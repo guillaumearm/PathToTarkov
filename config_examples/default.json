@@ -1,0 +1,223 @@
+{
+  "enabled": true,
+  "initial_offraid_position": "Car",
+  "reset_offraid_position_on_player_die": true,
+  "hideout_stash_access_restriction": true,
+  "hideout_stash_access_via": [
+    "Car"
+  ],
+  "TODO_traders_access_restriction": false,
+  "laboratory_access_restriction": true,
+  "laboratory_access_via": [
+    "Car"
+  ],
+  "player_scav_move_offraid_position": true,
+  "remove_all_exfils_restrictions": true,
+  "exfiltrations": {
+    "factory4_day": {
+      "Gate 3": "FactoryZB-1013",
+      "Gate m": "FactoryZB-1012",
+      "Cellars": "FactoryZB-1011",
+      "Gate 0": "WoodsFactoryGate"
+    },
+    "factory4_night": {
+      "Gate 3": "FactoryZB-1013",
+      "Gate m": "FactoryZB-1012",
+      "Cellars": "FactoryZB-1011",
+      "Gate 0": "WoodsFactoryGate"
+    },
+    "bigmap": {
+      "Shack": "CustomsMilitaryBaseCP",
+      "Railroad To Military Base": "MilitaryBaseRail",
+      "EXFIL_ZB013": "FactoryZB-1013",
+      "ZB-1012": "FactoryZB-1012",
+      "ZB-1011": "FactoryZB-1011",
+      "Dorms V-Ex": "Car",
+      "Sniper Roadblock": "ShorelineCustoms",
+      "Smuggler's Boat": "Boat",
+      "RUAF Roadblock": "WoodsCustoms",
+      "Crossroads": "InterchangeCustoms"
+    },
+    "woods": {
+      "un-sec": "WoodsCustoms",
+      "Factory Gate": "WoodsFactoryGate",
+      "ZB-014": "FactoryZB-1013",
+      "Outskirts": "WoodsReserveShoreline",
+      "The Boat": "Boat",
+      "South V-Ex": "Car"
+    },
+    "rezervbase": {
+      "EXFIL_ScavCooperation": "CustomsMilitaryBaseCP",
+      "Exit4": "WoodsReserveShoreline",
+      "Alpinist": "ShorelineNorthMoutains"
+    },
+    "interchange": {
+      "PP Exfil": "Car",
+      "NW Exfil": "InterchangeCustoms"
+    },
+    "shoreline": {
+      "exit_scav_NORTH_fencepassage": "ShorelineNorthMoutains",
+      "Road to Customs": "ShorelineCustoms",
+      "Pier Boat": "Boat",
+      "Tunnel": "ShorelineLighthouseTunnel",
+      "Lighthouse_pass": "ShorelineLighthousePath"
+    },
+    "lighthouse": {
+      " V-Ex_light": "Car",
+      "Shorl_free": "ShorelineLighthousePath",
+      "tunnel_shared": "ShorelineLighthouseTunnel"
+    }
+  },
+  "infiltrations": {
+    "ShorelineLighthousePath": {
+      "shoreline": [
+        "Path to Lighthouse"
+      ],
+      "lighthouse": [
+        "Path to Shoreline"
+      ],
+      "rezervbase": [
+        "CP Fence"
+      ]
+    },
+    "ShorelineLighthouseTunnel": {
+      "shoreline": [
+        "Tunnel"
+      ],
+      "lighthouse": [
+        "Lighthouse tunnel"
+      ]
+    },
+    "ShorelineNorthMoutains": {
+      "rezervbase": [
+        "Cliff"
+      ],
+      "shoreline": [
+        "North Fence Passage"
+      ]
+    },
+    "WoodsReserveShoreline": {
+      "woods": [
+        "Outskirts"
+      ],
+      "rezervbase": [
+        "CP Fence"
+      ]
+    },
+    "InterchangeCustoms": {
+      "bigmap": [
+        "Crossroads"
+      ],
+      "interchange": [
+        "Railway"
+      ]
+    },
+    "WoodsCustoms": {
+      "woods": [
+        "UN Roadblock"
+      ],
+      "bigmap": [
+        "RUAF Roadblock"
+      ]
+    },
+    "Boat": {
+      "bigmap": [
+        "Smuggler's Boat"
+      ],
+      "woods": [
+        "The Boat"
+      ],
+      "shoreline": [
+        "Pier Boat"
+      ],
+      "lighthouse": [
+        "Lighthouse Docks Boat"
+      ]
+    },
+    "ShorelineCustoms": {
+      "bigmap": [
+        "Sniper Roadblock"
+      ],
+      "shoreline": [
+        "Road to Customs"
+      ]
+    },
+    "Car": {
+      "bigmap": [
+        "Dorms Car"
+      ],
+      "interchange": [
+        "Car at Power Station"
+      ],
+      "woods": [
+        "Bridge Car"
+      ],
+      "lighthouse": [
+        "Lighthouse Vehicle Extract"
+      ]
+    },
+    "CustomsMilitaryBaseCP": {
+      "bigmap": [
+        "Military Base CP"
+      ],
+      "rezervbase": [
+        "Scav lands"
+      ]
+    },
+    "MilitaryBaseRail": {
+      "bigmap": [
+        "Railroad To Military Base"
+      ],
+      "rezervbase": [
+        "Scav lands rail"
+      ]
+    },
+    "FactoryZB-1013": {
+      "bigmap": [
+        "ZB-1013"
+      ],
+      "woods": [
+        "ZB-1014"
+      ],
+      "factory4_day": [
+        "Gate 3"
+      ],
+      "factory4_night": [
+        "Gate 3"
+      ]
+    },
+    "FactoryZB-1012": {
+      "bigmap": [
+        "ZB-1012"
+      ],
+      "factory4_day": [
+        "Med tent gates"
+      ],
+      "factory4_night": [
+        "Med tent gates"
+      ]
+    },
+    "FactoryZB-1011": {
+      "bigmap": [
+        "ZB-1011"
+      ],
+      "factory4_day": [
+        "Cellars"
+      ],
+      "factory4_night": [
+        "Cellars"
+      ]
+    },
+    "WoodsFactoryGate": {
+      "woods": [
+        "Factory Gate"
+      ],
+      "factory4_day": [
+        "Gate 0"
+      ],
+      "factory4_night": [
+        "Gate 0"
+      ]
+    }
+  }
+}
