@@ -15,6 +15,27 @@ const STASH_IDS = [
     "5811ce772459770e9e5f9532"  // Edge of darkness
 ];
 
+const isIgnoredArea = (area) => {
+
+    if (typeof area.type !== 'number') { // invalid area
+        return true;
+    }
+
+    if (area.type === 4) { // generator (prevent a crash at start)
+        return true;
+    } else if (area.type === 6) { // water collector (prevent infinite loading menu at start)
+        return true;
+    } else if (area.type === 16) { // place of fame
+        return true;
+    } else if (area.type === 17) { // air filtering unit (prevent a crash at start)
+        return true;
+    } else if (area.type === 21) { // christmas tree
+        return true;
+    }
+
+    return false;
+}
+
 class StashController {
     constructor(config) {
         this.config = config;
@@ -22,10 +43,27 @@ class StashController {
         // null means stash is unlocked
         this.stashSizes = null;
         this.items = DatabaseServer.tables.templates.items
+        this.areas = DatabaseServer.tables.hideout.areas;
     }
 
     _getInventory(sessionId) {
         return SaveServer.profiles[sessionId].characters.pmc.Inventory;
+    }
+
+    _disableHideout() {
+        this.areas.forEach(area => {
+            if (!isIgnoredArea(area)) {
+                area.enabled = false;
+            }
+        })
+    }
+
+    _enableHideout() {
+        this.areas.forEach(area => {
+            if (!isIgnoredArea(area)) {
+                area.enabled = true;
+            }
+        })
     }
 
     initProfile(sessionId) {
@@ -97,14 +135,17 @@ class StashController {
         const secondaryStash = this.config.hideout_secondary_stashes.find(stash => checkAccessVia(stash.access_via, offraidPosition));
 
         if (mainStashAvailable) {
+            // this._enableHideout(sessionId);
             this._resetSize();
             this._setMainStash(sessionId);
         }
         else if (secondaryStash) {
+            this._disableHideout(sessionId);
             this._setSize(secondaryStash.size);
             this._setSecondaryStash(secondaryStash.id, sessionId)
         }
         else {
+            this._disableHideout(sessionId);
             this._setSize(0);
         }
     }
@@ -360,8 +401,6 @@ class OffraidPositionController {
             offraidPosition = this.getOffraidPosition(sessionId);
         }
 
-        console.log('=> update offraid position to: ', offraidPosition);
-
         const profile = SaveServer.profiles[sessionId];
 
         const prevOffraidPosition = profile.PathToTarkov.offraidPosition;
@@ -407,7 +446,7 @@ const purgeProfiles = (config) => {
         });
 
         if (nbTradersRestored > 0) {
-            Logger.success(`=> PathToTarkov: ${nbTradersRestored} trader${nbTradersRestored === 1 ? '' : 's'} restored for profile '${profile.username}'`)
+            Logger.success(`=> PathToTarkov: ${nbTradersRestored} trader${nbTradersRestored === 1 ? '' : 's'} restored for profile '${profile.info.username}'`)
         }
     })
 
@@ -456,7 +495,6 @@ class PathToTarkov {
 
             const vanillaSaveProgress = InraidController.saveProgress;
             InraidController.saveProgress = (offraidData, sessionId) => {
-                console.log('=> 2. save progress');
                 const isPlayerScav = offraidData.isPlayerScav;
                 const currentLocationName = SaveServer.profiles[sessionId].inraid.location.toLowerCase();
 
@@ -481,8 +519,6 @@ class PathToTarkov {
                         offraidPositionController.updateOffraidPosition(sessionId, config.initial_offraid_position);
                         return;
                     }
-
-                    console.log('=> 1. end of raid !');
 
                     const extractsConf = config.exfiltrations[currentLocationName];
                     const newOffraidPosition = extractsConf && extractsConf[info.exitName];
