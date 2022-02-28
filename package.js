@@ -4,6 +4,10 @@ const isValidMap = (mapName) => {
     return mapName !== 'base' && mapName !== 'hideout' && mapName !== 'privatearea' && mapName !== 'private area' && mapName !== 'develop';
 }
 
+function checkAccessVia(access_via, x) {
+    return access_via === '*' || access_via[0] === '*' || access_via.includes(x);
+}
+
 const STASH_IDS = [
     "566abbc34bdc2d92178b4576", // Standard
     "5811ce572459770cba1a34ea", // Left Behind
@@ -89,8 +93,8 @@ class StashController {
             return;
         }
 
-        const mainStashAvailable = this.config.hideout_main_stash_access_via.includes(offraidPosition)
-        const secondaryStash = this.config.hideout_secondary_stashes.find(stash => stash.access_via.includes(offraidPosition));
+        const mainStashAvailable = checkAccessVia(this.config.hideout_main_stash_access_via, offraidPosition);
+        const secondaryStash = this.config.hideout_secondary_stashes.find(stash => checkAccessVia(stash.access_via, offraidPosition));
 
         if (mainStashAvailable) {
             this._resetSize();
@@ -105,6 +109,38 @@ class StashController {
         }
     }
 
+}
+
+class TraderController {
+    constructor(config) {
+        this.config = config;
+    }
+
+    initTraders() {
+        Object.keys(this.config.traders_config).forEach(traderId => {
+            const trader = DatabaseServer.tables.traders[traderId];
+
+            if (trader) {
+                trader.base.unlockedByDefault = false;
+            } else if (!this.config.traders_config[traderId].disable_warning) {
+                Logger.warning(`=> PathToTarkov: Unknown trader id found during init: '${traderId}'`);
+            }
+        })
+    }
+
+    updateTraders(offraidPosition, sessionId) {
+        const tradersConfig = this.config.traders_config;
+        const tradersInfo = SaveServer.profiles[sessionId].characters.pmc.TradersInfo;
+
+        Object.keys(tradersConfig).forEach(traderId => {
+
+            const unlocked = checkAccessVia(tradersConfig[traderId].access_via, offraidPosition);
+
+            if (tradersInfo[traderId]) {
+                tradersInfo[traderId].unlocked = unlocked;
+            }
+        })
+    }
 }
 
 const MAPLIST = [
@@ -203,6 +239,7 @@ class OffraidPositionController {
         this.database = database;
         this.entrypoints = getEntryPointsForMaps(database);
         this.stashController = new StashController(config);
+        this.traderController = new TraderController(config);
         this.config = config;
         this.spawnConfig = spawnConfig;
     }
@@ -223,7 +260,7 @@ class OffraidPositionController {
 
         MAPLIST.forEach(mapName => {
             if (mapName === 'laboratory') {
-                const playerIsAtLab = this.config.laboratory_access_via.includes(offraidPosition)
+                const playerIsAtLab = checkAccessVia(this.config.laboratory_access_via, offraidPosition)
                 const unlocked = !this.config.laboratory_access_restriction || Boolean(playerIsAtLab);
                 this.database.locations[mapName].base.Locked = !unlocked;
             } else if (mapName !== 'laboratory') {
@@ -323,6 +360,8 @@ class OffraidPositionController {
             offraidPosition = this.getOffraidPosition(sessionId);
         }
 
+        console.log('=> update offraid position to: ', offraidPosition);
+
         const profile = SaveServer.profiles[sessionId];
 
         const prevOffraidPosition = profile.PathToTarkov.offraidPosition;
@@ -335,7 +374,44 @@ class OffraidPositionController {
         this._updateSpawnPoints(offraidPosition);
 
         this.stashController.updateStash(offraidPosition, sessionId);
+        this.traderController.updateTraders(offraidPosition, sessionId);
+
+        SaveServer.saveProfile(sessionId);
     }
+}
+
+// Used for uninstallation process
+const purgeProfiles = (config) => {
+    // be sure to be able to read `SaveServer.profiles`
+    SaveServer.load();
+
+    Object.keys(SaveServer.profiles).forEach(sessionId => {
+        const profile = SaveServer.profiles[sessionId];
+        const mainStashId = profile.PathToTarkov.mainStashId
+
+        if (profile && profile.PathToTarkov && mainStashId && mainStashId !== profile.characters.pmc.Inventory.stash) {
+            Logger.success(`=> PathToTarkov: restore the selected stash to main stash for profile '${profile.info.username}'`)
+            profile.characters.pmc.Inventory.stash = mainStashId;
+        }
+
+        let nbTradersRestored = 0;
+        Object.keys(config.traders_config).forEach(traderId => {
+            const trader = profile.characters.pmc.TradersInfo[traderId];
+
+            if (trader && trader.unlocked === false) {
+                // TODO 1: check for jaeger quest
+                // TODO 2: check if player is level 15 (for flea market aka ragfair)
+                trader.unlocked = true;
+                nbTradersRestored += 1;
+            }
+        });
+
+        if (nbTradersRestored > 0) {
+            Logger.success(`=> PathToTarkov: ${nbTradersRestored} trader${nbTradersRestored === 1 ? '' : 's'} restored for profile '${profile.username}'`)
+        }
+    })
+
+    SaveServer.save();
 }
 
 class PathToTarkov {
@@ -348,6 +424,14 @@ class PathToTarkov {
 
         if (!config.enabled) {
             Logger.warning('=> PathToTarkov is disabled!')
+
+            if (config.bypass_uninstall_procedure === true) {
+                Logger.warning('=> PathToTarkov: uninstall process aborted because \'bypass_uninstall_procedure\' field is true in config.json');
+                return;
+            }
+
+            purgeProfiles(config);
+
             return;
         }
 
@@ -358,6 +442,7 @@ class PathToTarkov {
         offraidPositionController.initExfiltrations();
 
         ModLoader.onLoad[mod.name] = function () {
+            offraidPositionController.traderController.initTraders();
 
             onGameStart((sessionId) => {
                 offraidPositionController.stashController.initProfile(sessionId);
@@ -371,6 +456,7 @@ class PathToTarkov {
 
             const vanillaSaveProgress = InraidController.saveProgress;
             InraidController.saveProgress = (offraidData, sessionId) => {
+                console.log('=> 2. save progress');
                 const isPlayerScav = offraidData.isPlayerScav;
                 const currentLocationName = SaveServer.profiles[sessionId].inraid.location.toLowerCase();
 
@@ -395,6 +481,8 @@ class PathToTarkov {
                         offraidPositionController.updateOffraidPosition(sessionId, config.initial_offraid_position);
                         return;
                     }
+
+                    console.log('=> 1. end of raid !');
 
                     const extractsConf = config.exfiltrations[currentLocationName];
                     const newOffraidPosition = extractsConf && extractsConf[info.exitName];

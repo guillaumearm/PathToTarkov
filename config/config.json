@@ -3,6 +3,13 @@
   "initial_offraid_position": "FactoryZB-1011",
   "reset_offraid_position_on_player_die": true,
   "hideout_multistash_enabled": true,
+  "laboratory_access_restriction": true,
+  "laboratory_access_via": [
+    "Car"
+  ],
+  "player_scav_move_offraid_position": true,
+  "remove_all_exfils_restrictions": true,
+  "bypass_uninstall_procedure": false,
   "hideout_main_stash_access_via": [
     "FactoryZB-1011",
     "FactoryZB-1012",
@@ -24,13 +31,78 @@
       ]
     }
   ],
-  "TODO_traders_access_restriction": false,
-  "laboratory_access_restriction": true,
-  "laboratory_access_via": [
-    "Car"
-  ],
-  "player_scav_move_offraid_position": true,
-  "remove_all_exfils_restrictions": true,
+  "traders_access_restriction": true,
+  "traders_config": {
+    "54cb50c76803fa8b248b4571": {
+      "// Trader name": "Prapor",
+      "access_via": [
+        "FactoryZB-1011",
+        "FactoryZB-1012",
+        "FactoryZB-1013"
+      ]
+    },
+    "54cb57776803fa99248b456e": {
+      "// Trader name": "Therapist",
+      "access_via": [
+        "FactoryZB-1011",
+        "FactoryZB-1012",
+        "FactoryZB-1013"
+      ]
+    },
+    "5a7c2eca46aef81a7ca2145d": {
+      "// Trader name": "Mechanic",
+      "access_via": [
+        "FactoryZB-1011",
+        "FactoryZB-1012",
+        "FactoryZB-1013"
+      ]
+    },
+    "58330581ace78e27b8b10cee": {
+      "// Trader name": "Skier",
+      "access_via": [
+        "Car"
+      ]
+    },
+    "5ac3b934156ae10c4430e83c": {
+      "// Trader name": "Ragman",
+      "access_via": [
+        "Car"
+      ]
+    },
+    "5c0647fdd443bc2504c2d371": {
+      "// Trader name": "Jaeger",
+      "access_via": [
+        "Car"
+      ]
+    },
+    "5935c25fb3acc3127c3d8cd9": {
+      "// Trader name": "Peacekeeper",
+      "access_via": [
+        "Boat"
+      ]
+    },
+    "579dc571d53a0658a154fbec": {
+      "// Trader name": "Fence",
+      "// Fence is accessible everywhere": true,
+      "access_via": "*"
+    },
+    "Priscilu": {
+      "// mod integration for Priscilu": true,
+      "// Priscilu is available after extracting from Outskirts (woods map)": true,
+      "disable_warning": true,
+      "access_via": [
+        "WoodsReserveShoreline"
+      ]
+    },
+    "operator": {
+      "// mod integration for Alex-AIO": true,
+      "// Operator is available after extracting from Scav lands (reserve map)": true,
+      "disable_warning": true,
+      "access_via": [
+        "CustomsMilitaryBaseCP"
+      ]
+    }
+  },
   "exfiltrations": {
     "factory4_day": {
       "Gate 3": "FactoryZB-1013",

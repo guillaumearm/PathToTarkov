@@ -2,7 +2,7 @@
 Connect all available maps through the extracts points.
 
 ## Description
-This mod bring the notion of "offraid position" for the player, it locks certains maps according to this offraid position, change all player spawn points to reflect this positions and lock/unlock the hideout stash according to the config file.
+This mod bring the notion of "offraid position" for the player, it locks certains maps according to this offraid position, change all player spawn points to reflect this positions, change the hideout stash and lock/unlock traders according to the config file.
 
 For example, if the position is "FactoryZB-1011", only Customs and Factory maps should be available for infiltration.
 
@@ -12,9 +12,17 @@ New spawn points can be added in `player_spawnpoints.json`
 
 ## Features
 - Maps are locked/unlocked according to the offraid position
-- Hideout is locked/unlocked according to the offraid position (`Car` by default)
+- Several hideout stash according to your offraid position (and the configuration file)
+- Traders are available only on certains offraid position
 - Tweak exfiltrations points (fixed for each map + removed restrictions)
 - Changed spawn points according to the offraid position
+
+## Un-Installation
+Before deleting the mod, you can set the `enabled` props to `false` in `config.json` and start the server once.
+
+It does 2 things in all existing profiles: 
+1. Ensure the main stash is selected
+2. Unlock all traders listed in the config (Please note Jaeger will be unlocked even if the regarding quest is not completed)
 
 ## The Default configuration
 By default, you are on `Car` offraid position.
@@ -26,6 +34,9 @@ The hideout stash is only accessible on the `Car`.
 When player die, the position is reset to the `Car` position.
 
 Everything is configurable.
+
+## How to edit the current offraid position
+The offraid position is stored in your profile in a dedicated field `PathToTarkov`, you can edit it with a regular text editor.
 
 ### Factory
 Can move to Customs via:
