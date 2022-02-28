@@ -1,10 +1,5 @@
 "use strict";
 
-const fs = require('fs');
-const path = require('path');
-
-const OFFRAID_POSITION_FILE = path.join(__dirname, 'offraid_position.txt')
-
 const isValidMap = (mapName) => {
     return mapName !== 'base' && mapName !== 'hideout' && mapName !== 'privatearea' && mapName !== 'private area' && mapName !== 'develop';
 }
@@ -17,27 +12,53 @@ const STASH_IDS = [
 ];
 
 class StashController {
-    constructor(database) {
+    constructor(config) {
+        this.config = config;
+
         // null means stash is unlocked
         this.stashSizes = null;
-        this.items = database.templates.items
+        this.items = DatabaseServer.tables.templates.items
     }
 
-    lock() {
-        if (this.stashSizes) {
-            return;
+    _getInventory(sessionId) {
+        return SaveServer.profiles[sessionId].characters.pmc.Inventory;
+    }
+
+    initProfile(sessionId) {
+        const profile = SaveServer.profiles[sessionId];
+
+        if (!profile.PathToTarkov) {
+            profile.PathToTarkov = {};
         }
 
-        this.stashSizes = {};
+        if (!profile.PathToTarkov.mainStashId) {
+            profile.PathToTarkov.mainStashId = this._getInventory(sessionId).stash;
+        }
+    }
+
+    _getMainStashId(sessionId) {
+        return SaveServer.profiles[sessionId].PathToTarkov.mainStashId;
+    }
+
+    _setSize(n) {
+        let shouldCollectStashSizes = false;
+
+        if (!this.stashSizes) {
+            this.stashSizes = {};
+            shouldCollectStashSizes = true;
+        }
 
         STASH_IDS.forEach(stashId => {
             const gridProps = this.items[stashId]._props.Grids[0]._props;
-            this.stashSizes[stashId] = gridProps.cellsV;
-            gridProps.cellsV = 0;
+            if (shouldCollectStashSizes) {
+                this.stashSizes[stashId] = gridProps.cellsV;
+            }
+
+            gridProps.cellsV = n;
         });
     }
 
-    unlock() {
+    _resetSize() {
         if (!this.stashSizes) {
             return;
         }
@@ -49,46 +70,41 @@ class StashController {
         this.stashSizes = {};
     }
 
-}
+    _setMainStash(sessionId) {
+        const inventory = this._getInventory(sessionId);
+        inventory.stash = this._getMainStashId(sessionId);
+    }
 
-function initialExtractionsTweaks(database, config) {
-    const locations = database.locations;
+    _setSecondaryStash(stashId, sessionId) {
+        const inventory = SaveServer.profiles[sessionId].characters.pmc.Inventory;
+        inventory.stash = stashId;
 
-    // Extraction tweaks
-    for (let i in locations) {
-        if (isValidMap(i)) {
-            for (let x in locations[i].base.exits) {
-                // Remove extracts restrictions
-                if (config.remove_all_exfils_restrictions && locations[i].base.exits[x].Name !== "EXFIL_Train" && !locations[i].base.exits[x].Name.includes("lab") || locations[i].base.exits[x].Name === "lab_Vent") {
-                    if (locations[i].base.exits[x].PassageRequirement !== "None") {
-                        locations[i].base.exits[x].PassageRequirement = "None";
-                    }
-                    if (locations[i].base.exits[x].ExfiltrationType !== "Individual") {
-                        locations[i].base.exits[x].ExfiltrationType = "Individual";
-                    }
-                    if (locations[i].base.exits[x].Id !== '') {
-                        locations[i].base.exits[x].Id = '';
-                    }
-                    if (locations[i].base.exits[x].Count !== 0) {
-                        locations[i].base.exits[x].Count = 0;
-                    }
-                    if (locations[i].base.exits[x].RequirementTip !== '') {
-                        locations[i].base.exits[x].RequirementTip = '';
-                    }
-                    if (locations[i].base.exits[x].RequiredSlot) {
-                        delete locations[i].base.exits[x].RequiredSlot;
-                    }
-                }
-
-                // Make all extractions available to extract
-                if (locations[i].base.exits[x].Name !== "EXFIL_Train") {
-                    if (locations[i].base.exits[x].Chance !== 100) {
-                        locations[i].base.exits[x].Chance = 100;
-                    }
-                }
-            }
+        if (!inventory.items.find(item => item._id === stashId)) {
+            inventory.items.push({ _id: stashId, _tpl: STASH_IDS[0] });
         }
     }
+
+    updateStash(offraidPosition, sessionId) {
+        if (!this.config.hideout_multistash_enabled) {
+            return;
+        }
+
+        const mainStashAvailable = this.config.hideout_main_stash_access_via.includes(offraidPosition)
+        const secondaryStash = this.config.hideout_secondary_stashes.find(stash => stash.access_via.includes(offraidPosition));
+
+        if (mainStashAvailable) {
+            this._resetSize();
+            this._setMainStash(sessionId);
+        }
+        else if (secondaryStash) {
+            this._setSize(secondaryStash.size);
+            this._setSecondaryStash(secondaryStash.id, sessionId)
+        }
+        else {
+            this._setSize(0);
+        }
+    }
+
 }
 
 const MAPLIST = [
@@ -146,30 +162,6 @@ const createExitPoint = (entrypoints) => (name) => {
     }
 }
 
-const removePlayerSpawns = (database, mapName) => {
-    const base = database.locations[mapName].base;
-    base.SpawnPointParams = base.SpawnPointParams
-        .filter(params => params.Categories[0] !== 'Player')
-}
-
-const addSpawnPoint = (database, mapName, spawnPoint) => {
-    database.locations[mapName].base.SpawnPointParams.push(spawnPoint)
-}
-
-const updateLockedMaps = (database, config, playerOffraidPosition) => {
-    const unlockedMaps = config.infiltrations[playerOffraidPosition];
-
-    MAPLIST.forEach(mapName => {
-        if (mapName === 'laboratory') {
-            const playerIsAtLab = config.laboratory_access_via.includes(playerOffraidPosition)
-            const unlocked = !config.laboratory_access_restriction || Boolean(playerIsAtLab);
-            database.locations[mapName].base.Locked = !unlocked;
-        } else if (mapName !== 'laboratory') {
-            database.locations[mapName].base.Locked = !unlockedMaps[mapName];
-        }
-    })
-}
-
 const getPosition = (spawnData) => {
     const pos = spawnData.Position;
 
@@ -179,33 +171,6 @@ const getPosition = (spawnData) => {
     }
 
     return pos;
-}
-
-const updateSpawnPoints = (database, config, spawnConfig, playerOffraidPosition, entrypoints) => {
-    // Remove all player spawn points
-    MAPLIST.forEach(mapName => {
-        if (mapName !== 'laboratory') {
-            removePlayerSpawns(database, mapName);
-        }
-    })
-
-    // Add new spawn points according to player offraid position
-    Object.keys(config.infiltrations[playerOffraidPosition]).forEach(mapName => {
-        const spawnpoints = config.infiltrations[playerOffraidPosition][mapName];
-
-        if (spawnpoints) {
-            spawnpoints.forEach(spawnId => {
-                const spawnData = spawnConfig[mapName] && spawnConfig[mapName][spawnId];
-                if (spawnData) {
-                    const spawnPoint = createSpawnPoint(getPosition(spawnData), spawnData.Rotation, entrypoints[mapName]);
-                    addSpawnPoint(database, mapName, spawnPoint);
-                }
-            });
-
-
-
-        }
-    })
 }
 
 const getEntryPointsForMaps = (database) => {
@@ -223,13 +188,162 @@ const getEntryPointsForMaps = (database) => {
     return result;
 }
 
-const STASH_ID = '5811ce772459770e9e5f9532' //Edge of darkness stash 10x68
+const onGameStart = (cb) => {
+    const vanillaGameStart = GameController.gameStart;
+
+    GameController.gameStart = (url, info, sessionId) => {
+        const result = vanillaGameStart(url, info, sessionId);
+        cb(sessionId);
+        return result;
+    }
+}
+
+class OffraidPositionController {
+    constructor(database, config, spawnConfig) {
+        this.database = database;
+        this.entrypoints = getEntryPointsForMaps(database);
+        this.stashController = new StashController(config);
+        this.config = config;
+        this.spawnConfig = spawnConfig;
+    }
+
+    _addSpawnPoint(mapName, spawnPoint) {
+        this.database.locations[mapName].base.SpawnPointParams.push(spawnPoint)
+    }
+
+    _removePlayerSpawns(mapName) {
+        const base = this.database.locations[mapName].base;
+
+        base.SpawnPointParams = base.SpawnPointParams
+            .filter(params => params.Categories[0] !== 'Player')
+    }
+
+    _updateLockedMaps(offraidPosition) {
+        const unlockedMaps = this.config.infiltrations[offraidPosition];
+
+        MAPLIST.forEach(mapName => {
+            if (mapName === 'laboratory') {
+                const playerIsAtLab = this.config.laboratory_access_via.includes(offraidPosition)
+                const unlocked = !this.config.laboratory_access_restriction || Boolean(playerIsAtLab);
+                this.database.locations[mapName].base.Locked = !unlocked;
+            } else if (mapName !== 'laboratory') {
+                this.database.locations[mapName].base.Locked = !unlockedMaps[mapName];
+            }
+        })
+    }
+
+    _updateSpawnPoints(offraidPosition) {
+        // Remove all player spawn points
+        MAPLIST.forEach(mapName => {
+            if (mapName !== 'laboratory') {
+                this._removePlayerSpawns(mapName);
+            }
+        })
+
+        // Add new spawn points according to player offraid position
+        Object.keys(this.config.infiltrations[offraidPosition]).forEach(mapName => {
+            const spawnpoints = this.config.infiltrations[offraidPosition][mapName];
+
+            if (spawnpoints) {
+                spawnpoints.forEach(spawnId => {
+                    const spawnData = this.spawnConfig[mapName] && this.spawnConfig[mapName][spawnId];
+                    if (spawnData) {
+                        const spawnPoint = createSpawnPoint(getPosition(spawnData), spawnData.Rotation, this.entrypoints[mapName]);
+                        this._addSpawnPoint(mapName, spawnPoint);
+                    }
+                });
+
+
+
+            }
+        })
+    }
+
+    initExfiltrations() {
+        const locations = this.database.locations;
+
+        // Extraction tweaks
+        for (let i in locations) {
+            if (isValidMap(i)) {
+                for (let x in locations[i].base.exits) {
+                    // Remove extracts restrictions
+                    if (this.config.remove_all_exfils_restrictions && locations[i].base.exits[x].Name !== "EXFIL_Train" && !locations[i].base.exits[x].Name.includes("lab") || locations[i].base.exits[x].Name === "lab_Vent") {
+                        if (locations[i].base.exits[x].PassageRequirement !== "None") {
+                            locations[i].base.exits[x].PassageRequirement = "None";
+                        }
+                        if (locations[i].base.exits[x].ExfiltrationType !== "Individual") {
+                            locations[i].base.exits[x].ExfiltrationType = "Individual";
+                        }
+                        if (locations[i].base.exits[x].Id !== '') {
+                            locations[i].base.exits[x].Id = '';
+                        }
+                        if (locations[i].base.exits[x].Count !== 0) {
+                            locations[i].base.exits[x].Count = 0;
+                        }
+                        if (locations[i].base.exits[x].RequirementTip !== '') {
+                            locations[i].base.exits[x].RequirementTip = '';
+                        }
+                        if (locations[i].base.exits[x].RequiredSlot) {
+                            delete locations[i].base.exits[x].RequiredSlot;
+                        }
+                    }
+
+                    // Make all extractions available to extract
+                    if (locations[i].base.exits[x].Name !== "EXFIL_Train") {
+                        if (locations[i].base.exits[x].Chance !== 100) {
+                            locations[i].base.exits[x].Chance = 100;
+                        }
+                    }
+                }
+            }
+        }
+
+        Object.keys(this.config.exfiltrations).forEach(mapName => {
+            const extractPoints = Object.keys(this.config.exfiltrations[mapName]);
+            this.database.locations[mapName].base.exits = extractPoints.map(createExitPoint(this.entrypoints[mapName]));
+        });
+    }
+
+    getOffraidPosition = (sessionId) => {
+        const profile = SaveServer.profiles[sessionId];
+
+        if (!profile.PathToTarkov) {
+            profile.PathToTarkov = {};
+        }
+
+        if (!profile.PathToTarkov.offraidPosition) {
+            profile.PathToTarkov.offraidPosition = this.config.initial_offraid_position;
+        }
+
+        return profile.PathToTarkov.offraidPosition;
+    }
+
+    updateOffraidPosition(sessionId, offraidPosition) {
+        if (!offraidPosition) {
+            offraidPosition = this.getOffraidPosition(sessionId);
+        }
+
+        const profile = SaveServer.profiles[sessionId];
+
+        const prevOffraidPosition = profile.PathToTarkov.offraidPosition;
+        profile.PathToTarkov.offraidPosition = offraidPosition;
+
+        if (prevOffraidPosition !== offraidPosition) {
+            Logger.info(`=> PathToTarkov: player offraid position changed to '${offraidPosition}'`)
+        }
+        this._updateLockedMaps(offraidPosition);
+        this._updateSpawnPoints(offraidPosition);
+
+        this.stashController.updateStash(offraidPosition, sessionId);
+    }
+}
 
 class PathToTarkov {
     constructor() {
         const mod = require("./package.json");
         const config = require("./config/config.json");
         const spawnConfig = require("./config/player_spawnpoints.json");
+        const database = DatabaseServer.tables;
 
 
         if (!config.enabled) {
@@ -239,69 +353,30 @@ class PathToTarkov {
 
         Logger.info(`Loading: ${mod.name} v${mod.version}`);
 
+        const offraidPositionController = new OffraidPositionController(database, config, spawnConfig);
 
-        let offraidPosition;
-
-        try {
-            offraidPosition = fs.readFileSync(OFFRAID_POSITION_FILE, 'utf8').trim();
-        } catch (_e) {
-            // if the file does not exist, set the offraid position with initial_offraid_position in config
-            offraidPosition = config.initial_offraid_position;
-
-            // then save the file
-            fs.writeFileSync(OFFRAID_POSITION_FILE, offraidPosition);
-        }
+        offraidPositionController.initExfiltrations();
 
         ModLoader.onLoad[mod.name] = function () {
-            const database = DatabaseServer.tables;
-            const entrypoints = getEntryPointsForMaps(database);
 
-            const stashController = new StashController(database);
+            onGameStart((sessionId) => {
+                offraidPositionController.stashController.initProfile(sessionId);
 
-            // Lock maps according to the saved offraid position
-            updateLockedMaps(database, config, offraidPosition);
-
-            Logger.info(`=> PathToTarkov: player offraid position initialized to '${offraidPosition}'`)
-
-            // create spawn points
-            updateSpawnPoints(database, config, spawnConfig, offraidPosition, entrypoints)
-
-            // Remove extracts restrictions
-            initialExtractionsTweaks(database, config);
-
-            // setup extracts according to config
-            Object.keys(config.exfiltrations).forEach(mapName => {
-                const extractPoints = Object.keys(config.exfiltrations[mapName]);
-                database.locations[mapName].base.exits = extractPoints.map(createExitPoint(entrypoints[mapName]));
+                const offraidPosition = offraidPositionController.getOffraidPosition(sessionId)
+                offraidPositionController.updateOffraidPosition(sessionId, offraidPosition);
+                Logger.info(`=> PathToTarkov: player offraid position initialized to '${offraidPosition}'`)
             });
-
-            // lock stash if needed
-            if (config.hideout_stash_access_restriction && !config.hideout_stash_access_via.includes(offraidPosition)) {
-                stashController.lock();
-            }
-
-            // TODO: lock/unlock traders if needed
-
-            // detect if the player is a scav
-            let isPlayerScav = null;
-
-            // detect the map name
-            let currentLocationName = null;
 
             let endRaidCb = () => { };
 
             const vanillaSaveProgress = InraidController.saveProgress;
             InraidController.saveProgress = (offraidData, sessionId) => {
-                isPlayerScav = offraidData.isPlayerScav;
-                currentLocationName = SaveServer.profiles[sessionId].inraid.location.toLowerCase();
+                const isPlayerScav = offraidData.isPlayerScav;
+                const currentLocationName = SaveServer.profiles[sessionId].inraid.location.toLowerCase();
 
-                // TODO: remove
-                Logger.info(`=> save currentLocationName progress: ${currentLocationName}`);
-
-                // TODO: pass `isPlayerScav` and `currentLocationName` as arguments (`endRaidCb`)
-                endRaidCb();
+                endRaidCb(currentLocationName, isPlayerScav);
                 endRaidCb = () => { };
-                currentLocationName = null;
+
                 return vanillaSaveProgress(offraidData, sessionId);
             }
 
@@ -309,10 +384,7 @@ class PathToTarkov {
 
             // change the player offraid position according to the extract point used during the raid
             MatchController.endOfflineRaid = (info, sessionId) => {
-                // TODO: remove
-                Logger.info('=> end of raid detected')
-
-                endRaidCb = () => {
+                endRaidCb = (currentLocationName, isPlayerScav) => {
                     if (isPlayerScav && !config.player_scav_move_offraid_position) {
                         return;
                     }
@@ -320,51 +392,15 @@ class PathToTarkov {
                     const playerDied = !info.exitName;
 
                     if (config.reset_offraid_position_on_player_die && playerDied) {
-                        // TODO refactor: because used twice
-                        const prevPosition = offraidPosition;
-                        offraidPosition = config.initial_offraid_position;
-
-                        if (prevPosition !== offraidPosition) {
-                            fs.writeFileSync(OFFRAID_POSITION_FILE, offraidPosition);
-                            Logger.info(`=> PathToTarkov: player died, the offraid position has changed to '${offraidPosition}'`)
-                        }
-                        updateLockedMaps(database, config, offraidPosition);
-                        updateSpawnPoints(database, config, spawnConfig, offraidPosition, entrypoints);
-
-                        // lock/unlock stash if needed
-                        if (config.hideout_stash_access_restriction && config.hideout_stash_access_via.includes(offraidPosition)) {
-                            stashController.unlock();
-                        } else if (config.hideout_stash_access_restriction && !config.hideout_stash_access_via.includes(offraidPosition)) {
-                            stashController.lock();
-                        }
-
-                        // TODO: lock/unlock traders if needed
-
+                        offraidPositionController.updateOffraidPosition(sessionId, config.initial_offraid_position);
                         return;
                     }
 
                     const extractsConf = config.exfiltrations[currentLocationName];
+                    const newOffraidPosition = extractsConf && extractsConf[info.exitName];
 
-                    if (extractsConf && extractsConf[info.exitName]) {
-                        const prevPosition = offraidPosition;
-                        offraidPosition = extractsConf[info.exitName];
-
-                        if (prevPosition !== offraidPosition) {
-                            fs.writeFileSync(OFFRAID_POSITION_FILE, offraidPosition);
-                            Logger.info(`=> PathToTarkov: player offraid position changed to '${offraidPosition}'`)
-                        }
-                        updateLockedMaps(database, config, offraidPosition);
-                        updateSpawnPoints(database, config, spawnConfig, offraidPosition, entrypoints);
-
-                        // lock/unlock stash if needed
-                        if (config.hideout_stash_access_restriction && config.hideout_stash_access_via.includes(offraidPosition)) {
-                            stashController.unlock();
-                        } else if (config.hideout_stash_access_restriction && !config.hideout_stash_access_via.includes(offraidPosition)) {
-                            stashController.lock();
-                        }
-
-                        // TODO: lock/unlock traders if needed
-
+                    if (newOffraidPosition) {
+                        offraidPositionController.updateOffraidPosition(sessionId, newOffraidPosition);
                     }
                 }
 
@@ -372,6 +408,7 @@ class PathToTarkov {
             }
 
             Logger.success('=> PathToTarkov loaded!');
+
         };
     }
 }

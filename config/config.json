@@ -1,10 +1,28 @@
 {
   "enabled": true,
-  "initial_offraid_position": "Car",
+  "initial_offraid_position": "FactoryZB-1011",
   "reset_offraid_position_on_player_die": true,
-  "hideout_stash_access_restriction": true,
-  "hideout_stash_access_via": [
-    "Car"
+  "hideout_multistash_enabled": true,
+  "hideout_main_stash_access_via": [
+    "FactoryZB-1011",
+    "FactoryZB-1012",
+    "FactoryZB-1013"
+  ],
+  "hideout_secondary_stashes": [
+    {
+      "id": "PathToTarkov_Boat_stash",
+      "size": 12,
+      "access_via": [
+        "Boat"
+      ]
+    },
+    {
+      "id": "PathToTarkov_Car_stash",
+      "size": 18,
+      "access_via": [
+        "Car"
+      ]
+    }
   ],
   "TODO_traders_access_restriction": false,
   "laboratory_access_restriction": true,
