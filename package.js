@@ -135,7 +135,7 @@ class StashController {
         const secondaryStash = this.config.hideout_secondary_stashes.find(stash => checkAccessVia(stash.access_via, offraidPosition));
 
         if (mainStashAvailable) {
-            // this._enableHideout(sessionId);
+            this._enableHideout(sessionId);
             this._resetSize();
             this._setMainStash(sessionId);
         }
