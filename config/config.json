@@ -17,6 +17,13 @@
   ],
   "hideout_secondary_stashes": [
     {
+      "id": "PathToTarkov_Car_stash",
+      "size": 18,
+      "access_via": [
+        "Car"
+      ]
+    },
+    {
       "id": "PathToTarkov_Boat_stash",
       "size": 12,
       "access_via": [
@@ -24,10 +31,38 @@
       ]
     },
     {
-      "id": "PathToTarkov_Car_stash",
-      "size": 18,
+      "id": "PathToTarkov_WoodsFactoryGate_stash",
+      "size": 12,
       "access_via": [
-        "Car"
+        "WoodsFactoryGate"
+      ]
+    },
+    {
+      "id": "PathToTarkov_WoodsCustoms_stash",
+      "size": 8,
+      "access_via": [
+        "WoodsCustoms"
+      ]
+    },
+    {
+      "id": "PathToTarkov_InterchangeCustoms_stash",
+      "size": 8,
+      "access_via": [
+        "InterchangeCustoms"
+      ]
+    },
+    {
+      "id": "PathToTarkov_WoodsReserveShoreline_stash",
+      "size": 8,
+      "access_via": [
+        "WoodsReserveShoreline"
+      ]
+    },
+    {
+      "id": "PathToTarkov_CustomsMilitaryBaseCP_stash",
+      "size": 8,
+      "access_via": [
+        "CustomsMilitaryBaseCP"
       ]
     }
   ],
@@ -36,17 +71,13 @@
     "54cb50c76803fa8b248b4571": {
       "// Trader name": "Prapor",
       "access_via": [
-        "FactoryZB-1011",
-        "FactoryZB-1012",
-        "FactoryZB-1013"
+        "WoodsFactoryGate"
       ]
     },
     "54cb57776803fa99248b456e": {
       "// Trader name": "Therapist",
       "access_via": [
-        "FactoryZB-1011",
-        "FactoryZB-1012",
-        "FactoryZB-1013"
+        "WoodsFactoryGate"
       ]
     },
     "5a7c2eca46aef81a7ca2145d": {
@@ -60,13 +91,13 @@
     "58330581ace78e27b8b10cee": {
       "// Trader name": "Skier",
       "access_via": [
-        "Car"
+        "WoodsCustoms"
       ]
     },
     "5ac3b934156ae10c4430e83c": {
       "// Trader name": "Ragman",
       "access_via": [
-        "Car"
+        "InterchangeCustoms"
       ]
     },
     "5c0647fdd443bc2504c2d371": {
@@ -84,7 +115,8 @@
     "579dc571d53a0658a154fbec": {
       "// Trader name": "Fence",
       "// Fence is accessible everywhere": true,
-      "access_via": "*"
+      "access_via": "*",
+      "insurance_always_enabled": true
     },
     "Priscilu": {
       "// mod integration for Priscilu": true,
