@@ -300,18 +300,132 @@ const onProfileCreated = (cb) => {
     }
 }
 
-class OffraidPositionController {
+class OffraidRegenController {
+    constructor(config) {
+        this.regen_db = DatabaseServer.tables.globals.config.Health.Effects.Regeneration;
+        this.regen_config = config.offraid_regen_config;
+
+        this.regen_hydration_enabled = true;
+        this.regen_energy_enabled = true;
+        this.regen_health_enabled = true;
+
+        // saved values
+        this.energy_value = null;
+        this.hydration_value = null;
+        this.bodyhealth_values = {};
+    }
+
+    _getEmptyBodyHealthValues() {
+        const result = {};
+
+        Object.keys(this.bodyhealth_values).forEach(bodyPart => {
+            result[bodyPart] = { Value: 0 };
+        });
+
+        return result;
+    }
+
+    // this will snapshot the current regen config
+    init() {
+        this.energy_value = this.regen_db.Energy;
+        this.hydration_value = this.regen_db.Hydration;
+
+        Object.keys(this.regen_db.BodyHealth).forEach(bodyPart => {
+            this.bodyhealth_values[bodyPart] = { Value: this.regen_db.BodyHealth[bodyPart].Value };
+        })
+    }
+
+    _enableHydration() {
+        if (this.regen_hydration_enabled) {
+            return;
+        }
+
+        this.regen_db.Hydration = this.hydration_value;
+        this.regen_hydration_enabled = true;
+    }
+
+    _disableHydration() {
+        if (!this.regen_hydration_enabled) {
+            return;
+        }
+
+        this.regen_db.Hydration = 0;
+        this.regen_hydration_enabled = false;
+    }
+
+    _enableEnergy() {
+        if (this.regen_energy_enabled) {
+            return;
+        }
+
+        this.regen_db.Energy = this.energy_value;
+        this.regen_energy_enabled = true;
+    }
+
+    _disableEnergy() {
+        if (!this.regen_energy_enabled) {
+            return;
+        }
+
+        this.regen_db.Energy = 0;
+        this.regen_energy_enabled = false;
+    }
+
+    _enableHealth() {
+        if (this.regen_health_enabled) {
+            return;
+        }
+
+        this.regen_db.BodyHealth = this.bodyhealth_values;
+        this.regen_health_enabled = true;
+    }
+
+    _disableHealth() {
+        if (!this.regen_health_enabled) {
+            return;
+        }
+
+        this.regen_db.BodyHealth = this._getEmptyBodyHealthValues();
+        this.regen_health_enabled = false;
+
+        console.log('=> disable health: ', JSON.stringify(this.regen_db.bodyhealth_values))
+    }
+
+    updateOffraidRegen(offraidPosition) {
+        if (checkAccessVia(this.regen_config.hydration.access_via, offraidPosition)) {
+            this._enableHydration();
+        } else {
+            this._disableHydration();
+        }
+
+        if (checkAccessVia(this.regen_config.energy.access_via, offraidPosition)) {
+            this._enableEnergy();
+        } else {
+            this._disableEnergy();
+        }
+
+        if (checkAccessVia(this.regen_config.health.access_via, offraidPosition)) {
+            this._enableHealth();
+        } else {
+            this._disableHealth();
+        }
+    }
+}
+
+class PathToTarkovController {
     constructor(database, config, spawnConfig) {
         this.database = database;
         this.entrypoints = getEntryPointsForMaps(database);
         this.stashController = new StashController(config);
         this.traderController = new TraderController(config);
+        this.offraidRegenController = new OffraidRegenController(config);
         this.config = config;
         this.spawnConfig = spawnConfig;
     }
 
     init(sessionId) {
         this.stashController.initProfile(sessionId);
+        this.offraidRegenController.init();
 
         const offraidPosition = this.getOffraidPosition(sessionId)
         this.updateOffraidPosition(sessionId, offraidPosition);
@@ -446,6 +560,7 @@ class OffraidPositionController {
 
         this.stashController.updateStash(offraidPosition, sessionId);
         this.traderController.updateTraders(offraidPosition, sessionId);
+        this.offraidRegenController.updateOffraidRegen(offraidPosition);
 
         SaveServer.saveProfile(sessionId);
     }
@@ -508,25 +623,25 @@ class PathToTarkov {
 
         Logger.info(`Loading: ${mod.name} v${mod.version}`);
 
-        const offraidPositionController = new OffraidPositionController(database, config, spawnConfig);
+        const pathToTarkovController = new PathToTarkovController(database, config, spawnConfig);
 
-        offraidPositionController.initExfiltrations();
+        pathToTarkovController.initExfiltrations();
 
         ModLoader.onLoad[mod.name] = function () {
-            offraidPositionController.traderController.initTraders();
+            pathToTarkovController.traderController.initTraders();
 
             onGameStart((sessionId) => {
-                if (!offraidPositionController.stashController.getInventory(sessionId)) {
+                if (!pathToTarkovController.stashController.getInventory(sessionId)) {
                     // no pmc data found, will be handled by `onProfileCreated`
                     return;
                 }
 
-                offraidPositionController.init(sessionId);
+                pathToTarkovController.init(sessionId);
                 Logger.info(`=> PathToTarkov: game started!`);
             });
 
             onProfileCreated((_info, sessionId) => {
-                offraidPositionController.init(sessionId);
+                pathToTarkovController.init(sessionId);
                 Logger.info(`=> PathToTarkov: pmc created!`);
             });
 
@@ -555,7 +670,7 @@ class PathToTarkov {
                     const playerDied = !info.exitName;
 
                     if (config.reset_offraid_position_on_player_die && playerDied) {
-                        offraidPositionController.updateOffraidPosition(sessionId, config.initial_offraid_position);
+                        pathToTarkovController.updateOffraidPosition(sessionId, config.initial_offraid_position);
                         return;
                     }
 
@@ -563,7 +678,7 @@ class PathToTarkov {
                     const newOffraidPosition = extractsConf && extractsConf[info.exitName];
 
                     if (newOffraidPosition) {
-                        offraidPositionController.updateOffraidPosition(sessionId, newOffraidPosition);
+                        pathToTarkovController.updateOffraidPosition(sessionId, newOffraidPosition);
                     }
                 }
 

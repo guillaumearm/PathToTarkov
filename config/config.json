@@ -10,6 +10,32 @@
   "player_scav_move_offraid_position": true,
   "remove_all_exfils_restrictions": true,
   "bypass_uninstall_procedure": false,
+  "offraid_regen_config": {
+    "hydration": {
+      "access_via": [
+        "FactoryZB-1011",
+        "FactoryZB-1012",
+        "FactoryZB-1013",
+        "Car"
+      ]
+    },
+    "energy": {
+      "access_via": [
+        "FactoryZB-1011",
+        "FactoryZB-1012",
+        "FactoryZB-1013",
+        "WoodsCustoms"
+      ]
+    },
+    "health": {
+      "access_via": [
+        "FactoryZB-1011",
+        "FactoryZB-1012",
+        "FactoryZB-1013",
+        "WoodsFactoryGate"
+      ]
+    }
+  },
   "hideout_main_stash_access_via": [
     "FactoryZB-1011",
     "FactoryZB-1012",
