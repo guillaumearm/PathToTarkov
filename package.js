@@ -74,7 +74,7 @@ class StashController {
         }
 
         if (!profile.PathToTarkov.mainStashId) {
-            profile.PathToTarkov.mainStashId = this._getInventory(sessionId).stash;
+            profile.PathToTarkov.mainStashId = this.getInventory(sessionId).stash;
         }
     }
 
@@ -113,7 +113,7 @@ class StashController {
     }
 
     _setMainStash(sessionId) {
-        const inventory = this._getInventory(sessionId);
+        const inventory = this.getInventory(sessionId);
         inventory.stash = this._getMainStashId(sessionId);
     }
 
