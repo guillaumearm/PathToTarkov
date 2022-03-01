@@ -296,10 +296,10 @@ class OffraidPositionController {
     }
 
     init(sessionId) {
-        offraidPositionController.stashController.initProfile(sessionId);
+        this.stashController.initProfile(sessionId);
 
-        const offraidPosition = offraidPositionController.getOffraidPosition(sessionId)
-        offraidPositionController.updateOffraidPosition(sessionId, offraidPosition);
+        const offraidPosition = this.getOffraidPosition(sessionId)
+        this.updateOffraidPosition(sessionId, offraidPosition);
     }
 
     _addSpawnPoint(mapName, spawnPoint) {
