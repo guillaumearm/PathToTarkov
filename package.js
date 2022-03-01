@@ -46,7 +46,7 @@ class StashController {
         this.areas = DatabaseServer.tables.hideout.areas;
     }
 
-    _getInventory(sessionId) {
+    getInventory(sessionId) {
         return SaveServer.profiles[sessionId].characters.pmc.Inventory;
     }
 
@@ -275,6 +275,16 @@ const onGameStart = (cb) => {
     }
 }
 
+const onProfileCreated = (cb) => {
+    const vanillaCreateProfile = ProfileController.createProfile;
+
+    ProfileController.createProfile = (info, sessionId) => {
+        const result = vanillaCreateProfile(info, sessionId);
+        cb(info, sessionId);
+        return result;
+    }
+}
+
 class OffraidPositionController {
     constructor(database, config, spawnConfig) {
         this.database = database;
@@ -283,6 +293,13 @@ class OffraidPositionController {
         this.traderController = new TraderController(config);
         this.config = config;
         this.spawnConfig = spawnConfig;
+    }
+
+    init(sessionId) {
+        offraidPositionController.stashController.initProfile(sessionId);
+
+        const offraidPosition = offraidPositionController.getOffraidPosition(sessionId)
+        offraidPositionController.updateOffraidPosition(sessionId, offraidPosition);
     }
 
     _addSpawnPoint(mapName, spawnPoint) {
@@ -484,11 +501,18 @@ class PathToTarkov {
             offraidPositionController.traderController.initTraders();
 
             onGameStart((sessionId) => {
-                offraidPositionController.stashController.initProfile(sessionId);
+                if (!offraidPositionController.stashController.getInventory(sessionId)) {
+                    // no pmc data found, will be handled by `onProfileCreated`
+                    return;
+                }
 
-                const offraidPosition = offraidPositionController.getOffraidPosition(sessionId)
-                offraidPositionController.updateOffraidPosition(sessionId, offraidPosition);
-                Logger.info(`=> PathToTarkov: player offraid position initialized to '${offraidPosition}'`)
+                offraidPositionController.init(sessionId);
+                Logger.info(`=> PathToTarkov: player offraid position initialized to '${offraidPosition}'`);
+            });
+
+            onProfileCreated((_info, sessionId) => {
+                offraidPositionController.init(sessionId);
+                Logger.info(`=> PathToTarkov: pmc created and offraid position initialized to '${offraidPosition}'`);
             });
 
             let endRaidCb = () => { };
