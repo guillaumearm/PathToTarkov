@@ -23,6 +23,7 @@ The offraid position is stored in your profile in a dedicated field `PathToTarko
 
 
 ## Known issues
+- Sadly, Scav exfils cannot be used by a pmc (I don't know if it's a BSG limitation or if SPT-AKI doesn't implement a way to tweak this values)
 - Some hideout features cannot be disabled without crashing the game (generator, water collector and air filtering unit)
 
 ## UnInstallation
