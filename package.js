@@ -109,7 +109,7 @@ class StashController {
             this.items[stashId]._props.Grids[0]._props.cellsV = this.stashSizes[stashId];
         });
 
-        this.stashSizes = {};
+        this.stashSizes = null;
     }
 
     _setMainStash(sessionId) {
