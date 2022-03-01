@@ -33,16 +33,66 @@ It does 2 things in all existing profiles:
 2. Unlock all traders listed in the config (Please note Jaeger will be unlocked even if the regarding quest is not completed)
 
 ## The Default configuration
-By default, you are on `Car` offraid position.
+By default, you are on `FactoryZB-1011` offraid position.
 
-This means you can spawn on Customs, Interchange, Woods or Lighthouse at the corresponding car extract.
+This means you can spawn on Customs or Factory.
 
-The hideout stash is only accessible on the `Car`.
+The hideout and the main stash are only accessible on the `FactoryZB-1011`, `FactoryZB-1012` and `FactoryZB-1013`.
 
-When player die, the position is reset to the `Car` position.
+When player die, the position is reset to the `FactoryZB-1011` position.
 
 Everything is configurable.
 
+### Traders availability
+#### Prapor
+- Gate 0 (Factory)
+- Factory Gate (Woods)
+#### Therapist
+- Gate 0 (Factory)
+- Factory Gate (Woods)
+#### Mechanic
+You have access to your hideout and your main stash too
+
+- ZB-1011 (Customs)
+- ZB-1012 (Customs)
+- ZB-1013 (Customs)
+- ZB-1014 (Woods)
+- Gate 3 (Factory)
+- Med tent gates (Factory)
+- Cellars (Factory)
+
+#### Skier
+- RUAF Roadblock (Customs)
+- Northern UN Roadblock (Woods)
+
+#### Ragman
+- Railway exfil (Interchange)
+- Crossroads (Customs)
+
+#### Jaeger
+Accessible via the `Car`:
+- Dorms vehicule extract (Customs)
+- Bridge vehicule extract (Woods)
+- Power Station vehicule extract (Interchange)
+- Road to military base vehicule extract (Lighthouse)
+
+#### Peacekeeper
+Accessible via the `Boat`:
+- Smuggler's Boat (customs)
+- Pier Boat (Shoreline)
+
+#### Fence
+Available ewverywhere (with insurance enabled to avoid a client bug)
+
+#### Priscilu
+From the mod [Priscilu: the trader](https://hub.sp-tarkov.com/files/file/475-priscilu-the-trader/#overview) made by [Reis](https://hub.sp-tarkov.com/user/2833-reis/)
+- Outskirts (Woods)
+
+#### Operator
+From the mod [Alex-AIO](https://hub.sp-tarkov.com/files/file/375-alex-aio/#overview) made by [Alex](https://hub.sp-tarkov.com/user/10993-alex/)
+- Scav lands (Reserve)
+
+### All moves
 
 ### Factory
 Can move to Customs via:
