@@ -13,6 +13,7 @@ New spawn points can be added in `player_spawnpoints.json`
 ## Features
 - Maps are locked/unlocked according to the offraid position
 - Several hideout stash according to your offraid position (and the configuration file)
+- Hideout features disabled when player is not on the main stash position
 - Traders are available only on certains offraid position
 - Tweak exfiltrations points (fixed for each map + removed restrictions)
 - Changed spawn points according to the offraid position
