@@ -17,6 +17,7 @@ New spawn points can be added in `player_spawnpoints.json`
 - Traders are available only on certains offraid position
 - Tweak exfiltrations points (fixed for each map + removed restrictions)
 - Changed spawn points according to the offraid position
+- Certains offraid locations enable/disable the hydration/energy/health restoration (according to config)
 
 ## How to edit the current offraid position
 The offraid position is stored in your profile in a dedicated field `PathToTarkov`, you can edit it with a regular text editor.
