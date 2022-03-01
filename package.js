@@ -185,8 +185,10 @@ class TraderController {
             if (tradersConfig[traderId].insurance_always_enabled) {
                 const trader = this.traders[traderId];
                 if (!trader) {
-                    Logger.warning(`=> PathToTarkov: unknown trader '${traderId}'`)
+                    Logger.warning(`=> PathToTarkov: unknown trader found '${traderId}'`)
                 }
+
+                InsuranceConfig.insuranceMultiplier[traderId] = 0.30;
 
                 trader.base.insurance.availability = true;
                 trader.base.loyaltyLevels.forEach(payloadLevel => {
