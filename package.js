@@ -507,12 +507,12 @@ class PathToTarkov {
                 }
 
                 offraidPositionController.init(sessionId);
-                Logger.info(`=> PathToTarkov: player offraid position initialized to '${offraidPosition}'`);
+                Logger.info(`=> PathToTarkov: game started!`);
             });
 
             onProfileCreated((_info, sessionId) => {
                 offraidPositionController.init(sessionId);
-                Logger.info(`=> PathToTarkov: pmc created and offraid position initialized to '${offraidPosition}'`);
+                Logger.info(`=> PathToTarkov: pmc created!`);
             });
 
             let endRaidCb = () => { };
