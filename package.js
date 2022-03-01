@@ -155,6 +155,7 @@ class StashController {
 class TraderController {
     constructor(config) {
         this.config = config;
+        this.traders = DatabaseServer.tables.traders;
     }
 
     initTraders() {
@@ -179,6 +180,18 @@ class TraderController {
 
             if (tradersInfo[traderId]) {
                 tradersInfo[traderId].unlocked = unlocked;
+            }
+
+            if (tradersConfig[traderId].insurance_always_enabled) {
+                const trader = this.traders[traderId];
+                if (!trader) {
+                    Logger.warning(`=> PathToTarkov: unknown trader '${traderId}'`)
+                }
+
+                trader.base.insurance.availability = true;
+                trader.base.loyaltyLevels.forEach(payloadLevel => {
+                    payloadLevel.insurance_price_coef = 1;
+                })
             }
         })
     }
