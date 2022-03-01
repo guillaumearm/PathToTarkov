@@ -1,5 +1,5 @@
 # Path to Tarkov
-Connect all available maps through the extracts points.
+Connect all available maps through the extracts points, bring a multi-stash system and lock traders according to the player offraid position.
 
 ## Description
 This mod bring the notion of "offraid position" for the player, it locks certains maps according to this offraid position, change all player spawn points to reflect this positions, change the hideout stash and lock/unlock traders according to the config file.
@@ -18,7 +18,14 @@ New spawn points can be added in `player_spawnpoints.json`
 - Tweak exfiltrations points (fixed for each map + removed restrictions)
 - Changed spawn points according to the offraid position
 
-## Un-Installation
+## How to edit the current offraid position
+The offraid position is stored in your profile in a dedicated field `PathToTarkov`, you can edit it with a regular text editor.
+
+
+## Known issues
+- Some hideout features cannot be disabled without crashing the game (generator, water collector and air filtering unit)
+
+## UnInstallation
 Before deleting the mod, you can set the `enabled` props to `false` in `config.json` and start the server once.
 
 It does 2 things in all existing profiles: 
@@ -36,8 +43,6 @@ When player die, the position is reset to the `Car` position.
 
 Everything is configurable.
 
-## How to edit the current offraid position
-The offraid position is stored in your profile in a dedicated field `PathToTarkov`, you can edit it with a regular text editor.
 
 ### Factory
 Can move to Customs via:
