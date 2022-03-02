@@ -628,9 +628,8 @@ class PathToTarkov {
 
         const pathToTarkovController = new PathToTarkovController(database, config, spawnConfig);
 
-        pathToTarkovController.initExfiltrations();
-
         ModLoader.onLoad[mod.name] = function () {
+            pathToTarkovController.initExfiltrations();
             pathToTarkovController.traderController.initTraders();
 
             onGameStart((sessionId) => {
