@@ -96,18 +96,66 @@
   "traders_config": {
     "54cb50c76803fa8b248b4571": {
       "// Trader name": "Prapor",
+      "override_description": true,
+      "location_description": {
+        "ch": "Between woods and factory",
+        "cz": "Between woods and factory",
+        "en": "Between woods and factory",
+        "es-mx": "Between woods and factory",
+        "es": "Between woods and factory",
+        "fr": "Entre les bois et l'usine",
+        "ge": "Between woods and factory",
+        "hu": "Between woods and factory",
+        "it": "Between woods and factory",
+        "jp": "Between woods and factory",
+        "kr": "Between woods and factory",
+        "pl": "Between woods and factory",
+        "po": "Between woods and factory"
+      },
       "access_via": [
         "WoodsFactoryGate"
       ]
     },
     "54cb57776803fa99248b456e": {
       "// Trader name": "Therapist",
+      "override_description": true,
+      "location_description": {
+        "ch": "Between woods and factory",
+        "cz": "Between woods and factory",
+        "en": "Between woods and factory",
+        "es-mx": "Between woods and factory",
+        "es": "Between woods and factory",
+        "fr": "Entre les bois et l'usine",
+        "ge": "Between woods and factory",
+        "hu": "Between woods and factory",
+        "it": "Between woods and factory",
+        "jp": "Between woods and factory",
+        "kr": "Between woods and factory",
+        "pl": "Between woods and factory",
+        "po": "Between woods and factory"
+      },
       "access_via": [
         "WoodsFactoryGate"
       ]
     },
     "5a7c2eca46aef81a7ca2145d": {
       "// Trader name": "Mechanic",
+      "override_description": true,
+      "location_description": {
+        "ch": "In ZB-* bunkers",
+        "cz": "In ZB-* bunkers",
+        "en": "In ZB-* bunkers",
+        "es-mx": "In ZB-* bunkers",
+        "es": "In ZB-* bunkers",
+        "fr": "Dans les bunkers ZB-*",
+        "ge": "In ZB-* bunkers",
+        "hu": "In ZB-* bunkers",
+        "it": "In ZB-* bunkers",
+        "jp": "In ZB-* bunkers",
+        "kr": "In ZB-* bunkers",
+        "pl": "In ZB-* bunkers",
+        "po": "In ZB-* bunkers"
+      },
       "access_via": [
         "FactoryZB-1011",
         "FactoryZB-1012",
@@ -116,24 +164,88 @@
     },
     "58330581ace78e27b8b10cee": {
       "// Trader name": "Skier",
+      "override_description": true,
+      "location_description": {
+        "ch": "Between woods and customs",
+        "cz": "Between woods and customs",
+        "en": "Between woods and customs",
+        "es-mx": "Between woods and customs",
+        "es": "Between woods and customs",
+        "fr": "Entre les bois et les douanes",
+        "ge": "Between woods and customs",
+        "hu": "Between woods and customs",
+        "it": "Between woods and customs",
+        "jp": "Between woods and customs",
+        "kr": "Between woods and customs",
+        "pl": "Between woods and customs",
+        "po": "Between woods and customs"
+      },
       "access_via": [
         "WoodsCustoms"
       ]
     },
     "5ac3b934156ae10c4430e83c": {
       "// Trader name": "Ragman",
+      "override_description": true,
+      "location_description": {
+        "ch": "Between interchange and customs",
+        "cz": "Between interchange and customs",
+        "en": "Between interchange and customs",
+        "es-mx": "Between interchange and customs",
+        "es": "Between interchange and customs",
+        "fr": "Entre l'échangeur et les douanes",
+        "ge": "Between interchange and customs",
+        "hu": "Between interchange and customs",
+        "it": "Between interchange and customs",
+        "jp": "Between interchange and customs",
+        "kr": "Between interchange and customs",
+        "pl": "Between interchange and customs",
+        "po": "Between interchange and customs"
+      },
       "access_via": [
         "InterchangeCustoms"
       ]
     },
     "5c0647fdd443bc2504c2d371": {
       "// Trader name": "Jaeger",
+      "override_description": true,
+      "location_description": {
+        "ch": "In car",
+        "cz": "In car",
+        "en": "In car",
+        "es-mx": "In car",
+        "es": "In car",
+        "fr": "En voiture",
+        "ge": "In car",
+        "hu": "In car",
+        "it": "In car",
+        "jp": "In car",
+        "kr": "In car",
+        "pl": "In car",
+        "po": "In car"
+      },
       "access_via": [
         "Car"
       ]
     },
     "5935c25fb3acc3127c3d8cd9": {
       "// Trader name": "Peacekeeper",
+      "override_description": true,
+      "location_description": {
+        "ch": "In boat",
+        "cz": "In boat",
+        "en": "In boat",
+        "es-mx": "In boat",
+        "es": "In boat",
+        "fr": "En bateau",
+        "ge": "In boat",
+        "hu": "In boat",
+        "it": "In boat",
+        "jp": "In boat",
+        "kr": "In boat",
+        "pl": "In boat",
+        "po": "In boat"
+      },
       "access_via": [
         "Boat"
       ]
@@ -148,6 +260,22 @@
       "// mod integration for Priscilu": true,
       "// Priscilu is available after extracting from Outskirts (woods map)": true,
       "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "Somewhere between woods, military reserve and shoreline",
+        "cz": "Somewhere between woods, military reserve and shoreline",
+        "en": "Somewhere between woods, military reserve and shoreline",
+        "es-mx": "Somewhere between woods, military reserve and shoreline",
+        "es": "Somewhere between woods, military reserve and shoreline",
+        "fr": "Quelque part entre les bois, la base militaire et le littoral",
+        "ge": "Somewhere between woods, military reserve and shoreline",
+        "hu": "Somewhere between woods, military reserve and shoreline",
+        "it": "Somewhere between woods, military reserve and shoreline",
+        "jp": "Somewhere between woods, military reserve and shoreline",
+        "kr": "Somewhere between woods, military reserve and shoreline",
+        "pl": "Somewhere between woods, military reserve and shoreline",
+        "po": "Somewhere between woods, military reserve and shoreline"
+      },
       "access_via": [
         "WoodsReserveShoreline"
       ]
@@ -156,6 +284,22 @@
       "// mod integration for Alex-AIO": true,
       "// Operator is available after extracting from Scav lands (reserve map)": true,
       "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "Between customs and military reserve",
+        "cz": "Between customs and military reserve",
+        "en": "Between customs and military reserve",
+        "es-mx": "Between customs and military reserve",
+        "es": "Between customs and military reserve",
+        "fr": "Entre les douanes et la base militaire",
+        "ge": "Between customs and military reserve",
+        "hu": "Between customs and military reserve",
+        "it": "Between customs and military reserve",
+        "jp": "Between customs and military reserve",
+        "kr": "Between customs and military reserve",
+        "pl": "Between customs and military reserve",
+        "po": "Between customs and military reserve"
+      },
       "access_via": [
         "CustomsMilitaryBaseCP"
       ]

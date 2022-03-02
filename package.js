@@ -160,6 +160,7 @@ class TraderController {
     constructor(config) {
         this.config = config;
         this.traders = DatabaseServer.tables.traders;
+        this.locales = DatabaseServer.tables.locales;
     }
 
     initTraders() {
@@ -173,6 +174,19 @@ class TraderController {
                 // be able to lock a trader
                 trader.base.unlockedByDefault = false;
 
+                if (tradersConfig[traderId].override_description) {
+                    // change trader location in descriptions (TODO handle all locales)
+
+                    Object.keys(this.locales.global).forEach(locale => {
+                        const locationDescription = tradersConfig[traderId].location_description;
+                        if (locationDescription && locationDescription[locale]) {
+                            this.locales.global[locale].trading[traderId].Location = locationDescription[locale];
+                        }
+                    });
+                }
+
+
+                // insurances update
                 if (tradersConfig[traderId].insurance_always_enabled) {
                     const trader = this.traders[traderId];
 
