@@ -8,6 +8,8 @@ function checkAccessVia(access_via, x) {
     return access_via === '*' || access_via[0] === '*' || access_via.includes(x);
 }
 
+const PRAPOR_ID = '54cb50c76803fa8b248b4571';
+
 const STASH_IDS = [
     "566abbc34bdc2d92178b4576", // Standard
     "5811ce572459770cba1a34ea", // Left Behind
@@ -159,11 +161,34 @@ class TraderController {
     }
 
     initTraders() {
+        const tradersConfig = this.config.traders_config;
+        const praporTrader = this.traders[PRAPOR_ID];
+
         Object.keys(this.config.traders_config).forEach(traderId => {
-            const trader = DatabaseServer.tables.traders[traderId];
+            const trader = this.traders[traderId];
 
             if (trader) {
+                // be able to lock a trader
                 trader.base.unlockedByDefault = false;
+
+                if (tradersConfig[traderId].insurance_always_enabled) {
+                    const trader = this.traders[traderId];
+
+                    if (!trader) {
+                        Logger.warning(`=> PathToTarkov: unknown trader found '${traderId}'`)
+                    }
+
+                    if (!trader.dialogue) { // prevent several issues (freeze and crash)
+                        trader.dialogue = praporTrader.dialogue;
+                    }
+
+                    InsuranceConfig.insuranceMultiplier[traderId] = 0.30;
+
+                    trader.base.insurance.availability = true;
+                    trader.base.loyaltyLevels.forEach(payloadLevel => {
+                        payloadLevel.insurance_price_coef = 1;
+                    })
+                }
             } else if (!this.config.traders_config[traderId].disable_warning) {
                 Logger.warning(`=> PathToTarkov: Unknown trader id found during init: '${traderId}'`);
             }
@@ -182,24 +207,7 @@ class TraderController {
                 tradersInfo[traderId].unlocked = unlocked;
             }
 
-            if (tradersConfig[traderId].insurance_always_enabled) {
-                const trader = this.traders[traderId];
 
-                if (!trader) {
-                    Logger.warning(`=> PathToTarkov: unknown trader found '${traderId}'`)
-                }
-
-                if (!trader.dialogue) {
-                    trader.dialogue = {};
-                }
-
-                InsuranceConfig.insuranceMultiplier[traderId] = 0.30;
-
-                trader.base.insurance.availability = true;
-                trader.base.loyaltyLevels.forEach(payloadLevel => {
-                    payloadLevel.insurance_price_coef = 1;
-                })
-            }
         })
     }
 }
