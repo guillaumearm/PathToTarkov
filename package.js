@@ -8,6 +8,8 @@ function checkAccessVia(access_via, x) {
     return access_via === '*' || access_via[0] === '*' || access_via.includes(x);
 }
 
+function noop() { }
+
 const PRAPOR_ID = '54cb50c76803fa8b248b4571';
 
 const STASH_IDS = [
@@ -661,16 +663,25 @@ class PathToTarkov {
                 Logger.info(`=> PathToTarkov: pmc created!`);
             });
 
-            let endRaidCb = () => { };
+            let endRaidCb = noop;
+            let endRaidCbExecuted = false;
+            let savedCurrentLocationName = null;
+            let savedIsPlayerScav = null;
 
             const vanillaSaveProgress = InraidController.saveProgress;
             InraidController.saveProgress = (offraidData, sessionId) => {
                 const isPlayerScav = offraidData.isPlayerScav;
                 const currentLocationName = SaveServer.profiles[sessionId].inraid.location.toLowerCase();
 
-                endRaidCb(currentLocationName, isPlayerScav);
-                endRaidCb = () => { };
+                if (endRaidCb !== noop) {
+                    endRaidCb(currentLocationName, isPlayerScav);
+                    endRaidCb = noop;
+                } else if (!endRaidCbExecuted) {
+                    savedCurrentLocationName = currentLocationName;
+                    savedIsPlayerScav = isPlayerScav;
+                }
 
+                endRaidCbExecuted = false;
                 return vanillaSaveProgress(offraidData, sessionId);
             }
 
@@ -696,6 +707,14 @@ class PathToTarkov {
                     if (newOffraidPosition) {
                         pathToTarkovController.updateOffraidPosition(sessionId, newOffraidPosition);
                     }
+                }
+
+                if (savedCurrentLocationName !== null && savedIsPlayerScav !== null) {
+                    endRaidCb(savedCurrentLocationName, savedIsPlayerScav);
+                    endRaidCb = noop;
+                    endRaidCbExecuted = true;
+                    savedCurrentLocationName = null;
+                    savedIsPlayerScav = null;
                 }
 
                 return vanillaEndOfflineRaid(info, sessionId);
