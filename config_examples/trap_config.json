@@ -7,7 +7,7 @@
   "laboratory_access_via": [
     "Car"
   ],
-  "player_scav_move_offraid_position": true,
+  "player_scav_move_offraid_position": false,
   "remove_all_exfils_restrictions": true,
   "bypass_uninstall_procedure": false,
   "restrictions_in_raid": {
