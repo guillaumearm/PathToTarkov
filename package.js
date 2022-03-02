@@ -184,8 +184,13 @@ class TraderController {
 
             if (tradersConfig[traderId].insurance_always_enabled) {
                 const trader = this.traders[traderId];
+
                 if (!trader) {
                     Logger.warning(`=> PathToTarkov: unknown trader found '${traderId}'`)
+                }
+
+                if (!trader.dialogue) {
+                    trader.dialogue = {};
                 }
 
                 InsuranceConfig.insuranceMultiplier[traderId] = 0.30;
@@ -387,8 +392,6 @@ class OffraidRegenController {
 
         this.regen_db.BodyHealth = this._getEmptyBodyHealthValues();
         this.regen_health_enabled = false;
-
-        console.log('=> disable health: ', JSON.stringify(this.regen_db.bodyhealth_values))
     }
 
     updateOffraidRegen(offraidPosition) {
