@@ -104,6 +104,13 @@
       "access_via": [
         "CustomsMilitaryBaseCP"
       ]
+    },
+    {
+      "id": "PathToTarkov_SafeRoom_stash",
+      "size": 22,
+      "access_via": [
+        "SafeRoom"
+      ]
     }
   ],
   "traders_access_restriction": true,
@@ -355,11 +362,13 @@
     "rezervbase": {
       "EXFIL_ScavCooperation": "CustomsMilitaryBaseCP",
       "Exit4": "WoodsReserveShoreline",
-      "Alpinist": "ShorelineNorthMoutains"
+      "Alpinist": "ShorelineNorthMoutains",
+      "EXFIL_Bunker_D2": "SafeRoom"
     },
     "interchange": {
       "PP Exfil": "Car",
-      "NW Exfil": "InterchangeCustoms"
+      "NW Exfil": "InterchangeCustoms",
+      "Saferoom Exfil": "SafeRoom"
     },
     "shoreline": {
       "exit_scav_NORTH_fencepassage": "ShorelineNorthMoutains",
@@ -523,6 +532,14 @@
       ],
       "factory4_night": [
         "Gate 0"
+      ]
+    },
+    "SafeRoom": {
+      "rezervbase": [
+        "D-2"
+      ],
+      "interchange": [
+        "Safe Room"
       ]
     }
   }

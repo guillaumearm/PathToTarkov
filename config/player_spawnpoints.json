@@ -235,6 +235,14 @@
       "Rotation": 263.982239
     }
   },
+  "D-2": {
+    "Position": [
+      -116.999077,
+      -18.3659115,
+      169.5836
+    ],
+    "Rotation": 128.773651
+  },
   "interchange": {
     "Car at Power Station": {
       "Position": [
@@ -251,6 +259,14 @@
         -390.7554
       ],
       "Rotation": 281.3094
+    },
+    "Safe Room": {
+      "Position": [
+        -49.4776039,
+        21.3254585,
+        47.4479179
+      ],
+      "Rotation": 344.7888
     }
   },
   "shoreline": {
