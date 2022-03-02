@@ -40,6 +40,17 @@ const isIgnoredArea = (area) => {
     return false;
 }
 
+const changeRestrictionsInRaid = (database, config) => {
+    const restrictionsConfig = config.restrictions_in_raid || {};
+
+    database.globals.config.RestrictionsInRaid.forEach(payload => {
+
+        if (restrictionsConfig[payload.TemplateId]) {
+            payload.Value = restrictionsConfig[payload.TemplateId].Value;
+        }
+    })
+}
+
 class StashController {
     constructor(config) {
         this.config = config;
@@ -456,6 +467,8 @@ class PathToTarkovController {
 
         const offraidPosition = this.getOffraidPosition(sessionId)
         this.updateOffraidPosition(sessionId, offraidPosition);
+
+        changeRestrictionsInRaid(this.database, this.config);
     }
 
     _addSpawnPoint(mapName, spawnPoint) {
