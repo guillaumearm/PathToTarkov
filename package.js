@@ -570,8 +570,11 @@ class PathToTarkovController {
         this._updateSpawnPoints(offraidPosition);
 
         this.stashController.updateStash(offraidPosition, sessionId);
-        this.traderController.updateTraders(offraidPosition, sessionId);
         this.offraidRegenController.updateOffraidRegen(offraidPosition);
+
+        if (this.config.traders_access_restriction) {
+            this.traderController.updateTraders(offraidPosition, sessionId);
+        }
 
         SaveServer.saveProfile(sessionId);
     }
@@ -638,7 +641,10 @@ class PathToTarkov {
 
         ModLoader.onLoad[mod.name] = function () {
             pathToTarkovController.initExfiltrations();
-            pathToTarkovController.traderController.initTraders();
+
+            if (config.traders_access_restriction) {
+                pathToTarkovController.traderController.initTraders();
+            }
 
             onGameStart((sessionId) => {
                 if (!pathToTarkovController.stashController.getInventory(sessionId)) {
