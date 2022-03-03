@@ -328,6 +328,154 @@
       "access_via": [
         "*"
       ]
+    },
+    "Elder_Temporal_Id": {
+      "// mod integration for Andrudis-QuestManiac": true,
+      "// Trader name": "Elder",
+      "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "In ZB-* bunkers",
+        "cz": "In ZB-* bunkers",
+        "en": "In ZB-* bunkers",
+        "es-mx": "In ZB-* bunkers",
+        "es": "In ZB-* bunkers",
+        "fr": "Dans les bunkers ZB-*",
+        "ge": "In ZB-* bunkers",
+        "hu": "In ZB-* bunkers",
+        "it": "In ZB-* bunkers",
+        "jp": "In ZB-* bunkers",
+        "kr": "In ZB-* bunkers",
+        "pl": "In ZB-* bunkers",
+        "po": "In ZB-* bunkers"
+      },
+      "access_via": [
+        "FactoryZB-1011",
+        "FactoryZB-1012",
+        "FactoryZB-1013"
+      ]
+    },
+    "Khokhol_Temporal_Id": {
+      "// mod integration for Andrudis-QuestManiac": true,
+      "// Trader name": "Khokol",
+      "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "In ZB-* bunkers",
+        "cz": "In ZB-* bunkers",
+        "en": "In ZB-* bunkers",
+        "es-mx": "In ZB-* bunkers",
+        "es": "In ZB-* bunkers",
+        "fr": "Dans les bunkers ZB-*",
+        "ge": "In ZB-* bunkers",
+        "hu": "In ZB-* bunkers",
+        "it": "In ZB-* bunkers",
+        "jp": "In ZB-* bunkers",
+        "kr": "In ZB-* bunkers",
+        "pl": "In ZB-* bunkers",
+        "po": "In ZB-* bunkers"
+      },
+      "access_via": [
+        "FactoryZB-1011",
+        "FactoryZB-1012",
+        "FactoryZB-1013"
+      ]
+    },
+    "Warden_Temporal_Id": {
+      "// mod integration for Andrudis-QuestManiac": true,
+      "// Trader name": "Warden",
+      "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "In car",
+        "cz": "In car",
+        "en": "In car",
+        "es-mx": "In car",
+        "es": "In car",
+        "fr": "En voiture",
+        "ge": "In car",
+        "hu": "In car",
+        "it": "In car",
+        "jp": "In car",
+        "kr": "In car",
+        "pl": "In car",
+        "po": "In car"
+      },
+      "access_via": [
+        "Car"
+      ]
+    },
+    "LabRat_Temporal_Id": {
+      "// mod integration for Andrudis-QuestManiac": true,
+      "// Trader name": "Lab Rat",
+      "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "In car",
+        "cz": "In car",
+        "en": "In car",
+        "es-mx": "In car",
+        "es": "In car",
+        "fr": "En voiture",
+        "ge": "In car",
+        "hu": "In car",
+        "it": "In car",
+        "jp": "In car",
+        "kr": "In car",
+        "pl": "In car",
+        "po": "In car"
+      },
+      "access_via": [
+        "Car"
+      ]
+    },
+    "Bashkir_Temporal_Id": {
+      "// mod integration for Andrudis-QuestManiac": true,
+      "// Trader name": "Bashkir",
+      "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "In boat",
+        "cz": "In boat",
+        "en": "In boat",
+        "es-mx": "In boat",
+        "es": "In boat",
+        "fr": "En bateau",
+        "ge": "In boat",
+        "hu": "In boat",
+        "it": "In boat",
+        "jp": "In boat",
+        "kr": "In boat",
+        "pl": "In boat",
+        "po": "In boat"
+      },
+      "access_via": [
+        "Boat"
+      ]
+    },
+    "Colonel_Temporal_Id": {
+      "// mod integration for Andrudis-QuestManiac": true,
+      "// Trader name": "Colonel",
+      "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "Between interchange and military reserve",
+        "cz": "Between interchange and military reserve",
+        "en": "Between interchange and military reserve",
+        "es-mx": "Between interchange and military reserve",
+        "es": "Between interchange and military reserve",
+        "fr": "Entre l'échangeur et la base militaire",
+        "ge": "Between interchange and military reserve",
+        "hu": "Between interchange and military reserve",
+        "it": "Between interchange and military reserve",
+        "jp": "Between interchange and military reserve",
+        "kr": "Between interchange and military reserve",
+        "pl": "Between interchange and military reserve",
+        "po": "Between interchange and military reserve"
+      },
+      "access_via": [
+        "SafeRoom"
+      ]
     }
   },
   "exfiltrations": {
