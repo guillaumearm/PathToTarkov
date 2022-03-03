@@ -206,6 +206,7 @@ class TraderController {
                 // insurances update
                 if (tradersConfig[traderId].insurance_always_enabled) {
                     const trader = this.traders[traderId];
+                    const insuranceTraderConfig = tradersConfig[traderId].insurance_config || {};
 
                     if (!trader) {
                         Logger.warning(`=> PathToTarkov: unknown trader found '${traderId}'`)
@@ -215,11 +216,16 @@ class TraderController {
                         trader.dialogue = praporTrader.dialogue;
                     }
 
-                    InsuranceConfig.insuranceMultiplier[traderId] = 0.30;
+                    InsuranceConfig.insuranceMultiplier[traderId] = insuranceTraderConfig.insuranceMultiplier || 0.30;
 
                     trader.base.insurance.availability = true;
+                    trader.base.insurance.min_payment = insuranceTraderConfig.min_payment || 0;
+                    trader.base.insurance.min_return_hour = insuranceTraderConfig.min_return_hour || 1;
+                    trader.base.insurance.max_return_hour = insuranceTraderConfig.max_return_hour || 2;
+                    trader.base.insurance.max_storage_time = insuranceTraderConfig.max_storage_time || 480;
+
                     trader.base.loyaltyLevels.forEach(payloadLevel => {
-                        payloadLevel.insurance_price_coef = 1;
+                        payloadLevel.insurance_price_coef = insuranceTraderConfig.insurance_price_coef || 1;
                     })
                 }
             } else if (!this.config.traders_config[traderId].disable_warning) {
