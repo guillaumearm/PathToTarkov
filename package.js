@@ -475,6 +475,36 @@ class PathToTarkovController {
         this.updateOffraidPosition(sessionId, offraidPosition);
 
         changeRestrictionsInRaid(this.database, this.config);
+
+        this._hijackLuasCustomSpawnPointsUpdate();
+    }
+
+    // This is a fix to ensure Lua's Custom Spawn Point mod do not override player spawn point
+    _hijackLuasCustomSpawnPointsUpdate() {
+        // if disabled via config
+        if (this.config.bypass_luas_custom_spawn_points_tweak) {
+            return;
+        }
+
+        const LUAS_CSP_MODNAME = "Lua-CustomSpawnPoints";
+        const locationsRoute = HttpRouter.onStaticRoute["/client/locations"];
+        const luasUpdateFn = locationsRoute[LUAS_CSP_MODNAME];
+
+        // if Lua's Custom Spawn Points is not loaded
+        if (!luasUpdateFn) {
+            return
+        }
+
+        locationsRoute[LUAS_CSP_MODNAME] = (url, info, sessionId) => {
+            // _response is not used since we need to call `LocationController.generateAll()` after `_updateSpawnPoints`
+            const _response = luasUpdateFn(url, info, sessionId);
+
+            this._updateSpawnPoints(this.getOffraidPosition(sessionId));
+
+            return HttpResponse.getBody(LocationController.generateAll());;
+        }
+
+        Logger.info("=> PathToTarkov: Lua's Custom Spawn Points Update function hijacked!");
     }
 
     _addSpawnPoint(mapName, spawnPoint) {
@@ -497,6 +527,15 @@ class PathToTarkovController {
         });
     }
 
+
+    _removeAllPlayerSpawns() {
+        MAPLIST.forEach(mapName => {
+            if (mapName !== 'laboratory') {
+                this._removePlayerSpawns(mapName);
+            }
+        })
+    }
+
     _updateLockedMaps(offraidPosition) {
         const unlockedMaps = this.config.infiltrations[offraidPosition];
 
@@ -511,13 +550,10 @@ class PathToTarkovController {
         })
     }
 
+
     _updateSpawnPoints(offraidPosition) {
         // Remove all player spawn points
-        MAPLIST.forEach(mapName => {
-            if (mapName !== 'laboratory') {
-                this._removePlayerSpawns(mapName);
-            }
-        })
+        this._removeAllPlayerSpawns();
 
         // Add new spawn points according to player offraid position
         Object.keys(this.config.infiltrations[offraidPosition]).forEach(mapName => {
