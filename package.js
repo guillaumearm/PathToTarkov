@@ -186,7 +186,7 @@ class TraderController {
                 trader.base.unlockedByDefault = false;
 
                 if (tradersConfig[traderId].override_description) {
-                    // change trader location in descriptions (TODO handle all locales)
+                    // change trader location in descriptions
 
                     Object.keys(this.locales.global).forEach(locale => {
                         const locationDescription = tradersConfig[traderId].location_description;
