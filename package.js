@@ -191,7 +191,13 @@ class TraderController {
                     Object.keys(this.locales.global).forEach(locale => {
                         const locationDescription = tradersConfig[traderId].location_description;
                         if (locationDescription && locationDescription[locale]) {
-                            this.locales.global[locale].trading[traderId].Location = locationDescription[locale];
+                            const traderLocales = this.locales.global[locale].trading[traderId];
+
+                            if (traderLocales) {
+                                traderLocales.Location = locationDescription[locale];
+                            } else {
+                                Logger.warning(`=> PathToTarkov: no locales '${locale}' found for trader '${traderId}'`);
+                            }
                         }
                     });
                 }
