@@ -484,8 +484,17 @@ class PathToTarkovController {
     _removePlayerSpawns(mapName) {
         const base = this.database.locations[mapName].base;
 
-        base.SpawnPointParams = base.SpawnPointParams
-            .filter(params => params.Categories[0] !== 'Player')
+        base.SpawnPointParams = base.SpawnPointParams.filter(params => {
+            // remove Player from Categories array
+            params.Categories = params.Categories.filter(cat => cat !== 'Player');
+
+            if (!params.Categories.length) {
+                // remove the spawn point if Categories is empty
+                return false;
+            }
+
+            return true;
+        });
     }
 
     _updateLockedMaps(offraidPosition) {
