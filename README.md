@@ -94,6 +94,9 @@ From the mod [Priscilu: the trader](https://hub.sp-tarkov.com/files/file/475-pri
 From the mod [Alex-AIO](https://hub.sp-tarkov.com/files/file/375-alex-aio/#overview) made by [Alex](https://hub.sp-tarkov.com/user/10993-alex/)
 - Scav lands (Reserve)
 
+#### Other traders
+- All traders froms [Andrudis-QuestManiac](https://hub.sp-tarkov.com/files/file/113-andrudis-questmaniac)
+
 ### All moves
 
 ### Factory
