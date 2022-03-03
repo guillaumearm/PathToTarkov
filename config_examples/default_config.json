@@ -10,6 +10,20 @@
   "player_scav_move_offraid_position": true,
   "remove_all_exfils_restrictions": true,
   "bypass_uninstall_procedure": false,
+  "restrictions_in_raid": {
+    "5449016a4bdc2d6f028b456f": {
+      "// type = roubles": true,
+      "Value": 10000000
+    },
+    "5696686a4bdc2da3298b456a": {
+      "// type = dollars": true,
+      "Value": 100000
+    },
+    "569668774bdc2da2298b4568": {
+      "// type = euros": true,
+      "Value": 100000
+    }
+  },
   "offraid_regen_config": {
     "hydration": {
       "access_via": [
@@ -90,9 +104,16 @@
       "access_via": [
         "CustomsMilitaryBaseCP"
       ]
+    },
+    {
+      "id": "PathToTarkov_SafeRoom_stash",
+      "size": 22,
+      "access_via": [
+        "SafeRoom"
+      ]
     }
   ],
-  "traders_access_restriction": true,
+  "traders_access_restriction": false,
   "traders_config": {
     "54cb50c76803fa8b248b4571": {
       "// Trader name": "Prapor",
@@ -489,11 +510,13 @@
     "rezervbase": {
       "EXFIL_ScavCooperation": "CustomsMilitaryBaseCP",
       "Exit4": "WoodsReserveShoreline",
-      "Alpinist": "ShorelineNorthMoutains"
+      "Alpinist": "ShorelineNorthMoutains",
+      "EXFIL_Bunker_D2": "SafeRoom"
     },
     "interchange": {
       "PP Exfil": "Car",
-      "NW Exfil": "InterchangeCustoms"
+      "NW Exfil": "InterchangeCustoms",
+      "Saferoom Exfil": "SafeRoom"
     },
     "shoreline": {
       "exit_scav_NORTH_fencepassage": "ShorelineNorthMoutains",
@@ -657,6 +680,14 @@
       ],
       "factory4_night": [
         "Gate 0"
+      ]
+    },
+    "SafeRoom": {
+      "rezervbase": [
+        "D-2"
+      ],
+      "interchange": [
+        "Safe Room"
       ]
     }
   }
