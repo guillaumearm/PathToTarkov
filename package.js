@@ -1,5 +1,52 @@
 "use strict";
 
+// deep clone taken on stackoverflow
+function deepClone(item) {
+    if (!item) { return item; } // null, undefined values check
+
+    var types = [Number, String, Boolean],
+        result;
+
+    // normalizing primitives if someone did new String('aaa'), or new Number('444');
+    types.forEach(function (type) {
+        if (item instanceof type) {
+            result = type(item);
+        }
+    });
+
+    if (typeof result == "undefined") {
+        if (Object.prototype.toString.call(item) === "[object Array]") {
+            result = [];
+            item.forEach(function (child, index, array) {
+                result[index] = deepClone(child);
+            });
+        } else if (typeof item == "object") {
+            // testing that this is DOM
+            if (item.nodeType && typeof item.cloneNode == "function") {
+                result = item.cloneNode(true);
+            } else if (!item.prototype) { // check that this is a literal
+                if (item instanceof Date) {
+                    result = new Date(item);
+                } else {
+                    // it is an object literal
+                    result = {};
+                    for (var i in item) {
+                        result[i] = deepClone(item[i]);
+                    }
+                }
+            } else {
+                // just keep the reference
+                result = item;
+                // depending what you would like here,
+            }
+        } else {
+            result = item;
+        }
+    }
+
+    return result;
+}
+
 const isValidMap = (mapName) => {
     return mapName !== 'base' && mapName !== 'hideout' && mapName !== 'privatearea' && mapName !== 'private area' && mapName !== 'develop';
 }
@@ -52,8 +99,8 @@ const changeRestrictionsInRaid = (database, config) => {
 }
 
 class StashController {
-    constructor(config) {
-        this.config = config;
+    constructor(getConfig) {
+        this.getConfig = getConfig;
 
         // null means stash is unlocked
         this.stashSizes = null;
@@ -142,12 +189,12 @@ class StashController {
     }
 
     updateStash(offraidPosition, sessionId) {
-        if (!this.config.hideout_multistash_enabled) {
+        if (!this.getConfig().hideout_multistash_enabled) {
             return;
         }
 
-        const mainStashAvailable = checkAccessVia(this.config.hideout_main_stash_access_via, offraidPosition);
-        const secondaryStash = this.config.hideout_secondary_stashes.find(stash => checkAccessVia(stash.access_via, offraidPosition));
+        const mainStashAvailable = checkAccessVia(this.getConfig().hideout_main_stash_access_via, offraidPosition);
+        const secondaryStash = this.getConfig().hideout_secondary_stashes.find(stash => checkAccessVia(stash.access_via, offraidPosition));
 
         if (mainStashAvailable) {
             this._enableHideout(sessionId);
@@ -168,17 +215,17 @@ class StashController {
 }
 
 class TraderController {
-    constructor(config) {
-        this.config = config;
+    constructor(getConfig) {
+        this.getConfig = getConfig;
         this.traders = DatabaseServer.tables.traders;
         this.locales = DatabaseServer.tables.locales;
     }
 
     initTraders() {
-        const tradersConfig = this.config.traders_config;
+        const tradersConfig = this.getConfig().traders_config;
         const praporTrader = this.traders[PRAPOR_ID];
 
-        Object.keys(this.config.traders_config).forEach(traderId => {
+        Object.keys(this.getConfig().traders_config).forEach(traderId => {
             const trader = this.traders[traderId];
 
             if (trader) {
@@ -228,14 +275,14 @@ class TraderController {
                         payloadLevel.insurance_price_coef = insuranceTraderConfig.insurance_price_coef || 1;
                     })
                 }
-            } else if (!this.config.traders_config[traderId].disable_warning) {
+            } else if (!this.getConfig().traders_config[traderId].disable_warning) {
                 Logger.warning(`=> PathToTarkov: Unknown trader id found during init: '${traderId}'`);
             }
         })
     }
 
     updateTraders(offraidPosition, sessionId) {
-        const tradersConfig = this.config.traders_config;
+        const tradersConfig = this.getConfig().traders_config;
         const tradersInfo = SaveServer.profiles[sessionId].characters.pmc.TradersInfo;
 
         Object.keys(tradersConfig).forEach(traderId => {
@@ -353,9 +400,9 @@ const onProfileCreated = (cb) => {
 }
 
 class OffraidRegenController {
-    constructor(config) {
+    constructor(getConfig) {
         this.regen_db = DatabaseServer.tables.globals.config.Health.Effects.Regeneration;
-        this.regen_config = config.offraid_regen_config;
+        this.getRegenConfig = () => getConfig().offraid_regen_config;
 
         this.regen_hydration_enabled = true;
         this.regen_energy_enabled = true;
@@ -442,19 +489,19 @@ class OffraidRegenController {
     }
 
     updateOffraidRegen(offraidPosition) {
-        if (checkAccessVia(this.regen_config.hydration.access_via, offraidPosition)) {
+        if (checkAccessVia(this.getRegenConfig().hydration.access_via, offraidPosition)) {
             this._enableHydration();
         } else {
             this._disableHydration();
         }
 
-        if (checkAccessVia(this.regen_config.energy.access_via, offraidPosition)) {
+        if (checkAccessVia(this.getRegenConfig().energy.access_via, offraidPosition)) {
             this._enableEnergy();
         } else {
             this._disableEnergy();
         }
 
-        if (checkAccessVia(this.regen_config.health.access_via, offraidPosition)) {
+        if (checkAccessVia(this.getRegenConfig().health.access_via, offraidPosition)) {
             this._enableHealth();
         } else {
             this._disableHealth();
@@ -464,13 +511,14 @@ class OffraidRegenController {
 
 class PathToTarkovController {
     constructor(database, config, spawnConfig) {
-        this.database = database;
-        this.entrypoints = getEntryPointsForMaps(database);
-        this.stashController = new StashController(config);
-        this.traderController = new TraderController(config);
-        this.offraidRegenController = new OffraidRegenController(config);
         this.config = config;
         this.spawnConfig = spawnConfig;
+        this.database = database;
+
+        this.entrypoints = getEntryPointsForMaps(database);
+        this.stashController = new StashController(() => this.config);
+        this.traderController = new TraderController(() => this.config);
+        this.offraidRegenController = new OffraidRegenController(() => this.config);
     }
 
     init(sessionId) {
@@ -725,10 +773,44 @@ class PathToTarkov {
 
         const pathToTarkovController = new PathToTarkovController(database, config, spawnConfig);
 
+        // setup api for modders
+        const onStartCallbacks = [];
+
+        const executeAPICallbacks = (sessionId) => {
+            onStartCallbacks.forEach(cb => cb(sessionId));
+        }
+
+        globalThis.PathToTarkovAPI = {
+            onStart: (cb) => {
+                if (!cb) {
+                    return;
+                }
+
+                onStartCallbacks.push(cb);
+            },
+            getConfig: () => deepClone(pathToTarkovController.config),
+            getSpawnConfig: () => deepClone(pathToTarkovController.spawnConfig),
+            setConfig: (newConfig) => {
+                pathToTarkovController.config = newConfig;
+            },
+            setSpawnConfig: (newSpawnConfig) => {
+                pathToTarkovController.spawnConfig = newSpawnConfig;
+            },
+            refresh: (sessionId) => {
+                pathToTarkovController.initExfiltrations();
+
+                if (pathToTarkovController.config.traders_access_restriction) {
+                    pathToTarkovController.traderController.initTraders();
+                }
+
+                pathToTarkovController.init(sessionId);
+            }
+        };
+
         ModLoader.onLoad[mod.name] = function () {
             pathToTarkovController.initExfiltrations();
 
-            if (config.traders_access_restriction) {
+            if (pathToTarkovController.config.traders_access_restriction) {
                 pathToTarkovController.traderController.initTraders();
             }
 
@@ -739,11 +821,15 @@ class PathToTarkov {
                 }
 
                 pathToTarkovController.init(sessionId);
+                executeAPICallbacks(sessionId);
+
                 Logger.info(`=> PathToTarkov: game started!`);
             });
 
             onProfileCreated((_info, sessionId) => {
                 pathToTarkovController.init(sessionId);
+                executeAPICallbacks(sessionId);
+
                 Logger.info(`=> PathToTarkov: pmc created!`);
             });
 
@@ -774,18 +860,18 @@ class PathToTarkov {
             // change the player offraid position according to the extract point used during the raid
             MatchController.endOfflineRaid = (info, sessionId) => {
                 endRaidCb = (currentLocationName, isPlayerScav) => {
-                    if (isPlayerScav && !config.player_scav_move_offraid_position) {
+                    if (isPlayerScav && !pathToTarkovController.config.player_scav_move_offraid_position) {
                         return;
                     }
 
                     const playerDied = !info.exitName;
 
-                    if (config.reset_offraid_position_on_player_die && playerDied) {
-                        pathToTarkovController.updateOffraidPosition(sessionId, config.initial_offraid_position);
+                    if (pathToTarkovController.config.reset_offraid_position_on_player_die && playerDied) {
+                        pathToTarkovController.updateOffraidPosition(sessionId, pathToTarkovController.config.initial_offraid_position);
                         return;
                     }
 
-                    const extractsConf = config.exfiltrations[currentLocationName];
+                    const extractsConf = pathToTarkovController.config.exfiltrations[currentLocationName];
                     const newOffraidPosition = extractsConf && extractsConf[info.exitName];
 
                     if (newOffraidPosition) {
