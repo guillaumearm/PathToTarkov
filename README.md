@@ -180,6 +180,9 @@ Can move to Woods via:
 Can move to Lighthouse via:
 - Power station (car extract)
 
+Can move to Military reserve via:
+- Safe room
+
 Can move to Lab via: 
 - Power station (car extract)
 
@@ -189,6 +192,9 @@ Can move to Customs via:
 
 Can move to Shoreline via:
 - Cliff descent (one way ticket)
+
+Can move to Interchange via:
+- D-2
 
 ### Shoreline
 Can move to Customs via:
