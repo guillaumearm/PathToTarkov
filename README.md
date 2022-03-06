@@ -49,7 +49,7 @@ Everything is configurable.
 Example: 
 ```js
 if (!globalThis.PathToTarkovAPI) {
-    Logger.error(`=> ${this.modName}: PathToTarkovAPI not found, are you sure a version of PathToTarkov >= ${PTT_MINIMUM_VERSION} is installed ?`);
+    Logger.error(`=> ${this.modName}: PathToTarkovAPI not found, are you sure a version of PathToTarkov >= 2.5.0 is installed ?`);
     return;
 }
 
