@@ -45,6 +45,10 @@ When player die, the position is reset to the `FactoryZB-1011` position.
 
 Everything is configurable.
 
+
+## More tweaks
+Check the [Path To Tarkov Additions](https://github.com/guillaumearm/PathToTarkovAdditions) mod to setup additional restrictions.
+
 ## Modding API
 Example: 
 ```js
@@ -67,6 +71,8 @@ PathToTarkovAPI.onStart((sessionId) => {
     PathToTarkovAPI.refresh(sessionId);
 })
 ```
+
+Full example usage in [Path To Tarkov Additions](https://github.com/guillaumearm/PathToTarkovAdditions) sources.
 
 ### Traders availability
 #### Prapor
