@@ -45,6 +45,29 @@ When player die, the position is reset to the `FactoryZB-1011` position.
 
 Everything is configurable.
 
+## Modding API
+Example: 
+```js
+if (!globalThis.PathToTarkovAPI) {
+    Logger.error(`=> ${this.modName}: PathToTarkovAPI not found, are you sure a version of PathToTarkov >= ${PTT_MINIMUM_VERSION} is installed ?`);
+    return;
+}
+
+PathToTarkovAPI.onStart((sessionId) => {
+    const config = PathToTarkovAPI.getConfig();
+    const spawnConfig = PathToTarkovAPI.getSpawnConfig();
+
+    // make some config changes
+    config.player_scav_move_offraid_position = false;
+
+    PathToTarkovAPI.setConfig(config);
+    PathToTarkovAPI.setSpawnConfig(spawnConfig); // not needed if not changed, it's just for the example
+
+    // should be called after setting new configs
+    PathToTarkovAPI.refresh(sessionId);
+})
+```
+
 ### Traders availability
 #### Prapor
 - Gate 0 (Factory)
