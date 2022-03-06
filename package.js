@@ -66,6 +66,8 @@ const STASH_IDS = [
     "5811ce772459770e9e5f9532"  // Edge of darkness
 ];
 
+const GENERIC_ITEM_ID = '54009119af1c881c07000029';
+
 const isIgnoredArea = (area) => {
 
     if (typeof area.type !== 'number') { // invalid area
@@ -222,10 +224,11 @@ class TraderController {
     }
 
     initTraders() {
-        const tradersConfig = this.getConfig().traders_config;
+        const config = this.getConfig();
+        const tradersConfig = config.traders_config;
         const praporTrader = this.traders[PRAPOR_ID];
 
-        Object.keys(this.getConfig().traders_config).forEach(traderId => {
+        Object.keys(tradersConfig).forEach(traderId => {
             const trader = this.traders[traderId];
 
             if (trader) {
@@ -256,7 +259,7 @@ class TraderController {
                     const insuranceTraderConfig = tradersConfig[traderId].insurance_config || {};
 
                     if (!trader) {
-                        Logger.warning(`=> PathToTarkov: unknown trader found '${traderId}'`)
+                        Logger.error(`=> PathToTarkov: unknown trader found '${traderId}'`)
                     }
 
                     if (!trader.dialogue) { // prevent several issues (freeze and crash)
@@ -275,6 +278,37 @@ class TraderController {
                         payloadLevel.insurance_price_coef = insuranceTraderConfig.insurance_price_coef || 1;
                     })
                 }
+
+                // repairs update
+                if (tradersConfig[traderId].repair_always_enabled) {
+                    const trader = this.traders[traderId];
+                    const repairTraderConfig = tradersConfig[traderId].repair_config || {};
+
+                    if (!trader) {
+                        Logger.error(`=> PathToTarkov: unknown trader found '${traderId}'`)
+                    }
+
+                    trader.base.repair.availability = true;
+
+                    if (repairTraderConfig.quality) {
+                        trader.base.repair.quality = repairTraderConfig.quality
+                    }
+
+                    if (repairTraderConfig.currency) {
+                        trader.base.repair.currency = repairTraderConfig.currency
+                    }
+
+                    if (typeof repairTraderConfig.currency_coefficient == 'number') {
+                        trader.base.repair.currency_coefficient = repairTraderConfig.currency_coefficient
+                    }
+
+                    if (typeof repairTraderConfig.repair_price_coef == 'number') {
+                        trader.base.loyaltyLevels.forEach(payloadLevel => {
+                            payloadLevel.repair_price_coef = repairTraderConfig.repair_price_coef;
+                        })
+                    }
+                }
+
             } else if (!this.getConfig().traders_config[traderId].disable_warning) {
                 Logger.warning(`=> PathToTarkov: Unknown trader id found during init: '${traderId}'`);
             }
