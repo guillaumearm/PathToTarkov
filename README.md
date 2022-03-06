@@ -72,7 +72,7 @@ PathToTarkovAPI.onStart((sessionId) => {
 })
 ```
 
-Full example usage in [Path To Tarkov Additions](https://github.com/guillaumearm/PathToTarkovAdditions/blob/master/package.js) sources.
+Full example usage in [Path To Tarkov Additions source code](https://github.com/guillaumearm/PathToTarkovAdditions/blob/master/package.js).
 
 ### Traders availability
 #### Prapor
