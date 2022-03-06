@@ -118,7 +118,7 @@ From the mod [Alex-AIO](https://hub.sp-tarkov.com/files/file/375-alex-aio/#overv
 - Scav lands (Reserve)
 
 #### Other traders
-- All traders froms [Andrudis-QuestManiac](https://hub.sp-tarkov.com/files/file/113-andrudis-questmaniac)
+- All traders froms [Andrudis-QuestManiac](https://hub.sp-tarkov.com/files/file/113-andrudis-questmaniac) made by [Andrudis](https://hub.sp-tarkov.com/user/3674-andrudis/)
 
 ### All moves
 
