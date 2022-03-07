@@ -68,6 +68,8 @@ const STASH_IDS = [
 
 const GENERIC_ITEM_ID = '54009119af1c881c07000029';
 
+const EMPTY_STASH_ID = "PathToTarkov_Empty_Stash";
+
 const isIgnoredArea = (area) => {
 
     if (typeof area.type !== 'number') { // invalid area
@@ -99,6 +101,7 @@ const changeRestrictionsInRaid = (database, config) => {
         }
     })
 }
+
 
 class StashController {
     constructor(getConfig) {
@@ -211,6 +214,7 @@ class StashController {
         else {
             this._disableHideout(sessionId);
             this._setSize(0);
+            this._setSecondaryStash(EMPTY_STASH_ID, sessionId)
         }
     }
 
