@@ -91,7 +91,9 @@ const isIgnoredArea = (area) => {
     return false;
 }
 
-const changeRestrictionsInRaid = (database, config) => {
+const changeRestrictionsInRaid = (config) => {
+    const database = DatabaseServer.tables;
+
     const restrictionsConfig = config.restrictions_in_raid || {};
 
     database.globals.config.RestrictionsInRaid.forEach(payload => {
@@ -402,7 +404,9 @@ const getPosition = (spawnData) => {
     return pos;
 }
 
-const getEntryPointsForMaps = (database) => {
+const getEntryPointsForMaps = () => {
+    const database = DatabaseServer.tables;
+
     const result = {};
 
     MAPLIST.forEach(mapName => {
@@ -548,12 +552,11 @@ class OffraidRegenController {
 }
 
 class PathToTarkovController {
-    constructor(database, config, spawnConfig) {
+    constructor(config, spawnConfig) {
         this.config = config;
         this.spawnConfig = spawnConfig;
-        this.database = database;
 
-        this.entrypoints = getEntryPointsForMaps(database);
+        this.entrypoints = getEntryPointsForMaps();
         this.stashController = new StashController(() => this.config);
         this.traderController = new TraderController(() => this.config);
         this.offraidRegenController = new OffraidRegenController(() => this.config);
@@ -566,7 +569,7 @@ class PathToTarkovController {
         const offraidPosition = this.getOffraidPosition(sessionId)
         this.updateOffraidPosition(sessionId, offraidPosition);
 
-        changeRestrictionsInRaid(this.database, this.config);
+        changeRestrictionsInRaid(this.config);
 
         this._hijackLuasCustomSpawnPointsUpdate();
     }
@@ -600,11 +603,11 @@ class PathToTarkovController {
     }
 
     _addSpawnPoint(mapName, spawnPoint) {
-        this.database.locations[mapName].base.SpawnPointParams.push(spawnPoint)
+        DatabaseServer.tables.locations[mapName].base.SpawnPointParams.push(spawnPoint)
     }
 
     _removePlayerSpawns(mapName) {
-        const base = this.database.locations[mapName].base;
+        const base = DatabaseServer.tables.locations[mapName].base;
 
         base.SpawnPointParams = base.SpawnPointParams.filter(params => {
             // remove Player from Categories array
@@ -631,13 +634,15 @@ class PathToTarkovController {
     _updateLockedMaps(offraidPosition) {
         const unlockedMaps = this.config.infiltrations[offraidPosition];
 
+        const database = DatabaseServer.tables;
+
         MAPLIST.forEach(mapName => {
             if (mapName === 'laboratory') {
                 const playerIsAtLab = checkAccessVia(this.config.laboratory_access_via, offraidPosition)
                 const unlocked = !this.config.laboratory_access_restriction || Boolean(playerIsAtLab);
-                this.database.locations[mapName].base.Locked = !unlocked;
+                database.locations[mapName].base.Locked = !unlocked;
             } else if (mapName !== 'laboratory') {
-                this.database.locations[mapName].base.Locked = !unlockedMaps[mapName];
+                database.locations[mapName].base.Locked = !unlockedMaps[mapName];
             }
         })
     }
@@ -667,7 +672,7 @@ class PathToTarkovController {
     }
 
     initExfiltrations() {
-        const locations = this.database.locations;
+        const locations = DatabaseServer.tables.locations;
 
         // Extraction tweaks
         for (let i in locations) {
@@ -705,9 +710,11 @@ class PathToTarkovController {
             }
         }
 
+        const database = DatabaseServer.tables;
+
         Object.keys(this.config.exfiltrations).forEach(mapName => {
             const extractPoints = Object.keys(this.config.exfiltrations[mapName]);
-            this.database.locations[mapName].base.exits = extractPoints.map(createExitPoint(this.entrypoints[mapName]));
+            database.locations[mapName].base.exits = extractPoints.map(createExitPoint(this.entrypoints[mapName]));
         });
     }
 
@@ -791,8 +798,6 @@ class PathToTarkov {
         const mod = require("./package.json");
         const config = require("./config/config.json");
         const spawnConfig = require("./config/player_spawnpoints.json");
-        const database = DatabaseServer.tables;
-
 
         if (!config.enabled) {
             Logger.warning('=> PathToTarkov is disabled!')
@@ -809,7 +814,7 @@ class PathToTarkov {
 
         Logger.info(`Loading: ${mod.name} v${mod.version}`);
 
-        const pathToTarkovController = new PathToTarkovController(database, config, spawnConfig);
+        const pathToTarkovController = new PathToTarkovController(config, spawnConfig);
 
         // setup api for modders
         const onStartCallbacks = [];
