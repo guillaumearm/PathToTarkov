@@ -58,6 +58,7 @@ function checkAccessVia(access_via, x) {
 function noop() { }
 
 const PRAPOR_ID = '54cb50c76803fa8b248b4571';
+const JAEGGER_INTRO_QUEST = '5d2495a886f77425cd51e403';
 
 const STASH_IDS = [
     "566abbc34bdc2d92178b4576", // Standard
@@ -229,13 +230,26 @@ class TraderController {
         this.locales = DatabaseServer.tables.locales;
     }
 
+    disableUnlockJaegerViaIntroQuest() {
+        const quests = DatabaseServer.tables.templates.quests;
+        const quest = quests[JAEGGER_INTRO_QUEST];
+
+        if (quest && quest._id === JAEGGER_INTRO_QUEST && quest.QuestName === 'Introduction') {
+            quest.rewards.Success = quest.rewards.Success.filter(payload => payload.type !== 'TraderUnlock');
+        }
+    }
+
     initTraders() {
         const config = this.getConfig();
         const tradersConfig = config.traders_config;
         const praporTrader = this.traders[PRAPOR_ID];
 
+
+        this.disableUnlockJaegerViaIntroQuest();
+
         Object.keys(tradersConfig).forEach(traderId => {
             const trader = this.traders[traderId];
+
 
             if (trader) {
                 // be able to lock a trader
