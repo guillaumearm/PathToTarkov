@@ -408,6 +408,7 @@ const createExitPoint = (entrypoints) => (name) => {
         "ExfiltrationTime": 10
     }
 }
+
 const getPosition = (spawnData) => {
     const pos = spawnData.Position;
 
