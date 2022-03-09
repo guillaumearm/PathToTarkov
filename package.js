@@ -694,52 +694,16 @@ class PathToTarkovController {
         for (let i in locations) {
             if (isValidMap(i)) {
                 for (let x in locations[i].base.exits) {
-                    if (locations[i].base.exits[x].Name !== "EXFIL_Train" && !locations[i].base.exits[x].Name.includes("lab") || locations[i].base.exits[x].Name === "lab_Vent") {
                         // Make all extractions available to extract
                         if (locations[i].base.exits[x].Chance !== 100) {
                             locations[i].base.exits[x].Chance = 100;
-                        }
-                        
-                        // Remove extracts restrictions
-                        if (this.config.remove_all_exfils_restrictions) {
-                            if (locations[i].base.exits[x].ExfiltrationTime !== 10) {
-                                locations[i].base.exits[x].ExfiltrationTime = 10;
-                            }
-                            
-                            if (locations[i].base.exits[x].PlayersCount !== 0) {
-                                locations[i].base.exits[x].PlayersCount = 0;
-                            }
-                            
-                            if (locations[i].base.exits[x].Id !== '') {
-                                locations[i].base.exits[x].Id = '';
-                            }
-                            
-                            if (locations[i].base.exits[x].Count !== 0) {
-                                locations[i].base.exits[x].Count = 0;
-                            }
-                            
-                            if (locations[i].base.exits[x].PassageRequirement !== "None") {
-                                locations[i].base.exits[x].PassageRequirement = "None";
-                            }
-                            
-                            if (locations[i].base.exits[x].ExfiltrationType !== "Individual") {
-                                locations[i].base.exits[x].ExfiltrationType = "Individual";
-                            }
-                            
-                            if (locations[i].base.exits[x].RequirementTip !== '') {
-                                locations[i].base.exits[x].RequirementTip = '';
-                            }
-                            
-                            if (locations[i].base.exits[x].RequiredSlot) {
-                               delete locations[i].base.exits[x].RequiredSlot;
-                            }
                         }
                     }
                 }
             }
         }
         
-        if (!this.config.remove_all_exfils_restrictions) {       
+        if (this.config.remove_all_exfils_restrictions) {       
             const database = DatabaseServer.tables;
 
             Object.keys(this.config.exfiltrations).forEach(mapName => {
