@@ -694,10 +694,9 @@ class PathToTarkovController {
         for (let i in locations) {
             if (isValidMap(i)) {
                 for (let x in locations[i].base.exits) {
-                        // Make all extractions available to extract
-                        if (locations[i].base.exits[x].Chance !== 100) {
-                            locations[i].base.exits[x].Chance = 100;
-                        }
+                    // Make all extractions available to extract
+                    if (locations[i].base.exits[x].Chance !== 100) {
+                        locations[i].base.exits[x].Chance = 100;
                     }
                 }
             }
