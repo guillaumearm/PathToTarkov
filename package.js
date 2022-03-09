@@ -71,8 +71,8 @@ const GENERIC_ITEM_ID = '54009119af1c881c07000029';
 
 const EMPTY_STASH_ID = "PathToTarkov_Empty_Stash";
 
-const isIgnoredArea = (area) => {
-
+// more infos on areas here: https://hub.sp-tarkov.com/doc/entry/4-resources-hideout-areas-ids/
+const isIgnoredArea = (area, config) => {
     if (typeof area.type !== 'number') { // invalid area
         return true;
     }
@@ -80,6 +80,8 @@ const isIgnoredArea = (area) => {
     if (area.type === 4) { // generator (prevent a crash at start)
         return true;
     } else if (area.type === 6) { // water collector (prevent infinite loading menu at start)
+        return true;
+    } else if (config.workbench_always_enabled && area.type === 10) { // workbench
         return true;
     } else if (area.type === 16) { // place of fame
         return true;
@@ -122,7 +124,7 @@ class StashController {
 
     _disableHideout() {
         this.areas.forEach(area => {
-            if (!isIgnoredArea(area)) {
+            if (!isIgnoredArea(area, this.getConfig())) {
                 area.enabled = false;
             }
         })
@@ -130,7 +132,7 @@ class StashController {
 
     _enableHideout() {
         this.areas.forEach(area => {
-            if (!isIgnoredArea(area)) {
+            if (!isIgnoredArea(area, this.getConfig())) {
                 area.enabled = true;
             }
         })

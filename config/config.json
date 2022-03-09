@@ -9,6 +9,7 @@
   ],
   "player_scav_move_offraid_position": true,
   "remove_all_exfils_restrictions": true,
+  "workbench_always_enabled": true,
   "bypass_uninstall_procedure": false,
   "bypass_luas_custom_spawn_points_tweak": false,
   "restrictions_in_raid": {
