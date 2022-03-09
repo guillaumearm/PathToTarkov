@@ -688,50 +688,15 @@ class PathToTarkovController {
     }
 
     initExfiltrations() {
-        const locations = DatabaseServer.tables.locations;
+        // Extraction tweaks        
+        if (!this.config.bypass_exfils_override) {       
+            const database = DatabaseServer.tables;
 
-        // Extraction tweaks
-        for (let i in locations) {
-            if (isValidMap(i)) {
-                for (let x in locations[i].base.exits) {
-                    // Remove extracts restrictions
-                    if (this.config.remove_all_exfils_restrictions && locations[i].base.exits[x].Name !== "EXFIL_Train" && !locations[i].base.exits[x].Name.includes("lab") || locations[i].base.exits[x].Name === "lab_Vent") {
-                        if (locations[i].base.exits[x].PassageRequirement !== "None") {
-                            locations[i].base.exits[x].PassageRequirement = "None";
-                        }
-                        if (locations[i].base.exits[x].ExfiltrationType !== "Individual") {
-                            locations[i].base.exits[x].ExfiltrationType = "Individual";
-                        }
-                        if (locations[i].base.exits[x].Id !== '') {
-                            locations[i].base.exits[x].Id = '';
-                        }
-                        if (locations[i].base.exits[x].Count !== 0) {
-                            locations[i].base.exits[x].Count = 0;
-                        }
-                        if (locations[i].base.exits[x].RequirementTip !== '') {
-                            locations[i].base.exits[x].RequirementTip = '';
-                        }
-                        if (locations[i].base.exits[x].RequiredSlot) {
-                            delete locations[i].base.exits[x].RequiredSlot;
-                        }
-                    }
-
-                    // Make all extractions available to extract
-                    if (locations[i].base.exits[x].Name !== "EXFIL_Train") {
-                        if (locations[i].base.exits[x].Chance !== 100) {
-                            locations[i].base.exits[x].Chance = 100;
-                        }
-                    }
-                }
-            }
+            Object.keys(this.config.exfiltrations).forEach(mapName => {
+                const extractPoints = Object.keys(this.config.exfiltrations[mapName]);
+                database.locations[mapName].base.exits = extractPoints.map(createExitPoint(this.entrypoints[mapName]));
+            });
         }
-
-        const database = DatabaseServer.tables;
-
-        Object.keys(this.config.exfiltrations).forEach(mapName => {
-            const extractPoints = Object.keys(this.config.exfiltrations[mapName]);
-            database.locations[mapName].base.exits = extractPoints.map(createExitPoint(this.entrypoints[mapName]));
-        });
     }
 
     getOffraidPosition = (sessionId) => {
