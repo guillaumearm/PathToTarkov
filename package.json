@@ -1,7 +1,7 @@
 {
   "name": "PathToTarkov",
   "author": "trap",
-  "version": "2.5.3",
+  "version": "2.6.0",
   "akiVersion": "2.2.*",
   "license": "MIT",
   "main": "package.js"
