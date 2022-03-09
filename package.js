@@ -393,22 +393,6 @@ const createSpawnPoint = (pos, rot, entrypoints) => {
     }
 }
 
-const createExitPoint = (entrypoints) => (name) => {
-    return {
-        "Name": name,
-        "EntryPoints": entrypoints.join(','),
-        "Chance": 100,
-        "Count": 0,
-        "Id": "",
-        "MinTime": 0,
-        "MaxTime": 0,
-        "ExfiltrationType": "Individual",
-        "PassageRequirement": "None",
-        "PlayersCount": 0,
-        "ExfiltrationTime": 10
-    }
-}
-
 const getPosition = (spawnData) => {
     const pos = spawnData.Position;
 
@@ -694,44 +678,40 @@ class PathToTarkovController {
         for (let i in locations) {
             if (isValidMap(i)) {
                 for (let x in locations[i].base.exits) {
-                    // Remove extracts restrictions
-                    if (this.config.remove_all_exfils_restrictions && locations[i].base.exits[x].Name !== "EXFIL_Train" && !locations[i].base.exits[x].Name.includes("lab") || locations[i].base.exits[x].Name === "lab_Vent") {
-                        if (locations[i].base.exits[x].PassageRequirement !== "None") {
-                            locations[i].base.exits[x].PassageRequirement = "None";
-                        }
-                        if (locations[i].base.exits[x].ExfiltrationType !== "Individual") {
-                            locations[i].base.exits[x].ExfiltrationType = "Individual";
-                        }
-                        if (locations[i].base.exits[x].Id !== '') {
-                            locations[i].base.exits[x].Id = '';
-                        }
-                        if (locations[i].base.exits[x].Count !== 0) {
-                            locations[i].base.exits[x].Count = 0;
-                        }
-                        if (locations[i].base.exits[x].RequirementTip !== '') {
-                            locations[i].base.exits[x].RequirementTip = '';
-                        }
-                        if (locations[i].base.exits[x].RequiredSlot) {
-                            delete locations[i].base.exits[x].RequiredSlot;
-                        }
-                    }
-
-                    // Make all extractions available to extract
-                    if (locations[i].base.exits[x].Name !== "EXFIL_Train") {
+                    if (locations[i].base.exits[x].Name !== "EXFIL_Train" && !locations[i].base.exits[x].Name.includes("lab") || locations[i].base.exits[x].Name === "lab_Vent") {
                         if (locations[i].base.exits[x].Chance !== 100) {
                             locations[i].base.exits[x].Chance = 100;
+                        }
+                        if (this.config.remove_all_exfils_restrictions) {
+                            if (locations[i].base.exits[x].ExfiltrationTime !== 10) {
+                                locations[i].base.exits[x].ExfiltrationTime = 10;
+                            }
+                            if (locations[i].base.exits[x].PlayersCount !== 0) {
+                                locations[i].base.exits[x].PlayersCount = 0;
+                            }
+                            if (locations[i].base.exits[x].Id !== '') {
+                                locations[i].base.exits[x].Id = '';
+                            }
+                            if (locations[i].base.exits[x].Count !== 0) {
+                                locations[i].base.exits[x].Count = 0;
+                            }
+                            if (locations[i].base.exits[x].PassageRequirement !== "None") {
+                                locations[i].base.exits[x].PassageRequirement = "None";
+                            }
+                            if (locations[i].base.exits[x].ExfiltrationType !== "Individual") {
+                                locations[i].base.exits[x].ExfiltrationType = "Individual";
+                            }
+                            if (locations[i].base.exits[x].RequirementTip !== '') {
+                                locations[i].base.exits[x].RequirementTip = '';
+                            }
+                            if (locations[i].base.exits[x].RequiredSlot) {
+                               delete locations[i].base.exits[x].RequiredSlot;
+                            }
                         }
                     }
                 }
             }
         }
-
-        const database = DatabaseServer.tables;
-
-        Object.keys(this.config.exfiltrations).forEach(mapName => {
-            const extractPoints = Object.keys(this.config.exfiltrations[mapName]);
-            database.locations[mapName].base.exits = extractPoints.map(createExitPoint(this.entrypoints[mapName]));
-        });
     }
 
     getOffraidPosition = (sessionId) => {
