@@ -392,7 +392,21 @@ const createSpawnPoint = (pos, rot, entrypoints) => {
         "BotZoneName": ""
     }
 }
-
+const createExitPoint = (entrypoints) => (name) => {
+    return {
+        "Name": name,
+        "EntryPoints": entrypoints.join(','),
+        "Chance": 100,
+        "Count": 0,
+        "Id": "",
+        "MinTime": 0,
+        "MaxTime": 0,
+        "ExfiltrationType": "Individual",
+        "PassageRequirement": "None",
+        "PlayersCount": 0,
+        "ExfiltrationTime": 10
+    }
+}
 const getPosition = (spawnData) => {
     const pos = spawnData.Position;
 
@@ -711,6 +725,15 @@ class PathToTarkovController {
                     }
                 }
             }
+        }
+
+        if (!this.config.remove_all_exfils_restrictions) {       
+            const database = DatabaseServer.tables;
+
+            Object.keys(this.config.exfiltrations).forEach(mapName => {
+                const extractPoints = Object.keys(this.config.exfiltrations[mapName]);
+                database.locations[mapName].base.exits = extractPoints.map(createExitPoint(this.entrypoints[mapName]));
+            });
         }
     }
 
