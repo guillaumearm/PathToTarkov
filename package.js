@@ -688,21 +688,8 @@ class PathToTarkovController {
     }
 
     initExfiltrations() {
-        const locations = DatabaseServer.tables.locations;
-
-        // Extraction tweaks
-        for (let i in locations) {
-            if (isValidMap(i)) {
-                for (let x in locations[i].base.exits) {
-                    // Make all extractions available to extract
-                    if (locations[i].base.exits[x].Chance !== 100) {
-                        locations[i].base.exits[x].Chance = 100;
-                    }
-                }
-            }
-        }
-        
-        if (this.config.remove_all_exfils_restrictions) {       
+        // Extraction tweaks        
+        if (!this.config.bypass_exfils_override) {       
             const database = DatabaseServer.tables;
 
             Object.keys(this.config.exfiltrations).forEach(mapName => {
