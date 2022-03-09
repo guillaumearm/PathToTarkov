@@ -693,7 +693,6 @@ class PathToTarkovController {
         // Extraction tweaks
         for (let i in locations) {
             if (isValidMap(i)) {
-                
                 for (let x in locations[i].base.exits) {
                     if (locations[i].base.exits[x].Name !== "EXFIL_Train" && !locations[i].base.exits[x].Name.includes("lab") || locations[i].base.exits[x].Name === "lab_Vent") {
                         // Make all extractions available to extract
