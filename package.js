@@ -392,6 +392,7 @@ const createSpawnPoint = (pos, rot, entrypoints) => {
         "BotZoneName": ""
     }
 }
+
 const createExitPoint = (entrypoints) => (name) => {
     return {
         "Name": name,
