@@ -246,7 +246,6 @@ class TraderController {
         const tradersConfig = config.traders_config;
         const praporTrader = this.traders[PRAPOR_ID];
 
-        this.fixInsuranceDialogues(praporTrader.dialogue);
         this.disableUnlockJaegerViaIntroQuest();
 
         Object.keys(tradersConfig).forEach(traderId => {
