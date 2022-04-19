@@ -246,7 +246,7 @@ class TraderController {
         const tradersConfig = config.traders_config;
         const praporTrader = this.traders[PRAPOR_ID];
 
-
+        this.fixInsuranceDialogues(praporTrader.dialogue);
         this.disableUnlockJaegerViaIntroQuest();
 
         Object.keys(tradersConfig).forEach(traderId => {
@@ -590,6 +590,19 @@ class PathToTarkovController {
         this._hijackLuasCustomSpawnPointsUpdate();
     }
 
+    // fix for missing `insuranceStart` property when player died
+    fixInsuranceDialogues() {
+        const traders = DatabaseServer.tables.traders
+        const praporTrader = traders[PRAPOR_ID];
+
+        Object.keys(traders).forEach(traderId => {
+            const trader = traders[traderId];
+            if (trader && !trader.dialogue) {
+                trader.dialogue = praporTrader.dialogue;
+            }
+        });
+    }
+
     // This is a fix to ensure Lua's Custom Spawn Point mod do not override player spawn point
     _hijackLuasCustomSpawnPointsUpdate() {
         // if disabled via config
@@ -680,16 +693,13 @@ class PathToTarkovController {
                         this._addSpawnPoint(mapName, spawnPoint);
                     }
                 });
-
-
-
             }
         })
     }
 
     initExfiltrations() {
         // Extraction tweaks        
-        if (!this.config.bypass_exfils_override) {       
+        if (!this.config.bypass_exfils_override) {
             const database = DatabaseServer.tables;
 
             Object.keys(this.config.exfiltrations).forEach(mapName => {
@@ -833,6 +843,7 @@ class PathToTarkov {
 
         ModLoader.onLoad[mod.name] = function () {
             pathToTarkovController.initExfiltrations();
+            pathToTarkovController.fixInsuranceDialogues();
 
             if (pathToTarkovController.config.traders_access_restriction) {
                 pathToTarkovController.traderController.initTraders();
