@@ -4,9 +4,7 @@
   "reset_offraid_position_on_player_die": true,
   "hideout_multistash_enabled": true,
   "laboratory_access_restriction": true,
-  "laboratory_access_via": [
-    "Car"
-  ],
+  "laboratory_access_via": ["Car"],
   "player_scav_move_offraid_position": true,
   "workbench_always_enabled": true,
   "bypass_exfils_override": false,
@@ -61,58 +59,42 @@
     {
       "id": "PathToTarkov_Car_stash",
       "size": 18,
-      "access_via": [
-        "Car"
-      ]
+      "access_via": ["Car"]
     },
     {
       "id": "PathToTarkov_Boat_stash",
       "size": 12,
-      "access_via": [
-        "Boat"
-      ]
+      "access_via": ["Boat"]
     },
     {
       "id": "PathToTarkov_WoodsFactoryGate_stash",
       "size": 12,
-      "access_via": [
-        "WoodsFactoryGate"
-      ]
+      "access_via": ["WoodsFactoryGate"]
     },
     {
       "id": "PathToTarkov_WoodsCustoms_stash",
       "size": 8,
-      "access_via": [
-        "WoodsCustoms"
-      ]
+      "access_via": ["WoodsCustoms"]
     },
     {
       "id": "PathToTarkov_InterchangeCustoms_stash",
       "size": 8,
-      "access_via": [
-        "InterchangeCustoms"
-      ]
+      "access_via": ["InterchangeCustoms"]
     },
     {
       "id": "PathToTarkov_WoodsReserveShoreline_stash",
       "size": 8,
-      "access_via": [
-        "WoodsReserveShoreline"
-      ]
+      "access_via": ["WoodsReserveShoreline"]
     },
     {
       "id": "PathToTarkov_CustomsMilitaryBaseCP_stash",
       "size": 8,
-      "access_via": [
-        "CustomsMilitaryBaseCP"
-      ]
+      "access_via": ["CustomsMilitaryBaseCP"]
     },
     {
       "id": "PathToTarkov_SafeRoom_stash",
       "size": 22,
-      "access_via": [
-        "SafeRoom"
-      ]
+      "access_via": ["SafeRoom"]
     }
   ],
   "traders_access_restriction": true,
@@ -135,9 +117,7 @@
         "pl": "Between woods and factory",
         "po": "Between woods and factory"
       },
-      "access_via": [
-        "WoodsFactoryGate"
-      ]
+      "access_via": ["WoodsFactoryGate"]
     },
     "54cb57776803fa99248b456e": {
       "// Trader name": "Therapist",
@@ -157,9 +137,7 @@
         "pl": "Between woods and factory",
         "po": "Between woods and factory"
       },
-      "access_via": [
-        "WoodsFactoryGate"
-      ]
+      "access_via": ["WoodsFactoryGate"]
     },
     "5a7c2eca46aef81a7ca2145d": {
       "// Trader name": "Mechanic",
@@ -179,11 +157,7 @@
         "pl": "In ZB-* bunkers",
         "po": "In ZB-* bunkers"
       },
-      "access_via": [
-        "FactoryZB-1011",
-        "FactoryZB-1012",
-        "FactoryZB-1013"
-      ]
+      "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-1013"]
     },
     "58330581ace78e27b8b10cee": {
       "// Trader name": "Skier",
@@ -203,9 +177,7 @@
         "pl": "Between woods and customs",
         "po": "Between woods and customs"
       },
-      "access_via": [
-        "WoodsCustoms"
-      ]
+      "access_via": ["WoodsCustoms"]
     },
     "5ac3b934156ae10c4430e83c": {
       "// Trader name": "Ragman",
@@ -225,9 +197,7 @@
         "pl": "Between interchange and customs",
         "po": "Between interchange and customs"
       },
-      "access_via": [
-        "InterchangeCustoms"
-      ]
+      "access_via": ["InterchangeCustoms"]
     },
     "5c0647fdd443bc2504c2d371": {
       "// Trader name": "Jaeger",
@@ -247,9 +217,7 @@
         "pl": "In car",
         "po": "In car"
       },
-      "access_via": [
-        "Car"
-      ]
+      "access_via": ["Car"]
     },
     "5935c25fb3acc3127c3d8cd9": {
       "// Trader name": "Peacekeeper",
@@ -269,9 +237,7 @@
         "pl": "In boat",
         "po": "In boat"
       },
-      "access_via": [
-        "Boat"
-      ]
+      "access_via": ["Boat"]
     },
     "579dc571d53a0658a154fbec": {
       "// Trader name": "Fence",
@@ -279,7 +245,7 @@
       "access_via": "*",
       "insurance_always_enabled": true,
       "insurance_config": {
-        "insuranceMultiplier": 0.30,
+        "insuranceMultiplier": 0.3,
         "insurance_price_coef": 1,
         "min_payment": 0,
         "min_return_hour": 1,
@@ -314,9 +280,7 @@
         "pl": "Somewhere between woods, military reserve and shoreline",
         "po": "Somewhere between woods, military reserve and shoreline"
       },
-      "access_via": [
-        "WoodsReserveShoreline"
-      ]
+      "access_via": ["WoodsReserveShoreline"]
     },
     "operator": {
       "// mod integration for Alex-AIO": true,
@@ -338,9 +302,7 @@
         "pl": "Between customs and military reserve",
         "po": "Between customs and military reserve"
       },
-      "access_via": [
-        "CustomsMilitaryBaseCP"
-      ]
+      "access_via": ["CustomsMilitaryBaseCP"]
     },
     "Elder_Temporal_Id": {
       "// mod integration for Andrudis-QuestManiac": true,
@@ -362,11 +324,7 @@
         "pl": "In ZB-* bunkers",
         "po": "In ZB-* bunkers"
       },
-      "access_via": [
-        "FactoryZB-1011",
-        "FactoryZB-1012",
-        "FactoryZB-1013"
-      ]
+      "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-1013"]
     },
     "Khokhol_Temporal_Id": {
       "// mod integration for Andrudis-QuestManiac": true,
@@ -388,11 +346,7 @@
         "pl": "In ZB-* bunkers",
         "po": "In ZB-* bunkers"
       },
-      "access_via": [
-        "FactoryZB-1011",
-        "FactoryZB-1012",
-        "FactoryZB-1013"
-      ]
+      "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-1013"]
     },
     "Warden_Temporal_Id": {
       "// mod integration for Andrudis-QuestManiac": true,
@@ -414,9 +368,7 @@
         "pl": "In car",
         "po": "In car"
       },
-      "access_via": [
-        "Car"
-      ]
+      "access_via": ["Car"]
     },
     "LabRat_Temporal_Id": {
       "// mod integration for Andrudis-QuestManiac": true,
@@ -438,9 +390,7 @@
         "pl": "In car",
         "po": "In car"
       },
-      "access_via": [
-        "Car"
-      ]
+      "access_via": ["Car"]
     },
     "Bashkir_Temporal_Id": {
       "// mod integration for Andrudis-QuestManiac": true,
@@ -462,9 +412,7 @@
         "pl": "In boat",
         "po": "In boat"
       },
-      "access_via": [
-        "Boat"
-      ]
+      "access_via": ["Boat"]
     },
     "Colonel_Temporal_Id": {
       "// mod integration for Andrudis-QuestManiac": true,
@@ -486,9 +434,7 @@
         "pl": "Between interchange and military reserve",
         "po": "Between interchange and military reserve"
       },
-      "access_via": [
-        "SafeRoom"
-      ]
+      "access_via": ["SafeRoom"]
     }
   },
   "exfiltrations": {
@@ -550,162 +496,78 @@
   },
   "infiltrations": {
     "ShorelineLighthousePath": {
-      "shoreline": [
-        "Path to Lighthouse"
-      ],
-      "lighthouse": [
-        "Path to Shoreline"
-      ],
-      "rezervbase": [
-        "CP Fence"
-      ]
+      "shoreline": ["Path to Lighthouse"],
+      "lighthouse": ["Path to Shoreline"],
+      "rezervbase": ["CP Fence"]
     },
     "ShorelineLighthouseTunnel": {
-      "shoreline": [
-        "Tunnel"
-      ],
-      "lighthouse": [
-        "Lighthouse tunnel"
-      ]
+      "shoreline": ["Tunnel"],
+      "lighthouse": ["Lighthouse tunnel"]
     },
     "ShorelineNorthMoutains": {
-      "rezervbase": [
-        "Cliff"
-      ],
-      "shoreline": [
-        "North Fence Passage"
-      ]
+      "rezervbase": ["Cliff"],
+      "shoreline": ["North Fence Passage"]
     },
     "WoodsReserveShoreline": {
-      "woods": [
-        "Outskirts"
-      ],
-      "rezervbase": [
-        "CP Fence"
-      ]
+      "woods": ["Outskirts"],
+      "rezervbase": ["CP Fence"]
     },
     "InterchangeCustoms": {
-      "bigmap": [
-        "Crossroads"
-      ],
-      "interchange": [
-        "Railway"
-      ]
+      "bigmap": ["Crossroads"],
+      "interchange": ["Railway"]
     },
     "WoodsCustoms": {
-      "woods": [
-        "UN Roadblock"
-      ],
-      "bigmap": [
-        "RUAF Roadblock"
-      ]
+      "woods": ["UN Roadblock"],
+      "bigmap": ["RUAF Roadblock"]
     },
     "Boat": {
-      "bigmap": [
-        "Smuggler's Boat"
-      ],
-      "woods": [
-        "The Boat"
-      ],
-      "shoreline": [
-        "Pier Boat"
-      ],
-      "lighthouse": [
-        "Lighthouse Docks Boat"
-      ]
+      "bigmap": ["Smuggler's Boat"],
+      "woods": ["The Boat"],
+      "shoreline": ["Pier Boat"],
+      "lighthouse": ["Lighthouse Docks Boat"]
     },
     "ShorelineCustoms": {
-      "bigmap": [
-        "Sniper Roadblock"
-      ],
-      "shoreline": [
-        "Road to Customs"
-      ]
+      "bigmap": ["Sniper Roadblock"],
+      "shoreline": ["Road to Customs"]
     },
     "Car": {
-      "bigmap": [
-        "Dorms Car"
-      ],
-      "interchange": [
-        "Car at Power Station"
-      ],
-      "woods": [
-        "Bridge Car"
-      ],
-      "lighthouse": [
-        "Lighthouse Vehicle Extract"
-      ]
+      "bigmap": ["Dorms Car"],
+      "interchange": ["Car at Power Station"],
+      "woods": ["Bridge Car"],
+      "lighthouse": ["Lighthouse Vehicle Extract"]
     },
     "CustomsMilitaryBaseCP": {
-      "bigmap": [
-        "Military Base CP"
-      ],
-      "rezervbase": [
-        "Scav lands"
-      ]
+      "bigmap": ["Military Base CP"],
+      "rezervbase": ["Scav lands"]
     },
     "MilitaryBaseRail": {
-      "bigmap": [
-        "Railroad To Military Base"
-      ],
-      "rezervbase": [
-        "Scav lands rail"
-      ]
+      "bigmap": ["Railroad To Military Base"],
+      "rezervbase": ["Scav lands rail"]
     },
     "FactoryZB-1013": {
-      "bigmap": [
-        "ZB-1013"
-      ],
-      "woods": [
-        "ZB-1014"
-      ],
-      "factory4_day": [
-        "Gate 3"
-      ],
-      "factory4_night": [
-        "Gate 3"
-      ]
+      "bigmap": ["ZB-1013"],
+      "woods": ["ZB-1014"],
+      "factory4_day": ["Gate 3"],
+      "factory4_night": ["Gate 3"]
     },
     "FactoryZB-1012": {
-      "bigmap": [
-        "ZB-1012"
-      ],
-      "factory4_day": [
-        "Med tent gates"
-      ],
-      "factory4_night": [
-        "Med tent gates"
-      ]
+      "bigmap": ["ZB-1012"],
+      "factory4_day": ["Med tent gates"],
+      "factory4_night": ["Med tent gates"]
     },
     "FactoryZB-1011": {
-      "bigmap": [
-        "ZB-1011"
-      ],
-      "factory4_day": [
-        "Cellars"
-      ],
-      "factory4_night": [
-        "Cellars"
-      ]
+      "bigmap": ["ZB-1011"],
+      "factory4_day": ["Cellars"],
+      "factory4_night": ["Cellars"]
     },
     "WoodsFactoryGate": {
-      "woods": [
-        "Factory Gate"
-      ],
-      "factory4_day": [
-        "Gate 0"
-      ],
-      "factory4_night": [
-        "Gate 0"
-      ]
+      "woods": ["Factory Gate"],
+      "factory4_day": ["Gate 0"],
+      "factory4_night": ["Gate 0"]
     },
     "SafeRoom": {
-      "rezervbase": [
-        "D-2"
-      ],
-      "interchange": [
-        "Safe Room"
-      ]
+      "rezervbase": ["D-2"],
+      "interchange": ["Safe Room"]
     }
   }
 }
