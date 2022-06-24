@@ -3,7 +3,7 @@
   "debug": true,
   "initial_offraid_position": "FactoryZB-1011",
   "reset_offraid_position_on_player_die": true,
-  "hideout_multistash_enabled": true,
+  "hideout_multistash_enabled": false,
   "laboratory_access_restriction": true,
   "laboratory_access_via": ["Car"],
   "player_scav_move_offraid_position": true,
