@@ -1,2 +1,3 @@
-/ZTrap-PathToTarkov*
-
+/tmp/
+/dist/
+/src/**/*.js
