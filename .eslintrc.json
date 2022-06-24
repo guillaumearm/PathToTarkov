@@ -14,7 +14,6 @@
     "@typescript-eslint/no-empty-interface": 0,
     "@typescript-eslint/no-namespace": 0,
     "@typescript-eslint/func-call-spacing": 2,
-    "@typescript-eslint/indent": ["warn", 2],
     "@typescript-eslint/no-unused-expressions": [
       "warn",
       {

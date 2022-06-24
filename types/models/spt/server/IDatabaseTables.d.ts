@@ -37,7 +37,7 @@ export interface IDatabaseTables {
     templates?: {
         character: string[];
         items: Record<string, ITemplateItem>;
-        quests: IQuest[];
+        quests: Record<string, IQuest>;
         repeatableQuests: IRepeatableQuestDatabase;
         clientItems: Record<string, ITemplateItem>;
         handbook: IHandbookBase;

@@ -16,7 +16,7 @@ export interface ILocaleGlobalBase {
     templates: ILocaleTemplateBase;
     locations: ILocaleLocationsBase;
     banners: ILocaleBannersBase;
-    trading: ILocaleTradingBase;
+    trading: Record<string, ILocaleTradingProps>;
 }
 export interface ILocaleQuest {
     name: string;
@@ -45,9 +45,7 @@ export interface ILocaleProps {
     ShortName: string;
     Description: string;
 }
-export interface ILocaleTradingBase {
-    locations: Record<string, ILocaleTradingProps>;
-}
+
 export interface ILocaleTradingProps {
     FullName: string;
     FirstName: string;

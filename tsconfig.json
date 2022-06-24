@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "allowJs": true,
+    // "allowJs": true,
     "module": "CommonJS",
     "target": "es2020",
     "moduleResolution": "node",
@@ -9,6 +9,12 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "strictPropertyInitialization": false,
+    "strict": true,
+    "strictNullChecks": true,
     "outDir": "tmp",
     "baseUrl": ".",
     "paths": {

@@ -1,3 +1,5 @@
 /types/
+/tmp/
+/dist/
 *.md
 package-lock.json

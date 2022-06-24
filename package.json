@@ -1,6 +1,7 @@
 {
   "name": "path-to-tarkov",
   "displayName": "Path To Tarkov",
+  "zipNamePrefix": "Trap-PathToTarkov",
   "version": "3.0.0",
   "main": "src/mod.js",
   "license": "MIT",
@@ -16,7 +17,7 @@
     "lint": "eslint --ignore-pattern '*.js' .",
     "lint:all": "npm run prettier:check && npm run lint",
     "build": "tsc",
-    "test:all": "npm run clean && npm run build && npm run lint && npm run test",
+    "test:all": "npm run clean && npm run build && npm run lint:all && npm run test",
     "test": "echo TODO: unit tests"
   },
   "devDependencies": {
