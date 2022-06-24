@@ -22,6 +22,7 @@ import { getModDisplayName, noop, PackageJson, readJsonFile } from "./utils";
 
 class PathToTarkov implements IMod {
   private logger: ILogger;
+  private debug: (data: string) => void;
 
   private packageJson: PackageJson;
   private config: Config;
@@ -32,18 +33,25 @@ class PathToTarkov implements IMod {
   public pathToTarkovController: PathToTarkovController;
 
   public load(container: DependencyContainer): void {
-    this.logger = container.resolve<ILogger>("WinstonLogger");
-
     this.packageJson = readJsonFile(PACKAGE_JSON_PATH);
     this.config = readJsonFile(CONFIG_PATH);
     this.spawnConfig = readJsonFile(SPAWN_CONFIG_PATH);
 
+    this.logger = container.resolve<ILogger>("WinstonLogger");
+    this.debug = this.config.debug
+      ? (data: string) => this.logger.debug(`Path To Tarkov: ${data}`, true)
+      : noop;
+
     this.container = container;
+
+    if (this.config.debug) {
+      this.debug("debug mode enabled");
+    }
 
     const saveServer = container.resolve<SaveServer>("SaveServer");
 
     if (!this.config.enabled) {
-      this.logger.warning("=> PathToTarkov is disabled!");
+      this.logger.warning("=> Path To Tarkov is disabled!");
 
       if (this.config.bypass_uninstall_procedure === true) {
         this.logger.warning(
@@ -68,6 +76,9 @@ class PathToTarkov implements IMod {
         if (
           !this.pathToTarkovController.stashController.getInventory(sessionId)
         ) {
+          this.debug(
+            `/client/game/start: no pmc data found, init will be handled on profile creation`
+          );
           // no pmc data found, will be handled by `onProfileCreated`
           return;
         }
@@ -111,8 +122,11 @@ class PathToTarkov implements IMod {
       (url, info: { isPlayerScav: boolean }, sessionId) => {
         const isPlayerScav = info.isPlayerScav;
 
+        saveServer.load();
         const profile = saveServer.getProfile(sessionId);
         const currentLocationName = profile.inraid.location.toLowerCase();
+
+        this.debug(`save profile: currentLocationName=${currentLocationName}`);
 
         if (endRaidCb !== noop) {
           endRaidCb(currentLocationName, isPlayerScav);
@@ -130,11 +144,15 @@ class PathToTarkov implements IMod {
       "/client/match/offline/end",
       (url, info: { exitName: string | null }, sessionId) => {
         endRaidCb = (currentLocationName, isPlayerScav) => {
+          this.debug(
+            `end of raid: exitName='${info.exitName}' and currentLocationName='${currentLocationName}'`
+          );
           if (
             isPlayerScav &&
             !this.pathToTarkovController.config
               .player_scav_move_offraid_position
           ) {
+            this.debug("end of raid: scav player detected");
             return;
           }
 
@@ -145,6 +163,7 @@ class PathToTarkov implements IMod {
               .reset_offraid_position_on_player_die &&
             playerDied
           ) {
+            this.debug("end of raid: player dies");
             this.pathToTarkovController.updateOffraidPosition(
               sessionId,
               this.pathToTarkovController.config.initial_offraid_position
@@ -161,10 +180,15 @@ class PathToTarkov implements IMod {
             extractsConf && extractsConf[info.exitName ?? ""];
 
           if (newOffraidPosition) {
+            this.debug(
+              `end of raid: new offraid position ${newOffraidPosition}`
+            );
             this.pathToTarkovController.updateOffraidPosition(
               sessionId,
               newOffraidPosition
             );
+          } else {
+            this.debug(`end of raid: no new offraid position found`);
           }
         };
 

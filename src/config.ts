@@ -103,6 +103,7 @@ type Infiltrations = {
 
 export type Config = {
   enabled: boolean;
+  debug?: boolean;
   initial_offraid_position: string;
   reset_offraid_position_on_player_die: boolean;
   hideout_multistash_enabled: boolean;
