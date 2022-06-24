@@ -129,9 +129,7 @@ export class StashController {
   }
 
   updateStash(offraidPosition: string, sessionId: string): void {
-    if (!this.getConfig().hideout_multistash_enabled) {
-      return;
-    }
+    const multiStashEnabled = this.getConfig().hideout_multistash_enabled;
 
     const mainStashAvailable = checkAccessVia(
       this.getConfig().hideout_main_stash_access_via,
@@ -141,7 +139,7 @@ export class StashController {
       (stash) => checkAccessVia(stash.access_via, offraidPosition)
     );
 
-    if (mainStashAvailable) {
+    if (!multiStashEnabled || mainStashAvailable) {
       this.enableHideout();
       this.resetSize();
       this.setMainStash(sessionId);
