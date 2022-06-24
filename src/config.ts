@@ -113,7 +113,7 @@ export type Config = {
   workbench_always_enabled: boolean;
   bypass_exfils_override: boolean;
   bypass_uninstall_procedure: boolean;
-  bypass_luas_custom_spawn_points_tweak: boolean;
+  bypass_luas_custom_spawn_points_tweak?: boolean;
   restrictions_in_raid: Record<string, { Value: number }>;
   offraid_regen_config: {
     hydration: { access_via: AccessVia };
