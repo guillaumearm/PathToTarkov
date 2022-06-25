@@ -1,3 +1,5 @@
 /tmp/
 /dist/
 /src/**/*.js
+/Trap-PathToTarkov-*
+/mod.zip
