@@ -1,7 +1,7 @@
 {
   "name": "path-to-tarkov",
   "displayName": "Path To Tarkov",
-  "zipNamePrefix": "Trap-PathToTarkov",
+  "fullName": "Trap-PathToTarkov",
   "version": "2.100.100",
   "main": "src/mod.js",
   "license": "MIT",
@@ -10,16 +10,16 @@
   "scripts": {
     "zip:files": "node scripts/create-zip.js",
     "copy:files": "mkdir -p ./dist && cp package.json ./dist && cp README.md ./dist && cp LICENSE ./dist && cp -R config ./dist",
-    "build:release": "npm run lint:all && npm run rebuild && npm run copy:files && npm run zip:files",
-    "clean": "rimraf mod.zip dist tmp 'src/**/*.js' Trap-PathToTarkov-*",
+    "build:release": "npm run rebuild && npm run copy:files && npm run zip:files",
+    "clean": "rimraf mod.zip dist tmp 'src/**/*.js' Trap-PathToTarkov*",
     "prettier": "prettier --write .",
     "prettier:check": "prettier --check .",
     "lint": "eslint --ignore-pattern '*.js' .",
     "lint:all": "npm run prettier:check && npm run lint",
     "rebuild": "npm run clean && npm run build",
     "build": "tsc",
-    "test:all": "npm run clean && npm run build && npm run lint:all && npm run test",
-    "test": "echo TODO: unit tests"
+    "test:all": "npm run lint:all && npm run build:release",
+    "test": "tsc --noEmit && npm run lint:all"
   },
   "devDependencies": {
     "@types/node": "^14.15.3",

@@ -3,17 +3,21 @@ const packageJson = require("../package.json");
 const zip = require("bestzip");
 
 const main = async () => {
-  const fileName = `${packageJson.zipNamePrefix}-${packageJson.version}`;
+  const dirName = packageJson.fullName;
+  const zipFileName = `${packageJson.fullName}-${packageJson.version}.zip`;
 
-  execSync(`rm -rf ${fileName} ${fileName}.zip`);
-  execSync(`cp -R dist ${fileName}`);
+  execSync(`rm -rf ${dirName} ${zipFileName}`);
+  execSync(`cp -R dist ${dirName}`);
+  console.log(`Created '${dirName}' directory.`);
 
   await zip({
-    source: fileName,
-    destination: `${fileName}.zip`,
+    source: dirName,
+    destination: zipFileName,
   });
+  console.log(`Created '${zipFileName}' file.`);
 
-  // execSync(`rm -rf ${fileName}`);
+  execSync(`rm -rf ${dirName}`);
+  console.log(`Removed '${dirName}' directory.`);
 };
 
 main();
