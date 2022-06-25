@@ -2,7 +2,7 @@
   "name": "path-to-tarkov",
   "displayName": "Path To Tarkov",
   "zipNamePrefix": "Trap-PathToTarkov",
-  "version": "3.0.0",
+  "version": "2.100.100",
   "main": "src/mod.js",
   "license": "MIT",
   "author": "Trap",
