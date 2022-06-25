@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     // "allowJs": true,
-    "module": "system",
+    "module": "CommonJS",
     "target": "es2020",
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -15,7 +15,7 @@
     "strictPropertyInitialization": false,
     "strict": true,
     "strictNullChecks": true,
-    "outFile": "dist/src/mod.js",
+    "outDir": "dist/src/",
     "baseUrl": ".",
     "paths": {
       "@spt-aki/*": ["./types/*"]

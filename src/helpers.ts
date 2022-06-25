@@ -1,12 +1,12 @@
-import { RouteAction } from "@spt-aki/di/Router";
-import {
+import type { RouteAction } from "@spt-aki/di/Router";
+import type {
   Exit,
   SpawnPointParam,
 } from "@spt-aki/models/eft/common/ILocationBase";
-import { IPmcData } from "@spt-aki/models/eft/common/IPmcData";
-import { IHideoutArea } from "@spt-aki/models/eft/hideout/IHideoutArea";
-import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import { StaticRouterModService } from "@spt-aki/services/mod/staticRouter/StaticRouterModService";
+import type { IPmcData } from "@spt-aki/models/eft/common/IPmcData";
+import type { IHideoutArea } from "@spt-aki/models/eft/hideout/IHideoutArea";
+import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
+import type { StaticRouterModService } from "@spt-aki/services/mod/staticRouter/StaticRouterModService";
 import {
   AccessVia,
   Config,

@@ -1,9 +1,9 @@
-import { BodyHealth, Effects } from "@spt-aki/models/eft/common/IGlobals";
-import { SpawnPointParam } from "@spt-aki/models/eft/common/ILocationBase";
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import { SaveServer } from "@spt-aki/servers/SaveServer";
+import type { BodyHealth, Effects } from "@spt-aki/models/eft/common/IGlobals";
+import type { SpawnPointParam } from "@spt-aki/models/eft/common/ILocationBase";
+import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
+import type { ConfigServer } from "@spt-aki/servers/ConfigServer";
+import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
+import type { SaveServer } from "@spt-aki/servers/SaveServer";
 import {
   Config,
   ConfigGetter,

@@ -1,10 +1,10 @@
-import { IMod } from "@spt-aki/models/external/mod";
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import { SaveServer } from "@spt-aki/servers/SaveServer";
-import { StaticRouterModService } from "@spt-aki/services/mod/staticRouter/StaticRouterModService";
-import { DependencyContainer } from "tsyringe";
+import type { IMod } from "@spt-aki/models/external/mod";
+import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
+import type { ConfigServer } from "@spt-aki/servers/ConfigServer";
+import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
+import type { SaveServer } from "@spt-aki/servers/SaveServer";
+import type { StaticRouterModService } from "@spt-aki/services/mod/staticRouter/StaticRouterModService";
+import type { DependencyContainer } from "tsyringe";
 import { createPathToTarkovAPI } from "./api";
 import {
   Config,

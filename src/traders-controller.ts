@@ -1,9 +1,9 @@
-import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
-import { IInsuranceConfig } from "@spt-aki/models/spt/config/IInsuranceConfig";
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import { SaveServer } from "@spt-aki/servers/SaveServer";
+import type { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
+import type { IInsuranceConfig } from "@spt-aki/models/spt/config/IInsuranceConfig";
+import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
+import type { ConfigServer } from "@spt-aki/servers/ConfigServer";
+import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
+import type { SaveServer } from "@spt-aki/servers/SaveServer";
 import {
   ConfigGetter,
   JAEGER_INTRO_QUEST,
@@ -103,7 +103,7 @@ export class TradersController {
           }
 
           const insuranceConfig = this.configServer.getConfig<IInsuranceConfig>(
-            ConfigTypes.INSURANCE
+            "aki-insurance" as ConfigTypes.INSURANCE
           );
 
           insuranceConfig.insuranceMultiplier[traderId] =

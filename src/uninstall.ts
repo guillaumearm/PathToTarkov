@@ -1,5 +1,5 @@
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { SaveServer } from "@spt-aki/servers/SaveServer";
+import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
+import type { SaveServer } from "@spt-aki/servers/SaveServer";
 import { Config, JAEGER_ID, Profile } from "./config";
 import { isJaegerIntroQuestCompleted } from "./helpers";
 

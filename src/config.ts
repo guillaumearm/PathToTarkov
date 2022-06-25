@@ -1,4 +1,4 @@
-import { IAkiProfile } from "@spt-aki/models/eft/profile/IAkiProfile";
+import type { IAkiProfile } from "@spt-aki/models/eft/profile/IAkiProfile";
 import { join } from "path";
 
 type ByMap<T> = {

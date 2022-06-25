@@ -8,7 +8,6 @@
   "author": "Trap",
   "akiVersion": ">=3.0.0",
   "scripts": {
-    "build:unzipped": "copyfiles -e \"./node_modules/**/*.*\" -e \"./dist/**/*.*\" -e \"./package-lock.json\" -e \"./tsconfig.json\" -e \"./tmp/**/*.*\" -e \"./README.md\" -e \"./mod.code-workspace\" \"./**/*.*\" ./dist",
     "zip:files": "node scripts/create-zip.js",
     "copy:files": "mkdir -p ./dist && cp package.json ./dist && cp README.md ./dist && cp LICENSE ./dist && cp -R config ./dist",
     "build:release": "npm run lint:all && npm run rebuild && npm run copy:files && npm run zip:files",
@@ -28,7 +27,6 @@
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "bestzip": "2.2.1",
-    "copyfiles": "2.4.1",
     "eslint": "7.26.0",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
