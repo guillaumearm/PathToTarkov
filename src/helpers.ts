@@ -3,10 +3,18 @@ import {
   Exit,
   SpawnPointParam,
 } from "@spt-aki/models/eft/common/ILocationBase";
+import { IPmcData } from "@spt-aki/models/eft/common/IPmcData";
 import { IHideoutArea } from "@spt-aki/models/eft/hideout/IHideoutArea";
 import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import { StaticRouterModService } from "@spt-aki/services/mod/staticRouter/StaticRouterModService";
-import { AccessVia, Config, MAPLIST, MapName, SpawnPoint } from "./config";
+import {
+  AccessVia,
+  Config,
+  JAEGER_INTRO_QUEST,
+  MAPLIST,
+  MapName,
+  SpawnPoint,
+} from "./config";
 
 export function checkAccessVia(access_via: AccessVia, value: string): boolean {
   return (
@@ -183,4 +191,12 @@ export const createStaticRoutePeeker = (
     register,
     watchRoute,
   };
+};
+
+export const isJaegerIntroQuestCompleted = (pmc: IPmcData): boolean => {
+  return Boolean(
+    pmc.Quests.find(
+      (quest) => quest.qid === JAEGER_INTRO_QUEST && quest.status === "Success"
+    )
+  );
 };

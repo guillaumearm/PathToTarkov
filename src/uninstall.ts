@@ -1,6 +1,7 @@
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { SaveServer } from "@spt-aki/servers/SaveServer";
-import { Config, Profile } from "./config";
+import { Config, JAEGER_ID, Profile } from "./config";
+import { isJaegerIntroQuestCompleted } from "./helpers";
 
 // Used for uninstallation process
 export const purgeProfiles = (
@@ -31,14 +32,27 @@ export const purgeProfiles = (
     }
 
     let nbTradersRestored = 0;
+    let jaegerLocked = false;
     Object.keys(config.traders_config).forEach((traderId) => {
-      const trader = profile.characters.pmc.TradersInfo?.[traderId];
+      const pmc = profile.characters.pmc;
+      const trader = pmc.TradersInfo?.[traderId];
+      const jaegerAvailable = isJaegerIntroQuestCompleted(pmc);
 
-      if (trader && trader.unlocked === false) {
-        // TODO 1: check for jaeger quest
-        // TODO 2: check if player is level 15 (for flea market aka ragfair)
+      if (
+        trader &&
+        trader.unlocked === false &&
+        ((traderId === JAEGER_ID && jaegerAvailable) || traderId !== JAEGER_ID)
+      ) {
         trader.unlocked = true;
         nbTradersRestored += 1;
+      } else if (
+        trader &&
+        trader.unlocked === true &&
+        traderId === JAEGER_ID &&
+        !jaegerAvailable
+      ) {
+        trader.unlocked = false;
+        jaegerLocked = true;
       }
     });
 
@@ -47,6 +61,12 @@ export const purgeProfiles = (
         `=> PathToTarkov: ${nbTradersRestored} trader${
           nbTradersRestored === 1 ? "" : "s"
         } restored for profile '${profile.info.username}'`
+      );
+    }
+
+    if (jaegerLocked) {
+      logger.success(
+        `=> PathToTarkov: Jaeger trader locked (because introduction quest is not completed) for profile '${profile.info.username}'`
       );
     }
   });

@@ -6,7 +6,7 @@ import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import { SaveServer } from "@spt-aki/servers/SaveServer";
 import {
   ConfigGetter,
-  JAEGGER_INTRO_QUEST,
+  JAEGER_INTRO_QUEST,
   LocaleName,
   PRAPOR_ID,
 } from "./config";
@@ -25,11 +25,11 @@ export class TradersController {
 
   disableUnlockJaegerViaIntroQuest(): void {
     const quests = this.db.getTables().templates?.quests;
-    const quest = quests?.[JAEGGER_INTRO_QUEST];
+    const quest = quests?.[JAEGER_INTRO_QUEST];
 
     if (
       quest &&
-      quest._id === JAEGGER_INTRO_QUEST &&
+      quest._id === JAEGER_INTRO_QUEST &&
       quest.QuestName === "Introduction"
     ) {
       quest.rewards.Success = quest.rewards.Success.filter(
