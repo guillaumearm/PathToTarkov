@@ -1,6 +1,7 @@
 /types/
 /tmp/
 /dist/
+/src/*.js
 /Trap-PathToTarkov-*
 *.md
 package-lock.json

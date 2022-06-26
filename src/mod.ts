@@ -118,21 +118,35 @@ class PathToTarkov implements IMod {
     let savedIsPlayerScav: boolean | null = null;
 
     staticRoutePeeker.watchRoute(
+      "/client/match/offline/start",
+      (url, info: { locationName: string }, sessionId) => {
+        const locationName = info.locationName.toLowerCase();
+        this.debug(
+          `offline raid started for '${sessionId}' on map '${locationName}'`
+        );
+
+        savedCurrentLocationName = locationName;
+      }
+    );
+
+    staticRoutePeeker.watchRoute(
       "/raid/profile/save",
       (url, info: { isPlayerScav: boolean }, sessionId) => {
         const isPlayerScav = info.isPlayerScav;
-
-        saveServer.load();
         const profile = saveServer.getProfile(sessionId);
-        const currentLocationName = profile.inraid.location.toLowerCase();
 
-        this.debug(`save profile: currentLocationName=${currentLocationName}`);
+        if (!profile) {
+          this.debug(`profile '${sessionId}' not found`);
+        }
 
-        if (endRaidCb !== noop) {
-          endRaidCb(currentLocationName, isPlayerScav);
+        this.debug(
+          `save profile: currentLocationName=${savedCurrentLocationName} isPlayerScav=${isPlayerScav}`
+        );
+
+        if (endRaidCb !== noop && savedCurrentLocationName) {
+          endRaidCb(savedCurrentLocationName, isPlayerScav);
           endRaidCb = noop;
         } else if (!endRaidCbExecuted) {
-          savedCurrentLocationName = currentLocationName;
           savedIsPlayerScav = isPlayerScav;
         }
 
