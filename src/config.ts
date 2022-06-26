@@ -104,6 +104,7 @@ type Infiltrations = {
 export type Config = {
   enabled: boolean;
   debug?: boolean;
+  bypass_keep_found_in_raid_tweak?: boolean;
   initial_offraid_position: string;
   reset_offraid_position_on_player_die: boolean;
   hideout_multistash_enabled: boolean;

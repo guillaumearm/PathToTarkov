@@ -13,6 +13,7 @@ import {
   SPAWN_CONFIG_PATH,
 } from "./config";
 import { EventWatcher } from "./event-watcher";
+import { enableKeepFoundInRaidTweak } from "./keep-fir-tweak";
 
 import { PathToTarkovController } from "./path-to-tarkov-controller";
 import { purgeProfiles } from "./uninstall";
@@ -29,7 +30,11 @@ class PathToTarkov implements IMod {
   public executeOnStartAPICallbacks: (sessionId: string) => void = noop;
   public pathToTarkovController: PathToTarkovController;
 
+  public itemsFoundInRaid: Record<string, true> = {};
+
   public load(container: DependencyContainer): void {
+    this.container = container;
+
     this.packageJson = readJsonFile(PACKAGE_JSON_PATH);
     this.config = readJsonFile(CONFIG_PATH);
     this.spawnConfig = readJsonFile(SPAWN_CONFIG_PATH);
@@ -38,8 +43,6 @@ class PathToTarkov implements IMod {
     this.debug = this.config.debug
       ? (data: string) => this.logger.debug(`Path To Tarkov: ${data}`, true)
       : noop;
-
-    this.container = container;
 
     if (this.config.debug) {
       this.debug("debug mode enabled");
@@ -61,12 +64,21 @@ class PathToTarkov implements IMod {
       return;
     }
 
+    const tweakFoundInRaid = !this.config.bypass_keep_found_in_raid_tweak;
+
+    if (tweakFoundInRaid) {
+      enableKeepFoundInRaidTweak(this);
+      this.debug("option keep_found_in_raid_tweak enabled");
+    }
+
     this.logger.info(
       `===> Loading ${getModDisplayName(this.packageJson, true)}`
     );
   }
 
   public delayedLoad(container: DependencyContainer): void {
+    this.container = container;
+
     if (!this.config.enabled) {
       return;
     }
@@ -90,9 +102,9 @@ class PathToTarkov implements IMod {
     );
 
     (globalThis as any).PathToTarkovAPI = api;
+
     this.executeOnStartAPICallbacks = executeOnStartAPICallbacks;
 
-    this.container = container;
     this.pathToTarkovController.initExfiltrations();
     this.pathToTarkovController.fixInsuranceDialogues();
 

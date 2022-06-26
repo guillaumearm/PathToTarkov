@@ -9,11 +9,12 @@ import { PathToTarkovController } from "./path-to-tarkov-controller";
 import { noop } from "./utils";
 
 type PTTInstance = {
-  container: DependencyContainer;
-  pathToTarkovController: PathToTarkovController;
-  logger: ILogger;
-  debug: (data: string) => void;
-  executeOnStartAPICallbacks: (sessionId: string) => void;
+  readonly container: DependencyContainer;
+  readonly pathToTarkovController: PathToTarkovController;
+  readonly logger: ILogger;
+  readonly debug: (data: string) => void;
+  readonly executeOnStartAPICallbacks: (sessionId: string) => void;
+  itemsFoundInRaid: Record<string, true>;
 };
 
 export const LOCATIONS_MAPS: Record<string, string> = {
@@ -88,6 +89,20 @@ export class EventWatcher {
       "/client/match/offline/start",
       (url, info: { locationName: string }, sessionId) => {
         const mapName = getMapNameFromLocationName(info.locationName);
+
+        const profile = saveServer.getProfile(sessionId);
+
+        if (!profile) {
+          this.ptt.debug(`profile '${sessionId}' not found`);
+        }
+
+        // snapshot all items found in raid (used by enableKeepFoundInRaidTweak function)
+        this.ptt.itemsFoundInRaid = {};
+        profile.characters.pmc.Inventory.items.forEach((item) => {
+          if (item.upd?.SpawnedInSession) {
+            this.ptt.itemsFoundInRaid[item._id] = true;
+          }
+        });
 
         this.ptt.debug(
           `offline raid started for '${sessionId}' on map '${mapName}'`
