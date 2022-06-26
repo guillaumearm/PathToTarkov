@@ -16,6 +16,24 @@ type PTTInstance = {
   executeOnStartAPICallbacks: (sessionId: string) => void;
 };
 
+export const LOCATIONS_MAPS: Record<string, string> = {
+  customs: "bigmap",
+  factory: "factory4_day",
+  reservebase: "rezervbase",
+  interchange: "interchange",
+  woods: "woods",
+  lighthouse: "lighthouse",
+  shoreline: "shoreline",
+  laboratory: "laboratory",
+};
+
+export const getMapNameFromLocationName = (location: string): string => {
+  const locationName = location.toLowerCase();
+  const mapName = LOCATIONS_MAPS[locationName];
+
+  return mapName ?? "none";
+};
+
 export class EventWatcher {
   constructor(private ptt: PTTInstance) {}
 
@@ -59,25 +77,23 @@ export class EventWatcher {
     staticRoutePeeker: StaticRoutePeeker,
     saveServer: SaveServer
   ): void {
-    type EndRaidCb = (
-      currentLocationName: string,
-      isPLayerScav: boolean
-    ) => void;
+    type EndRaidCb = (currentMapName: string, isPLayerScav: boolean) => void;
 
     let endRaidCb: EndRaidCb = noop;
     let endRaidCbExecuted = false;
-    let savedCurrentLocationName: string | null = null;
+    let savedCurrentMapName: string | null = null;
     let savedIsPlayerScav: boolean | null = null;
 
     staticRoutePeeker.watchRoute(
       "/client/match/offline/start",
       (url, info: { locationName: string }, sessionId) => {
-        const locationName = info.locationName.toLowerCase();
+        const mapName = getMapNameFromLocationName(info.locationName);
+
         this.ptt.debug(
-          `offline raid started for '${sessionId}' on map '${locationName}'`
+          `offline raid started for '${sessionId}' on map '${mapName}'`
         );
 
-        savedCurrentLocationName = locationName;
+        savedCurrentMapName = mapName;
       }
     );
 
@@ -92,11 +108,11 @@ export class EventWatcher {
         }
 
         this.ptt.debug(
-          `save profile: currentLocationName=${savedCurrentLocationName} isPlayerScav=${isPlayerScav}`
+          `save profile: currentMapName=${savedCurrentMapName} isPlayerScav=${isPlayerScav}`
         );
 
-        if (endRaidCb !== noop && savedCurrentLocationName) {
-          endRaidCb(savedCurrentLocationName, isPlayerScav);
+        if (endRaidCb !== noop && savedCurrentMapName) {
+          endRaidCb(savedCurrentMapName, isPlayerScav);
           endRaidCb = noop;
         } else if (!endRaidCbExecuted) {
           savedIsPlayerScav = isPlayerScav;
@@ -109,9 +125,9 @@ export class EventWatcher {
     staticRoutePeeker.watchRoute(
       "/client/match/offline/end",
       (url, info: { exitName: string | null }, sessionId) => {
-        endRaidCb = (currentLocationName, isPlayerScav) => {
+        endRaidCb = (currentMapName, isPlayerScav) => {
           this.ptt.debug(
-            `end of raid: exitName='${info.exitName}' and currentLocationName='${currentLocationName}'`
+            `end of raid: exitName='${info.exitName}' and currentMapName='${currentMapName}'`
           );
           if (
             isPlayerScav &&
@@ -139,7 +155,7 @@ export class EventWatcher {
 
           const extractsConf =
             this.ptt.pathToTarkovController.config.exfiltrations[
-              currentLocationName as MapName
+              currentMapName as MapName
             ];
 
           const newOffraidPosition =
@@ -158,11 +174,11 @@ export class EventWatcher {
           }
         };
 
-        if (savedCurrentLocationName !== null && savedIsPlayerScav !== null) {
-          endRaidCb(savedCurrentLocationName, savedIsPlayerScav);
+        if (savedCurrentMapName !== null && savedIsPlayerScav !== null) {
+          endRaidCb(savedCurrentMapName, savedIsPlayerScav);
           endRaidCb = noop;
           endRaidCbExecuted = true;
-          savedCurrentLocationName = null;
+          savedCurrentMapName = null;
           savedIsPlayerScav = null;
         }
       }
