@@ -3,31 +3,28 @@ import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import type { ConfigServer } from "@spt-aki/servers/ConfigServer";
 import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import type { SaveServer } from "@spt-aki/servers/SaveServer";
-import type { StaticRouterModService } from "@spt-aki/services/mod/staticRouter/StaticRouterModService";
 import type { DependencyContainer } from "tsyringe";
 import { createPathToTarkovAPI } from "./api";
 import {
   Config,
   CONFIG_PATH,
-  MapName,
   PACKAGE_JSON_PATH,
   SpawnConfig,
   SPAWN_CONFIG_PATH,
 } from "./config";
-import { createStaticRoutePeeker, StaticRoutePeeker } from "./helpers";
+import { EventWatcher } from "./event-watcher";
 
 import { PathToTarkovController } from "./path-to-tarkov-controller";
 import { purgeProfiles } from "./uninstall";
 import { getModDisplayName, noop, PackageJson, readJsonFile } from "./utils";
 
 class PathToTarkov implements IMod {
-  private logger: ILogger;
-  private debug: (data: string) => void;
-
   private packageJson: PackageJson;
   private config: Config;
   private spawnConfig: SpawnConfig;
 
+  public logger: ILogger;
+  public debug: (data: string) => void;
   public container: DependencyContainer;
   public executeOnStartAPICallbacks: (sessionId: string) => void = noop;
   public pathToTarkovController: PathToTarkovController;
@@ -69,154 +66,6 @@ class PathToTarkov implements IMod {
     );
   }
 
-  private watchOnGameStart(staticRoutePeeker: StaticRoutePeeker): void {
-    staticRoutePeeker.watchRoute(
-      "/client/game/start",
-      (url, info: unknown, sessionId) => {
-        if (
-          !this.pathToTarkovController.stashController.getInventory(sessionId)
-        ) {
-          this.debug(
-            `/client/game/start: no pmc data found, init will be handled on profile creation`
-          );
-          // no pmc data found, will be handled by `onProfileCreated`
-          return;
-        }
-
-        this.pathToTarkovController.init(sessionId);
-        this.executeOnStartAPICallbacks(sessionId);
-
-        this.logger.info(`=> PathToTarkov: game started!`);
-      }
-    );
-  }
-
-  private watchOnProfileCreated(staticRoutePeeker: StaticRoutePeeker): void {
-    staticRoutePeeker.watchRoute(
-      "/client/game/profile/create",
-      (url, info: unknown, sessionId) => {
-        this.pathToTarkovController.init(sessionId);
-        this.executeOnStartAPICallbacks(sessionId);
-
-        this.logger.info(`=> PathToTarkov: pmc created!`);
-      }
-    );
-  }
-
-  private watchEndOfRaid(
-    staticRoutePeeker: StaticRoutePeeker,
-    saveServer: SaveServer
-  ): void {
-    type EndRaidCb = (
-      currentLocationName: string,
-      isPLayerScav: boolean
-    ) => void;
-
-    let endRaidCb: EndRaidCb = noop;
-    let endRaidCbExecuted = false;
-    let savedCurrentLocationName: string | null = null;
-    let savedIsPlayerScav: boolean | null = null;
-
-    staticRoutePeeker.watchRoute(
-      "/client/match/offline/start",
-      (url, info: { locationName: string }, sessionId) => {
-        const locationName = info.locationName.toLowerCase();
-        this.debug(
-          `offline raid started for '${sessionId}' on map '${locationName}'`
-        );
-
-        savedCurrentLocationName = locationName;
-      }
-    );
-
-    staticRoutePeeker.watchRoute(
-      "/raid/profile/save",
-      (url, info: { isPlayerScav: boolean }, sessionId) => {
-        const isPlayerScav = info.isPlayerScav;
-        const profile = saveServer.getProfile(sessionId);
-
-        if (!profile) {
-          this.debug(`profile '${sessionId}' not found`);
-        }
-
-        this.debug(
-          `save profile: currentLocationName=${savedCurrentLocationName} isPlayerScav=${isPlayerScav}`
-        );
-
-        if (endRaidCb !== noop && savedCurrentLocationName) {
-          endRaidCb(savedCurrentLocationName, isPlayerScav);
-          endRaidCb = noop;
-        } else if (!endRaidCbExecuted) {
-          savedIsPlayerScav = isPlayerScav;
-        }
-
-        endRaidCbExecuted = false;
-      }
-    );
-
-    staticRoutePeeker.watchRoute(
-      "/client/match/offline/end",
-      (url, info: { exitName: string | null }, sessionId) => {
-        endRaidCb = (currentLocationName, isPlayerScav) => {
-          this.debug(
-            `end of raid: exitName='${info.exitName}' and currentLocationName='${currentLocationName}'`
-          );
-          if (
-            isPlayerScav &&
-            !this.pathToTarkovController.config
-              .player_scav_move_offraid_position
-          ) {
-            this.debug("end of raid: scav player detected");
-            return;
-          }
-
-          const playerDied = !info.exitName;
-
-          if (
-            this.pathToTarkovController.config
-              .reset_offraid_position_on_player_die &&
-            playerDied
-          ) {
-            this.debug("end of raid: player dies");
-            this.pathToTarkovController.updateOffraidPosition(
-              sessionId,
-              this.pathToTarkovController.config.initial_offraid_position
-            );
-            return;
-          }
-
-          const extractsConf =
-            this.pathToTarkovController.config.exfiltrations[
-              currentLocationName as MapName
-            ];
-
-          const newOffraidPosition =
-            extractsConf && extractsConf[info.exitName ?? ""];
-
-          if (newOffraidPosition) {
-            this.debug(
-              `end of raid: new offraid position ${newOffraidPosition}`
-            );
-            this.pathToTarkovController.updateOffraidPosition(
-              sessionId,
-              newOffraidPosition
-            );
-          } else {
-            this.debug(`end of raid: no new offraid position found`);
-          }
-        };
-
-        if (savedCurrentLocationName !== null && savedIsPlayerScav !== null) {
-          endRaidCb(savedCurrentLocationName, savedIsPlayerScav);
-          endRaidCb = noop;
-          endRaidCbExecuted = true;
-          savedCurrentLocationName = null;
-          savedIsPlayerScav = null;
-        }
-      }
-    );
-  }
-
   public delayedLoad(container: DependencyContainer): void {
     if (!this.config.enabled) {
       return;
@@ -250,19 +99,8 @@ class PathToTarkov implements IMod {
       this.pathToTarkovController.tradersController.initTraders();
     }
 
-    // TODO const eventWatcher = new EventWatcher(this);
-
-    const staticRouter = container.resolve<StaticRouterModService>(
-      "StaticRouterModService"
-    );
-
-    const staticRoutePeeker = createStaticRoutePeeker(staticRouter);
-
-    this.watchOnGameStart(staticRoutePeeker);
-    this.watchOnProfileCreated(staticRoutePeeker);
-    this.watchEndOfRaid(staticRoutePeeker, saveServer);
-
-    staticRoutePeeker.register();
+    const eventWatcher = new EventWatcher(this);
+    eventWatcher.listen();
 
     this.logger.success(
       `===> Successfully loaded ${getModDisplayName(this.packageJson, true)}`
