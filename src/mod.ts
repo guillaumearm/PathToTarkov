@@ -81,7 +81,8 @@ class PathToTarkov implements IMod {
       db,
       saveServer,
       configServer,
-      this.logger
+      this.logger,
+      this.debug
     );
 
     const [api, executeOnStartAPICallbacks] = createPathToTarkovAPI(

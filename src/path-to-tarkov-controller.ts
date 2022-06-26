@@ -169,7 +169,8 @@ export class PathToTarkovController {
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
     configServer: ConfigServer,
-    private readonly logger: ILogger
+    private readonly logger: ILogger,
+    private readonly debug: (data: string) => void
   ) {
     this.stashController = new StashController(
       () => this.config,
@@ -362,6 +363,7 @@ export class PathToTarkovController {
   }
 
   getOffraidPosition = (sessionId: string): string => {
+    const defaultOffraidPosition = this.config.initial_offraid_position;
     const profile: Profile = this.saveServer.getProfile(sessionId);
 
     if (!profile.PathToTarkov) {
@@ -369,11 +371,21 @@ export class PathToTarkovController {
     }
 
     if (!profile.PathToTarkov.offraidPosition) {
-      profile.PathToTarkov.offraidPosition =
-        this.config.initial_offraid_position;
+      profile.PathToTarkov.offraidPosition = defaultOffraidPosition;
     }
 
-    return profile.PathToTarkov.offraidPosition;
+    const offraidPosition = profile.PathToTarkov.offraidPosition;
+
+    if (!this.config.infiltrations[offraidPosition]) {
+      this.debug(
+        `Unknown offraid position '${offraidPosition}', reset to default '${defaultOffraidPosition}'`
+      );
+
+      profile.PathToTarkov.offraidPosition = defaultOffraidPosition;
+      return profile.PathToTarkov.offraidPosition;
+    }
+
+    return offraidPosition;
   };
 
   updateOffraidPosition(sessionId: string, offraidPosition?: string): void {
