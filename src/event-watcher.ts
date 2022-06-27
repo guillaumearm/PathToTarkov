@@ -14,7 +14,6 @@ type PTTInstance = {
   readonly logger: ILogger;
   readonly debug: (data: string) => void;
   readonly executeOnStartAPICallbacks: (sessionId: string) => void;
-  itemsFoundInRaid: Record<string, true>;
 };
 
 export const LOCATIONS_MAPS: Record<string, string> = {
@@ -95,14 +94,6 @@ export class EventWatcher {
         if (!profile) {
           this.ptt.debug(`profile '${sessionId}' not found`);
         }
-
-        // snapshot all items found in raid (used by enableKeepFoundInRaidTweak function)
-        this.ptt.itemsFoundInRaid = {};
-        profile.characters.pmc.Inventory.items.forEach((item) => {
-          if (item.upd?.SpawnedInSession) {
-            this.ptt.itemsFoundInRaid[item._id] = true;
-          }
-        });
 
         this.ptt.debug(
           `offline raid started for '${sessionId}' on map '${mapName}'`

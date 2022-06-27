@@ -30,8 +30,6 @@ class PathToTarkov implements IMod {
   public executeOnStartAPICallbacks: (sessionId: string) => void = noop;
   public pathToTarkovController: PathToTarkovController;
 
-  public itemsFoundInRaid: Record<string, true> = {};
-
   public load(container: DependencyContainer): void {
     this.container = container;
 
