@@ -342,24 +342,56 @@ export class PathToTarkovController {
   }
 
   initExfiltrations(): void {
-    // Extraction tweaks
-    if (!this.config.bypass_exfils_override) {
-      const locations = this.db.getTables().locations;
+    if (this.config.bypass_exfils_override) {
+      return;
+    }
 
-      Object.keys(this.config.exfiltrations).forEach((mapName) => {
-        const extractPoints = Object.keys(
-          this.config.exfiltrations[mapName as MapName]
-        );
+    // Exfiltrations tweaks without requirements
+    const locations = this.db.getTables().locations;
+    let exfilsCounter = 0;
 
-        const location = locations?.[mapName as MapName];
+    Object.keys(this.config.exfiltrations).forEach((mapName) => {
+      const extractPoints = Object.keys(
+        this.config.exfiltrations[mapName as MapName]
+      );
 
-        if (location) {
+      const location = locations?.[mapName as MapName];
+
+      if (location) {
+        const entrypointsForMap = this.entrypoints[mapName];
+
+        if (this.config.vanilla_exfils_requirements) {
+          // filter all exits and keep vanilla requirements (except for ScavCooperation requirements)
+          location.base.exits = location.base.exits
+            .filter((exit) => {
+              return extractPoints.includes(exit.Name);
+            })
+            .map((exit) => {
+              if (exit.PassageRequirement === "ScavCooperation") {
+                return createExitPoint(entrypointsForMap)(exit.Name);
+              }
+
+              exit.EntryPoints = entrypointsForMap.join(",");
+              exit.ExfiltrationTime = 10;
+              exit.Chance = 100;
+
+              return exit;
+            });
+        } else {
+          // erase all exits and create custom exit points without requirements
           location.base.exits = extractPoints.map(
-            createExitPoint(this.entrypoints[mapName])
+            createExitPoint(entrypointsForMap)
           );
         }
-      });
-    }
+        exfilsCounter = exfilsCounter + location.base.exits.length;
+      }
+    });
+
+    this.debug(
+      `initialized ${exfilsCounter} exfiltrations ${
+        this.config.vanilla_exfils_requirements ? "with vanilla" : "without"
+      } requirements`
+    );
   }
 
   getOffraidPosition = (sessionId: string): string => {

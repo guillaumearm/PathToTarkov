@@ -112,7 +112,8 @@ export type Config = {
   laboratory_access_via: AccessVia;
   player_scav_move_offraid_position: boolean;
   workbench_always_enabled: boolean;
-  bypass_exfils_override: boolean;
+  vanilla_exfils_requirements?: boolean;
+  bypass_exfils_override?: boolean;
   bypass_uninstall_procedure: boolean;
   bypass_luas_custom_spawn_points_tweak?: boolean;
   restrictions_in_raid: Record<string, { Value: number }>;
