@@ -283,6 +283,72 @@
       },
       "access_via": ["WoodsReserveShoreline"]
     },
+    "GearGal": {
+      "// mod integration for GearGal": true,
+      "// GearGal is available after extracting from Crossroads (cutstoms map) or Railway Exfil (interchange map)": true,
+      "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "Between interchange and customs",
+        "cz": "Between interchange and customs",
+        "en": "Between interchange and customs",
+        "es-mx": "Between interchange and customs",
+        "es": "Between interchange and customs",
+        "fr": "Entre l'échangeur et les douanes",
+        "ge": "Between interchange and customs",
+        "hu": "Between interchange and customs",
+        "it": "Between interchange and customs",
+        "jp": "Between interchange and customs",
+        "kr": "Between interchange and customs",
+        "pl": "Between interchange and customs",
+        "po": "Between interchange and customs"
+      },
+      "access_via": ["InterchangeCustoms"]
+    },
+    "armalite": {
+      "// mod integration for AR Shoppe Unlimited": true,
+      "// ArmaLite is available after extracting from RUAF (cutstoms map) or North UN Roadblock (woods map)": true,
+      "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "Between woods and customs",
+        "cz": "Between woods and customs",
+        "en": "Between woods and customs",
+        "es-mx": "Between woods and customs",
+        "es": "Between woods and customs",
+        "fr": "Entre les bois et les douanes",
+        "ge": "Between woods and customs",
+        "hu": "Between woods and customs",
+        "it": "Between woods and customs",
+        "jp": "Between woods and customs",
+        "kr": "Between woods and customs",
+        "pl": "Between woods and customs",
+        "po": "Between woods and customs"
+      },
+      "access_via": ["WoodsCustoms"]
+    },
+    "gunsmith": {
+      "// mod integration for Gunsmith": true,
+      "// Gunsmith is available after extracting from Tunnel (shoreline map) or Lighthouse Tunnel (lighthouse map)": true,
+      "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "Between lighthouse and shoreline",
+        "cz": "Between lighthouse and shoreline",
+        "en": "Between lighthouse and shoreline",
+        "es-mx": "Between lighthouse and shoreline",
+        "es": "Between lighthouse and shoreline",
+        "fr": "Entre le phare et le littoral",
+        "ge": "Between lighthouse and shoreline",
+        "hu": "Between lighthouse and shoreline",
+        "it": "Between lighthouse and shoreline",
+        "jp": "Between lighthouse and shoreline",
+        "kr": "Between lighthouse and shoreline",
+        "pl": "Between lighthouse and shoreline",
+        "po": "Between lighthouse and shoreline"
+      },
+      "access_via": ["ShorelineLighthouseTunnel"]
+    },
     "operator": {
       "// mod integration for Alex-AIO": true,
       "// Operator is available after extracting from Scav lands (reserve map)": true,
