@@ -98,7 +98,7 @@
       "access_via": ["SafeRoom"]
     }
   ],
-  "traders_access_restriction": false,
+  "traders_access_restriction": true,
   "traders_config": {
     "54cb50c76803fa8b248b4571": {
       "// Trader name": "Prapor",
