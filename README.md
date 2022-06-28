@@ -32,7 +32,7 @@ Before deleting the mod, you can set the `enabled` props to `false` in `config.j
 
 It does 2 things in all existing profiles: 
 1. Ensure the main stash is selected
-2. Unlock all traders listed in the config (Please note Jaeger will be unlocked even if the regarding quest is not completed)
+2. Unlock all traders listed in the config (Please note Jaeger will be unlocked only if the Introduction quest has been already completed)
 
 ## The Default configuration
 By default, you are on `FactoryZB-1011` offraid position.
