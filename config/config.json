@@ -493,6 +493,15 @@
       " V-Ex_light": "Car",
       "Shorl_free": "ShorelineLighthousePath",
       "tunnel_shared": "ShorelineLighthouseTunnel"
+    },
+    "laboratory": {
+      "lab_Parking_Gate": "Car",
+      "lab_Hangar_Gate": "Car",
+      "lab_Elevator_Med": "Car",
+      "lab_Under_Storage_Collector": "Car",
+      "lab_Elevator_Main": "Car",
+      "lab_Vent": "Car",
+      "lab_Elevator_Cargo": "Car"
     }
   },
   "infiltrations": {
