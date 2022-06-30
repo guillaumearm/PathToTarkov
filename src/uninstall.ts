@@ -16,17 +16,25 @@ export const purgeProfiles = (
 
   Object.keys(profiles).forEach((sessionId) => {
     const profile: Profile = saveServer.getProfile(sessionId);
+    const pmc = profile.characters.pmc;
 
-    const bonuses = profile.characters.pmc.Bonuses;
-    const lastBonus = bonuses[bonuses.length - 1];
-    const mainStashId = lastBonus.templateId;
-    const pmcInventory = profile.characters.pmc.Inventory;
+    // immutable reverse
+    const bonuses = [...pmc.Bonuses].reverse();
 
-    if (!mainStashId) {
+    const stashSizeBonus = bonuses.find((b) => b.type === "StashSize");
+    const mainStashTemplateId = stashSizeBonus?.templateId;
+
+    if (!mainStashTemplateId) {
       throw new Error(
-        "Uninstallation Fatal Error: cannot retrieve mainStashId!"
+        "Uninstallation Fatal Error: cannot retrieve main stash template id!"
       );
     }
+    const pmcInventory = pmc.Inventory;
+
+    const item = pmc.Inventory.items.find(
+      (i) => i._tpl === mainStashTemplateId
+    );
+    const mainStashId = item?._id;
 
     if (mainStashId && mainStashId !== pmcInventory.stash) {
       logger.success(
