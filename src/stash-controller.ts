@@ -52,19 +52,25 @@ export class StashController {
     if (!profile.PathToTarkov) {
       profile.PathToTarkov = {};
     }
-
-    if (!profile.PathToTarkov.mainStashId) {
-      const stashId: string = this.getInventory(sessionId).stash;
-      profile.PathToTarkov.mainStashId = stashId;
-    }
   }
 
   private getMainStashId(sessionId: string): string {
     const profile: Profile = this.saveServer.getProfile(sessionId);
-    const stashId: string | undefined = profile.PathToTarkov?.mainStashId;
+    const pmc = profile.characters.pmc;
+
+    const bonuses = pmc.Bonuses;
+    const lastBonus = bonuses[bonuses.length - 1];
+    const stashTemplateId = lastBonus.templateId;
+
+    if (!stashTemplateId) {
+      throw new Error("Fatal: cannot retrieve stash template id from profile!");
+    }
+
+    const item = pmc.Inventory.items.find((i) => i._tpl === stashTemplateId);
+    const stashId = item?._id;
 
     if (!stashId) {
-      throw new Error("Fatal: cannot retrieve mainStashId from profile");
+      throw new Error("Fatal: cannot retrieve main stash id from profile!");
     }
 
     return stashId;

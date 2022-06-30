@@ -16,19 +16,23 @@ export const purgeProfiles = (
 
   Object.keys(profiles).forEach((sessionId) => {
     const profile: Profile = saveServer.getProfile(sessionId);
-    const mainStashId: string | undefined =
-      profile.PathToTarkov && profile.PathToTarkov.mainStashId;
 
-    if (
-      profile &&
-      profile.PathToTarkov &&
-      mainStashId &&
-      mainStashId !== profile.characters.pmc.Inventory.stash
-    ) {
+    const bonuses = profile.characters.pmc.Bonuses;
+    const lastBonus = bonuses[bonuses.length - 1];
+    const mainStashId = lastBonus.templateId;
+    const pmcInventory = profile.characters.pmc.Inventory;
+
+    if (!mainStashId) {
+      throw new Error(
+        "Uninstallation Fatal Error: cannot retrieve mainStashId!"
+      );
+    }
+
+    if (mainStashId && mainStashId !== pmcInventory.stash) {
       logger.success(
         `=> PathToTarkov: restore the selected stash to main stash for profile '${profile.info.username}'`
       );
-      profile.characters.pmc.Inventory.stash = mainStashId;
+      pmcInventory.stash = mainStashId;
     }
 
     let nbTradersRestored = 0;

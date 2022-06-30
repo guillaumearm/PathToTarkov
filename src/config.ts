@@ -132,7 +132,6 @@ export type Config = {
 
 export type Profile = IAkiProfile & {
   PathToTarkov?: {
-    mainStashId?: string;
     offraidPosition?: string;
   };
 };
