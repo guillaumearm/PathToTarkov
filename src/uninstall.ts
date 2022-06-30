@@ -2,6 +2,7 @@ import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import type { SaveServer } from "@spt-aki/servers/SaveServer";
 import { Config, JAEGER_ID, Profile } from "./config";
 import { isJaegerIntroQuestCompleted } from "./helpers";
+import { getMainStashId } from "./utils";
 
 // Used for uninstallation process
 export const purgeProfiles = (
@@ -18,25 +19,11 @@ export const purgeProfiles = (
     const profile: Profile = saveServer.getProfile(sessionId);
     const pmc = profile.characters.pmc;
 
-    // immutable reverse
-    const bonuses = [...pmc.Bonuses].reverse();
-
-    const stashSizeBonus = bonuses.find((b) => b.type === "StashSize");
-    const mainStashTemplateId = stashSizeBonus?.templateId;
-
-    if (!mainStashTemplateId) {
-      throw new Error(
-        "Uninstallation Fatal Error: cannot retrieve main stash template id!"
-      );
-    }
     const pmcInventory = pmc.Inventory;
 
-    const item = pmc.Inventory.items.find(
-      (i) => i._tpl === mainStashTemplateId
-    );
-    const mainStashId = item?._id;
+    const mainStashId = getMainStashId(profile);
 
-    if (mainStashId && mainStashId !== pmcInventory.stash) {
+    if (mainStashId !== pmcInventory.stash) {
       logger.success(
         `=> PathToTarkov: restore the selected stash to main stash for profile '${profile.info.username}'`
       );

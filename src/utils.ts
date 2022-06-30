@@ -1,4 +1,5 @@
 import { readFileSync } from "fs";
+import { Profile } from "./config";
 
 export const readJsonFile = <T>(path: string): T => {
   return JSON.parse(readFileSync(path, "utf-8"));
@@ -72,3 +73,26 @@ export function deepClone<T>(item: T): T {
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export function noop(): void {}
+
+export const getMainStashId = (profile: Profile): string => {
+  const pmc = profile.characters.pmc;
+
+  // immutable reverse
+  const bonuses = [...pmc.Bonuses].reverse();
+
+  const stashSizeBonus = bonuses.find((b) => b.type === "StashSize");
+  const mainStashTemplateId = stashSizeBonus?.templateId;
+
+  if (!mainStashTemplateId) {
+    throw new Error("Fatal Error: cannot retrieve main stash template id!");
+  }
+
+  const item = pmc.Inventory.items.find((i) => i._tpl === mainStashTemplateId);
+  const stashId = item?._id;
+
+  if (!stashId) {
+    throw new Error("Fatal Errir: cannot retrieve main stash id from profile!");
+  }
+
+  return stashId;
+};

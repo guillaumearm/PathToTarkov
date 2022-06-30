@@ -4,6 +4,7 @@ import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import type { SaveServer } from "@spt-aki/servers/SaveServer";
 import { ConfigGetter, EMPTY_STASH_ID, Profile, STASH_IDS } from "./config";
 import { checkAccessVia, isIgnoredArea } from "./helpers";
+import { getMainStashId } from "./utils";
 
 // indexed by stashId
 type StashSizes = Record<string, number>;
@@ -56,24 +57,7 @@ export class StashController {
 
   private getMainStashId(sessionId: string): string {
     const profile: Profile = this.saveServer.getProfile(sessionId);
-    const pmc = profile.characters.pmc;
-
-    const bonuses = pmc.Bonuses;
-    const lastBonus = bonuses[bonuses.length - 1];
-    const stashTemplateId = lastBonus.templateId;
-
-    if (!stashTemplateId) {
-      throw new Error("Fatal: cannot retrieve stash template id from profile!");
-    }
-
-    const item = pmc.Inventory.items.find((i) => i._tpl === stashTemplateId);
-    const stashId = item?._id;
-
-    if (!stashId) {
-      throw new Error("Fatal: cannot retrieve main stash id from profile!");
-    }
-
-    return stashId;
+    return getMainStashId(profile);
   }
 
   private setSize(n: number): void {
