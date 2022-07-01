@@ -4,12 +4,8 @@ import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import type { ConfigServer } from "@spt-aki/servers/ConfigServer";
 import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import type { SaveServer } from "@spt-aki/servers/SaveServer";
-import {
-  ConfigGetter,
-  JAEGER_INTRO_QUEST,
-  LocaleName,
-  PRAPOR_ID,
-} from "./config";
+import type { ConfigGetter, LocaleName } from "./config";
+import { JAEGER_INTRO_QUEST, PRAPOR_ID } from "./config";
 import { checkAccessVia } from "./helpers";
 
 export class TradersController {

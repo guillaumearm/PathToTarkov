@@ -1,6 +1,7 @@
 import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import type { SaveServer } from "@spt-aki/servers/SaveServer";
-import { Config, JAEGER_ID, Profile } from "./config";
+import type { Config, Profile } from "./config";
+import { JAEGER_ID } from "./config";
 import { isJaegerIntroQuestCompleted } from "./helpers";
 import { getMainStashId } from "./utils";
 

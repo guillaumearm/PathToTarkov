@@ -1,5 +1,5 @@
 import { readFileSync } from "fs";
-import { Profile } from "./config";
+import type { Profile } from "./config";
 
 export const readJsonFile = <T>(path: string): T => {
   return JSON.parse(readFileSync(path, "utf-8"));

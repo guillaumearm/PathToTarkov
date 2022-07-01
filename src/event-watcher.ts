@@ -1,10 +1,11 @@
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
+import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import type { SaveServer } from "@spt-aki/servers/SaveServer";
 import type { StaticRouterModService } from "@spt-aki/services/mod/staticRouter/StaticRouterModService";
-import { DependencyContainer } from "tsyringe";
-import { MapName } from "./config";
-import { createStaticRoutePeeker, StaticRoutePeeker } from "./helpers";
-import { PathToTarkovController } from "./path-to-tarkov-controller";
+import type { DependencyContainer } from "tsyringe";
+import type { MapName } from "./config";
+import type { StaticRoutePeeker } from "./helpers";
+import { createStaticRoutePeeker } from "./helpers";
+import type { PathToTarkovController } from "./path-to-tarkov-controller";
 
 import { noop } from "./utils";
 

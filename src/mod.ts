@@ -5,19 +5,15 @@ import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import type { SaveServer } from "@spt-aki/servers/SaveServer";
 import type { DependencyContainer } from "tsyringe";
 import { createPathToTarkovAPI } from "./api";
-import {
-  Config,
-  CONFIG_PATH,
-  PACKAGE_JSON_PATH,
-  SpawnConfig,
-  SPAWN_CONFIG_PATH,
-} from "./config";
+import type { Config, SpawnConfig } from "./config";
+import { CONFIG_PATH, PACKAGE_JSON_PATH, SPAWN_CONFIG_PATH } from "./config";
 import { EventWatcher } from "./event-watcher";
 import { enableKeepFoundInRaidTweak } from "./keep-fir-tweak";
 
 import { PathToTarkovController } from "./path-to-tarkov-controller";
 import { purgeProfiles } from "./uninstall";
-import { getModDisplayName, noop, PackageJson, readJsonFile } from "./utils";
+import type { PackageJson } from "./utils";
+import { getModDisplayName, noop, readJsonFile } from "./utils";
 
 class PathToTarkov implements IMod {
   private packageJson: PackageJson;

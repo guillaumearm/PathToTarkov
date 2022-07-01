@@ -2,7 +2,8 @@ import type { Inventory } from "@spt-aki/models/eft/common/IPmcData";
 
 import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import type { SaveServer } from "@spt-aki/servers/SaveServer";
-import { ConfigGetter, EMPTY_STASH_ID, Profile, STASH_IDS } from "./config";
+import type { ConfigGetter, Profile } from "./config";
+import { EMPTY_STASH_ID, STASH_IDS } from "./config";
 import { checkAccessVia, isIgnoredArea } from "./helpers";
 import { getMainStashId } from "./utils";
 

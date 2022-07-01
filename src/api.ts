@@ -1,5 +1,5 @@
-import { Config, SpawnConfig } from "./config";
-import { PathToTarkovController } from "./path-to-tarkov-controller";
+import type { Config, SpawnConfig } from "./config";
+import type { PathToTarkovController } from "./path-to-tarkov-controller";
 import { deepClone } from "./utils";
 
 export type StartCallback = (sessionId: string) => void;

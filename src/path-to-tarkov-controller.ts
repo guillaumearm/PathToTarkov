@@ -4,23 +4,26 @@ import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import type { ConfigServer } from "@spt-aki/servers/ConfigServer";
 import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import type { SaveServer } from "@spt-aki/servers/SaveServer";
-import {
+
+import type {
   Config,
   ConfigGetter,
-  MAPLIST,
   MapName,
-  PRAPOR_ID,
   Profile,
   SpawnConfig,
 } from "./config";
+import { MAPLIST, PRAPOR_ID } from "./config";
+
+import type { EntryPoints } from "./helpers";
+
 import {
   changeRestrictionsInRaid,
   checkAccessVia,
   createExitPoint,
   createSpawnPoint,
-  EntryPoints,
   getEntryPointsForMaps,
 } from "./helpers";
+
 import { StashController } from "./stash-controller";
 import { TradersController } from "./traders-controller";
 

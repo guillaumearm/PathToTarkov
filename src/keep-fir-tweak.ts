@@ -1,5 +1,5 @@
-import { InRaidHelper } from "@spt-aki/helpers/InRaidHelper";
-import { Item } from "@spt-aki/models/eft/common/tables/IItem";
+import type { InRaidHelper } from "@spt-aki/helpers/InRaidHelper";
+import type { Item } from "@spt-aki/models/eft/common/tables/IItem";
 import type { DependencyContainer } from "tsyringe";
 
 type PTTInstance = {

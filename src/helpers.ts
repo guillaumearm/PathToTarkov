@@ -7,14 +7,9 @@ import type { IPmcData } from "@spt-aki/models/eft/common/IPmcData";
 import type { IHideoutArea } from "@spt-aki/models/eft/hideout/IHideoutArea";
 import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import type { StaticRouterModService } from "@spt-aki/services/mod/staticRouter/StaticRouterModService";
-import {
-  AccessVia,
-  Config,
-  JAEGER_INTRO_QUEST,
-  MAPLIST,
-  MapName,
-  SpawnPoint,
-} from "./config";
+
+import type { AccessVia, Config, MapName, SpawnPoint } from "./config";
+import { JAEGER_INTRO_QUEST, MAPLIST } from "./config";
 
 export function checkAccessVia(access_via: AccessVia, value: string): boolean {
   return (
