@@ -172,6 +172,7 @@ export class PathToTarkovController {
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
     configServer: ConfigServer,
+    getIsTraderLocked: (traderId: string) => boolean,
     private readonly logger: ILogger,
     private readonly debug: (data: string) => void
   ) {
@@ -182,6 +183,7 @@ export class PathToTarkovController {
     );
     this.tradersController = new TradersController(
       () => this.config,
+      getIsTraderLocked,
       db,
       saveServer,
       configServer,

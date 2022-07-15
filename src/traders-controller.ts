@@ -14,13 +14,12 @@ import { checkAccessVia } from "./helpers";
 export class TradersController {
   constructor(
     private readonly getConfig: ConfigGetter,
+    private readonly getIsTraderLocked: (traderId: string) => boolean,
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
     private readonly configServer: ConfigServer,
     private readonly logger: ILogger
-  ) {
-    this.getConfig = getConfig;
-  }
+  ) {}
 
   private disableUnlockJaegerViaIntroQuest(): void {
     const quests = this.db.getTables().templates?.quests;
@@ -175,10 +174,9 @@ export class TradersController {
     const tradersInfo = profile.characters.pmc.TradersInfo;
 
     Object.keys(tradersConfig).forEach((traderId) => {
-      const unlocked = checkAccessVia(
-        tradersConfig[traderId].access_via,
-        offraidPosition
-      );
+      const unlocked =
+        checkAccessVia(tradersConfig[traderId].access_via, offraidPosition) &&
+        !this.getIsTraderLocked(traderId);
 
       if (tradersInfo[traderId]) {
         tradersInfo[traderId].unlocked = unlocked;

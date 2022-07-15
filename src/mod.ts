@@ -81,12 +81,16 @@ class PathToTarkov implements IMod {
     const saveServer = container.resolve<SaveServer>("SaveServer");
     const configServer = container.resolve<ConfigServer>("ConfigServer");
 
+    // TODO: compat with Custom Quests
+    const getIsTraderLocked = () => false;
+
     this.pathToTarkovController = new PathToTarkovController(
       this.config,
       this.spawnConfig,
       db,
       saveServer,
       configServer,
+      getIsTraderLocked,
       this.logger,
       this.debug
     );
