@@ -8,6 +8,9 @@ import type { ConfigGetter, LocaleName } from "./config";
 import { JAEGER_INTRO_QUEST, PRAPOR_ID } from "./config";
 import { checkAccessVia } from "./helpers";
 
+/**
+ * Used only when `traders_access_restriction` is true
+ */
 export class TradersController {
   constructor(
     private readonly getConfig: ConfigGetter,
@@ -19,7 +22,7 @@ export class TradersController {
     this.getConfig = getConfig;
   }
 
-  disableUnlockJaegerViaIntroQuest(): void {
+  private disableUnlockJaegerViaIntroQuest(): void {
     const quests = this.db.getTables().templates?.quests;
     const quest = quests?.[JAEGER_INTRO_QUEST];
 
