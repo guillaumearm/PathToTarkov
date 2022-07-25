@@ -9,7 +9,7 @@ import { ModCompilerService } from "../services/ModCompilerService";
 import { JsonUtil } from "../utils/JsonUtil";
 import { VFS } from "../utils/VFS";
 import { BundleLoader } from "./BundleLoader";
-export declare class InitialModLoader implements IModLoader {
+export declare class PreAkiModLoader implements IModLoader {
     protected logger: ILogger;
     protected vfs: VFS;
     protected jsonUtil: JsonUtil;
@@ -50,7 +50,7 @@ export declare class InitialModLoader implements IModLoader {
      * @param modToValidate package.json details
      * @returns boolean
      */
-    protected isModSpt300Compatible(modFolderName: string, modToValidate: IPackageJsonData): boolean;
+    protected isModSpt3XXCompatible(modFolderName: string, modToValidate: IPackageJsonData): boolean;
     protected isModCombatibleWithAki(mod: IPackageJsonData): boolean;
     protected executeMods(container: DependencyContainer): void;
     sortModsLoadOrder(): string[];

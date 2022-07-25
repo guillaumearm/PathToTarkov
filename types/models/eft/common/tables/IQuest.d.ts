@@ -1,3 +1,4 @@
+import { QuestRewardType } from "../../../enums/QuestRewardType";
 import { Item } from "./IItem";
 export interface IQuest {
     QuestName: string;
@@ -23,6 +24,7 @@ export interface IQuest {
     status: string;
     KeyQuest: boolean;
     changeQuestMessageText: string;
+    side: string;
 }
 export interface Conditions {
     Started: AvailableForConditions[];
@@ -56,6 +58,7 @@ export interface AvailableForProps {
     plantTime?: number;
     zoneId?: string;
     type?: boolean;
+    countInRaid?: boolean;
 }
 export interface AvailableForCounter {
     id: string;
@@ -97,9 +100,9 @@ export interface Rewards {
     Expired: Reward[];
 }
 export interface Reward {
-    value?: string;
+    value?: string | number;
     id: string;
-    type: string;
+    type: QuestRewardType;
     index: number;
     target?: string;
     items?: Item[];

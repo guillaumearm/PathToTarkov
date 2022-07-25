@@ -45,7 +45,9 @@ export interface ILocaleProps {
     ShortName: string;
     Description: string;
 }
-
+export interface ILocaleTradingBase {
+    locations: Record<string, ILocaleTradingProps>;
+}
 export interface ILocaleTradingProps {
     FullName: string;
     FirstName: string;

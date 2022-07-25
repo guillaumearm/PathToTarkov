@@ -1,4 +1,5 @@
-import type { IMod } from "@spt-aki/models/external/mod";
+import type { IPostAkiLoadMod } from "@spt-aki/models/external/IPostAkiLoadMod";
+import type { IPreAkiLoadMod } from "@spt-aki/models/external/IPreAkiLoadMod";
 import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import type { ConfigServer } from "@spt-aki/servers/ConfigServer";
 import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
@@ -15,7 +16,7 @@ import { purgeProfiles } from "./uninstall";
 import type { PackageJson } from "./utils";
 import { getModDisplayName, noop, readJsonFile } from "./utils";
 
-class PathToTarkov implements IMod {
+class PathToTarkov implements IPreAkiLoadMod, IPostAkiLoadMod {
   private packageJson: PackageJson;
   private config: Config;
   private spawnConfig: SpawnConfig;
@@ -26,7 +27,7 @@ class PathToTarkov implements IMod {
   public executeOnStartAPICallbacks: (sessionId: string) => void = noop;
   public pathToTarkovController: PathToTarkovController;
 
-  public load(container: DependencyContainer): void {
+  public preAkiLoad(container: DependencyContainer): void {
     this.container = container;
 
     this.packageJson = readJsonFile(PACKAGE_JSON_PATH);
@@ -70,7 +71,7 @@ class PathToTarkov implements IMod {
     );
   }
 
-  public delayedLoad(container: DependencyContainer): void {
+  public postAkiLoad(container: DependencyContainer): void {
     this.container = container;
 
     if (!this.config.enabled) {

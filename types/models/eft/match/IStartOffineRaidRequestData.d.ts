@@ -1,6 +1,7 @@
+import { BotAmount } from "../../enums/BotAmount";
+import { BotDifficulty } from "../../enums/BotDifficulty";
 export interface IStartOfflineRaidRequestData {
     locationName: string;
-    entryPoint: string;
     startTime: number;
     dateTime: string;
     gameSettings: GameSettings;
@@ -17,11 +18,11 @@ export interface TimeAndWeatherSettings {
 export interface BotsSettings {
     isEnabled: boolean;
     isScavWars: boolean;
-    botAmount: string;
+    botAmount: BotAmount;
 }
 export interface WavesSettings {
-    botDifficulty: string;
+    botDifficulty: BotDifficulty;
     isBosses: boolean;
     isTaggedAndCursed: boolean;
-    wavesBotAmount: string;
+    wavesBotAmount: BotAmount;
 }

@@ -68,8 +68,7 @@ export class TradersController {
               locationDescription && locationDescription[locale as LocaleName];
 
             if (desc) {
-              const traderLocales =
-                locales?.global?.[locale as LocaleName].trading[traderId];
+              const traderLocales = locales?.global?.[locale].trading[traderId];
 
               if (traderLocales) {
                 traderLocales.Location = desc;

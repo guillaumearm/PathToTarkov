@@ -8,6 +8,7 @@ import { ILogger } from "../models/spt/utils/ILogger";
 import { ItemEventRouter } from "../routers/ItemEventRouter";
 import { ConfigServer } from "../servers/ConfigServer";
 import { DatabaseServer } from "../servers/DatabaseServer";
+import { LocaleService } from "../services/LocaleService";
 import { HashUtil } from "../utils/HashUtil";
 import { JsonUtil } from "../utils/JsonUtil";
 import { TimeUtil } from "../utils/TimeUtil";
@@ -25,6 +26,7 @@ export declare class QuestHelper {
     protected itemHelper: ItemHelper;
     protected itemEventRouter: ItemEventRouter;
     protected databaseServer: DatabaseServer;
+    protected localeService: LocaleService;
     protected ragfairServerHelper: RagfairServerHelper;
     protected dialogueHelper: DialogueHelper;
     protected profileHelper: ProfileHelper;
@@ -32,7 +34,7 @@ export declare class QuestHelper {
     protected traderHelper: TraderHelper;
     protected configServer: ConfigServer;
     protected questConfig: IQuestConfig;
-    constructor(logger: ILogger, jsonUtil: JsonUtil, timeUtil: TimeUtil, hashUtil: HashUtil, itemHelper: ItemHelper, itemEventRouter: ItemEventRouter, databaseServer: DatabaseServer, ragfairServerHelper: RagfairServerHelper, dialogueHelper: DialogueHelper, profileHelper: ProfileHelper, paymentHelper: PaymentHelper, traderHelper: TraderHelper, configServer: ConfigServer);
+    constructor(logger: ILogger, jsonUtil: JsonUtil, timeUtil: TimeUtil, hashUtil: HashUtil, itemHelper: ItemHelper, itemEventRouter: ItemEventRouter, databaseServer: DatabaseServer, localeService: LocaleService, ragfairServerHelper: RagfairServerHelper, dialogueHelper: DialogueHelper, profileHelper: ProfileHelper, paymentHelper: PaymentHelper, traderHelper: TraderHelper, configServer: ConfigServer);
     static get STATUS(): Record<string, number>;
     questStatus(pmcData: IPmcData, questID: string): string;
     /**
@@ -73,8 +75,22 @@ export declare class QuestHelper {
      */
     cleanQuestConditions(quest: IQuest): IQuest;
     failQuest(pmcData: IPmcData, body: any, sessionID: string): any;
+    /**
+     * Get quest by id from database
+     * @param questId questid to look for
+     * @param pmcData player profile
+     * @returns IQuest object
+     */
     getQuestFromDb(questId: string, pmcData: IPmcData): IQuest;
-    getQuestLocaleIdFromDb(messageId: string, localisation?: string): string;
+    getQuestLocaleIdFromDb(messageId: string): string;
+    /**
+     * Give player quest rewards - Skills/exp/trader standing/items/assort unlocks
+     * @param pmcData Player profile
+     * @param body complete quest request
+     * @param state State of the quest now its complete
+     * @param sessionID Seession id
+     * @returns array of reward objects
+     */
     applyQuestReward(pmcData: IPmcData, body: ICompleteQuestRequestData, state: string, sessionID: string): Reward[];
     /**
      * Get the intel center bonus a player has
