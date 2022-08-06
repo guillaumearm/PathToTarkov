@@ -1,10 +1,8 @@
 import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import type { SaveServer } from "@spt-aki/servers/SaveServer";
-import type { StaticRouterModService } from "@spt-aki/services/mod/staticRouter/StaticRouterModService";
 import type { DependencyContainer } from "tsyringe";
 import type { MapName } from "./config";
 import type { StaticRoutePeeker } from "./helpers";
-import { createStaticRoutePeeker } from "./helpers";
 import type { PathToTarkovController } from "./path-to-tarkov-controller";
 
 import { noop } from "./utils";
@@ -192,14 +190,10 @@ export class EventWatcher {
     );
   }
 
-  public listen(): void {
-    const saveServer = this.ptt.container.resolve<SaveServer>("SaveServer");
-    const staticRouter = this.ptt.container.resolve<StaticRouterModService>(
-      "StaticRouterModService"
-    );
-
-    const staticRoutePeeker = createStaticRoutePeeker(staticRouter);
-
+  public listen(
+    saveServer: SaveServer,
+    staticRoutePeeker: StaticRoutePeeker
+  ): void {
     this.watchOnGameStart(staticRoutePeeker);
     this.watchOnProfileCreated(staticRoutePeeker);
     this.watchEndOfRaid(staticRoutePeeker, saveServer);

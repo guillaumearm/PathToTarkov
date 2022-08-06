@@ -1,4 +1,5 @@
 import type { RouteAction } from "@spt-aki/di/Router";
+import type { PreAkiModLoader } from "@spt-aki/loaders/PreAkiModLoader";
 import type {
   Exit,
   SpawnPointParam,
@@ -155,7 +156,7 @@ type StaticRouteCallback = (
 ) => void;
 
 export type StaticRoutePeeker = {
-  register: () => void;
+  register: (name?: string) => void;
   watchRoute: (url: string, cb: StaticRouteCallback) => void;
 };
 
@@ -174,12 +175,8 @@ export const createStaticRoutePeeker = (
     });
   };
 
-  const register = () => {
-    staticRouter.registerStaticRouter(
-      "StaticRoutePeekingAki",
-      routeActions,
-      "aki"
-    );
+  const register = (name = "Trap-PathToTarkov-StaticRoutePeeking") => {
+    staticRouter.registerStaticRouter(name, routeActions, "aki");
   };
 
   return {
@@ -194,4 +191,18 @@ export const isJaegerIntroQuestCompleted = (pmc: IPmcData): boolean => {
       (quest) => quest.qid === JAEGER_INTRO_QUEST && quest.status === "Success"
     )
   );
+};
+
+const isModLoaded = (modLoader: PreAkiModLoader, modId: string): boolean => {
+  const loadedModName = Object.keys(modLoader.imported).find(
+    (modName) => modLoader.imported[modName].name === modId
+  );
+
+  return Boolean(loadedModName);
+};
+
+const LUAS_CSP_MOD_ID = "CustomSpawnPoints";
+
+export const isLuasCSPModLoaded = (modLoader: PreAkiModLoader): boolean => {
+  return isModLoaded(modLoader, LUAS_CSP_MOD_ID);
 };

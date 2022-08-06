@@ -1,3 +1,4 @@
+import type { PreAkiModLoader } from "@spt-aki/loaders/PreAkiModLoader";
 import type { BodyHealth, Effects } from "@spt-aki/models/eft/common/IGlobals";
 import type { SpawnPointParam } from "@spt-aki/models/eft/common/ILocationBase";
 import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
@@ -14,7 +15,8 @@ import type {
 } from "./config";
 import { MAPLIST, PRAPOR_ID } from "./config";
 
-import type { EntryPoints } from "./helpers";
+import type { EntryPoints, StaticRoutePeeker } from "./helpers";
+import { isLuasCSPModLoaded } from "./helpers";
 
 import {
   changeRestrictionsInRaid,
@@ -174,7 +176,9 @@ export class PathToTarkovController {
     configServer: ConfigServer,
     getIsTraderLocked: (traderId: string) => boolean,
     private readonly logger: ILogger,
-    private readonly debug: (data: string) => void
+    private readonly debug: (data: string) => void,
+    private staticRouterPeeker: StaticRoutePeeker,
+    private modLoader: PreAkiModLoader
   ) {
     this.stashController = new StashController(
       () => this.config,
@@ -205,7 +209,7 @@ export class PathToTarkovController {
     this.updateOffraidPosition(sessionId, offraidPosition);
 
     changeRestrictionsInRaid(this.config, this.db);
-    // this._hijackLuasCustomSpawnPointsUpdate();
+    // this.hijackLuasCustomSpawnPointsUpdate();
   }
 
   // fix for missing `insuranceStart` property when player died
@@ -221,36 +225,44 @@ export class PathToTarkovController {
     });
   }
 
-  // DISABLED since 3.0.0
   // This is a fix to ensure Lua's Custom Spawn Point mod do not override player spawn point
-  // _hijackLuasCustomSpawnPointsUpdate(): void {
-  //   // if disabled via config
-  //   if (this.config.bypass_luas_custom_spawn_points_tweak) {
-  //     return;
-  //   }
+  public hijackLuasCustomSpawnPointsUpdate(): void {
+    // if disabled via config
+    if (this.config.bypass_luas_custom_spawn_points_tweak) {
+      return;
+    }
 
-  //   const LUAS_CSP_MODNAME = "Lua-CustomSpawnPoints";
-  //   const locationsRoute = HttpRouter.onStaticRoute["/client/locations"];
-  //   const luasUpdateFn = locationsRoute[LUAS_CSP_MODNAME];
+    const LUAS_CSP_ROUTE = "/client/locations";
+    const LUAS_CSP_MODNAME = `Lua-CustomSpawnPoints-${LUAS_CSP_ROUTE}`;
 
-  //   // if Lua's Custom Spawn Points is not loaded
-  //   if (!luasUpdateFn) {
-  //     return;
-  //   }
+    if (isLuasCSPModLoaded(this.modLoader)) {
+      this.debug(
+        `Lua's Custom Spawn Point detected, hijack '${LUAS_CSP_ROUTE}' route`
+      );
+    } else {
+      this.debug("Lua's Custom Spawn Point not detected.");
+      return;
+    }
 
-  //   locationsRoute[LUAS_CSP_MODNAME] = (url, info, sessionId) => {
-  //     // _response is not used since we need to call `LocationController.generateAll()` after `_updateSpawnPoints`
-  //     const _response = luasUpdateFn(url, info, sessionId);
+    this.staticRouterPeeker.watchRoute(
+      LUAS_CSP_ROUTE,
+      (url, info, sessionId, output) => {
+        this.logger.info(
+          "=> Path To Tarkov: '/client/locations' route called !"
+        );
 
-  //     this._updateSpawnPoints(this.getOffraidPosition(sessionId));
+        this.updateSpawnPoints(this.getOffraidPosition(sessionId));
 
-  //     return HttpResponse.getBody(LocationController.generateAll());
-  //   };
+        return output;
+      }
+    );
 
-  //   Logger.info(
-  //     "=> PathToTarkov: Lua's Custom Spawn Points Update function hijacked!"
-  //   );
-  // }
+    this.staticRouterPeeker.register(LUAS_CSP_MODNAME + "!");
+
+    this.logger.info(
+      `=> PathToTarkov: Lua's Custom Spawn Points '${LUAS_CSP_ROUTE}' route hijacked!`
+    );
+  }
 
   private addSpawnPoint(mapName: string, spawnPoint: SpawnPointParam): void {
     const location = this.db.getTables().locations?.[mapName as MapName];

@@ -18,7 +18,7 @@ export declare class PreAkiModLoader implements IModLoader {
     protected configServer: ConfigServer;
     protected static container: DependencyContainer;
     protected readonly basepath = "user/mods/";
-    protected imported: Record<string, ModLoader.IMod>;
+    public imported: Record<string, ModLoader.IMod>;
     protected akiConfig: ICoreConfig;
     constructor(logger: ILogger, vfs: VFS, jsonUtil: JsonUtil, modCompilerService: ModCompilerService, bundleLoader: BundleLoader, configServer: ConfigServer);
     load(container: DependencyContainer): Promise<void>;
