@@ -233,7 +233,6 @@ export class PathToTarkovController {
     }
 
     const LUAS_CSP_ROUTE = "/client/locations";
-    const LUAS_CSP_MODNAME = `Lua-CustomSpawnPoints-${LUAS_CSP_ROUTE}`;
 
     if (isLuasCSPModLoaded(this.modLoader)) {
       this.debug(
@@ -257,7 +256,9 @@ export class PathToTarkovController {
       }
     );
 
-    this.staticRouterPeeker.register(LUAS_CSP_MODNAME + "!");
+    this.staticRouterPeeker.register(
+      "Trap-PathToTarkov-Lua-CustomSpawnPoints-integration"
+    );
 
     this.logger.info(
       `=> PathToTarkov: Lua's Custom Spawn Points '${LUAS_CSP_ROUTE}' route hijacked!`
