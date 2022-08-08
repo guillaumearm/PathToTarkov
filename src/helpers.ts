@@ -185,10 +185,15 @@ export const createStaticRoutePeeker = (
   };
 };
 
+const QUEST_STATUS_SUCCESS = 4;
+
 export const isJaegerIntroQuestCompleted = (pmc: IPmcData): boolean => {
   return Boolean(
     pmc.Quests.find(
-      (quest) => quest.qid === JAEGER_INTRO_QUEST && quest.status === "Success"
+      (quest) =>
+        quest.qid === JAEGER_INTRO_QUEST &&
+        (quest.status === QUEST_STATUS_SUCCESS ||
+          (quest as any).status === "Success") // compatibility with aki 3.1.x
     )
   );
 };

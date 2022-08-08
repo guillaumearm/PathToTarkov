@@ -1,5 +1,6 @@
 import type { InRaidHelper } from "@spt-aki/helpers/InRaidHelper";
 import type { Item } from "@spt-aki/models/eft/common/tables/IItem";
+
 import type { DependencyContainer } from "tsyringe";
 
 type PTTInstance = {
@@ -31,8 +32,14 @@ export const enableKeepFoundInRaidTweak = (ptt: PTTInstance): void => {
     (_t, result): void => {
       const inraidHelper = Array.isArray(result) ? result[0] : result;
 
-      inraidHelper.markFoundItems = (_pmcData, profile, isPlayerScav) => {
-        const count = setSpawnedInSessionOnAllItems(profile.Inventory.items);
+      inraidHelper.addSpawnedInSessionPropertyToItems = (
+        preRaidProfile,
+        postRaidProfile,
+        isPlayerScav
+      ) => {
+        const count = setSpawnedInSessionOnAllItems(
+          preRaidProfile.Inventory.items
+        );
         if (isPlayerScav) {
           ptt.debug(
             `raid survived with a scav, added 'SpawnedInSession' flag on ${count} items`
@@ -42,14 +49,15 @@ export const enableKeepFoundInRaidTweak = (ptt: PTTInstance): void => {
             `raid survived with a pmc, added 'SpawnedInSession' flag on ${count} items`
           );
         }
-
-        return profile;
+        return postRaidProfile;
       };
-
-      inraidHelper.removeFoundInRaidStatusFromItems = (profile) => {
-        const isPlayerScav = profile.Info.Side === "Savage";
-
-        const count = setSpawnedInSessionOnAllItems(profile.Inventory.items);
+      inraidHelper.removeSpawnedInSessionPropertyFromItems = (
+        postRaidProfile
+      ) => {
+        const isPlayerScav = postRaidProfile.Info.Side === "Savage";
+        const count = setSpawnedInSessionOnAllItems(
+          postRaidProfile.Inventory.items
+        );
         if (isPlayerScav) {
           ptt.debug(
             `raid ran through with a scav, added 'SpawnedInSession' flag on ${count} items`
@@ -59,8 +67,7 @@ export const enableKeepFoundInRaidTweak = (ptt: PTTInstance): void => {
             `raid ran through with a pmc, added 'SpawnedInSession' flag on ${count} items`
           );
         }
-
-        return profile;
+        return postRaidProfile;
       };
     },
     { frequency: "Always" }

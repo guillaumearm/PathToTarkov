@@ -1,5 +1,4 @@
-import type { Inventory } from "@spt-aki/models/eft/common/IPmcData";
-
+import type { Inventory } from "@spt-aki/models/eft/common/tables/IBotBase";
 import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import type { SaveServer } from "@spt-aki/servers/SaveServer";
 import type { ConfigGetter, Profile } from "./config";
