@@ -70,6 +70,17 @@ export const enableKeepFoundInRaidTweak = (ptt: PTTInstance): void => {
         }
         return postRaidProfile;
       };
+
+      // AKI 3.1.x compat
+      if ("markFoundItems" in inraidHelper) {
+        (inraidHelper as any).markFoundItems =
+          inraidHelper.addSpawnedInSessionPropertyToItems;
+      }
+
+      if ("removeFoundInRaidStatusFromItems" in inraidHelper) {
+        (inraidHelper as any).removeFoundInRaidStatusFromItems =
+          inraidHelper.removeSpawnedInSessionPropertyFromItems;
+      }
     },
     { frequency: "Always" }
   );
