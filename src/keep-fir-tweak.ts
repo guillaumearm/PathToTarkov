@@ -33,12 +33,12 @@ export const enableKeepFoundInRaidTweak = (ptt: PTTInstance): void => {
       const inraidHelper = Array.isArray(result) ? result[0] : result;
 
       inraidHelper.addSpawnedInSessionPropertyToItems = (
-        preRaidProfile,
+        _preRaidProfile,
         postRaidProfile,
         isPlayerScav
       ) => {
         const count = setSpawnedInSessionOnAllItems(
-          preRaidProfile.Inventory.items
+          postRaidProfile.Inventory.items
         );
         if (isPlayerScav) {
           ptt.debug(
@@ -51,6 +51,7 @@ export const enableKeepFoundInRaidTweak = (ptt: PTTInstance): void => {
         }
         return postRaidProfile;
       };
+
       inraidHelper.removeSpawnedInSessionPropertyFromItems = (
         postRaidProfile
       ) => {
