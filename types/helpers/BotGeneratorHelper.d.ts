@@ -1,5 +1,5 @@
 import { DurabilityLimitsHelper } from "../helpers/DurabilityLimitsHelper";
-import { Inventory as PmcInventory } from "../models/eft/common/IPmcData";
+import { Inventory as PmcInventory } from "../models/eft/common/tables/IBotBase";
 import { Mods, ModsChances } from "../models/eft/common/tables/IBotType";
 import { Item, Repairable, Upd } from "../models/eft/common/tables/IItem";
 import { Grid, ITemplateItem, Slot } from "../models/eft/common/tables/ITemplateItem";
@@ -28,20 +28,13 @@ export declare class BotGeneratorHelper {
     protected configServer: ConfigServer;
     protected botConfig: IBotConfig;
     constructor(logger: ILogger, jsonUtil: JsonUtil, hashUtil: HashUtil, randomUtil: RandomUtil, probabilityHelper: ProbabilityHelper, databaseServer: DatabaseServer, durabilityLimitsHelper: DurabilityLimitsHelper, itemHelper: ItemHelper, inventoryHelper: InventoryHelper, containerHelper: ContainerHelper, configServer: ConfigServer);
-    generateModsForItem(items: Item[], modPool: Mods, parentId: string, parentTemplate: ITemplateItem, modSpawnChances: ModsChances, isPmc?: boolean): Item[];
+    generateModsForItem(items: Item[], modPool: Mods, parentId: string, parentTemplate: ITemplateItem, modSpawnChances: ModsChances): Item[];
     /**
      * Is this magazine cylinder related (revolvers and grenade launchers)
      * @param magazineParentName the name of the magazines parent
      * @returns true if it is cylinder related
      */
     magazineIsCylinderRelated(magazineParentName: string): boolean;
-    /**
-     * Get a list of non black-listed cartridges from the PMC bot config
-     * @param modSlot mod item slot
-     * @param itemModPool
-     * @returns string array of cartridges PMCs can use
-     */
-    protected getNonBlacklistedCartridges(modSlot: string, itemModPool: Record<string, string[]>): string[];
     /**
      * randomly choose if a mod should be spawned, 100% for required mods OR mod is ammo slot
      * never return true for an item that has 0% spawn chance
@@ -53,6 +46,7 @@ export declare class BotGeneratorHelper {
     protected shouldModBeSpawned(itemSlot: Slot, modSlot: string, modSpawnChances: ModsChances): boolean;
     /**
      * Get a list of containers that hold ammo
+     * e.g. mod_magazine
      * @returns string array
      */
     protected getAmmoContainers(): string[];

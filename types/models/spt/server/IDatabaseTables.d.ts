@@ -38,7 +38,7 @@ export interface IDatabaseTables {
     templates?: {
         character: string[];
         items: Record<string, ITemplateItem>;
-        quests: Record<string, IQuest>;
+        quests: IQuest[];
         repeatableQuests: IRepeatableQuestDatabase;
         /** DEPRECATED - Items file found in the client, massivly out of date compared to templates.items, try not to use this, remove ASAP*/
         clientItems: Record<string, ITemplateItem>;
