@@ -84,14 +84,14 @@ export const getMainStashId = (profile: Profile): string => {
   const mainStashTemplateId = stashSizeBonus?.templateId;
 
   if (!mainStashTemplateId) {
-    throw new Error("Fatal Error: cannot retrieve main stash template id!");
+    return pmc.Inventory.stash;
   }
 
   const item = pmc.Inventory.items.find((i) => i._tpl === mainStashTemplateId);
   const stashId = item?._id;
 
   if (!stashId) {
-    throw new Error("Fatal Errir: cannot retrieve main stash id from profile!");
+    return pmc.Inventory.stash;
   }
 
   return stashId;
