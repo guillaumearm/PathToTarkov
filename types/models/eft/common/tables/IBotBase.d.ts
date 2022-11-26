@@ -28,6 +28,8 @@ export interface IBotBase {
     CarExtractCounts: CarExtractCounts;
     SurvivorClass: SurvivorClass;
     WishList: string[];
+    /** SPT specific property used during bot generation in raid */
+    sptIsPmc?: boolean;
 }
 export interface Info {
     EntryPoint: string;
@@ -66,13 +68,13 @@ export interface IBan {
     dateTime: number;
 }
 export declare enum BanType {
-    Chat = 0,
-    RagFair = 1,
-    Voip = 2,
-    Trading = 3,
-    Online = 4,
-    Friends = 5,
-    ChangeNickname = 6
+    CHAT = 0,
+    RAGFAIR = 1,
+    VOIP = 2,
+    TRADING = 3,
+    ONLINE = 4,
+    FRIENDS = 5,
+    CHANGE_NICKNAME = 6
 }
 export interface Customization {
     Head: string;
@@ -105,6 +107,7 @@ export interface CurrentMax {
     Maximum: number;
 }
 export interface Inventory {
+    discardLimits: Record<string, number>;
     items: Item[];
     equipment: string;
     stash: string;
@@ -312,11 +315,11 @@ export interface Notes {
 export interface CarExtractCounts {
 }
 export declare enum SurvivorClass {
-    Unknown = 0,
-    Neutralizer = 1,
-    Marauder = 2,
-    Paramedic = 3,
-    Survivor = 4
+    UNKNOWN = 0,
+    NEUTRALIZER = 1,
+    MARAUDER = 2,
+    PARAMEDIC = 3,
+    SURVIVOR = 4
 }
 export interface Quest {
     qid: string;
@@ -339,6 +342,7 @@ export interface RagfairInfo {
     offers: IRagfairOffer[];
 }
 export interface Bonus {
+    id?: string;
     type: string;
     templateId?: string;
     passive?: boolean;
@@ -346,6 +350,8 @@ export interface Bonus {
     visible?: boolean;
     value?: number;
     icon?: string;
+    filter?: string[];
+    skillType?: string;
 }
 export interface Note {
     Time: number;

@@ -1,16 +1,21 @@
+import { HideoutHelper } from "../helpers/HideoutHelper";
 import { IPmcData } from "../models/eft/common/IPmcData";
-import { HideoutSlot } from "../models/eft/common/tables/IBotBase";
+import { Bonus, HideoutSlot } from "../models/eft/common/tables/IBotBase";
 import { IPmcDataRepeatableQuest, IRepeatableQuest } from "../models/eft/common/tables/IRepeatableQuests";
+import { StageBonus } from "../models/eft/hideout/IHideoutArea";
 import { IAkiProfile } from "../models/eft/profile/IAkiProfile";
 import { HideoutAreas } from "../models/enums/HideoutAreas";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { Watermark } from "../utils/Watermark";
+import { LocalisationService } from "./LocalisationService";
 export declare class ProfileFixerService {
     protected logger: ILogger;
     protected watermark: Watermark;
+    protected hideoutHelper: HideoutHelper;
+    protected localisationService: LocalisationService;
     protected databaseServer: DatabaseServer;
-    constructor(logger: ILogger, watermark: Watermark, databaseServer: DatabaseServer);
+    constructor(logger: ILogger, watermark: Watermark, hideoutHelper: HideoutHelper, localisationService: LocalisationService, databaseServer: DatabaseServer);
     /**
      * Find issues in the pmc profile data that may cause issues and fix them
      * @param pmcProfile profile to check and fix
@@ -46,6 +51,11 @@ export declare class ProfileFixerService {
      */
     protected removeResourcesFromSlotsInHideoutWithoutLocationIndexValue(pmcProfile: IPmcData): void;
     /**
+     * Hideout slots need to be in a specific order, locationIndex in ascending order
+     * @param pmcProfile profile to edit
+     */
+    protected reorderHideoutAreasWithResouceInputs(pmcProfile: IPmcData): void;
+    /**
      * add in objects equal to the number of slots
      * @param areaType area to check
      * @param pmcProfile profile to update
@@ -58,4 +68,21 @@ export declare class ProfileFixerService {
      */
     protected updateProfilePocketsToNewId(pmcProfile: IPmcData): void;
     addMissingArmorRepairSkill(pmcProfile: IPmcData): void;
+    /**
+     * Iterate over players hideout areas and find what's build, look for missing bonuses those areas give and add them if missing
+     * @param pmcProfile Profile to update
+     */
+    addMissingHideoutBonusesToProfile(pmcProfile: IPmcData): void;
+    /**
+     *
+     * @param profileBonuses bonuses from profile
+     * @param bonus bonus to find
+     * @returns matching bonus
+     */
+    protected getBonusFromProfile(profileBonuses: Bonus[], bonus: StageBonus): Bonus;
+    /**
+     * Checks profile inventiory for items that do not exist inside the items db
+     * @param pmcProfile Profile to check inventory of
+     */
+    checkForOrphanedModdedItems(pmcProfile: IPmcData): void;
 }

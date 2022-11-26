@@ -1,7 +1,8 @@
+import { BotDifficultyHelper } from "../helpers/BotDifficultyHelper";
 import { BotHelper } from "../helpers/BotHelper";
 import { GameEventHelper } from "../helpers/GameEventHelper";
 import { ProfileHelper } from "../helpers/ProfileHelper";
-import { IGenerateBotsRequestData } from "../models/eft/bot/IGenerateBotsRequestData";
+import { WeightedRandomHelper } from "../helpers/WeightedRandomHelper";
 import { Health as PmcHealth, IBotBase, Skills } from "../models/eft/common/tables/IBotBase";
 import { Health, IBotType, Inventory } from "../models/eft/common/tables/IBotType";
 import { IBotConfig } from "../models/spt/config/IBotConfig";
@@ -28,11 +29,13 @@ export declare class BotGenerator {
     protected databaseServer: DatabaseServer;
     protected botInventoryGenerator: BotInventoryGenerator;
     protected botEquipmentFilterService: BotEquipmentFilterService;
+    protected weightedRandomHelper: WeightedRandomHelper;
     protected botHelper: BotHelper;
+    protected botDifficultyHelper: BotDifficultyHelper;
     protected gameEventHelper: GameEventHelper;
     protected configServer: ConfigServer;
     protected botConfig: IBotConfig;
-    constructor(logger: ILogger, hashUtil: HashUtil, randomUtil: RandomUtil, jsonUtil: JsonUtil, profileHelper: ProfileHelper, databaseServer: DatabaseServer, botInventoryGenerator: BotInventoryGenerator, botEquipmentFilterService: BotEquipmentFilterService, botHelper: BotHelper, gameEventHelper: GameEventHelper, configServer: ConfigServer);
+    constructor(logger: ILogger, hashUtil: HashUtil, randomUtil: RandomUtil, jsonUtil: JsonUtil, profileHelper: ProfileHelper, databaseServer: DatabaseServer, botInventoryGenerator: BotInventoryGenerator, botEquipmentFilterService: BotEquipmentFilterService, weightedRandomHelper: WeightedRandomHelper, botHelper: BotHelper, botDifficultyHelper: BotDifficultyHelper, gameEventHelper: GameEventHelper, configServer: ConfigServer);
     /**
      * Generate a player scav bot object
      * @param role e.g. assault / pmcbot
@@ -40,14 +43,20 @@ export declare class BotGenerator {
      * @param botTemplate base bot template to use  (e.g. assault/pmcbot)
      * @returns
      */
-    generatePlayerScav(role: string, difficulty: string, botTemplate: IBotType): IBotBase;
-    generate(sessionId: string, info: IGenerateBotsRequestData): IBotBase[];
+    generatePlayerScav(sessionId: string, role: string, difficulty: string, botTemplate: IBotType): IBotBase;
     /**
-     * Choose if a bot should become a PMC by checking if bot type is allowed to become a Pmc in botConfig.convertFromChances and doing a random int check
-     * @param botRole the bot role to check if should be a pmc
-     * @returns true if should be a pmc
+     * Generate an array of bot objects based on a condition for a raid with
+     * @param sessionId session id
+     * @param condition request condition
+     * @returns bot array
      */
-    protected shouldBotBePmc(botRole: string): boolean;
+    generateByCondition(sessionId: string, botCountToGenerate: number, difficulty: string, role: string, isPmc: boolean): IBotBase[];
+    /**
+     * Get the PMCs wildSpawnType value
+     * @param role "usec" / "bear"
+     * @returns wildSpawnType value as string
+     */
+    protected getPmcRoleByDescription(role: string): string;
     /**
      * Get a randomised PMC side based on bot config value 'isUsec'
      * @returns pmc side as string
@@ -58,12 +67,30 @@ export declare class BotGenerator {
      * @returns IBotBase object
      */
     protected getCloneOfBotBase(): IBotBase;
-    protected generateBot(bot: IBotBase, role: string, node: IBotType, isPmc: boolean, isPlayerScav?: boolean): IBotBase;
+    /**
+     * Create a IBotBase object with equipment/loot/exp etc
+     * @param sessionId Session id
+     * @param bot bots base file
+     * @param botRole Role bot will use (bear/usec for PMCs)
+     * @param node Bot template from db/bots/x.json
+     * @param isPmc Is bot to be a PMC
+     * @param isPlayerScav is bot to be a p scav bot
+     * @returns IBotBase object
+     */
+    protected generateBot(sessionId: string, bot: IBotBase, botRole: string, node: IBotType, isPmc: boolean, isPlayerScav?: boolean): IBotBase;
     /**
      * Log the number of PMCs generated to the debug console
+     * @param output Generated bot array, ready to send to client
      */
     protected logPmcGeneratedCount(output: IBotBase[]): void;
-    protected generateRandomLevel(min: number, max: number): BotGenerator.IRandomisedBotLevelResult;
+    /**
+     * Return a randomised bot level and exp value
+     * @param role botRole being generated for
+     * @param min Min exp value
+     * @param max Max exp value
+     * @returns IRandomisedBotLevelResult object
+     */
+    protected generateRandomLevel(role: string, min: number, max: number): BotGenerator.IRandomisedBotLevelResult;
     /**
      * Converts health object to the required format
      * @param healthObj health object from bot json
@@ -73,18 +100,22 @@ export declare class BotGenerator {
     protected generateHealth(healthObj: Health, playerScav?: boolean): PmcHealth;
     protected generateSkills(skillsObj: Skills): Skills;
     /**
-     * Convert from pmc side (usec/bear) to the side as defined in the bot config (usecType/bearType)
-     * @param pmcSide eft side (usec/bear)
-     * @returns pmc side as defined in config
-     */
-    protected getPmcRole(pmcSide: string): string;
-    /**
      * Iterate through bots inventory and loot to find and remove christmas items (as defined in GameEventHelper)
      * @param nodeInventory Bots inventory to iterate over
      */
     protected removeChristmasItemsFromBotInventory(nodeInventory: Inventory): void;
+    /**
+     * Generate a random Id for a bot and apply to bots _id and aid value
+     * @param bot bot to update
+     * @returns updated IBotBase object
+     */
     protected generateId(bot: IBotBase): IBotBase;
     protected generateInventoryID(profile: IBotBase): IBotBase;
+    /**
+     * Get the difficulty passed in, if its not "asoline", get selected difficulty from config
+     * @param requestedDifficulty
+     * @returns
+     */
     protected getPMCDifficulty(requestedDifficulty: string): string;
     /**
      * Add a side-specific (usec/bear) dogtag item to a bots inventory

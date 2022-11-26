@@ -22,8 +22,10 @@
     "test": "tsc --noEmit && npm run lint:all"
   },
   "devDependencies": {
+    "@types/i18n": "^0.13.5",
     "@types/node": "^14.15.3",
     "@types/winston": "^2.4.4",
+    "@types/ws": "^8.5.3",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "bestzip": "2.2.1",

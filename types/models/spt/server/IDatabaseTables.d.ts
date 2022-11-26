@@ -31,11 +31,11 @@ export interface IDatabaseTables {
         scavcase: IHideoutScavCase[];
         settings: IHideoutSettingsBase;
     };
-    locales?: ILocaleBase;
+    locales: ILocaleBase;
     locations?: ILocations;
     loot?: ILootBase;
     match?: IMatch;
-    templates?: {
+    templates: {
         character: string[];
         items: Record<string, ITemplateItem>;
         quests: Record<string, IQuest>;
@@ -49,7 +49,7 @@ export interface IDatabaseTables {
         /** Flea prices of items - gathered from online flea market dump */
         prices: Record<string, number>;
     };
-    traders?: Record<string, ITrader>;
+    traders: Record<string, ITrader>;
     globals?: IGlobals;
     server?: IServerBase;
     settings?: ISettingsBase;

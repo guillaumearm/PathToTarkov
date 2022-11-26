@@ -1,6 +1,6 @@
 export interface Item {
-    _id: string;
-    _tpl: string;
+    _id?: string;
+    _tpl?: string;
     parentId?: string;
     slotId?: string;
     location?: Location | number;

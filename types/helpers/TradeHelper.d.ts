@@ -7,20 +7,20 @@ import { IItemEventRouterResponse } from "../models/eft/itemEvent/IItemEventRout
 import { IProcessBuyTradeRequestData } from "../models/eft/trade/IProcessBuyTradeRequestData";
 import { IProcessSellTradeRequestData } from "../models/eft/trade/IProcessSellTradeRequestData";
 import { ILogger } from "../models/spt/utils/ILogger";
-import { ItemEventRouter } from "../routers/ItemEventRouter";
+import { EventOutputHolder } from "../routers/EventOutputHolder";
 import { RagfairServer } from "../servers/RagfairServer";
 import { FenceService } from "../services/FenceService";
 import { PaymentService } from "../services/PaymentService";
 export declare class TradeHelper {
     protected logger: ILogger;
-    protected itemEventRouter: ItemEventRouter;
+    protected eventOutputHolder: EventOutputHolder;
     protected traderHelper: TraderHelper;
     protected itemHelper: ItemHelper;
     protected paymentService: PaymentService;
     protected fenceService: FenceService;
     protected inventoryHelper: InventoryHelper;
     protected ragfairServer: RagfairServer;
-    constructor(logger: ILogger, itemEventRouter: ItemEventRouter, traderHelper: TraderHelper, itemHelper: ItemHelper, paymentService: PaymentService, fenceService: FenceService, inventoryHelper: InventoryHelper, ragfairServer: RagfairServer);
+    constructor(logger: ILogger, eventOutputHolder: EventOutputHolder, traderHelper: TraderHelper, itemHelper: ItemHelper, paymentService: PaymentService, fenceService: FenceService, inventoryHelper: InventoryHelper, ragfairServer: RagfairServer);
     /**
      * Buy item from flea or trader
      * @param pmcData
@@ -39,6 +39,12 @@ export declare class TradeHelper {
      * @returns
      */
     sellItem(pmcData: IPmcData, body: IProcessSellTradeRequestData, sessionID: string): IItemEventRouterResponse;
+    /**
+     * Increment the assorts buy count by number of items purchased
+     * Show error on screen if player attepts to buy more than what the buy max allows
+     * @param assortBeingPurchased assort being bought
+     * @param itemsPurchasedCount number of items being bought
+     */
     protected incrementAssortBuyCount(assortBeingPurchased: Item, itemsPurchasedCount: number): void;
     protected checkPurchaseIsWithinTraderItemLimit(assortBeingPurchased: Item, assortId: string, count: number): void;
 }

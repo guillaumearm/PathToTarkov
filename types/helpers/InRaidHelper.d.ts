@@ -5,6 +5,7 @@ import { ISaveProgressRequestData } from "../models/eft/inRaid/ISaveProgressRequ
 import { ILogger } from "../models/spt/utils/ILogger";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { SaveServer } from "../servers/SaveServer";
+import { ProfileFixerService } from "../services/ProfileFixerService";
 import { JsonUtil } from "../utils/JsonUtil";
 import { InventoryHelper } from "./InventoryHelper";
 import { PaymentHelper } from "./PaymentHelper";
@@ -15,19 +16,8 @@ export declare class InRaidHelper {
     protected databaseServer: DatabaseServer;
     protected inventoryHelper: InventoryHelper;
     protected paymentHelper: PaymentHelper;
-    constructor(logger: ILogger, saveServer: SaveServer, jsonUtil: JsonUtil, databaseServer: DatabaseServer, inventoryHelper: InventoryHelper, paymentHelper: PaymentHelper);
-    /**
-     * Reset the SPT inraid property stored in a profile to 'none'
-     * @param sessionID Session id
-     */
-    protected removePlayer(sessionID: string): void;
-    /**
-     * Some maps have one-time-use keys (e.g. Labs
-     * Remove the relevant key from an inventory based on the post-raid request data passed in
-     * @param offraidData post-raid data
-     * @param sessionID Session id
-     */
-    protected removeMapAccessKey(offraidData: ISaveProgressRequestData, sessionID: string): void;
+    protected profileFixerService: ProfileFixerService;
+    constructor(logger: ILogger, saveServer: SaveServer, jsonUtil: JsonUtil, databaseServer: DatabaseServer, inventoryHelper: InventoryHelper, paymentHelper: PaymentHelper, profileFixerService: ProfileFixerService);
     /**
      * Check an array of items and add an upd object to money items with a stack count of 1
      * Single stack money items have no upd object and thus no StackObjectsCount, causing issues
@@ -52,6 +42,18 @@ export declare class InRaidHelper {
      * @returns Reset profile object
      */
     updateProfileBaseStats(profileData: IPmcData, saveProgressRequest: ISaveProgressRequestData, sessionID: string): IPmcData;
+    /**
+     * Some maps have one-time-use keys (e.g. Labs
+     * Remove the relevant key from an inventory based on the post-raid request data passed in
+     * @param offraidData post-raid data
+     * @param sessionID Session id
+     */
+    protected removeMapAccessKey(offraidData: ISaveProgressRequestData, sessionID: string): void;
+    /**
+     * Set the SPT inraid location Profile property to 'none'
+     * @param sessionID Session id
+     */
+    protected setPlayerInRaidLocationStatusToNone(sessionID: string): void;
     /**
      * Adds SpawnedInSession property to items found in a raid
      * Removes SpawnedInSession for non-scav players if item was taken into raid with SpawnedInSession = true
@@ -93,5 +95,10 @@ export declare class InRaidHelper {
      * @returns true if item is kept after death
      */
     isItemKeptAfterDeath(slotId: string): boolean;
+    /**
+     * Return the equipped items from a players inventory
+     * @param items Players inventory to search through
+     * @returns an array of equipped items
+     */
     getPlayerGear(items: Item[]): Item[];
 }
