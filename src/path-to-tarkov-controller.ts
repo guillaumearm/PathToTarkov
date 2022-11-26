@@ -30,7 +30,6 @@ import { StashController } from "./stash-controller";
 import { TradersController } from "./traders-controller";
 
 class OffraidRegenController {
-  private regen_db: Effects["Regeneration"];
   private getRegenConfig: () => Config["offraid_regen_config"];
 
   private regen_hydration_enabled = true;
@@ -43,15 +42,6 @@ class OffraidRegenController {
   private bodyhealth_values: Partial<BodyHealth> = {};
 
   constructor(getConfig: ConfigGetter, private db: DatabaseServer) {
-    const regen = db.getTables().globals?.config.Health.Effects.Regeneration;
-
-    if (!regen) {
-      throw new Error(
-        "Fatal OffraidRegenController constructor: unable to get Regeneration health effects"
-      );
-    }
-
-    this.regen_db = regen;
     this.getRegenConfig = () => getConfig().offraid_regen_config;
   }
 
@@ -63,6 +53,19 @@ class OffraidRegenController {
     });
 
     return result as BodyHealth;
+  }
+
+  private get regen_db(): Effects["Regeneration"] {
+    const regen =
+      this.db.getTables().globals?.config.Health.Effects.Regeneration;
+
+    if (!regen) {
+      throw new Error(
+        "Fatal OffraidRegenController constructor: unable to get Regeneration health effects"
+      );
+    }
+
+    return regen;
   }
 
   // this will snapshot the current regen config
