@@ -1,3 +1,5 @@
+import type { DependencyContainer } from "tsyringe";
+
 import type { PreAkiModLoader } from "@spt-aki/loaders/PreAkiModLoader";
 import type { IPostAkiLoadMod } from "@spt-aki/models/external/IPostAkiLoadMod";
 import type { IPreAkiLoadMod } from "@spt-aki/models/external/IPreAkiLoadMod";
@@ -6,7 +8,7 @@ import type { ConfigServer } from "@spt-aki/servers/ConfigServer";
 import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import type { SaveServer } from "@spt-aki/servers/SaveServer";
 import type { StaticRouterModService } from "@spt-aki/services/mod/staticRouter/StaticRouterModService";
-import type { DependencyContainer } from "tsyringe";
+
 import { createPathToTarkovAPI } from "./api";
 import type { Config, SpawnConfig } from "./config";
 import { CONFIG_PATH, PACKAGE_JSON_PATH, SPAWN_CONFIG_PATH } from "./config";
@@ -46,7 +48,14 @@ class PathToTarkov implements IPreAkiLoadMod, IPostAkiLoadMod {
       this.debug("debug mode enabled");
     }
 
+    const db = container.resolve<DatabaseServer>("DatabaseServer");
+    const configServer = container.resolve<ConfigServer>("ConfigServer");
+    const modLoader = container.resolve<PreAkiModLoader>("PreAkiModLoader");
     const saveServer = container.resolve<SaveServer>("SaveServer");
+
+    const staticRouter = this.container.resolve<StaticRouterModService>(
+      "StaticRouterModService"
+    );
 
     if (!this.config.enabled) {
       this.logger.warning("=> Path To Tarkov is disabled!");
@@ -69,27 +78,6 @@ class PathToTarkov implements IPreAkiLoadMod, IPostAkiLoadMod {
       this.debug("option keep_found_in_raid_tweak enabled");
     }
 
-    this.logger.info(
-      `===> Loading ${getModDisplayName(this.packageJson, true)}`
-    );
-  }
-
-  public postAkiLoad(container: DependencyContainer): void {
-    this.container = container;
-
-    if (!this.config.enabled) {
-      return;
-    }
-
-    const db = container.resolve<DatabaseServer>("DatabaseServer");
-    const saveServer = container.resolve<SaveServer>("SaveServer");
-    const configServer = container.resolve<ConfigServer>("ConfigServer");
-    const modLoader = container.resolve<PreAkiModLoader>("PreAkiModLoader");
-
-    const staticRouter = this.container.resolve<StaticRouterModService>(
-      "StaticRouterModService"
-    );
-
     // TODO: compat with Custom Quests
     const getIsTraderLocked = () => false;
 
@@ -108,6 +96,21 @@ class PathToTarkov implements IPreAkiLoadMod, IPostAkiLoadMod {
 
     this.pathToTarkovController.hijackLuasCustomSpawnPointsUpdate();
 
+    const eventWatcher = new EventWatcher(this);
+    eventWatcher.listen(saveServer, createStaticRoutePeeker(staticRouter));
+
+    this.logger.info(
+      `===> Loading ${getModDisplayName(this.packageJson, true)}`
+    );
+  }
+
+  public postAkiLoad(container: DependencyContainer): void {
+    this.container = container;
+
+    if (!this.config.enabled) {
+      return;
+    }
+
     const [api, executeOnStartAPICallbacks] = createPathToTarkovAPI(
       this.pathToTarkovController
     );
@@ -122,9 +125,6 @@ class PathToTarkov implements IPreAkiLoadMod, IPostAkiLoadMod {
     if (this.config.traders_access_restriction) {
       this.pathToTarkovController.tradersController.initTraders();
     }
-
-    const eventWatcher = new EventWatcher(this);
-    eventWatcher.listen(saveServer, createStaticRoutePeeker(staticRouter));
 
     this.logger.success(
       `===> Successfully loaded ${getModDisplayName(this.packageJson, true)}`
