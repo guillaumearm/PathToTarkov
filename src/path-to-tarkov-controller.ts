@@ -201,7 +201,11 @@ export class PathToTarkovController {
       db
     );
 
-    this.entrypoints = getEntryPointsForMaps(db);
+    this.entrypoints = {};
+  }
+
+  generateEntrypoints(): void {
+    this.entrypoints = getEntryPointsForMaps(this.db);
   }
 
   init(sessionId: string): void {
@@ -379,7 +383,13 @@ export class PathToTarkovController {
       const location = locations?.[mapName as MapName];
 
       if (location) {
-        const entrypointsForMap = this.entrypoints[mapName];
+        const entrypointsForMap = this.entrypoints[mapName] ?? [];
+
+        if (entrypointsForMap.length === 0) {
+          this.logger.error(
+            `Path To Tarkov: no entrypoints found for map '${mapName}'!`
+          );
+        }
 
         if (this.config.vanilla_exfils_requirements) {
           // filter all exits and keep vanilla requirements (except for ScavCooperation requirements)

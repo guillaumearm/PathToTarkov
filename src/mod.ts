@@ -111,6 +111,8 @@ class PathToTarkov implements IPreAkiLoadMod, IPostAkiLoadMod {
       return;
     }
 
+    this.pathToTarkovController.generateEntrypoints();
+
     const [api, executeOnStartAPICallbacks] = createPathToTarkovAPI(
       this.pathToTarkovController
     );
