@@ -116,30 +116,21 @@ Accessible via the `Boat`:
 Available ewverywhere (with insurance enabled to avoid a client bug)
 
 #### Priscilu
-From the mod [Priscilu: the trader](https://hub.sp-tarkov.com/files/file/475-priscilu-the-trader/#overview) made by [Reis](https://hub.sp-tarkov.com/user/2833-reis/)
+From the mod [Priscilu: the trader](https://hub.sp-tarkov.com/files/file/546-priscilu-the-trader/#overview) made by [Reis](https://hub.sp-tarkov.com/user/2833-reis/)
 - Outskirts (Woods)
 
-#### Operator
-From the mod [Alex-AIO](https://hub.sp-tarkov.com/files/file/375-alex-aio/#overview) made by [Alex](https://hub.sp-tarkov.com/user/10993-alex/)
-- Scav lands (Reserve)
-
 #### GearGal
-From the mod [GearGal Equipment Shop](https://hub.sp-tarkov.com/files/file/473-geargal-equipment-shop/) made by [Fershte](https://hub.sp-tarkov.com/user/6561-fershte/)
+From the mod [GearGal Equipment Shop](https://hub.sp-tarkov.com/files/file/544-geargal-equipment-shop/) made by [Fershte](https://hub.sp-tarkov.com/user/6561-fershte/)
 - Crossroads (Customs)
 - Railway Exfil (Interchange)
 
 #### AR Shop
-From the mod [AR Shoppe Unlimited](https://hub.sp-tarkov.com/files/file/185-ar-shoppe-unlimited/) made by [Fershte](https://hub.sp-tarkov.com/user/6561-fershte/)
+From the mod [AR Shoppe Unlimited](https://hub.sp-tarkov.com/files/file/250-ar-shoppe-unlimited/) made by [Fershte](https://hub.sp-tarkov.com/user/6561-fershte/)
 - RUAF (Customs)
 - North UN Roadblock (Woods)
 
-#### Gunsmith
-From the mod [Gunsmith](https://hub.sp-tarkov.com/files/file/616-gunsmith/) made by [Alex](https://hub.sp-tarkov.com/user/10993-alex/)
-- Tunnel (Shoreline)
-- Lighthouse Tunnel (Lighthouse)
-
 #### Other traders
-- All traders froms [Andrudis-QuestManiac](https://hub.sp-tarkov.com/files/file/113-andrudis-questmaniac) made by [Andrudis](https://hub.sp-tarkov.com/user/3674-andrudis/)
+- All traders froms [Andrudis-QuestManiac](https://hub.sp-tarkov.com/files/file/158-andrudis-questmaniac) made by [Andrudis](https://hub.sp-tarkov.com/user/3674-andrudis/)
 
 ### All moves
 
