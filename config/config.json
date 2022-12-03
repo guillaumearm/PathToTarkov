@@ -510,12 +510,16 @@
       "Gate 3": "FactoryZB-1013",
       "Gate m": "FactoryZB-1012",
       "Cellars": "FactoryZB-1011",
+      "Camera Bunker Door": "FactoryZB-1011",
+      "Office Window": "WoodsFactoryGate",
       "Gate 0": "WoodsFactoryGate"
     },
     "factory4_night": {
       "Gate 3": "FactoryZB-1013",
       "Gate m": "FactoryZB-1012",
       "Cellars": "FactoryZB-1011",
+      "Camera Bunker Door": "FactoryZB-1011",
+      "Office Window": "WoodsFactoryGate",
       "Gate 0": "WoodsFactoryGate"
     },
     "bigmap": {
