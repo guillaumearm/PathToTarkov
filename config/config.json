@@ -523,8 +523,9 @@
       "Gate 0": "WoodsFactoryGate"
     },
     "bigmap": {
-      "Shack": "CustomsMilitaryBaseCP",
+      "Military Checkpoint": "CustomsMilitaryBaseCP",
       "Railroad To Military Base": "MilitaryBaseRail",
+      "Railroad To Port": "ShorelineCustoms",
       "EXFIL_ZB013": "FactoryZB-1013",
       "ZB-1012": "FactoryZB-1012",
       "ZB-1011": "FactoryZB-1011",
