@@ -113,7 +113,7 @@ Accessible via the `Boat`:
 - Pier Boat (Shoreline)
 
 #### Fence
-Available ewverywhere (with insurance enabled to avoid a client bug)
+Available everywhere (with insurance enabled to avoid a client bug)
 
 #### Priscilu
 From the mod [Priscilu: the trader](https://hub.sp-tarkov.com/files/file/546-priscilu-the-trader/#overview) made by [Reis](https://hub.sp-tarkov.com/user/2833-reis/)
