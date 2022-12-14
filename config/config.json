@@ -545,6 +545,9 @@
     },
     "rezervbase": {
       "EXFIL_ScavCooperation": "CustomsMilitaryBaseCP",
+      "Exit1": "WoodsReserveShoreline",
+      "Exit2": "WoodsReserveShoreline",
+      "Exit3": "WoodsReserveShoreline",
       "Exit4": "WoodsReserveShoreline",
       "Alpinist": "ShorelineNorthMoutains",
       "EXFIL_Bunker_D2": "SafeRoom"
