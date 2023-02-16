@@ -1,4 +1,6 @@
+import { ITraderBase } from "../models/eft/common/tables/ITrader";
 import { DialogueHelper } from "../helpers/DialogueHelper";
+import { HandbookHelper } from "../helpers/HandbookHelper";
 import { SecureContainerHelper } from "../helpers/SecureContainerHelper";
 import { TraderHelper } from "../helpers/TraderHelper";
 import { IPmcData } from "../models/eft/common/IPmcData";
@@ -12,6 +14,7 @@ import { DatabaseServer } from "../servers/DatabaseServer";
 import { SaveServer } from "../servers/SaveServer";
 import { RandomUtil } from "../utils/RandomUtil";
 import { TimeUtil } from "../utils/TimeUtil";
+import { LocalisationService } from "./LocalisationService";
 export declare class InsuranceService {
     protected logger: ILogger;
     protected databaseServer: DatabaseServer;
@@ -21,14 +24,16 @@ export declare class InsuranceService {
     protected saveServer: SaveServer;
     protected traderHelper: TraderHelper;
     protected dialogueHelper: DialogueHelper;
+    protected handbookHelper: HandbookHelper;
+    protected localisationService: LocalisationService;
     protected configServer: ConfigServer;
     protected insured: Record<string, Record<string, Item[]>>;
     protected insuranceConfig: IInsuranceConfig;
-    constructor(logger: ILogger, databaseServer: DatabaseServer, secureContainerHelper: SecureContainerHelper, randomUtil: RandomUtil, timeUtil: TimeUtil, saveServer: SaveServer, traderHelper: TraderHelper, dialogueHelper: DialogueHelper, configServer: ConfigServer);
+    constructor(logger: ILogger, databaseServer: DatabaseServer, secureContainerHelper: SecureContainerHelper, randomUtil: RandomUtil, timeUtil: TimeUtil, saveServer: SaveServer, traderHelper: TraderHelper, dialogueHelper: DialogueHelper, handbookHelper: HandbookHelper, localisationService: LocalisationService, configServer: ConfigServer);
     insuranceExists(sessionId: string): boolean;
     insuranceTraderArrayExists(sessionId: string, traderId: string): boolean;
     getInsurance(sessionId: string): Record<string, Item[]>;
-    getInsuranceItems(sessionId: string, traderId: string): any[];
+    getInsuranceItems(sessionId: string, traderId: string): Item[];
     resetInsurance(sessionId: string): void;
     resetInsuranceTraderArray(sessionId: string, traderId: string): void;
     addInsuranceItemToArray(sessionId: string, traderId: string, itemToAdd: any): void;
@@ -45,6 +50,13 @@ export declare class InsuranceService {
      * @param mapId Id of the map player died/exited that caused the insurance to be issued on
      */
     sendInsuredItems(pmcData: IPmcData, sessionID: string, mapId: string): void;
+    /**
+     * Get a timestamp of what insurance items should be sent to player based on the type of trader used to insure
+     * @param pmcData Player profile
+     * @param trader Trader used to insure items
+     * @returns Timestamp to return items to player in seconds
+     */
+    protected getInsuranceReturnTimestamp(pmcData: IPmcData, trader: ITraderBase): number;
     /**
      * Store lost gear post-raid inside profile
      * @param pmcData player profile to store gear in

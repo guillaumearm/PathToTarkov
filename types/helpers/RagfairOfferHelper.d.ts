@@ -46,8 +46,14 @@ export declare class RagfairOfferHelper {
     protected ragfairConfig: IRagfairConfig;
     protected questConfig: IQuestConfig;
     constructor(logger: ILogger, timeUtil: TimeUtil, hashUtil: HashUtil, eventOutputHolder: EventOutputHolder, databaseServer: DatabaseServer, traderHelper: TraderHelper, saveServer: SaveServer, dialogueHelper: DialogueHelper, itemHelper: ItemHelper, paymentHelper: PaymentHelper, presetHelper: PresetHelper, profileHelper: ProfileHelper, ragfairServerHelper: RagfairServerHelper, ragfairSortHelper: RagfairSortHelper, ragfairHelper: RagfairHelper, ragfairOfferService: RagfairOfferService, localeService: LocaleService, configServer: ConfigServer);
-    getValidOffers(info: ISearchRequestData, itemsToAdd: string[], assorts: Record<string, ITraderAssort>, pmcProfile: IPmcData): IRagfairOffer[];
+    getValidOffers(searchRequest: ISearchRequestData, itemsToAdd: string[], traderAssorts: Record<string, ITraderAssort>, pmcProfile: IPmcData): IRagfairOffer[];
     getOffersForBuild(info: ISearchRequestData, itemsToAdd: string[], assorts: Record<string, ITraderAssort>, pmcProfile: IPmcData): IRagfairOffer[];
+    /**
+     * Has a traders offer ran out of stock to sell to player
+     * @param offer Offer to check stock of
+     * @returns true if out of stock
+     */
+    protected traderOutOfStock(offer: IRagfairOffer): boolean;
     /**
      * Check if trader offers' BuyRestrictionMax value has been reached
      * @param offer offer to check restriction properties of
@@ -64,5 +70,5 @@ export declare class RagfairOfferHelper {
     protected getProfileOffers(sessionID: string): IRagfairOffer[];
     protected deleteOfferByOfferId(sessionID: string, offerId: string): void;
     protected completeOffer(sessionID: string, offer: IRagfairOffer, boughtAmount: number): IItemEventRouterResponse;
-    isDisplayableOffer(info: ISearchRequestData, itemsToAdd: string[], assorts: Record<string, ITraderAssort>, offer: IRagfairOffer, pmcProfile: IPmcData): boolean;
+    isDisplayableOffer(info: ISearchRequestData, itemsToAdd: string[], traderAssorts: Record<string, ITraderAssort>, offer: IRagfairOffer, pmcProfile: IPmcData): boolean;
 }

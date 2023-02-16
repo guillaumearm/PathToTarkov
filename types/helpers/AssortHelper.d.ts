@@ -2,28 +2,31 @@ import { IPmcData } from "../models/eft/common/IPmcData";
 import { ITraderAssort } from "../models/eft/common/tables/ITrader";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { DatabaseServer } from "../servers/DatabaseServer";
+import { LocalisationService } from "../services/LocalisationService";
 import { ItemHelper } from "./ItemHelper";
 import { QuestHelper } from "./QuestHelper";
 export declare class AssortHelper {
     protected logger: ILogger;
     protected itemHelper: ItemHelper;
     protected databaseServer: DatabaseServer;
+    protected localisationService: LocalisationService;
     protected questHelper: QuestHelper;
-    constructor(logger: ILogger, itemHelper: ItemHelper, databaseServer: DatabaseServer, questHelper: QuestHelper);
+    constructor(logger: ILogger, itemHelper: ItemHelper, databaseServer: DatabaseServer, localisationService: LocalisationService, questHelper: QuestHelper);
     /**
      * Remove assorts from a trader that have not been unlocked yet
      * @param pmcProfile player profile
      * @param traderId traders id
      * @param assort assort items from a trader
+     * @param mergedQuestAssorts An object of quest assort to quest id unlocks for all traders
      * @returns assort items minus locked quest assorts
      */
-    stripLockedQuestAssort(pmcProfile: IPmcData, traderId: string, assort: ITraderAssort, flea?: boolean): ITraderAssort;
+    stripLockedQuestAssort(pmcProfile: IPmcData, traderId: string, assort: ITraderAssort, mergedQuestAssorts: Record<string, Record<string, string>>, flea?: boolean): ITraderAssort;
     /**
      * Remove assorts from a trader that have not been unlocked yet
      * @param pmcProfile player profile
      * @param traderId traders id
      * @param assort traders assorts
-     * @returns traders assorts minus locked loyality assorts
+     * @returns traders assorts minus locked loyalty assorts
      */
     stripLockedLoyaltyAssort(pmcProfile: IPmcData, traderId: string, assort: ITraderAssort): ITraderAssort;
     /**

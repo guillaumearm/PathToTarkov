@@ -1,8 +1,8 @@
 import { OnLoad } from "../../../di/OnLoad";
-export declare class OnLoadMod extends OnLoad {
+export declare class OnLoadMod implements OnLoad {
     private onLoadOverride;
     private getRouteOverride;
     constructor(onLoadOverride: () => void, getRouteOverride: () => string);
-    onLoad(): void;
+    onLoad(): Promise<void>;
     getRoute(): string;
 }

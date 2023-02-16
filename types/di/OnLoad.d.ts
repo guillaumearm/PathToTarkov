@@ -1,4 +1,4 @@
-export declare class OnLoad {
-    onLoad(): void;
+export interface OnLoad {
+    onLoad(): Promise<void>;
     getRoute(): string;
 }

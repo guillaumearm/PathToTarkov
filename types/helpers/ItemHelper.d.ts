@@ -5,12 +5,15 @@ import { IStaticAmmoDetails } from "../models/eft/common/tables/ILootBase";
 import { ITemplateItem } from "../models/eft/common/tables/ITemplateItem";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { DatabaseServer } from "../servers/DatabaseServer";
+import { ItemBaseClassService } from "../services/ItemBaseClassService";
 import { LocaleService } from "../services/LocaleService";
+import { LocalisationService } from "../services/LocalisationService";
 import { HashUtil } from "../utils/HashUtil";
 import { JsonUtil } from "../utils/JsonUtil";
 import { MathUtil } from "../utils/MathUtil";
 import { ObjectId } from "../utils/ObjectId";
 import { RandomUtil } from "../utils/RandomUtil";
+import { HandbookHelper } from "./HandbookHelper";
 declare class ItemHelper {
     protected logger: ILogger;
     protected hashUtil: HashUtil;
@@ -19,22 +22,32 @@ declare class ItemHelper {
     protected objectId: ObjectId;
     protected mathUtil: MathUtil;
     protected databaseServer: DatabaseServer;
+    protected handbookHelper: HandbookHelper;
+    protected itemBaseClassService: ItemBaseClassService;
+    protected localisationService: LocalisationService;
     protected localeService: LocaleService;
-    constructor(logger: ILogger, hashUtil: HashUtil, jsonUtil: JsonUtil, randomUtil: RandomUtil, objectId: ObjectId, mathUtil: MathUtil, databaseServer: DatabaseServer, localeService: LocaleService);
+    constructor(logger: ILogger, hashUtil: HashUtil, jsonUtil: JsonUtil, randomUtil: RandomUtil, objectId: ObjectId, mathUtil: MathUtil, databaseServer: DatabaseServer, handbookHelper: HandbookHelper, itemBaseClassService: ItemBaseClassService, localisationService: LocalisationService, localeService: LocaleService);
     /**
      * Checks if an id is a valid item. Valid meaning that it's an item that be stored in stash
      * @param       {string}    tpl       the template id / tpl
-     * @returns                             boolean; true for items that may be in player posession and not quest items
+     * @returns                             boolean; true for items that may be in player possession and not quest items
      */
     isValidItem(tpl: string, invalidBaseTypes?: string[]): boolean;
     /**
      * Check if the tpl / template Id provided is a descendent of the baseclass
      *
      * @param   {string}    tpl             the item template id to check
-     * @param   {string}    baseclassTpl    the baseclass to check for
+     * @param   {string}    baseClassTpl    the baseclass to check for
      * @return  {boolean}                   is the tpl a descendent?
      */
-    isOfBaseclass(tpl: string, baseclassTpl: string): boolean;
+    isOfBaseclass(tpl: string, baseClassTpl: string): boolean;
+    /**
+     * Check if item has any of the supplied base classes
+     * @param tpl Item to check base classes of
+     * @param baseClassTpls base classes to check for
+     * @returns true if any supplied base classes match
+     */
+    isOfBaseclasses(tpl: string, baseClassTpls: string[]): boolean;
     /**
      * Returns the item price based on the handbook or as a fallback from the prices.json if the item is not
      * found in the handbook. If the price can't be found at all return 0
@@ -152,7 +165,7 @@ declare class ItemHelper {
      */
     getChildId(item: Item): string;
     /**
-     * Can the pased in item be stacked
+     * Can the passed in item be stacked
      * @param tpl item to check
      * @returns true if it can be stacked
      */
@@ -179,7 +192,7 @@ declare class ItemHelper {
      */
     replaceIDs(pmcData: IPmcData, items: Item[], insuredItems?: InsuredItem[], fastPanel?: any): any[];
     /**
-     * Recursivly loop down through an items hierarchy to see if any of the ids match the supplied list, return true if any do
+     * WARNING, SLOW. Recursively loop down through an items hierarchy to see if any of the ids match the supplied list, return true if any do
      * @param {string} tpl
      * @param {Array} tplsToCheck
      * @returns boolean
@@ -207,7 +220,15 @@ declare class ItemHelper {
     createRandomMagCartridges(magTemplate: ITemplateItem, parentId: string, staticAmmoDist: Record<string, IStaticAmmoDetails[]>, caliber?: string): Item;
     protected getRandomValidCaliber(magTemplate: ITemplateItem): string;
     protected drawAmmoTpl(caliber: string, staticAmmoDist: Record<string, IStaticAmmoDetails[]>): string;
-    createCartidges(parentId: string, ammoTpl: string, stackCount: number): Item;
+    /**
+     *
+     * @param parentId container cartridges will be placed in
+     * @param ammoTpl Cartridge to insert
+     * @param stackCount Count of cartridges inside parent
+     * @param location Location inside parent (e.g. 0, 1)
+     * @returns Item
+     */
+    createCartridges(parentId: string, ammoTpl: string, stackCount: number, location: number): Item;
     /**
      * Get the size of a stack, return 1 if no stack object count property found
      * @param item Item to get stack size of

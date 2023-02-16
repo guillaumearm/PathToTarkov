@@ -5,6 +5,7 @@ import { ISaveProgressRequestData } from "../models/eft/inRaid/ISaveProgressRequ
 import { ILogger } from "../models/spt/utils/ILogger";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { SaveServer } from "../servers/SaveServer";
+import { LocalisationService } from "../services/LocalisationService";
 import { ProfileFixerService } from "../services/ProfileFixerService";
 import { JsonUtil } from "../utils/JsonUtil";
 import { InventoryHelper } from "./InventoryHelper";
@@ -16,8 +17,9 @@ export declare class InRaidHelper {
     protected databaseServer: DatabaseServer;
     protected inventoryHelper: InventoryHelper;
     protected paymentHelper: PaymentHelper;
+    protected localisationService: LocalisationService;
     protected profileFixerService: ProfileFixerService;
-    constructor(logger: ILogger, saveServer: SaveServer, jsonUtil: JsonUtil, databaseServer: DatabaseServer, inventoryHelper: InventoryHelper, paymentHelper: PaymentHelper, profileFixerService: ProfileFixerService);
+    constructor(logger: ILogger, saveServer: SaveServer, jsonUtil: JsonUtil, databaseServer: DatabaseServer, inventoryHelper: InventoryHelper, paymentHelper: PaymentHelper, localisationService: LocalisationService, profileFixerService: ProfileFixerService);
     /**
      * Check an array of items and add an upd object to money items with a stack count of 1
      * Single stack money items have no upd object and thus no StackObjectsCount, causing issues
@@ -38,10 +40,16 @@ export declare class InRaidHelper {
      * Remove Labs keycard
      * @param profileData Profile to update
      * @param saveProgressRequest post raid save data request data
-     * @param sessionID Sessino id
+     * @param sessionID Session id
      * @returns Reset profile object
      */
     updateProfileBaseStats(profileData: IPmcData, saveProgressRequest: ISaveProgressRequestData, sessionID: string): IPmcData;
+    /**
+     * Take body part effects from client profile and apply to server profile
+     * @param saveProgressRequest post-raid request
+     * @param profileData player profile on server
+     */
+    protected transferPostRaidLimbEffectsToProfile(saveProgressRequest: ISaveProgressRequestData, profileData: IPmcData): void;
     /**
      * Some maps have one-time-use keys (e.g. Labs
      * Remove the relevant key from an inventory based on the post-raid request data passed in
@@ -58,7 +66,7 @@ export declare class InRaidHelper {
      * Adds SpawnedInSession property to items found in a raid
      * Removes SpawnedInSession for non-scav players if item was taken into raid with SpawnedInSession = true
      * @param preRaidProfile profile to update
-     * @param postRaidProfile profile to upate inventory contents of
+     * @param postRaidProfile profile to update inventory contents of
      * @param isPlayerScav Was this a p scav raid
      * @returns
      */

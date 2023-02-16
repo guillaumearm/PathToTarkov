@@ -9,6 +9,7 @@ export interface ITrader {
 export interface ITraderBase {
     refreshTraderRagfairOffers: boolean;
     _id: string;
+    availableInRaid: boolean;
     avatar: string;
     balance_dol: number;
     balance_eur: number;
@@ -20,6 +21,8 @@ export interface ITraderBase {
     discount_end: number;
     gridHeight: number;
     insurance: Insurance;
+    items_buy: IItemBuyData;
+    items_buy_prohibited: IItemBuyData;
     location: string;
     loyaltyLevels: LoyaltyLevel[];
     medic: boolean;
@@ -30,6 +33,10 @@ export interface ITraderBase {
     sell_category: string[];
     surname: string;
     unlockedByDefault: boolean;
+}
+export interface IItemBuyData {
+    category: string[];
+    id_list: string[];
 }
 export interface Insurance {
     availability: boolean;
@@ -54,8 +61,9 @@ export interface Repair {
     currency: string;
     currency_coefficient: number;
     excluded_category: string[];
+    /** Doesn't exist in client object */
     excluded_id_list: any[];
-    quality: string;
+    quality: number;
 }
 export interface ITraderAssort {
     nextResupply: number;

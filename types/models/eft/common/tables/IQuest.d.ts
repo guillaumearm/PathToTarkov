@@ -2,7 +2,7 @@ import { QuestRewardType } from "../../../enums/QuestRewardType";
 import { QuestStatus } from "../../../enums/QuestStatus";
 import { Item } from "./IItem";
 export interface IQuest {
-    QuestName: string;
+    QuestName?: string;
     _id: string;
     canShowNotificationsInGame: boolean;
     conditions: Conditions;
@@ -15,6 +15,7 @@ export interface IQuest {
     image: string;
     type: string;
     isKey: boolean;
+    questStatus: any;
     restartable: boolean;
     instantComplete: boolean;
     secretQuest: boolean;
@@ -22,33 +23,36 @@ export interface IQuest {
     successMessageText: string;
     templateId: string;
     rewards: Rewards;
-    status?: string;
-    KeyQuest?: boolean;
-    changeQuestMessageText?: string;
-    side?: string;
+    status: string | number;
+    KeyQuest: boolean;
+    changeQuestMessageText: string;
+    side: string;
 }
 export interface Conditions {
-    Started?: AvailableForConditions[];
+    Started: AvailableForConditions[];
     AvailableForFinish: AvailableForConditions[];
     AvailableForStart: AvailableForConditions[];
-    Success?: AvailableForConditions[];
+    Success: AvailableForConditions[];
     Fail: AvailableForConditions[];
 }
 export interface AvailableForConditions {
     _parent: string;
     _props: AvailableForProps;
-    dynamicLocale: boolean;
+    dynamicLocale?: boolean;
 }
 export interface AvailableForProps {
     id: string;
     index: number;
     parentId: string;
+    isEncoded: boolean;
     dynamicLocale: boolean;
-    value?: string | number;
+    value?: number;
     compareMethod?: string;
     visibilityConditions?: VisibilityCondition[];
     target?: string | string[];
     status?: QuestStatus[];
+    availableAfter?: number;
+    dispersion?: number;
     onlyFoundInRaid?: boolean;
     oneSessionOnly?: boolean;
     doNotResetIfCounterCompleted?: boolean;
@@ -58,7 +62,7 @@ export interface AvailableForProps {
     counter?: AvailableForCounter;
     plantTime?: number;
     zoneId?: string;
-    type?: string;
+    type?: boolean;
     countInRaid?: boolean;
 }
 export interface AvailableForCounter {
@@ -73,7 +77,7 @@ export interface CounterProps {
     id: string;
     target: string[] | string;
     compareMethod?: string;
-    value?: number | string;
+    value?: string;
     weapon?: string[];
     equipmentInclusive?: string[][];
     weaponModsInclusive?: string[][];
@@ -86,23 +90,19 @@ export interface DaytimeCounter {
     to: number;
 }
 export interface VisibilityCondition {
-    _parent: string;
-    _props: {
-        id: string;
-        value?: number;
-        target: string
-        dynamicLocale?: boolean;
-        oneSessionOnly?: boolean;
-    }
+    id: string;
+    value: number;
+    dynamicLocale: boolean;
+    oneSessionOnly: boolean;
 }
 export interface Rewards {
-    AvailableForStart?: Reward[];
-    AvailableForFinish?: Reward[];
+    AvailableForStart: Reward[];
+    AvailableForFinish: Reward[];
     Started: Reward[];
     Success: Reward[];
     Fail: Reward[];
-    FailRestartable?: Reward[];
-    Expired?: Reward[];
+    FailRestartable: Reward[];
+    Expired: Reward[];
 }
 export interface Reward extends Item {
     value?: string | number;

@@ -8,6 +8,7 @@ import { ConfigServer } from "../servers/ConfigServer";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { SaveServer } from "../servers/SaveServer";
 import { FenceService } from "../services/FenceService";
+import { LocalisationService } from "../services/LocalisationService";
 import { PlayerService } from "../services/PlayerService";
 import { TimeUtil } from "../utils/TimeUtil";
 import { HandbookHelper } from "./HandbookHelper";
@@ -23,11 +24,14 @@ export declare class TraderHelper {
     protected itemHelper: ItemHelper;
     protected handbookHelper: HandbookHelper;
     protected playerService: PlayerService;
+    protected localisationService: LocalisationService;
     protected fenceService: FenceService;
     protected timeUtil: TimeUtil;
     protected configServer: ConfigServer;
     protected traderConfig: ITraderConfig;
-    constructor(logger: ILogger, databaseServer: DatabaseServer, saveServer: SaveServer, profileHelper: ProfileHelper, paymentHelper: PaymentHelper, itemHelper: ItemHelper, handbookHelper: HandbookHelper, playerService: PlayerService, fenceService: FenceService, timeUtil: TimeUtil, configServer: ConfigServer);
+    /** Dictionary of item tpl and the highest trader rouble price */
+    protected highestTraderPriceItems: Record<string, number>;
+    constructor(logger: ILogger, databaseServer: DatabaseServer, saveServer: SaveServer, profileHelper: ProfileHelper, paymentHelper: PaymentHelper, itemHelper: ItemHelper, handbookHelper: HandbookHelper, playerService: PlayerService, localisationService: LocalisationService, fenceService: FenceService, timeUtil: TimeUtil, configServer: ConfigServer);
     getTrader(traderID: string, sessionID: string): ITraderBase;
     getTraderAssortsById(traderId: string): ITraderAssort;
     /**
@@ -39,11 +43,11 @@ export declare class TraderHelper {
     resetTrader(sessionID: string, traderID: string): void;
     /**
      * Alter a traders unlocked status
-     * @param traderID Trader to alter
+     * @param traderId Trader to alter
      * @param status New status to use
-     * @param sessionID Session id
+     * @param sessionId Session id
      */
-    setTraderUnlockedState(traderID: string, status: boolean, sessionID: string): void;
+    setTraderUnlockedState(traderId: string, status: boolean, sessionId: string): void;
     /**
      * Get a list of items and their prices from player inventory that can be sold to a trader
      * @param traderID trader id being traded with
@@ -53,22 +57,29 @@ export declare class TraderHelper {
     getPurchasesData(traderID: string, sessionID: string): Record<string, IBarterScheme[][]>;
     /**
      * Should item be skipped when selling to trader according to its sell categories and other checks
-     * @param pmcData
-     * @param item
-     * @param sellCategory
+     * @param pmcData Profile
+     * @param item Item to be checked is sellable to trader
+     * @param sellCategory categories trader will buy
+     * @param traderId Trader item is being checked can be sold to
      * @returns true if should NOT be sold to trader
      */
-    protected isItemUnSellableToTrader(pmcData: IPmcData, item: Item, sellCategory: string[]): boolean;
+    protected isItemUnSellableToTrader(pmcData: IPmcData, item: Item, sellCategory: string[], traderId: string): boolean;
     /**
-     * Can this weapon be sold to a trader with its current durabiltiy level
-     * @param traderID
-     * @param item
-     * @returns boolean
+     * Check if item has durability so low it precludes it from being sold to the trader (inclusive)
+     * @param item Item to check durability of
+     * @param traderId Trader item is sold to
+     * @returns
      */
-    protected isWeaponBelowTraderBuyDurability(traderID: string, item: Item): boolean;
+    protected itemIsBelowSellableDurabilityThreshhold(item: Item, traderId: string): boolean;
     /**
-     * Get the price of an item and all of its attached children
-     * Take into account bonuses/adjsutments e.g. discounts
+     * Get the percentage threshold value a trader will buy armor/weapons above
+     * @param traderId Trader to look up
+     * @returns percentage
+     */
+    protected getTraderDurabiltyPurchaseThreshold(traderId: string): number;
+    /**
+     * Get the price of passed in item and all of its attached children (mods)
+     * Take into account bonuses/adjustments e.g. discounts
      * @param pmcData profile data
      * @param item item to calculate price of
      * @param buyPriceCoefficient
@@ -85,14 +96,21 @@ export declare class TraderHelper {
      * @returns price as number
      */
     protected getRawItemPrice(pmcData: IPmcData, item: Item): number;
-    protected getTraderDiscount(trader: ITraderBase, buyPriceCoefficient: number, fenceInfo: FenceLevel, traderID: string): number;
+    /**
+     * Get discount modifier for desired trader
+     * @param trader Trader to get discount for
+     * @param buyPriceCoefficient
+     * @param fenceInfo fence info, needed if getting fence modifier value
+     * @returns discount modifier value
+     */
+    protected getTraderDiscount(trader: ITraderBase, buyPriceCoefficient: number, fenceInfo: FenceLevel): number;
     /**
      * Add standing to a trader and level them up if exp goes over level threshold
-     * @param sessionID Session id
-     * @param traderId traders id
+     * @param sessionId Session id
+     * @param traderId Traders id
      * @param standingToAdd Standing value to add to trader
      */
-    addStandingToTrader(sessionID: string, traderId: string, standingToAdd: number): void;
+    addStandingToTrader(sessionId: string, traderId: string, standingToAdd: number): void;
     /**
      * Calculate traders level based on exp amount and increments level if over threshold
      * @param traderID trader to process
@@ -113,10 +131,28 @@ export declare class TraderHelper {
     getTraderUpdateSeconds(traderId: string): number;
     /**
     * check if an item is allowed to be sold to a trader
-    * @param traderFilters array of allowed categories
+    * @param categoriesTraderBuys array of allowed categories
     * @param tplToCheck itemTpl of inventory
-    * @returns boolean
+    * @returns boolean if item can be sold to trader
     */
-    traderFilter(traderFilters: string[], tplToCheck: string): boolean;
+    doesTraderBuyItem(categoriesTraderBuys: string[], tplToCheck: string): boolean;
     getLoyaltyLevel(traderID: string, pmcData: IPmcData): LoyaltyLevel;
+    /**
+     * Store the purchase of an assort from a trader in the player profile
+     * @param sessionID Session id
+     * @param newPurchaseDetails New item assort id + count
+     */
+    addTraderPurchasesToPlayerProfile(sessionID: string, newPurchaseDetails: {
+        items: {
+            item_id: string;
+            count: number;
+        }[];
+        tid: string;
+    }): void;
+    /**
+     * Get the highest rouble price for an item from traders
+     * @param tpl Item to look up highest pride for
+     * @returns highest rouble cost for item
+     */
+    getHighestTraderPriceRouble(tpl: string): number;
 }

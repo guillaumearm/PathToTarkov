@@ -6,6 +6,7 @@ export declare class JsonUtil {
     protected hashUtil: HashUtil;
     protected logger: ILogger;
     protected fileHashes: any;
+    protected jsonCacheExists: boolean;
     constructor(vfs: VFS, hashUtil: HashUtil, logger: ILogger);
     /**
      * From object to string
@@ -13,13 +14,14 @@ export declare class JsonUtil {
      * @param prettify Should output be prettified?
      * @returns string
      */
-    serialize(data: any, prettify?: boolean): string;
+    serialize<T>(data: T, prettify?: boolean): string;
     /**
      * From string to object
      * @param jsonString json string to turn into object
      * @returns object
      */
-    deserialize(jsonString: string): any;
-    deserializeWithCacheCheck(jsonString: string, filePath: string): string;
+    deserialize<T>(jsonString: string, filename?: string): T;
+    deserializeWithCacheCheckAsync<T>(jsonString: string, filePath: string): Promise<T>;
+    deserializeWithCacheCheck<T>(jsonString: string, filePath: string): T;
     clone<T>(data: T): T;
 }

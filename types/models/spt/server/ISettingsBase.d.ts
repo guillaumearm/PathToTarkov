@@ -10,7 +10,9 @@ export interface Config {
     FirstCycleDelaySeconds: number;
     FramerateLimit: FramerateLimit;
     GroupStatusInterval: number;
+    GroupStatusButtonInterval: number;
     KeepAliveInterval: number;
+    LobbyKeepAliveInterval: number;
     Mark502and504AsNonImportant: boolean;
     MemoryManagementSettings: MemoryManagementSettings;
     NVidiaHighlights: boolean;
@@ -18,7 +20,10 @@ export interface Config {
     PingServerResultSendInterval: number;
     PingServersInterval: number;
     ReleaseProfiler: ReleaseProfiler;
+    RequestConfirmationTimeouts: number[];
+    RequestsMadeThroughLobby: string[];
     SecondCycleDelaySeconds: number;
+    ShouldEstablishLobbyConnection: boolean;
     TurnOffLogging: boolean;
     WeaponOverlapDistanceCulling: number;
     WebDiagnosticsEnabled: boolean;

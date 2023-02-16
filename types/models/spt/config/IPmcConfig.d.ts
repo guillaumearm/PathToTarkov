@@ -11,12 +11,12 @@ export interface IPmcConfig {
     chanceSameSideIsHostilePercent: number;
     /** key: location, value: type for usec/bear */
     pmcType: Record<string, Record<string, Record<string, number>>>;
-    types?: Record<string, number>;
     maxBackpackLootTotalRub: number;
     maxPocketLootTotalRub: number;
     maxVestLootTotalRub: number;
     convertIntoPmcChance: Record<string, MinMax>;
     enemyTypes: string[];
+    botRelativeLevelDeltaMax: number;
 }
 export interface PmcTypes {
     usec: string;

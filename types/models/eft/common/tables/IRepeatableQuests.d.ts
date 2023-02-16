@@ -25,7 +25,7 @@ export interface IPmcDataRepeatableQuest {
     endTime: number;
     changeRequirement: TChangeRequirementRecord;
 }
-export declare type TChangeRequirementRecord = Record<string, IChangeRequirement>;
+export type TChangeRequirementRecord = Record<string, IChangeRequirement>;
 export interface IChangeRequirement {
     changeCost: IChangeCost[];
     changeStandingCost: number;
@@ -47,6 +47,7 @@ export interface IRepeatableQuest {
     canShowNotificationsInGame: boolean;
     rewards: IRewards;
     conditions: IConditions;
+    side: string;
     name: string;
     note: string;
     description: string;

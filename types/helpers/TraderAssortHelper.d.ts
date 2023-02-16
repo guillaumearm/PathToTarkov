@@ -7,7 +7,9 @@ import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { FenceService } from "../services/FenceService";
+import { LocalisationService } from "../services/LocalisationService";
 import { TraderAssortService } from "../services/TraderAssortService";
+import { TraderPurchasePersisterService } from "../services/TraderPurchasePersisterService";
 import { JsonUtil } from "../utils/JsonUtil";
 import { MathUtil } from "../utils/MathUtil";
 import { TimeUtil } from "../utils/TimeUtil";
@@ -27,11 +29,15 @@ export declare class TraderAssortHelper {
     protected ragfairAssortGenerator: RagfairAssortGenerator;
     protected ragfairOfferGenerator: RagfairOfferGenerator;
     protected traderAssortService: TraderAssortService;
+    protected localisationService: LocalisationService;
+    protected traderPurchasePersisterService: TraderPurchasePersisterService;
     protected traderHelper: TraderHelper;
     protected fenceService: FenceService;
     protected configServer: ConfigServer;
     protected traderConfig: ITraderConfig;
-    constructor(logger: ILogger, jsonUtil: JsonUtil, mathUtil: MathUtil, timeUtil: TimeUtil, databaseServer: DatabaseServer, profileHelper: ProfileHelper, assortHelper: AssortHelper, paymentHelper: PaymentHelper, ragfairAssortGenerator: RagfairAssortGenerator, ragfairOfferGenerator: RagfairOfferGenerator, traderAssortService: TraderAssortService, traderHelper: TraderHelper, fenceService: FenceService, configServer: ConfigServer);
+    protected mergedQuestAssorts: Record<string, Record<string, string>>;
+    protected createdMergedQuestAssorts: boolean;
+    constructor(logger: ILogger, jsonUtil: JsonUtil, mathUtil: MathUtil, timeUtil: TimeUtil, databaseServer: DatabaseServer, profileHelper: ProfileHelper, assortHelper: AssortHelper, paymentHelper: PaymentHelper, ragfairAssortGenerator: RagfairAssortGenerator, ragfairOfferGenerator: RagfairOfferGenerator, traderAssortService: TraderAssortService, localisationService: LocalisationService, traderPurchasePersisterService: TraderPurchasePersisterService, traderHelper: TraderHelper, fenceService: FenceService, configServer: ConfigServer);
     /**
      * Get a traders assorts
      * Can be used for returning ragfair / fence assorts
@@ -41,6 +47,10 @@ export declare class TraderAssortHelper {
      * @returns a traders' assorts
      */
     getAssort(sessionId: string, traderId: string, flea?: boolean): ITraderAssort;
+    /**
+     * Create a dict of all assort id = quest id mappings used to work out what items should be shown to player based on the quests they've started/completed/failed
+     */
+    protected hydrateMergedQuestAssorts(): void;
     /**
      * Reset a traders assorts and move nextResupply value to future
      * Flag trader as needing a flea offer reset to be picked up by flea update() function
@@ -57,7 +67,7 @@ export declare class TraderAssortHelper {
      * Iterate over all assorts barter_scheme values, find barters selling for money and multiply by multipler in config
      * @param traderAssort Assorts to multiple price of
      */
-    protected multiplyItemPricesByConfigMultipler(traderAssort: ITraderAssort): void;
+    protected multiplyItemPricesByConfigMultiplier(traderAssort: ITraderAssort): void;
     /**
      * Get an array of pristine trader items prior to any alteration by player (as they were on server start)
      * @param traderId trader id
