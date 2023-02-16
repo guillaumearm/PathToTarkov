@@ -63,7 +63,7 @@ export interface Repair {
     excluded_category: string[];
     /** Doesn't exist in client object */
     excluded_id_list: any[];
-    quality: number;
+    quality: string;
 }
 export interface ITraderAssort {
     nextResupply: number;

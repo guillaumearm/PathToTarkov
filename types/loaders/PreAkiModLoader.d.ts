@@ -23,7 +23,7 @@ export declare class PreAkiModLoader implements IModLoader {
     protected readonly basepath = "user/mods/";
     protected readonly modOrderPath = "user/mods/order.json";
     protected order: Record<string, number>;
-    protected imported: Record<string, IPackageJsonData>;
+    public imported: Record<string, IPackageJsonData>;
     protected akiConfig: ICoreConfig;
     constructor(logger: ILogger, vfs: VFS, jsonUtil: JsonUtil, modCompilerService: ModCompilerService, bundleLoader: BundleLoader, localisationService: LocalisationService, configServer: ConfigServer, modTypeCheck: ModTypeCheck);
     load(container: DependencyContainer): Promise<void>;
