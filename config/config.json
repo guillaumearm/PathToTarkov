@@ -569,6 +569,11 @@
       "Shorl_free": "ShorelineLighthousePath",
       "tunnel_shared": "ShorelineLighthouseTunnel"
     },
+    "tarkovstreets": {
+      "E1": "Car",
+      "E2": "Car",
+      "E7_car": "Car"
+    },
     "laboratory": {
       "lab_Parking_Gate": "Car",
       "lab_Hangar_Gate": "Car",
@@ -619,7 +624,8 @@
       "bigmap": ["Dorms Car"],
       "interchange": ["Car at Power Station"],
       "woods": ["Bridge Car"],
-      "lighthouse": ["Lighthouse Vehicle Extract"]
+      "lighthouse": ["Lighthouse Vehicle Extract"],
+      "tarkovstreets": ["Promorsky Vehicle Extract"]
     },
     "CustomsMilitaryBaseCP": {
       "bigmap": ["Military Base CP"],

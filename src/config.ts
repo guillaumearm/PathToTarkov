@@ -10,6 +10,7 @@ type ByMap<T> = {
   interchange: T;
   shoreline: T;
   lighthouse: T;
+  tarkovstreets: T;
 };
 
 export type MapName = keyof ByMap<unknown>;
@@ -168,4 +169,5 @@ export const MAPLIST = [
   "rezervbase",
   "shoreline",
   "woods",
+  "tarkovstreets",
 ];

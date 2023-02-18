@@ -212,5 +212,11 @@
       "Position": [164.16626, 0.317433029, -163.23497],
       "Rotation": 285.558533
     }
+  },
+  "tarkovstreets": {
+    "Promorsky Vehicle Extract": {
+      "Position": [-5.0, 3.8, 459.9],
+      "Rotation": 0.0
+    }
   }
 }
