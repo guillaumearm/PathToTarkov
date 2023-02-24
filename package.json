@@ -6,7 +6,7 @@
   "main": "src/mod.js",
   "license": "MIT",
   "author": "Trap",
-  "akiVersion": "3.1.x || 3.2.x || 3.3.x",
+  "akiVersion": "3.5.x",
   "scripts": {
     "zip:files": "node scripts/create-zip.js",
     "copy:files": "mkdir -p ./dist && cp package.json ./dist && cp README.md ./dist && cp LICENSE ./dist && cp -R config ./dist",
