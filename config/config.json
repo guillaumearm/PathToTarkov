@@ -625,7 +625,7 @@
       "interchange": ["Car at Power Station"],
       "woods": ["Bridge Car"],
       "lighthouse": ["Lighthouse Vehicle Extract"],
-      "tarkovstreets": ["Promorsky Vehicle Extract"]
+      "tarkovstreets": ["Primorsky Vehicle Extract"]
     },
     "CustomsMilitaryBaseCP": {
       "bigmap": ["Military Base CP"],
