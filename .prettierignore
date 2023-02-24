@@ -3,5 +3,6 @@
 /dist/
 /src/*.js
 /Trap-PathToTarkov-*
+/PTT-Extracts/
 *.md
 package-lock.json

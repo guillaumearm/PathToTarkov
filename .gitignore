@@ -3,3 +3,6 @@
 /src/**/*.js
 /Trap-PathToTarkov*
 /mod.zip
+
+/PTT-Extracts/bin
+/PTT-Extracts/obj
