@@ -23,10 +23,6 @@ New spawn points can be added in `player_spawnpoints.json`
 The offraid position is stored in your profile in a dedicated field `PathToTarkov`, you can edit it with a regular text editor.
 
 
-## Known issues
-- Sadly, Scav exfils cannot be used by a pmc (I don't know if it's a BSG limitation or if SPT-AKI doesn't implement a way to tweak this values)
-- Some hideout features cannot be disabled without crashing the game (generator, water collector and air filtering unit)
-
 ## UnInstallation
 Before deleting the mod, you can set the `enabled` props to `false` in `config.json` and start the server once.
 
@@ -106,6 +102,7 @@ Accessible via the `Car`:
 - Bridge vehicule extract (Woods)
 - Power Station vehicule extract (Interchange)
 - Road to military base vehicule extract (Lighthouse)
+- Primorsky Avenue taxi vehicule extract (Tarkov Streets)
 
 #### Peacekeeper
 Accessible via the `Boat`:
@@ -169,12 +166,21 @@ Can move to Shoreline via:
 Can move to Lab via:
 - Dorms vehicule extract
 
+Can move to Tarkov Streets via:
+- Dorms vehicule extract
+
 ### Woods
 Can move to Factory via:
 - Factory Gate
 
 Can move to Customs via:
 - Northern UN Roadblock
+- Bridge car extract
+
+Can move to Lab via: 
+- Bridge car extract
+
+Can move to Tarkov Streets via:
 - Bridge car extract
 
 Can move to milirary reserve via:
@@ -196,6 +202,9 @@ Can move to Military reserve via:
 - Safe room
 
 Can move to Lab via: 
+- Power station (car extract)
+
+Can move to Tarkov Streets via:
 - Power station (car extract)
 
 ### Military reserve
@@ -232,6 +241,12 @@ Can move to Interchange via:
 - Road to military base vehicule extraction
 
 Can move to Woods via:
+- Road to military base vehicule extraction
+
+Can move to Tarkov Streets via:
+- Road to military base vehicule extraction
+
+Can move to Lab via:
 - Road to military base vehicule extraction
 
 Can move to Military base via:
