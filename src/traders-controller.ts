@@ -68,11 +68,11 @@ export class TradersController {
               locationDescription && locationDescription[locale as LocaleName];
 
             if (desc) {
-              const trading = locales?.global?.[locale]?.trading;
-              const traderLocales = trading && trading[traderId];
+              const globalLocale = locales?.global?.[locale];
+              const localeId = `${traderId} Description`;
 
-              if (traderLocales) {
-                traderLocales.Location = desc;
+              if (globalLocale && globalLocale[localeId]) {
+                globalLocale[localeId] = desc;
               } else {
                 this.logger.warning(
                   `=> PathToTarkov: no locales '${locale}' found for trader '${traderId}'`
