@@ -24,6 +24,7 @@ export const LOCATIONS_MAPS: Record<string, string> = {
   lighthouse: "lighthouse",
   shoreline: "shoreline",
   laboratory: "laboratory",
+  ["streets of tarkov"]: "tarkovstreets",
 };
 
 export const getMapNameFromLocationName = (location: string): string => {
@@ -83,24 +84,45 @@ export class EventWatcher {
     let savedCurrentMapName: string | null = null;
     let savedIsPlayerScav: boolean | null = null;
 
-    staticRoutePeeker.watchRoute(
-      "/client/match/offline/start",
-      (url, info: { locationName: string }, sessionId) => {
-        const mapName = getMapNameFromLocationName(info.locationName);
+    // staticRoutePeeker.watchRoute(
+    //   "/client/match/offline/start",
+    //   (url, info: { locationName: string }, sessionId) => {
+    //     const mapName = getMapNameFromLocationName(info.locationName);
 
-        const profile = saveServer.getProfile(sessionId);
+    //     const profile = saveServer.getProfile(sessionId);
 
-        if (!profile) {
-          this.ptt.debug(`profile '${sessionId}' not found`);
-        }
+    //     if (!profile) {
+    //       this.ptt.debug(`profile '${sessionId}' not found`);
+    //     }
 
-        this.ptt.debug(
-          `offline raid started for '${sessionId}' on map '${mapName}'`
-        );
+    //     this.ptt.debug(
+    //       `offline raid started for '${sessionId}' on map '${mapName}'`
+    //     );
 
-        savedCurrentMapName = mapName;
+    //     savedCurrentMapName = mapName;
+    //   }
+    // );
+
+    staticRoutePeeker.watchRoute("/client/raid/configuration", (url, info: { location: string }, sessionId) => {
+      this.ptt.debug(`location detected: ${info.location}`)
+      const mapName = getMapNameFromLocationName(info.location);
+
+      const profile = saveServer.getProfile(sessionId);
+
+      if (!profile) {
+        this.ptt.debug(`profile '${sessionId}' not found`);
       }
-    );
+
+      this.ptt.debug(
+        `offline raid started for '${sessionId}' on map '${mapName}'`
+      );
+
+      savedCurrentMapName = mapName;
+    })
+
+    // staticRoutePeeker.watchRoute("/client/location/getLocalloot", (url, info) => {
+    //   console.log('=> /client/location/getLocalloot', info)
+    // })
 
     staticRoutePeeker.watchRoute(
       "/raid/profile/save",
