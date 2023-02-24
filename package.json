@@ -10,8 +10,7 @@
   "scripts": {
     "zip:files": "cd dist && bestzip ../mod.zip user BepInEx && cd .. && node scripts/rename-zip.js",
     "prepare:files": "node scripts/prepare-files.js",
-    "build:release": "npm run build:all && npm run prepare:files && npm run zip:files",
-    "rebuild:release": "npm run rebuild:all && npm run prepare:files && npm run zip:files",
+    "build:release": "npm run lint:all && npm run rebuild:all && npm run prepare:files && npm run zip:files",
     "clean": "rimraf dist tmp 'src/**/*.js' Trap-PathToTarkov*",
     "clean:all": "npm run clean:client && npm run clean",
     "prettier": "prettier --write .",
@@ -24,7 +23,7 @@
     "build:all": "npm run build && npm run build:client",
     "build:client": "cd PTT-Extracts && dotnet.exe build",
     "clean:client": "rimraf PTT-Extracts/bin PTT-Extracts/obj",
-    "test:all": "npm run lint:all && npm run build:release",
+    "test:all": "npm run build:release",
     "test": "tsc --noEmit && npm run lint:all"
   },
   "devDependencies": {
