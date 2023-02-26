@@ -20,6 +20,7 @@ import { PathToTarkovController } from "./path-to-tarkov-controller";
 import { purgeProfiles } from "./uninstall";
 import type { PackageJson } from "./utils";
 import { getModDisplayName, noop, readJsonFile } from "./utils";
+import { EndOfRaidController } from "./end-of-raid-controller";
 
 class PathToTarkov implements IPreAkiLoadMod, IPostAkiLoadMod {
   private packageJson: PackageJson;
@@ -34,7 +35,6 @@ class PathToTarkov implements IPreAkiLoadMod, IPostAkiLoadMod {
 
   public preAkiLoad(container: DependencyContainer): void {
     this.container = container;
-
     this.packageJson = readJsonFile(PACKAGE_JSON_PATH);
     this.config = readJsonFile(CONFIG_PATH);
     this.spawnConfig = readJsonFile(SPAWN_CONFIG_PATH);
@@ -53,7 +53,7 @@ class PathToTarkov implements IPreAkiLoadMod, IPostAkiLoadMod {
     const modLoader = container.resolve<PreAkiModLoader>("PreAkiModLoader");
     const saveServer = container.resolve<SaveServer>("SaveServer");
 
-    const staticRouter = this.container.resolve<StaticRouterModService>(
+    const staticRouter = container.resolve<StaticRouterModService>(
       "StaticRouterModService"
     );
 
@@ -97,7 +97,10 @@ class PathToTarkov implements IPreAkiLoadMod, IPostAkiLoadMod {
     this.pathToTarkovController.hijackLuasCustomSpawnPointsUpdate();
 
     const eventWatcher = new EventWatcher(this);
-    eventWatcher.listen(saveServer, createStaticRoutePeeker(staticRouter));
+    const endOfRaidController = new EndOfRaidController(this);
+
+    eventWatcher.onEndOfRaid((payload) => endOfRaidController.end(payload));
+    eventWatcher.register(createStaticRoutePeeker(staticRouter));
 
     this.logger.info(
       `===> Loading ${getModDisplayName(this.packageJson, true)}`

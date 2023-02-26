@@ -1,46 +1,49 @@
-import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import type { SaveServer } from "@spt-aki/servers/SaveServer";
-import type { DependencyContainer } from "tsyringe";
-import type { MapName } from "./config";
 import type { StaticRoutePeeker } from "./helpers";
-import type { PathToTarkovController } from "./path-to-tarkov-controller";
+import type { EndOfRaidPayload, PTTInstance } from "./end-of-raid-controller";
 
-import { noop } from "./utils";
+type EndOfRaidCallback = (payload: EndOfRaidPayload) => void;
 
-type PTTInstance = {
-  readonly container: DependencyContainer;
-  readonly pathToTarkovController: PathToTarkovController;
-  readonly logger: ILogger;
-  readonly debug: (data: string) => void;
-  readonly executeOnStartAPICallbacks: (sessionId: string) => void;
+type RaidCache = {
+  saved: boolean;
+  endOfRaid: boolean;
+  sessionId: string | null;
+  currentLocationName: string | null;
+  exitName: string | null | undefined;
+  isPlayerScav: boolean | null;
 };
 
-export const LOCATIONS_MAPS: Record<string, string> = {
-  customs: "bigmap",
-  factory: "factory4_day",
-  reservebase: "rezervbase",
-  interchange: "interchange",
-  woods: "woods",
-  lighthouse: "lighthouse",
-  shoreline: "shoreline",
-  laboratory: "laboratory",
-  ["streets of tarkov"]: "tarkovstreets",
-};
-
-export const getMapNameFromLocationName = (location: string): string => {
-  const locationName = location.toLowerCase();
-  const mapName = LOCATIONS_MAPS[locationName];
-
-  return mapName ?? "none";
-};
+const getEmptyRaidCache = (): RaidCache => ({
+  saved: false,
+  endOfRaid: false,
+  sessionId: null,
+  currentLocationName: null,
+  exitName: undefined,
+  isPlayerScav: null,
+});
 
 export class EventWatcher {
-  constructor(private ptt: PTTInstance) {}
+  private raidCache: RaidCache;
+  private endOfRaidCallback: EndOfRaidCallback | null = null;
+
+  constructor(private ptt: PTTInstance) {
+    this.raidCache = getEmptyRaidCache();
+  }
+
+  private cleanRaidCache(): void {
+    this.raidCache = getEmptyRaidCache();
+  }
+
+  private initRaidCache(sessionId: string): void {
+    this.cleanRaidCache();
+    this.raidCache.sessionId = sessionId;
+  }
 
   private watchOnGameStart(staticRoutePeeker: StaticRoutePeeker): void {
     staticRoutePeeker.watchRoute(
       "/client/game/start",
       (url, info: unknown, sessionId) => {
+        this.initRaidCache(sessionId);
+
         if (
           !this.ptt.pathToTarkovController.stashController.getInventory(
             sessionId
@@ -49,7 +52,7 @@ export class EventWatcher {
           this.ptt.debug(
             `/client/game/start: no pmc data found, init will be handled on profile creation`
           );
-          // no pmc data found, will be handled by `onProfileCreated`
+          // no pmc data found, init will be handled by `watchOnProfileCreated`
           return;
         }
 
@@ -65,6 +68,8 @@ export class EventWatcher {
     staticRoutePeeker.watchRoute(
       "/client/game/profile/create",
       (url, info: unknown, sessionId) => {
+        this.initRaidCache(sessionId);
+
         this.ptt.pathToTarkovController.init(sessionId);
         this.ptt.executeOnStartAPICallbacks(sessionId);
 
@@ -73,132 +78,129 @@ export class EventWatcher {
     );
   }
 
-  private watchEndOfRaid(
-    staticRoutePeeker: StaticRoutePeeker,
-    saveServer: SaveServer
-  ): void {
-    type EndRaidCb = (currentMapName: string, isPLayerScav: boolean) => void;
-
-    let endRaidCb: EndRaidCb = noop;
-    let endRaidCbExecuted = false;
-    let savedCurrentMapName: string | null = null;
-    let savedIsPlayerScav: boolean | null = null;
-
+  private watchStartOfRaid(staticRoutePeeker: StaticRoutePeeker): void {
     staticRoutePeeker.watchRoute(
       "/client/raid/configuration",
       (url, info: { location: string }, sessionId) => {
-        this.ptt.debug(`location detected: ${info.location}`);
-        const mapName = getMapNameFromLocationName(info.location);
+        this.initRaidCache(sessionId);
 
-        const profile = saveServer.getProfile(sessionId);
-
-        if (!profile) {
-          this.ptt.debug(`profile '${sessionId}' not found`);
-        }
+        this.raidCache.currentLocationName = info.location;
 
         this.ptt.debug(
-          `offline raid started for '${sessionId}' on map '${mapName}'`
+          `offline raid started on location '${info.location}' with sessionId '${sessionId}'`
         );
-
-        savedCurrentMapName = mapName;
-      }
-    );
-
-    staticRoutePeeker.watchRoute(
-      "/raid/profile/save",
-      (url, info: { isPlayerScav: boolean }, sessionId) => {
-        const isPlayerScav = info.isPlayerScav;
-        const profile = saveServer.getProfile(sessionId);
-
-        if (!profile) {
-          this.ptt.debug(`profile '${sessionId}' not found`);
-        }
-
-        this.ptt.debug(
-          `save profile: currentMapName=${savedCurrentMapName} isPlayerScav=${isPlayerScav}`
-        );
-
-        if (endRaidCb !== noop && savedCurrentMapName) {
-          endRaidCb(savedCurrentMapName, isPlayerScav);
-          endRaidCb = noop;
-        } else if (!endRaidCbExecuted) {
-          savedIsPlayerScav = isPlayerScav;
-        }
-
-        endRaidCbExecuted = false;
-      }
-    );
-
-    staticRoutePeeker.watchRoute(
-      "/client/match/offline/end",
-      (url, info: { exitName: string | null }, sessionId) => {
-        endRaidCb = (currentMapName, isPlayerScav) => {
-          this.ptt.debug(
-            `end of raid: exitName='${info.exitName}' and currentMapName='${currentMapName}'`
-          );
-          if (
-            isPlayerScav &&
-            !this.ptt.pathToTarkovController.config
-              .player_scav_move_offraid_position
-          ) {
-            this.ptt.debug("end of raid: scav player detected");
-            return;
-          }
-
-          const playerDied = !info.exitName;
-
-          if (
-            this.ptt.pathToTarkovController.config
-              .reset_offraid_position_on_player_die &&
-            playerDied
-          ) {
-            this.ptt.debug("end of raid: player dies");
-            this.ptt.pathToTarkovController.updateOffraidPosition(
-              sessionId,
-              this.ptt.pathToTarkovController.config.initial_offraid_position
-            );
-            return;
-          }
-
-          const extractsConf =
-            this.ptt.pathToTarkovController.config.exfiltrations[
-              currentMapName as MapName
-            ];
-
-          const newOffraidPosition =
-            extractsConf && extractsConf[info.exitName ?? ""];
-
-          if (newOffraidPosition) {
-            this.ptt.debug(
-              `end of raid: new offraid position ${newOffraidPosition}`
-            );
-            this.ptt.pathToTarkovController.updateOffraidPosition(
-              sessionId,
-              newOffraidPosition
-            );
-          } else {
-            this.ptt.debug(`end of raid: no new offraid position found`);
-          }
-        };
-
-        if (savedCurrentMapName !== null && savedIsPlayerScav !== null) {
-          endRaidCb(savedCurrentMapName, savedIsPlayerScav);
-          endRaidCb = noop;
-          endRaidCbExecuted = true;
-          savedCurrentMapName = null;
-          savedIsPlayerScav = null;
-        }
       }
     );
   }
 
-  public listen(
-    saveServer: SaveServer,
-    staticRoutePeeker: StaticRoutePeeker
-  ): void {
+  private watchSave(staticRoutePeeker: StaticRoutePeeker): void {
+    staticRoutePeeker.watchRoute(
+      "/raid/profile/save",
+      (url, info: { isPlayerScav: boolean }) => {
+        this.raidCache.saved = true;
+        this.raidCache.isPlayerScav = info.isPlayerScav;
+
+        this.ptt.debug(
+          `profile saved: raidCache.isPlayerScav=${info.isPlayerScav}`
+        );
+
+        if (!this.raidCache.endOfRaid) {
+          this.ptt.debug("end of raid: callback execution delayed...");
+          return;
+        }
+
+        return this.runEndOfRaidCallback();
+      }
+    );
+  }
+
+  private watchEndOfRaid(staticRoutePeeker: StaticRoutePeeker): void {
+    staticRoutePeeker.watchRoute(
+      "/client/match/offline/end",
+      (url, info: { exitName: string | null }, sessionId: string) => {
+        this.raidCache.endOfRaid = true;
+        this.raidCache.sessionId = sessionId;
+        this.raidCache.exitName = info.exitName;
+
+        this.ptt.debug(`end of raid detected for exit '${info.exitName}'`);
+
+        if (!this.raidCache.saved) {
+          this.ptt.debug(
+            "end of raid: callback execution delayed on profile save..."
+          );
+          return;
+        }
+
+        return this.runEndOfRaidCallback();
+      }
+    );
+  }
+
+  private getEndOfRaidPayload(): EndOfRaidPayload {
+    const {
+      sessionId,
+      currentLocationName: locationName,
+      isPlayerScav,
+      exitName,
+    } = this.raidCache;
+
+    if (sessionId === null) {
+      throw new Error("raidCache.sessionId is null");
+    }
+
+    if (locationName === null) {
+      throw new Error("raidCache.currentLocationName is null");
+    }
+
+    if (isPlayerScav === null) {
+      throw new Error("raidCache.isPlayerScav is null");
+    }
+
+    if (exitName === undefined) {
+      throw new Error("raidCache.exitName is undefined");
+    }
+
+    return {
+      sessionId,
+      locationName,
+      isPlayerScav,
+      exitName,
+    };
+  }
+
+  private runEndOfRaidCallback(): void {
+    if (this.endOfRaidCallback) {
+      try {
+        const endOfRaidPayload = this.getEndOfRaidPayload();
+        this.endOfRaidCallback(endOfRaidPayload);
+      } catch (error: any) {
+        this.ptt.logger.error(`Path To Tarkov Error: ${error.message}`);
+      } finally {
+        this.cleanRaidCache();
+      }
+    } else {
+      this.ptt.logger.error(
+        "Path To Tarkov Error: no endOfRaidCallback on EventWatcher!"
+      );
+    }
+  }
+
+  public onEndOfRaid(cb: EndOfRaidCallback): void {
+    if (this.endOfRaidCallback) {
+      throw new Error(
+        "Path To Tarkov EventWatcher: endOfRaidCallback already setted!"
+      );
+    }
+
+    this.endOfRaidCallback = cb;
+  }
+
+  public register(staticRoutePeeker: StaticRoutePeeker): void {
     this.watchOnGameStart(staticRoutePeeker);
     this.watchOnProfileCreated(staticRoutePeeker);
-    this.watchEndOfRaid(staticRoutePeeker, saveServer);
+    this.watchStartOfRaid(staticRoutePeeker);
+    this.watchSave(staticRoutePeeker);
+    this.watchEndOfRaid(staticRoutePeeker);
 
     staticRoutePeeker.register();
   }
