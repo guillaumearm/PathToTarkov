@@ -1,4 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { execSync } = require("child_process");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageJson = require("../package.json");
 
 const modName = packageJson.fullName;
@@ -13,6 +15,7 @@ const main = async () => {
     `cp -R dist/src ./dist/user/mods/${modName}`,
     `cp package.json ./dist/user/mods/${modName}`,
     `cp README.md ./dist/user/mods/${modName}`,
+    `cp ALL_EXFILS.md ./dist/user/mods/${modName}`,
     `cp LICENSE ./dist/user/mods/${modName}`,
     `cp -R config ./dist/user/mods/${modName}`,
     'echo "> Successfully prepared files!"',

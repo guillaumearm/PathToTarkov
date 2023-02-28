@@ -9,6 +9,9 @@
   "akiVersion": "3.5.x",
   "scripts": {
     "gather:external:resources": "./scripts/gather-external-resources.sh",
+    "build:doc:all-exfils": "node scripts/generate-all-exfils > ALL_EXFILS.md",
+    "dev:doc": "node scripts/generate-all-exfils",
+    "build:doc": "npm run build:doc:all-exfils",
     "zip:files": "cd dist && bestzip ../mod.zip user BepInEx && cd .. && node scripts/rename-zip.js",
     "prepare:files": "node scripts/prepare-files.js",
     "build:release": "npm run lint:all && npm run rebuild:all && npm run prepare:files && npm run zip:files",
@@ -21,7 +24,7 @@
     "rebuild:all": "npm run clean:all && npm run build:all",
     "rebuild": "npm run clean && npm run build",
     "build": "tsc",
-    "build:all": "npm run build && npm run build:client",
+    "build:all": "npm run build:doc && npm run build && npm run build:client",
     "build:client": "cd PTT-Extracts && dotnet.exe build",
     "clean:client": "rimraf PTT-Extracts/bin PTT-Extracts/obj",
     "test:all": "npm run build:release",

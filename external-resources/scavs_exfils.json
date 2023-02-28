@@ -1,17 +1,4 @@
 {
-  "streets": ["scav_e1", "scav_e2", "scav_e3", "scav_e4"],
-  "reserve": ["Exit1", "Exit2", "Exit3", "Exit4"],
-  "woods": [
-    "East Gate",
-    "Outskirts Water",
-    "Mountain Stash",
-    "West Border",
-    "Old Station",
-    "Scav House",
-    "The Boat",
-    "Dead Man's Place"
-  ],
-  "factory": ["Office Window", "Camera Bunker Door"],
   "customs": [
     "Railroad To Tarkov",
     "Railroad To Port",
@@ -29,11 +16,20 @@
     "Administration Gate",
     "Factory Far Corner"
   ],
-  "lighthouse": [
-    "SCAV_Industrial_Zone",
-    "Scav_Hideout_at_the_grotto",
-    "SCAV_Underboat_Hideout",
-    "Scav_Coastal_South"
+  "factory": [
+    "Office Window",
+    "Camera Bunker Door"
+  ],
+  "interchange": [],
+  "woods": [
+    "East Gate",
+    "Outskirts Water",
+    "Mountain Stash",
+    "West Border",
+    "Old Station",
+    "Scav House",
+    "The Boat",
+    "Dead Man's Place"
   ],
   "shoreline": [
     "Adm Basement",
@@ -44,6 +40,23 @@
     "Wrecked Road",
     "Lighthouse"
   ],
-  "interchange": [],
+  "reserve": [
+    "Exit1",
+    "Exit2", 
+    "Exit3",
+    "Exit4"
+  ],
+  "lighthouse": [
+    "SCAV_Industrial_Zone",
+    "Scav_Hideout_at_the_grotto",
+    "SCAV_Underboat_Hideout",
+    "Scav_Coastal_South"
+  ],
+  "streets": [
+    "scav_e1",
+    "scav_e2",
+    "scav_e3",
+    "scav_e4"
+  ],
   "laboratory": []
 }
