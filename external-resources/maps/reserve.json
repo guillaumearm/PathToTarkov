@@ -47,23 +47,17 @@
       "Supports": [
         {
           "BossEscortAmount": "2",
-          "BossEscortDifficult": [
-            "normal"
-          ],
+          "BossEscortDifficult": ["normal"],
           "BossEscortType": "followerGluharAssault"
         },
         {
           "BossEscortAmount": "2",
-          "BossEscortDifficult": [
-            "normal"
-          ],
+          "BossEscortDifficult": ["normal"],
           "BossEscortType": "followerGluharSecurity"
         },
         {
           "BossEscortAmount": "2",
-          "BossEscortDifficult": [
-            "normal"
-          ],
+          "BossEscortDifficult": ["normal"],
           "BossEscortType": "followerGluharScout"
         }
       ],
@@ -203,9 +197,7 @@
   "SpawnPointParams": [
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -226,15 +218,11 @@
         "z": 38.0700073
       },
       "Rotation": 201.86,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -255,16 +243,11 @@
         "z": -223.095
       },
       "Rotation": 315.001068,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneSubCommand",
-      "Categories": [
-        "Bot",
-        "Boss"
-      ],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -285,16 +268,11 @@
         "z": 36.945
       },
       "Rotation": 96.64535,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneBarrack",
-      "Categories": [
-        "Bot",
-        "Boss"
-      ],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -315,15 +293,11 @@
         "z": -3.04
       },
       "Rotation": 22.0423622,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -344,16 +318,11 @@
         "z": -64.01001
       },
       "Rotation": 170,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -374,16 +343,11 @@
         "z": 29.5580139
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneSubCommand",
-      "Categories": [
-        "Bot",
-        "Boss"
-      ],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -404,15 +368,11 @@
         "z": 3.42
       },
       "Rotation": 96.64535,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -433,16 +393,11 @@
         "z": -174.450012
       },
       "Rotation": 7.00999975,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZonePTOR2",
-      "Categories": [
-        "Bot",
-        "Boss"
-      ],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -463,15 +418,11 @@
         "z": -39.17
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -492,15 +443,11 @@
         "z": -1.97000122
       },
       "Rotation": 254.950012,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -521,15 +468,11 @@
         "z": 63.77002
       },
       "Rotation": 184.72,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -550,15 +493,11 @@
         "z": 40.539978
       },
       "Rotation": 201.86,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -579,15 +518,11 @@
         "z": 51.0800171
       },
       "Rotation": 180.89,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -608,16 +543,11 @@
         "z": -234.905991
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -638,16 +568,11 @@
         "z": 30.5980225
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -668,16 +593,11 @@
         "z": -112.53
       },
       "Rotation": 283.845032,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -698,15 +618,11 @@
         "z": 26.5700073
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBarrack",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -727,15 +643,11 @@
         "z": -35.536
       },
       "Rotation": 130.028351,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -756,16 +668,11 @@
         "z": 34.6499939
       },
       "Rotation": 201.86,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -786,15 +693,11 @@
         "z": 26.2000122
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -815,15 +718,11 @@
         "z": 36.23001
       },
       "Rotation": 201.86,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -844,16 +743,11 @@
         "z": -101.459991
       },
       "Rotation": 216.03,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -874,15 +768,11 @@
         "z": -114.519989
       },
       "Rotation": 283.845032,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -903,15 +793,11 @@
         "z": -172.024
       },
       "Rotation": 281.0713,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -932,15 +818,11 @@
         "z": -161.37
       },
       "Rotation": 354.619965,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -961,16 +843,11 @@
         "z": -173.99
       },
       "Rotation": 281.0713,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneSubCommand",
-      "Categories": [
-        "Bot",
-        "Boss"
-      ],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -991,15 +868,11 @@
         "z": 17.43
       },
       "Rotation": 297.8055,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1020,16 +893,11 @@
         "z": 50.3699951
       },
       "Rotation": 180.89,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1050,15 +918,11 @@
         "z": 45.6799927
       },
       "Rotation": 112.108734,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneSubStorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1079,15 +943,11 @@
         "z": -38.34
       },
       "Rotation": 186.0699,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnBoxParams",
         "_props": {
@@ -1112,15 +972,11 @@
         "z": 80.6500244
       },
       "Rotation": 96.94,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1141,15 +997,11 @@
         "z": -171.97
       },
       "Rotation": 7.00999975,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1170,15 +1022,11 @@
         "z": -75.04999
       },
       "Rotation": 83.81,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZonePTOR1",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1199,15 +1047,11 @@
         "z": -12.45
       },
       "Rotation": 105.6213,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1228,15 +1072,11 @@
         "z": 50.8900146
       },
       "Rotation": 180.89,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1257,15 +1097,11 @@
         "z": 193.82
       },
       "Rotation": 154.03,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1286,16 +1122,11 @@
         "z": -167.66
       },
       "Rotation": 314.09,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1316,16 +1147,11 @@
         "z": 20.0800171
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneSubStorage",
-      "Categories": [
-        "Bot",
-        "Boss"
-      ],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1346,15 +1172,11 @@
         "z": -155.19
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1375,15 +1197,11 @@
         "z": -184.23
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1404,16 +1222,11 @@
         "z": -234.905991
       },
       "Rotation": 29.01,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1434,15 +1247,11 @@
         "z": 47.77002
       },
       "Rotation": 112.108734,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1463,15 +1272,11 @@
         "z": 50.9299927
       },
       "Rotation": 180.89,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1492,15 +1297,11 @@
         "z": -88.11
       },
       "Rotation": 281.0713,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneSubStorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1521,15 +1322,11 @@
         "z": -110.21
       },
       "Rotation": 79.13992,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1550,15 +1347,11 @@
         "z": 64.82001
       },
       "Rotation": 184.72,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1579,15 +1372,11 @@
         "z": -105
       },
       "Rotation": 216.03,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1608,15 +1397,11 @@
         "z": 184.18
       },
       "Rotation": 88.80001,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneSubCommand",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1637,16 +1422,11 @@
         "z": 21.839
       },
       "Rotation": 102.590828,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneBarrack",
-      "Categories": [
-        "Bot",
-        "Boss"
-      ],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1667,15 +1447,11 @@
         "z": 53.34
       },
       "Rotation": 110.272163,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneBarrack",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1696,15 +1472,11 @@
         "z": -9.22
       },
       "Rotation": 294.580322,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1725,15 +1497,11 @@
         "z": 8.209991
       },
       "Rotation": 289.35,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneBarrack",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1754,15 +1522,11 @@
         "z": 27.013
       },
       "Rotation": 283.263184,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1783,15 +1547,11 @@
         "z": -172.26001
       },
       "Rotation": 1.47,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneSubCommand",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1812,16 +1572,11 @@
         "z": 58.736
       },
       "Rotation": 102.590828,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1842,15 +1597,11 @@
         "z": -112.909973
       },
       "Rotation": 283.845032,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1871,15 +1622,11 @@
         "z": 66.6500244
       },
       "Rotation": 203.36,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneSubCommand",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1900,15 +1647,11 @@
         "z": 14.514
       },
       "Rotation": 96.64535,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1929,15 +1672,11 @@
         "z": 181.580017
       },
       "Rotation": 264.97,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneBarrack",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1958,16 +1697,11 @@
         "z": 23.06
       },
       "Rotation": 84.70626,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZonePTOR1",
-      "Categories": [
-        "Bot",
-        "Boss"
-      ],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1988,16 +1722,11 @@
         "z": -11.45
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2018,15 +1747,11 @@
         "z": 21.8700256
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2047,15 +1772,11 @@
         "z": -234.905991
       },
       "Rotation": 15.7700033,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZonePTOR1",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2076,15 +1797,11 @@
         "z": -32.69
       },
       "Rotation": 260.9375,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneBarrack",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2105,16 +1822,11 @@
         "z": 44.85
       },
       "Rotation": 347.314056,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneBunkerStorage",
-      "Categories": [
-        "Bot",
-        "Boss"
-      ],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2135,15 +1847,11 @@
         "z": 45.4300079
       },
       "Rotation": 186.0699,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2164,15 +1872,11 @@
         "z": -168.052
       },
       "Rotation": 26.43,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2193,15 +1897,11 @@
         "z": -229.27
       },
       "Rotation": 315.001068,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZonePTOR2",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2222,15 +1922,11 @@
         "z": -5.478
       },
       "Rotation": 109.706451,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2251,16 +1947,11 @@
         "z": -129.98999
       },
       "Rotation": 2.98000026,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneBunkerStorage",
-      "Categories": [
-        "Bot",
-        "Boss"
-      ],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2281,16 +1972,11 @@
         "z": -28.2319946
       },
       "Rotation": 297.1585,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2311,16 +1997,11 @@
         "z": -109.72998
       },
       "Rotation": 283.845032,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2341,15 +2022,11 @@
         "z": -109.369995
       },
       "Rotation": 283.845032,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2370,15 +2047,11 @@
         "z": -67.33002
       },
       "Rotation": 126.350006,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2399,16 +2072,11 @@
         "z": 7.19000244
       },
       "Rotation": 281.74,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2429,16 +2097,11 @@
         "z": 20.3200073
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2459,15 +2122,11 @@
         "z": 13.5900269
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2488,15 +2147,11 @@
         "z": 41.1300049
       },
       "Rotation": 201.86,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2517,15 +2172,11 @@
         "z": -182.43
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2546,15 +2197,11 @@
         "z": -166.78
       },
       "Rotation": 314.09,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2575,15 +2222,11 @@
         "z": -106.419983
       },
       "Rotation": 154.03,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2604,16 +2247,11 @@
         "z": 15.7000122
       },
       "Rotation": 12.37,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneSubCommand",
-      "Categories": [
-        "Bot",
-        "Boss"
-      ],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2634,15 +2272,11 @@
         "z": 28.901
       },
       "Rotation": 96.64535,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2663,16 +2297,11 @@
         "z": -129.98999
       },
       "Rotation": 2.98000026,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot",
-        "Boss"
-      ],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2693,15 +2322,11 @@
         "z": -128.25
       },
       "Rotation": 110.272163,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2722,15 +2347,11 @@
         "z": -166.97998
       },
       "Rotation": 12.24,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2751,15 +2372,11 @@
         "z": 5.17001343
       },
       "Rotation": 289.35,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2780,15 +2397,11 @@
         "z": 6.619995
       },
       "Rotation": 289.35,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2809,15 +2422,11 @@
         "z": -96.26001
       },
       "Rotation": 322.68,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2838,16 +2447,11 @@
         "z": 65.1099854
       },
       "Rotation": 184.72,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2868,16 +2472,11 @@
         "z": 45.1300049
       },
       "Rotation": 112.108734,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneSubCommand",
-      "Categories": [
-        "Bot",
-        "Boss"
-      ],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2898,15 +2497,11 @@
         "z": 21.38
       },
       "Rotation": 96.64535,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneBarrack",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2927,16 +2522,11 @@
         "z": 13.13
       },
       "Rotation": 84.70626,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2957,15 +2547,11 @@
         "z": 23.9200134
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2986,15 +2572,11 @@
         "z": -76.8500061
       },
       "Rotation": 28.36,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3015,16 +2597,11 @@
         "z": -122.95
       },
       "Rotation": 281.0713,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3045,15 +2622,11 @@
         "z": 20.52002
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3074,16 +2647,11 @@
         "z": -3.29000854
       },
       "Rotation": 254.950012,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3104,16 +2672,11 @@
         "z": 28.7740173
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3134,15 +2697,11 @@
         "z": 49.8599854
       },
       "Rotation": 112.108734,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3163,15 +2722,11 @@
         "z": -168.200012
       },
       "Rotation": 7.00999975,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneBarrack",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3192,15 +2747,11 @@
         "z": 11.51
       },
       "Rotation": 84.70626,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3221,15 +2772,11 @@
         "z": 193.75
       },
       "Rotation": 154.03,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneBarrack",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3250,15 +2797,11 @@
         "z": 37.87
       },
       "Rotation": 347.314056,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneBarrack",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3279,15 +2822,11 @@
         "z": -0.72
       },
       "Rotation": 84.70626,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZonePTOR2",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3308,15 +2847,11 @@
         "z": -16.16
       },
       "Rotation": 109.706451,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3337,15 +2872,11 @@
         "z": 18.1000061
       },
       "Rotation": 12.37,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3366,15 +2897,11 @@
         "z": -0.5799866
       },
       "Rotation": 254.950012,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3395,15 +2922,11 @@
         "z": -154.47
       },
       "Rotation": 86.59,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3424,15 +2947,11 @@
         "z": 51.02997
       },
       "Rotation": 180.89,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneSubStorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3453,16 +2972,11 @@
         "z": -153.948
       },
       "Rotation": 79.13992,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3483,15 +2997,11 @@
         "z": 43.8500366
       },
       "Rotation": 112.108734,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3512,16 +3022,11 @@
         "z": 4.880005
       },
       "Rotation": 289.35,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneBunkerStorage",
-      "Categories": [
-        "Bot",
-        "Boss"
-      ],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3542,16 +3047,11 @@
         "z": -32.87999
       },
       "Rotation": 248.310242,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3572,16 +3072,11 @@
         "z": 47.73004
       },
       "Rotation": 112.108734,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3602,15 +3097,11 @@
         "z": -111.539978
       },
       "Rotation": 283.845032,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneSubCommand",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3631,15 +3122,11 @@
         "z": 41.582
       },
       "Rotation": 96.64535,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3660,15 +3147,11 @@
         "z": -186.01
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3689,16 +3172,11 @@
         "z": -97.51999
       },
       "Rotation": 46.72,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3719,15 +3197,11 @@
         "z": 15.1000061
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3748,15 +3222,11 @@
         "z": -117.53
       },
       "Rotation": 281.0713,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneBunkerStorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3777,16 +3247,11 @@
         "z": -18.0099945
       },
       "Rotation": 248.310242,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3807,15 +3272,11 @@
         "z": -116.34
       },
       "Rotation": 283.845032,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3836,16 +3297,11 @@
         "z": -156.91
       },
       "Rotation": 86.59,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3866,15 +3322,11 @@
         "z": -115.48999
       },
       "Rotation": 283.845032,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZonePTOR2",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3895,15 +3347,11 @@
         "z": 12.853
       },
       "Rotation": 109.706451,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3924,15 +3372,11 @@
         "z": -234.905991
       },
       "Rotation": 28.0800018,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3953,16 +3397,11 @@
         "z": -169.22
       },
       "Rotation": 3.630001,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3983,15 +3422,11 @@
         "z": -114.09
       },
       "Rotation": 283.845032,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4012,15 +3447,11 @@
         "z": -180.038
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZonePTOR1",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4041,16 +3472,11 @@
         "z": -39.999
       },
       "Rotation": 105.6213,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneSubCommand",
-      "Categories": [
-        "Bot",
-        "Boss"
-      ],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4071,15 +3497,11 @@
         "z": 33.834
       },
       "Rotation": 102.590828,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneSubCommand",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4100,15 +3522,11 @@
         "z": 17.202
       },
       "Rotation": 12.218833,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneBarrack",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4129,15 +3547,11 @@
         "z": 40.57
       },
       "Rotation": 347.314056,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4158,15 +3572,11 @@
         "z": 194.040039
       },
       "Rotation": 154.03,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4187,15 +3597,11 @@
         "z": 191.140015
       },
       "Rotation": 154.03,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4216,15 +3622,11 @@
         "z": 63.1099854
       },
       "Rotation": 216.23,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneBarrack",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4245,16 +3647,11 @@
         "z": -6.836
       },
       "Rotation": 294.580322,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4275,15 +3672,11 @@
         "z": -110.81
       },
       "Rotation": 283.845032,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneSubStorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4304,15 +3697,11 @@
         "z": -123.123
       },
       "Rotation": 271.344574,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnBoxParams",
         "_props": {
@@ -4337,15 +3726,11 @@
         "z": 80.26001
       },
       "Rotation": 96.94,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4366,16 +3751,11 @@
         "z": -196.341
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4396,16 +3776,11 @@
         "z": 27.40802
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4426,15 +3801,11 @@
         "z": 49.52002
       },
       "Rotation": 112.108734,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4455,15 +3826,11 @@
         "z": 15.0599976
       },
       "Rotation": 12.37,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4484,16 +3851,11 @@
         "z": -234.905991
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4514,15 +3876,11 @@
         "z": 33.3099976
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBunkerStorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4543,15 +3901,11 @@
         "z": 42.002
       },
       "Rotation": 186.0699,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneSubStorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4572,15 +3926,11 @@
         "z": -142.628
       },
       "Rotation": 79.13992,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4601,16 +3951,11 @@
         "z": -183.433
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4631,15 +3976,11 @@
         "z": 16.6000061
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZonePTOR1",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4660,15 +4001,11 @@
         "z": -34.11
       },
       "Rotation": 105.6213,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4689,15 +4026,11 @@
         "z": -177.18
       },
       "Rotation": 7.00999975,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4718,15 +4051,11 @@
         "z": -64.70999
       },
       "Rotation": 170,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnBoxParams",
         "_props": {
@@ -4751,16 +4080,11 @@
         "z": 79.09003
       },
       "Rotation": 96.94,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4781,16 +4105,11 @@
         "z": 42.960022
       },
       "Rotation": 112.108734,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4811,15 +4130,11 @@
         "z": 22.76001
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4840,15 +4155,11 @@
         "z": -188.589
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4869,15 +4180,11 @@
         "z": -231.952
       },
       "Rotation": 281.0713,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4898,15 +4205,11 @@
         "z": -176.889
       },
       "Rotation": 281.0713,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4927,15 +4230,11 @@
         "z": -4.83999634
       },
       "Rotation": 254.950012,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZonePTOR2",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4956,15 +4255,11 @@
         "z": 3.068
       },
       "Rotation": 109.706451,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4985,15 +4280,11 @@
         "z": -94.94
       },
       "Rotation": 281.0713,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneBarrack",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5014,15 +4305,11 @@
         "z": -10.41
       },
       "Rotation": 96.64535,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnBoxParams",
         "_props": {
@@ -5047,15 +4334,11 @@
         "z": 77.5
       },
       "Rotation": 96.94,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5076,16 +4359,11 @@
         "z": -6.720001
       },
       "Rotation": 254.950012,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5106,15 +4384,11 @@
         "z": 14.9630127
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5135,15 +4409,11 @@
         "z": -189.65
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5164,16 +4434,11 @@
         "z": 192
       },
       "Rotation": 154.03,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5194,15 +4459,11 @@
         "z": 16.27002
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneSubStorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5223,15 +4484,11 @@
         "z": -146.815
       },
       "Rotation": 79.13992,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5252,15 +4509,11 @@
         "z": -230.529
       },
       "Rotation": 281.0713,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZonePTOR1",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5281,16 +4534,11 @@
         "z": -19.157
       },
       "Rotation": 105.6213,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5311,15 +4559,11 @@
         "z": 20.730011
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5340,15 +4584,11 @@
         "z": -168.15
       },
       "Rotation": 7.00999975,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5369,15 +4609,11 @@
         "z": 182.93
       },
       "Rotation": 88.80001,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5398,15 +4634,11 @@
         "z": 18.7000122
       },
       "Rotation": 45.4399948,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneSubStorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5427,15 +4659,11 @@
         "z": -93.33
       },
       "Rotation": 186.0699,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneBunkerStorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5456,15 +4684,11 @@
         "z": -42.14
       },
       "Rotation": 248.310242,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5485,15 +4709,11 @@
         "z": -129.98999
       },
       "Rotation": 2.98000026,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5514,16 +4734,11 @@
         "z": -129.98999
       },
       "Rotation": 2.98000026,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "ZoneBunkerStorage",
-      "Categories": [
-        "Bot",
-        "Boss"
-      ],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5544,15 +4759,11 @@
         "z": 31.4150085
       },
       "Rotation": 186.0699,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneBarrack",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5573,15 +4784,11 @@
         "z": 1.2
       },
       "Rotation": 294.580322,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnBoxParams",
         "_props": {
@@ -5606,15 +4813,11 @@
         "z": 78.1400146
       },
       "Rotation": 96.94,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5635,16 +4838,11 @@
         "z": -169.16
       },
       "Rotation": 314.09,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5665,15 +4863,11 @@
         "z": 51.3300171
       },
       "Rotation": 112.108734,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5694,16 +4888,11 @@
         "z": -129.98999
       },
       "Rotation": 2.98000026,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5724,16 +4913,11 @@
         "z": 17.059021
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Opposite"
-      ],
+      "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5754,15 +4938,11 @@
         "z": 41.77002
       },
       "Rotation": 112.108734,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneSubStorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5783,15 +4963,11 @@
         "z": -120.284
       },
       "Rotation": 286.266541,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5812,15 +4988,11 @@
         "z": 182.830017
       },
       "Rotation": 88.80001,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5841,16 +5013,11 @@
         "z": 14.269989
       },
       "Rotation": 12.37,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
       "BotZoneName": "",
-      "Categories": [
-        "Coop",
-        "Group"
-      ],
+      "Categories": ["Coop", "Group"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5871,15 +5038,11 @@
         "z": 28.8600159
       },
       "Rotation": 28.0800037,
-      "Sides": [
-        "Pmc"
-      ]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBunkerStorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5900,15 +5063,11 @@
         "z": 40.798996
       },
       "Rotation": 186.0699,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZonePTOR2",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5929,15 +5088,11 @@
         "z": -56.2
       },
       "Rotation": 105.6213,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "ZoneRailStrorage",
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5958,9 +5113,7 @@
         "z": -175.682
       },
       "Rotation": 281.0713,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     }
   ],
   "UnixDateTime": 1636384173,

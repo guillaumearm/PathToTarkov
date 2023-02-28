@@ -47,23 +47,17 @@
       "Supports": [
         {
           "BossEscortAmount": "2",
-          "BossEscortDifficult": [
-            "normal"
-          ],
+          "BossEscortDifficult": ["normal"],
           "BossEscortType": "followerGluharAssault"
         },
         {
           "BossEscortAmount": "2",
-          "BossEscortDifficult": [
-            "normal"
-          ],
+          "BossEscortDifficult": ["normal"],
           "BossEscortType": "followerGluharSecurity"
         },
         {
           "BossEscortAmount": "1",
-          "BossEscortDifficult": [
-            "normal"
-          ],
+          "BossEscortDifficult": ["normal"],
           "BossEscortType": "followerGluharScout"
         }
       ],
@@ -156,9 +150,7 @@
   },
   "SpawnPointParams": [
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -179,14 +171,10 @@
         "z": 423.09
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -207,14 +195,10 @@
         "z": 350.427
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -235,14 +219,10 @@
         "z": 220.356
       },
       "Rotation": 359.110931,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -263,14 +243,10 @@
         "z": 400.981
       },
       "Rotation": 180,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -291,14 +267,10 @@
         "z": 409.53
       },
       "Rotation": 169.7296,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -319,14 +291,10 @@
         "z": 57.728
       },
       "Rotation": 351.1806,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -347,14 +315,10 @@
         "z": 399.605
       },
       "Rotation": 271.2534,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -375,14 +339,10 @@
         "z": 183.069
       },
       "Rotation": 74.27901,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -403,14 +363,10 @@
         "z": 163.591
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -431,14 +387,10 @@
         "z": 341.592
       },
       "Rotation": 4.729597,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -459,14 +411,10 @@
         "z": 361.571
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -487,14 +435,10 @@
         "z": 296.639
       },
       "Rotation": 334.7296,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -515,14 +459,10 @@
         "z": 154.221008
       },
       "Rotation": 331.5,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -543,14 +483,10 @@
         "z": 277.332
       },
       "Rotation": 25.0000076,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -571,14 +507,10 @@
         "z": 399.57
       },
       "Rotation": 271.2534,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -599,14 +531,10 @@
         "z": 43.093
       },
       "Rotation": 22.0116329,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -627,14 +555,10 @@
         "z": 75.15
       },
       "Rotation": 162.1,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -655,14 +579,10 @@
         "z": 285.08
       },
       "Rotation": 130.584167,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -683,14 +603,10 @@
         "z": 66.369
       },
       "Rotation": 13.8160019,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -711,14 +627,10 @@
         "z": 64.002
       },
       "Rotation": 83.99048,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -739,14 +651,10 @@
         "z": 81.787
       },
       "Rotation": 94.72958,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -767,14 +675,10 @@
         "z": 330.802
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -795,14 +699,10 @@
         "z": 105.23
       },
       "Rotation": 94.72969,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -823,14 +723,10 @@
         "z": 66.538
       },
       "Rotation": 287.434448,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -851,14 +747,10 @@
         "z": 182.111
       },
       "Rotation": 4.729717,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -879,14 +771,10 @@
         "z": 82.052
       },
       "Rotation": 94.72958,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -907,14 +795,10 @@
         "z": 70.348
       },
       "Rotation": 323.630524,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -935,14 +819,10 @@
         "z": 231.915
       },
       "Rotation": 114.231476,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -963,14 +843,10 @@
         "z": 466.984
       },
       "Rotation": 181.253433,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -991,14 +867,10 @@
         "z": 376.28
       },
       "Rotation": 334.7296,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1019,14 +891,10 @@
         "z": 180.776
       },
       "Rotation": 4.729717,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1047,14 +915,10 @@
         "z": 405.031
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1075,14 +939,10 @@
         "z": 76.47
       },
       "Rotation": 162.1,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1103,14 +963,10 @@
         "z": 107.92
       },
       "Rotation": 94.72969,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1131,14 +987,10 @@
         "z": 127.036
       },
       "Rotation": 279.4518,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1159,14 +1011,10 @@
         "z": 399.622
       },
       "Rotation": 271.2534,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1187,14 +1035,10 @@
         "z": 351.635
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1215,14 +1059,10 @@
         "z": 54.35
       },
       "Rotation": 109.729546,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1243,14 +1083,10 @@
         "z": 350.161
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1271,14 +1107,10 @@
         "z": 345.06
       },
       "Rotation": 16.7069,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1299,14 +1131,10 @@
         "z": 83.728
       },
       "Rotation": 94.72958,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1327,14 +1155,10 @@
         "z": 428.614
       },
       "Rotation": 169.729568,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1355,14 +1179,10 @@
         "z": 71.9
       },
       "Rotation": 347.919159,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1383,14 +1203,10 @@
         "z": 242.94
       },
       "Rotation": 205,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1411,14 +1227,10 @@
         "z": 44.094
       },
       "Rotation": 109.729546,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1439,14 +1251,10 @@
         "z": 417.082
       },
       "Rotation": 241.253387,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1467,14 +1275,10 @@
         "z": 379.56
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1495,14 +1299,10 @@
         "z": 62.497
       },
       "Rotation": 4.72967052,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1523,14 +1323,10 @@
         "z": 342.49
       },
       "Rotation": 340.000031,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1551,14 +1347,10 @@
         "z": 240.565
       },
       "Rotation": 205,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1579,14 +1371,10 @@
         "z": 177.886
       },
       "Rotation": 162.1,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1607,14 +1395,10 @@
         "z": 410.72
       },
       "Rotation": 169.7296,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1635,14 +1419,10 @@
         "z": 468.656
       },
       "Rotation": 181.253433,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1663,14 +1443,10 @@
         "z": 71.19
       },
       "Rotation": 336.3428,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1691,14 +1467,10 @@
         "z": 286.245
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1719,14 +1491,10 @@
         "z": 410.43
       },
       "Rotation": 169.7296,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1747,14 +1515,10 @@
         "z": 414.922
       },
       "Rotation": 241.253387,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1775,14 +1539,10 @@
         "z": 342.105
       },
       "Rotation": 16.7069,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1803,14 +1563,10 @@
         "z": 401.048
       },
       "Rotation": 180,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1831,14 +1587,10 @@
         "z": 369.477
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1859,14 +1611,10 @@
         "z": 124.36
       },
       "Rotation": 184.72963,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1887,14 +1635,10 @@
         "z": 279.065
       },
       "Rotation": 25.0000076,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1915,14 +1659,10 @@
         "z": 238.5
       },
       "Rotation": 114.231476,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1943,14 +1683,10 @@
         "z": 401.783
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1971,14 +1707,10 @@
         "z": 465.022
       },
       "Rotation": 181.253433,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1999,14 +1731,10 @@
         "z": 343.2
       },
       "Rotation": 4.729597,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2027,14 +1755,10 @@
         "z": 375.369
       },
       "Rotation": 334.7296,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2055,14 +1779,10 @@
         "z": 231.312
       },
       "Rotation": 114.231476,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2083,14 +1803,10 @@
         "z": 344.996
       },
       "Rotation": 16.7069,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2111,14 +1827,10 @@
         "z": 87
       },
       "Rotation": 162.1,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2139,14 +1851,10 @@
         "z": 106.89
       },
       "Rotation": 94.72969,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2167,14 +1875,10 @@
         "z": 268.45
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2195,14 +1899,10 @@
         "z": 296.404
       },
       "Rotation": 334.7296,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2223,14 +1923,10 @@
         "z": 401.49
       },
       "Rotation": 271.2534,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2251,14 +1947,10 @@
         "z": 306.553
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2279,14 +1971,10 @@
         "z": 299.881
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2307,14 +1995,10 @@
         "z": 196.95
       },
       "Rotation": 301.882233,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2335,14 +2019,10 @@
         "z": 64.16
       },
       "Rotation": 1.72222173,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2363,14 +2043,10 @@
         "z": 359.39
       },
       "Rotation": 180,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2391,14 +2067,10 @@
         "z": 363.484
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2419,14 +2091,10 @@
         "z": 297.28
       },
       "Rotation": 334.7296,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2447,14 +2115,10 @@
         "z": 126.507
       },
       "Rotation": 184.72963,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2475,14 +2139,10 @@
         "z": 58.81
       },
       "Rotation": 226.20929,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2503,14 +2163,10 @@
         "z": 345.289
       },
       "Rotation": 4.729597,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2531,14 +2187,10 @@
         "z": 341.66
       },
       "Rotation": 4.729597,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2559,14 +2211,10 @@
         "z": 357.136
       },
       "Rotation": 180,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2587,14 +2235,10 @@
         "z": 175.6
       },
       "Rotation": 162.1,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2615,14 +2259,10 @@
         "z": 128.073
       },
       "Rotation": 279.4518,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2643,14 +2283,10 @@
         "z": 287.44
       },
       "Rotation": 130.584167,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2671,14 +2307,10 @@
         "z": 289.52
       },
       "Rotation": 130.584167,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2699,14 +2331,10 @@
         "z": 375.708
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2727,14 +2355,10 @@
         "z": 180.655
       },
       "Rotation": 74.27901,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2755,14 +2379,10 @@
         "z": 381.269
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2783,14 +2403,10 @@
         "z": 346.075
       },
       "Rotation": 272.480042,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2811,14 +2427,10 @@
         "z": 282.178
       },
       "Rotation": 25.0000076,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2839,14 +2451,10 @@
         "z": 243.479
       },
       "Rotation": 205,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2867,14 +2475,10 @@
         "z": 177.965
       },
       "Rotation": 4.72961473,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2895,14 +2499,10 @@
         "z": 92.28
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2923,14 +2523,10 @@
         "z": 428.53
       },
       "Rotation": 169.729568,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2951,14 +2547,10 @@
         "z": 173.602
       },
       "Rotation": 281.824554,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2979,14 +2571,10 @@
         "z": 180.998
       },
       "Rotation": 4.729717,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3007,14 +2595,10 @@
         "z": 165.156
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3035,14 +2619,10 @@
         "z": 423.31
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3063,14 +2643,10 @@
         "z": 178.024
       },
       "Rotation": 162.1,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3091,14 +2667,10 @@
         "z": 125.441
       },
       "Rotation": 184.72963,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3119,14 +2691,10 @@
         "z": 86.182
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3147,14 +2715,10 @@
         "z": 282.533
       },
       "Rotation": 25.0000076,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3175,14 +2739,10 @@
         "z": 66.398
       },
       "Rotation": 287.434448,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3203,14 +2763,10 @@
         "z": 183.074
       },
       "Rotation": 74.27901,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3231,14 +2787,10 @@
         "z": 127.088
       },
       "Rotation": 184.72963,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3259,14 +2811,10 @@
         "z": 402.74
       },
       "Rotation": 271.2534,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3287,14 +2835,10 @@
         "z": 61.52
       },
       "Rotation": 109.729546,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3315,14 +2859,10 @@
         "z": 466.544
       },
       "Rotation": 181.253433,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3343,14 +2883,10 @@
         "z": 80.308
       },
       "Rotation": 94.72958,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3371,14 +2907,10 @@
         "z": 169.61
       },
       "Rotation": 281.824554,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3399,14 +2931,10 @@
         "z": 176.78
       },
       "Rotation": 281.824554,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3427,14 +2955,10 @@
         "z": 466.542
       },
       "Rotation": 181.253433,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3455,14 +2979,10 @@
         "z": 280.783
       },
       "Rotation": 25.0000076,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3483,14 +3003,10 @@
         "z": 188.66
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3511,14 +3027,10 @@
         "z": 298.55
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3539,14 +3051,10 @@
         "z": 465.087
       },
       "Rotation": 181.253433,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3567,14 +3075,10 @@
         "z": 359.66
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3595,14 +3099,10 @@
         "z": 74.08
       },
       "Rotation": 162.1,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3623,14 +3123,10 @@
         "z": 410.74
       },
       "Rotation": 169.7296,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3651,14 +3147,10 @@
         "z": 237.972
       },
       "Rotation": 205,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3679,14 +3171,10 @@
         "z": 395.888
       },
       "Rotation": 180,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3707,14 +3195,10 @@
         "z": 342.45
       },
       "Rotation": 340.000031,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3735,14 +3219,10 @@
         "z": 297.4
       },
       "Rotation": 334.7296,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3763,14 +3243,10 @@
         "z": 379.893
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3791,14 +3267,10 @@
         "z": 88.469
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3819,14 +3291,10 @@
         "z": 43.507
       },
       "Rotation": 22.0116329,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3847,14 +3315,10 @@
         "z": 404.55
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3875,14 +3339,10 @@
         "z": 413.596
       },
       "Rotation": 241.253387,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3903,14 +3363,10 @@
         "z": 304.276
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3931,14 +3387,10 @@
         "z": 168.261
       },
       "Rotation": 281.824554,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3959,14 +3411,10 @@
         "z": 377.25
       },
       "Rotation": 334.7296,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3987,14 +3435,10 @@
         "z": 267.041016
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4015,14 +3459,10 @@
         "z": 200.375
       },
       "Rotation": 359.110931,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4043,14 +3483,10 @@
         "z": 125.374
       },
       "Rotation": 139.014771,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4071,14 +3507,10 @@
         "z": 182.139
       },
       "Rotation": 74.27901,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4099,14 +3531,10 @@
         "z": 415.754
       },
       "Rotation": 241.253387,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4127,14 +3555,10 @@
         "z": 289.934
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4155,14 +3579,10 @@
         "z": 66.17
       },
       "Rotation": 287.434448,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4183,14 +3603,10 @@
         "z": 329.919
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4211,14 +3627,10 @@
         "z": 295.835
       },
       "Rotation": 334.7296,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4239,14 +3651,10 @@
         "z": 421.58
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4267,14 +3675,10 @@
         "z": 466.141
       },
       "Rotation": 181.253433,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4295,14 +3699,10 @@
         "z": 64.192
       },
       "Rotation": 4.72967052,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4323,14 +3723,10 @@
         "z": 108.38
       },
       "Rotation": 94.72969,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4351,14 +3747,10 @@
         "z": 128.329
       },
       "Rotation": 184.72963,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4379,14 +3771,10 @@
         "z": 44.36
       },
       "Rotation": 109.729546,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4407,14 +3795,10 @@
         "z": 60.45
       },
       "Rotation": 63.4586678,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4435,14 +3819,10 @@
         "z": 127.434
       },
       "Rotation": 279.4518,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4463,14 +3843,10 @@
         "z": 57.38
       },
       "Rotation": 1.138527,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4491,14 +3867,10 @@
         "z": 285.931
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4519,14 +3891,10 @@
         "z": 179.404
       },
       "Rotation": 4.729717,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4547,14 +3915,10 @@
         "z": 288.036
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4575,14 +3939,10 @@
         "z": 301.99
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4603,14 +3963,10 @@
         "z": 270.845
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4631,14 +3987,10 @@
         "z": 270.573
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4659,14 +4011,10 @@
         "z": 318.596
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4687,14 +4035,10 @@
         "z": 352.58
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4715,14 +4059,10 @@
         "z": 291.57
       },
       "Rotation": 130.584167,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4743,14 +4083,10 @@
         "z": 421.67
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4771,14 +4107,10 @@
         "z": 399.657
       },
       "Rotation": 180,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4799,14 +4131,10 @@
         "z": 386.267
       },
       "Rotation": 92.4,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4827,14 +4155,10 @@
         "z": 222.293
       },
       "Rotation": 359.110931,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4855,14 +4179,10 @@
         "z": 203.36
       },
       "Rotation": 359.110931,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4883,14 +4203,10 @@
         "z": 194.976
       },
       "Rotation": 301.882233,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4911,14 +4227,10 @@
         "z": 232.6
       },
       "Rotation": 114.231476,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4939,14 +4251,10 @@
         "z": 242.265
       },
       "Rotation": 158.789185,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4967,14 +4275,10 @@
         "z": 253.572
       },
       "Rotation": 111.727104,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4995,14 +4299,10 @@
         "z": 374.04
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5023,14 +4323,10 @@
         "z": 402.46
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5051,14 +4347,10 @@
         "z": 357.876
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5079,14 +4371,10 @@
         "z": 361.238
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5107,14 +4395,10 @@
         "z": 357.98
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5135,14 +4419,10 @@
         "z": 350.13
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5163,14 +4443,10 @@
         "z": 358.498
       },
       "Rotation": 180,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5191,14 +4467,10 @@
         "z": 378.527
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5219,14 +4491,10 @@
         "z": 405.033
       },
       "Rotation": 99.85764,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5247,14 +4515,10 @@
         "z": 297.1
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5275,14 +4539,10 @@
         "z": 297.93
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5303,14 +4563,10 @@
         "z": 331.588
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5331,14 +4587,10 @@
         "z": 328.16
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5359,14 +4611,10 @@
         "z": 468.992
       },
       "Rotation": 181.253433,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5387,14 +4635,10 @@
         "z": 63.05
       },
       "Rotation": 63.4586678,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5415,14 +4659,10 @@
         "z": 61.504
       },
       "Rotation": 357.465179,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5443,14 +4683,10 @@
         "z": 174.42
       },
       "Rotation": 281.824554,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5471,14 +4707,10 @@
         "z": 80.613
       },
       "Rotation": 94.72958,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5499,14 +4731,10 @@
         "z": 156.097
       },
       "Rotation": 331.5,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5527,14 +4755,10 @@
         "z": 107.643
       },
       "Rotation": 94.72969,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5555,14 +4779,10 @@
         "z": 374.65
       },
       "Rotation": 334.7296,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5583,14 +4803,10 @@
         "z": 410.5
       },
       "Rotation": 169.7296,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5611,14 +4827,10 @@
         "z": 416.533
       },
       "Rotation": 241.253387,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5639,14 +4851,10 @@
         "z": 126.294
       },
       "Rotation": 279.4518,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5667,14 +4875,10 @@
         "z": 376.208
       },
       "Rotation": 334.7296,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5695,14 +4899,10 @@
         "z": 395.469
       },
       "Rotation": 180,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5723,14 +4923,10 @@
         "z": 165.45
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5751,14 +4947,10 @@
         "z": 182.271
       },
       "Rotation": 4.729717,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5779,14 +4971,10 @@
         "z": 43.803
       },
       "Rotation": 109.729546,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5807,14 +4995,10 @@
         "z": 298.748
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5835,14 +5019,10 @@
         "z": 428.129
       },
       "Rotation": 169.729568,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5863,14 +5043,10 @@
         "z": 86.31
       },
       "Rotation": 162.1,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5891,14 +5067,10 @@
         "z": 467.431
       },
       "Rotation": 181.253433,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5919,14 +5091,10 @@
         "z": 357.65
       },
       "Rotation": 180,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5947,14 +5115,10 @@
         "z": 299.252
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -5975,14 +5139,10 @@
         "z": 267.981018
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6003,14 +5163,10 @@
         "z": 371.175
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6031,14 +5187,10 @@
         "z": 430.76
       },
       "Rotation": 169.729568,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6059,14 +5211,10 @@
         "z": 86.85
       },
       "Rotation": 162.1,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6087,14 +5235,10 @@
         "z": 64.97
       },
       "Rotation": 101.2029,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6115,14 +5259,10 @@
         "z": 430.339
       },
       "Rotation": 169.729568,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6143,14 +5283,10 @@
         "z": 465.548
       },
       "Rotation": 181.253433,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6171,14 +5307,10 @@
         "z": 358
       },
       "Rotation": 0,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6199,14 +5331,10 @@
         "z": 302.641
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6227,14 +5355,10 @@
         "z": 269.47
       },
       "Rotation": 353.8347,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6255,14 +5379,10 @@
         "z": 192.06
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6283,14 +5403,10 @@
         "z": 154.769989
       },
       "Rotation": 331.5,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Player"
-      ],
+      "Categories": ["Player"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6311,14 +5427,10 @@
         "z": 242.089
       },
       "Rotation": 205,
-      "Sides": [
-        "All"
-      ]
+      "Sides": ["All"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6339,14 +5451,10 @@
         "z": 404.31
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6367,14 +5475,10 @@
         "z": 178.296
       },
       "Rotation": 162.1,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6395,14 +5499,10 @@
         "z": 152.372009
       },
       "Rotation": 331.5,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6423,14 +5523,10 @@
         "z": 156.55
       },
       "Rotation": 50.4,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6451,14 +5547,10 @@
         "z": 83.2299957
       },
       "Rotation": 162.1,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6479,14 +5571,10 @@
         "z": 75.04
       },
       "Rotation": 162.1,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6507,14 +5595,10 @@
         "z": 73.128
       },
       "Rotation": 162.1,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6535,14 +5619,10 @@
         "z": 228.13
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6563,14 +5643,10 @@
         "z": 309.91
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6591,14 +5667,10 @@
         "z": 297.38
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6619,14 +5691,10 @@
         "z": 410.85
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6647,14 +5715,10 @@
         "z": 390.43
       },
       "Rotation": 90,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "Bot"
-      ],
+      "Categories": ["Bot"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6675,14 +5739,10 @@
         "z": 101.34
       },
       "Rotation": 270,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6703,14 +5763,10 @@
         "z": 165.33
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6731,14 +5787,10 @@
         "z": 90.2299957
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6759,14 +5811,10 @@
         "z": 189.07
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     },
     {
-      "Categories": [
-        "All"
-      ],
+      "Categories": ["All"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -6787,9 +5835,7 @@
         "z": 169.49
       },
       "Rotation": 264.516571,
-      "Sides": [
-        "Savage"
-      ]
+      "Sides": ["Savage"]
     }
   ],
   "UnixDateTime": 1621511450,

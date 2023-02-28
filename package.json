@@ -8,7 +8,7 @@
   "author": "Trap",
   "akiVersion": "3.5.x",
   "scripts": {
-    "gather:external:resources": "./scripts/gather-external-resources.sh",
+    "gather:external:resources": "./scripts/gather-external-resources.sh && npm run prettier",
     "build:doc:all-exfils": "node scripts/generate-all-exfils > ALL_EXFILS.md",
     "dev:doc": "node scripts/generate-all-exfils",
     "build:doc": "npm run build:doc:all-exfils",

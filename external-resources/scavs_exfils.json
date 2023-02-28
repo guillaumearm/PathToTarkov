@@ -16,10 +16,7 @@
     "Administration Gate",
     "Factory Far Corner"
   ],
-  "factory": [
-    "Office Window",
-    "Camera Bunker Door"
-  ],
+  "factory": ["Office Window", "Camera Bunker Door"],
   "interchange": [],
   "woods": [
     "East Gate",
@@ -40,23 +37,13 @@
     "Wrecked Road",
     "Lighthouse"
   ],
-  "reserve": [
-    "Exit1",
-    "Exit2", 
-    "Exit3",
-    "Exit4"
-  ],
+  "reserve": ["Exit1", "Exit2", "Exit3", "Exit4"],
   "lighthouse": [
     "SCAV_Industrial_Zone",
     "Scav_Hideout_at_the_grotto",
     "SCAV_Underboat_Hideout",
     "Scav_Coastal_South"
   ],
-  "streets": [
-    "scav_e1",
-    "scav_e2",
-    "scav_e3",
-    "scav_e4"
-  ],
+  "streets": ["scav_e1", "scav_e2", "scav_e3", "scav_e4"],
   "laboratory": []
 }
