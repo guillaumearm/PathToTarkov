@@ -14,6 +14,10 @@ const MARKDOWN_TABLE_HEADER = `
 |----------|-----------|
 `.trim();
 
+const MAPGENIE_REMAPPING = {
+  laboratory: "lab",
+};
+
 const lowerLocaleKeys = (locales) => {
   const result = {};
   const localeKeys = Object.keys(locales);
@@ -42,6 +46,20 @@ const SCAVS_EXFILS = require(`../${EXTERNAL_RESOURCES_DIR}/${SCAVS_EXFILS_FILENA
 
 const getMapJsonFilePath = (mapName) =>
   `${EXTERNAL_RESOURCES_DIR}/${MAPS_DIR}/${mapName}.json`;
+
+const getMapGenieMapName = (mapName) => {
+  if (MAPGENIE_REMAPPING[mapName]) {
+    return MAPGENIE_REMAPPING[mapName];
+  }
+
+  return mapName;
+};
+
+// TODO
+const getMapGenieLocationUrl = (mapName, locationId) => {
+  const mapGenieMapName = getMapGenieMapName(mapName);
+  return `https://mapgenie.io/tarkov/maps/${mapGenieMapName}?locationIds=${locationId}`;
+};
 
 class ConfigError extends Error {
   constructor(msg) {
