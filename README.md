@@ -19,9 +19,11 @@ New spawn points can be added in `player_spawnpoints.json`
 - Changed spawn points according to the offraid position
 - Certains offraid locations enable/disable the hydration/energy/health restoration (according to config)
 
+## Available Exfiltrations
+Here is [the complete list of available exfiltrations points](./ALL_EXFILS.md)
+
 ## How to edit the current offraid position
 The offraid position is stored in your profile in a dedicated field `PathToTarkov`, you can edit it with a regular text editor.
-
 
 ## UnInstallation
 Before deleting the mod, you can set the `enabled` props to `false` in `config.json` and start the server once.
