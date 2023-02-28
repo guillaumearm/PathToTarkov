@@ -8,6 +8,7 @@
   "author": "Trap",
   "akiVersion": "3.5.x",
   "scripts": {
+    "gather:external:resources": "./scripts/gather-external-resources.sh",
     "zip:files": "cd dist && bestzip ../mod.zip user BepInEx && cd .. && node scripts/rename-zip.js",
     "prepare:files": "node scripts/prepare-files.js",
     "build:release": "npm run lint:all && npm run rebuild:all && npm run prepare:files && npm run zip:files",
