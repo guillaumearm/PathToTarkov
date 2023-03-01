@@ -1,3 +1,444 @@
 {
-  "customs": [{ "id": 29976, "description": "Administration Gate [SCAV]" }]
+  "customs": [
+    {
+      "id": 29967,
+      "description": "Railroad To Port"
+    },
+    {
+      "id": 29968,
+      "description": "Smuggler's Boat"
+    },
+    {
+      "id": 29969,
+      "description": "Crossroads"
+    },
+    {
+      "id": 29970,
+      "description": "Trailer Park"
+    },
+    {
+      "id": 29971,
+      "description": "Railroad To Tarkov"
+    },
+    {
+      "id": 29972,
+      "description": "Trailer Park Workers' Shack"
+    },
+    {
+      "id": 29973,
+      "description": "RUAF Roadblock"
+    },
+    {
+      "id": 29974,
+      "description": "Old Gas Station"
+    },
+    {
+      "id": 29975,
+      "description": "Factory Far Corner"
+    },
+    {
+      "id": 29976,
+      "description": "Administration Gate"
+    },
+    {
+      "id": 29977,
+      "description": "Scav Checkpoint"
+    },
+    {
+      "id": 29978,
+      "description": "Military Base CP"
+    },
+    {
+      "id": 29979,
+      "description": "Passage Between Rocks"
+    },
+    {
+      "id": 29980,
+      "description": "Railroad To Military Base"
+    },
+    {
+      "id": 29981,
+      "description": "Old Road Gate"
+    },
+    {
+      "id": 29982,
+      "description": "Dorms V-Ex"
+    },
+    {
+      "id": 29983,
+      "description": "Sniper Roadblock"
+    },
+    {
+      "id": 29984,
+      "description": "Factory Shacks"
+    },
+    {
+      "id": 29985,
+      "description": "Warehouse 17"
+    },
+    {
+      "id": 30116,
+      "description": "ZB-1011"
+    },
+    {
+      "id": 30117,
+      "description": "ZB-1012"
+    },
+    {
+      "id": 30162,
+      "description": "Warehouse 4"
+    },
+    {
+      "id": 43360,
+      "description": "ZB-013"
+    },
+    {
+      "id": 59684,
+      "description": "Old Gas Station Gate"
+    }
+  ],
+  "factory": [
+    {
+      "id": 25056,
+      "description": "Gate 3"
+    },
+    {
+      "id": 25057,
+      "description": "Gate 0"
+    },
+    {
+      "id": 25058,
+      "description": "Camera Bunker Door"
+    },
+    {
+      "id": 25059,
+      "description": "Cellars"
+    },
+    {
+      "id": 25060,
+      "description": "Office Window"
+    },
+    {
+      "id": 88025,
+      "description": "Med Tent Gate"
+    }
+  ],
+  "interchange": [
+    {
+      "id": 28339,
+      "description": "Power Station V-Ex"
+    },
+    {
+      "id": 28340,
+      "description": "Emercom Checkpoint"
+    },
+    {
+      "id": 28341,
+      "description": "Railway Exfil"
+    },
+    {
+      "id": 28342,
+      "description": "Saferoom Exfil"
+    },
+    {
+      "id": 28343,
+      "description": "SCAV Camp (Co-Op)"
+    },
+    {
+      "id": 28349,
+      "description": "Hole in the Fence"
+    }
+  ],
+  "laboratory": [
+    {
+      "id": 31540,
+      "description": "Sewage Conduit"
+    },
+    {
+      "id": 31542,
+      "description": "Main Elevator"
+    },
+    {
+      "id": 31543,
+      "description": "Ventilation Shaft"
+    },
+    {
+      "id": 31549,
+      "description": "Medical Block Elevator"
+    },
+    {
+      "id": 31570,
+      "description": "Hangar Gate"
+    },
+    {
+      "id": 31571,
+      "description": "Cargo Elevator"
+    },
+    {
+      "id": 32101,
+      "description": "Parking Gate"
+    }
+  ],
+  "lighthouse": [
+    {
+      "id": 152315,
+      "description": "Northern Checkpoint"
+    },
+    {
+      "id": 152316,
+      "description": "Armored Train"
+    },
+    {
+      "id": 152317,
+      "description": "Industrial Zone Gates"
+    },
+    {
+      "id": 152319,
+      "description": "Road to military base V-ex"
+    },
+    {
+      "id": 152321,
+      "description": "Scav Hideout at the Grotto"
+    },
+    {
+      "id": 152322,
+      "description": "Path to Shoreline"
+    },
+    {
+      "id": 152323,
+      "description": "Mountain Pass"
+    },
+    {
+      "id": 152325,
+      "description": "Hideout Under The Landing Stage"
+    },
+    {
+      "id": 152326,
+      "description": "Side Tunnel (Co-Op)"
+    },
+    {
+      "id": 152328,
+      "description": "Southern Road"
+    },
+    {
+      "id": 152329,
+      "description": "Southern Road Landslide"
+    }
+  ],
+  "reserve": [
+    {
+      "id": 39193,
+      "description": "Heating Pipe"
+    },
+    {
+      "id": 39194,
+      "description": "Hole in the Wall by the Mountains"
+    },
+    {
+      "id": 39195,
+      "description": "Checkpoint Fence"
+    },
+    {
+      "id": 39196,
+      "description": "Cliff Descent"
+    },
+    {
+      "id": 39211,
+      "description": "SCAV Lands (Co-Op)"
+    },
+    {
+      "id": 39212,
+      "description": "Sewer Manhole"
+    },
+    {
+      "id": 39299,
+      "description": "Depot Hermetic Door"
+    },
+    {
+      "id": 39336,
+      "description": "Bunker Hermetic Door"
+    },
+    {
+      "id": 39352,
+      "description": "Armored Train"
+    },
+    {
+      "id": 39424,
+      "description": "D-2"
+    }
+  ],
+  "shoreline": [
+    {
+      "id": 26116,
+      "description": "Tunnel"
+    },
+    {
+      "id": 26117,
+      "description": "Svetliy Dead End"
+    },
+    {
+      "id": 26118,
+      "description": "Ruined House Fence"
+    },
+    {
+      "id": 26120,
+      "description": "North Fence Passage"
+    },
+    {
+      "id": 26121,
+      "description": "Road To Customs"
+    },
+    {
+      "id": 26122,
+      "description": "CCP Temporary"
+    },
+    {
+      "id": 26123,
+      "description": "Lighthouse"
+    },
+    {
+      "id": 26124,
+      "description": "Pier Boat"
+    },
+    {
+      "id": 26323,
+      "description": "Ruined Road"
+    },
+    {
+      "id": 28239,
+      "description": "Admin Basement"
+    },
+    {
+      "id": 28240,
+      "description": "East Wing Gym Entrance"
+    },
+    {
+      "id": 151041,
+      "description": "Path to Lighthouse"
+    },
+    {
+      "id": 151043,
+      "description": "Railway Bridge"
+    }
+  ],
+  "streets": [
+    {
+      "id": 247827,
+      "description": "Klimov Street"
+    },
+    {
+      "id": 247828,
+      "description": "Underpass"
+    },
+    {
+      "id": 247829,
+      "description": "Basement Descent"
+    },
+    {
+      "id": 247830,
+      "description": "SCAV Checkpoint"
+    },
+    {
+      "id": 247831,
+      "description": "Collapsed Crane"
+    },
+    {
+      "id": 247832,
+      "description": "Sewer Manhole"
+    },
+    {
+      "id": 247833,
+      "description": "Evacuation Zone"
+    },
+    {
+      "id": 247834,
+      "description": "Ventilation Shaft"
+    },
+    {
+      "id": 247835,
+      "description": "Primorsky Ave Taxi V-Ex"
+    },
+    {
+      "id": 247836,
+      "description": "Courtyard"
+    },
+    {
+      "id": 247837,
+      "description": "Damaged House"
+    },
+    {
+      "id": 247838,
+      "description": "Entrance To Catacombs"
+    },
+    {
+      "id": 247839,
+      "description": "Sewer River"
+    }
+  ],
+  "woods": [
+    {
+      "id": 24666,
+      "description": "Eastern Rocks"
+    },
+    {
+      "id": 24854,
+      "description": "Old Station"
+    },
+    {
+      "id": 24855,
+      "description": "UN Roadblock"
+    },
+    {
+      "id": 24856,
+      "description": "Factory Gate (Co-Op)"
+    },
+    {
+      "id": 24857,
+      "description": "RUAF Gate"
+    },
+    {
+      "id": 24858,
+      "description": "ZB-016"
+    },
+    {
+      "id": 24859,
+      "description": "Mountain Stash"
+    },
+    {
+      "id": 24862,
+      "description": "ZB-014"
+    },
+    {
+      "id": 24866,
+      "description": "Outskirts"
+    },
+    {
+      "id": 24868,
+      "description": "Dead Man's Place"
+    },
+    {
+      "id": 24869,
+      "description": "Boat"
+    },
+    {
+      "id": 24870,
+      "description": "SCAV House"
+    },
+    {
+      "id": 65035,
+      "description": "SCAV Bridge"
+    },
+    {
+      "id": 65036,
+      "description": "SCAV Bunker"
+    },
+    {
+      "id": 65037,
+      "description": "Bridge V-EX"
+    },
+    {
+      "id": 65038,
+      "description": "Northern UN Roadblock"
+    }
+  ]
 }

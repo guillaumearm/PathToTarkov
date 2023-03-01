@@ -5,13 +5,14 @@ const EXTERNAL_RESOURCES_DIR = "external-resources";
 const LOCATION_NAME_MAPPING_FILENAME = "location_name_mapping.json";
 const LOCALES_FILENAME = "locales_global_en.json";
 const SCAVS_EXFILS_FILENAME = "scavs_exfils.json";
+const MAPGENIE_LOCATIONS_FILENAME = "mapgenie_locations.json";
 const MAPS_DIR = "maps";
 
 const MARKDOWN_MAIN_TITLE = "All exfiltrations";
 
 const MARKDOWN_TABLE_HEADER = `
-|identifier|description|
-|----------|-----------|
+|identifier|description|mapgenie.io|
+|----------|-----------|-----------|
 `.trim();
 
 const MAPGENIE_REMAPPING = {
@@ -43,6 +44,8 @@ const LOCALES = lowerLocaleKeys(
 );
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const SCAVS_EXFILS = require(`../${EXTERNAL_RESOURCES_DIR}/${SCAVS_EXFILS_FILENAME}`);
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const MAPGENIE_LOCATIONS = require(`../${EXTERNAL_RESOURCES_DIR}/${MAPGENIE_LOCATIONS_FILENAME}`);
 
 const getMapJsonFilePath = (mapName) =>
   `${EXTERNAL_RESOURCES_DIR}/${MAPS_DIR}/${mapName}.json`;
@@ -55,10 +58,24 @@ const getMapGenieMapName = (mapName) => {
   return mapName;
 };
 
-// TODO
+const resolveMapGenieLocationId = (mapName, exitResolvedName) => {
+  const mapLocation = MAPGENIE_LOCATIONS[mapName].find(
+    (l) => l.description.toLowerCase() === exitResolvedName.toLowerCase()
+  );
+
+  if (!mapLocation) {
+    console.error(
+      `Warning: cannot resolve map location ${exitResolvedName} for map '${mapName}'`
+    );
+    return null;
+  }
+
+  return mapLocation.id;
+};
+
 const getMapGenieLocationUrl = (mapName, locationId) => {
   const mapGenieMapName = getMapGenieMapName(mapName);
-  return `https://mapgenie.io/tarkov/maps/${mapGenieMapName}?locationIds=${locationId}`;
+  return `[link](https://mapgenie.io/tarkov/maps/${mapGenieMapName}?locationIds=${locationId})`;
 };
 
 class ConfigError extends Error {
@@ -147,13 +164,34 @@ const formatMapsExits = (mapsExits) => {
   return allMapNames
     .reduce((output, mapName) => {
       const title = `## ${resolveMapDisplayName(mapName)}`;
+      const exits = mapsExits[mapName];
 
-      const exits = mapsExits[mapName].map(
-        (exitName) => `| "${exitName}" | ${resolveLocale(exitName)} |`
-      );
+      const formattedRow = exits
+        .map((exitName) => {
+          const resolvedExitName = resolveLocale(exitName);
+          const mapGenieLocationId = resolveMapGenieLocationId(
+            mapName,
+            resolvedExitName
+          );
+
+          if (!mapGenieLocationId) {
+            return "";
+          }
+
+          const mapGenieLocationUrl = getMapGenieLocationUrl(
+            mapName,
+            mapGenieLocationId
+          );
+
+          return `| "${exitName}" | ${resolveLocale(
+            exitName
+          )} | ${mapGenieLocationUrl} |`;
+        })
+        .filter(Boolean);
 
       return (
-        output + `${title}\n${MARKDOWN_TABLE_HEADER}\n${exits.join("\n")}\n\n`
+        output +
+        `${title}\n${MARKDOWN_TABLE_HEADER}\n${formattedRow.join("\n")}\n\n`
       );
     }, "")
     .trim();
