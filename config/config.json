@@ -3,7 +3,7 @@
   "debug": true,
   "initial_offraid_position": "FactoryZB-1011",
   "reset_offraid_position_on_player_die": true,
-  "traders_access_restriction": true,
+  "traders_access_restriction": false,
   "hideout_multistash_enabled": false,
   "vanilla_exfils_requirements": false,
   "laboratory_access_restriction": true,
@@ -572,7 +572,8 @@
     "tarkovstreets": {
       "E1": "Car",
       "E2": "Car",
-      "E7_car": "Car"
+      "E7_car": "Car",
+      "E9_sniper": "Car"
     },
     "laboratory": {
       "lab_Parking_Gate": "Car",
