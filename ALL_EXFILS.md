@@ -128,6 +128,7 @@
 | "E8" | Cardinal Apartment Complex | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=560) |
 | "E8_yard" | Courtyard | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=562) |
 | "E9_sniper" | Klimov Street | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=567) |
+| "Exit_E10_coop" | Pinewood Basement (Co-Op) | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=570) |
 | "scav_e1" | Basement Descent | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=571) |
 | "scav_e2" | Entrance to Catacombs | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=573) |
 | "scav_e3" | Ventilation Shaft | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=577) |
