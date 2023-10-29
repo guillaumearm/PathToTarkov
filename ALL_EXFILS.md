@@ -117,19 +117,25 @@
 ## Streets of Tarkov
 |identifier|description|mapgenie.io|
 |----------|-----------|-----------|
-| "E1" | Underpass | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247828) |
-| "E2" | Sewer River | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247839) |
-| "E3" | Damaged House | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247837) |
-| "E4" | Evacuation Zone | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247833) |
-| "E5" | Collapsed Crane | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247831) |
-| "E6" | Scav Checkpoint | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247830) |
-| "E7_car" | Primorsky Ave Taxi V-Ex | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247835) |
-| "E8_yard" | Courtyard | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247836) |
-| "E9_sniper" | Klimov Street | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247827) |
-| "scav_e1" | Basement Descent | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247829) |
-| "scav_e2" | Entrance to Catacombs | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247838) |
-| "scav_e3" | Ventilation Shaft | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247834) |
-| "scav_e4" | Sewer Manhole | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247832) |
+| "E1" | Stylobate Building Elevator | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=569) |
+| "E2" | Sewer River | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=565) |
+| "E3" | Damaged House | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=564) |
+| "E4" | Crash Site | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=563) |
+| "E5" | Collapsed Crane | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=561) |
+| "E6" | Scav Checkpoint | No link - outdated extract |
+| "E7" | Expo Checkpoint | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=566) |
+| "E7_car" | Primorsky Ave Taxi V-Ex | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=568) |
+| "E8" | Cardinal Apartment Complex | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=560) |
+| "E8_yard" | Courtyard | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=562) |
+| "E9_sniper" | Klimov Street | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=567) |
+| "scav_e1" | Basement Descent | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=571) |
+| "scav_e2" | Entrance to Catacombs | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=573) |
+| "scav_e3" | Ventilation Shaft | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=577) |
+| "scav_e4" | Sewer Manhole | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=576) |
+| "scav_e5" | Near Kamchatskaya Arch | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=575) |
+| "scav_e6" | Basement Entrance | Same as Entrance to Catacombs [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=573) |
+| "scav_e7" | Cardinal Apartment Complex Parking | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=572) |
+| "scav_e8" | Klimov Shopping Mall Exfil | [link](https://escapefromtarkov.fandom.com/wiki/Streets_of_Tarkov?marker=574) |
 
 ## Laboratory
 |identifier|description|mapgenie.io|
