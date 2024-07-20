@@ -12,12 +12,13 @@ const main = async () => {
     `mkdir -p ./dist/user/mods/${modName}`,
     "mkdir -p ./dist/BepInEx/plugins",
     "cp ./PTT-Extracts/bin/Debug/netstandard2.0/PTTExtracts.dll ./dist/BepInEx/plugins/",
-    `cp -R dist/src ./dist/user/mods/${modName}`,
     `cp package.json ./dist/user/mods/${modName}`,
-    `cp README.md ./dist/user/mods/${modName}`,
-    `cp ALL_EXFILS.md ./dist/user/mods/${modName}`,
-    `cp LICENSE ./dist/user/mods/${modName}`,
+    `cp -R dist/src ./dist/user/mods/${modName}`,
     `cp -R config ./dist/user/mods/${modName}`,
+    `cp ALL_EXFILS.md ./dist/user/mods/${modName}`,
+    `cp LOGO.jpg ./dist/user/mods/${modName}`,
+    `cp README.md ./dist/user/mods/${modName}`,
+    `cp LICENSE ./dist/user/mods/${modName}`,
     'echo "> Successfully prepared files!"',
   ].forEach((cmd) => process.stdout.write(execSync(cmd)));
 };

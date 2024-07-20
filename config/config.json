@@ -1,14 +1,14 @@
 {
   "enabled": true,
   "debug": true,
-  "initial_offraid_position": "FactoryZB-1011",
+  "initial_offraid_position": "MechanicStash",
   "reset_offraid_position_on_player_die": true,
-  "traders_access_restriction": false,
-  "hideout_multistash_enabled": false,
+  "traders_access_restriction": true,
+  "hideout_multistash_enabled": true,
   "vanilla_exfils_requirements": false,
   "laboratory_access_restriction": true,
-  "laboratory_access_via": ["Car"],
-  "player_scav_move_offraid_position": true,
+  "laboratory_access_via": ["PraporStash"],
+  "player_scav_move_offraid_position": false,
   "workbench_always_enabled": true,
   "bypass_keep_found_in_raid_tweak": false,
   "bypass_uninstall_procedure": false,
@@ -29,217 +29,198 @@
   },
   "offraid_regen_config": {
     "hydration": {
-      "access_via": [
-        "FactoryZB-1011",
-        "FactoryZB-1012",
-        "FactoryZB-1013",
-        "Car"
-      ]
+      "access_via": ["MechanicStash", "TherapistStash"]
     },
     "energy": {
-      "access_via": [
-        "FactoryZB-1011",
-        "FactoryZB-1012",
-        "FactoryZB-1013",
-        "WoodsCustoms"
-      ]
+      "access_via": ["MechanicStash", "TherapistStash"]
     },
     "health": {
-      "access_via": [
-        "FactoryZB-1011",
-        "FactoryZB-1012",
-        "FactoryZB-1013",
-        "WoodsFactoryGate"
-      ]
+      "access_via": ["MechanicStash", "TherapistStash"]
     }
   },
-  "hideout_main_stash_access_via": [
-    "FactoryZB-1011",
-    "FactoryZB-1012",
-    "FactoryZB-1013"
-  ],
+  "hideout_main_stash_access_via": ["TherapistStash"],
   "hideout_secondary_stashes": [
     {
-      "id": "PathToTarkov_Car_stash",
-      "size": 18,
-      "access_via": ["Car"]
-    },
-    {
-      "id": "PathToTarkov_Boat_stash",
-      "size": 12,
-      "access_via": ["Boat"]
-    },
-    {
-      "id": "PathToTarkov_WoodsFactoryGate_stash",
-      "size": 12,
-      "access_via": ["WoodsFactoryGate"]
-    },
-    {
-      "id": "PathToTarkov_WoodsCustoms_stash",
-      "size": 8,
-      "access_via": ["WoodsCustoms"]
-    },
-    {
-      "id": "PathToTarkov_InterchangeCustoms_stash",
-      "size": 8,
-      "access_via": ["InterchangeCustoms"]
-    },
-    {
-      "id": "PathToTarkov_WoodsReserveShoreline_stash",
-      "size": 8,
-      "access_via": ["WoodsReserveShoreline"]
-    },
-    {
-      "id": "PathToTarkov_CustomsMilitaryBaseCP_stash",
-      "size": 8,
-      "access_via": ["CustomsMilitaryBaseCP"]
-    },
-    {
-      "id": "PathToTarkov_SafeRoom_stash",
+      "id": "PathToTarkov_Therapist_stash",
       "size": 22,
-      "access_via": ["SafeRoom"]
+      "access_via": ["TherapistStash"]
+    },
+    {
+      "id": "PathToTarkov_Prapor_stash",
+      "size": 22,
+      "access_via": ["PraporStash"]
+    },
+    {
+      "id": "PathToTarkov_Mechanic_stash",
+      "size": 22,
+      "access_via": ["MechanicStash"]
+    },
+    {
+      "id": "PathToTarkov_Ragman_stash",
+      "size": 22,
+      "access_via": ["RagmanStash"]
+    },
+    {
+      "id": "PathToTarkov_Skier_stash",
+      "size": 22,
+      "access_via": ["SkierStash"]
+    },
+    {
+      "id": "PathToTarkov_Peacekeeper_stash",
+      "size": 22,
+      "access_via": ["PeacekeeperStash"]
+    },
+    {
+      "id": "PathToTarkov_Jaeger_stash",
+      "size": 22,
+      "access_via": ["JaegerStash"]
+    },
+    {
+      "id": "PathToTarkov_MilitaryLighthouse_stash",
+      "size": 22,
+      "access_via": ["MilitaryLighthouseStash"]
     }
   ],
   "traders_config": {
     "54cb50c76803fa8b248b4571": {
       "// Trader name": "Prapor",
-      "override_description": true,
+      "override_description": false,
       "location_description": {
-        "ch": "Between woods and factory",
-        "cz": "Between woods and factory",
-        "en": "Between woods and factory",
-        "es-mx": "Between woods and factory",
-        "es": "Between woods and factory",
-        "fr": "Entre les bois et l'usine",
-        "ge": "Between woods and factory",
-        "hu": "Between woods and factory",
-        "it": "Between woods and factory",
-        "jp": "Between woods and factory",
-        "kr": "Between woods and factory",
-        "pl": "Between woods and factory",
-        "po": "Between woods and factory"
+        "ch": "In his car, he hangs around the city",
+        "cz": "In his car, he hangs around the city",
+        "en": "In his car, he hangs around the city",
+        "es-mx": "In his car, he hangs around the city",
+        "es": "In his car, he hangs around the city",
+        "fr": "Dans sa voiture, il traine en ville",
+        "ge": "In his car, he hangs around the city",
+        "hu": "In his car, he hangs around the city",
+        "it": "In his car, he hangs around the city",
+        "jp": "In his car, he hangs around the city",
+        "kr": "In his car, he hangs around the city",
+        "pl": "In his car, he hangs around the city",
+        "po": "In his car, he hangs around the city"
       },
-      "access_via": ["WoodsFactoryGate"]
+      "access_via": ["PraporStash"]
     },
     "54cb57776803fa99248b456e": {
       "// Trader name": "Therapist",
-      "override_description": true,
+      "override_description": false,
       "location_description": {
-        "ch": "Between woods and factory",
-        "cz": "Between woods and factory",
-        "en": "Between woods and factory",
-        "es-mx": "Between woods and factory",
-        "es": "Between woods and factory",
-        "fr": "Entre les bois et l'usine",
-        "ge": "Between woods and factory",
-        "hu": "Between woods and factory",
-        "it": "Between woods and factory",
-        "jp": "Between woods and factory",
-        "kr": "Between woods and factory",
-        "pl": "Between woods and factory",
-        "po": "Between woods and factory"
+        "ch": "in the city",
+        "cz": "In the city",
+        "en": "In the city",
+        "es-mx": "In the city",
+        "es": "In the city",
+        "fr": "En ville",
+        "ge": "In the city",
+        "hu": "In the city",
+        "it": "In the city",
+        "jp": "In the city",
+        "kr": "In the city",
+        "pl": "In the city",
+        "po": "In the city"
       },
-      "access_via": ["WoodsFactoryGate"]
+      "access_via": ["TherapistStash"]
     },
     "5a7c2eca46aef81a7ca2145d": {
       "// Trader name": "Mechanic",
-      "override_description": true,
+      "override_description": false,
       "location_description": {
-        "ch": "In ZB-* bunkers",
-        "cz": "In ZB-* bunkers",
-        "en": "In ZB-* bunkers",
-        "es-mx": "In ZB-* bunkers",
-        "es": "In ZB-* bunkers",
-        "fr": "Dans les bunkers ZB-*",
-        "ge": "In ZB-* bunkers",
-        "hu": "In ZB-* bunkers",
-        "it": "In ZB-* bunkers",
-        "jp": "In ZB-* bunkers",
-        "kr": "In ZB-* bunkers",
-        "pl": "In ZB-* bunkers",
-        "po": "In ZB-* bunkers"
+        "ch": "inside the factory (at home)",
+        "cz": "inside the factory (at home)",
+        "en": "inside the factory (at home)",
+        "es-mx": "inside the factory (at home)",
+        "es": "inside the factory (at home)",
+        "fr": "Dans l'usine (à la maison)",
+        "ge": "inside the factory (at home)",
+        "hu": "inside the factory (at home)",
+        "it": "inside the factory (at home)",
+        "jp": "inside the factory (at home)",
+        "kr": "inside the factory (at home)",
+        "pl": "inside the factory (at home)",
+        "po": "inside the factory (at home)"
       },
-      "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-1013"]
+      "access_via": ["MechanicStash"]
     },
     "58330581ace78e27b8b10cee": {
       "// Trader name": "Skier",
-      "override_description": true,
+      "override_description": false,
       "location_description": {
-        "ch": "Between woods and customs",
-        "cz": "Between woods and customs",
-        "en": "Between woods and customs",
-        "es-mx": "Between woods and customs",
-        "es": "Between woods and customs",
-        "fr": "Entre les bois et les douanes",
-        "ge": "Between woods and customs",
-        "hu": "Between woods and customs",
-        "it": "Between woods and customs",
-        "jp": "Between woods and customs",
-        "kr": "Between woods and customs",
-        "pl": "Between woods and customs",
-        "po": "Between woods and customs"
+        "ch": "To customs",
+        "cz": "To customs",
+        "en": "To customs",
+        "es-mx": "To customs",
+        "es": "To customs",
+        "fr": "Vers les douanes",
+        "ge": "To customs",
+        "hu": "To customs",
+        "it": "To customs",
+        "jp": "To customs",
+        "kr": "To customs",
+        "pl": "To customs",
+        "po": "To customs"
       },
-      "access_via": ["WoodsCustoms"]
+      "access_via": ["SkierStash"]
     },
     "5ac3b934156ae10c4430e83c": {
       "// Trader name": "Ragman",
-      "override_description": true,
+      "override_description": false,
       "location_description": {
-        "ch": "Between interchange and customs",
-        "cz": "Between interchange and customs",
-        "en": "Between interchange and customs",
-        "es-mx": "Between interchange and customs",
-        "es": "Between interchange and customs",
-        "fr": "Entre l'échangeur et les douanes",
-        "ge": "Between interchange and customs",
-        "hu": "Between interchange and customs",
-        "it": "Between interchange and customs",
-        "jp": "Between interchange and customs",
-        "kr": "Between interchange and customs",
-        "pl": "Between interchange and customs",
-        "po": "Between interchange and customs"
+        "ch": "To interchange",
+        "cz": "To interchange",
+        "en": "To interchange",
+        "es-mx": "To interchange",
+        "es": "To interchange",
+        "fr": "Vers l'échangeur",
+        "ge": "To interchange",
+        "hu": "To interchange",
+        "it": "To interchange",
+        "jp": "To interchange",
+        "kr": "To interchange",
+        "pl": "To interchange",
+        "po": "To interchange"
       },
-      "access_via": ["InterchangeCustoms"]
+      "access_via": ["RagmanStash"]
     },
     "5c0647fdd443bc2504c2d371": {
       "// Trader name": "Jaeger",
-      "override_description": true,
+      "override_description": false,
       "location_description": {
-        "ch": "In car",
-        "cz": "In car",
-        "en": "In car",
-        "es-mx": "In car",
-        "es": "In car",
-        "fr": "En voiture",
-        "ge": "In car",
-        "hu": "In car",
-        "it": "In car",
-        "jp": "In car",
-        "kr": "In car",
-        "pl": "In car",
-        "po": "In car"
+        "ch": "In the woods, not far from the factory",
+        "cz": "In the woods, not far from the factory",
+        "en": "In the woods, not far from the factory",
+        "es-mx": "In the woods, not far from the factory",
+        "es": "In the woods, not far from the factory",
+        "fr": "Dans les bois, pas loin de l'usine",
+        "ge": "In the woods, not far from the factory",
+        "hu": "In the woods, not far from the factory",
+        "it": "In the woods, not far from the factory",
+        "jp": "In the woods, not far from the factory",
+        "kr": "In the woods, not far from the factory",
+        "pl": "In the woods, not far from the factory",
+        "po": "In the woods, not far from the factory"
       },
-      "access_via": ["Car"]
+      "access_via": ["JaegerStash"]
     },
     "5935c25fb3acc3127c3d8cd9": {
       "// Trader name": "Peacekeeper",
       "override_description": true,
       "location_description": {
-        "ch": "In boat",
-        "cz": "In boat",
-        "en": "In boat",
-        "es-mx": "In boat",
-        "es": "In boat",
-        "fr": "En bateau",
-        "ge": "In boat",
-        "hu": "In boat",
-        "it": "In boat",
-        "jp": "In boat",
-        "kr": "In boat",
-        "pl": "In boat",
-        "po": "In boat"
+        "ch": "In the tunnel between the shoreline and the lighthouse",
+        "cz": "In the tunnel between the shoreline and the lighthouse",
+        "en": "In the tunnel between the shoreline and the lighthouse",
+        "es-mx": "In the tunnel between the shoreline and the lighthouse",
+        "es": "In the tunnel between the shoreline and the lighthouse",
+        "fr": "Dans le tunnel entre le littoral et le phare",
+        "ge": "In the tunnel between the shoreline and the lighthouse",
+        "hu": "In the tunnel between the shoreline and the lighthouse",
+        "it": "In the tunnel between the shoreline and the lighthouse",
+        "jp": "In the tunnel between the shoreline and the lighthouse",
+        "kr": "In the tunnel between the shoreline and the lighthouse",
+        "pl": "In the tunnel between the shoreline and the lighthouse",
+        "po": "In the tunnel between the shoreline and the lighthouse"
       },
-      "access_via": ["Boat"]
+      "access_via": ["PeacekeeperStash"]
     },
     "579dc571d53a0658a154fbec": {
       "// Trader name": "Fence",
@@ -247,7 +228,6 @@
       "access_via": "*",
       "insurance_always_enabled": true,
       "insurance_config": {
-        "insuranceMultiplier": 0.3,
         "insurance_price_coef": 1,
         "min_payment": 0,
         "min_return_hour": 1,
@@ -261,405 +241,96 @@
         "currency_coefficient": 12,
         "repair_price_coef": 0
       }
-    },
-    "Priscilu": {
-      "// mod integration for Priscilu": true,
-      "// Priscilu is available after extracting from Outskirts (woods map)": true,
-      "disable_warning": true,
-      "override_description": true,
-      "location_description": {
-        "ch": "Somewhere between woods, military reserve and shoreline",
-        "cz": "Somewhere between woods, military reserve and shoreline",
-        "en": "Somewhere between woods, military reserve and shoreline",
-        "es-mx": "Somewhere between woods, military reserve and shoreline",
-        "es": "Somewhere between woods, military reserve and shoreline",
-        "fr": "Quelque part entre les bois, la base militaire et le littoral",
-        "ge": "Somewhere between woods, military reserve and shoreline",
-        "hu": "Somewhere between woods, military reserve and shoreline",
-        "it": "Somewhere between woods, military reserve and shoreline",
-        "jp": "Somewhere between woods, military reserve and shoreline",
-        "kr": "Somewhere between woods, military reserve and shoreline",
-        "pl": "Somewhere between woods, military reserve and shoreline",
-        "po": "Somewhere between woods, military reserve and shoreline"
-      },
-      "access_via": ["WoodsReserveShoreline"]
-    },
-    "GearGal": {
-      "// mod integration for GearGal": true,
-      "// GearGal is available after extracting from Crossroads (cutstoms map) or Railway Exfil (interchange map)": true,
-      "disable_warning": true,
-      "override_description": true,
-      "location_description": {
-        "ch": "Between interchange and customs",
-        "cz": "Between interchange and customs",
-        "en": "Between interchange and customs",
-        "es-mx": "Between interchange and customs",
-        "es": "Between interchange and customs",
-        "fr": "Entre l'échangeur et les douanes",
-        "ge": "Between interchange and customs",
-        "hu": "Between interchange and customs",
-        "it": "Between interchange and customs",
-        "jp": "Between interchange and customs",
-        "kr": "Between interchange and customs",
-        "pl": "Between interchange and customs",
-        "po": "Between interchange and customs"
-      },
-      "access_via": ["InterchangeCustoms"]
-    },
-    "armalite": {
-      "// mod integration for AR Shoppe Unlimited": true,
-      "// ArmaLite is available after extracting from RUAF (cutstoms map) or North UN Roadblock (woods map)": true,
-      "disable_warning": true,
-      "override_description": true,
-      "location_description": {
-        "ch": "Between woods and customs",
-        "cz": "Between woods and customs",
-        "en": "Between woods and customs",
-        "es-mx": "Between woods and customs",
-        "es": "Between woods and customs",
-        "fr": "Entre les bois et les douanes",
-        "ge": "Between woods and customs",
-        "hu": "Between woods and customs",
-        "it": "Between woods and customs",
-        "jp": "Between woods and customs",
-        "kr": "Between woods and customs",
-        "pl": "Between woods and customs",
-        "po": "Between woods and customs"
-      },
-      "access_via": ["WoodsCustoms"]
-    },
-    "gunsmith": {
-      "// mod integration for Gunsmith": true,
-      "// Gunsmith is available after extracting from Tunnel (shoreline map) or Lighthouse Tunnel (lighthouse map)": true,
-      "disable_warning": true,
-      "override_description": true,
-      "location_description": {
-        "ch": "Between lighthouse and shoreline",
-        "cz": "Between lighthouse and shoreline",
-        "en": "Between lighthouse and shoreline",
-        "es-mx": "Between lighthouse and shoreline",
-        "es": "Between lighthouse and shoreline",
-        "fr": "Entre le phare et le littoral",
-        "ge": "Between lighthouse and shoreline",
-        "hu": "Between lighthouse and shoreline",
-        "it": "Between lighthouse and shoreline",
-        "jp": "Between lighthouse and shoreline",
-        "kr": "Between lighthouse and shoreline",
-        "pl": "Between lighthouse and shoreline",
-        "po": "Between lighthouse and shoreline"
-      },
-      "access_via": ["ShorelineLighthouseTunnel"]
-    },
-    "operator": {
-      "// mod integration for Alex-AIO": true,
-      "// Operator is available after extracting from Scav lands (reserve map)": true,
-      "disable_warning": true,
-      "override_description": true,
-      "location_description": {
-        "ch": "Between customs and military reserve",
-        "cz": "Between customs and military reserve",
-        "en": "Between customs and military reserve",
-        "es-mx": "Between customs and military reserve",
-        "es": "Between customs and military reserve",
-        "fr": "Entre les douanes et la base militaire",
-        "ge": "Between customs and military reserve",
-        "hu": "Between customs and military reserve",
-        "it": "Between customs and military reserve",
-        "jp": "Between customs and military reserve",
-        "kr": "Between customs and military reserve",
-        "pl": "Between customs and military reserve",
-        "po": "Between customs and military reserve"
-      },
-      "access_via": ["CustomsMilitaryBaseCP"]
-    },
-    "Elder_Temporal_Id": {
-      "// mod integration for Andrudis-QuestManiac": true,
-      "// Trader name": "Elder",
-      "disable_warning": true,
-      "override_description": true,
-      "location_description": {
-        "ch": "In ZB-* bunkers",
-        "cz": "In ZB-* bunkers",
-        "en": "In ZB-* bunkers",
-        "es-mx": "In ZB-* bunkers",
-        "es": "In ZB-* bunkers",
-        "fr": "Dans les bunkers ZB-*",
-        "ge": "In ZB-* bunkers",
-        "hu": "In ZB-* bunkers",
-        "it": "In ZB-* bunkers",
-        "jp": "In ZB-* bunkers",
-        "kr": "In ZB-* bunkers",
-        "pl": "In ZB-* bunkers",
-        "po": "In ZB-* bunkers"
-      },
-      "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-1013"]
-    },
-    "Khokhol_Temporal_Id": {
-      "// mod integration for Andrudis-QuestManiac": true,
-      "// Trader name": "Khokol",
-      "disable_warning": true,
-      "override_description": true,
-      "location_description": {
-        "ch": "In ZB-* bunkers",
-        "cz": "In ZB-* bunkers",
-        "en": "In ZB-* bunkers",
-        "es-mx": "In ZB-* bunkers",
-        "es": "In ZB-* bunkers",
-        "fr": "Dans les bunkers ZB-*",
-        "ge": "In ZB-* bunkers",
-        "hu": "In ZB-* bunkers",
-        "it": "In ZB-* bunkers",
-        "jp": "In ZB-* bunkers",
-        "kr": "In ZB-* bunkers",
-        "pl": "In ZB-* bunkers",
-        "po": "In ZB-* bunkers"
-      },
-      "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-1013"]
-    },
-    "Warden_Temporal_Id": {
-      "// mod integration for Andrudis-QuestManiac": true,
-      "// Trader name": "Warden",
-      "disable_warning": true,
-      "override_description": true,
-      "location_description": {
-        "ch": "In car",
-        "cz": "In car",
-        "en": "In car",
-        "es-mx": "In car",
-        "es": "In car",
-        "fr": "En voiture",
-        "ge": "In car",
-        "hu": "In car",
-        "it": "In car",
-        "jp": "In car",
-        "kr": "In car",
-        "pl": "In car",
-        "po": "In car"
-      },
-      "access_via": ["Car"]
-    },
-    "LabRat_Temporal_Id": {
-      "// mod integration for Andrudis-QuestManiac": true,
-      "// Trader name": "Lab Rat",
-      "disable_warning": true,
-      "override_description": true,
-      "location_description": {
-        "ch": "In car",
-        "cz": "In car",
-        "en": "In car",
-        "es-mx": "In car",
-        "es": "In car",
-        "fr": "En voiture",
-        "ge": "In car",
-        "hu": "In car",
-        "it": "In car",
-        "jp": "In car",
-        "kr": "In car",
-        "pl": "In car",
-        "po": "In car"
-      },
-      "access_via": ["Car"]
-    },
-    "Bashkir_Temporal_Id": {
-      "// mod integration for Andrudis-QuestManiac": true,
-      "// Trader name": "Bashkir",
-      "disable_warning": true,
-      "override_description": true,
-      "location_description": {
-        "ch": "In boat",
-        "cz": "In boat",
-        "en": "In boat",
-        "es-mx": "In boat",
-        "es": "In boat",
-        "fr": "En bateau",
-        "ge": "In boat",
-        "hu": "In boat",
-        "it": "In boat",
-        "jp": "In boat",
-        "kr": "In boat",
-        "pl": "In boat",
-        "po": "In boat"
-      },
-      "access_via": ["Boat"]
-    },
-    "Colonel_Temporal_Id": {
-      "// mod integration for Andrudis-QuestManiac": true,
-      "// Trader name": "Colonel",
-      "disable_warning": true,
-      "override_description": true,
-      "location_description": {
-        "ch": "Between interchange and military reserve",
-        "cz": "Between interchange and military reserve",
-        "en": "Between interchange and military reserve",
-        "es-mx": "Between interchange and military reserve",
-        "es": "Between interchange and military reserve",
-        "fr": "Between interchange and military reserve",
-        "ge": "Between interchange and military reserve",
-        "hu": "Between interchange and military reserve",
-        "it": "Between interchange and military reserve",
-        "jp": "Between interchange and military reserve",
-        "kr": "Between interchange and military reserve",
-        "pl": "Between interchange and military reserve",
-        "po": "Between interchange and military reserve"
-      },
-      "access_via": ["SafeRoom"]
     }
   },
   "exfiltrations": {
     "factory4_day": {
-      "Gate 3": "FactoryZB-1013",
-      "Gate m": "FactoryZB-1012",
-      "Cellars": "FactoryZB-1011",
-      "Camera Bunker Door": "FactoryZB-1011",
-      "Office Window": "WoodsFactoryGate",
-      "Gate 0": "WoodsFactoryGate"
+      "Gate 3": "MechanicStash",
+      "Office Window": "JaegerStash"
     },
     "factory4_night": {
-      "Gate 3": "FactoryZB-1013",
-      "Gate m": "FactoryZB-1012",
-      "Cellars": "FactoryZB-1011",
-      "Camera Bunker Door": "FactoryZB-1011",
-      "Office Window": "WoodsFactoryGate",
-      "Gate 0": "WoodsFactoryGate"
+      "Gate 3": "MechanicStash",
+      "Office Window": "JaegerStash"
     },
     "bigmap": {
-      "Military Checkpoint": "CustomsMilitaryBaseCP",
-      "Railroad To Military Base": "MilitaryBaseRail",
-      "Railroad To Port": "ShorelineCustoms",
-      "EXFIL_ZB013": "FactoryZB-1013",
-      "ZB-1012": "FactoryZB-1012",
-      "ZB-1011": "FactoryZB-1011",
-      "Dorms V-Ex": "Car",
-      "Sniper Roadblock": "ShorelineCustoms",
-      "Smuggler's Boat": "Boat",
-      "RUAF Roadblock": "WoodsCustoms",
-      "Crossroads": "InterchangeCustoms"
+      "Railroad To Tarkov": "TherapistStash",
+      "Railroad To Military Base": "SkierStash",
+      "Factory Far Corner": "MechanicStash",
+      "Old Azs Gate": "RagmanStash"
     },
     "woods": {
-      "un-sec": "WoodsCustoms",
-      "Factory Gate": "WoodsFactoryGate",
-      "ZB-014": "FactoryZB-1013",
-      "Outskirts": "WoodsReserveShoreline",
-      "The Boat": "Boat",
-      "South V-Ex": "Car"
+      "Factory Gate": "JaegerStash"
     },
     "rezervbase": {
-      "EXFIL_ScavCooperation": "CustomsMilitaryBaseCP",
-      "Exit1": "WoodsReserveShoreline",
-      "Exit2": "WoodsReserveShoreline",
-      "Exit3": "WoodsReserveShoreline",
-      "Exit4": "WoodsReserveShoreline",
-      "Alpinist": "ShorelineNorthMoutains",
-      "EXFIL_Bunker_D2": "SafeRoom"
+      "EXFIL_ScavCooperation": "SkierStash",
+      "Exit4": "MilitaryLighthouseStash"
     },
     "interchange": {
-      "PP Exfil": "Car",
-      "NW Exfil": "InterchangeCustoms",
-      "Saferoom Exfil": "SafeRoom"
+      "NW Exfil": "RagmanStash"
     },
     "shoreline": {
-      "exit_scav_NORTH_fencepassage": "ShorelineNorthMoutains",
-      "Road to Customs": "ShorelineCustoms",
-      "Pier Boat": "Boat",
-      "Tunnel": "ShorelineLighthouseTunnel",
-      "Lighthouse_pass": "ShorelineLighthousePath"
+      "Tunnel": "PeacekeeperStash"
     },
     "lighthouse": {
-      " V-Ex_light": "Car",
-      "Shorl_free": "ShorelineLighthousePath",
-      "tunnel_shared": "ShorelineLighthouseTunnel"
+      "Coastal_South_Road": "PeacekeeperStash",
+      " V-Ex_light": "MilitaryLighthouseStash"
     },
     "tarkovstreets": {
-      "E1": "Car",
-      "E2": "Car",
-      "E7_car": "Car",
-      "E9_sniper": "Car"
+      "E5": "TherapistStash",
+      "E7_car": "PraporStash"
     },
     "laboratory": {
-      "lab_Parking_Gate": "Car",
-      "lab_Hangar_Gate": "Car",
-      "lab_Elevator_Med": "Car",
-      "lab_Under_Storage_Collector": "Car",
-      "lab_Elevator_Main": "Car",
-      "lab_Vent": "Car",
-      "lab_Elevator_Cargo": "Car"
+      "lab_Parking_Gate": "PraporStash",
+      "lab_Hangar_Gate": "PraporStash",
+      "lab_Elevator_Med": "PraporStash",
+      "lab_Under_Storage_Collector": "PraporStash",
+      "lab_Elevator_Main": "PraporStash",
+      "lab_Vent": "PraporStash",
+      "lab_Elevator_Cargo": "PraporStash"
     }
   },
   "infiltrations": {
-    "ShorelineLighthousePath": {
-      "shoreline": ["Path to Lighthouse"],
-      "lighthouse": ["Path to Shoreline"],
-      "rezervbase": ["CP Fence"]
-    },
-    "ShorelineLighthouseTunnel": {
-      "shoreline": ["Tunnel"],
-      "lighthouse": ["Lighthouse tunnel"]
-    },
-    "ShorelineNorthMoutains": {
-      "rezervbase": ["Cliff"],
-      "shoreline": ["North Fence Passage"]
-    },
-    "WoodsReserveShoreline": {
-      "woods": ["Outskirts"],
-      "rezervbase": ["CP Fence"]
-    },
-    "InterchangeCustoms": {
+    "TherapistStash": {
       "bigmap": ["Crossroads"],
+      "tarkovstreets": ["Zmeevsky Alley"]
+    },
+    "PraporStash": {
+      "tarkovstreets": ["Klimov Street"],
+      "sandbox": ["Mira Ave"],
+      "laboratory": [
+        "Cargo Elevator",
+        "Hangar Gate",
+        "Lab Sewage Conduit",
+        "Lab Vents",
+        "Main Elevator",
+        "Med Block Elevator",
+        "Parking Gate"
+      ]
+    },
+    "MechanicStash": {
+      "factory4_day": ["Gate 3"],
+      "factory4_night": ["Gate 3"],
+      "bigmap": ["ZB-1011"]
+    },
+    "RagmanStash": {
+      "bigmap": ["Old Gas Scav"],
       "interchange": ["Railway"]
     },
-    "WoodsCustoms": {
-      "woods": ["UN Roadblock"],
-      "bigmap": ["RUAF Roadblock"]
-    },
-    "Boat": {
-      "bigmap": ["Smuggler's Boat"],
-      "woods": ["The Boat"],
-      "shoreline": ["Pier Boat"],
-      "lighthouse": ["Lighthouse Docks Boat"]
-    },
-    "ShorelineCustoms": {
-      "bigmap": ["Sniper Roadblock"],
-      "shoreline": ["Road to Customs"]
-    },
-    "Car": {
-      "bigmap": ["Dorms Car"],
-      "interchange": ["Car at Power Station"],
-      "woods": ["Bridge Car"],
-      "lighthouse": ["Lighthouse Vehicle Extract"],
-      "tarkovstreets": ["Primorsky Vehicle Extract"]
-    },
-    "CustomsMilitaryBaseCP": {
-      "bigmap": ["Military Base CP"],
-      "rezervbase": ["Scav lands"]
-    },
-    "MilitaryBaseRail": {
+    "SkierStash": {
       "bigmap": ["Railroad To Military Base"],
       "rezervbase": ["Scav lands rail"]
     },
-    "FactoryZB-1013": {
-      "bigmap": ["ZB-1013"],
-      "woods": ["ZB-1014"],
-      "factory4_day": ["Gate 3"],
-      "factory4_night": ["Gate 3"]
+    "PeacekeeperStash": {
+      "lighthouse": ["Lighthouse tunnel"],
+      "shoreline": ["Tunnel"]
     },
-    "FactoryZB-1012": {
-      "bigmap": ["ZB-1012"],
-      "factory4_day": ["Med tent gates"],
-      "factory4_night": ["Med tent gates"]
+    "JaegerStash": {
+      "factory4_day": ["Office Window"],
+      "factory4_night": ["Office Window"]
     },
-    "FactoryZB-1011": {
-      "bigmap": ["ZB-1011"],
-      "factory4_day": ["Cellars"],
-      "factory4_night": ["Cellars"]
-    },
-    "WoodsFactoryGate": {
-      "woods": ["Factory Gate"],
-      "factory4_day": ["Gate 0"],
-      "factory4_night": ["Gate 0"]
-    },
-    "SafeRoom": {
-      "rezervbase": ["D-2"],
-      "interchange": ["Safe Room"]
+    "MilitaryLighthouseStash": {
+      "lighthouse": ["Lighthouse Vehicle Extract"],
+      "rezervbase": ["CP Fence"]
     }
   }
 }

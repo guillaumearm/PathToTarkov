@@ -65,7 +65,6 @@ type AllLocales<T> = {
 export type LocaleName = keyof AllLocales<unknown>;
 
 type InsuranceConfig = {
-  insuranceMultiplier?: number;
   insurance_price_coef?: number;
   min_payment?: number;
   min_return_hour?: number;
@@ -166,8 +165,9 @@ export const MAPLIST = [
   "bigmap", // customs
   "interchange",
   "lighthouse",
-  "rezervbase",
+  "rezervbase", // military reserve
   "shoreline",
   "woods",
   "tarkovstreets",
+  "sandbox", // ground zero
 ];

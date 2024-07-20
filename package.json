@@ -8,6 +8,7 @@
   "author": "Trap",
   "sptVersion": "3.9.x",
   "scripts": {
+    "build:mermaid": "mmdc -i paths/default.md -o config/PathToTarkov.png",
     "gather:external:resources": "./scripts/gather-external-resources.sh && npm run prettier",
     "build:doc:all-exfils": "node scripts/generate-all-exfils > ALL_EXFILS.md",
     "dev:doc": "node scripts/generate-all-exfils",
@@ -24,13 +25,14 @@
     "rebuild:all": "npm run clean:all && npm run build:all",
     "rebuild": "npm run clean && npm run build",
     "build": "tsc",
-    "build:all": "npm run build:doc && npm run build && npm run build:client",
+    "build:all": "npm run build:doc && npm run build:mermaid && npm run build && npm run build:client",
     "build:client": "cd PTT-Extracts && dotnet.exe build",
-    "clean:client": "rimraf PTT-Extracts/bin PTT-Extracts/obj",
+    "clean:client": "cd PTT-Extracts && dotnet.exe clean && rimraf bin obj",
     "test:all": "npm run build:release",
     "test": "tsc --noEmit && npm run lint:all"
   },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^10.9.1",
     "@types/i18n": "^0.13.5",
     "@types/node": "^14.15.3",
     "@types/winston": "^2.4.4",

@@ -31,6 +31,14 @@
         "z": -30.9360619
       },
       "Rotation": 231.811646
+    },
+    "Office Window": {
+      "Position": {
+        "x": 17.66614,
+        "y": 8.210876,
+        "z": 40.92688
+      },
+      "Rotation": 158.9888
     }
   },
   "factory4_night": {
@@ -65,6 +73,14 @@
         "z": -30.9360619
       },
       "Rotation": 231.811646
+    },
+    "Office Window": {
+      "Position": {
+        "x": 17.66614,
+        "y": 8.210876,
+        "z": 40.92688
+      },
+      "Rotation": 158.9888
     }
   },
   "bigmap": {
@@ -107,6 +123,26 @@
     "Dorms Car": {
       "Position": [191.627884, -2.16589069, 208.912079],
       "Rotation": 278.774384
+    },
+    "Old Gas Scav": {
+      "Position": [302.545, 2.91025, -185.017761],
+      "Rotation": 202.349335
+    },
+    "MallTrain": {
+      "Position": [-154.6799, 2.266766, -221.5874],
+      "Rotation": 327.8281
+    },
+    "PraveenGasoline": {
+      "Position": [354.8507, 1.106263, -191.5768],
+      "Rotation": 23.4955
+    },
+    "OfficePath": {
+      "Position": [655.933, 1.098399, -166.3037],
+      "rotation": 302.8839
+    },
+    "RUAFAdmin": {
+      "Position": [667.3405, 1.064447, -58.31626],
+      "rotation": 287.2482
     }
   },
   "woods": {
@@ -134,6 +170,10 @@
     "Bridge Car": {
       "Position": [-487.348541, 15.0604687, -497.965179],
       "Rotation": 24.781599
+    },
+    "RUAFRoadblock": {
+      "Position": [-129.7272, -1.194496, 415.476],
+      "Rotation": 146.2519
     }
   },
   "rezervbase": {
@@ -157,6 +197,22 @@
     "D-2": {
       "Position": [-116.999077, -18.3659115, 169.5836],
       "Rotation": 128.773651
+    },
+    "Reserve Manhole": {
+      "Position": [50.6118279, -6.97395849, 73.78378],
+      "Rotation": 213.616745
+    },
+    "Depot Hermetic": {
+      "Position": [118.866768, -12.2845945, -119.324211],
+      "Rotation": 299.889923
+    },
+    "Hole In Wall": {
+      "Position": [-262.3644, -6.20308161, 47.7328873],
+      "Rotation": 89.65134
+    },
+    "Train Station": {
+      "Position": [166.653687, -5.19410563, -144.143341],
+      "Rotation": 191.8541
     }
   },
   "interchange": {
@@ -171,6 +227,10 @@
     "Safe Room": {
       "Position": [-49.4776039, 21.3254585, 47.4479179],
       "Rotation": 344.7888
+    },
+    "EmercomMall": {
+      "Position": [-313.2805, 21.32544, 254.3763],
+      "Rotation": 105.2137
     }
   },
   "shoreline": {

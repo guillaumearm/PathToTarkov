@@ -1,10 +1,10 @@
 # Path to Tarkov
 Connect all available maps through the extracts points, bring a multi-stash system and lock traders according to the player offraid position.
 
+![PTT LOGO](./LOGO.jpg)
+
 ## Description
 This mod bring the notion of "offraid position" for the player, it locks certains maps according to this offraid position, change all player spawn points to reflect this positions, change the hideout stash and lock/unlock traders according to the config file.
-
-For example, if the position is "FactoryZB-1011", only Customs and Factory maps should be available for infiltration.
 
 All corresponding offraid positions, extracts and spawn points can be configured via `config.json` file.
 
@@ -19,6 +19,17 @@ New spawn points can be added in `player_spawnpoints.json`
 - Changed spawn points according to the offraid position
 - Certains offraid locations enable/disable the hydration/energy/health restoration (according to config)
 
+## The Default configuration
+![PathToTarkov mermaid image](./config/PathToTarkov-1.png)
+
+By default, you are on `MechanicStash` offraid position. It means you can spawn on Customs or Factory maps only.
+
+The hideout and the main stash are only accessible on this offraid position.
+
+When player die, the position is reset to the `MechanicStash` position.
+
+Everything is configurable.
+
 ## Available Exfiltrations
 Here is [the complete list of available exfiltrations points](./ALL_EXFILS.md)
 
@@ -31,18 +42,6 @@ Before deleting the mod, you can set the `enabled` props to `false` in `config.j
 It does 2 things in all existing profiles: 
 1. Ensure the main stash is selected
 2. Unlock all traders listed in the config (Please note Jaeger will be unlocked only if the Introduction quest has been already completed)
-
-## The Default configuration
-By default, you are on `FactoryZB-1011` offraid position.
-
-This means you can spawn on Customs or Factory.
-
-The hideout and the main stash are only accessible on the `FactoryZB-1011`, `FactoryZB-1012` and `FactoryZB-1013`.
-
-When player die, the position is reset to the `FactoryZB-1011` position.
-
-Everything is configurable.
-
 
 ## More tweaks
 Check the [Path To Tarkov Additions](https://github.com/guillaumearm/PathToTarkovAdditions) mod to setup additional restrictions.
