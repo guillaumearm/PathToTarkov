@@ -217,6 +217,94 @@
     "Primorsky Vehicle Extract": {
       "Position": [-5.0, 3.8, 459.9],
       "Rotation": 0.0
+    },
+    "Basement Descent": {
+      "Position": [73.63199, -2.13371778, 56.0767555],
+      "Rotation": 326.0107
+    },
+    "Catacombs": {
+      "Position": [-243.837051, 0.6605578, 243.027969],
+      "Rotation": 124.062996
+    },
+    "Evacuation Zone": {
+      "Position": [161.997284, 3.35329342, 419.626373],
+      "Rotation": 241.142944
+    },
+    "Klimov Street": {
+      "Position": [-152.4702, 0.8981548, 76.18395],
+      "Rotation": 10.636034
+    },
+    "Sewer River": {
+      "Position": [-263.4596, -2.58167219, 216.658859],
+      "Rotation": 151.635468
+    },
+    "Streets Manhole": {
+      "Position": [279.991425, 3.43549061, 349.09433],
+      "Rotation": 268.153534
+    },
+    "Streets Ruined House": {
+      "Position": [-244.822723, 6.355562, 344.1349],
+      "Rotation": 87.62667
+    },
+    "Streets Vents": {
+      "Position": [-123.828979, 2.30664325, 432.900574],
+      "Rotation": 244.029388
+    },
+    "Underpass": {
+      "Position": [-2.86661983, -3.73687434, 6.0282855],
+      "Rotation": 2.20911074
+    },
+    "Zmeevsky Alley": {
+      "Position": [176.868683, 0.7778812, 172.814636],
+      "Rotation": 304.3322
+    },
+    "Crane": {
+      "Position": [212.0187, 3.098404, 252.7016],
+      "Rotation": 270.9422
+    }
+  },
+  "laboratory": {
+    "Cargo Elevator": {
+      "Position": [-114.2475, 4.101831, -408.6356],
+      "Rotation": 270.727661
+    },
+    "Hangar Gate": {
+      "Position": [-170.346313, 0.07315855, -249.111542],
+      "Rotation": 208.741516
+    },
+    "Lab Sewage Conduit": {
+      "Position": [-123.794968, -4.985455, -260.754242],
+      "Rotation": 185.730515
+    },
+    "Lab Vents": {
+      "Position": [-142.8083, -4.053963, -400.147034],
+      "Rotation": 38.8127365
+    },
+    "Main Elevator": {
+      "Position": [-279.4339, -4.050967, -334.7585],
+      "Rotation": 73.58874
+    },
+    "Med Block Elevator": {
+      "Position": [-114.566971, -4.05397, -343.565735],
+      "Rotation": 275.983582
+    },
+    "Parking Gate": {
+      "Position": [-231.813736, 0.0220247321, -426.099579],
+      "Rotation": 14.0038671
+    }
+  },
+  "sandbox": {
+    "Nakatani Basement": {
+      "Position": [5.295958, 22.73891, 331.8584],
+      "Rotation": 132.0392
+    },
+    "Mira Ave": {
+      "Position": [233.1694, 16.01762, 56.08633],
+      "Rotation": 251.7702
+    },
+    "GZ Scav checkpoint": {
+      "Position": [31.74341, 22.59711, -85.79424],
+      "Rotation": 43.04764
     }
   }
 }
