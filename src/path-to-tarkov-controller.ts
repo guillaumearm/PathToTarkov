@@ -27,7 +27,7 @@ import {
 
 import { StashController } from "./stash-controller";
 import { TradersController } from "./traders-controller";
-import { ModLoader } from "./modLoader";
+import type { ModLoader } from "./modLoader";
 
 class OffraidRegenController {
   private getRegenConfig: () => Config["offraid_regen_config"];

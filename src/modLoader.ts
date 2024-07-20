@@ -1,6 +1,6 @@
-import { PreSptModLoader } from "@spt/loaders/PreSptModLoader";
-import { IPackageJsonData } from "@spt/models/spt/mod/IPackageJsonData";
-import { DependencyContainer } from "tsyringe";
+import type { PreSptModLoader } from "@spt/loaders/PreSptModLoader";
+import type { IPackageJsonData } from "@spt/models/spt/mod/IPackageJsonData";
+import type { DependencyContainer } from "tsyringe";
 
 export type ModLoader = PreSptModLoader & {
   imported: Record<string, IPackageJsonData>;

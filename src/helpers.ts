@@ -1,5 +1,4 @@
 import type { RouteAction } from "@spt/di/Router";
-import type { PreSptModLoader } from "@spt/loaders/PreSptModLoader";
 import type {
   Exit,
   SpawnPointParam,
@@ -11,7 +10,7 @@ import type { StaticRouterModService } from "@spt/services/mod/staticRouter/Stat
 
 import type { AccessVia, Config, MapName, SpawnPoint } from "./config";
 import { JAEGER_INTRO_QUEST, MAPLIST } from "./config";
-import { ModLoader } from "./modLoader";
+import type { ModLoader } from "./modLoader";
 
 // not used in theory (this is here to make TypeScript happy)
 const PVE_DEFAULT_PARAMS = {
