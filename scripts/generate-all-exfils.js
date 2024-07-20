@@ -60,7 +60,9 @@ const getMapGenieMapName = (mapName) => {
 
 const resolveMapGenieLocationId = (mapName, exitResolvedName) => {
   if (!MAPGENIE_LOCATIONS[mapName]) {
-    throw new Error(`Error: map name '${mapName}' does not exist in MAPGENIE_LOCATIONS`)
+    throw new Error(
+      `Error: map name '${mapName}' does not exist in MAPGENIE_LOCATIONS`
+    );
   }
 
   const mapLocation = MAPGENIE_LOCATIONS[mapName].find(
