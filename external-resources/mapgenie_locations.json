@@ -281,12 +281,24 @@
       "description": "Ruined House Fence"
     },
     {
-      "id": 26120,
-      "description": "North Fence Passage"
-    },
-    {
       "id": 26121,
       "description": "Road To Customs"
+    },
+    {
+      "id": 317032,
+      "description": "Road to North V-Ex"
+    },
+    {
+      "id": 317034,
+      "description": "Climber's Trail"
+    },
+    {
+      "id": 317040,
+      "description": "Smuggler's Path (Co-op)"
+    },
+    {
+      "id": 317033,
+      "description": "Old Bunker"
     },
     {
       "id": 26122,
@@ -319,6 +331,10 @@
     {
       "id": 151043,
       "description": "Railway Bridge"
+    },
+    {
+      "id": null,
+      "description": "Rock Passage"
     }
   ],
   "streets": [
@@ -373,6 +389,42 @@
     {
       "id": 247839,
       "description": "Sewer River"
+    },
+    {
+      "id": 300388,
+      "description": "Stylobate Building Elevator"
+    },
+    {
+      "id": 300385,
+      "description": "Crash Site"
+    },
+    {
+      "id": 300387,
+      "description": "Pinewood Basement (Co-Op)"
+    },
+    {
+      "id": 300382,
+      "description": "Expo Checkpoint"
+    },
+    {
+      "id": 300400,
+      "description": "Cardinal Apartment Complex Parking"
+    },
+    {
+      "id": null,
+      "description": "Cardinal Apartment Complex"
+    },
+    {
+      "id": null,
+      "description": "Basement Entrance"
+    },
+    {
+      "id": 300386,
+      "description": "Near Kamchatskaya Arch"
+    },
+    {
+      "id": 300384,
+      "description": "Klimov Shopping Mall Exfil"
     }
   ],
   "woods": [
@@ -382,7 +434,7 @@
     },
     {
       "id": 24854,
-      "description": "Old Station"
+      "description": "Old Railway Depot"
     },
     {
       "id": 24855,
@@ -439,6 +491,28 @@
     {
       "id": 65038,
       "description": "Northern UN Roadblock"
+    }
+  ],
+  "groundzero": [
+    {
+      "id": 314855,
+      "description": "Emercom Checkpoint"
+    },
+    {
+      "id": 314851,
+      "description": "Police Cordon V-Ex"
+    },
+    {
+      "id": 314853,
+      "description": "Mira Ave"
+    },
+    {
+      "id": 314852,
+      "description": "Scav Checkpoint (Co-op)"
+    },
+    {
+      "id": 314854,
+      "description": "Nakatani Basement Stairs"
     }
   ]
 }

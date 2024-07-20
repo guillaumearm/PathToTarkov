@@ -63,7 +63,7 @@
 | "Outskirts Water" | Scav Bridge | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=65035) |
 | "Mountain Stash" | Mountain Stash | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24859) |
 | "West Border" | Eastern Rocks | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24666) |
-| "Old Station" | Old Station | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24854) |
+| "Old Station" | Old Railway Depot | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24854) |
 | "Scav House" | Scav House | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24870) |
 | "The Boat" | Boat | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24869) |
 | "Dead Man's Place" | Dead Man's Place | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24868) |
@@ -72,14 +72,18 @@
 |identifier|description|mapgenie.io|
 |----------|-----------|-----------|
 | "Tunnel" | Tunnel | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=26116) |
+| "Rock Passage" | Rock Passage | no link |
 | "Pier Boat" | Pier Boat | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=26124) |
 | "CCP Temporary" | CCP Temporary | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=26122) |
 | "Road to Customs" | Road to Customs | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=26121) |
 | "Lighthouse_pass" | Path to Lighthouse | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=151041) |
 | "Road_at_railbridge" | Railway Bridge | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=151043) |
+| "Shorl_V-Ex" | Road to North V-Ex | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=317032) |
+| "RedRebel_alp" | Climber's Trail | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=317034) |
+| "Smugglers_Trail_coop" | Smuggler's Path (Co-op) | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=317040) |
 | "Adm Basement" | Admin Basement | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=28239) |
 | "RWing Gym Entrance" | East Wing Gym Entrance | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=28240) |
-| "South Fence Passage" | North Fence Passage | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=26120) |
+| "South Fence Passage" | Old Bunker | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=317033) |
 | "Ruined House Fence" | Ruined House Fence | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=26118) |
 | "Svetliy Dead End" | Svetliy Dead End | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=26117) |
 | "Wrecked Road" | Ruined Road | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=26323) |
@@ -117,19 +121,26 @@
 ## Streets of Tarkov
 |identifier|description|mapgenie.io|
 |----------|-----------|-----------|
-| "E1" | Underpass | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247828) |
+| "E1" | Stylobate Building Elevator | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=300388) |
 | "E2" | Sewer River | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247839) |
 | "E3" | Damaged House | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247837) |
-| "E4" | Evacuation Zone | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247833) |
+| "E4" | Crash Site | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=300385) |
 | "E5" | Collapsed Crane | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247831) |
 | "E6" | Scav Checkpoint | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247830) |
 | "E7_car" | Primorsky Ave Taxi V-Ex | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247835) |
 | "E8_yard" | Courtyard | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247836) |
 | "E9_sniper" | Klimov Street | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247827) |
+| "Exit_E10_coop" | Pinewood Basement (Co-Op) | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=300387) |
+| "E7" | Expo Checkpoint | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=300382) |
+| "E8" | Cardinal Apartment Complex | no link |
 | "scav_e1" | Basement Descent | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247829) |
 | "scav_e2" | Entrance to Catacombs | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247838) |
 | "scav_e3" | Ventilation Shaft | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247834) |
 | "scav_e4" | Sewer Manhole | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=247832) |
+| "scav_e5" | Near Kamchatskaya Arch | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=300386) |
+| "scav_e6" | Basement Entrance | no link |
+| "scav_e7" | Cardinal Apartment Complex Parking | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=300400) |
+| "scav_e8" | Klimov Shopping Mall Exfil | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=300384) |
 
 ## Laboratory
 |identifier|description|mapgenie.io|
@@ -141,4 +152,13 @@
 | "lab_Elevator_Main" | Main Elevator | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=31542) |
 | "lab_Vent" | Ventilation Shaft | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=31543) |
 | "lab_Elevator_Cargo" | Cargo Elevator | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=31571) |
+
+## Ground Zero
+|identifier|description|mapgenie.io|
+|----------|-----------|-----------|
+| "Unity_free_exit" | Emercom Checkpoint | [link](https://mapgenie.io/tarkov/maps/groundzero?locationIds=314855) |
+| "Sandbox_VExit" | Police Cordon V-Ex | [link](https://mapgenie.io/tarkov/maps/groundzero?locationIds=314851) |
+| "Sniper_exit" | Mira Ave | [link](https://mapgenie.io/tarkov/maps/groundzero?locationIds=314853) |
+| "Scav_coop_exit" | Scav Checkpoint (Co-op) | [link](https://mapgenie.io/tarkov/maps/groundzero?locationIds=314852) |
+| "Nakatani_stairs_free_exit" | Nakatani Basement Stairs | [link](https://mapgenie.io/tarkov/maps/groundzero?locationIds=314854) |
   

@@ -81,6 +81,11 @@ const resolveMapGenieLocationId = (mapName, exitResolvedName) => {
 
 const getMapGenieLocationUrl = (mapName, locationId) => {
   const mapGenieMapName = getMapGenieMapName(mapName);
+
+  if (!locationId) {
+    return "no link";
+  }
+
   return `[link](https://mapgenie.io/tarkov/maps/${mapGenieMapName}?locationIds=${locationId})`;
 };
 
@@ -172,28 +177,22 @@ const formatMapsExits = (mapsExits) => {
       const title = `## ${resolveMapDisplayName(mapName)}`;
       const exits = mapsExits[mapName];
 
-      const formattedRow = exits
-        .map((exitName) => {
-          const resolvedExitName = resolveLocale(exitName);
-          const mapGenieLocationId = resolveMapGenieLocationId(
-            mapName,
-            resolvedExitName
-          );
+      const formattedRow = exits.map((exitName) => {
+        const resolvedExitName = resolveLocale(exitName);
+        const mapGenieLocationId = resolveMapGenieLocationId(
+          mapName,
+          resolvedExitName
+        );
 
-          if (!mapGenieLocationId) {
-            return "";
-          }
+        const mapGenieLocationUrl = getMapGenieLocationUrl(
+          mapName,
+          mapGenieLocationId
+        );
 
-          const mapGenieLocationUrl = getMapGenieLocationUrl(
-            mapName,
-            mapGenieLocationId
-          );
-
-          return `| "${exitName}" | ${resolveLocale(
-            exitName
-          )} | ${mapGenieLocationUrl} |`;
-        })
-        .filter(Boolean);
+        return `| "${exitName}" | ${resolveLocale(
+          exitName
+        )} | ${mapGenieLocationUrl} |`;
+      });
 
       return (
         output +

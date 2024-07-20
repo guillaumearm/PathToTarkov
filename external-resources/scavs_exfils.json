@@ -44,6 +44,16 @@
     "SCAV_Underboat_Hideout",
     "Scav_Coastal_South"
   ],
-  "streets": ["scav_e1", "scav_e2", "scav_e3", "scav_e4"],
-  "laboratory": []
+  "streets": [
+    "scav_e1",
+    "scav_e2",
+    "scav_e3",
+    "scav_e4",
+    "scav_e5",
+    "scav_e6",
+    "scav_e7",
+    "scav_e8"
+  ],
+  "laboratory": [],
+  "groundzero": []
 }
