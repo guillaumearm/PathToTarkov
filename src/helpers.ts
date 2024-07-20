@@ -11,6 +11,7 @@ import type { StaticRouterModService } from "@spt/services/mod/staticRouter/Stat
 
 import type { AccessVia, Config, MapName, SpawnPoint } from "./config";
 import { JAEGER_INTRO_QUEST, MAPLIST } from "./config";
+import { ModLoader } from "./modLoader";
 
 // not used in theory (this is here to make TypeScript happy)
 const PVE_DEFAULT_PARAMS = {
@@ -211,20 +212,16 @@ export const isJaegerIntroQuestCompleted = (pmc: IPmcData): boolean => {
   );
 };
 
-// const isModLoaded = (modLoader: PreSptModLoader, modId: string): boolean => {
-//   const loadedModName = Object.keys(modLoader.imported).find(
-//     (modName) => modLoader.imported[modName].name === modId
-//   );
+const isModLoaded = (modLoader: ModLoader, modId: string): boolean => {
+  const loadedModName = Object.keys(modLoader.imported).find(
+    (modName) => modLoader.imported[modName].name === modId
+  );
 
-//   return Boolean(loadedModName);
-// };
+  return Boolean(loadedModName);
+};
 
 const LUAS_CSP_MOD_ID = "CustomSpawnPoints";
 
-// TODO fix
-export const isLuasCSPModLoaded = (modLoader: PreSptModLoader): boolean => {
-  void modLoader;
-  void LUAS_CSP_MOD_ID;
-  return false;
-  // return isModLoaded(modLoader, LUAS_CSP_MOD_ID);
+export const isLuasCSPModLoaded = (modLoader: ModLoader): boolean => {
+  return isModLoaded(modLoader, LUAS_CSP_MOD_ID);
 };

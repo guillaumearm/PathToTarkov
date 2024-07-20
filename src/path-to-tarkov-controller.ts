@@ -1,4 +1,3 @@
-import type { PreSptModLoader } from "@spt/loaders/PreSptModLoader";
 import type { IBodyHealth, IEffects } from "@spt/models/eft/common/IGlobals";
 import type { SpawnPointParam } from "@spt/models/eft/common/ILocationBase";
 import type { ILogger } from "@spt/models/spt/utils/ILogger";
@@ -28,6 +27,7 @@ import {
 
 import { StashController } from "./stash-controller";
 import { TradersController } from "./traders-controller";
+import { ModLoader } from "./modLoader";
 
 class OffraidRegenController {
   private getRegenConfig: () => Config["offraid_regen_config"];
@@ -181,7 +181,7 @@ export class PathToTarkovController {
     private readonly logger: ILogger,
     private readonly debug: (data: string) => void,
     private staticRouterPeeker: StaticRoutePeeker,
-    private modLoader: PreSptModLoader
+    private modLoader: ModLoader
   ) {
     this.stashController = new StashController(
       () => this.config,
@@ -202,6 +202,10 @@ export class PathToTarkovController {
     );
 
     this.entrypoints = {};
+
+    if (!modLoader.imported || typeof modLoader.imported !== "object") {
+      throw new Error("Invalid ModLoader -> 'imported' object is missing");
+    }
   }
 
   generateEntrypoints(): void {

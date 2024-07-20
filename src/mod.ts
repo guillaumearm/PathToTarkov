@@ -1,6 +1,5 @@
 import type { DependencyContainer } from "tsyringe";
 
-import type { PreSptModLoader } from "@spt/loaders/PreSptModLoader";
 import type { IPostSptLoadMod } from "@spt/models/external/IPostSptLoadMod";
 import type { IPreSptLoadMod } from "@spt/models/external/IPreSptLoadMod";
 import type { ILogger } from "@spt/models/spt/utils/ILogger";
@@ -21,6 +20,7 @@ import { purgeProfiles } from "./uninstall";
 import type { PackageJson } from "./utils";
 import { getModDisplayName, noop, readJsonFile } from "./utils";
 import { EndOfRaidController } from "./end-of-raid-controller";
+import { getModLoader } from "./modLoader";
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;
@@ -50,8 +50,8 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     const db = container.resolve<DatabaseServer>("DatabaseServer");
     const configServer = container.resolve<ConfigServer>("ConfigServer");
-    const modLoader = container.resolve<PreSptModLoader>("PreAkiModLoader");
     const saveServer = container.resolve<SaveServer>("SaveServer");
+    const modLoader = getModLoader(container);
 
     const staticRouter = container.resolve<StaticRouterModService>(
       "StaticRouterModService"
