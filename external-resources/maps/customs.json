@@ -73,11 +73,37 @@
         "path": "CONTENT/banners/banner_scavraider.jpg",
         "rcid": ""
       }
+    },
+    {
+      "id": "64c0ad6af99768b777048f4e",
+      "pic": {
+        "path": "CONTENT/banners/banner_emissary.jpg",
+        "rcid": ""
+      }
     }
   ],
   "BossLocationSpawn": [
     {
-      "BossChance": 18,
+      "BossChance": 4,
+      "BossDifficult": "normal",
+      "BossEscortAmount": "2,2,3,3,3,4,4,5",
+      "BossEscortDifficult": "normal",
+      "BossEscortType": "skier",
+      "BossName": "skier",
+      "BossPlayer": false,
+      "BossZone": "ZoneScavBase,ZoneDormitory,ZoneFactoryCenter,ZoneCustoms,ZoneBrige",
+      "Delay": 0,
+      "ForceSpawn": false,
+      "IgnoreMaxBots": true,
+      "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
+      "Supports": null,
+      "Time": -1,
+      "TriggerId": "",
+      "TriggerName": ""
+    },
+    {
+      "BossChance": 35,
       "BossDifficult": "normal",
       "BossEscortAmount": "2",
       "BossEscortDifficult": "normal",
@@ -85,7 +111,11 @@
       "BossName": "bossKnight",
       "BossPlayer": false,
       "BossZone": "ZoneScavBase",
+      "Delay": 0,
+      "ForceSpawn": false,
+      "IgnoreMaxBots": true,
       "RandomTimeSpawn": true,
+      "SpawnMode": ["regular", "pve"],
       "Supports": [
         {
           "BossEscortAmount": "1",
@@ -103,23 +133,31 @@
           "BossEscortType": "followerGluharScout"
         }
       ],
-      "Time": -1
+      "Time": -1,
+      "TriggerId": "",
+      "TriggerName": ""
     },
     {
-      "BossChance": 15,
+      "BossChance": 35,
       "BossDifficult": "normal",
       "BossEscortAmount": "4",
       "BossEscortDifficult": "normal",
       "BossEscortType": "followerBully",
       "BossName": "bossBully",
       "BossPlayer": false,
-      "BossZone": "ZoneDormitory,ZoneGasStation",
+      "BossZone": "ZoneDormitory,ZoneGasStation,ZoneScavBase",
+      "Delay": 0,
+      "ForceSpawn": false,
+      "IgnoreMaxBots": true,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Supports": null,
-      "Time": -1
+      "Time": -1,
+      "TriggerId": "",
+      "TriggerName": ""
     },
     {
-      "BossChance": 6,
+      "BossChance": 20,
       "BossDifficult": "normal",
       "BossEscortAmount": "4",
       "BossEscortDifficult": "normal",
@@ -127,9 +165,32 @@
       "BossName": "sectantPriest",
       "BossPlayer": false,
       "BossZone": "ZoneScavBase",
+      "Delay": 0,
+      "ForceSpawn": false,
+      "IgnoreMaxBots": true,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Supports": null,
-      "Time": -1
+      "Time": -1,
+      "TriggerId": "",
+      "TriggerName": ""
+    },
+    {
+      "BossChance": 5,
+      "BossDifficult": "normal",
+      "BossEscortAmount": "3,4",
+      "BossEscortDifficult": "normal",
+      "BossEscortType": "arenaFighterEvent",
+      "BossName": "arenaFighterEvent",
+      "BossPlayer": false,
+      "BossZone": "ZoneFactoryCenter,ZoneScavBase",
+      "Delay": 0,
+      "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
+      "Supports": [],
+      "Time": -1,
+      "TriggerId": "",
+      "TriggerName": ""
     }
   ],
   "BotAssault": 80,
@@ -149,38 +210,75 @@
     "VisibleDistance": 1
   },
   "BotMarksman": 20,
-  "BotMax": 13,
-  "BotMaxPlayer": 7,
+  "BotMax": 17,
+  "BotMaxPlayer": 9,
+  "BotMaxPvE": 30,
   "BotMaxTimePlayer": 1000,
   "BotNormal": 50,
+  "BotSpawnCountStep": 4,
+  "BotSpawnPeriodCheck": 15,
   "BotSpawnTimeOffMax": 30,
   "BotSpawnTimeOffMin": 20,
   "BotSpawnTimeOnMax": 320,
   "BotSpawnTimeOnMin": 260,
   "BotStart": 20,
+  "BotStartPlayer": 210,
   "BotStop": 1500,
   "Description": "Very Big Map",
   "DisabledForScav": false,
   "DisabledScavExits": "",
+  "EnableCoop": true,
   "Enabled": true,
-  "EnabledCoop": false,
   "EscapeTimeLimit": 40,
   "EscapeTimeLimitCoop": 25,
+  "EscapeTimeLimitPVE": 40,
   "GenerateLocalLootCache": true,
-  "GlobalLootChanceModifier": 0.8,
-  "IconX": 456,
-  "IconY": 443,
+  "GlobalContainerChanceModifier": 1,
+  "GlobalLootChanceModifier": 0.9,
+  "GlobalLootChanceModifierPvE": 0.9,
+  "IconX": 550,
+  "IconY": 460,
   "Id": "bigmap",
   "Insurance": true,
   "IsSecret": false,
   "Locked": false,
   "Loot": [],
+  "MatchMakerMinPlayersByWaitTime": [
+    {
+      "minPlayers": 7,
+      "time": 60
+    },
+    {
+      "minPlayers": 6,
+      "time": 70
+    },
+    {
+      "minPlayers": 5,
+      "time": 120
+    },
+    {
+      "minPlayers": 4,
+      "time": 180
+    },
+    {
+      "minPlayers": 3,
+      "time": 250
+    },
+    {
+      "minPlayers": 2,
+      "time": 330
+    },
+    {
+      "minPlayers": 1,
+      "time": 420
+    }
+  ],
   "MaxBotPerZone": 4,
   "MaxCoopGroup": 12,
-  "MaxDistToFreePoint": 300,
+  "MaxDistToFreePoint": 200,
   "MaxPlayers": 12,
   "MinDistToExitPoint": 30,
-  "MinDistToFreePoint": 80,
+  "MinDistToFreePoint": 60,
   "MinMaxBots": [
     {
       "WildSpawnType": "marksman",
@@ -188,18 +286,29 @@
       "min": 2
     }
   ],
-  "MinPlayers": 9,
+  "MinPlayerLvlAccessKeys": 0,
+  "MinPlayers": 10,
   "Name": "Customs",
   "NewSpawn": true,
+  "NonWaveGroupScenario": {
+    "Chance": 50,
+    "Enabled": true,
+    "MaxToBeGroup": 3,
+    "MinToBeGroup": 2
+  },
   "OcculsionCullingEnabled": false,
+  "OfflineNewSpawn": true,
+  "OfflineOldSpawn": false,
   "OldSpawn": false,
   "OpenZones": "ZoneBrige,ZoneCrossRoad,ZoneDormitory,ZoneGasStation,ZoneFactoryCenter,ZoneFactorySide,ZoneOldAZS,ZoneSnipeBrige,ZoneSnipeTower,ZoneSnipeFactory,ZoneBlockPost,ZoneBlockPostSniper,ZoneBlockPostSniper3,ZoneBlockPost,ZoneTankSquare,ZoneWade,ZoneCustoms",
+  "PlayersRequestCount": -1,
   "PmcMaxPlayersInGroup": 5,
   "Preview": {
     "path": "",
     "rcid": ""
   },
-  "RequiredPlayerLevel": 0,
+  "RequiredPlayerLevelMax": 100,
+  "RequiredPlayerLevelMin": 0,
   "Rules": "AvoidAllPmc",
   "SafeLocation": false,
   "ScavMaxPlayersInGroup": 4,
@@ -222,6 +331,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 19,
       "DelayToCanSpawnSec": 6,
       "Id": "001e44f1-406b-4121-be96-aa1e77c3d558",
       "Infiltration": "",
@@ -247,6 +357,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 13,
       "DelayToCanSpawnSec": 6,
       "Id": "0168c19d-0e4c-4684-a8ad-4b41a9f02166",
       "Infiltration": "",
@@ -272,6 +383,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 6,
       "Id": "0243940a-ef7e-480e-90a6-12b10523e0dc",
       "Infiltration": "",
@@ -297,6 +409,7 @@
           "Radius": 117.5
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 6,
       "Id": "0293be29-bfd1-4959-85b3-3dfed44cf6e4",
       "Infiltration": "",
@@ -322,6 +435,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "0327c5d1-cc7f-432f-92dc-f95fb4719f1b",
       "Infiltration": "Boiler Tanks",
@@ -347,6 +461,7 @@
           "Radius": 120
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 6,
       "Id": "0431d71a-7a61-496e-8fdc-32433ef00f29",
       "Infiltration": "",
@@ -372,6 +487,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "06305c94-bdc3-4355-b2df-4b9060f54ed2",
       "Infiltration": "Boiler Tanks",
@@ -397,6 +513,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 16,
       "DelayToCanSpawnSec": 4,
       "Id": "0711d5e8-26e2-43fb-a2b5-6998eac2e0e7",
       "Infiltration": "",
@@ -422,6 +539,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 16,
       "DelayToCanSpawnSec": 4,
       "Id": "082ca074-6733-42cc-a855-a36732074c8d",
       "Infiltration": "",
@@ -447,6 +565,7 @@
           "Radius": 20
         }
       },
+      "CorePointId": 16,
       "DelayToCanSpawnSec": 4,
       "Id": "0a598207-bf53-4847-9f87-62fd08170616",
       "Infiltration": "",
@@ -472,6 +591,7 @@
           "Radius": 93.4
         }
       },
+      "CorePointId": 11,
       "DelayToCanSpawnSec": 6,
       "Id": "0a71bdc4-7f40-45ba-a99d-7b0ed082fd8f",
       "Infiltration": "",
@@ -497,6 +617,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "0a780428-48e0-4268-9ef8-0a7f999cc632",
       "Infiltration": "Customs",
@@ -522,6 +643,7 @@
           "Radius": 75
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "0bfe7760-902e-4b79-8722-7ce2ad0a970c",
       "Infiltration": "Boiler Tanks",
@@ -547,6 +669,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 16,
       "DelayToCanSpawnSec": 4,
       "Id": "0cc3c862-6acf-4b00-bac1-962984231138",
       "Infiltration": "",
@@ -572,6 +695,7 @@
           "Radius": 77.17
         }
       },
+      "CorePointId": 11,
       "DelayToCanSpawnSec": 6,
       "Id": "0e7d1ee0-4ae3-4845-9c9b-6101409955da",
       "Infiltration": "",
@@ -597,6 +721,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "0f054aeb-dae4-4de4-8f19-e96baac1def6",
       "Infiltration": "Boiler Tanks",
@@ -622,6 +747,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "0fd52df3-8419-4644-917f-efd18d99c85a",
       "Infiltration": "Boiler Tanks",
@@ -647,6 +773,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "105e161c-c1ad-4004-8c02-f3c95164a75e",
       "Infiltration": "Boiler Tanks",
@@ -672,6 +799,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "10a75815-d786-43e2-9639-6b94071433f8",
       "Infiltration": "Customs",
@@ -697,6 +825,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 19,
       "DelayToCanSpawnSec": 6,
       "Id": "117bc357-c61a-45ea-9018-6dca47b7e665",
       "Infiltration": "",
@@ -722,6 +851,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "119b220b-ec7f-41a8-bdb2-eeb831e2c17b",
       "Infiltration": "Customs",
@@ -747,6 +877,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "11e7dc8d-ee50-4800-a400-a2f2761b6e9f",
       "Infiltration": "Customs",
@@ -772,6 +903,7 @@
           "Radius": 114.7
         }
       },
+      "CorePointId": 21,
       "DelayToCanSpawnSec": 6,
       "Id": "14492c77-9b71-45f7-bbd1-d40e86a04ee1",
       "Infiltration": "",
@@ -797,6 +929,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "158ea18b-12e5-4495-8774-0cb185ce83ba",
       "Infiltration": "Boiler Tanks",
@@ -822,6 +955,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "15a5b4ce-8d57-41b8-8f2b-bcf806a8e803",
       "Infiltration": "Customs",
@@ -847,6 +981,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 6,
       "Id": "15efa578-bddc-4e26-b173-18dd95ec8031",
       "Infiltration": "",
@@ -872,6 +1007,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "181f7000-df70-4bc7-bff3-a709291c907f",
       "Infiltration": "Customs",
@@ -897,6 +1033,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 13,
       "DelayToCanSpawnSec": 6,
       "Id": "18aa63ac-895c-4178-ac75-5e916a53d0b3",
       "Infiltration": "",
@@ -922,6 +1059,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1a39d596-25e4-4b63-b6da-325aa8409576",
       "Infiltration": "Boiler Tanks",
@@ -947,6 +1085,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1ae5dc66-b54c-4584-bc24-174f5b3194ec",
       "Infiltration": "Customs",
@@ -972,6 +1111,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1b636e5b-ae6d-4df3-93ea-159f5a2437fd",
       "Infiltration": "Customs",
@@ -997,6 +1137,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1b65286c-52e8-48ef-a369-e89bfd0ab95e",
       "Infiltration": "Customs",
@@ -1022,6 +1163,7 @@
           "Radius": 20
         }
       },
+      "CorePointId": 16,
       "DelayToCanSpawnSec": 4,
       "Id": "1b997c88-6205-4ec8-b15e-1c2d45aa7700",
       "Infiltration": "",
@@ -1047,6 +1189,7 @@
           "Radius": 65
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1b9fddbc-f667-4344-98ef-3d198229bd41",
       "Infiltration": "Customs",
@@ -1072,6 +1215,7 @@
           "Radius": 120
         }
       },
+      "CorePointId": 9,
       "DelayToCanSpawnSec": 1700,
       "Id": "1c08d9cd-7ba8-41be-a92f-f233ac7f9da5",
       "Infiltration": "",
@@ -1097,6 +1241,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1c26a886-b1f5-490e-8fdd-153d991dc393",
       "Infiltration": "Boiler Tanks",
@@ -1122,6 +1267,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1d0f26c8-85e5-42d0-b115-7d8f325f97d4",
       "Infiltration": "Customs",
@@ -1147,6 +1293,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1d80614c-e211-42d5-b661-8e2bb1aeae79",
       "Infiltration": "Customs",
@@ -1172,6 +1319,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1fb2eba7-250e-4fd1-ba2a-75fb3d640ed7",
       "Infiltration": "Customs",
@@ -1197,6 +1345,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "20495255-3094-4add-8744-14efc6e05308",
       "Infiltration": "Boiler Tanks",
@@ -1222,6 +1371,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "2051eb7b-3ae8-49b8-adcb-c13f0ddc7972",
       "Infiltration": "Boiler Tanks",
@@ -1247,6 +1397,7 @@
           "Radius": 90
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 6,
       "Id": "20f9df0c-f775-40a3-84a2-e509be0f399f",
       "Infiltration": "",
@@ -1272,6 +1423,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 6,
       "Id": "21e744e4-db21-4316-9b33-5c418ca7bc10",
       "Infiltration": "",
@@ -1297,6 +1449,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "222800ad-50c8-4c75-b94b-ff1ec3d807d0",
       "Infiltration": "Customs",
@@ -1322,6 +1475,7 @@
           "Radius": 77.17
         }
       },
+      "CorePointId": 25,
       "DelayToCanSpawnSec": 6,
       "Id": "22bbd9cc-d773-4a85-93ce-b90211534270",
       "Infiltration": "",
@@ -1347,6 +1501,7 @@
           "Radius": 120
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 6,
       "Id": "247c4c9e-7c53-48dd-869b-a4ea7db16dc9",
       "Infiltration": "",
@@ -1372,6 +1527,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "253e504c-4d28-4aa0-926d-14dcbdeebc1c",
       "Infiltration": "Customs",
@@ -1397,6 +1553,7 @@
           "Radius": 110
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 6,
       "Id": "2557b707-d8e8-40c6-93d5-127033425fa0",
       "Infiltration": "",
@@ -1422,6 +1579,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 13,
       "DelayToCanSpawnSec": 6,
       "Id": "27051f69-33be-4310-8c69-6bed56e7ccdd",
       "Infiltration": "",
@@ -1447,6 +1605,7 @@
           "Radius": 65
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "27aa4110-1b16-4454-b505-35026255b7f9",
       "Infiltration": "Customs",
@@ -1472,6 +1631,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 6,
       "Id": "27fc8f4c-e3e2-4200-8ed5-22459074647c",
       "Infiltration": "",
@@ -1497,6 +1657,7 @@
           "Radius": 120
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 6,
       "Id": "28736287-2a28-458e-82da-7ab3533d0c9d",
       "Infiltration": "",
@@ -1522,6 +1683,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "287bf35f-5cdc-44dc-97b6-c035d5054bfa",
       "Infiltration": "Customs",
@@ -1547,6 +1709,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 6,
       "Id": "29fd0e7e-8056-473f-a34e-33868312a249",
       "Infiltration": "",
@@ -1572,6 +1735,7 @@
           "Radius": 90
         }
       },
+      "CorePointId": 11,
       "DelayToCanSpawnSec": 6,
       "Id": "2b474bfc-6077-48b1-b2f3-5b03aec9eebe",
       "Infiltration": "",
@@ -1597,6 +1761,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "2b5a6af0-0e2e-4fa1-bbf3-a390276b0b13",
       "Infiltration": "Customs",
@@ -1622,6 +1787,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 6,
       "Id": "2be1fb2a-8b38-44b7-b7f8-1893f9b12312",
       "Infiltration": "",
@@ -1647,6 +1813,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "2c286540-f748-4719-9a6d-6bd0e9a3c143",
       "Infiltration": "Customs",
@@ -1672,6 +1839,7 @@
           "Radius": 131.24
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 6,
       "Id": "2c546e35-205d-4108-8a80-f0af9d53b156",
       "Infiltration": "",
@@ -1697,6 +1865,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "2c5cc586-9010-4b6c-8a67-fbfacb76a225",
       "Infiltration": "Boiler Tanks",
@@ -1722,6 +1891,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "2cb9950d-20ec-484e-919c-5489bb7abd5c",
       "Infiltration": "Boiler Tanks",
@@ -1747,6 +1917,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "2e02fd39-ee4a-4c26-bb44-12324b433a02",
       "Infiltration": "Customs",
@@ -1772,6 +1943,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 6,
       "Id": "2fbc647a-c23b-4bec-9dc7-de6db1e4266f",
       "Infiltration": "",
@@ -1797,6 +1969,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 8,
       "DelayToCanSpawnSec": 6,
       "Id": "33de60fb-9bc3-48d0-a164-5b91a9182138",
       "Infiltration": "",
@@ -1822,6 +1995,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 6,
       "Id": "3405b78f-c24f-45e2-9d48-63433c687c20",
       "Infiltration": "",
@@ -1847,6 +2021,7 @@
           "Radius": 131.24
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 6,
       "Id": "3495bb0c-9832-4c5e-a8bf-790d085cd754",
       "Infiltration": "",
@@ -1872,6 +2047,7 @@
           "Radius": 130
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 6,
       "Id": "36469543-ca01-41f0-8a47-11e9812c5b0a",
       "Infiltration": "",
@@ -1897,6 +2073,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "3735903c-ebbd-407d-ba27-46129dc360c3",
       "Infiltration": "Boiler Tanks",
@@ -1922,6 +2099,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "38a13157-f0cd-48d5-bada-dff42472b410",
       "Infiltration": "Boiler Tanks",
@@ -1947,6 +2125,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "38aaf44a-c4a7-49a0-a669-96520c28332d",
       "Infiltration": "Boiler Tanks",
@@ -1972,6 +2151,7 @@
           "Radius": 90
         }
       },
+      "CorePointId": 11,
       "DelayToCanSpawnSec": 6,
       "Id": "39989383-f53e-47be-80fd-14f92502fc3c",
       "Infiltration": "",
@@ -1997,6 +2177,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 13,
       "DelayToCanSpawnSec": 6,
       "Id": "3a254c66-b92e-4f10-84b2-de66f701952a",
       "Infiltration": "",
@@ -2022,6 +2203,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "3b128730-ba41-4ac8-9c08-517655a787dd",
       "Infiltration": "Boiler Tanks",
@@ -2047,6 +2229,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "3b54601a-2e4b-4991-988e-962f1ee45668",
       "Infiltration": "Customs",
@@ -2072,6 +2255,7 @@
           "Radius": 164.4
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 6,
       "Id": "3ba21920-cdb3-498d-9aac-f141f08c3492",
       "Infiltration": "",
@@ -2097,6 +2281,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "3bb03dcc-70b9-455d-ab44-058121da9469",
       "Infiltration": "Customs",
@@ -2122,6 +2307,7 @@
           "Radius": 90
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 6,
       "Id": "3e185028-ab0a-48b7-9967-d55df97467b3",
       "Infiltration": "",
@@ -2147,6 +2333,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "3ef3c5d0-afaf-44cb-82c5-530c0e6300ab",
       "Infiltration": "Boiler Tanks",
@@ -2172,6 +2359,7 @@
           "Radius": 65
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "413a6ac7-3f9d-4a38-9652-f3c68505dcc0",
       "Infiltration": "Customs",
@@ -2197,6 +2385,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "41440b15-7ff8-42fa-893a-5b4b59eaf13b",
       "Infiltration": "Customs",
@@ -2222,6 +2411,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 6,
       "Id": "41c1c31a-fecf-44f6-9f83-ef219c57f886",
       "Infiltration": "",
@@ -2247,6 +2437,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "426e619c-f5a9-4529-b10b-4796f82d9f6d",
       "Infiltration": "Customs",
@@ -2272,6 +2463,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "42904c13-d45a-4375-9bd1-67a9da6cdb2e",
       "Infiltration": "Customs",
@@ -2297,6 +2489,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "42933fa9-9478-4db3-a97f-7d120afa4ca9",
       "Infiltration": "Boiler Tanks",
@@ -2322,6 +2515,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "4293a264-a66e-4d7d-8ce7-65cade015117",
       "Infiltration": "Boiler Tanks",
@@ -2347,6 +2541,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 3,
       "Id": "44ebd934-61f9-4e1d-901c-6376c5568d3e",
       "Infiltration": "",
@@ -2372,6 +2567,7 @@
           "Radius": 131.24
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 6,
       "Id": "45e153bb-2b3d-4169-8e2b-02142373d437",
       "Infiltration": "",
@@ -2397,6 +2593,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "468b8eec-29bd-430f-920b-e32d89e2beda",
       "Infiltration": "Boiler Tanks",
@@ -2422,6 +2619,7 @@
           "Radius": 95
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "471799c4-3aed-4c0e-9489-fabc2e76dd06",
       "Infiltration": "Customs",
@@ -2447,6 +2645,7 @@
           "Radius": 110
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 6,
       "Id": "4ac7ec98-ec6a-4ebd-b2f6-e6a4ed2fc627",
       "Infiltration": "",
@@ -2472,6 +2671,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "4ba3ef50-0c41-4f25-9419-58152197b15b",
       "Infiltration": "Boiler Tanks",
@@ -2497,6 +2697,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "4c18262a-245d-47ee-99c9-f4d36a095d56",
       "Infiltration": "Boiler Tanks",
@@ -2522,6 +2723,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "4d2e6d0c-078c-4918-8227-8df098a47a39",
       "Infiltration": "Boiler Tanks",
@@ -2547,6 +2749,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "4d676699-1243-452b-b4d7-3353616854fb",
       "Infiltration": "Boiler Tanks",
@@ -2572,6 +2775,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "4e876370-2396-4517-81c1-c535811d18e0",
       "Infiltration": "Customs",
@@ -2597,6 +2801,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "4f865c11-d533-4fce-9833-fe41a6cb52af",
       "Infiltration": "Customs",
@@ -2622,6 +2827,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "4fb0d413-cf19-4580-8217-b2d6ca431e91",
       "Infiltration": "Customs",
@@ -2647,6 +2853,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "4fb8d6d8-c158-42f5-b4d2-5e28feb8c675",
       "Infiltration": "Boiler Tanks",
@@ -2672,6 +2879,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "504128ee-ac81-457d-86b3-e79a3d05abe6",
       "Infiltration": "",
@@ -2697,6 +2905,7 @@
           "Radius": 75
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "51169827-146f-4993-af37-0de3ccec8d45",
       "Infiltration": "Boiler Tanks",
@@ -2722,6 +2931,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "519599b1-5b4d-4c91-8530-13042c3a3a37",
       "Infiltration": "Customs",
@@ -2747,6 +2957,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "52e74209-8ff4-4121-85ef-a54b5b6689be",
       "Infiltration": "Boiler Tanks",
@@ -2772,6 +2983,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "53635fda-547d-4b4c-af82-e9adfd93daf2",
       "Infiltration": "Customs",
@@ -2797,6 +3009,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "537c1307-b83a-4c57-8c51-21380f5605a1",
       "Infiltration": "Boiler Tanks",
@@ -2822,6 +3035,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 15,
       "DelayToCanSpawnSec": 6,
       "Id": "53ff77a5-4780-410b-b02f-b9d9103dd670",
       "Infiltration": "",
@@ -2847,6 +3061,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 6,
       "DelayToCanSpawnSec": 6,
       "Id": "5414de25-273d-42fa-9ac9-93f1a1e5d2c6",
       "Infiltration": "",
@@ -2872,6 +3087,7 @@
           "Radius": 95
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "54991d80-f85d-49fd-8ae0-f686d6fdf828",
       "Infiltration": "Customs",
@@ -2897,6 +3113,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 13,
       "DelayToCanSpawnSec": 6,
       "Id": "55281950-7e25-4013-84d7-dc62e701b52b",
       "Infiltration": "",
@@ -2922,6 +3139,7 @@
           "Radius": 75
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "5621e44b-9f44-494b-9695-143a88146d43",
       "Infiltration": "Boiler Tanks",
@@ -2947,6 +3165,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "582b9ea6-4404-4af1-8443-da3db48fcaad",
       "Infiltration": "Boiler Tanks",
@@ -2972,6 +3191,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "58a91424-a24c-44e1-9f8a-c5cc6c66489f",
       "Infiltration": "Boiler Tanks",
@@ -2997,6 +3217,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "5a551a12-ca0e-41af-9845-270ffce6808a",
       "Infiltration": "Boiler Tanks",
@@ -3022,6 +3243,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 6,
       "Id": "5ba8c30d-3e08-4e6b-8570-91cce2f6d0dc",
       "Infiltration": "",
@@ -3047,6 +3269,7 @@
           "Radius": 110
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 6,
       "Id": "5be39d24-ec46-4f54-90e8-fcf35e35931a",
       "Infiltration": "",
@@ -3072,6 +3295,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "5caf5e1b-0113-41fc-9867-007e37ffe906",
       "Infiltration": "Customs",
@@ -3097,6 +3321,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "61aba24c-79d9-445f-8a1c-f887b36a8417",
       "Infiltration": "Customs",
@@ -3122,6 +3347,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "61e3a2a4-55af-4b66-bf4f-302f9cdac5b2",
       "Infiltration": "Boiler Tanks",
@@ -3147,6 +3373,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "62a46181-d31d-4abb-855d-3e24886e171b",
       "Infiltration": "Customs",
@@ -3172,6 +3399,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "62f5b14d-cb51-4529-b572-f5a8f5815bb5",
       "Infiltration": "Customs",
@@ -3197,6 +3425,7 @@
           "Radius": 120
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 6,
       "Id": "65d3b397-a86b-43a8-95fd-9de96f42e7c2",
       "Infiltration": "",
@@ -3222,6 +3451,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "66ab21e5-21b1-42aa-bb0a-e7525f793536",
       "Infiltration": "Boiler Tanks",
@@ -3247,6 +3477,7 @@
           "Radius": 120
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 6,
       "Id": "66b92e80-0a31-4db9-8fe4-4a9c489ec514",
       "Infiltration": "",
@@ -3272,6 +3503,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "677581fc-5c9f-4e13-913d-e32798dfd61c",
       "Infiltration": "Customs",
@@ -3297,6 +3529,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "6889bd40-9338-4297-8c15-0f1af8f4f74f",
       "Infiltration": "Customs",
@@ -3322,6 +3555,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 6,
       "Id": "6b320b9d-2304-47db-a8a8-c7efc0114131",
       "Infiltration": "",
@@ -3347,6 +3581,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "6d8626ec-449b-4d63-a066-38e802756ec9",
       "Infiltration": "Boiler Tanks",
@@ -3372,6 +3607,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "6df008d3-3928-4213-b05b-8285bd15e7c2",
       "Infiltration": "Boiler Tanks",
@@ -3397,6 +3633,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "6e3ad315-21c1-4816-84f5-e6d5ad0568af",
       "Infiltration": "Customs",
@@ -3422,6 +3659,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "6fbb2585-70d7-4f2f-9242-11f88d8dc2f3",
       "Infiltration": "Boiler Tanks",
@@ -3447,6 +3685,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 16,
       "DelayToCanSpawnSec": 4,
       "Id": "7123ae4a-c17f-42b8-a19f-37d49eae20d1",
       "Infiltration": "",
@@ -3472,6 +3711,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 17,
       "DelayToCanSpawnSec": 4,
       "Id": "7123eb86-2fe5-4826-8f18-a56498f03ddc",
       "Infiltration": "",
@@ -3497,6 +3737,7 @@
           "Radius": 110
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 6,
       "Id": "71a02066-841b-427f-abf1-0fc34fc19749",
       "Infiltration": "",
@@ -3522,6 +3763,7 @@
           "Radius": 141.4
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 6,
       "Id": "74aef5cc-3cda-47d5-86b0-e10433712f38",
       "Infiltration": "",
@@ -3547,6 +3789,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "751ed8cb-d9c5-4c3a-ad31-7ae979f66316",
       "Infiltration": "Customs",
@@ -3572,6 +3815,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "75b634c6-60a6-4846-8d15-c8e79cab0c78",
       "Infiltration": "Customs",
@@ -3597,6 +3841,7 @@
           "Radius": 62.3
         }
       },
+      "CorePointId": 11,
       "DelayToCanSpawnSec": 6,
       "Id": "783ca48b-4a18-438b-a8a7-9d0d6de4eb31",
       "Infiltration": "",
@@ -3622,6 +3867,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 6,
       "Id": "790f0f4b-132f-4795-bb01-b5f8f61e3eb9",
       "Infiltration": "",
@@ -3647,6 +3893,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "7994d5ba-6c84-44fc-a66e-a16a169fbaed",
       "Infiltration": "Customs",
@@ -3672,6 +3919,7 @@
           "Radius": 110
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 6,
       "Id": "7a4edc97-c24b-4a00-bc24-2ea3b0fb7db9",
       "Infiltration": "",
@@ -3697,6 +3945,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 6,
       "Id": "7a9af696-f6f8-4561-99f9-98ef5c2f3b6a",
       "Infiltration": "",
@@ -3722,6 +3971,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "7afa635c-296e-42be-8a76-26be3f736827",
       "Infiltration": "Boiler Tanks",
@@ -3747,6 +3997,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "7bf576fa-4a6f-48dc-90a8-8ddd3029816f",
       "Infiltration": "Boiler Tanks",
@@ -3772,6 +4023,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "7c349cb6-2e80-4166-919d-63ae486f618c",
       "Infiltration": "Customs",
@@ -3797,6 +4049,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 6,
       "Id": "7d3062a3-a1a6-4c5b-b709-5fc9ac9f6ef7",
       "Infiltration": "",
@@ -3822,6 +4075,7 @@
           "Radius": 65
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "7d47b29d-9758-4925-a614-3e70ed1374f4",
       "Infiltration": "Customs",
@@ -3847,6 +4101,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 15,
       "DelayToCanSpawnSec": 6,
       "Id": "7f10f680-35e6-416e-a5d2-a535db289381",
       "Infiltration": "",
@@ -3872,6 +4127,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "81fa9972-7d9f-4ad9-9f86-6db8656e211c",
       "Infiltration": "Boiler Tanks",
@@ -3897,6 +4153,7 @@
           "Radius": 85.4
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 6,
       "Id": "83fcd970-3686-4e94-90d8-2d53ad8de391",
       "Infiltration": "",
@@ -3922,6 +4179,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "8464e389-d91c-45d4-9e99-5b61d5bcdc69",
       "Infiltration": "Customs",
@@ -3947,6 +4205,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "85efb186-180f-4fdc-9d1b-abf4b1b07696",
       "Infiltration": "Boiler Tanks",
@@ -3972,6 +4231,7 @@
           "Radius": 115
         }
       },
+      "CorePointId": 15,
       "DelayToCanSpawnSec": 1700,
       "Id": "8679977b-fa85-4b6d-bf69-9f65f6f9cd05",
       "Infiltration": "",
@@ -3997,6 +4257,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "8878252a-9516-4f33-a54d-56f9705098b6",
       "Infiltration": "Boiler Tanks",
@@ -4022,6 +4283,7 @@
           "Radius": 114.7
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 6,
       "Id": "89734df6-d713-4d40-8761-94d69dbc8019",
       "Infiltration": "",
@@ -4047,6 +4309,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "8998cdf3-aa44-40e9-b34e-df32f1bf4540",
       "Infiltration": "Boiler Tanks",
@@ -4072,6 +4335,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "89fe6e6f-7ebc-458e-8297-621824d1d6ac",
       "Infiltration": "Boiler Tanks",
@@ -4097,6 +4361,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "8b301a0d-e694-4f24-b938-32329a5084f5",
       "Infiltration": "Customs",
@@ -4122,6 +4387,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "8bae21f5-6d20-4368-a820-0a05730f81ad",
       "Infiltration": "Boiler Tanks",
@@ -4147,6 +4413,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 6,
       "Id": "8bd67c96-1e6d-4d2f-88c3-f6ab41d58af1",
       "Infiltration": "",
@@ -4172,6 +4439,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 21,
       "DelayToCanSpawnSec": 6,
       "Id": "8c6cd06f-8bd6-469a-a8e0-916a96876b9e",
       "Infiltration": "",
@@ -4197,6 +4465,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "8cb5b38c-2355-4093-8b47-f99c6673a566",
       "Infiltration": "Boiler Tanks",
@@ -4222,6 +4491,7 @@
           "Radius": 65
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "8d6e133a-e996-431b-a120-efa9a96f69e7",
       "Infiltration": "Customs",
@@ -4247,6 +4517,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "8e31a0d6-0d23-4e79-bf7d-089bf232f4ac",
       "Infiltration": "Boiler Tanks",
@@ -4272,6 +4543,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "8e59cd3f-750b-4d00-841a-9ebfc41a1ac1",
       "Infiltration": "Customs",
@@ -4297,6 +4569,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 6,
       "Id": "8e7ac880-5649-442e-ad45-f639116d26ba",
       "Infiltration": "",
@@ -4322,6 +4595,7 @@
           "Radius": 77.17
         }
       },
+      "CorePointId": 25,
       "DelayToCanSpawnSec": 6,
       "Id": "9249f0f9-ef25-4fd3-986a-0dc219148a19",
       "Infiltration": "",
@@ -4347,6 +4621,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "92eddb79-cfd5-491d-85ed-23769ee28f95",
       "Infiltration": "Boiler Tanks",
@@ -4372,6 +4647,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "93427305-4f03-44d6-8690-7c24dbbb4128",
       "Infiltration": "Customs",
@@ -4397,6 +4673,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "95259830-27ef-4056-8bee-cfbba562dedc",
       "Infiltration": "Customs",
@@ -4422,6 +4699,7 @@
           "Radius": 110
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 6,
       "Id": "966d9bc9-dfd7-47e8-8704-f70b703f7ed5",
       "Infiltration": "",
@@ -4447,6 +4725,7 @@
           "Radius": 95
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "967f3d09-de07-4f11-b68f-2f42ba684f51",
       "Infiltration": "Customs",
@@ -4472,6 +4751,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "97185451-3b24-4e74-baa1-6a706f09c520",
       "Infiltration": "Customs",
@@ -4497,6 +4777,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "97513a7b-d467-454a-8232-2e77f3e386ef",
       "Infiltration": "Customs",
@@ -4522,6 +4803,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "989f1148-f609-4191-8a09-de4d40b117e4",
       "Infiltration": "Boiler Tanks",
@@ -4547,6 +4829,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "999c413b-05eb-4c30-a4ef-4e0c95c838ef",
       "Infiltration": "Customs",
@@ -4572,6 +4855,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9a904fab-076c-4fc5-89e3-d6983cba8d89",
       "Infiltration": "Customs",
@@ -4597,6 +4881,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9b6a8b4a-f315-4dc2-b294-49094c0c0490",
       "Infiltration": "Boiler Tanks",
@@ -4622,6 +4907,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9d396201-600c-4920-a915-3e5d0aff2280",
       "Infiltration": "Boiler Tanks",
@@ -4647,6 +4933,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9d4a13b3-bad7-41ee-9d4e-d83149736816",
       "Infiltration": "Boiler Tanks",
@@ -4672,6 +4959,7 @@
           "Radius": 120
         }
       },
+      "CorePointId": 12,
       "DelayToCanSpawnSec": 1700,
       "Id": "9da42bb6-fa0c-4f6a-ab93-15a2955c648d",
       "Infiltration": "",
@@ -4697,6 +4985,7 @@
           "Radius": 114.7
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 6,
       "Id": "9da61bca-625a-4e66-9791-2cfd8249593b",
       "Infiltration": "",
@@ -4722,6 +5011,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9dd4bcc0-062e-45a4-9346-2b488ed4ad72",
       "Infiltration": "Customs",
@@ -4747,6 +5037,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9f6cbe96-7d68-45bf-8f4b-4ccac2550961",
       "Infiltration": "Customs",
@@ -4772,6 +5063,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a092494e-01bf-496f-b789-8e9790639784",
       "Infiltration": "Boiler Tanks",
@@ -4797,6 +5089,7 @@
           "Radius": 90
         }
       },
+      "CorePointId": 11,
       "DelayToCanSpawnSec": 6,
       "Id": "a1530917-9969-4b25-a0c6-913481f7deb7",
       "Infiltration": "",
@@ -4822,6 +5115,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a1e820f6-34ae-474c-818f-aa67c35266aa",
       "Infiltration": "Customs",
@@ -4847,6 +5141,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 4,
       "Id": "a303e429-e91c-4a91-883d-a73de8966231",
       "Infiltration": "",
@@ -4872,6 +5167,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a44d5d64-8570-48b7-b696-52db3db8ac13",
       "Infiltration": "Boiler Tanks",
@@ -4897,6 +5193,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a64e8bd1-42f5-4c0d-b132-ddc01cd46d33",
       "Infiltration": "Customs",
@@ -4922,6 +5219,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a8dafd79-4811-4598-9061-7062654a1200",
       "Infiltration": "Customs",
@@ -4947,6 +5245,7 @@
           "Radius": 110
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 6,
       "Id": "a951473e-1fc9-4e63-820f-5985ac4c2b9a",
       "Infiltration": "",
@@ -4972,6 +5271,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a97b15dc-9f2b-4de6-ae02-ec4417bef821",
       "Infiltration": "Boiler Tanks",
@@ -4997,6 +5297,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 6,
       "Id": "aa8a8760-b3f1-4017-9496-2fec25e42a08",
       "Infiltration": "",
@@ -5022,6 +5323,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 6,
       "Id": "ac2cf869-74ad-4f68-8914-76a0a6b9267f",
       "Infiltration": "",
@@ -5047,6 +5349,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b0126d65-ba76-45ad-b25e-32f4f3509904",
       "Infiltration": "Customs",
@@ -5072,6 +5375,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b049c6f8-afb9-42f9-9591-2f265fef2097",
       "Infiltration": "Customs",
@@ -5097,6 +5401,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b1a57f2f-89ab-49ae-81ab-3d4e5f6e9f1c",
       "Infiltration": "Customs",
@@ -5122,6 +5427,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b523d044-6957-4cd1-b039-b653cd4acbe4",
       "Infiltration": "Customs",
@@ -5147,6 +5453,7 @@
           "Radius": 90
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 6,
       "Id": "b5266e62-e41e-4b88-8d79-0c34b1f52db2",
       "Infiltration": "",
@@ -5172,6 +5479,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b54ce786-74b8-41b1-889f-0fe62c36d8e0",
       "Infiltration": "Boiler Tanks",
@@ -5197,6 +5505,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b5552110-2313-4285-9a06-769077e3c16b",
       "Infiltration": "Customs",
@@ -5222,6 +5531,7 @@
           "Radius": 95
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b623ab89-4538-4afa-b6a6-49e9aad4324a",
       "Infiltration": "Customs",
@@ -5247,6 +5557,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b736a3e7-270e-4797-92d0-6c3a7927f008",
       "Infiltration": "Customs",
@@ -5272,6 +5583,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b96df3dc-23f2-4e1d-8a9a-9fbe05a94f47",
       "Infiltration": "Customs",
@@ -5297,6 +5609,7 @@
           "Radius": 115
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 6,
       "Id": "b984d943-0a4b-4d24-9a55-76ab0357128d",
       "Infiltration": "",
@@ -5322,6 +5635,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "bb1128eb-b548-48b8-a785-c18ef08d7c37",
       "Infiltration": "Boiler Tanks",
@@ -5347,6 +5661,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c11f719c-3491-4a60-901e-cf20832b432e",
       "Infiltration": "Boiler Tanks",
@@ -5372,6 +5687,7 @@
           "Radius": 110
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 6,
       "Id": "c16dfabf-db42-4f4f-befe-9b92b0c19932",
       "Infiltration": "",
@@ -5397,6 +5713,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c21695bd-f460-4e72-8138-54d7aa92b965",
       "Infiltration": "Boiler Tanks",
@@ -5422,6 +5739,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c26390c5-80e1-428e-a11f-5d34d33fcc69",
       "Infiltration": "Customs",
@@ -5447,6 +5765,7 @@
           "Radius": 110
         }
       },
+      "CorePointId": 6,
       "DelayToCanSpawnSec": 6,
       "Id": "c33efaa2-f678-43fc-bf48-b6af6d403669",
       "Infiltration": "",
@@ -5472,6 +5791,7 @@
           "Radius": 75
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c351748e-915b-4be3-ae56-2bb13470f278",
       "Infiltration": "Boiler Tanks",
@@ -5497,6 +5817,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c36b37b1-e654-45b8-a921-4864d1a325a4",
       "Infiltration": "Customs",
@@ -5522,6 +5843,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 6,
       "Id": "c37fc9fb-a3cc-4097-9687-a22d32cb51e1",
       "Infiltration": "",
@@ -5547,6 +5869,7 @@
           "Radius": 164.4
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 6,
       "Id": "c5eb01ed-5fef-4535-ab9b-9a7394dafb8e",
       "Infiltration": "",
@@ -5572,6 +5895,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c70da15f-6bc8-4dda-b666-e4163754bcd5",
       "Infiltration": "Boiler Tanks",
@@ -5597,6 +5921,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c838176a-28e6-4871-89a2-827ec044b3f4",
       "Infiltration": "Customs",
@@ -5622,6 +5947,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 15,
       "DelayToCanSpawnSec": 6,
       "Id": "c83af793-2422-41e5-a9fb-4808f4e0e41f",
       "Infiltration": "",
@@ -5647,6 +5973,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c8b04f3f-1f80-49a7-8530-3180b3ff71e9",
       "Infiltration": "Customs",
@@ -5672,6 +5999,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c98a753b-d534-4fa4-9430-478b7d8bf27d",
       "Infiltration": "Boiler Tanks",
@@ -5697,6 +6025,7 @@
           "Radius": 130
         }
       },
+      "CorePointId": 10,
       "DelayToCanSpawnSec": 1700,
       "Id": "ccf7a261-a540-4d17-a3c3-445521a8dd22",
       "Infiltration": "",
@@ -5722,6 +6051,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "cd52aa33-141e-4f89-9120-2dd899fd23f2",
       "Infiltration": "Customs",
@@ -5747,6 +6077,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "cdabcf05-fa38-4640-89a6-294133b99a5c",
       "Infiltration": "Customs",
@@ -5772,6 +6103,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "ce469ace-55c1-4381-b3a1-6458f1bea611",
       "Infiltration": "Boiler Tanks",
@@ -5797,6 +6129,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "cec675dc-0443-44f1-90bb-61b0fc25b2fc",
       "Infiltration": "Customs",
@@ -5822,6 +6155,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "cfb2039d-a575-4246-9903-bd20336478de",
       "Infiltration": "Boiler Tanks",
@@ -5847,6 +6181,7 @@
           "Radius": 131.24
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 6,
       "Id": "d0a62fe5-f5fa-40cc-b832-9b59ae4c0317",
       "Infiltration": "",
@@ -5872,6 +6207,7 @@
           "Radius": 95
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "d12962b9-c23f-47c4-96fa-afe2b1ef30be",
       "Infiltration": "Customs",
@@ -5897,6 +6233,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "d1bc73de-4089-433b-9427-99085917973f",
       "Infiltration": "",
@@ -5922,6 +6259,7 @@
           "Radius": 131.24
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 6,
       "Id": "d4ae72bc-93d0-4a3c-b322-eccf42a579c4",
       "Infiltration": "",
@@ -5947,6 +6285,7 @@
           "Radius": 75
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "d591be31-c6f9-444d-9b7e-15faf5825066",
       "Infiltration": "Boiler Tanks",
@@ -5972,6 +6311,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "d7bae537-f5a0-416d-9849-d939cc3575f4",
       "Infiltration": "Boiler Tanks",
@@ -5997,6 +6337,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 21,
       "DelayToCanSpawnSec": 3,
       "Id": "d94ce36a-9c3d-4d2a-b786-3fdf23c31733",
       "Infiltration": "",
@@ -6022,6 +6363,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "daaa4a02-1f51-460b-bdf8-29b3bd2c838b",
       "Infiltration": "Customs",
@@ -6047,6 +6389,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "dbab2e51-b5f5-4bd8-9324-9f3fd4cc977f",
       "Infiltration": "Boiler Tanks",
@@ -6072,6 +6415,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 6,
       "Id": "dc52e5af-2c9d-4b09-8e2e-de871bd18829",
       "Infiltration": "",
@@ -6097,6 +6441,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "dd81d0d1-c0de-48c2-afed-49522f652d00",
       "Infiltration": "Customs",
@@ -6122,6 +6467,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "ddca1267-6caa-4986-bd13-0ed29a81e6d2",
       "Infiltration": "Customs",
@@ -6147,6 +6493,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 8,
       "DelayToCanSpawnSec": 6,
       "Id": "ddf17e52-f093-4a66-880d-c23546e8c6f0",
       "Infiltration": "",
@@ -6172,6 +6519,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "df949703-1471-4367-a395-3afa78fcf886",
       "Infiltration": "Customs",
@@ -6197,6 +6545,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 16,
       "DelayToCanSpawnSec": 4,
       "Id": "e04805f7-14c0-490b-82d0-8ab2d4cee314",
       "Infiltration": "",
@@ -6222,6 +6571,7 @@
           "Radius": 114.7
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 6,
       "Id": "e1430515-568a-42f8-a264-5fec7dbaa576",
       "Infiltration": "",
@@ -6247,6 +6597,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 5,
       "Id": "e269db37-96ee-48a1-9ed8-0938be9f9cf4",
       "Infiltration": "",
@@ -6272,6 +6623,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e5da63fb-4d33-4ebb-a621-dd414deecab5",
       "Infiltration": "Customs",
@@ -6297,6 +6649,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e765e08d-9ea3-46f0-ad0b-774d78da5478",
       "Infiltration": "Customs",
@@ -6322,6 +6675,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e8dcecc5-1fda-4553-bffb-7efbd681c11d",
       "Infiltration": "Customs",
@@ -6347,6 +6701,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f0113a3b-12cd-4801-ad39-c5ebc9578d38",
       "Infiltration": "Customs",
@@ -6372,6 +6727,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f02af868-e415-4779-bbf6-a1eabeee7ae3",
       "Infiltration": "Customs",
@@ -6397,6 +6753,7 @@
           "Radius": 131.24
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 6,
       "Id": "f08cc0db-6948-498f-b26a-51ebf2f30af8",
       "Infiltration": "",
@@ -6422,6 +6779,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 14,
       "DelayToCanSpawnSec": 3,
       "Id": "f1607318-b27d-44c8-bc0d-2a7376b8d231",
       "Infiltration": "",
@@ -6447,6 +6805,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f2755660-ab11-4982-a774-26119ce5241e",
       "Infiltration": "Boiler Tanks",
@@ -6472,6 +6831,7 @@
           "Radius": 120
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 6,
       "Id": "f44a3dce-3acb-4e54-af80-49c3c53ebca4",
       "Infiltration": "",
@@ -6497,6 +6857,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f61dc8f4-8ab8-4a1b-9771-8c4d26568769",
       "Infiltration": "Customs",
@@ -6522,6 +6883,7 @@
           "Radius": 77.17
         }
       },
+      "CorePointId": 11,
       "DelayToCanSpawnSec": 6,
       "Id": "f66533f0-ec28-4c8a-8b38-a058c2ed6563",
       "Infiltration": "",
@@ -6547,6 +6909,7 @@
           "Radius": 130
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 6,
       "Id": "f6d3a5c7-5880-42b4-b98d-7d5c8ec3c438",
       "Infiltration": "",
@@ -6572,6 +6935,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f87de9ef-e4f7-4cf4-b241-85cc17724acd",
       "Infiltration": "Customs",
@@ -6597,6 +6961,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f8fa00b6-4941-4c21-b10b-77ff30b0c382",
       "Infiltration": "Boiler Tanks",
@@ -6622,6 +6987,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 6,
       "Id": "fb16a717-c61a-488d-985e-0ec16dd288ec",
       "Infiltration": "",
@@ -6647,6 +7013,7 @@
           "Radius": 110
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 6,
       "Id": "fc913846-cd48-4398-82c4-b2be3b60eb7c",
       "Infiltration": "",
@@ -6672,6 +7039,7 @@
           "Radius": 80
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "fd246e19-a658-4f37-ad29-43b37ca413a1",
       "Infiltration": "Customs",
@@ -6697,6 +7065,7 @@
           "Radius": 77
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "fd6734ed-6ba8-423b-8a7b-2943f31c6527",
       "Infiltration": "Customs",
@@ -6718,128 +7087,191 @@
   "exits": [
     {
       "Chance": 100,
+      "ChancePVE": 100,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Boiler Tanks",
+      "EventAvailable": false,
       "ExfiltrationTime": 8,
+      "ExfiltrationTimePVE": 8,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "Crossroads",
       "PassageRequirement": "None",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequirementTip": ""
     },
     {
       "Chance": 50,
+      "ChancePVE": 50,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Boiler Tanks",
+      "EventAvailable": false,
       "ExfiltrationTime": 8,
+      "ExfiltrationTimePVE": 8,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "Smuggler's Boat",
       "PassageRequirement": "None",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequirementTip": ""
     },
     {
       "Chance": 100,
+      "ChancePVE": 100,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Boiler Tanks",
+      "EventAvailable": false,
       "ExfiltrationTime": 8,
+      "ExfiltrationTimePVE": 8,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "RUAF Roadblock",
       "PassageRequirement": "None",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequirementTip": ""
     },
     {
       "Chance": 50,
+      "ChancePVE": 50,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Customs",
+      "EventAvailable": false,
       "ExfiltrationTime": 8,
+      "ExfiltrationTimePVE": 8,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "ZB-1012",
       "PassageRequirement": "None",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequirementTip": ""
     },
     {
       "Chance": 100,
+      "ChancePVE": 100,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Customs",
+      "EventAvailable": false,
       "ExfiltrationTime": 8,
+      "ExfiltrationTimePVE": 8,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "ZB-1011",
       "PassageRequirement": "None",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequirementTip": ""
     },
     {
       "Chance": 100,
+      "ChancePVE": 100,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Boiler Tanks",
+      "EventAvailable": false,
       "ExfiltrationTime": 8,
+      "ExfiltrationTimePVE": 8,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "Trailer Park",
       "PassageRequirement": "None",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequirementTip": ""
     },
     {
       "Chance": 50,
+      "ChancePVE": 50,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Customs",
+      "EventAvailable": false,
       "ExfiltrationTime": 8,
+      "ExfiltrationTimePVE": 8,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "Old Gas Station",
       "PassageRequirement": "None",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequirementTip": ""
     },
     {
       "Chance": 50,
+      "ChancePVE": 50,
       "Count": 5000,
+      "CountPVE": 5000,
       "EntryPoints": "Customs,Boiler Tanks",
+      "EventAvailable": false,
       "ExfiltrationTime": 60,
+      "ExfiltrationTimePVE": 60,
       "ExfiltrationType": "SharedTimer",
       "Id": "5449016a4bdc2d6f028b456f",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "Dorms V-Ex",
       "PassageRequirement": "TransferItem",
       "PlayersCount": 4,
+      "PlayersCountPVE": 4,
       "RequirementTip": "EXFIL_Item"
     },
     {
       "Chance": 100,
+      "ChancePVE": 100,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Customs,Boiler Tanks",
+      "EventAvailable": false,
       "ExfiltrationTime": 8,
+      "ExfiltrationTimePVE": 8,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "EXFIL_ZB013",
       "PassageRequirement": "WorldEvent",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequirementTip": ""
     }
   ],

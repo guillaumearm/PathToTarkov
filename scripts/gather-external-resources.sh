@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-DB_PATH=../../Aki_Data/Server/database/
+DB_PATH=../../SPT_Data/Server/database/
 TARGET_PATH=external-resources/
 
 ls $DB_PATH 2>&1 > /dev/null || exit 1

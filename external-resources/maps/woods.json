@@ -31,11 +31,18 @@
         "path": "CONTENT/banners/banner_scavraider.jpg",
         "rcid": ""
       }
+    },
+    {
+      "id": "64c0ad6af99768b777048f4e",
+      "pic": {
+        "path": "CONTENT/banners/banner_emissary.jpg",
+        "rcid": ""
+      }
     }
   ],
   "BossLocationSpawn": [
     {
-      "BossChance": 15,
+      "BossChance": 37,
       "BossDifficult": "normal",
       "BossEscortAmount": "2",
       "BossEscortDifficult": "normal",
@@ -43,7 +50,11 @@
       "BossName": "bossKnight",
       "BossPlayer": false,
       "BossZone": "ZoneScavBase2",
+      "Delay": 0,
+      "ForceSpawn": false,
+      "IgnoreMaxBots": true,
       "RandomTimeSpawn": true,
+      "SpawnMode": ["regular", "pve"],
       "Supports": [
         {
           "BossEscortAmount": "1",
@@ -61,10 +72,12 @@
           "BossEscortType": "followerGluharScout"
         }
       ],
-      "Time": -1
+      "Time": -1,
+      "TriggerId": "",
+      "TriggerName": ""
     },
     {
-      "BossChance": 18,
+      "BossChance": 37,
       "BossDifficult": "normal",
       "BossEscortAmount": "2",
       "BossEscortDifficult": "normal",
@@ -72,12 +85,18 @@
       "BossName": "bossKojaniy",
       "BossPlayer": false,
       "BossZone": "ZoneWoodCutter",
+      "Delay": 0,
+      "ForceSpawn": false,
+      "IgnoreMaxBots": true,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Supports": null,
-      "Time": -1
+      "Time": -1,
+      "TriggerId": "",
+      "TriggerName": ""
     },
     {
-      "BossChance": 6,
+      "BossChance": 20,
       "BossDifficult": "normal",
       "BossEscortAmount": "4",
       "BossEscortDifficult": "normal",
@@ -85,8 +104,27 @@
       "BossName": "sectantPriest",
       "BossPlayer": false,
       "BossZone": "ZoneMiniHouse,ZoneBrokenVill",
+      "Delay": 0,
+      "ForceSpawn": false,
+      "IgnoreMaxBots": true,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Supports": null,
+      "Time": -1,
+      "TriggerId": "",
+      "TriggerName": ""
+    },
+    {
+      "BossChance": 5,
+      "BossDifficult": "normal",
+      "BossEscortAmount": "3,4",
+      "BossEscortDifficult": "normal",
+      "BossEscortType": "arenaFighterEvent",
+      "BossName": "arenaFighterEvent",
+      "BossPlayer": false,
+      "BossZone": "ZoneMiniHouse,ZoneClearVill,ZoneRoad,ZoneBrokenVill,ZoneScavBase2",
+      "RandomTimeSpawn": false,
+      "Supports": [],
       "Time": -1
     }
   ],
@@ -107,51 +145,99 @@
     "VisibleDistance": 1
   },
   "BotMarksman": 20,
-  "BotMax": 13,
-  "BotMaxPlayer": 7,
-  "BotMaxTimePlayer": 1000,
+  "BotMax": 23,
+  "BotMaxPlayer": 0,
+  "BotMaxPvE": 32,
+  "BotMaxTimePlayer": 0,
   "BotNormal": 50,
+  "BotSpawnCountStep": 4,
+  "BotSpawnPeriodCheck": 15,
   "BotSpawnTimeOffMax": 30,
   "BotSpawnTimeOffMin": 20,
   "BotSpawnTimeOnMax": 320,
   "BotSpawnTimeOnMin": 260,
-  "BotStart": 20,
+  "BotStart": 10,
+  "BotStartPlayer": 0,
   "BotStop": 1900,
   "Description": "The Priozersk Natural Reserve was recently included into the list of state-protected wildlife reserves of the North-Western Federal District.",
   "DisabledForScav": false,
   "DisabledScavExits": "",
+  "EnableCoop": true,
   "Enabled": true,
-  "EnabledCoop": false,
   "EscapeTimeLimit": 40,
   "EscapeTimeLimitCoop": 30,
+  "EscapeTimeLimitPVE": 40,
   "GenerateLocalLootCache": true,
-  "GlobalLootChanceModifier": 0.9,
-  "IconX": 252,
-  "IconY": 463,
+  "GlobalContainerChanceModifier": 1,
+  "GlobalLootChanceModifier": 0.95,
+  "GlobalLootChanceModifierPvE": 0.95,
+  "IconX": 460,
+  "IconY": 660,
   "Id": "Woods",
   "Insurance": true,
   "IsSecret": false,
   "Locked": false,
   "Loot": [],
+  "MatchMakerMinPlayersByWaitTime": [
+    {
+      "minPlayers": 7,
+      "time": 60
+    },
+    {
+      "minPlayers": 6,
+      "time": 70
+    },
+    {
+      "minPlayers": 5,
+      "time": 120
+    },
+    {
+      "minPlayers": 4,
+      "time": 180
+    },
+    {
+      "minPlayers": 3,
+      "time": 250
+    },
+    {
+      "minPlayers": 2,
+      "time": 330
+    },
+    {
+      "minPlayers": 1,
+      "time": 420
+    }
+  ],
   "MaxBotPerZone": 4,
   "MaxCoopGroup": 14,
-  "MaxDistToFreePoint": 300,
+  "MaxDistToFreePoint": 200,
   "MaxPlayers": 14,
   "MinDistToExitPoint": 30,
-  "MinDistToFreePoint": 80,
+  "MinDistToFreePoint": 50,
   "MinMaxBots": [],
-  "MinPlayers": 9,
+  "MinPlayerLvlAccessKeys": 0,
+  "MinPlayers": 10,
   "Name": "Woods",
   "NewSpawn": true,
+  "NonWaveGroupScenario": {
+    "Chance": 50,
+    "Enabled": true,
+    "MaxToBeGroup": 3,
+    "MinToBeGroup": 2
+  },
   "OcculsionCullingEnabled": false,
+  "OfflineNewSpawn": true,
+  "OfflineOldSpawn": false,
   "OldSpawn": false,
   "OpenZones": "ZoneClearVill,ZoneHouse,ZoneScavBase2,ZoneHouse,ZoneWoodCutter,ZoneBigRocks,ZoneRoad,ZoneHighRocks,ZoneMiniHouse,ZoneBigRocks",
+  "PlayersRequestCount": -1,
   "PmcMaxPlayersInGroup": 5,
   "Preview": {
     "path": "",
     "rcid": ""
   },
-  "RequiredPlayerLevel": 0,
+  "RequiredPlayerLevelMax": 100,
+  "RequiredPlayerLevelMin": 0,
   "Rules": "Normal",
   "SafeLocation": false,
   "ScavMaxPlayersInGroup": 4,
@@ -174,6 +260,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "007293cc-b2a3-4b23-a094-f0b2c77535e0",
       "Infiltration": "House",
@@ -183,7 +270,7 @@
         "z": -595.6699
       },
       "Rotation": 268.42,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -199,6 +286,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "01c489a9-a17c-45e0-9c42-803173881056",
       "Infiltration": "House",
@@ -208,7 +296,7 @@
         "z": 331.25
       },
       "Rotation": 229.460022,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneClearVill",
@@ -224,6 +312,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "02070d3d-0bec-4671-9518-d903a211c6a7",
       "Infiltration": "",
@@ -249,6 +338,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "027273fa-04bc-48d1-acfb-74f008bb196c",
       "Infiltration": "Old Station",
@@ -258,7 +348,7 @@
         "z": -698
       },
       "Rotation": 325.167175,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneClearVill",
@@ -274,6 +364,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "043bc54d-074f-4dd6-bc17-5c7c3378c420",
       "Infiltration": "",
@@ -299,6 +390,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "046ca3c7-3af3-4557-a5c3-c98262ced461",
       "Infiltration": "Old Station",
@@ -308,7 +400,7 @@
         "z": 334.3
       },
       "Rotation": 213.64,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -324,6 +416,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "04ae9885-e3b2-4713-bd7c-36f59351c47f",
       "Infiltration": "House",
@@ -333,7 +426,7 @@
         "z": 13.3900146
       },
       "Rotation": 263.1,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneScavBase2",
@@ -349,6 +442,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "05cd6de2-a55e-4930-98a4-cc6ce6e8d49d",
       "Infiltration": "",
@@ -374,6 +468,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "0629d023-ea80-45cb-8376-9ea211e740f9",
       "Infiltration": "Old Station",
@@ -383,7 +478,7 @@
         "z": -587.319946
       },
       "Rotation": 316.58,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -399,6 +494,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "06f65382-5ecf-4852-9020-5b37c432331f",
       "Infiltration": "Old Station",
@@ -408,7 +504,7 @@
         "z": -509.619965
       },
       "Rotation": 14.210001,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -424,6 +520,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "0739b113-2c10-47b2-b86c-6674f6ce92dd",
       "Infiltration": "Old Station",
@@ -433,7 +530,7 @@
         "z": 329.74
       },
       "Rotation": 200.38,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -449,6 +546,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "078c67f6-5e64-4c48-b9b2-5e6c1042fe83",
       "Infiltration": "House",
@@ -458,7 +556,7 @@
         "z": -81.73999
       },
       "Rotation": 0,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -474,6 +572,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "08189e53-2a0a-4cf8-830e-75aa54e1bab5",
       "Infiltration": "Old Station",
@@ -483,7 +582,7 @@
         "z": 218.57
       },
       "Rotation": 0,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRedHouse",
@@ -499,6 +598,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "0947c04a-676e-4077-bc3e-9cdc2032cedb",
       "Infiltration": "",
@@ -524,6 +624,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "0b5ae3cc-8779-4679-bd0f-9e6d322b308f",
       "Infiltration": "",
@@ -549,6 +650,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "0ba5301a-df26-49b5-8ee5-61bd0c1bd808",
       "Infiltration": "Old Station",
@@ -558,7 +660,7 @@
         "z": -328.990021
       },
       "Rotation": 44.72,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBrokenVill",
@@ -574,6 +676,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "0c28a191-6308-4820-99c0-9d347d09a9ce",
       "Infiltration": "",
@@ -599,6 +702,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "0ced4119-d0aa-481e-9c45-e93fc820a41f",
       "Infiltration": "Old Station",
@@ -608,7 +712,7 @@
         "z": -156.300018
       },
       "Rotation": 125.579994,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRedHouse",
@@ -624,6 +728,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "0d4e68ed-06f9-47f5-ab00-77ef4534fee2",
       "Infiltration": "",
@@ -649,6 +754,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "0d6c16ec-adc2-4d80-9daf-96caca9a5b75",
       "Infiltration": "",
@@ -674,6 +780,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "0dd1d014-6642-4a75-a496-242dd44a855b",
       "Infiltration": "House",
@@ -683,7 +790,7 @@
         "z": 264.3
       },
       "Rotation": 216.79,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -699,6 +806,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "100d945d-1da3-434e-9a45-5d07c64bc296",
       "Infiltration": "Old Station",
@@ -708,7 +816,7 @@
         "z": -519.410034
       },
       "Rotation": 14.210001,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneClearVill",
@@ -724,6 +832,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "125759c0-c52e-4ec5-b61a-e11557ac06b5",
       "Infiltration": "",
@@ -749,6 +858,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "129e73e2-8660-4f9d-bf32-e2a802612a2a",
       "Infiltration": "",
@@ -774,6 +884,7 @@
           "Radius": 192.6
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "12b17d88-bc67-4d6a-82fb-e36afe2aa596",
       "Infiltration": "",
@@ -799,6 +910,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "13e379d7-fe3a-4005-bac7-b9b9f4a1d589",
       "Infiltration": "",
@@ -824,6 +936,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "158e0a94-64fb-4555-afa0-90109713db91",
       "Infiltration": "Old Station",
@@ -833,7 +946,7 @@
         "z": -632.22
       },
       "Rotation": 14.210001,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -849,6 +962,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "17d3fee1-d9bb-4950-80bd-44cd33b12e50",
       "Infiltration": "House",
@@ -858,7 +972,7 @@
         "z": -314.429962
       },
       "Rotation": 287.12,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -874,6 +988,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1804b780-85a9-4eff-a465-82e2fbb88f0c",
       "Infiltration": "Old Station",
@@ -883,7 +998,7 @@
         "z": 239.63
       },
       "Rotation": 129.42,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -899,6 +1014,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "191b6c5a-0fb7-40b2-95b4-3a33397eb872",
       "Infiltration": "Old Station",
@@ -908,7 +1024,7 @@
         "z": -579.439941
       },
       "Rotation": 316.58,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneHouse",
@@ -924,6 +1040,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 9,
       "DelayToCanSpawnSec": 4,
       "Id": "1a4a6702-1a25-4301-94f9-a4a0f42886ec",
       "Infiltration": "",
@@ -949,6 +1066,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1aaa922d-7f31-433a-8457-075f9886600b",
       "Infiltration": "Old Station",
@@ -958,7 +1076,7 @@
         "z": -308.717
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -974,6 +1092,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1b3e5b5b-a6cc-4702-8b79-d00183af37b6",
       "Infiltration": "House",
@@ -983,7 +1102,7 @@
         "z": -73.28
       },
       "Rotation": 0,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -999,6 +1118,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1baafdd1-e250-453c-94b3-f842c87f4b8a",
       "Infiltration": "Old Station",
@@ -1008,7 +1128,7 @@
         "z": -308.203
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -1024,6 +1144,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1c102540-4777-4cd4-bb36-b28d7b0b9bf9",
       "Infiltration": "House",
@@ -1033,7 +1154,7 @@
         "z": 364.0982
       },
       "Rotation": 228.71,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -1049,6 +1170,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1c6ea7b6-4a93-4a2a-95d0-90c980b00ffb",
       "Infiltration": "Old Station",
@@ -1058,7 +1180,7 @@
         "z": 145.43
       },
       "Rotation": 0,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBrokenVill",
@@ -1074,6 +1196,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "1d485547-36ae-4ed6-a54f-22d4f0cc78fc",
       "Infiltration": "",
@@ -1099,6 +1222,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 11,
       "DelayToCanSpawnSec": 4,
       "Id": "1d585de4-8d57-4c18-a56e-4ee90750a8df",
       "Infiltration": "",
@@ -1124,6 +1248,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1dfb41ff-4233-47ba-8db1-054dd7923906",
       "Infiltration": "Old Station",
@@ -1133,7 +1258,7 @@
         "z": -138.91
       },
       "Rotation": 33.6,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRoad",
@@ -1149,6 +1274,7 @@
           "Radius": 250
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "1e4fff1f-f268-4aec-b01a-e2349c4440f4",
       "Infiltration": "",
@@ -1174,6 +1300,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "1e884503-3b3b-4e5b-9da6-974752b21cf5",
       "Infiltration": "",
@@ -1199,6 +1326,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 15,
       "DelayToCanSpawnSec": 4,
       "Id": "1f7d566b-5cce-4a9e-8c22-23b5303c02ed",
       "Infiltration": "",
@@ -1224,6 +1352,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "20ee24e5-1db9-4191-9ba5-444ff4207f2b",
       "Infiltration": "House",
@@ -1233,7 +1362,7 @@
         "z": -598.199951
       },
       "Rotation": 268.42,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -1249,6 +1378,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "219c81c4-5e06-4abe-b971-61728edafde9",
       "Infiltration": "House",
@@ -1258,7 +1388,7 @@
         "z": 197.5
       },
       "Rotation": 193.25,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -1274,6 +1404,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "21c4f855-6ada-4784-aec5-797f78732ed8",
       "Infiltration": "House",
@@ -1283,7 +1414,7 @@
         "z": -62.81
       },
       "Rotation": 268.0896,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBigRocks",
@@ -1299,6 +1430,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "252d5a74-501e-497a-946b-163044adfac2",
       "Infiltration": "",
@@ -1324,6 +1456,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "2533a3ec-8812-4546-9e44-d19ae093ef6b",
       "Infiltration": "House",
@@ -1333,7 +1466,7 @@
         "z": -320.27
       },
       "Rotation": 287.12,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -1349,6 +1482,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "2685c5c9-9bde-40c1-bbc2-3a0f3b024106",
       "Infiltration": "Old Station",
@@ -1358,7 +1492,7 @@
         "z": -657.75
       },
       "Rotation": 316.58,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBrokenVill",
@@ -1374,6 +1508,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "278d9b66-49bc-44cc-a70b-308f643b19e9",
       "Infiltration": "",
@@ -1399,6 +1534,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "280011ca-3526-431d-af3d-67fb6312ee98",
       "Infiltration": "House",
@@ -1408,7 +1544,7 @@
         "z": 14.2999878
       },
       "Rotation": 262.49,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -1424,6 +1560,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "2915d180-1de7-42a6-a6da-1cf2de15e78c",
       "Infiltration": "House",
@@ -1433,7 +1570,7 @@
         "z": 176.27
       },
       "Rotation": 239.859985,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneMiniHouse",
@@ -1449,6 +1586,7 @@
           "Radius": 145
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 4,
       "Id": "2950af48-325b-41af-ac80-fcd87c657688",
       "Infiltration": "",
@@ -1474,6 +1612,7 @@
           "Radius": 250
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "2a3b365d-78cb-4fe6-9168-e2c7e9099419",
       "Infiltration": "",
@@ -1499,6 +1638,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "2b2b5b1e-0bfd-4316-af38-bbefa25ac3b2",
       "Infiltration": "House",
@@ -1508,7 +1648,7 @@
         "z": 319.43
       },
       "Rotation": 255.300018,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRoad",
@@ -1524,6 +1664,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "2cc5049f-030c-437b-ab8c-e11fec5b7680",
       "Infiltration": "",
@@ -1549,6 +1690,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "2d7f7e41-7f75-4d8f-be43-b025bb5078b3",
       "Infiltration": "Old Station",
@@ -1558,7 +1700,7 @@
         "z": 216
       },
       "Rotation": 261.12,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneHouse",
@@ -1574,6 +1716,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 9,
       "DelayToCanSpawnSec": 4,
       "Id": "2d8304b8-ea45-42b5-bd50-c9a2703e5828",
       "Infiltration": "",
@@ -1599,6 +1742,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "2e52ceb4-5491-4a44-bfe4-a658f87271ff",
       "Infiltration": "Old Station",
@@ -1608,7 +1752,7 @@
         "z": 294.67
       },
       "Rotation": 68.9,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneHouse",
@@ -1624,6 +1768,7 @@
           "Radius": 249.4
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 4,
       "Id": "2e5c6594-07ea-4dc3-ba81-dc3916e86309",
       "Infiltration": "",
@@ -1649,6 +1794,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "319279a1-ec16-4d6e-8c87-3382938823f7",
       "Infiltration": "Old Station",
@@ -1658,7 +1804,7 @@
         "z": -306.602
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -1674,6 +1820,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "31d3dd12-a1c0-4e5f-a840-ccad3ad9f472",
       "Infiltration": "House",
@@ -1683,7 +1830,7 @@
         "z": 174.25
       },
       "Rotation": 239.859985,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBigRocks",
@@ -1699,6 +1846,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 8,
       "DelayToCanSpawnSec": 4,
       "Id": "3234744e-1181-457a-bcf4-756b35b35bff",
       "Infiltration": "",
@@ -1724,6 +1872,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "3245f7f0-21a2-457f-ae32-562f7955d4ae",
       "Infiltration": "Old Station",
@@ -1733,7 +1882,7 @@
         "z": 385.31
       },
       "Rotation": 224.32,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -1749,6 +1898,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "342bd347-016e-485a-b0b1-f573b8c31b21",
       "Infiltration": "House",
@@ -1758,7 +1908,7 @@
         "z": -407.26004
       },
       "Rotation": 287.12,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -1774,6 +1924,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "3463a539-969d-4c3a-aba7-b350a07a6bc5",
       "Infiltration": "Old Station",
@@ -1783,7 +1934,7 @@
         "z": -50.23001
       },
       "Rotation": 53.04,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -1799,6 +1950,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "366cec0b-e96a-4706-a8c3-2fada6801993",
       "Infiltration": "Old Station",
@@ -1808,7 +1960,7 @@
         "z": 88.3999939
       },
       "Rotation": 130.67,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBigRocks",
@@ -1824,6 +1976,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "37395ddf-7a49-4ea4-9e6b-fe5a32b1adf2",
       "Infiltration": "",
@@ -1849,6 +2002,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "381d4cbc-39c8-4765-8d61-5bfe790f34a6",
       "Infiltration": "",
@@ -1874,6 +2028,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "38280e0c-af89-4081-ab01-5f1494074317",
       "Infiltration": "House",
@@ -1883,7 +2038,7 @@
         "z": 174.27
       },
       "Rotation": 239.859985,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -1899,6 +2054,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "38481684-83d2-4a25-98d9-e8fc9fb925c4",
       "Infiltration": "Old Station",
@@ -1908,7 +2064,7 @@
         "z": -142.31
       },
       "Rotation": 33.42,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -1924,6 +2080,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "38df9752-76f3-4206-a46b-d279db55aee3",
       "Infiltration": "Old Station",
@@ -1933,7 +2090,7 @@
         "z": -150.15
       },
       "Rotation": 125.579994,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -1949,6 +2106,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "3977d085-4fa2-45dd-a341-ddb0fa55c06d",
       "Infiltration": "Old Station",
@@ -1958,7 +2116,7 @@
         "z": -513.01
       },
       "Rotation": 14.210001,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -1974,6 +2132,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "3d17ca8d-3e08-498c-8bcd-01f909c91c19",
       "Infiltration": "Old Station",
@@ -1983,7 +2142,7 @@
         "z": 237.99
       },
       "Rotation": 129.42,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRoad",
@@ -1999,6 +2158,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "3e37ed32-9681-4bf9-ae5d-473eefe6d2fc",
       "Infiltration": "",
@@ -2024,6 +2184,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "3e8f83ba-7706-49ac-b19c-20f90da1309a",
       "Infiltration": "Old Station",
@@ -2033,7 +2194,7 @@
         "z": -204.1
       },
       "Rotation": 9.03,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneScavBase2",
@@ -2049,6 +2210,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "3fbf597c-f75d-4a08-bc06-aeaf0f2baee8",
       "Infiltration": "",
@@ -2074,6 +2236,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 6,
       "DelayToCanSpawnSec": 1700,
       "Id": "40e7ee28-23c3-45a7-9c77-ae40e7750429",
       "Infiltration": "",
@@ -2099,6 +2262,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "410307e8-cd43-45b4-8fb7-45a576f4f293",
       "Infiltration": "Old Station",
@@ -2108,7 +2272,7 @@
         "z": -331.79
       },
       "Rotation": 44.72,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBigRocks",
@@ -2124,6 +2288,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "42cff02a-5afd-41a6-8492-fe81da880ee6",
       "Infiltration": "",
@@ -2149,6 +2314,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "43598be9-9042-4e06-8ee9-11a3d346d570",
       "Infiltration": "Old Station",
@@ -2158,7 +2324,7 @@
         "z": -581.03
       },
       "Rotation": 316.58,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneWoodCutter",
@@ -2174,6 +2340,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 15,
       "DelayToCanSpawnSec": 4,
       "Id": "4721ad28-1703-47e2-8b22-a8f027c74b0f",
       "Infiltration": "",
@@ -2199,6 +2366,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 9,
       "DelayToCanSpawnSec": 4,
       "Id": "48e43cdb-f0eb-4d12-9973-f0519c61a480",
       "Infiltration": "",
@@ -2224,6 +2392,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 9,
       "DelayToCanSpawnSec": 4,
       "Id": "4bb373ec-a673-4562-9128-6ba8d009acfa",
       "Infiltration": "",
@@ -2249,6 +2418,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "4bef69e6-18dd-4c33-8b74-39eba90908cd",
       "Infiltration": "Old Station",
@@ -2258,7 +2428,7 @@
         "z": -637.5499
       },
       "Rotation": 316.58,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -2274,6 +2444,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "4e02d667-c158-421c-9dba-2d5465895a05",
       "Infiltration": "Old Station",
@@ -2283,7 +2454,7 @@
         "z": 99.92
       },
       "Rotation": 112.027237,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -2299,6 +2470,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "4ed8f2c4-7b26-473c-b6ee-1489a374285f",
       "Infiltration": "House",
@@ -2308,7 +2480,7 @@
         "z": 12.9500122
       },
       "Rotation": 268.46,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBrokenVill",
@@ -2324,6 +2496,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "5034a1be-bc7c-4c9b-82bc-3fd8661b7a75",
       "Infiltration": "",
@@ -2349,6 +2522,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "506b435f-09b7-4abe-9da4-47e0f15632c6",
       "Infiltration": "Old Station",
@@ -2358,7 +2532,7 @@
         "z": -207.9
       },
       "Rotation": 25.38,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -2374,6 +2548,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "5074c052-55d3-4e9f-b8aa-7e29555f79f7",
       "Infiltration": "House",
@@ -2383,7 +2558,7 @@
         "z": 314.4
       },
       "Rotation": 242.98999,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneScavBase2",
@@ -2399,6 +2574,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "50aec2a0-5dd5-4007-9581-c7d94643e8a7",
       "Infiltration": "",
@@ -2424,6 +2600,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 4,
       "Id": "50f8a6b8-8fc6-4e3f-8000-39540da348f1",
       "Infiltration": "",
@@ -2449,6 +2626,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "52bd721f-80ea-4c6d-ae97-af9379180a91",
       "Infiltration": "House",
@@ -2458,7 +2636,7 @@
         "z": 11.9400024
       },
       "Rotation": 256.93,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -2474,6 +2652,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "53bc3938-f77c-413f-acd6-9d453925f152",
       "Infiltration": "Old Station",
@@ -2483,7 +2662,7 @@
         "z": -139.37
       },
       "Rotation": 51.83,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRoad",
@@ -2499,6 +2678,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "53d25c29-09e2-4424-adc2-0b6f3b324af0",
       "Infiltration": "",
@@ -2524,6 +2704,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "557d5203-4e7c-4bb7-bb01-f8f2f792f93e",
       "Infiltration": "",
@@ -2549,6 +2730,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "57b4786d-ee61-4c7f-b6ef-94467e39a3cf",
       "Infiltration": "Old Station",
@@ -2558,7 +2740,7 @@
         "z": -631.89
       },
       "Rotation": 14.210001,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -2574,6 +2756,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "58351d4d-3b8e-4ea5-8453-9c67c6e8964d",
       "Infiltration": "Old Station",
@@ -2583,7 +2766,7 @@
         "z": 218.24
       },
       "Rotation": 295.64,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -2599,6 +2782,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "583d3cc8-2a34-461c-9ec7-0376e23f4e72",
       "Infiltration": "House",
@@ -2608,7 +2792,7 @@
         "z": -48.99
       },
       "Rotation": 268.0896,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -2624,6 +2808,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "5beb21e5-df5f-4db0-b607-202cb7a62ecf",
       "Infiltration": "Old Station",
@@ -2633,7 +2818,7 @@
         "z": -659.78
       },
       "Rotation": 316.58,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRedHouse",
@@ -2649,6 +2834,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "5cd6f0cb-e6fd-4455-b370-d855738a434d",
       "Infiltration": "",
@@ -2674,6 +2860,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "5d238d90-a648-4d38-a868-e9eb7add2917",
       "Infiltration": "",
@@ -2699,6 +2886,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "5e748beb-9aae-41f8-be21-500441518972",
       "Infiltration": "Old Station",
@@ -2708,7 +2896,7 @@
         "z": 377.36
       },
       "Rotation": 224.32,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRoad",
@@ -2724,6 +2912,7 @@
           "Radius": 250
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "6400e0f5-754e-4a02-b93a-74b68dc7c03f",
       "Infiltration": "",
@@ -2749,6 +2938,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "6767b1b7-da32-4b62-90f0-0d44712a642b",
       "Infiltration": "Old Station",
@@ -2758,7 +2948,7 @@
         "z": -699.98
       },
       "Rotation": 323.3954,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneClearVill",
@@ -2774,6 +2964,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "68988ed2-79f2-485d-a0e6-13189d0221d4",
       "Infiltration": "",
@@ -2799,6 +2990,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "69378f13-ba17-464e-8875-618e6219d7e5",
       "Infiltration": "Old Station",
@@ -2808,7 +3000,7 @@
         "z": -302.726
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneMiniHouse",
@@ -2824,6 +3016,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 4,
       "Id": "6969a351-e6f7-4f1a-a109-1e0d0da8f3e7",
       "Infiltration": "",
@@ -2849,6 +3042,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "69a4318c-7522-4738-877a-099b3733ae23",
       "Infiltration": "House",
@@ -2858,7 +3052,7 @@
         "z": -597.53
       },
       "Rotation": 268.42,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBrokenVill",
@@ -2874,6 +3068,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "69a65e45-1180-4aab-9d68-8b60652a68f6",
       "Infiltration": "",
@@ -2899,6 +3094,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "69c6da14-8dae-4c58-a826-59df5093a19d",
       "Infiltration": "Old Station",
@@ -2908,7 +3104,7 @@
         "z": 236.44
       },
       "Rotation": 129.42,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -2924,6 +3120,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "6aef3e62-3a74-4d9b-a168-d3520f740ba2",
       "Infiltration": "Old Station",
@@ -2933,7 +3130,7 @@
         "z": -522.429932
       },
       "Rotation": 14.210001,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -2949,6 +3146,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "6bd2a586-6792-435c-bad3-9c96e140ca7d",
       "Infiltration": "House",
@@ -2958,7 +3156,7 @@
         "z": 366.63916
       },
       "Rotation": 240.480011,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneHouse",
@@ -2974,6 +3172,7 @@
           "Radius": 249.4
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 4,
       "Id": "6e093e43-1b9d-4934-b779-503b7af772a3",
       "Infiltration": "",
@@ -2999,6 +3198,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "6f4332cc-f37d-4125-85b3-0cc6b21708f3",
       "Infiltration": "",
@@ -3024,6 +3224,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "702b7612-f1a2-4531-8090-aca235a70c7d",
       "Infiltration": "House",
@@ -3033,7 +3234,7 @@
         "z": -53.2
       },
       "Rotation": 268.0896,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -3049,6 +3250,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "70885532-6518-405f-aeb0-ee7a7f10ea46",
       "Infiltration": "Old Station",
@@ -3058,7 +3260,7 @@
         "z": -45.23001
       },
       "Rotation": 53.04,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBigRocks",
@@ -3074,6 +3276,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "70b81aa2-9bfc-4e17-841c-f38f3b407452",
       "Infiltration": "",
@@ -3099,6 +3302,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "7149b906-da38-46dd-8fc3-6b4d8aca5ad8",
       "Infiltration": "House",
@@ -3108,7 +3312,7 @@
         "z": 362.51
       },
       "Rotation": 230.000015,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -3124,6 +3328,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "75fe2cc6-b21e-437d-a629-1b56a98d37b3",
       "Infiltration": "Old Station",
@@ -3133,7 +3338,7 @@
         "z": 105.45
       },
       "Rotation": 112.027237,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBrokenVill",
@@ -3149,6 +3354,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "760bd407-5519-4c21-a173-b4e04f3467be",
       "Infiltration": "",
@@ -3174,6 +3380,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "76582ea6-095f-494d-83b8-c9335ba3f14f",
       "Infiltration": "Old Station",
@@ -3183,7 +3390,7 @@
         "z": -654.540039
       },
       "Rotation": 316.58,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -3199,6 +3406,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "77d9c02e-6167-4823-97b0-f7de30a9a95b",
       "Infiltration": "House",
@@ -3208,7 +3416,7 @@
         "z": -588.059937
       },
       "Rotation": 268.42,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -3224,6 +3432,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "78682e7d-3f65-4b8d-a33c-a6defd5070d8",
       "Infiltration": "House",
@@ -3233,7 +3442,7 @@
         "z": 9.01001
       },
       "Rotation": 276.02,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneClearVill",
@@ -3249,6 +3458,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "793948e1-ea02-482b-b44b-82e41eaf6410",
       "Infiltration": "",
@@ -3274,6 +3484,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "794c2ad7-29fa-4faf-8bcf-649c8925444a",
       "Infiltration": "Old Station",
@@ -3283,7 +3494,7 @@
         "z": -703
       },
       "Rotation": 306.008484,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRedHouse",
@@ -3299,6 +3510,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 11,
       "DelayToCanSpawnSec": 4,
       "Id": "7a48cd52-e346-47f1-9f08-b020a6c7dc51",
       "Infiltration": "",
@@ -3324,6 +3536,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "7a929379-fe61-411a-87b8-aa1184e7f2b6",
       "Infiltration": "Old Station",
@@ -3333,7 +3546,7 @@
         "z": 297.02
       },
       "Rotation": 78.41,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -3349,6 +3562,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "7c7544d9-4e2f-4fb4-b967-9136e4441a71",
       "Infiltration": "Old Station",
@@ -3358,7 +3572,7 @@
         "z": 333.25
       },
       "Rotation": 195.7,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBigRocks",
@@ -3374,6 +3588,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "7c8bdb04-0122-4831-8385-fc2e56500da7",
       "Infiltration": "",
@@ -3399,6 +3614,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 15,
       "DelayToCanSpawnSec": 4,
       "Id": "7d5a5e57-9a77-4c10-8fda-7fd32771f9ae",
       "Infiltration": "",
@@ -3424,6 +3640,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "7d90e1b9-5aa1-4dcb-80ef-37ffcd141528",
       "Infiltration": "Old Station",
@@ -3433,7 +3650,7 @@
         "z": -333.949982
       },
       "Rotation": 66.96001,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -3449,6 +3666,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "7f756f8e-6458-4d82-9135-ef4cc7dbc861",
       "Infiltration": "House",
@@ -3458,7 +3676,7 @@
         "z": -45.99
       },
       "Rotation": 268.0896,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -3474,6 +3692,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "802d0076-1a65-4fcd-9fd7-ae20620d06cd",
       "Infiltration": "Old Station",
@@ -3483,7 +3702,7 @@
         "z": -205.009979
       },
       "Rotation": 18.05,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneWoodCutter",
@@ -3499,6 +3718,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 15,
       "DelayToCanSpawnSec": 4,
       "Id": "82bc2c5d-303d-4749-9334-6746005fe5ff",
       "Infiltration": "",
@@ -3524,6 +3744,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "831704c9-39ca-4b9c-a23f-c1f4a05f326b",
       "Infiltration": "Old Station",
@@ -3533,7 +3754,7 @@
         "z": -136.199982
       },
       "Rotation": 47.6100044,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -3549,6 +3770,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "850f44fe-ea49-4c84-91b3-5f31c6b14c5f",
       "Infiltration": "Old Station",
@@ -3558,7 +3780,7 @@
         "z": -305.6
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneMiniHouse",
@@ -3574,6 +3796,7 @@
           "Radius": 249.4
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 4,
       "Id": "861336cc-9822-4c9b-9353-bef50bb5eee3",
       "Infiltration": "",
@@ -3599,6 +3822,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "86c03175-87d8-4949-af27-f40fd6e9a3bb",
       "Infiltration": "",
@@ -3624,6 +3848,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 15,
       "DelayToCanSpawnSec": 4,
       "Id": "89151e94-ff6e-4ef6-a76d-b1599df0aab7",
       "Infiltration": "",
@@ -3649,6 +3874,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "8b03a106-108f-44e0-a41f-a71118cb8268",
       "Infiltration": "Old Station",
@@ -3658,7 +3884,7 @@
         "z": 382.53
       },
       "Rotation": 224.32,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -3674,6 +3900,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "8b1af5ad-6d84-4fdb-8538-be150c5584da",
       "Infiltration": "Old Station",
@@ -3683,7 +3910,7 @@
         "z": -46.98999
       },
       "Rotation": 53.04,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -3699,6 +3926,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "8d19978a-28a9-4c15-8b1d-9bf51695f401",
       "Infiltration": "House",
@@ -3708,7 +3936,7 @@
         "z": -59.17
       },
       "Rotation": 268.0896,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -3724,6 +3952,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "8efb8386-e830-48c3-98ad-088f8fbfbebd",
       "Infiltration": "House",
@@ -3733,7 +3962,7 @@
         "z": 199.06
       },
       "Rotation": 144.47,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBrokenVill",
@@ -3749,6 +3978,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "8fe8f516-e398-48de-8881-05ec6e729afd",
       "Infiltration": "",
@@ -3774,6 +4004,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 10,
       "DelayToCanSpawnSec": 4,
       "Id": "90dfab11-26b8-472e-bd22-21f6171099a0",
       "Infiltration": "",
@@ -3799,6 +4030,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "922c0b4f-5177-448b-8ab3-b8df4f82aa12",
       "Infiltration": "Old Station",
@@ -3808,7 +4040,7 @@
         "z": -515.23
       },
       "Rotation": 14.210001,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -3824,6 +4056,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "928f1dd2-4769-47c0-9803-77d7911e98e7",
       "Infiltration": "House",
@@ -3833,7 +4066,7 @@
         "z": -67.45999
       },
       "Rotation": 0,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneHouse",
@@ -3849,6 +4082,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 9,
       "DelayToCanSpawnSec": 4,
       "Id": "92b55875-0ec1-4a96-9cc4-72dfbb4befb7",
       "Infiltration": "",
@@ -3874,6 +4108,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 9,
       "DelayToCanSpawnSec": 4,
       "Id": "92c0f586-3b0e-404a-816c-82531b84c894",
       "Infiltration": "",
@@ -3899,6 +4134,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9332f801-241b-4383-b8cb-25c6278888e1",
       "Infiltration": "Old Station",
@@ -3908,7 +4144,7 @@
         "z": 154.59
       },
       "Rotation": 188.21,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -3924,6 +4160,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9426259b-9067-4fd2-96e9-2a308454a98a",
       "Infiltration": "Old Station",
@@ -3933,7 +4170,7 @@
         "z": 153.66983
       },
       "Rotation": 185.28,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -3949,6 +4186,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "94f47e76-1904-4586-a4d0-eaa230cc0f50",
       "Infiltration": "Old Station",
@@ -3958,7 +4196,7 @@
         "z": -147.490021
       },
       "Rotation": 125.579994,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneHouse",
@@ -3974,6 +4212,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 4,
       "Id": "9576c513-49fd-4af6-a3f9-dfbea4fa784b",
       "Infiltration": "",
@@ -3999,6 +4238,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "95eed7b0-be7e-4c74-92c4-a18135e3f579",
       "Infiltration": "",
@@ -4024,6 +4264,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "97782b53-27e6-4943-b75f-7f5bd18703f3",
       "Infiltration": "Old Station",
@@ -4033,7 +4274,7 @@
         "z": 297.58
       },
       "Rotation": 97.42,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4049,6 +4290,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "98e02682-9632-467d-97da-ccfdacca967c",
       "Infiltration": "House",
@@ -4058,7 +4300,7 @@
         "z": 200.65
       },
       "Rotation": 139.58,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4074,6 +4316,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9ca380ef-e31f-45e4-b832-f49c4e266795",
       "Infiltration": "Old Station",
@@ -4083,7 +4326,7 @@
         "z": -207.4
       },
       "Rotation": 25.48,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRoad",
@@ -4099,6 +4342,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "9dab1746-6ac8-4860-abde-784643946d87",
       "Infiltration": "",
@@ -4124,6 +4368,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "9e45bfc7-c9bc-42aa-82fe-72c232e39370",
       "Infiltration": "",
@@ -4149,6 +4394,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9ec89724-0285-4ffc-9ba7-0e1b0912410c",
       "Infiltration": "Old Station",
@@ -4158,7 +4404,7 @@
         "z": -310.713
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4174,6 +4420,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9f04fd7f-bc63-4641-8373-ac41edfc16de",
       "Infiltration": "Old Station",
@@ -4183,7 +4430,7 @@
         "z": -304.148
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4199,6 +4446,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9f5da3b8-592e-43aa-8bfd-f2e0710cae63",
       "Infiltration": "House",
@@ -4208,7 +4456,7 @@
         "z": -43.77
       },
       "Rotation": 268.0896,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4224,6 +4472,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a0962412-c584-4809-be76-b7a5c78cb855",
       "Infiltration": "Old Station",
@@ -4233,7 +4482,7 @@
         "z": -324.47
       },
       "Rotation": 66.96001,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4249,6 +4498,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a112057b-e7f1-4e10-b8e4-ec7d678b8b70",
       "Infiltration": "Old Station",
@@ -4258,7 +4508,7 @@
         "z": 89.04001
       },
       "Rotation": 130.67,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRoad",
@@ -4274,6 +4524,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "a139ae8f-1e50-43c9-8459-026081336b7b",
       "Infiltration": "",
@@ -4299,6 +4550,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a4b2e037-8469-4547-bea2-348c96ad56e6",
       "Infiltration": "House",
@@ -4308,7 +4560,7 @@
         "z": 260.66
       },
       "Rotation": 257,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4324,6 +4576,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a4cd083a-e76f-456a-be08-885cfbea81e7",
       "Infiltration": "Old Station",
@@ -4333,7 +4586,7 @@
         "z": -48.01999
       },
       "Rotation": 53.04,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4349,6 +4602,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a4e09fca-93ba-436c-9ffd-051a6b849a3c",
       "Infiltration": "Old Station",
@@ -4358,7 +4612,7 @@
         "z": 237.46
       },
       "Rotation": 129.42,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4374,6 +4628,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a5b20828-ad7b-4b07-a291-e2f07aa78e64",
       "Infiltration": "Old Station",
@@ -4383,7 +4638,7 @@
         "z": 379.36
       },
       "Rotation": 224.32,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4399,6 +4654,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a6fd8d7e-1bd3-4a41-8589-b3f0c35eb87c",
       "Infiltration": "Old Station",
@@ -4408,7 +4664,7 @@
         "z": -310.343
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4424,6 +4680,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a70f89f5-20a9-4962-8d08-075aa088c7ba",
       "Infiltration": "Old Station",
@@ -4433,7 +4690,7 @@
         "z": 329.42
       },
       "Rotation": 198.39,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRedHouse",
@@ -4449,6 +4706,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "a82f494f-2f4c-4edc-ba0a-66a504500ce3",
       "Infiltration": "",
@@ -4474,6 +4732,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "aaab6926-0679-4bd7-94c5-174a437f0a08",
       "Infiltration": "Old Station",
@@ -4483,7 +4742,7 @@
         "z": 216.57
       },
       "Rotation": 89.89,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4499,6 +4758,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "ab6dee85-93f5-45cb-a910-1ccd06e604ad",
       "Infiltration": "Old Station",
@@ -4508,7 +4768,7 @@
         "z": -301.63
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRedHouse",
@@ -4524,6 +4784,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "ab81316f-b469-41a4-80f4-471e80c5da4a",
       "Infiltration": "",
@@ -4549,6 +4810,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "ae63ba35-6701-403b-9803-43a836a08c4b",
       "Infiltration": "House",
@@ -4558,7 +4820,7 @@
         "z": -73.79001
       },
       "Rotation": 0,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4574,6 +4836,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b0365322-2ae6-4748-9689-d644d2177c73",
       "Infiltration": "Old Station",
@@ -4583,7 +4846,7 @@
         "z": -47.8299866
       },
       "Rotation": 0,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4599,6 +4862,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b09e235d-d504-4607-843f-b8286c3dbd62",
       "Infiltration": "Old Station",
@@ -4608,7 +4872,7 @@
         "z": -301.99
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4624,6 +4888,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b10e6b2c-93fb-44af-ac24-a016042c03ea",
       "Infiltration": "Old Station",
@@ -4633,7 +4898,7 @@
         "z": 85.86
       },
       "Rotation": 130.67,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneScavBase2",
@@ -4649,6 +4914,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "b1755e13-12e8-4a82-a899-8fb0f1f4d535",
       "Infiltration": "",
@@ -4674,6 +4940,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b3697fa5-29af-4a4e-afd1-3cf837b1fdae",
       "Infiltration": "Old Station",
@@ -4683,7 +4950,7 @@
         "z": 332.87
       },
       "Rotation": 193.46,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneClearVill",
@@ -4699,6 +4966,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "b3a5c785-d6cc-4559-acb2-ddc69b22515a",
       "Infiltration": "",
@@ -4724,6 +4992,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b43bd5a4-aa6c-4dd6-9052-d3359fa6b53c",
       "Infiltration": "Old Station",
@@ -4733,7 +5002,7 @@
         "z": -639.7899
       },
       "Rotation": 14.210001,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4749,6 +5018,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b4cee9ef-7ec2-4799-ad20-92e94b1365fc",
       "Infiltration": "Old Station",
@@ -4758,7 +5028,7 @@
         "z": 294.64
       },
       "Rotation": 76.84,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4774,6 +5044,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b4e1a661-9925-4791-a4dd-e2756a6024f0",
       "Infiltration": "Old Station",
@@ -4783,7 +5054,7 @@
         "z": 99.81
       },
       "Rotation": 112.027237,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4799,6 +5070,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b593e2ff-9764-4bbe-9f8f-e05781071e7b",
       "Infiltration": "Old Station",
@@ -4808,7 +5080,7 @@
         "z": -695.569946
       },
       "Rotation": 317.312622,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4824,6 +5096,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b74b9702-5543-4187-845f-db79885c0b11",
       "Infiltration": "House",
@@ -4833,7 +5106,7 @@
         "z": 199.36
       },
       "Rotation": 157.11,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneWoodCutter",
@@ -4849,6 +5122,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 10,
       "DelayToCanSpawnSec": 4,
       "Id": "b759747e-e91d-4427-a2da-28802a35fa33",
       "Infiltration": "",
@@ -4874,6 +5148,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b93d8187-0ae2-4971-be9c-7839721aeece",
       "Infiltration": "House",
@@ -4883,7 +5158,7 @@
         "z": 334.589966
       },
       "Rotation": 240.480011,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4899,6 +5174,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "ba05b27c-b857-4d25-9fea-c20a4d7d8ce5",
       "Infiltration": "Old Station",
@@ -4908,7 +5184,7 @@
         "z": -328.73
       },
       "Rotation": 66.96001,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBrokenVill",
@@ -4924,6 +5200,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "bae81a81-6114-4f13-8fd9-c273f49962b1",
       "Infiltration": "",
@@ -4949,6 +5226,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "bd0c617a-4288-47f9-ab50-25848294a38e",
       "Infiltration": "House",
@@ -4958,7 +5236,7 @@
         "z": 177.84
       },
       "Rotation": 239.859985,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4974,6 +5252,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "bdcfc53f-69f8-44fb-9be1-238bab9c2629",
       "Infiltration": "House",
@@ -4983,7 +5262,7 @@
         "z": 176.19
       },
       "Rotation": 239.859985,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -4999,6 +5278,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "be022f29-5b2b-4e94-893c-26d18fb3f61d",
       "Infiltration": "Old Station",
@@ -5008,7 +5288,7 @@
         "z": 220.33
       },
       "Rotation": 0,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5024,6 +5304,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "be2be8fa-4a03-4c1e-b8d7-85d702cf42f6",
       "Infiltration": "House",
@@ -5033,7 +5314,7 @@
         "z": 332.61
       },
       "Rotation": 245.390015,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5049,6 +5330,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "beefc821-7b82-4489-a064-a43fc1f752b2",
       "Infiltration": "Old Station",
@@ -5058,7 +5340,7 @@
         "z": 110.76
       },
       "Rotation": 112.027237,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneWoodCutter",
@@ -5074,6 +5356,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 15,
       "DelayToCanSpawnSec": 4,
       "Id": "bf135b79-4b10-4d78-8a1b-573eb800444d",
       "Infiltration": "",
@@ -5099,6 +5382,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "bf2a6323-087e-4d49-a160-ea86b8295ac0",
       "Infiltration": "Old Station",
@@ -5108,7 +5392,7 @@
         "z": -661.4
       },
       "Rotation": 316.58,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneWoodCutter",
@@ -5124,6 +5408,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 15,
       "DelayToCanSpawnSec": 4,
       "Id": "bfe4231f-a0bc-4bc4-b427-b98285523269",
       "Infiltration": "",
@@ -5149,6 +5434,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c047a076-7425-4c63-ac40-75be5226847c",
       "Infiltration": "House",
@@ -5158,7 +5444,7 @@
         "z": -400.750031
       },
       "Rotation": 287.12,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5174,6 +5460,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c053faa2-0f4e-4508-ac35-230ff6aa6a74",
       "Infiltration": "House",
@@ -5183,7 +5470,7 @@
         "z": -317.97
       },
       "Rotation": 287.12,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5199,6 +5486,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c0b93127-2d2f-4129-96e1-0d4dcc18a722",
       "Infiltration": "Old Station",
@@ -5208,7 +5496,7 @@
         "z": 110.95
       },
       "Rotation": 112.027237,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneHouse",
@@ -5224,6 +5512,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 9,
       "DelayToCanSpawnSec": 4,
       "Id": "c0c439df-041c-4b0b-9956-b074a3bca17e",
       "Infiltration": "",
@@ -5249,6 +5538,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 9,
       "DelayToCanSpawnSec": 4,
       "Id": "c3c6b35b-4a1b-40ae-af6d-b32fa522aa27",
       "Infiltration": "",
@@ -5274,6 +5564,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c5021df7-1750-44ff-ae44-137022a8bdac",
       "Infiltration": "Old Station",
@@ -5283,7 +5574,7 @@
         "z": -700.829956
       },
       "Rotation": 310.421173,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5299,6 +5590,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c58f8bd9-ff28-48d3-a8e8-dbad862698a8",
       "Infiltration": "Old Station",
@@ -5308,7 +5600,7 @@
         "z": 105.69
       },
       "Rotation": 112.027237,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5324,6 +5616,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c6f6dcc4-17ef-4842-83ab-124e34dfa53e",
       "Infiltration": "Old Station",
@@ -5333,7 +5626,7 @@
         "z": 85.72
       },
       "Rotation": 112.027237,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneScavBase2",
@@ -5349,6 +5642,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "c804e60e-3965-4745-975a-31056939f58e",
       "Infiltration": "",
@@ -5374,6 +5668,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c82d2b76-ad46-4624-825e-975a6d40fcf4",
       "Infiltration": "Old Station",
@@ -5383,7 +5678,7 @@
         "z": 86.93
       },
       "Rotation": 112.027237,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneMiniHouse",
@@ -5399,6 +5694,7 @@
           "Radius": 249.4
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 4,
       "Id": "c852e0c0-3bda-4acd-adb3-533373fb342f",
       "Infiltration": "",
@@ -5424,6 +5720,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c880793b-d822-4677-870e-6ffa1c05abd7",
       "Infiltration": "Old Station",
@@ -5433,7 +5730,7 @@
         "z": 239.67
       },
       "Rotation": 129.42,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5449,6 +5746,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c93838d9-3ec1-47b9-b5da-db2eb0fbec46",
       "Infiltration": "House",
@@ -5458,7 +5756,7 @@
         "z": -403.929962
       },
       "Rotation": 287.12,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5474,6 +5772,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "ca70d792-4fc8-47d8-a70a-e08bc2598448",
       "Infiltration": "House",
@@ -5483,7 +5782,7 @@
         "z": -594.9099
       },
       "Rotation": 268.42,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5499,6 +5798,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "cb602055-146b-4bd4-b43b-4df81301d046",
       "Infiltration": "House",
@@ -5508,7 +5808,7 @@
         "z": -76.16
       },
       "Rotation": 0,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5524,6 +5824,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "ce2a9b2d-260a-4eb4-b0b1-239a10eab0cc",
       "Infiltration": "House",
@@ -5533,7 +5834,7 @@
         "z": 330.75
       },
       "Rotation": 228.71,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5549,6 +5850,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "cead6c41-d92b-47e5-8f03-8365ceccee77",
       "Infiltration": "Old Station",
@@ -5558,7 +5860,7 @@
         "z": 154.3
       },
       "Rotation": 183.39,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5574,6 +5876,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "ceb25518-5a40-42cd-b57d-076d40d29890",
       "Infiltration": "Old Station",
@@ -5583,7 +5886,7 @@
         "z": -579.6
       },
       "Rotation": 316.58,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5599,6 +5902,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "cec41a3d-7939-4d43-8c64-36b1aed8818f",
       "Infiltration": "Old Station",
@@ -5608,7 +5912,7 @@
         "z": -310.053
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5624,6 +5928,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "cef385ed-2de5-4337-a876-9ae52e50a1c6",
       "Infiltration": "House",
@@ -5633,7 +5938,7 @@
         "z": -406.429962
       },
       "Rotation": 287.12,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneScavBase2",
@@ -5649,6 +5954,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "cf001f8e-fb62-4e75-ba73-2c01516c9cd1",
       "Infiltration": "",
@@ -5674,6 +5980,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "d044ee6d-4391-4496-8d47-e541ea05e94f",
       "Infiltration": "House",
@@ -5683,7 +5990,7 @@
         "z": 312.44
       },
       "Rotation": 243.09,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5699,6 +6006,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "d0e088c0-9d02-4227-869b-193aa464d7aa",
       "Infiltration": "House",
@@ -5708,7 +6016,7 @@
         "z": 264.43
       },
       "Rotation": 198.81,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5724,6 +6032,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "d1b20f00-8c54-4ff5-afd6-b3e1035de6d5",
       "Infiltration": "House",
@@ -5733,7 +6042,7 @@
         "z": -317.429962
       },
       "Rotation": 287.12,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5749,6 +6058,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "d290e1f7-ce87-4332-b386-c3f2441f45f7",
       "Infiltration": "Old Station",
@@ -5758,7 +6068,7 @@
         "z": -145.300018
       },
       "Rotation": 125.579994,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5774,6 +6084,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "d2da7554-3689-481c-9e29-4c55f4ba50cb",
       "Infiltration": "Old Station",
@@ -5783,7 +6094,7 @@
         "z": -304.759
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneWoodCutter",
@@ -5799,6 +6110,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 10,
       "DelayToCanSpawnSec": 4,
       "Id": "d42a7e44-fd07-4c42-bb3e-1b5ddd2d0394",
       "Infiltration": "",
@@ -5824,6 +6136,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "d7005efc-32b9-4c26-bf50-1e13a3c0d774",
       "Infiltration": "Old Station",
@@ -5833,7 +6146,7 @@
         "z": 93.59
       },
       "Rotation": 112.027237,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneMiniHouse",
@@ -5849,6 +6162,7 @@
           "Radius": 171
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 4,
       "Id": "d91c4717-0dd8-48b6-98a7-7eb7219a9647",
       "Infiltration": "",
@@ -5874,6 +6188,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "da037755-e7ae-4738-8be9-be02991b422b",
       "Infiltration": "Old Station",
@@ -5883,7 +6198,7 @@
         "z": -204.87
       },
       "Rotation": 23.36,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5899,6 +6214,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "da22cead-d753-44c4-b44e-131a3d9690b7",
       "Infiltration": "Old Station",
@@ -5908,7 +6224,7 @@
         "z": -577.11
       },
       "Rotation": 316.58,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5924,6 +6240,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "da89268f-c6c8-4689-a9d5-5be89a23740f",
       "Infiltration": "Old Station",
@@ -5933,7 +6250,7 @@
         "z": 380.44
       },
       "Rotation": 224.32,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5949,6 +6266,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "dd6a29b3-46ab-4b43-a64d-a556342cc243",
       "Infiltration": "Old Station",
@@ -5958,7 +6276,7 @@
         "z": -308.583
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5974,6 +6292,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "deaa5307-ad18-4d43-a46a-e6ef0c5aad7a",
       "Infiltration": "House",
@@ -5983,7 +6302,7 @@
         "z": -51.36
       },
       "Rotation": 268.0896,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -5999,6 +6318,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "deea2fb8-334a-4327-8e1e-a520140ac51e",
       "Infiltration": "Old Station",
@@ -6008,7 +6328,7 @@
         "z": -302.877
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6024,6 +6344,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e02b3d1e-aa8d-4482-8188-d8680b91e274",
       "Infiltration": "House",
@@ -6033,7 +6354,7 @@
         "z": 363.106354
       },
       "Rotation": 245.390015,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6049,6 +6370,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e05ef34f-8247-44aa-95a9-fc5085998045",
       "Infiltration": "Old Station",
@@ -6058,7 +6380,7 @@
         "z": -308.343
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRoad",
@@ -6074,6 +6396,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "e0a100fe-5ab6-46f9-a799-3fe3b40be35c",
       "Infiltration": "",
@@ -6099,6 +6422,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e0fb7ebc-0a4c-45a3-b5a3-ba5e6b1456ba",
       "Infiltration": "Old Station",
@@ -6108,7 +6432,7 @@
         "z": -656.64
       },
       "Rotation": 284.39,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6124,6 +6448,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e1986567-8367-44cd-9bfa-e5c20e9e1460",
       "Infiltration": "Old Station",
@@ -6133,7 +6458,7 @@
         "z": -638.929932
       },
       "Rotation": 316.58,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6149,6 +6474,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e23a1216-20f7-4675-88b6-8538090e3dcc",
       "Infiltration": "House",
@@ -6158,7 +6484,7 @@
         "z": -55.13
       },
       "Rotation": 268.0896,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6174,6 +6500,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e46cc7ed-cb3b-46cf-a822-ecca3fc36638",
       "Infiltration": "Old Station",
@@ -6183,7 +6510,7 @@
         "z": -305.98
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBrokenVill",
@@ -6199,6 +6526,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "e46e996a-cd72-45c4-a311-a324d7144373",
       "Infiltration": "",
@@ -6224,6 +6552,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e48a6b22-ef3f-4c2b-96ef-1a36803af60d",
       "Infiltration": "Old Station",
@@ -6233,7 +6562,7 @@
         "z": -303.139
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6249,6 +6578,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e4f280f7-ba13-4fa1-83ec-fac99e8f66b5",
       "Infiltration": "Old Station",
@@ -6258,7 +6588,7 @@
         "z": -302.47
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBrokenVill",
@@ -6274,6 +6604,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "e54f65a2-bd3f-46d2-806e-5eab29876ea8",
       "Infiltration": "",
@@ -6299,6 +6630,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "e5754fee-15cb-428d-bf4e-b0e1ae2eaeaf",
       "Infiltration": "",
@@ -6324,6 +6656,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 8,
       "DelayToCanSpawnSec": 4,
       "Id": "e57bbb92-6313-4b7e-8274-6f0ba1638d59",
       "Infiltration": "",
@@ -6349,6 +6682,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "e62228ab-2453-4e59-b594-b283c787333c",
       "Infiltration": "",
@@ -6374,6 +6708,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e6fb5fd6-dff6-4af0-bc35-7c4d8dd198fc",
       "Infiltration": "Old Station",
@@ -6383,7 +6718,7 @@
         "z": -303.086
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6399,6 +6734,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e79077ff-20e2-401f-8836-87f347497c7d",
       "Infiltration": "House",
@@ -6408,7 +6744,7 @@
         "z": 264.44
       },
       "Rotation": 204.02,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6424,6 +6760,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e7e7fcfc-f2c0-4f5d-9b69-d6774de59df3",
       "Infiltration": "House",
@@ -6433,7 +6770,7 @@
         "z": -57.08
       },
       "Rotation": 268.0896,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBrokenVill",
@@ -6449,6 +6786,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "e8156138-015c-415c-b993-1c72383ad070",
       "Infiltration": "",
@@ -6474,6 +6812,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e94aee7d-4b61-4214-a68c-498eebdd6574",
       "Infiltration": "House",
@@ -6483,7 +6822,7 @@
         "z": 317.73
       },
       "Rotation": 237.94,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6499,6 +6838,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "ea838cee-14e1-418f-a616-a5f2d39987c1",
       "Infiltration": "House",
@@ -6508,7 +6848,7 @@
         "z": -410.250031
       },
       "Rotation": 287.12,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6524,6 +6864,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "eaabeff9-9737-4c63-a3e2-42f64c93b7ef",
       "Infiltration": "Old Station",
@@ -6533,7 +6874,7 @@
         "z": 90.68
       },
       "Rotation": 112.027237,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6549,6 +6890,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "eb67cff0-571a-4d65-b9be-766d1a58aafc",
       "Infiltration": "Old Station",
@@ -6558,7 +6900,7 @@
         "z": 86.6199951
       },
       "Rotation": 130.67,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6574,6 +6916,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "eb7ad162-909d-415b-9800-3508bc9f8664",
       "Infiltration": "House",
@@ -6583,7 +6926,7 @@
         "z": 315.84
       },
       "Rotation": 223.42,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneWoodCutter",
@@ -6599,6 +6942,7 @@
           "Radius": 140
         }
       },
+      "CorePointId": 15,
       "DelayToCanSpawnSec": 4,
       "Id": "ec0e1791-8b0f-4e7f-b31d-f3ab6be28990",
       "Infiltration": "",
@@ -6624,6 +6968,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "ec3445e7-00c8-43ba-9a91-69b426d0537e",
       "Infiltration": "House",
@@ -6633,7 +6978,7 @@
         "z": 201.72
       },
       "Rotation": 136.06,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6649,6 +6994,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "ed269133-85c0-4307-bfe8-27c2cab926d9",
       "Infiltration": "Old Station",
@@ -6658,7 +7004,7 @@
         "z": 146.29
       },
       "Rotation": 0.08,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneClearVill",
@@ -6674,6 +7020,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "ee66e640-13cb-4b34-b743-339f3a16e73a",
       "Infiltration": "",
@@ -6699,6 +7046,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "eeafbe43-88fa-4755-8c10-d5815528838d",
       "Infiltration": "Old Station",
@@ -6708,7 +7056,7 @@
         "z": -308.56
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneRedHouse",
@@ -6724,6 +7072,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "ef01d04a-1194-4c95-9487-d699247dc7b6",
       "Infiltration": "",
@@ -6749,6 +7098,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f10701b0-ee96-4f9b-94db-8007bc90fb07",
       "Infiltration": "House",
@@ -6758,7 +7108,7 @@
         "z": -314.58
       },
       "Rotation": 287.12,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBrokenVill",
@@ -6774,6 +7124,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "f1d7faef-6e94-4ae6-ae13-dc909266ce5e",
       "Infiltration": "",
@@ -6799,6 +7150,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f2ae3edb-47f9-402e-8e4f-de47df81c9ce",
       "Infiltration": "Old Station",
@@ -6808,7 +7160,7 @@
         "z": -141.908661
       },
       "Rotation": 38.5499954,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6824,6 +7176,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f3a50056-4d67-43d2-93a0-ea672b49bb5b",
       "Infiltration": "House",
@@ -6833,7 +7186,7 @@
         "z": 261.53
       },
       "Rotation": 239.859985,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6849,6 +7202,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f4963cf2-9c80-4a14-b300-eac6102fd51d",
       "Infiltration": "House",
@@ -6858,7 +7212,7 @@
         "z": 328.52
       },
       "Rotation": 230.000015,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBrokenVill",
@@ -6874,6 +7228,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 1,
       "DelayToCanSpawnSec": 4,
       "Id": "f4971ab1-d1a8-4e2a-ba0c-8773de2bc543",
       "Infiltration": "",
@@ -6899,6 +7254,7 @@
           "Radius": 250
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "f4aad71b-7d2f-4d14-90f4-cf400e721ada",
       "Infiltration": "",
@@ -6924,6 +7280,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f4f8f8c1-7c55-4b68-878f-f631e769ba30",
       "Infiltration": "House",
@@ -6933,7 +7290,7 @@
         "z": 362.19
       },
       "Rotation": 229.460022,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6949,6 +7306,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f520eec3-2fe1-4538-9e85-2997336fa667",
       "Infiltration": "Old Station",
@@ -6958,7 +7316,7 @@
         "z": 84.5
       },
       "Rotation": 130.67,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6974,6 +7332,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f66219ad-4eb0-48bd-a435-47f76d48c34d",
       "Infiltration": "Old Station",
@@ -6983,7 +7342,7 @@
         "z": -153.09
       },
       "Rotation": 125.579994,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "",
@@ -6999,6 +7358,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f6b08d4e-8de0-4922-87b8-546d593d4454",
       "Infiltration": "Old Station",
@@ -7008,7 +7368,7 @@
         "z": 295.99
       },
       "Rotation": 83.79,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneBigRocks",
@@ -7024,6 +7384,7 @@
           "Radius": 158.9
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "f98e30ff-a233-4f02-8588-2e02a4d42ac8",
       "Infiltration": "",
@@ -7049,6 +7410,7 @@
           "Radius": 70
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f997caf2-a40d-457c-ae98-20b17660a5aa",
       "Infiltration": "Old Station",
@@ -7058,7 +7420,7 @@
         "z": -309.621
       },
       "Rotation": 353.636353,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneScavBase2",
@@ -7074,6 +7436,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "fb56a4ee-ecf3-4329-ad07-06d5f3b1a371",
       "Infiltration": "",
@@ -7099,6 +7462,7 @@
           "Radius": 100
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "fc1c9271-3fc8-403f-a730-da10e263b9b1",
       "Infiltration": "House",
@@ -7108,7 +7472,7 @@
         "z": -60.91
       },
       "Rotation": 268.0896,
-      "Sides": ["Usec", "Bear"]
+      "Sides": ["Pmc"]
     },
     {
       "BotZoneName": "ZoneMiniHouse",
@@ -7124,6 +7488,7 @@
           "Radius": 155
         }
       },
+      "CorePointId": 10,
       "DelayToCanSpawnSec": 4,
       "Id": "fe5769b5-fb63-42e2-a388-fd84044c08a9",
       "Infiltration": "",
@@ -7149,6 +7514,7 @@
           "Radius": 60
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "ff7aa61d-d6f0-42c9-8e35-f3c49e33b6a2",
       "Infiltration": "",
@@ -7170,119 +7536,181 @@
   "exits": [
     {
       "Chance": 66,
+      "ChancePVE": 66,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "House",
+      "EventAvailable": false,
       "ExfiltrationTime": 8,
+      "ExfiltrationTimePVE": 8,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "ZB-016",
       "PassageRequirement": "None",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequirementTip": ""
     },
     {
       "Chance": 100,
+      "ChancePVE": 100,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Old Station",
+      "EventAvailable": false,
       "ExfiltrationTime": 8,
+      "ExfiltrationTimePVE": 8,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "Outskirts",
       "PassageRequirement": "None",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequirementTip": ""
     },
     {
       "Chance": 100,
+      "ChancePVE": 100,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "House",
+      "EventAvailable": false,
       "ExfiltrationTime": 8,
+      "ExfiltrationTimePVE": 8,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "UN Roadblock",
       "PassageRequirement": "None",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequirementTip": ""
     },
     {
       "Chance": 66,
+      "ChancePVE": 66,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "House",
+      "EventAvailable": false,
       "ExfiltrationTime": 8,
+      "ExfiltrationTimePVE": 8,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "RUAF Gate",
       "PassageRequirement": "None",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequirementTip": ""
     },
     {
       "Chance": 66,
+      "ChancePVE": 66,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Old Station",
+      "EventAvailable": false,
       "ExfiltrationTime": 8,
+      "ExfiltrationTimePVE": 8,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "ZB-014",
       "PassageRequirement": "None",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequirementTip": ""
     },
     {
       "Chance": 100,
+      "ChancePVE": 100,
       "Count": 5000,
+      "CountPVE": 5000,
       "EntryPoints": "House,Old Station",
+      "EventAvailable": false,
       "ExfiltrationTime": 60,
+      "ExfiltrationTimePVE": 60,
       "ExfiltrationType": "SharedTimer",
       "Id": "5449016a4bdc2d6f028b456f",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "South V-Ex",
       "PassageRequirement": "TransferItem",
       "PlayersCount": 4,
+      "PlayersCountPVE": 4,
       "RequirementTip": "EXFIL_Item"
     },
     {
       "Chance": 100,
+      "ChancePVE": 100,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "House,Old Station",
+      "EventAvailable": false,
       "ExfiltrationTime": 20,
+      "ExfiltrationTimePVE": 20,
       "ExfiltrationType": "SharedTimer",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "Factory Gate",
       "PassageRequirement": "ScavCooperation",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequirementTip": "EXFIL_Cooperate"
     },
     {
       "Chance": 100,
+      "ChancePVE": 100,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "House",
+      "EventAvailable": false,
       "ExfiltrationTime": 8,
+      "ExfiltrationTimePVE": 8,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "un-sec",
       "PassageRequirement": "None",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequirementTip": ""
     }
   ],
   "filter_ex": [],
-  "limits": [],
+  "limits": [
+    {
+      "items": ["6389c8c5dbfd5e4b95197e6b"],
+      "max": 1,
+      "min": 0
+    }
+  ],
   "matching_min_seconds": 60,
   "maxItemCountInLocation": [],
   "sav_summon_seconds": 60,

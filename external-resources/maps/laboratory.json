@@ -24,11 +24,18 @@
         "path": "CONTENT/banners/banner_scavraider.jpg",
         "rcid": ""
       }
+    },
+    {
+      "id": "64c0acf85174e095610734a0",
+      "pic": {
+        "path": "CONTENT/banners/banner_sherpa.jpg",
+        "rcid": ""
+      }
     }
   ],
   "BossLocationSpawn": [
     {
-      "BossChance": 45,
+      "BossChance": 60,
       "BossDifficult": "normal",
       "BossEscortAmount": "1,1,1,1,2,2,2,1,1,1,1,2,2,2,3",
       "BossEscortDifficult": "normal",
@@ -38,12 +45,13 @@
       "BossZone": "BotZoneFloor1",
       "Delay": 0,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Time": 900,
       "TriggerId": "",
       "TriggerName": ""
     },
     {
-      "BossChance": 45,
+      "BossChance": 60,
       "BossDifficult": "normal",
       "BossEscortAmount": "1,1,1,1,2,2,2,1,1,1,1,2,2,2,3",
       "BossEscortDifficult": "normal",
@@ -53,6 +61,7 @@
       "BossZone": "BotZoneFloor2",
       "Delay": 0,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Time": 300,
       "TriggerId": "",
       "TriggerName": ""
@@ -68,6 +77,7 @@
       "BossZone": "BotZoneBasement",
       "Delay": 0,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Time": 450,
       "TriggerId": "autoId_00008_EXFIL",
       "TriggerName": "interactObject"
@@ -83,6 +93,7 @@
       "BossZone": "BotZoneBasement",
       "Delay": 0,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Time": 800,
       "TriggerId": "autoId_00010_EXFIL",
       "TriggerName": "interactObject"
@@ -98,6 +109,7 @@
       "BossZone": "BotZoneBasement",
       "Delay": 0,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Time": -1,
       "TriggerId": "autoId_00007_EXFIL",
       "TriggerName": "interactObject"
@@ -113,6 +125,7 @@
       "BossZone": "BotZoneFloor2",
       "Delay": 0,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Time": -1,
       "TriggerId": "autoId_00007_EXFIL",
       "TriggerName": "interactObject"
@@ -128,12 +141,13 @@
       "BossZone": "BotZoneFloor1",
       "Delay": 0,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Time": 600,
       "TriggerId": "autoId_00632_EXFIL",
       "TriggerName": "interactObject"
     },
     {
-      "BossChance": 30,
+      "BossChance": 35,
       "BossDifficult": "normal",
       "BossEscortAmount": "1,1,1,1,2,2,2,1,1,1,1,2,2,2,3",
       "BossEscortDifficult": "normal",
@@ -143,12 +157,13 @@
       "BossZone": "BotZoneFloor2",
       "Delay": 0,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Time": 600,
       "TriggerId": "autoId_00632_EXFIL",
       "TriggerName": "interactObject"
     },
     {
-      "BossChance": 30,
+      "BossChance": 35,
       "BossDifficult": "normal",
       "BossEscortAmount": "1,1,1,1,2,2,2,1,1,1,1,2,2,2,3",
       "BossEscortDifficult": "normal",
@@ -158,12 +173,13 @@
       "BossZone": "BotZoneFloor1",
       "Delay": 0,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Time": -1,
       "TriggerId": "autoId_00012_EXFIL",
       "TriggerName": "interactObject"
     },
     {
-      "BossChance": 30,
+      "BossChance": 35,
       "BossDifficult": "normal",
       "BossEscortAmount": "1,1,1,1,2,2,2,1,1,1,1,2,2,2,3",
       "BossEscortDifficult": "normal",
@@ -173,6 +189,7 @@
       "BossZone": "BotZoneFloor2",
       "Delay": 0,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Time": -1,
       "TriggerId": "autoId_00012_EXFIL",
       "TriggerName": "interactObject"
@@ -188,6 +205,7 @@
       "BossZone": "BotZoneFloor1",
       "Delay": 0,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Time": 1200,
       "TriggerId": "autoId_00014_EXFIL",
       "TriggerName": "interactObject"
@@ -203,6 +221,7 @@
       "BossZone": "BotZoneFloor2",
       "Delay": 0,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Time": 1200,
       "TriggerId": "autoId_00014_EXFIL",
       "TriggerName": "interactObject"
@@ -218,6 +237,7 @@
       "BossZone": "BotZoneFloor1",
       "Delay": 0,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Time": -1,
       "TriggerId": "autoId_00009_EXFIL",
       "TriggerName": "interactObject"
@@ -233,6 +253,7 @@
       "BossZone": "BotZoneFloor2",
       "Delay": 0,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Time": -1,
       "TriggerId": "autoId_00009_EXFIL",
       "TriggerName": "interactObject"
@@ -248,6 +269,7 @@
       "BossZone": "BotZoneGate2",
       "Delay": 8,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Time": -1,
       "TriggerId": "autoId_00014_EXFIL",
       "TriggerName": "interactObject"
@@ -263,14 +285,15 @@
       "BossZone": "BotZoneGate1",
       "Delay": 8,
       "RandomTimeSpawn": false,
+      "SpawnMode": ["regular", "pve"],
       "Time": -1,
       "TriggerId": "autoId_00632_EXFIL",
       "TriggerName": "interactObject"
     }
   ],
-  "BotAssault": 0,
+  "BotAssault": 100,
   "BotEasy": 0,
-  "BotHard": 0,
+  "BotHard": 70,
   "BotImpossible": 0,
   "BotLocationModifier": {
     "AccuracySpeed": 1,
@@ -285,16 +308,20 @@
     "VisibleDistance": 1
   },
   "BotMarksman": 0,
-  "BotMax": 0,
-  "BotMaxPlayer": 0,
-  "BotMaxTimePlayer": 0,
-  "BotNormal": 0,
-  "BotSpawnTimeOffMax": 0,
-  "BotSpawnTimeOffMin": 0,
-  "BotSpawnTimeOnMax": 0,
-  "BotSpawnTimeOnMin": 0,
-  "BotStart": 0,
-  "BotStop": 0,
+  "BotMax": 14,
+  "BotMaxPlayer": 14,
+  "BotMaxPvE": 25,
+  "BotMaxTimePlayer": 1000,
+  "BotNormal": 30,
+  "BotSpawnCountStep": 3,
+  "BotSpawnPeriodCheck": 15,
+  "BotSpawnTimeOffMax": 30,
+  "BotSpawnTimeOffMin": 20,
+  "BotSpawnTimeOnMax": 330,
+  "BotSpawnTimeOnMin": 300,
+  "BotStart": 10,
+  "BotStartPlayer": 15,
+  "BotStop": 1400,
   "Description": "Laboratory description",
   "DisabledForScav": true,
   "DisabledScavExits": "",
@@ -302,34 +329,78 @@
   "Enabled": true,
   "EscapeTimeLimit": 35,
   "EscapeTimeLimitCoop": 30,
+  "EscapeTimeLimitPVE": 27,
   "GenerateLocalLootCache": true,
-  "GlobalLootChanceModifier": 0.37,
-  "IconX": 288,
-  "IconY": 611,
+  "GlobalContainerChanceModifier": 1,
+  "GlobalLootChanceModifier": 0.77,
+  "GlobalLootChanceModifierPvE": 0.77,
+  "IconX": 700,
+  "IconY": 800,
   "Id": "laboratory",
   "Insurance": false,
   "IsSecret": true,
   "Locked": false,
   "Loot": [],
-  "MaxBotPerZone": 0,
+  "MatchMakerMinPlayersByWaitTime": [
+    {
+      "minPlayers": 7,
+      "time": 60
+    },
+    {
+      "minPlayers": 6,
+      "time": 70
+    },
+    {
+      "minPlayers": 5,
+      "time": 120
+    },
+    {
+      "minPlayers": 4,
+      "time": 180
+    },
+    {
+      "minPlayers": 3,
+      "time": 250
+    },
+    {
+      "minPlayers": 2,
+      "time": 330
+    },
+    {
+      "minPlayers": 1,
+      "time": 420
+    }
+  ],
+  "MaxBotPerZone": 5,
   "MaxCoopGroup": 10,
   "MaxDistToFreePoint": 900,
   "MaxPlayers": 10,
   "MinDistToExitPoint": 30,
-  "MinDistToFreePoint": 10,
+  "MinDistToFreePoint": 35,
   "MinMaxBots": [],
-  "MinPlayers": 6,
+  "MinPlayerLvlAccessKeys": 0,
+  "MinPlayers": 8,
   "Name": "Laboratory",
   "NewSpawn": false,
+  "NonWaveGroupScenario": {
+    "Chance": 50,
+    "Enabled": false,
+    "MaxToBeGroup": 3,
+    "MinToBeGroup": 2
+  },
   "OcculsionCullingEnabled": true,
+  "OfflineNewSpawn": false,
+  "OfflineOldSpawn": true,
   "OldSpawn": true,
   "OpenZones": "BotZoneFloor1,BotZoneFloor2",
+  "PlayersRequestCount": -1,
   "PmcMaxPlayersInGroup": 5,
   "Preview": {
     "path": "",
     "rcid": ""
   },
-  "RequiredPlayerLevel": 1,
+  "RequiredPlayerLevelMax": 100,
+  "RequiredPlayerLevelMin": 0,
   "Rules": "Normal",
   "SafeLocation": false,
   "ScavMaxPlayersInGroup": 4,
@@ -352,6 +423,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "0043f275-0dc2-4c04-87a1-bd90cbaf183a",
       "Infiltration": "Common",
@@ -377,6 +449,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "00a92ab8-28d7-4c1c-87a5-ef1c480e9900",
       "Infiltration": "Common",
@@ -402,6 +475,7 @@
           "Radius": 27
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "0171ec0f-4050-4303-8504-b742922cf80b",
       "Infiltration": "",
@@ -427,6 +501,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "01d14f42-45de-45fb-be52-bfff19f3a470",
       "Infiltration": "Common",
@@ -452,6 +527,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "037af7bf-1a89-454d-af5c-83df829fbde0",
       "Infiltration": "Common",
@@ -477,6 +553,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "037b1766-b66b-4c3e-adf1-390f67dc70bb",
       "Infiltration": "Common",
@@ -502,6 +579,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "04277419-2f99-4283-a180-acb761f90c72",
       "Infiltration": "Common",
@@ -527,6 +605,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "0483afba-89af-43a9-b2d3-47e2905440c5",
       "Infiltration": "Common",
@@ -552,6 +631,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "04ca5c72-7c54-43cf-9150-6ddcaedf9808",
       "Infiltration": "Common",
@@ -577,6 +657,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "04f71bcb-922f-48bc-992b-3a64a20d589c",
       "Infiltration": "",
@@ -602,6 +683,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "07863ac5-27c5-4001-85a2-13356eda6133",
       "Infiltration": "",
@@ -627,6 +709,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "081425b7-a633-420b-ae62-da220db1a651",
       "Infiltration": "Common",
@@ -652,6 +735,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "08633a18-3bbd-4a4b-934a-b51e049817b1",
       "Infiltration": "Common",
@@ -677,6 +761,7 @@
           "Radius": 7
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "0b5e336a-2cb6-4619-b9a5-07ff0afad1ee",
       "Infiltration": "",
@@ -702,6 +787,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "0d7728c8-59c8-493a-8849-fa22a1346fcd",
       "Infiltration": "Common",
@@ -727,6 +813,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "0f8dedb9-f5f2-4c18-af92-968b0b22e54b",
       "Infiltration": "Common",
@@ -752,6 +839,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "12055345-4522-4b48-b08a-6a517bbf7c61",
       "Infiltration": "Common",
@@ -777,6 +865,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "125f7075-b7c9-4d29-be15-a8e33b9c5d6f",
       "Infiltration": "Common",
@@ -802,6 +891,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "13ea441c-75e5-48a2-9d87-396590d9bc98",
       "Infiltration": "Common",
@@ -827,6 +917,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 4,
       "Id": "15c0ac46-c1e4-498b-9466-1c071554be06",
       "Infiltration": "",
@@ -852,6 +943,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "16f8ebd0-39b4-4fe2-8128-ed2bc82008a1",
       "Infiltration": "Common",
@@ -877,6 +969,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1780c396-0394-48cf-8871-a6feae1bc4b7",
       "Infiltration": "Common",
@@ -902,6 +995,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "19383115-da70-4cc5-8ab7-d80bf8045113",
       "Infiltration": "Common",
@@ -927,6 +1021,7 @@
           "Radius": 27
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 4,
       "Id": "19e75b93-4470-4d65-b5f8-e3a09fb4a71d",
       "Infiltration": "",
@@ -952,6 +1047,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1d148166-42cd-4c7b-8b33-d93682121c2f",
       "Infiltration": "Common",
@@ -977,6 +1073,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1d3d7178-c84f-47b2-9ea6-4cd11449dbfa",
       "Infiltration": "Common",
@@ -1002,6 +1099,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "1d66c992-d022-490d-a451-18d19c284988",
       "Infiltration": "Common",
@@ -1027,6 +1125,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "223b6e4d-2ead-45eb-ad5f-35abd028d2c3",
       "Infiltration": "Common",
@@ -1052,6 +1151,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "22c00064-df0c-474b-b479-918175a539a7",
       "Infiltration": "Common",
@@ -1077,6 +1177,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "242085cb-6ffa-4aa5-8268-dc8b138c7b74",
       "Infiltration": "Common",
@@ -1102,6 +1203,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "24453a69-8df7-47cf-8449-b56ef868be5c",
       "Infiltration": "Common",
@@ -1127,6 +1229,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "25692e11-5450-4b6f-9820-fae868e113bf",
       "Infiltration": "Common",
@@ -1152,6 +1255,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "293e014a-512d-4fe3-a3fd-1a40611e90da",
       "Infiltration": "Common",
@@ -1177,6 +1281,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "29b9975d-3abf-4478-affb-cd0d29b4f3a5",
       "Infiltration": "Common",
@@ -1202,6 +1307,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "2f66dafc-a2f1-4283-a383-aa64c84f6da7",
       "Infiltration": "Common",
@@ -1227,6 +1333,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "32e05b2a-9847-45b8-b04b-36bafe5879f1",
       "Infiltration": "Common",
@@ -1252,6 +1359,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "330b076f-bd90-494d-8c3d-bed9e5959378",
       "Infiltration": "",
@@ -1277,6 +1385,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "35beb4da-36a6-48e3-bbd1-810126872d3c",
       "Infiltration": "Common",
@@ -1302,6 +1411,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "38378dc4-cb6a-4538-9b78-fab68201bfa6",
       "Infiltration": "Common",
@@ -1327,6 +1437,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "3a7f4c28-ea1f-466d-8920-3f2871d69cf3",
       "Infiltration": "",
@@ -1352,6 +1463,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "3d6df899-9a65-48d3-9e55-2664c6c6c4c0",
       "Infiltration": "Common",
@@ -1377,6 +1489,7 @@
           "Radius": 27
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 4,
       "Id": "3dbca587-2589-4370-9594-407655be3186",
       "Infiltration": "",
@@ -1402,6 +1515,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "40b7da99-8f93-4ca6-bb33-c94b8a7c92a7",
       "Infiltration": "Common",
@@ -1427,6 +1541,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "4654cec6-f2e9-4118-830e-d633b39375f4",
       "Infiltration": "Common",
@@ -1452,6 +1567,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "49367d3d-95f6-4b3f-9406-693ab39259bd",
       "Infiltration": "Common",
@@ -1477,6 +1593,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "4c524643-e17e-4d20-ae81-d47fb4a1701a",
       "Infiltration": "Common",
@@ -1502,6 +1619,7 @@
           "Radius": 27
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "4cd0a70e-8349-4707-b3f6-4b0d18cf989b",
       "Infiltration": "",
@@ -1527,6 +1645,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "4e9cd17c-ae56-4408-a308-4b9722e6e344",
       "Infiltration": "",
@@ -1552,6 +1671,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "505b3a49-81fd-49e8-8ff1-fbee3af0fadf",
       "Infiltration": "Common",
@@ -1577,6 +1697,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 4,
       "Id": "50bda7e6-480e-412c-a91c-8dda1faffa45",
       "Infiltration": "",
@@ -1602,6 +1723,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "51d82d49-97b2-4fba-b1f8-219b20005c17",
       "Infiltration": "",
@@ -1627,6 +1749,7 @@
           "Radius": 7
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "52005238-4fb5-4775-9052-c1f52bfd1c94",
       "Infiltration": "",
@@ -1652,6 +1775,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 8,
       "DelayToCanSpawnSec": 4,
       "Id": "584031bc-1dbb-4fec-a95f-7297e0b6a540",
       "Infiltration": "",
@@ -1677,6 +1801,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "5aed643f-3714-49fc-bdf8-00168189da61",
       "Infiltration": "Common",
@@ -1702,6 +1827,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "5efaabad-3df0-451c-ae8c-df707c90d24f",
       "Infiltration": "Common",
@@ -1727,6 +1853,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "5f925d72-bfd0-4add-b89b-9fec63005145",
       "Infiltration": "Common",
@@ -1752,6 +1879,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "5f97a1fc-1cc0-4cb6-85dc-ab20c9d90fea",
       "Infiltration": "Common",
@@ -1777,6 +1905,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "5f9d0c13-d935-48f5-9112-0852d8e8d9e0",
       "Infiltration": "Common",
@@ -1802,6 +1931,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "604f6db8-2519-42b8-8d45-7b1b1290e97d",
       "Infiltration": "Common",
@@ -1827,6 +1957,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "616552c2-e458-4b8c-b39b-4e26083cd722",
       "Infiltration": "Common",
@@ -1852,6 +1983,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "63a12c08-6718-4344-b9c4-d9c2b0550faa",
       "Infiltration": "Common",
@@ -1877,6 +2009,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "65372346-89b9-4c52-94af-7bb4d474daa5",
       "Infiltration": "Common",
@@ -1902,6 +2035,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "666a2681-4a93-4b9c-b96d-a1419149069d",
       "Infiltration": "Common",
@@ -1927,6 +2061,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "666b38f8-c232-4b2e-994e-ead3b121990c",
       "Infiltration": "Common",
@@ -1952,6 +2087,7 @@
           "Radius": 27
         }
       },
+      "CorePointId": 8,
       "DelayToCanSpawnSec": 4,
       "Id": "66d2a253-d1a0-490c-93d3-b1e3dd589c3d",
       "Infiltration": "",
@@ -1977,6 +2113,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "66ea0d24-890a-4a5b-a0d1-2e13629f26b7",
       "Infiltration": "Common",
@@ -2002,6 +2139,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "6715c896-cb94-4e04-8cea-06d8dd685f83",
       "Infiltration": "Common",
@@ -2027,6 +2165,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "6ac4a2e0-f06e-4098-908f-c04ebfeada8c",
       "Infiltration": "Common",
@@ -2052,6 +2191,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "6b542eec-7db1-48e5-81ff-32af5b120663",
       "Infiltration": "Common",
@@ -2077,6 +2217,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "6e2cf61e-85a6-4cfa-b232-ae4cd892e4e0",
       "Infiltration": "Common",
@@ -2102,6 +2243,7 @@
           "Radius": 7
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "6e35cbe7-b819-40df-9262-656d3ac42a31",
       "Infiltration": "",
@@ -2127,6 +2269,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "707edb2a-0cbb-4c12-9fc5-49a34af4779d",
       "Infiltration": "Common",
@@ -2152,6 +2295,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "70a6af86-3b7a-4687-8128-ff324774cf6f",
       "Infiltration": "Common",
@@ -2177,6 +2321,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 4,
       "Id": "75a36d48-cf3e-48f6-98cd-ca520bf8ff2d",
       "Infiltration": "",
@@ -2202,6 +2347,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "75febbcd-6f56-495e-a74a-e93f0f8b7827",
       "Infiltration": "Common",
@@ -2227,6 +2373,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "7716a644-0c23-4f0b-9613-b9fc4767ba35",
       "Infiltration": "",
@@ -2252,6 +2399,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "7859f63b-aff6-4bb5-9423-1fc08f2120b9",
       "Infiltration": "Common",
@@ -2277,6 +2425,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "7a9b1874-adec-4a4a-bcab-04265a114afa",
       "Infiltration": "Common",
@@ -2302,6 +2451,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "7b8911d0-dc36-43f1-9058-451f4cc6f362",
       "Infiltration": "Common",
@@ -2327,6 +2477,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "7c978d56-01bd-4010-bf0c-80d4b52aba4a",
       "Infiltration": "Common",
@@ -2352,6 +2503,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "7eb7a024-be39-49ab-8a3c-82aecf4c1f95",
       "Infiltration": "",
@@ -2377,6 +2529,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "7ffdd6c9-29dc-43d3-8348-349bbf64c128",
       "Infiltration": "",
@@ -2402,6 +2555,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "81e2c355-e3dd-4a70-a076-0fea62aec9f1",
       "Infiltration": "",
@@ -2427,6 +2581,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "832a9963-7ad2-436b-8140-9d52d113afba",
       "Infiltration": "Common",
@@ -2452,6 +2607,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "8442480f-2fd2-4867-a558-7f95aa75211b",
       "Infiltration": "",
@@ -2477,6 +2633,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "84fa5d1e-635b-439a-8f61-26eb2e37f36f",
       "Infiltration": "Common",
@@ -2502,6 +2659,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "863a8fba-0b54-4c06-9a4e-498298c7f938",
       "Infiltration": "Common",
@@ -2527,6 +2685,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "8804ccce-fc0a-488f-9a50-12837e382ae9",
       "Infiltration": "Common",
@@ -2552,6 +2711,7 @@
           "Radius": 7
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "8ae99f32-2b96-4a1a-9ff6-62bbf3f452bb",
       "Infiltration": "",
@@ -2577,6 +2737,7 @@
           "Radius": 27
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "8f0dd3c2-9339-484e-b4ed-785a7929a545",
       "Infiltration": "",
@@ -2602,6 +2763,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "8f160eaa-3467-4059-a46a-ecd5b510a21e",
       "Infiltration": "Common",
@@ -2627,6 +2789,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9174a2bb-e647-40d2-9f27-b02bb4256e5a",
       "Infiltration": "Common",
@@ -2652,6 +2815,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "92cd8ec7-d9d3-4917-bc3a-782abf0574f9",
       "Infiltration": "Common",
@@ -2677,6 +2841,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "93e73b75-40f6-48ec-9c41-a722c79b36df",
       "Infiltration": "Common",
@@ -2702,6 +2867,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9781bf62-5817-49c8-91f5-e1718080f43c",
       "Infiltration": "Common",
@@ -2727,6 +2893,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9896b358-7857-4dfc-baba-c9ff10f4b288",
       "Infiltration": "Common",
@@ -2752,6 +2919,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "98f72004-624d-4a11-a551-9b5150456369",
       "Infiltration": "Common",
@@ -2777,6 +2945,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "994bc745-d017-41fe-a2cb-f26d13e016e6",
       "Infiltration": "Common",
@@ -2802,6 +2971,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9ad6d872-4797-47a9-a5a6-b4675b478913",
       "Infiltration": "Common",
@@ -2827,6 +2997,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9ae1736f-4869-4c3b-99c2-5825878573d8",
       "Infiltration": "Common",
@@ -2852,6 +3023,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9b5e4910-ca9a-49bb-ac83-0f5e6299fa12",
       "Infiltration": "Common",
@@ -2877,6 +3049,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9c1654a5-3808-4d52-becd-066428ec0660",
       "Infiltration": "Common",
@@ -2902,6 +3075,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "9cc6492e-477a-419b-84c4-c9f02c3715fe",
       "Infiltration": "Common",
@@ -2927,6 +3101,7 @@
           "Radius": 7
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "9dbe0dc5-6380-41d3-9798-75b98f89c8a8",
       "Infiltration": "",
@@ -2952,6 +3127,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a0fdcb82-40f8-4996-83e5-39389c6b846a",
       "Infiltration": "Common",
@@ -2977,6 +3153,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a35626aa-d89e-4ace-8bff-5b7582f6bc30",
       "Infiltration": "Common",
@@ -3002,6 +3179,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a55e3167-efff-4d96-807b-1e5de515bcca",
       "Infiltration": "Common",
@@ -3027,6 +3205,7 @@
           "Radius": 7
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "a66912bd-3583-4285-bb40-bf5a0bb2d7ad",
       "Infiltration": "",
@@ -3052,6 +3231,7 @@
           "Radius": 7
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "a7c8500d-3a45-4ab4-8bde-4891ebdb33be",
       "Infiltration": "",
@@ -3077,6 +3257,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "a98ef4db-61cc-4588-a8e8-52e59ce8bace",
       "Infiltration": "Common",
@@ -3102,6 +3283,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "ab9fb40e-790c-40f2-aae0-f191aaecbf7e",
       "Infiltration": "Common",
@@ -3127,6 +3309,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "ad4dd281-ed1d-4bbb-a15e-1b719c90fe8f",
       "Infiltration": "",
@@ -3152,6 +3335,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "ad74c165-363f-4706-999c-2d33396865e4",
       "Infiltration": "Common",
@@ -3177,6 +3361,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "af9b450f-11df-4411-b92b-4df4ecc7504b",
       "Infiltration": "Common",
@@ -3202,6 +3387,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "b25de2ee-d9fb-4c35-a73b-fe516b436d10",
       "Infiltration": "",
@@ -3227,6 +3413,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "b53cfa11-2ce4-4a85-a3c2-674068472d58",
       "Infiltration": "",
@@ -3252,6 +3439,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b71e139d-c363-4b9a-b87e-1a6bef552641",
       "Infiltration": "Common",
@@ -3277,6 +3465,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "b89c86e5-5e60-4f09-96a9-8831685d807c",
       "Infiltration": "Common",
@@ -3302,6 +3491,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
       "Id": "bb29ab56-4425-40e2-b133-8abc10c4fe39",
       "Infiltration": "",
@@ -3327,6 +3517,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "bcf0ec7f-9673-4fa1-aede-fdc6d6dd616b",
       "Infiltration": "Common",
@@ -3352,6 +3543,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "bf1d14c2-2c9b-4921-8534-76c1ae9430dc",
       "Infiltration": "Common",
@@ -3377,6 +3569,7 @@
           "Radius": 27
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "c18b92b0-7915-4e30-995e-e163bc06d9fb",
       "Infiltration": "",
@@ -3402,6 +3595,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 8,
       "DelayToCanSpawnSec": 4,
       "Id": "c260494b-0ace-42f0-9b3c-945cbb77d608",
       "Infiltration": "",
@@ -3427,6 +3621,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c3a0e266-3318-4db6-9c31-b7b780686ea8",
       "Infiltration": "Common",
@@ -3452,6 +3647,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c40614b7-e0bc-4a8a-944d-bcaca72a32fb",
       "Infiltration": "Common",
@@ -3477,6 +3673,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c59b04c4-0ceb-4af0-851e-2f81a7a02c02",
       "Infiltration": "Common",
@@ -3502,6 +3699,7 @@
           "Radius": 7
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "c6928e60-e4ce-40db-94c3-8c84915366e2",
       "Infiltration": "",
@@ -3527,6 +3725,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c7d01076-c9a0-4162-923e-bb2f51248500",
       "Infiltration": "Common",
@@ -3552,6 +3751,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c7f058cd-cff0-4f4b-9bf1-dc6632c63eaf",
       "Infiltration": "Common",
@@ -3577,6 +3777,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "c9cb436b-9821-44ef-8ac8-fbef720f45d8",
       "Infiltration": "Common",
@@ -3602,6 +3803,7 @@
           "Radius": 27
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "cb64847e-76a6-42a9-ab3d-9e5629e4bf5b",
       "Infiltration": "",
@@ -3627,6 +3829,7 @@
           "Radius": 27
         }
       },
+      "CorePointId": 5,
       "DelayToCanSpawnSec": 4,
       "Id": "cde4c94f-1f0a-43bc-a0d7-b07758171d61",
       "Infiltration": "",
@@ -3652,6 +3855,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "cf866867-a4ba-4355-bfac-198ca52e755c",
       "Infiltration": "Common",
@@ -3677,6 +3881,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "cfd895b4-b565-4c8a-a10b-ac2058b019af",
       "Infiltration": "Common",
@@ -3702,6 +3907,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "d188e22c-8216-4371-b9af-8e900e372ea3",
       "Infiltration": "Common",
@@ -3727,6 +3933,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "d1b3cb3f-042c-4698-9284-9cb3985eca30",
       "Infiltration": "Common",
@@ -3752,6 +3959,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "d37a7f14-534d-4f8c-86cc-b107bb5380d5",
       "Infiltration": "Common",
@@ -3777,6 +3985,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "d385b5f5-d5c6-4f6a-9486-e128cbba2da6",
       "Infiltration": "Common",
@@ -3802,6 +4011,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "d3951942-a8b7-48a8-b38d-edc4299499aa",
       "Infiltration": "Common",
@@ -3827,6 +4037,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "d3c624f1-7e3d-41b2-a7a3-9e05314a413f",
       "Infiltration": "Common",
@@ -3852,6 +4063,7 @@
           "Radius": 25
         }
       },
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
       "Id": "d67c127c-7f89-4ad6-a4c4-90f56a6bf666",
       "Infiltration": "",
@@ -3877,6 +4089,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "d7eb2d80-10a1-48e1-b214-d7cac5eff13a",
       "Infiltration": "Common",
@@ -3902,6 +4115,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "db3d7424-1f39-4e33-b4d2-26821477c010",
       "Infiltration": "Common",
@@ -3927,6 +4141,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "dd19a5a1-b24b-4b4c-b0ff-12567bc35c48",
       "Infiltration": "Common",
@@ -3952,6 +4167,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "ddcd040c-42b2-4586-879d-f9d07d9737ce",
       "Infiltration": "Common",
@@ -3977,6 +4193,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "de98318f-4443-4cb1-92be-52e49fcdddd0",
       "Infiltration": "Common",
@@ -4002,6 +4219,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e1270dab-99e1-442a-a32e-63aa4af0f719",
       "Infiltration": "Common",
@@ -4027,6 +4245,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "e809f94e-aedb-4f69-98eb-9f1d94288d86",
       "Infiltration": "Common",
@@ -4052,6 +4271,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
       "Id": "e9147ec4-61b7-43e9-8e9b-515e127167d2",
       "Infiltration": "",
@@ -4077,6 +4297,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "eb45ebae-4f05-49d4-b5d7-8851ba7f042b",
       "Infiltration": "Common",
@@ -4102,6 +4323,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "effc8ec3-29a6-4531-89eb-a23ab350d015",
       "Infiltration": "Common",
@@ -4127,6 +4349,7 @@
           "Radius": 35
         }
       },
+      "CorePointId": 8,
       "DelayToCanSpawnSec": 4,
       "Id": "f1cf8f15-cc59-48ef-8d98-840d12972120",
       "Infiltration": "",
@@ -4152,6 +4375,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f3b5e0b0-0996-4191-81f3-a709b324d5b9",
       "Infiltration": "Common",
@@ -4177,6 +4401,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f86c5106-44cb-4e1e-b346-4df5c817664e",
       "Infiltration": "Common",
@@ -4202,6 +4427,7 @@
           "Radius": 50
         }
       },
+      "CorePointId": 0,
       "DelayToCanSpawnSec": 4,
       "Id": "f9ba0574-638b-4900-874c-21b6f4d5e6b4",
       "Infiltration": "Common",
@@ -4227,6 +4453,7 @@
           "Radius": 7
         }
       },
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
       "Id": "fe0e7112-8129-4749-8aed-e357368172af",
       "Infiltration": "",
@@ -4239,7 +4466,7 @@
       "Sides": ["Savage"]
     }
   ],
-  "UnixDateTime": 1636383862,
+  "UnixDateTime": 1707142616,
   "_Id": "5b0fc42d86f7744a585f9105",
   "doors": [],
   "exit_access_time": 60,
@@ -4248,106 +4475,155 @@
   "exits": [
     {
       "Chance": 60,
+      "ChancePVE": 60,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Common",
+      "EventAvailable": false,
       "ExfiltrationTime": 10,
+      "ExfiltrationTimePVE": 10,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "lab_Parking_Gate",
       "PassageRequirement": "WorldEvent",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequiredSlot": "FirstPrimaryWeapon",
       "RequirementTip": ""
     },
     {
       "Chance": 60,
+      "ChancePVE": 60,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Common",
+      "EventAvailable": false,
       "ExfiltrationTime": 10,
+      "ExfiltrationTimePVE": 10,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "lab_Hangar_Gate",
       "PassageRequirement": "WorldEvent",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequiredSlot": "FirstPrimaryWeapon",
       "RequirementTip": ""
     },
     {
       "Chance": 100,
+      "ChancePVE": 100,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Common",
+      "EventAvailable": false,
       "ExfiltrationTime": 5,
+      "ExfiltrationTimePVE": 5,
       "ExfiltrationType": "Manual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "lab_Elevator_Med",
       "PassageRequirement": "WorldEvent",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequiredSlot": "FirstPrimaryWeapon",
       "RequirementTip": ""
     },
     {
       "Chance": 100,
+      "ChancePVE": 100,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Common",
+      "EventAvailable": false,
       "ExfiltrationTime": 10,
+      "ExfiltrationTimePVE": 10,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "lab_Under_Storage_Collector",
       "PassageRequirement": "WorldEvent",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequiredSlot": "FirstPrimaryWeapon",
       "RequirementTip": ""
     },
     {
       "Chance": 100,
+      "ChancePVE": 100,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Common",
+      "EventAvailable": false,
       "ExfiltrationTime": 5,
+      "ExfiltrationTimePVE": 5,
       "ExfiltrationType": "Manual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "lab_Elevator_Main",
       "PassageRequirement": "WorldEvent",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequiredSlot": "FirstPrimaryWeapon",
       "RequirementTip": ""
     },
     {
       "Chance": 100,
+      "ChancePVE": 100,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Common",
+      "EventAvailable": false,
       "ExfiltrationTime": 15,
+      "ExfiltrationTimePVE": 15,
       "ExfiltrationType": "Individual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "lab_Vent",
       "PassageRequirement": "Empty",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequiredSlot": "Backpack",
       "RequirementTip": "EXFIL_tip_backpack"
     },
     {
       "Chance": 100,
+      "ChancePVE": 100,
       "Count": 0,
+      "CountPVE": 0,
       "EntryPoints": "Common",
+      "EventAvailable": false,
       "ExfiltrationTime": 10,
+      "ExfiltrationTimePVE": 10,
       "ExfiltrationType": "Manual",
       "Id": "",
       "MaxTime": 0,
+      "MaxTimePVE": 0,
       "MinTime": 0,
+      "MinTimePVE": 0,
       "Name": "lab_Elevator_Cargo",
       "PassageRequirement": "WorldEvent",
       "PlayersCount": 0,
+      "PlayersCountPVE": 0,
       "RequiredSlot": "FirstPrimaryWeapon",
       "RequirementTip": ""
     }
