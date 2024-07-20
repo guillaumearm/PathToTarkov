@@ -1,28 +1,31 @@
-import { QuestHelper } from "../helpers/QuestHelper";
-import { RepairHelper } from "../helpers/RepairHelper";
-import { TraderHelper } from "../helpers/TraderHelper";
-import { IPmcData } from "../models/eft/common/IPmcData";
-import { IItemEventRouterResponse } from "../models/eft/itemEvent/IItemEventRouterResponse";
-import { IRepairActionDataRequest } from "../models/eft/repair/IRepairActionDataRequest";
-import { ITraderRepairActionDataRequest } from "../models/eft/repair/ITraderRepairActionDataRequest";
-import { IRepairConfig } from "../models/spt/config/IRepairConfig";
-import { ILogger } from "../models/spt/utils/ILogger";
-import { EventOutputHolder } from "../routers/EventOutputHolder";
-import { DatabaseServer } from "../servers/DatabaseServer";
-import { PaymentService } from "../services/PaymentService";
-import { RepairService } from "../services/RepairService";
+import { ProfileHelper } from "@spt/helpers/ProfileHelper";
+import { QuestHelper } from "@spt/helpers/QuestHelper";
+import { RepairHelper } from "@spt/helpers/RepairHelper";
+import { TraderHelper } from "@spt/helpers/TraderHelper";
+import { IPmcData } from "@spt/models/eft/common/IPmcData";
+import { IItemEventRouterResponse } from "@spt/models/eft/itemEvent/IItemEventRouterResponse";
+import { IRepairActionDataRequest } from "@spt/models/eft/repair/IRepairActionDataRequest";
+import { ITraderRepairActionDataRequest } from "@spt/models/eft/repair/ITraderRepairActionDataRequest";
+import { IRepairConfig } from "@spt/models/spt/config/IRepairConfig";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { EventOutputHolder } from "@spt/routers/EventOutputHolder";
+import { DatabaseService } from "@spt/services/DatabaseService";
+import { PaymentService } from "@spt/services/PaymentService";
+import { RepairService } from "@spt/services/RepairService";
 export declare class RepairController {
     protected logger: ILogger;
     protected eventOutputHolder: EventOutputHolder;
-    protected databaseServer: DatabaseServer;
+    protected databaseService: DatabaseService;
     protected questHelper: QuestHelper;
     protected traderHelper: TraderHelper;
     protected paymentService: PaymentService;
     protected repairHelper: RepairHelper;
     protected repairService: RepairService;
+    protected profileHelper: ProfileHelper;
     protected repairConfig: IRepairConfig;
-    constructor(logger: ILogger, eventOutputHolder: EventOutputHolder, databaseServer: DatabaseServer, questHelper: QuestHelper, traderHelper: TraderHelper, paymentService: PaymentService, repairHelper: RepairHelper, repairService: RepairService);
+    constructor(logger: ILogger, eventOutputHolder: EventOutputHolder, databaseService: DatabaseService, questHelper: QuestHelper, traderHelper: TraderHelper, paymentService: PaymentService, repairHelper: RepairHelper, repairService: RepairService, profileHelper: ProfileHelper);
     /**
+     * Handle TraderRepair event
      * Repair with trader
      * @param sessionID session id
      * @param body endpoint request data
@@ -31,6 +34,7 @@ export declare class RepairController {
      */
     traderRepair(sessionID: string, body: ITraderRepairActionDataRequest, pmcData: IPmcData): IItemEventRouterResponse;
     /**
+     * Handle Repair event
      * Repair with repair kit
      * @param sessionID session id
      * @param body endpoint request data

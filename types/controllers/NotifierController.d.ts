@@ -1,7 +1,7 @@
-import { NotifierHelper } from "../helpers/NotifierHelper";
-import { NotificationService } from "../services/NotificationService";
-import { INotifierChannel } from "../models/eft/notifier/INotifier";
-import { HttpServerHelper } from "../helpers/HttpServerHelper";
+import { HttpServerHelper } from "@spt/helpers/HttpServerHelper";
+import { NotifierHelper } from "@spt/helpers/NotifierHelper";
+import { INotifierChannel } from "@spt/models/eft/notifier/INotifier";
+import { NotificationService } from "@spt/services/NotificationService";
 export declare class NotifierController {
     protected notifierHelper: NotifierHelper;
     protected httpServerHelper: HttpServerHelper;
@@ -18,5 +18,6 @@ export declare class NotifierController {
      */
     notifyAsync(sessionID: string): Promise<unknown>;
     getServer(sessionID: string): string;
+    /** Handle client/notifier/channel/create */
     getChannel(sessionID: string): INotifierChannel;
 }

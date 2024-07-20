@@ -1,8 +1,8 @@
 /// <reference types="node" />
-import { IncomingMessage, ServerResponse } from "http";
-import { ImageRouteService } from "../services/mod/image/ImageRouteService";
-import { HttpFileUtil } from "../utils/HttpFileUtil";
-import { VFS } from "../utils/VFS";
+import { IncomingMessage, ServerResponse } from "node:http";
+import { ImageRouteService } from "@spt/services/mod/image/ImageRouteService";
+import { HttpFileUtil } from "@spt/utils/HttpFileUtil";
+import { VFS } from "@spt/utils/VFS";
 export declare class ImageRouter {
     protected vfs: VFS;
     protected imageRouteService: ImageRouteService;

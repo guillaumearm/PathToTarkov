@@ -1,16 +1,6 @@
-import { MemberCategory } from "../../enums/MemberCategory";
+import { IUserDialogInfo } from "@spt/models/eft/profile/ISptProfile";
 export interface IGetFriendListDataResponse {
-    Friends: Friend[];
+    Friends: IUserDialogInfo[];
     Ignore: string[];
     InIgnoreList: string[];
-}
-export interface Friend {
-    _id: string;
-    Info: Info;
-}
-export interface Info {
-    Nickname: string;
-    Side: string;
-    Level: number;
-    MemberCategory: MemberCategory;
 }

@@ -1,10 +1,11 @@
-import { SaveLoadRouter } from "../di/Router";
-import { IAkiProfile, Info } from "../models/eft/profile/IAkiProfile";
-import { ILogger } from "../models/spt/utils/ILogger";
-import { LocalisationService } from "../services/LocalisationService";
-import { HashUtil } from "../utils/HashUtil";
-import { JsonUtil } from "../utils/JsonUtil";
-import { VFS } from "../utils/VFS";
+import { SaveLoadRouter } from "@spt/di/Router";
+import { ISptProfile, Info } from "@spt/models/eft/profile/ISptProfile";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { ConfigServer } from "@spt/servers/ConfigServer";
+import { LocalisationService } from "@spt/services/LocalisationService";
+import { HashUtil } from "@spt/utils/HashUtil";
+import { JsonUtil } from "@spt/utils/JsonUtil";
+import { VFS } from "@spt/utils/VFS";
 export declare class SaveServer {
     protected vfs: VFS;
     protected saveLoadRouters: SaveLoadRouter[];
@@ -12,17 +13,18 @@ export declare class SaveServer {
     protected hashUtil: HashUtil;
     protected localisationService: LocalisationService;
     protected logger: ILogger;
+    protected configServer: ConfigServer;
     protected profileFilepath: string;
     protected profiles: {};
     protected onBeforeSaveCallbacks: {};
     protected saveMd5: {};
-    constructor(vfs: VFS, saveLoadRouters: SaveLoadRouter[], jsonUtil: JsonUtil, hashUtil: HashUtil, localisationService: LocalisationService, logger: ILogger);
+    constructor(vfs: VFS, saveLoadRouters: SaveLoadRouter[], jsonUtil: JsonUtil, hashUtil: HashUtil, localisationService: LocalisationService, logger: ILogger, configServer: ConfigServer);
     /**
      * Add callback to occur prior to saving profile changes
      * @param id Id for save callback
      * @param callback Callback to execute prior to running SaveServer.saveProfile()
      */
-    addBeforeSaveCallback(id: string, callback: (profile: Partial<IAkiProfile>) => Partial<IAkiProfile>): void;
+    addBeforeSaveCallback(id: string, callback: (profile: Partial<ISptProfile>) => Partial<ISptProfile>): void;
     /**
      * Remove a callback from being executed prior to saving profile in SaveServer.saveProfile()
      * @param id Id of callback to remove
@@ -39,14 +41,15 @@ export declare class SaveServer {
     /**
      * Get a player profile from memory
      * @param sessionId Session id
-     * @returns IAkiProfile
+     * @returns ISptProfile
      */
-    getProfile(sessionId: string): IAkiProfile;
+    getProfile(sessionId: string): ISptProfile;
+    profileExists(id: string): boolean;
     /**
      * Get all profiles from memory
-     * @returns Dictionary of IAkiProfile
+     * @returns Dictionary of ISptProfile
      */
-    getProfiles(): Record<string, IAkiProfile>;
+    getProfiles(): Record<string, ISptProfile>;
     /**
      * Delete a profile by id
      * @param sessionID Id of profile to remove
@@ -62,7 +65,7 @@ export declare class SaveServer {
      * Add full profile in memory by key (info.id)
      * @param profileDetails Profile to save
      */
-    addProfile(profileDetails: IAkiProfile): void;
+    addProfile(profileDetails: ISptProfile): void;
     /**
      * Look up profile json in user/profiles by id and store in memory
      * Execute saveLoadRouters callbacks after being loaded into memory
@@ -73,8 +76,9 @@ export declare class SaveServer {
      * Save changes from in-memory profile to user/profiles json
      * Execute onBeforeSaveCallbacks callbacks prior to being saved to json
      * @param sessionID profile id (user/profiles/id.json)
+     * @returns time taken to save in MS
      */
-    saveProfile(sessionID: string): void;
+    saveProfile(sessionID: string): number;
     /**
      * Remove a physical profile json from user/profiles
      * @param sessionID Profile id to remove

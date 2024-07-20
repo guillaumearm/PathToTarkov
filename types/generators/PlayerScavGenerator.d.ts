@@ -1,48 +1,53 @@
-import { BotGeneratorHelper } from "../helpers/BotGeneratorHelper";
-import { BotHelper } from "../helpers/BotHelper";
-import { BotWeaponGeneratorHelper } from "../helpers/BotWeaponGeneratorHelper";
-import { ItemHelper } from "../helpers/ItemHelper";
-import { ProfileHelper } from "../helpers/ProfileHelper";
-import { IPmcData } from "../models/eft/common/IPmcData";
-import { Skills, Stats } from "../models/eft/common/tables/IBotBase";
-import { IBotType } from "../models/eft/common/tables/IBotType";
-import { IPlayerScavConfig, KarmaLevel } from "../models/spt/config/IPlayerScavConfig";
-import { ILogger } from "../models/spt/utils/ILogger";
-import { ConfigServer } from "../servers/ConfigServer";
-import { DatabaseServer } from "../servers/DatabaseServer";
-import { SaveServer } from "../servers/SaveServer";
-import { BotLootCacheService } from "../services/BotLootCacheService";
-import { FenceService } from "../services/FenceService";
-import { LocalisationService } from "../services/LocalisationService";
-import { HashUtil } from "../utils/HashUtil";
-import { JsonUtil } from "../utils/JsonUtil";
-import { RandomUtil } from "../utils/RandomUtil";
-import { BotGenerator } from "./BotGenerator";
+import { BotGenerator } from "@spt/generators/BotGenerator";
+import { BotGeneratorHelper } from "@spt/helpers/BotGeneratorHelper";
+import { BotHelper } from "@spt/helpers/BotHelper";
+import { ItemHelper } from "@spt/helpers/ItemHelper";
+import { ProfileHelper } from "@spt/helpers/ProfileHelper";
+import { IPmcData } from "@spt/models/eft/common/IPmcData";
+import { IBotBase, Skills, Stats } from "@spt/models/eft/common/tables/IBotBase";
+import { IBotType } from "@spt/models/eft/common/tables/IBotType";
+import { IPlayerScavConfig, KarmaLevel } from "@spt/models/spt/config/IPlayerScavConfig";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { ConfigServer } from "@spt/servers/ConfigServer";
+import { SaveServer } from "@spt/servers/SaveServer";
+import { BotLootCacheService } from "@spt/services/BotLootCacheService";
+import { DatabaseService } from "@spt/services/DatabaseService";
+import { FenceService } from "@spt/services/FenceService";
+import { LocalisationService } from "@spt/services/LocalisationService";
+import { ICloner } from "@spt/utils/cloners/ICloner";
+import { HashUtil } from "@spt/utils/HashUtil";
+import { RandomUtil } from "@spt/utils/RandomUtil";
 export declare class PlayerScavGenerator {
     protected logger: ILogger;
     protected randomUtil: RandomUtil;
-    protected databaseServer: DatabaseServer;
+    protected databaseService: DatabaseService;
     protected hashUtil: HashUtil;
     protected itemHelper: ItemHelper;
-    protected botWeaponGeneratorHelper: BotWeaponGeneratorHelper;
     protected botGeneratorHelper: BotGeneratorHelper;
     protected saveServer: SaveServer;
     protected profileHelper: ProfileHelper;
     protected botHelper: BotHelper;
-    protected jsonUtil: JsonUtil;
     protected fenceService: FenceService;
     protected botLootCacheService: BotLootCacheService;
     protected localisationService: LocalisationService;
     protected botGenerator: BotGenerator;
     protected configServer: ConfigServer;
+    protected cloner: ICloner;
     protected playerScavConfig: IPlayerScavConfig;
-    constructor(logger: ILogger, randomUtil: RandomUtil, databaseServer: DatabaseServer, hashUtil: HashUtil, itemHelper: ItemHelper, botWeaponGeneratorHelper: BotWeaponGeneratorHelper, botGeneratorHelper: BotGeneratorHelper, saveServer: SaveServer, profileHelper: ProfileHelper, botHelper: BotHelper, jsonUtil: JsonUtil, fenceService: FenceService, botLootCacheService: BotLootCacheService, localisationService: LocalisationService, botGenerator: BotGenerator, configServer: ConfigServer);
+    constructor(logger: ILogger, randomUtil: RandomUtil, databaseService: DatabaseService, hashUtil: HashUtil, itemHelper: ItemHelper, botGeneratorHelper: BotGeneratorHelper, saveServer: SaveServer, profileHelper: ProfileHelper, botHelper: BotHelper, fenceService: FenceService, botLootCacheService: BotLootCacheService, localisationService: LocalisationService, botGenerator: BotGenerator, configServer: ConfigServer, cloner: ICloner);
     /**
      * Update a player profile to include a new player scav profile
      * @param sessionID session id to specify what profile is updated
      * @returns profile object
      */
     generate(sessionID: string): IPmcData;
+    /**
+     * Add items picked from `playerscav.lootItemsToAddChancePercent`
+     * @param possibleItemsToAdd dict of tpl + % chance to be added
+     * @param scavData
+     * @param containersToAddTo Possible slotIds to add loot to
+     */
+    protected addAdditionalLootToPlayerScavContainers(possibleItemsToAdd: Record<string, number>, scavData: IBotBase, containersToAddTo: string[]): void;
     /**
      * Get the scav karama level for a profile
      * Is also the fence trader rep level

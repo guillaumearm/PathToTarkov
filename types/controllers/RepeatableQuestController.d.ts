@@ -1,83 +1,49 @@
-import { HandbookHelper } from "../helpers/HandbookHelper";
-import { ItemHelper } from "../helpers/ItemHelper";
-import { PresetHelper } from "../helpers/PresetHelper";
-import { ProfileHelper } from "../helpers/ProfileHelper";
-import { RagfairServerHelper } from "../helpers/RagfairServerHelper";
-import { IEmptyRequestData } from "../models/eft/common/IEmptyRequestData";
-import { Exit } from "../models/eft/common/ILocationBase";
-import { IPmcData } from "../models/eft/common/IPmcData";
-import { TraderInfo } from "../models/eft/common/tables/IBotBase";
-import { ICompletion, ICompletionAvailableFor, IElimination, IEliminationCondition, IExploration, IExplorationCondition, IPmcDataRepeatableQuest, IRepeatableQuest, IReward, IRewards } from "../models/eft/common/tables/IRepeatableQuests";
-import { ITemplateItem } from "../models/eft/common/tables/ITemplateItem";
-import { IItemEventRouterResponse } from "../models/eft/itemEvent/IItemEventRouterResponse";
-import { IRepeatableQuestChangeRequest } from "../models/eft/quests/IRepeatableQuestChangeRequest";
-import { ELocationName } from "../models/enums/ELocationName";
-import { IQuestConfig, IRepeatableQuestConfig } from "../models/spt/config/IQuestConfig";
-import { ILogger } from "../models/spt/utils/ILogger";
-import { EventOutputHolder } from "../routers/EventOutputHolder";
-import { ConfigServer } from "../servers/ConfigServer";
-import { DatabaseServer } from "../servers/DatabaseServer";
-import { ItemFilterService } from "../services/ItemFilterService";
-import { LocalisationService } from "../services/LocalisationService";
-import { PaymentService } from "../services/PaymentService";
-import { ProfileFixerService } from "../services/ProfileFixerService";
-import { HttpResponseUtil } from "../utils/HttpResponseUtil";
-import { JsonUtil } from "../utils/JsonUtil";
-import { MathUtil } from "../utils/MathUtil";
-import { ObjectId } from "../utils/ObjectId";
-import { ProbabilityObject, ProbabilityObjectArray, RandomUtil } from "../utils/RandomUtil";
-import { TimeUtil } from "../utils/TimeUtil";
-export interface IQuestTypePool {
-    types: string[];
-    pool: IQuestPool;
-}
-export interface IQuestPool {
-    Exploration: IExplorationPool;
-    Elimination: IEliminationPool;
-}
-export interface IExplorationPool {
-    locations: Partial<Record<ELocationName, string[]>>;
-}
-export interface IEliminationPool {
-    targets: IEliminationTargetPool;
-}
-export interface IEliminationTargetPool {
-    Savage?: ITargetLocation;
-    AnyPmc?: ITargetLocation;
-    bossBully?: ITargetLocation;
-    bossGluhar?: ITargetLocation;
-    bossKilla?: ITargetLocation;
-    bossSanitar?: ITargetLocation;
-    bossTagilla?: ITargetLocation;
-    bossKojaniy?: ITargetLocation;
-}
-export interface ITargetLocation {
-    locations: string[];
-}
+import { RepeatableQuestGenerator } from "@spt/generators/RepeatableQuestGenerator";
+import { ProfileHelper } from "@spt/helpers/ProfileHelper";
+import { QuestHelper } from "@spt/helpers/QuestHelper";
+import { RepeatableQuestHelper } from "@spt/helpers/RepeatableQuestHelper";
+import { IPmcData } from "@spt/models/eft/common/IPmcData";
+import { IPmcDataRepeatableQuest, IRepeatableQuest } from "@spt/models/eft/common/tables/IRepeatableQuests";
+import { IItemEventRouterResponse } from "@spt/models/eft/itemEvent/IItemEventRouterResponse";
+import { ISptProfile } from "@spt/models/eft/profile/ISptProfile";
+import { IRepeatableQuestChangeRequest } from "@spt/models/eft/quests/IRepeatableQuestChangeRequest";
+import { ELocationName } from "@spt/models/enums/ELocationName";
+import { IQuestConfig, IRepeatableQuestConfig } from "@spt/models/spt/config/IQuestConfig";
+import { IGetRepeatableByIdResult } from "@spt/models/spt/quests/IGetRepeatableByIdResult";
+import { IQuestTypePool } from "@spt/models/spt/repeatable/IQuestTypePool";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { EventOutputHolder } from "@spt/routers/EventOutputHolder";
+import { ConfigServer } from "@spt/servers/ConfigServer";
+import { DatabaseService } from "@spt/services/DatabaseService";
+import { LocalisationService } from "@spt/services/LocalisationService";
+import { PaymentService } from "@spt/services/PaymentService";
+import { ProfileFixerService } from "@spt/services/ProfileFixerService";
+import { ICloner } from "@spt/utils/cloners/ICloner";
+import { HttpResponseUtil } from "@spt/utils/HttpResponseUtil";
+import { ObjectId } from "@spt/utils/ObjectId";
+import { RandomUtil } from "@spt/utils/RandomUtil";
+import { TimeUtil } from "@spt/utils/TimeUtil";
 export declare class RepeatableQuestController {
-    protected timeUtil: TimeUtil;
     protected logger: ILogger;
+    protected databaseService: DatabaseService;
+    protected timeUtil: TimeUtil;
     protected randomUtil: RandomUtil;
     protected httpResponse: HttpResponseUtil;
-    protected mathUtil: MathUtil;
-    protected jsonUtil: JsonUtil;
-    protected databaseServer: DatabaseServer;
-    protected itemHelper: ItemHelper;
-    protected presetHelper: PresetHelper;
     protected profileHelper: ProfileHelper;
     protected profileFixerService: ProfileFixerService;
-    protected handbookHelper: HandbookHelper;
-    protected ragfairServerHelper: RagfairServerHelper;
-    protected eventOutputHolder: EventOutputHolder;
     protected localisationService: LocalisationService;
+    protected eventOutputHolder: EventOutputHolder;
     protected paymentService: PaymentService;
     protected objectId: ObjectId;
-    protected itemFilterService: ItemFilterService;
+    protected repeatableQuestGenerator: RepeatableQuestGenerator;
+    protected repeatableQuestHelper: RepeatableQuestHelper;
+    protected questHelper: QuestHelper;
     protected configServer: ConfigServer;
+    protected cloner: ICloner;
     protected questConfig: IQuestConfig;
-    constructor(timeUtil: TimeUtil, logger: ILogger, randomUtil: RandomUtil, httpResponse: HttpResponseUtil, mathUtil: MathUtil, jsonUtil: JsonUtil, databaseServer: DatabaseServer, itemHelper: ItemHelper, presetHelper: PresetHelper, profileHelper: ProfileHelper, profileFixerService: ProfileFixerService, handbookHelper: HandbookHelper, ragfairServerHelper: RagfairServerHelper, eventOutputHolder: EventOutputHolder, localisationService: LocalisationService, paymentService: PaymentService, objectId: ObjectId, itemFilterService: ItemFilterService, configServer: ConfigServer);
+    constructor(logger: ILogger, databaseService: DatabaseService, timeUtil: TimeUtil, randomUtil: RandomUtil, httpResponse: HttpResponseUtil, profileHelper: ProfileHelper, profileFixerService: ProfileFixerService, localisationService: LocalisationService, eventOutputHolder: EventOutputHolder, paymentService: PaymentService, objectId: ObjectId, repeatableQuestGenerator: RepeatableQuestGenerator, repeatableQuestHelper: RepeatableQuestHelper, questHelper: QuestHelper, configServer: ConfigServer, cloner: ICloner);
     /**
-     * This is the method reached by the /client/repeatalbeQuests/activityPeriods endpoint
+     * Handle client/repeatalbeQuests/activityPeriods
      * Returns an array of objects in the format of repeatable quests to the client.
      * repeatableQuestObject = {
      *  id: Unique Id,
@@ -97,11 +63,44 @@ export declare class RepeatableQuestController {
      * (if the are on "Succeed" but not "Completed" we keep them, to allow the player to complete them and get the rewards)
      * The new quests generated are again persisted in profile.RepeatableQuests
      *
+     * @param   {string}    sessionID   Player's session id
      *
-     * @param   {string}    sessionId       Player's session id
-     * @returns  {array}                    array of "repeatableQuestObjects" as descibed above
+     * @returns  {array}                Array of "repeatableQuestObjects" as described above
      */
-    getClientRepeatableQuests(_info: IEmptyRequestData, sessionID: string): IPmcDataRepeatableQuest[];
+    getClientRepeatableQuests(sessionID: string): IPmcDataRepeatableQuest[];
+    /**
+     * Expire quests and replace expired quests with ready-to-hand-in quests inside generatedRepeatables.activeQuests
+     * @param generatedRepeatables Repeatables to process (daily/weekly)
+     * @param pmcData Player profile
+     */
+    protected processExpiredQuests(generatedRepeatables: IPmcDataRepeatableQuest, pmcData: IPmcData): void;
+    /**
+     * Check if a repeatable quest type (daily/weekly) is active for the given profile
+     * @param repeatableConfig Repeatable quest config
+     * @param pmcData Player profile
+     * @returns True if profile is allowed to access dailies
+     */
+    protected canProfileAccessRepeatableQuests(repeatableConfig: IRepeatableQuestConfig, pmcData: IPmcData): boolean;
+    /**
+     * Does player have daily scav quests unlocked
+     * @param pmcData Player profile to check
+     * @returns True if unlocked
+     */
+    protected playerHasDailyScavQuestsUnlocked(pmcData: IPmcData): boolean;
+    /**
+     * Does player have daily pmc quests unlocked
+     * @param pmcData Player profile to check
+     * @param repeatableConfig Config of daily type to check
+     * @returns True if unlocked
+     */
+    protected playerHasDailyPmcQuestsUnlocked(pmcData: IPmcData, repeatableConfig: IRepeatableQuestConfig): boolean;
+    /**
+     * Get the number of quests to generate - takes into account charisma state of player
+     * @param repeatableConfig Config
+     * @param pmcData Player profile
+     * @returns Quest count
+     */
+    protected getQuestCount(repeatableConfig: IRepeatableQuestConfig, pmcData: IPmcData): number;
     /**
      * Get repeatable quest data from profile from name (daily/weekly), creates base repeatable quest object if none exists
      * @param repeatableConfig daily/weekly config
@@ -110,147 +109,59 @@ export declare class RepeatableQuestController {
      */
     protected getRepeatableQuestSubTypeFromProfile(repeatableConfig: IRepeatableQuestConfig, pmcData: IPmcData): IPmcDataRepeatableQuest;
     /**
-     * This method is called by GetClientRepeatableQuests and creates one element of quest type format (see assets/database/templates/repeatableQuests.json).
-     * It randomly draws a quest type (currently Elimination, Completion or Exploration) as well as a trader who is providing the quest
-     */
-    generateRepeatableQuest(pmcLevel: number, pmcTraderInfo: Record<string, TraderInfo>, questTypePool: IQuestTypePool, repeatableConfig: IRepeatableQuestConfig): IRepeatableQuest;
-    /**
      * Just for debug reasons. Draws dailies a random assort of dailies extracted from dumps
      */
     generateDebugDailies(dailiesPool: any, factory: any, number: number): any;
     /**
-     * Generates the base object of quest type format given as templates in assets/database/templates/repeatableQuests.json
-     * The templates include Elimination, Completion and Extraction quest types
-     *
-     * @param   {string}    type            quest type: "Elimination", "Completion" or "Extraction"
-     * @param   {string}    traderId        trader from which the quest will be provided
-     * @param   {string}    side            scav daily or pmc daily/weekly quest
-     * @returns {object}                    a object which contains the base elements for repeatable quests of the requests type
-     *                                      (needs to be filled with reward and conditions by called to make a valid quest)
-     */
-    generateRepeatableTemplate(type: string, traderId: string, side: string): IRepeatableQuest;
-    /**
-     * Generates a valid Exploration quest
-     *
-     * @param   {integer}   pmcLevel            player's level for reward generation
-     * @param   {string}    traderId            trader from which the quest will be provided
-     * @param   {object}    questTypePool       Pools for quests (used to avoid redundant quests)
-     * @param   {object}    repeatableConfig    The configuration for the repeatably kind (daily, weekly) as configured in QuestConfig for the requestd quest
-     * @returns {object}                        object of quest type format for "Exploration" (see assets/database/templates/repeatableQuests.json)
-     */
-    generateExplorationQuest(pmcLevel: number, traderId: string, questTypePool: IQuestTypePool, repeatableConfig: IRepeatableQuestConfig): IExploration;
-    /**
-     * Generates a valid Completion quest
-     *
-     * @param   {integer}   pmcLevel            player's level for requested items and reward generation
-     * @param   {string}    traderId            trader from which the quest will be provided
-     * @param   {object}    repeatableConfig    The configuration for the repeatably kind (daily, weekly) as configured in QuestConfig for the requestd quest
-     * @returns {object}                        object of quest type format for "Completion" (see assets/database/templates/repeatableQuests.json)
-     */
-    generateCompletionQuest(pmcLevel: number, traderId: string, repeatableConfig: IRepeatableQuestConfig): ICompletion;
-    /**
-     * Generates a valid Elimination quest
-     *
-     * @param   {integer}   pmcLevel            player's level for requested items and reward generation
-     * @param   {string}    traderId            trader from which the quest will be provided
-     * @param   {object}    questTypePool       Pools for quests (used to avoid redundant quests)
-     * @param   {object}    repeatableConfig    The configuration for the repeatably kind (daily, weekly) as configured in QuestConfig for the requestd quest
-     * @returns {object}                        object of quest type format for "Elimination" (see assets/database/templates/repeatableQuests.json)
-     */
-    generateEliminationQuest(pmcLevel: number, traderId: string, questTypePool: IQuestTypePool, repeatableConfig: IRepeatableQuestConfig): IElimination;
-    /**
-     * Cpnvert a location into an quest code can read (e.g. factory4_day into 55f2d3fd4bdc2d5f408b4567)
-     * @param locationKey e.g factory4_day
-     * @returns guid
-     */
-    protected getQuestLocationByMapId(locationKey: string): string;
-    /**
-     * Exploration repeatable quests can specify a required extraction point.
-     * This method creates the according object which will be appended to the conditions array
-     *
-     * @param   {string}        exit                The exit name to generate the condition for
-     * @returns {object}                            Exit condition
-     */
-    generateExplorationExitCondition(exit: Exit): IExplorationCondition;
-    /**
-     * A repeatable quest, besides some more or less static components, exists of reward and condition (see assets/database/templates/repeatableQuests.json)
-     * This is a helper method for GenerateCompletionQuest to create a completion condition (of which a completion quest theoretically can have many)
-     *
-     * @param   {string}    targetItemId    id of the item to request
-     * @param   {integer}   value           amount of items of this specific type to request
-     * @returns {object}                    object of "Completion"-condition
-     */
-    generateCompletionAvailableForFinish(targetItemId: string, value: number): ICompletionAvailableFor;
-    /**
-     * A repeatable quest, besides some more or less static components, exists of reward and condition (see assets/database/templates/repeatableQuests.json)
-     * This is a helper method for GenerateEliminationQuest to create a location condition.
-     *
-     * @param   {string}    location        the location on which to fulfill the elimination quest
-     * @returns {object}                    object of "Elimination"-location-subcondition
-     */
-    generateEliminationLocation(location: string[]): IEliminationCondition;
-    /**
-     * A repeatable quest, besides some more or less static components, exists of reward and condition (see assets/database/templates/repeatableQuests.json)
-     * This is a helper method for GenerateEliminationQuest to create a kill condition.
-     *
-     * @param   {string}    target          array of target npcs e.g. "AnyPmc", "Savage"
-     * @param   {array}     bodyParts       array of body parts with which to kill e.g. ["stomach", "thorax"]
-     * @param   {number}    distance        distance from which to kill (currently only >= supported)
-     * @returns {object}                    object of "Elimination"-kill-subcondition
-     */
-    generateEliminationCondition(target: string, bodyPart: string[], distance: number): IEliminationCondition;
-    /**
      * Used to create a quest pool during each cycle of repeatable quest generation. The pool will be subsequently
      * narrowed down during quest generation to avoid duplicate quests. Like duplicate extractions or elimination quests
      * where you have to e.g. kill scavs in same locations.
-     *
-     * @returns {object}                    the quest pool
+     * @param repeatableConfig main repeatable quest config
+     * @param pmcLevel level of pmc generating quest pool
+     * @returns IQuestTypePool
      */
-    generateQuestPool(repeatableConfig: IRepeatableQuestConfig): IQuestTypePool;
+    protected generateQuestPool(repeatableConfig: IRepeatableQuestConfig, pmcLevel: number): IQuestTypePool;
+    protected createBaseQuestPool(repeatableConfig: IRepeatableQuestConfig): IQuestTypePool;
     /**
-     * Generate the reward for a mission. A reward can consist of
-     * - Experience
-     * - Money
-     * - Items
-     * - Trader Reputation
-     *
-     * The reward is dependent on the player level as given by the wiki. The exact mapping of pmcLevel to
-     * experience / money / items / trader reputation can be defined in QuestConfig.js
-     *
-     * There's also a random variation of the reward the spread of which can be also defined in the config.
-     *
-     * Additonaly, a scaling factor w.r.t. quest difficulty going from 0.2...1 can be used
-     *
-     * @param   {integer}   pmcLevel            player's level
-     * @param   {number}    difficulty          a reward scaling factor goint from 0.2 to 1
-     * @param   {string}    traderId            the trader for reputation gain (and possible in the future filtering of reward item type based on trader)
-     * @param   {object}    repeatableConfig    The configuration for the repeatably kind (daily, weekly) as configured in QuestConfig for the requestd quest
-     * @returns {object}                        object of "Reward"-type that can be given for a repeatable mission
+     * Return the locations this PMC is allowed to get daily quests for based on their level
+     * @param locations The original list of locations
+     * @param pmcLevel The players level
+     * @returns A filtered list of locations that allow the player PMC level to access it
      */
-    generateReward(pmcLevel: number, difficulty: number, traderId: string, repeatableConfig: IRepeatableQuestConfig): IRewards;
+    protected getAllowedLocationsForPmcLevel(locations: Record<ELocationName, string[]>, pmcLevel: number): Partial<Record<ELocationName, string[]>>;
     /**
-     * Helper to create a reward item structured as required by the client
-     *
-     * @param   {string}    tpl             itemId of the rewarded item
-     * @param   {integer}   value           amount of items to give
-     * @param   {integer}   index           all rewards will be appended to a list, for unkown reasons the client wants the index
-     * @returns {object}                    object of "Reward"-item-type
+     * Return true if the given pmcLevel is allowed on the given location
+     * @param location The location name to check
+     * @param pmcLevel The level of the pmc
+     * @returns True if the given pmc level is allowed to access the given location
      */
-    generateRewardItem(tpl: string, value: number, index: number, preset?: any): IReward;
+    protected isPmcLevelAllowedOnLocation(location: string, pmcLevel: number): boolean;
     debugLogRepeatableQuestIds(pmcData: IPmcData): void;
-    probabilityObjectArray<K, V>(configArrayInput: ProbabilityObject<K, V>[]): ProbabilityObjectArray<K, V>;
-    changeRepeatableQuest(pmcData: IPmcData, body: IRepeatableQuestChangeRequest, sessionID: string): IItemEventRouterResponse;
     /**
-    * Picks rewardable items from items.json. This means they need to fit into the inventory and they shouldn't be keys (debatable)
-     * @param repeatableQuestConfig config file
-     * @returns a list of rewardable items [[_tpl, itemTemplate],...]
+     * Handle RepeatableQuestChange event
+     *
+     * Replace a players repeatable quest
+     * @param pmcData Player profile
+     * @param changeRequest Request object
+     * @param sessionID Session id
+     * @returns IItemEventRouterResponse
      */
-    protected getRewardableItems(repeatableQuestConfig: IRepeatableQuestConfig): [string, ITemplateItem][];
+    changeRepeatableQuest(pmcData: IPmcData, changeRequest: IRepeatableQuestChangeRequest, sessionID: string): IItemEventRouterResponse;
     /**
-     * Checks if an id is a valid item. Valid meaning that it's an item that may be a reward
-     * or content of bot loot. Items that are tested as valid may be in a player backpack or stash.
-     * @param {string} tpl template id of item to check
-     * @returns boolean: true if item is valid reward
+     * Find a repeatable (daily/weekly/scav) from a players profile by its id
+     * @param questId Id of quest to find
+     * @param pmcData Profile that contains quests to look through
+     * @returns IGetRepeatableByIdResult
      */
-    isValidRewardItem(tpl: string, repeatableQuestConfig: IRepeatableQuestConfig): boolean;
+    protected getRepeatableById(questId: string, pmcData: IPmcData): IGetRepeatableByIdResult;
+    protected attemptToGenerateRepeatableQuest(pmcData: IPmcData, questTypePool: IQuestTypePool, repeatableConfig: IRepeatableQuestConfig): IRepeatableQuest;
+    /**
+     * Some accounts have access to free repeatable quest refreshes
+     * Track the usage of them inside players profile
+     * @param fullProfile Player profile
+     * @param repeatableSubType Can be daily / weekly / scav repeatable
+     * @param repeatableTypeName Subtype of repeatable quest: daily / weekly / scav
+     * @returns Is the repeatable being replaced for free
+     */
+    protected useFreeRefreshIfAvailable(fullProfile: ISptProfile, repeatableSubType: IPmcDataRepeatableQuest, repeatableTypeName: string): boolean;
 }

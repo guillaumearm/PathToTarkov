@@ -1,7 +1,6 @@
-import { IPmcData } from "../common/IPmcData";
-import { Message } from "../profile/IAkiProfile";
+import { IUserDialogInfo, Message } from "@spt/models/eft/profile/ISptProfile";
 export interface IGetMailDialogViewResponseData {
     messages: Message[];
-    profiles: IPmcData[];
+    profiles: IUserDialogInfo[];
     hasMessagesWithRewards: boolean;
 }

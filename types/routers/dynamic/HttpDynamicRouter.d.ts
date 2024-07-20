@@ -1,5 +1,5 @@
-import { DynamicRouter } from "../../di/Router";
-import { ImageRouter } from "../ImageRouter";
+import { DynamicRouter } from "@spt/di/Router";
+import { ImageRouter } from "@spt/routers/ImageRouter";
 export declare class HttpDynamicRouter extends DynamicRouter {
     protected imageRouter: ImageRouter;
     constructor(imageRouter: ImageRouter);

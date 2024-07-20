@@ -1,8 +1,10 @@
-import { InraidController } from "../controllers/InraidController";
-import { INullResponseData } from "../models/eft/httpResponse/INullResponseData";
-import { IRegisterPlayerRequestData } from "../models/eft/inRaid/IRegisterPlayerRequestData";
-import { ISaveProgressRequestData } from "../models/eft/inRaid/ISaveProgressRequestData";
-import { HttpResponseUtil } from "../utils/HttpResponseUtil";
+import { InraidController } from "@spt/controllers/InraidController";
+import { IEmptyRequestData } from "@spt/models/eft/common/IEmptyRequestData";
+import { INullResponseData } from "@spt/models/eft/httpResponse/INullResponseData";
+import { IItemDeliveryRequestData } from "@spt/models/eft/inRaid/IItemDeliveryRequestData";
+import { IRegisterPlayerRequestData } from "@spt/models/eft/inRaid/IRegisterPlayerRequestData";
+import { ISaveProgressRequestData } from "@spt/models/eft/inRaid/ISaveProgressRequestData";
+import { HttpResponseUtil } from "@spt/utils/HttpResponseUtil";
 /**
  * Handle client requests
  */
@@ -12,6 +14,7 @@ export declare class InraidCallbacks {
     constructor(inraidController: InraidController, httpResponse: HttpResponseUtil);
     /**
      * Handle client/location/getLocalloot
+     * Store active map in profile + applicationContext
      * @param url
      * @param info register player request
      * @param sessionID Session id
@@ -37,13 +40,24 @@ export declare class InraidCallbacks {
      */
     getRaidMenuSettings(): string;
     /**
-     * Handle singleplayer/settings/weapon/durability
-     * @returns
-     */
-    getWeaponDurability(): string;
-    /**
      * Handle singleplayer/airdrop/config
      * @returns JSON as string
      */
     getAirdropConfig(): string;
+    /**
+     * Handle singleplayer/btr/config
+     * @returns JSON as string
+     */
+    getBTRConfig(): string;
+    /**
+     * Handle singleplayer/traderServices/getTraderServices
+     */
+    getTraderServices(url: string, info: IEmptyRequestData, sessionId: string): string;
+    /**
+     * Handle singleplayer/traderServices/itemDelivery
+     */
+    itemDelivery(url: string, request: IItemDeliveryRequestData, sessionId: string): INullResponseData;
+    getTraitorScavHostileChance(url: string, info: IEmptyRequestData, sessionId: string): string;
+    getSandboxMaxPatrolValue(url: string, info: IEmptyRequestData, sessionId: string): string;
+    getBossConvertSettings(url: string, info: IEmptyRequestData, sessionId: string): string;
 }

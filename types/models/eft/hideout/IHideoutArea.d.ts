@@ -1,3 +1,5 @@
+import { BonusSkillType } from "@spt/models/enums/BonusSkillType";
+import { BonusType } from "@spt/models/enums/BonusType";
 export interface IHideoutArea {
     _id: string;
     type: number;
@@ -8,6 +10,7 @@ export interface IHideoutArea {
     craftGivesExp: boolean;
     displayLevel: boolean;
     enableAreaRequirements: boolean;
+    parentArea?: string;
     stages: Record<string, Stage>;
 }
 export interface IAreaRequirement {
@@ -19,6 +22,8 @@ export interface Stage {
     autoUpgrade: boolean;
     bonuses: StageBonus[];
     constructionTime: number;
+    /** Containers inventory tpl */
+    container?: string;
     description: string;
     displayInterface: boolean;
     improvements: IStageImprovement[];
@@ -63,10 +68,11 @@ export interface StageBonus {
     passive: boolean;
     production: boolean;
     visible: boolean;
-    skillType?: string;
-    type: string;
+    skillType?: BonusSkillType;
+    type: BonusType;
     filter?: string[];
     icon?: string;
+    /** CHANGES PER DUMP */
     id?: string;
     templateId?: string;
 }

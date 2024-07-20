@@ -1,33 +1,37 @@
-import { ItemHelper } from "../helpers/ItemHelper";
-import { QuestHelper } from "../helpers/QuestHelper";
-import { RepairHelper } from "../helpers/RepairHelper";
-import { TraderHelper } from "../helpers/TraderHelper";
-import { WeightedRandomHelper } from "../helpers/WeightedRandomHelper";
-import { IPmcData } from "../models/eft/common/IPmcData";
-import { Item } from "../models/eft/common/tables/IItem";
-import { ITemplateItem } from "../models/eft/common/tables/ITemplateItem";
-import { IItemEventRouterResponse } from "../models/eft/itemEvent/IItemEventRouterResponse";
-import { RepairKitsInfo } from "../models/eft/repair/IRepairActionDataRequest";
-import { RepairItem } from "../models/eft/repair/ITraderRepairActionDataRequest";
-import { BonusSettings, IRepairConfig } from "../models/spt/config/IRepairConfig";
-import { ILogger } from "../models/spt/utils/ILogger";
-import { ConfigServer } from "../servers/ConfigServer";
-import { DatabaseServer } from "../servers/DatabaseServer";
-import { RandomUtil } from "../utils/RandomUtil";
-import { PaymentService } from "./PaymentService";
+import { ItemHelper } from "@spt/helpers/ItemHelper";
+import { ProfileHelper } from "@spt/helpers/ProfileHelper";
+import { RepairHelper } from "@spt/helpers/RepairHelper";
+import { TraderHelper } from "@spt/helpers/TraderHelper";
+import { WeightedRandomHelper } from "@spt/helpers/WeightedRandomHelper";
+import { IPmcData } from "@spt/models/eft/common/IPmcData";
+import { Item } from "@spt/models/eft/common/tables/IItem";
+import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
+import { IItemEventRouterResponse } from "@spt/models/eft/itemEvent/IItemEventRouterResponse";
+import { RepairKitsInfo } from "@spt/models/eft/repair/IRepairActionDataRequest";
+import { RepairItem } from "@spt/models/eft/repair/ITraderRepairActionDataRequest";
+import { BonusType } from "@spt/models/enums/BonusType";
+import { SkillTypes } from "@spt/models/enums/SkillTypes";
+import { BonusSettings, IRepairConfig } from "@spt/models/spt/config/IRepairConfig";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { ConfigServer } from "@spt/servers/ConfigServer";
+import { DatabaseService } from "@spt/services/DatabaseService";
+import { LocalisationService } from "@spt/services/LocalisationService";
+import { PaymentService } from "@spt/services/PaymentService";
+import { RandomUtil } from "@spt/utils/RandomUtil";
 export declare class RepairService {
     protected logger: ILogger;
-    protected databaseServer: DatabaseServer;
-    protected questHelper: QuestHelper;
+    protected databaseService: DatabaseService;
+    protected profileHelper: ProfileHelper;
     protected randomUtil: RandomUtil;
     protected itemHelper: ItemHelper;
     protected traderHelper: TraderHelper;
     protected weightedRandomHelper: WeightedRandomHelper;
     protected paymentService: PaymentService;
     protected repairHelper: RepairHelper;
+    protected localisationService: LocalisationService;
     protected configServer: ConfigServer;
     protected repairConfig: IRepairConfig;
-    constructor(logger: ILogger, databaseServer: DatabaseServer, questHelper: QuestHelper, randomUtil: RandomUtil, itemHelper: ItemHelper, traderHelper: TraderHelper, weightedRandomHelper: WeightedRandomHelper, paymentService: PaymentService, repairHelper: RepairHelper, configServer: ConfigServer);
+    constructor(logger: ILogger, databaseService: DatabaseService, profileHelper: ProfileHelper, randomUtil: RandomUtil, itemHelper: ItemHelper, traderHelper: TraderHelper, weightedRandomHelper: WeightedRandomHelper, paymentService: PaymentService, repairHelper: RepairHelper, localisationService: LocalisationService, configServer: ConfigServer);
     /**
      * Use trader to repair an items durability
      * @param sessionID Session id
@@ -38,7 +42,6 @@ export declare class RepairService {
      */
     repairItemByTrader(sessionID: string, pmcData: IPmcData, repairItemDetails: RepairItem, traderId: string): RepairDetails;
     /**
-     *
      * @param sessionID Session id
      * @param pmcData profile to take money from
      * @param repairedItemId Repaired item id
@@ -54,8 +57,14 @@ export declare class RepairService {
      * @param pmcData Profile to add points to
      */
     addRepairSkillPoints(sessionId: string, repairDetails: RepairDetails, pmcData: IPmcData): void;
+    protected getIntellectGainedFromRepair(repairDetails: RepairDetails): number;
     /**
-     *
+     * Return an appromixation of the amount of skill points live would return for the given repairDetails
+     * @param repairDetails the repair details to calculate skill points for
+     * @returns the number of skill points to reward the user
+     */
+    protected getWeaponRepairSkillPoints(repairDetails: RepairDetails): number;
+    /**
      * @param sessionId Session id
      * @param pmcData Profile to update repaired item in
      * @param repairKits Array of Repair kits to use
@@ -74,11 +83,18 @@ export declare class RepairService {
     protected getKitDivisor(itemToRepairDetails: ITemplateItem, isArmor: boolean, pmcData: IPmcData): number;
     /**
      * Get the bonus multiplier for a skill from a player profile
-     * @param skillBonusName Name of bonus to get multipler of
+     * @param skillBonus Bonus to get multipler of
      * @param pmcData Player profile to look in for skill
      * @returns Multiplier value
      */
-    protected getBonusMultiplierValue(skillBonusName: string, pmcData: IPmcData): number;
+    protected getBonusMultiplierValue(skillBonus: BonusType, pmcData: IPmcData): number;
+    /**
+     * Should a repair kit apply total durability loss on repair
+     * @param pmcData Player profile
+     * @param applyRandomizeDurabilityLoss Value from repair config
+     * @returns True if loss should be applied
+     */
+    protected shouldRepairKitApplyDurabilityLoss(pmcData: IPmcData, applyRandomizeDurabilityLoss: boolean): boolean;
     /**
      * Update repair kits Resource object if it doesn't exist
      * @param repairKitDetails Repair kit details from db
@@ -92,11 +108,11 @@ export declare class RepairService {
      */
     addBuffToItem(repairDetails: RepairDetails, pmcData: IPmcData): void;
     /**
-     * Add buff to item
+     * Add random buff to item
      * @param itemConfig weapon/armor config
      * @param repairDetails Details for item to repair
      */
-    protected addBuff(itemConfig: BonusSettings, repairDetails: RepairDetails): void;
+    addBuff(itemConfig: BonusSettings, item: Item): void;
     /**
      * Check if item should be buffed by checking the item type and relevant player skill level
      * @param repairDetails Item that was repaired
@@ -110,17 +126,18 @@ export declare class RepairService {
      * @param itemTemplate Item to check for skill
      * @returns Skill name
      */
-    protected getItemSkillType(itemTemplate: ITemplateItem): string;
+    protected getItemSkillType(itemTemplate: ITemplateItem): SkillTypes | undefined;
     /**
      * Ensure multiplier is between 1 and 0.01
-     * @param receiveDurabilityMaxPercent Max durabiltiy percent
+     * @param receiveDurabilityMaxPercent Max durability percent
      * @param receiveDurabilityPercent current durability percent
-     * @returns durability multipler value
+     * @returns durability multiplier value
      */
     protected getDurabilityMultiplier(receiveDurabilityMaxPercent: number, receiveDurabilityPercent: number): number;
 }
 export declare class RepairDetails {
     repairCost?: number;
+    repairPoints?: number;
     repairedItem: Item;
     repairedItemIsArmor: boolean;
     repairAmount: number;

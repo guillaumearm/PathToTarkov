@@ -1,10 +1,12 @@
-import { Item } from "./IItem";
+import { Item } from "@spt/models/eft/common/tables/IItem";
+import { ITraderServiceModel } from "@spt/models/spt/services/ITraderServiceModel";
 export interface ITrader {
-    assort: ITraderAssort;
+    assort?: ITraderAssort;
     base: ITraderBase;
     dialogue?: Record<string, string[]>;
-    questassort: Record<string, Record<string, string>>;
+    questassort?: Record<string, Record<string, string>>;
     suits?: ISuit[];
+    services?: ITraderServiceModel[];
 }
 export interface ITraderBase {
     refreshTraderRagfairOffers: boolean;
@@ -63,7 +65,7 @@ export interface Repair {
     excluded_category: string[];
     /** Doesn't exist in client object */
     excluded_id_list: any[];
-    quality: string;
+    quality: number;
 }
 export interface ITraderAssort {
     nextResupply: number;
@@ -82,9 +84,9 @@ export interface ISuit {
     tid: string;
     suiteId: string;
     isActive: boolean;
-    requirements: Requirements;
+    requirements: ISuitRequirements;
 }
-export interface Requirements {
+export interface ISuitRequirements {
     loyaltyLevel: number;
     profileLevel: number;
     standing: number;

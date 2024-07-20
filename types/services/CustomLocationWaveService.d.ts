@@ -1,18 +1,16 @@
-import { BossLocationSpawn, Wave } from "../models/eft/common/ILocationBase";
-import { ILocationConfig } from "../models/spt/config/ILocationConfig";
-import { ILogger } from "../models/spt/utils/ILogger";
-import { ConfigServer } from "../servers/ConfigServer";
-import { DatabaseServer } from "../servers/DatabaseServer";
-import { JsonUtil } from "../utils/JsonUtil";
-import { RandomUtil } from "../utils/RandomUtil";
+import { BossLocationSpawn, Wave } from "@spt/models/eft/common/ILocationBase";
+import { ILocationConfig } from "@spt/models/spt/config/ILocationConfig";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { ConfigServer } from "@spt/servers/ConfigServer";
+import { DatabaseService } from "@spt/services/DatabaseService";
+import { RandomUtil } from "@spt/utils/RandomUtil";
 export declare class CustomLocationWaveService {
     protected logger: ILogger;
     protected randomUtil: RandomUtil;
-    protected jsonUtil: JsonUtil;
-    protected databaseServer: DatabaseServer;
+    protected databaseService: DatabaseService;
     protected configServer: ConfigServer;
     protected locationConfig: ILocationConfig;
-    constructor(logger: ILogger, randomUtil: RandomUtil, jsonUtil: JsonUtil, databaseServer: DatabaseServer, configServer: ConfigServer);
+    constructor(logger: ILogger, randomUtil: RandomUtil, databaseService: DatabaseService, configServer: ConfigServer);
     /**
      * Add a boss wave to a map
      * @param locationId e.g. factory4_day, bigmap

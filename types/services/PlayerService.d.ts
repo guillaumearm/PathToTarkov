@@ -1,22 +1,18 @@
-import { IPmcData } from "../models/eft/common/IPmcData";
-import { ILogger } from "../models/spt/utils/ILogger";
-import { DatabaseServer } from "../servers/DatabaseServer";
-import { LocalisationService } from "./LocalisationService";
+import { IPmcData } from "@spt/models/eft/common/IPmcData";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { DatabaseService } from "@spt/services/DatabaseService";
+import { LocalisationService } from "@spt/services/LocalisationService";
+import { TimeUtil } from "@spt/utils/TimeUtil";
 export declare class PlayerService {
     protected logger: ILogger;
+    protected timeUtil: TimeUtil;
     protected localisationService: LocalisationService;
-    protected databaseServer: DatabaseServer;
-    constructor(logger: ILogger, localisationService: LocalisationService, databaseServer: DatabaseServer);
+    protected databaseService: DatabaseService;
+    constructor(logger: ILogger, timeUtil: TimeUtil, localisationService: LocalisationService, databaseService: DatabaseService);
     /**
-     * increases the profile skill and updates any output
-     * @param {Object} pmcData
-     * @param {String} skillName
-     * @param {Number} amount
-     */
-    incrementSkillLevel(pmcData: IPmcData, skillName: string, amount: number): void;
-    /**
-     * @param {Object} pmcData
-     * @returns number
+     * Get level of player
+     * @param pmcData Player profile
+     * @returns Level of player
      */
     calculateLevel(pmcData: IPmcData): number;
 }

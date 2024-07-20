@@ -1,6 +1,6 @@
-import { BotWeaponGeneratorHelper } from "../../../helpers/BotWeaponGeneratorHelper";
-import { IInventoryMagGen } from "../IInventoryMagGen";
-import { InventoryMagGen } from "../InventoryMagGen";
+import { IInventoryMagGen } from "@spt/generators/weapongen/IInventoryMagGen";
+import { InventoryMagGen } from "@spt/generators/weapongen/InventoryMagGen";
+import { BotWeaponGeneratorHelper } from "@spt/helpers/BotWeaponGeneratorHelper";
 export declare class InternalMagazineInventoryMagGen implements IInventoryMagGen {
     protected botWeaponGeneratorHelper: BotWeaponGeneratorHelper;
     constructor(botWeaponGeneratorHelper: BotWeaponGeneratorHelper);

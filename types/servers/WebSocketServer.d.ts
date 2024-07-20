@@ -1,27 +1,23 @@
 /// <reference types="node" />
-import http, { IncomingMessage } from "http";
-import WebSocket from "ws";
-import { HttpServerHelper } from "../helpers/HttpServerHelper";
-import { INotification } from "../models/eft/notifier/INotifier";
-import { IHttpConfig } from "../models/spt/config/IHttpConfig";
-import { ILogger } from "../models/spt/utils/ILogger";
-import { LocalisationService } from "../services/LocalisationService";
-import { RandomUtil } from "../utils/RandomUtil";
-import { ConfigServer } from "./ConfigServer";
+import http, { IncomingMessage } from "node:http";
+import { WebSocket, Server } from "ws";
+import { HttpServerHelper } from "@spt/helpers/HttpServerHelper";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { IWebSocketConnectionHandler } from "@spt/servers/ws/IWebSocketConnectionHandler";
+import { LocalisationService } from "@spt/services/LocalisationService";
+import { JsonUtil } from "@spt/utils/JsonUtil";
+import { RandomUtil } from "@spt/utils/RandomUtil";
 export declare class WebSocketServer {
     protected logger: ILogger;
     protected randomUtil: RandomUtil;
-    protected configServer: ConfigServer;
+    protected jsonUtil: JsonUtil;
     protected localisationService: LocalisationService;
     protected httpServerHelper: HttpServerHelper;
-    constructor(logger: ILogger, randomUtil: RandomUtil, configServer: ConfigServer, localisationService: LocalisationService, httpServerHelper: HttpServerHelper);
-    protected httpConfig: IHttpConfig;
-    protected defaultNotification: INotification;
-    protected webSockets: Record<string, WebSocket.WebSocket>;
-    protected websocketPingHandler: any;
+    protected webSocketConnectionHandlers: IWebSocketConnectionHandler[];
+    protected webSocketServer: Server;
+    constructor(logger: ILogger, randomUtil: RandomUtil, jsonUtil: JsonUtil, localisationService: LocalisationService, httpServerHelper: HttpServerHelper, webSocketConnectionHandlers: IWebSocketConnectionHandler[]);
+    getWebSocketServer(): Server;
     setupWebSocket(httpServer: http.Server): void;
-    sendMessage(sessionID: string, output: INotification): void;
     protected getRandomisedMessage(): string;
-    isConnectionWebSocket(sessionID: string): boolean;
-    protected wsOnConnection(ws: WebSocket.WebSocket, req: IncomingMessage): void;
+    protected wsOnConnection(ws: WebSocket, req: IncomingMessage): void;
 }

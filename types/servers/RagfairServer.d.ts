@@ -1,14 +1,15 @@
-import { RagfairOfferGenerator } from "../generators/RagfairOfferGenerator";
-import { TraderAssortHelper } from "../helpers/TraderAssortHelper";
-import { TraderHelper } from "../helpers/TraderHelper";
-import { IRagfairOffer } from "../models/eft/ragfair/IRagfairOffer";
-import { IRagfairConfig } from "../models/spt/config/IRagfairConfig";
-import { ILogger } from "../models/spt/utils/ILogger";
-import { LocalisationService } from "../services/LocalisationService";
-import { RagfairCategoriesService } from "../services/RagfairCategoriesService";
-import { RagfairOfferService } from "../services/RagfairOfferService";
-import { RagfairRequiredItemsService } from "../services/RagfairRequiredItemsService";
-import { ConfigServer } from "./ConfigServer";
+import { RagfairOfferGenerator } from "@spt/generators/RagfairOfferGenerator";
+import { TraderAssortHelper } from "@spt/helpers/TraderAssortHelper";
+import { TraderHelper } from "@spt/helpers/TraderHelper";
+import { IRagfairOffer } from "@spt/models/eft/ragfair/IRagfairOffer";
+import { ISearchRequestData } from "@spt/models/eft/ragfair/ISearchRequestData";
+import { IRagfairConfig } from "@spt/models/spt/config/IRagfairConfig";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { ConfigServer } from "@spt/servers/ConfigServer";
+import { LocalisationService } from "@spt/services/LocalisationService";
+import { RagfairCategoriesService } from "@spt/services/RagfairCategoriesService";
+import { RagfairOfferService } from "@spt/services/RagfairOfferService";
+import { RagfairRequiredItemsService } from "@spt/services/RagfairRequiredItemsService";
 export declare class RagfairServer {
     protected logger: ILogger;
     protected ragfairOfferGenerator: RagfairOfferGenerator;
@@ -27,9 +28,8 @@ export declare class RagfairServer {
      * Get traders who need to be periodically refreshed
      * @returns string array of traders
      */
-    protected getUpdateableTraders(): string[];
-    getAllCategories(): Record<string, number>;
-    getBespokeCategories(offers: IRagfairOffer[]): Record<string, number>;
+    getUpdateableTraders(): string[];
+    getAllActiveCategories(fleaUnlocked: boolean, searchRequestData: ISearchRequestData, offers: IRagfairOffer[]): Record<string, number>;
     /**
      * Disable/Hide an offer from flea
      * @param offerId

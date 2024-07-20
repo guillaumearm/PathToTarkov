@@ -1,7 +1,7 @@
-import { BotWeaponGeneratorHelper } from "../../../helpers/BotWeaponGeneratorHelper";
-import { RandomUtil } from "../../../utils/RandomUtil";
-import { IInventoryMagGen } from "../IInventoryMagGen";
-import { InventoryMagGen } from "../InventoryMagGen";
+import { IInventoryMagGen } from "@spt/generators/weapongen/IInventoryMagGen";
+import { InventoryMagGen } from "@spt/generators/weapongen/InventoryMagGen";
+import { BotWeaponGeneratorHelper } from "@spt/helpers/BotWeaponGeneratorHelper";
+import { RandomUtil } from "@spt/utils/RandomUtil";
 export declare class BarrelInventoryMagGen implements IInventoryMagGen {
     protected randomUtil: RandomUtil;
     protected botWeaponGeneratorHelper: BotWeaponGeneratorHelper;

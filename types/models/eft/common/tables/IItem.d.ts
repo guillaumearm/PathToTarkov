@@ -12,6 +12,7 @@ export interface Upd {
     Togglable?: Togglable;
     Map?: Map;
     Tag?: Tag;
+    /** SPT specific property, not made by BSG */
     sptPresetId?: string;
     FaceShield?: FaceShield;
     StackObjectsCount?: number;
@@ -32,6 +33,7 @@ export interface Upd {
     Foldable?: Foldable;
     SideEffect?: SideEffect;
     RepairKit?: RepairKit;
+    CultistAmulet?: ICultistAmulet;
 }
 export interface Buff {
     rarity: string;
@@ -117,4 +119,7 @@ export interface SideEffect {
 }
 export interface RepairKit {
     Resource: number;
+}
+export interface ICultistAmulet {
+    NumberOfUsages: number;
 }

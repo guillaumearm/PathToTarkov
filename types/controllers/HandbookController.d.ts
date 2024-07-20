@@ -1,5 +1,5 @@
-import { HandbookHelper } from "../helpers/HandbookHelper";
-import { DatabaseServer } from "../servers/DatabaseServer";
+import { HandbookHelper } from "@spt/helpers/HandbookHelper";
+import { DatabaseServer } from "@spt/servers/DatabaseServer";
 export declare class HandbookController {
     protected databaseServer: DatabaseServer;
     protected handbookHelper: HandbookHelper;

@@ -1,7 +1,6 @@
-import { HandledRoute, SaveLoadRouter } from "../../di/Router";
-import { IAkiProfile } from "../../models/eft/profile/IAkiProfile";
+import { HandledRoute, SaveLoadRouter } from "@spt/di/Router";
+import { ISptProfile } from "@spt/models/eft/profile/ISptProfile";
 export declare class HealthSaveLoadRouter extends SaveLoadRouter {
-    constructor();
     getHandledRoutes(): HandledRoute[];
-    handleLoad(profile: IAkiProfile): IAkiProfile;
+    handleLoad(profile: ISptProfile): ISptProfile;
 }

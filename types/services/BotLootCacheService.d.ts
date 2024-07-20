@@ -1,23 +1,25 @@
-import { PMCLootGenerator } from "../generators/PMCLootGenerator";
-import { Items } from "../models/eft/common/tables/IBotType";
-import { ITemplateItem, Props } from "../models/eft/common/tables/ITemplateItem";
-import { BotLootCache, LootCacheType } from "../models/spt/bots/BotLootCache";
-import { ILogger } from "../models/spt/utils/ILogger";
-import { DatabaseServer } from "../servers/DatabaseServer";
-import { JsonUtil } from "../utils/JsonUtil";
-import { LocalisationService } from "./LocalisationService";
-import { RagfairPriceService } from "./RagfairPriceService";
+import { PMCLootGenerator } from "@spt/generators/PMCLootGenerator";
+import { ItemHelper } from "@spt/helpers/ItemHelper";
+import { IBotType } from "@spt/models/eft/common/tables/IBotType";
+import { ITemplateItem, Props } from "@spt/models/eft/common/tables/ITemplateItem";
+import { IBotLootCache, LootCacheType } from "@spt/models/spt/bots/IBotLootCache";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { DatabaseServer } from "@spt/servers/DatabaseServer";
+import { LocalisationService } from "@spt/services/LocalisationService";
+import { RagfairPriceService } from "@spt/services/RagfairPriceService";
+import { ICloner } from "@spt/utils/cloners/ICloner";
 export declare class BotLootCacheService {
     protected logger: ILogger;
-    protected jsonUtil: JsonUtil;
+    protected itemHelper: ItemHelper;
     protected databaseServer: DatabaseServer;
     protected pmcLootGenerator: PMCLootGenerator;
     protected localisationService: LocalisationService;
     protected ragfairPriceService: RagfairPriceService;
-    protected lootCache: Record<string, BotLootCache>;
-    constructor(logger: ILogger, jsonUtil: JsonUtil, databaseServer: DatabaseServer, pmcLootGenerator: PMCLootGenerator, localisationService: LocalisationService, ragfairPriceService: RagfairPriceService);
+    protected cloner: ICloner;
+    protected lootCache: Record<string, IBotLootCache>;
+    constructor(logger: ILogger, itemHelper: ItemHelper, databaseServer: DatabaseServer, pmcLootGenerator: PMCLootGenerator, localisationService: LocalisationService, ragfairPriceService: RagfairPriceService, cloner: ICloner);
     /**
-     * Remove all cached bot loot data
+     * Remove cached bot loot data
      */
     clearCache(): void;
     /**
@@ -25,28 +27,24 @@ export declare class BotLootCacheService {
      * @param botRole bot to get loot for
      * @param isPmc is the bot a pmc
      * @param lootType what type of loot is needed (backpack/pocket/stim/vest etc)
-     * @param lootPool the full pool of loot (needed when cache is empty)
+     * @param botJsonTemplate Base json db file for the bot having its loot generated
      * @returns ITemplateItem array
      */
-    getLootFromCache(botRole: string, isPmc: boolean, lootType: LootCacheType, lootPool: Items): ITemplateItem[];
+    getLootFromCache(botRole: string, isPmc: boolean, lootType: LootCacheType, botJsonTemplate: IBotType): Record<string, number>;
     /**
      * Generate loot for a bot and store inside a private class property
      * @param botRole bots role (assault / pmcBot etc)
-     * @param lootPool the full pool of loot we use to create the various sub-categories with
      * @param isPmc Is the bot a PMC (alteres what loot is cached)
+     * @param botJsonTemplate db template for bot having its loot generated
      */
-    protected addLootToCache(botRole: string, isPmc: boolean, lootPool: Items): void;
-    /**
-     * Sort a pool of item objects by its flea price
-     * @param poolToSort pool of items to sort
-     */
-    protected sortPoolByRagfairPrice(poolToSort: ITemplateItem[]): void;
+    protected addLootToCache(botRole: string, isPmc: boolean, botJsonTemplate: IBotType): void;
     /**
      * Add unique items into combined pool
-     * @param combinedItemPool Pool of items to add to
+     * @param poolToAddTo Pool of items to add to
      * @param itemsToAdd items to add to combined pool if unique
      */
-    protected addUniqueItemsToPool(combinedItemPool: ITemplateItem[], itemsToAdd: ITemplateItem[]): void;
+    protected addUniqueItemsToPool(poolToAddTo: ITemplateItem[], itemsToAdd: ITemplateItem[]): void;
+    protected addItemsToPool(poolToAddTo: Record<string, number>, poolOfItemsToAdd: Record<string, number>): void;
     /**
      * Ammo/grenades have this property
      * @param props
@@ -71,6 +69,9 @@ export declare class BotLootCacheService {
      * @returns
      */
     protected isGrenade(props: Props): boolean;
+    protected isFood(tpl: string): boolean;
+    protected isDrink(tpl: string): boolean;
+    protected isCurrency(tpl: string): boolean;
     /**
      * Check if a bot type exists inside the loot cache
      * @param botRole role to check for
@@ -78,7 +79,7 @@ export declare class BotLootCacheService {
      */
     protected botRoleExistsInCache(botRole: string): boolean;
     /**
-     * If lootcache is null, init with empty property arrays
+     * If lootcache is undefined, init with empty property arrays
      * @param botRole Bot role to hydrate
      */
     protected initCacheForBotRole(botRole: string): void;

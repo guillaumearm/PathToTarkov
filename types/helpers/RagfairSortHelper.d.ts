@@ -1,7 +1,7 @@
-import { IRagfairOffer } from "../models/eft/ragfair/IRagfairOffer";
-import { RagfairSort } from "../models/enums/RagfairSort";
-import { DatabaseServer } from "../servers/DatabaseServer";
-import { LocaleService } from "../services/LocaleService";
+import { IRagfairOffer } from "@spt/models/eft/ragfair/IRagfairOffer";
+import { RagfairSort } from "@spt/models/enums/RagfairSort";
+import { DatabaseServer } from "@spt/servers/DatabaseServer";
+import { LocaleService } from "@spt/services/LocaleService";
 export declare class RagfairSortHelper {
     protected databaseServer: DatabaseServer;
     protected localeService: LocaleService;
@@ -15,6 +15,7 @@ export declare class RagfairSortHelper {
      */
     sortOffers(offers: IRagfairOffer[], type: RagfairSort, direction?: number): IRagfairOffer[];
     protected sortOffersByID(a: IRagfairOffer, b: IRagfairOffer): number;
+    protected sortOffersByBarter(a: IRagfairOffer, b: IRagfairOffer): number;
     protected sortOffersByRating(a: IRagfairOffer, b: IRagfairOffer): number;
     protected sortOffersByName(a: IRagfairOffer, b: IRagfairOffer): number;
     /**

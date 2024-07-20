@@ -1,20 +1,18 @@
-import { ILocationConfig } from "../models/spt/config/ILocationConfig";
-import { ILogger } from "../models/spt/utils/ILogger";
-import { ConfigServer } from "../servers/ConfigServer";
-import { DatabaseServer } from "../servers/DatabaseServer";
-import { JsonUtil } from "../utils/JsonUtil";
-import { RandomUtil } from "../utils/RandomUtil";
-import { LocalisationService } from "./LocalisationService";
+import { ILocationConfig } from "@spt/models/spt/config/ILocationConfig";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { ConfigServer } from "@spt/servers/ConfigServer";
+import { DatabaseService } from "@spt/services/DatabaseService";
+import { LocalisationService } from "@spt/services/LocalisationService";
+import { RandomUtil } from "@spt/utils/RandomUtil";
 /** Service for adding new zones to a maps OpenZones property */
 export declare class OpenZoneService {
     protected logger: ILogger;
     protected randomUtil: RandomUtil;
-    protected jsonUtil: JsonUtil;
-    protected databaseServer: DatabaseServer;
+    protected databaseService: DatabaseService;
     protected localisationService: LocalisationService;
     protected configServer: ConfigServer;
     protected locationConfig: ILocationConfig;
-    constructor(logger: ILogger, randomUtil: RandomUtil, jsonUtil: JsonUtil, databaseServer: DatabaseServer, localisationService: LocalisationService, configServer: ConfigServer);
+    constructor(logger: ILogger, randomUtil: RandomUtil, databaseService: DatabaseService, localisationService: LocalisationService, configServer: ConfigServer);
     /**
      * Add open zone to specified map
      * @param locationId map location (e.g. factory4_day)
