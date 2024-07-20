@@ -1,9 +1,7 @@
-import type { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
-import type { IInsuranceConfig } from "@spt-aki/models/spt/config/IInsuranceConfig";
-import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import type { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import type { SaveServer } from "@spt-aki/servers/SaveServer";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ConfigServer } from "@spt/servers/ConfigServer";
+import type { DatabaseServer } from "@spt/servers/DatabaseServer";
+import type { SaveServer } from "@spt/servers/SaveServer";
 import type { ConfigGetter, LocaleName } from "./config";
 import { JAEGER_INTRO_QUEST, PRAPOR_ID } from "./config";
 import { checkAccessVia } from "./helpers";
@@ -30,7 +28,7 @@ export class TradersController {
       quest._id === JAEGER_INTRO_QUEST &&
       quest.QuestName === "Introduction"
     ) {
-      quest.rewards.Success = quest.rewards.Success.filter(
+      quest.rewards.Success = quest.rewards.Success?.filter(
         (payload) => payload.type !== "TraderUnlock"
       );
     }
@@ -99,13 +97,6 @@ export class TradersController {
             // prevent several issues (freeze and crash)
             trader.dialogue = praporTrader.dialogue;
           }
-
-          const insuranceConfig = this.configServer.getConfig<IInsuranceConfig>(
-            "aki-insurance" as ConfigTypes.INSURANCE
-          );
-
-          insuranceConfig.insuranceMultiplier[traderId] =
-            insuranceTraderConfig.insuranceMultiplier || 0.3;
 
           trader.base.insurance.availability = true;
           trader.base.insurance.min_payment =

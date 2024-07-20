@@ -1,16 +1,26 @@
-import type { RouteAction } from "@spt-aki/di/Router";
-import type { PreAkiModLoader } from "@spt-aki/loaders/PreAkiModLoader";
+import type { RouteAction } from "@spt/di/Router";
+import type { PreSptModLoader } from "@spt/loaders/PreSptModLoader";
 import type {
   Exit,
   SpawnPointParam,
-} from "@spt-aki/models/eft/common/ILocationBase";
-import type { IPmcData } from "@spt-aki/models/eft/common/IPmcData";
-import type { IHideoutArea } from "@spt-aki/models/eft/hideout/IHideoutArea";
-import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import type { StaticRouterModService } from "@spt-aki/services/mod/staticRouter/StaticRouterModService";
+} from "@spt/models/eft/common/ILocationBase";
+import type { IPmcData } from "@spt/models/eft/common/IPmcData";
+import type { IHideoutArea } from "@spt/models/eft/hideout/IHideoutArea";
+import type { DatabaseServer } from "@spt/servers/DatabaseServer";
+import type { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
 
 import type { AccessVia, Config, MapName, SpawnPoint } from "./config";
 import { JAEGER_INTRO_QUEST, MAPLIST } from "./config";
+
+// not used in theory (this is here to make TypeScript happy)
+const PVE_DEFAULT_PARAMS = {
+  ChancePVE: 1,
+  CountPVE: 1,
+  ExfiltrationTimePVE: 10,
+  MinTimePVE: 1,
+  MaxTimePVE: 120,
+  PlayersCountPVE: 1,
+};
 
 export function checkAccessVia(access_via: AccessVia, value: string): boolean {
   return (
@@ -58,6 +68,7 @@ export const createSpawnPoint = (
         Radius: 0.0,
       },
     },
+    CorePointId: 0,
     BotZoneName: "",
   };
 };
@@ -68,6 +79,7 @@ export const createExitPoint =
     return {
       Name: name,
       EntryPoints: entrypoints.join(","),
+      EventAvailable: true,
       Chance: 100,
       Count: 0,
       Id: "",
@@ -78,6 +90,7 @@ export const createExitPoint =
       PlayersCount: 0,
       ExfiltrationTime: 10,
       RequirementTip: "",
+      ...PVE_DEFAULT_PARAMS,
     };
   };
 
@@ -168,7 +181,7 @@ export const createStaticRoutePeeker = (
   const watchRoute = (url: string, cb: StaticRouteCallback): void => {
     routeActions.push({
       url,
-      action: (url, info, sessionId, output) => {
+      action: async (url, info, sessionId, output) => {
         cb(url, info, sessionId, output);
         return output;
       },
@@ -198,16 +211,20 @@ export const isJaegerIntroQuestCompleted = (pmc: IPmcData): boolean => {
   );
 };
 
-const isModLoaded = (modLoader: PreAkiModLoader, modId: string): boolean => {
-  const loadedModName = Object.keys(modLoader.imported).find(
-    (modName) => modLoader.imported[modName].name === modId
-  );
+// const isModLoaded = (modLoader: PreSptModLoader, modId: string): boolean => {
+//   const loadedModName = Object.keys(modLoader.imported).find(
+//     (modName) => modLoader.imported[modName].name === modId
+//   );
 
-  return Boolean(loadedModName);
-};
+//   return Boolean(loadedModName);
+// };
 
 const LUAS_CSP_MOD_ID = "CustomSpawnPoints";
 
-export const isLuasCSPModLoaded = (modLoader: PreAkiModLoader): boolean => {
-  return isModLoaded(modLoader, LUAS_CSP_MOD_ID);
+// TODO fix
+export const isLuasCSPModLoaded = (modLoader: PreSptModLoader): boolean => {
+  void modLoader;
+  void LUAS_CSP_MOD_ID;
+  return false;
+  // return isModLoaded(modLoader, LUAS_CSP_MOD_ID);
 };

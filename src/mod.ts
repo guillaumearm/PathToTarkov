@@ -1,13 +1,13 @@
 import type { DependencyContainer } from "tsyringe";
 
-import type { PreAkiModLoader } from "@spt-aki/loaders/PreAkiModLoader";
-import type { IPostAkiLoadMod } from "@spt-aki/models/external/IPostAkiLoadMod";
-import type { IPreAkiLoadMod } from "@spt-aki/models/external/IPreAkiLoadMod";
-import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import type { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import type { SaveServer } from "@spt-aki/servers/SaveServer";
-import type { StaticRouterModService } from "@spt-aki/services/mod/staticRouter/StaticRouterModService";
+import type { PreSptModLoader } from "@spt/loaders/PreSptModLoader";
+import type { IPostSptLoadMod } from "@spt/models/external/IPostSptLoadMod";
+import type { IPreSptLoadMod } from "@spt/models/external/IPreSptLoadMod";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ConfigServer } from "@spt/servers/ConfigServer";
+import type { DatabaseServer } from "@spt/servers/DatabaseServer";
+import type { SaveServer } from "@spt/servers/SaveServer";
+import type { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
 
 import { createPathToTarkovAPI } from "./api";
 import type { Config, SpawnConfig } from "./config";
@@ -22,7 +22,7 @@ import type { PackageJson } from "./utils";
 import { getModDisplayName, noop, readJsonFile } from "./utils";
 import { EndOfRaidController } from "./end-of-raid-controller";
 
-class PathToTarkov implements IPreAkiLoadMod, IPostAkiLoadMod {
+class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;
   private config: Config;
   private spawnConfig: SpawnConfig;
@@ -33,7 +33,7 @@ class PathToTarkov implements IPreAkiLoadMod, IPostAkiLoadMod {
   public executeOnStartAPICallbacks: (sessionId: string) => void = noop;
   public pathToTarkovController: PathToTarkovController;
 
-  public preAkiLoad(container: DependencyContainer): void {
+  public preSptLoad(container: DependencyContainer): void {
     this.container = container;
     this.packageJson = readJsonFile(PACKAGE_JSON_PATH);
     this.config = readJsonFile(CONFIG_PATH);
@@ -50,7 +50,7 @@ class PathToTarkov implements IPreAkiLoadMod, IPostAkiLoadMod {
 
     const db = container.resolve<DatabaseServer>("DatabaseServer");
     const configServer = container.resolve<ConfigServer>("ConfigServer");
-    const modLoader = container.resolve<PreAkiModLoader>("PreAkiModLoader");
+    const modLoader = container.resolve<PreSptModLoader>("PreAkiModLoader");
     const saveServer = container.resolve<SaveServer>("SaveServer");
 
     const staticRouter = container.resolve<StaticRouterModService>(
@@ -107,7 +107,7 @@ class PathToTarkov implements IPreAkiLoadMod, IPostAkiLoadMod {
     );
   }
 
-  public postAkiLoad(container: DependencyContainer): void {
+  public postSptLoad(container: DependencyContainer): void {
     this.container = container;
 
     if (!this.config.enabled) {

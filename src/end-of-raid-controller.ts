@@ -1,5 +1,5 @@
 import type { MapName } from "./config";
-import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import type { PathToTarkovController } from "./path-to-tarkov-controller";
 import { resolveMapNameFromLocation } from "./map-name-resolver";
 

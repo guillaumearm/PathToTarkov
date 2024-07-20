@@ -6,7 +6,7 @@
   "main": "src/mod.js",
   "license": "MIT",
   "author": "Trap",
-  "akiVersion": "3.5.x",
+  "sptVersion": "3.9.x",
   "scripts": {
     "gather:external:resources": "./scripts/gather-external-resources.sh && npm run prettier",
     "build:doc:all-exfils": "node scripts/generate-all-exfils > ALL_EXFILS.md",
@@ -39,6 +39,7 @@
     "@typescript-eslint/parser": "^4.33.0",
     "bestzip": "2.2.1",
     "eslint": "7.26.0",
+    "jsonc": "^2.0.0",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
     "tsyringe": "4.6.0",

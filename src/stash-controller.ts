@@ -1,6 +1,6 @@
-import type { Inventory } from "@spt-aki/models/eft/common/tables/IBotBase";
-import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import type { SaveServer } from "@spt-aki/servers/SaveServer";
+import type { Inventory } from "@spt/models/eft/common/tables/IBotBase";
+import type { DatabaseServer } from "@spt/servers/DatabaseServer";
+import type { SaveServer } from "@spt/servers/SaveServer";
 import type { ConfigGetter, Profile } from "./config";
 import { EMPTY_STASH_ID, STASH_IDS } from "./config";
 import { checkAccessVia, isIgnoredArea } from "./helpers";

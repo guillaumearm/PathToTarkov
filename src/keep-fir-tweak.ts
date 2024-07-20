@@ -1,5 +1,5 @@
-import type { InRaidHelper } from "@spt-aki/helpers/InRaidHelper";
-import type { Item } from "@spt-aki/models/eft/common/tables/IItem";
+import type { InRaidHelper } from "@spt/helpers/InRaidHelper";
+import type { Item } from "@spt/models/eft/common/tables/IItem";
 
 import type { DependencyContainer } from "tsyringe";
 
@@ -32,26 +32,6 @@ export const enableKeepFoundInRaidTweak = (ptt: PTTInstance): void => {
     (_t, result): void => {
       const inraidHelper = Array.isArray(result) ? result[0] : result;
 
-      inraidHelper.addSpawnedInSessionPropertyToItems = (
-        _preRaidProfile,
-        postRaidProfile,
-        isPlayerScav
-      ) => {
-        const count = setSpawnedInSessionOnAllItems(
-          postRaidProfile.Inventory.items
-        );
-        if (isPlayerScav) {
-          ptt.debug(
-            `raid survived with a scav, added 'SpawnedInSession' flag on ${count} items`
-          );
-        } else {
-          ptt.debug(
-            `raid survived with a pmc, added 'SpawnedInSession' flag on ${count} items`
-          );
-        }
-        return postRaidProfile;
-      };
-
       inraidHelper.removeSpawnedInSessionPropertyFromItems = (
         postRaidProfile
       ) => {
@@ -70,12 +50,6 @@ export const enableKeepFoundInRaidTweak = (ptt: PTTInstance): void => {
         }
         return postRaidProfile;
       };
-
-      // AKI 3.1.x compat
-      if ("markFoundItems" in inraidHelper) {
-        (inraidHelper as any).markFoundItems =
-          inraidHelper.addSpawnedInSessionPropertyToItems;
-      }
 
       if ("removeFoundInRaidStatusFromItems" in inraidHelper) {
         (inraidHelper as any).removeFoundInRaidStatusFromItems =

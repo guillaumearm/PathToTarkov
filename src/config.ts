@@ -1,4 +1,4 @@
-import type { IAkiProfile } from "@spt-aki/models/eft/profile/IAkiProfile";
+import type { ISptProfile } from "@spt/models/eft/profile/ISptProfile";
 import { join } from "path";
 
 type ByMap<T> = {
@@ -74,7 +74,7 @@ type InsuranceConfig = {
 };
 
 type RepairConfig = {
-  quality?: string;
+  quality?: number;
   currency?: string;
   currency_coefficient?: number;
   repair_price_coef?: number;
@@ -131,7 +131,7 @@ export type Config = {
   infiltrations: Infiltrations;
 };
 
-export type Profile = IAkiProfile & {
+export type Profile = ISptProfile & {
   PathToTarkov?: {
     offraidPosition?: string;
   };
