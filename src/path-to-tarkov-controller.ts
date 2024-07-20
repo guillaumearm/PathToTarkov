@@ -28,6 +28,7 @@ import {
 import { StashController } from "./stash-controller";
 import { TradersController } from "./traders-controller";
 import type { ModLoader } from "./modLoader";
+import { isEmptyArray } from "./utils";
 
 class OffraidRegenController {
   private getRegenConfig: () => Config["offraid_regen_config"];
@@ -204,7 +205,9 @@ export class PathToTarkovController {
     this.entrypoints = {};
 
     if (!modLoader.imported || typeof modLoader.imported !== "object") {
-      throw new Error("Invalid ModLoader -> 'imported' object is missing");
+      throw new Error(
+        "Fatal PTTController: 'modLoader.imported' object is required"
+      );
     }
   }
 
@@ -223,15 +226,28 @@ export class PathToTarkovController {
     // this.hijackLuasCustomSpawnPointsUpdate();
   }
 
-  // fix for missing `insuranceStart` property when player died
+  // fix for missing `insuranceStart` and `insuranceFound` properties when player died
   fixInsuranceDialogues(): void {
     const traders = this.db.getTables().traders ?? {};
-    const praporTrader = traders?.[PRAPOR_ID];
+    const praporDialogue = traders?.[PRAPOR_ID]?.dialogue;
+
+    if (!praporDialogue) {
+      throw new Error(
+        "Fatal PTTController fixInsuranceDialogues: Prapor dialogue object is required"
+      );
+    }
 
     Object.keys(traders).forEach((traderId) => {
       const trader = traders?.[traderId];
+
       if (trader && !trader.dialogue) {
-        trader.dialogue = praporTrader?.dialogue;
+        trader.dialogue = praporDialogue;
+      } else if (trader?.dialogue) {
+        for (const dialogueKey of ["insuranceStart", "insuranceFound"]) {
+          if (isEmptyArray(trader.dialogue[dialogueKey])) {
+            trader.dialogue[dialogueKey] = praporDialogue[dialogueKey] ?? [];
+          }
+        }
       }
     });
   }

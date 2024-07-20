@@ -74,6 +74,10 @@ export function deepClone<T>(item: T): T {
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export function noop(): void {}
 
+export const isEmptyArray = <T>(arr: T[] | undefined): boolean => {
+  return Boolean(arr && arr.length > 0);
+};
+
 export const getMainStashId = (profile: Profile): string => {
   const pmc = profile.characters.pmc;
 
