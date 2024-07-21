@@ -3,8 +3,10 @@ import type { ConfigServer } from "@spt/servers/ConfigServer";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
 import type { ConfigGetter, LocaleName } from "./config";
-import { JAEGER_ID, PRAPOR_ID } from "./config";
+import { FENCE_ID, JAEGER_ID, PRAPOR_ID } from "./config";
 import { checkAccessVia, isJaegerIntroQuestCompleted } from "./helpers";
+import type { IRepeatableTemplates } from "@spt/models/eft/common/tables/IRepeatableQuests";
+import { tweakRepeatableQuestTemplates } from "./repeatable-quests-fix";
 
 /**
  * Used only when `traders_access_restriction` is true
@@ -20,10 +22,13 @@ export class TradersController {
   ) {}
 
   initTraders(): void {
+    this.tweakRepeatableQuestTemplates();
+
     const config = this.getConfig();
     const tradersConfig = config.traders_config;
     const traders = this.db.getTables().traders;
     const locales = this.db.getTables().locales;
+    const templates = this.db.getTables().templates;
 
     const praporTrader = traders?.[PRAPOR_ID];
 
@@ -141,13 +146,20 @@ export class TradersController {
     });
   }
 
+  private tweakRepeatableQuestTemplates(): void {
+    const questTemplates =
+      this.db.getTables().templates?.repeatableQuests?.templates;
+
+    tweakRepeatableQuestTemplates(questTemplates);
+    this.logger.info(`=> PathToTarkov: tweaked repeatable quests templates`);
+  }
+
   updateTraders(offraidPosition: string, sessionId: string): void {
     const tradersConfig = this.getConfig().traders_config;
 
     const profile = this.saveServer.getProfile(sessionId);
     const pmc = profile.characters.pmc;
     const tradersInfo = pmc.TradersInfo;
-
     const isJaegerAvailable = isJaegerIntroQuestCompleted(pmc.Quests);
 
     Object.keys(tradersConfig).forEach((traderId) => {
