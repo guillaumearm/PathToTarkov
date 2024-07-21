@@ -10,7 +10,9 @@ export function getModLoader(container: DependencyContainer): ModLoader {
   const modLoader = container.resolve<ModLoader>("PreSptModLoader");
 
   if (!modLoader.imported || typeof modLoader.imported !== "object") {
-    throw new Error("Invalid ModLoader -> 'imported' object is missing");
+    throw new Error(
+      "Fatal getModLoader: 'modLoader.imported' object is required"
+    );
   }
 
   return modLoader;

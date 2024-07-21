@@ -203,12 +203,6 @@ export class PathToTarkovController {
     );
 
     this.entrypoints = {};
-
-    if (!modLoader.imported || typeof modLoader.imported !== "object") {
-      throw new Error(
-        "Fatal PTTController: 'modLoader.imported' object is required"
-      );
-    }
   }
 
   generateEntrypoints(): void {
