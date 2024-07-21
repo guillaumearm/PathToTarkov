@@ -133,6 +133,7 @@ export type Config = {
 export type Profile = ISptProfile & {
   PathToTarkov?: {
     offraidPosition?: string;
+    mainStashId?: string;
   };
 };
 

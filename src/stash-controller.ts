@@ -53,11 +53,10 @@ export class StashController {
     if (!profile.PathToTarkov) {
       profile.PathToTarkov = {};
     }
-  }
 
-  private getMainStashId(sessionId: string): string {
-    const profile: Profile = this.saveServer.getProfile(sessionId);
-    return getMainStashId(profile);
+    if (!profile.PathToTarkov.mainStashId) {
+      profile.PathToTarkov.mainStashId = profile.characters.pmc.Inventory.stash;
+    }
   }
 
   private setSize(n: number): void {
@@ -104,7 +103,8 @@ export class StashController {
 
   private setMainStash(sessionId: string): void {
     const inventory = this.getInventory(sessionId);
-    inventory.stash = this.getMainStashId(sessionId);
+    const profile: Profile = this.saveServer.getProfile(sessionId);
+    inventory.stash = getMainStashId(profile);
   }
 
   private setSecondaryStash(stashId: string, sessionId: string): void {

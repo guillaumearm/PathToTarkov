@@ -79,24 +79,7 @@ export const isEmptyArray = <T>(arr: T[] | undefined): boolean => {
 };
 
 export const getMainStashId = (profile: Profile): string => {
-  const pmc = profile.characters.pmc;
-
-  // immutable reverse
-  const bonuses = [...pmc.Bonuses].reverse();
-
-  const stashSizeBonus = bonuses.find((b) => b.type === "StashSize");
-  const mainStashTemplateId = stashSizeBonus?.templateId;
-
-  if (!mainStashTemplateId) {
-    return pmc.Inventory.stash;
-  }
-
-  const item = pmc.Inventory.items.find((i) => i._tpl === mainStashTemplateId);
-  const stashId = item?._id;
-
-  if (!stashId) {
-    return pmc.Inventory.stash;
-  }
-
-  return stashId;
+  return (
+    profile.PathToTarkov?.mainStashId ?? profile.characters.pmc.Inventory.stash
+  );
 };
