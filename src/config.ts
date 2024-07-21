@@ -149,8 +149,10 @@ export const PRAPOR_ID = "54cb50c76803fa8b248b4571";
 export const JAEGER_ID = "5c0647fdd443bc2504c2d371";
 export const JAEGER_INTRO_QUEST = "5d2495a886f77425cd51e403";
 
+export const STANDARD_STASH_ID = "566abbc34bdc2d92178b4576";
+
 export const STASH_IDS = [
-  "566abbc34bdc2d92178b4576", // Standard
+  STANDARD_STASH_ID, // Standard
   "5811ce572459770cba1a34ea", // Left Behind
   "5811ce662459770f6f490f32", // Prepare for escape
   "5811ce772459770e9e5f9532", // Edge of darkness

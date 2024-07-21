@@ -2,7 +2,7 @@ import type { Inventory } from "@spt/models/eft/common/tables/IBotBase";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
 import type { ConfigGetter, Profile } from "./config";
-import { EMPTY_STASH_ID, STASH_IDS } from "./config";
+import { EMPTY_STASH_ID, STANDARD_STASH_ID, STASH_IDS } from "./config";
 import { checkAccessVia, isIgnoredArea } from "./helpers";
 import { getMainStashId } from "./utils";
 
@@ -114,7 +114,7 @@ export class StashController {
     inventory.stash = stashId;
 
     if (!inventory.items.find((item) => item._id === stashId)) {
-      inventory.items.push({ _id: stashId, _tpl: STASH_IDS[0] });
+      inventory.items.push({ _id: stashId, _tpl: STANDARD_STASH_ID });
     }
   }
 
