@@ -38,7 +38,7 @@
       "access_via": ["MechanicStash", "TherapistStash"]
     }
   },
-  "hideout_main_stash_access_via": ["TherapistStash"],
+  "hideout_main_stash_access_via": ["MechanicStash"],
   "hideout_secondary_stashes": [
     {
       "id": "PathToTarkov_Therapist_stash",
