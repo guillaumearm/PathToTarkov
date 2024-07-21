@@ -15,5 +15,5 @@ export const resolveMapNameFromLocation = (location: string): string => {
   const locationName = location.toLowerCase();
   const mapName = LOCATIONS_MAPS[locationName];
 
-  return mapName ?? "";
+  return mapName ?? location;
 };
