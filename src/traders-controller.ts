@@ -5,6 +5,7 @@ import type { SaveServer } from "@spt/servers/SaveServer";
 import type { ConfigGetter, LocaleName } from "./config";
 import { JAEGER_ID, PRAPOR_ID } from "./config";
 import { checkAccessVia, isJaegerIntroQuestCompleted } from "./helpers";
+import type { RepeatableTemplates } from "./repeatable-quests-fix";
 import { tweakRepeatableQuestTemplates } from "./repeatable-quests-fix";
 
 /**
@@ -145,8 +146,8 @@ export class TradersController {
   }
 
   private tweakRepeatableQuestTemplates(): void {
-    const questTemplates =
-      this.db.getTables().templates?.repeatableQuests?.templates;
+    const questTemplates = this.db.getTables().templates?.repeatableQuests
+      ?.templates as RepeatableTemplates;
 
     tweakRepeatableQuestTemplates(questTemplates);
     this.logger.info(`=> PathToTarkov: tweaked repeatable quests templates`);
