@@ -228,7 +228,7 @@
       "access_via": "*",
       "insurance_always_enabled": true,
       "insurance_config": {
-        "insurance_price_coef": 1,
+        "insurance_price_coef": 100,
         "min_payment": 0,
         "min_return_hour": 1,
         "max_return_hour": 2,
