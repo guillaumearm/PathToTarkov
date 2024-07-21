@@ -326,7 +326,8 @@
     },
     "JaegerStash": {
       "factory4_day": ["Office Window"],
-      "factory4_night": ["Office Window"]
+      "factory4_night": ["Office Window"],
+      "woods": ["Factory Gate", "RUAFRoadblock", "UN Roadblock"]
     },
     "MilitaryLighthouseStash": {
       "lighthouse": ["Lighthouse Vehicle Extract"],
