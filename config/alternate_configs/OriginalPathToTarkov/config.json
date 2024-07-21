@@ -6,8 +6,6 @@
   "traders_access_restriction": true,
   "hideout_multistash_enabled": true,
   "vanilla_exfils_requirements": false,
-  "laboratory_access_restriction": true,
-  "laboratory_access_via": ["Car"],
   "player_scav_move_offraid_position": false,
   "workbench_always_enabled": true,
   "bypass_keep_found_in_raid_tweak": false,
@@ -630,7 +628,16 @@
       "woods": ["Bridge Car"],
       "lighthouse": ["Lighthouse Vehicle Extract"],
       "tarkovstreets": ["Primorsky Vehicle Extract"],
-      "sandbox": ["Mira Ave"]
+      "sandbox": ["Mira Ave"],
+      "laboratory": [
+        "Cargo Elevator",
+        "Hangar Gate",
+        "Lab Sewage Conduit",
+        "Lab Vents",
+        "Main Elevator",
+        "Med Block Elevator",
+        "Parking Gate"
+      ]
     },
     "CustomsMilitaryBaseCP": {
       "bigmap": ["Military Base CP"],

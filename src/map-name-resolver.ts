@@ -7,6 +7,7 @@ const LOCATIONS_MAPS: Record<string, string> = {
   lighthouse: "lighthouse",
   shoreline: "shoreline",
   laboratory: "laboratory",
+  lab: "laboratory",
   ["streets of tarkov"]: "tarkovstreets",
   groundzero: "sandbox",
 };

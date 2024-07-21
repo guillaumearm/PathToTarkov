@@ -108,8 +108,6 @@ export type Config = {
   initial_offraid_position: string;
   reset_offraid_position_on_player_die: boolean;
   hideout_multistash_enabled: boolean;
-  laboratory_access_restriction: boolean;
-  laboratory_access_via: AccessVia;
   player_scav_move_offraid_position: boolean;
   workbench_always_enabled: boolean;
   vanilla_exfils_requirements?: boolean;

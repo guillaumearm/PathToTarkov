@@ -315,9 +315,7 @@ export class PathToTarkovController {
 
   private removeAllPlayerSpawns(): void {
     MAPLIST.forEach((mapName) => {
-      if (mapName !== "laboratory") {
-        this.removePlayerSpawns(mapName);
-      }
+      this.removePlayerSpawns(mapName);
     });
   }
 
@@ -326,26 +324,11 @@ export class PathToTarkovController {
     const locations = this.db.getTables().locations;
 
     MAPLIST.forEach((mapName) => {
-      if (mapName === "laboratory") {
-        const playerIsAtLab = checkAccessVia(
-          this.config.laboratory_access_via,
-          offraidPosition
-        );
-        const unlocked =
-          !this.config.laboratory_access_restriction || Boolean(playerIsAtLab);
+      const locked = Boolean(!unlockedMaps[mapName as MapName]);
+      const location = locations?.[mapName as MapName];
 
-        const location = locations?.[mapName as MapName];
-
-        if (location) {
-          location.base.Locked = !unlocked;
-        }
-      } else if (mapName !== "laboratory") {
-        const locked = !unlockedMaps[mapName as MapName];
-        const location = locations?.[mapName as MapName];
-
-        if (location) {
-          location.base.Locked = locked;
-        }
+      if (location) {
+        location.base.Locked = locked;
       }
     });
   }
