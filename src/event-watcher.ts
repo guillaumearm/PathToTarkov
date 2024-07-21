@@ -46,11 +46,11 @@ export class EventWatcher {
 
         if (
           !this.ptt.pathToTarkovController.stashController.getInventory(
-            sessionId
+            sessionId,
           )
         ) {
           this.ptt.debug(
-            `/client/game/start: no pmc data found, init will be handled on profile creation`
+            `/client/game/start: no pmc data found, init will be handled on profile creation`,
           );
           // no pmc data found, init will be handled by `watchOnProfileCreated`
           return;
@@ -60,7 +60,7 @@ export class EventWatcher {
         this.ptt.executeOnStartAPICallbacks(sessionId);
 
         this.ptt.logger.info(`=> PathToTarkov: game started!`);
-      }
+      },
     );
   }
 
@@ -74,7 +74,7 @@ export class EventWatcher {
         this.ptt.executeOnStartAPICallbacks(sessionId);
 
         this.ptt.logger.info(`=> PathToTarkov: pmc created!`);
-      }
+      },
     );
   }
 
@@ -87,9 +87,9 @@ export class EventWatcher {
         this.raidCache.currentLocationName = info.location;
 
         this.ptt.debug(
-          `offline raid started on location '${info.location}' with sessionId '${sessionId}'`
+          `offline raid started on location '${info.location}' with sessionId '${sessionId}'`,
         );
-      }
+      },
     );
   }
 
@@ -101,7 +101,7 @@ export class EventWatcher {
         this.raidCache.isPlayerScav = info.isPlayerScav;
 
         this.ptt.debug(
-          `profile saved: raidCache.isPlayerScav=${info.isPlayerScav}`
+          `profile saved: raidCache.isPlayerScav=${info.isPlayerScav}`,
         );
 
         if (!this.raidCache.endOfRaid) {
@@ -110,7 +110,7 @@ export class EventWatcher {
         }
 
         return this.runEndOfRaidCallback();
-      }
+      },
     );
   }
 
@@ -126,13 +126,13 @@ export class EventWatcher {
 
         if (!this.raidCache.saved) {
           this.ptt.debug(
-            "end of raid: callback execution delayed on profile save..."
+            "end of raid: callback execution delayed on profile save...",
           );
           return;
         }
 
         return this.runEndOfRaidCallback();
-      }
+      },
     );
   }
 
@@ -180,7 +180,7 @@ export class EventWatcher {
       }
     } else {
       this.ptt.logger.error(
-        "Path To Tarkov Error: no endOfRaidCallback on EventWatcher!"
+        "Path To Tarkov Error: no endOfRaidCallback on EventWatcher!",
       );
     }
   }
@@ -188,7 +188,7 @@ export class EventWatcher {
   public onEndOfRaid(cb: EndOfRaidCallback): void {
     if (this.endOfRaidCallback) {
       throw new Error(
-        "Path To Tarkov EventWatcher: endOfRaidCallback already setted!"
+        "Path To Tarkov EventWatcher: endOfRaidCallback already setted!",
       );
     }
 

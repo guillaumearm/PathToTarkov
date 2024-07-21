@@ -42,7 +42,10 @@ class OffraidRegenController {
   private hydration_value: number | null = null;
   private bodyhealth_values: Partial<IBodyHealth> = {};
 
-  constructor(getConfig: ConfigGetter, private db: DatabaseServer) {
+  constructor(
+    getConfig: ConfigGetter,
+    private db: DatabaseServer,
+  ) {
     this.getRegenConfig = () => getConfig().offraid_regen_config;
   }
 
@@ -62,7 +65,7 @@ class OffraidRegenController {
 
     if (!regen) {
       throw new Error(
-        "Fatal OffraidRegenController constructor: unable to get Regeneration health effects"
+        "Fatal OffraidRegenController constructor: unable to get Regeneration health effects",
       );
     }
 
@@ -139,7 +142,7 @@ class OffraidRegenController {
     if (
       checkAccessVia(
         this.getRegenConfig().hydration.access_via,
-        offraidPosition
+        offraidPosition,
       )
     ) {
       this._enableHydration();
@@ -182,12 +185,12 @@ export class PathToTarkovController {
     private readonly logger: ILogger,
     private readonly debug: (data: string) => void,
     private staticRouterPeeker: StaticRoutePeeker,
-    private modLoader: ModLoader
+    private modLoader: ModLoader,
   ) {
     this.stashController = new StashController(
       () => this.config,
       db,
-      saveServer
+      saveServer,
     );
     this.tradersController = new TradersController(
       () => this.config,
@@ -195,11 +198,11 @@ export class PathToTarkovController {
       db,
       saveServer,
       configServer,
-      this.logger
+      this.logger,
     );
     this.offraidRegenController = new OffraidRegenController(
       () => this.config,
-      db
+      db,
     );
 
     this.entrypoints = {};
@@ -227,7 +230,7 @@ export class PathToTarkovController {
 
     if (!praporDialogue) {
       throw new Error(
-        "Fatal PTTController fixInsuranceDialogues: Prapor dialogue object is required"
+        "Fatal PTTController fixInsuranceDialogues: Prapor dialogue object is required",
       );
     }
 
@@ -257,7 +260,7 @@ export class PathToTarkovController {
 
     if (isLuasCSPModLoaded(this.modLoader)) {
       this.debug(
-        `Lua's Custom Spawn Point detected, hijack '${LUAS_CSP_ROUTE}' route`
+        `Lua's Custom Spawn Point detected, hijack '${LUAS_CSP_ROUTE}' route`,
       );
     } else {
       this.debug("Lua's Custom Spawn Point not detected.");
@@ -268,21 +271,21 @@ export class PathToTarkovController {
       LUAS_CSP_ROUTE,
       (url, info, sessionId, output) => {
         this.logger.info(
-          "=> Path To Tarkov: '/client/locations' route called !"
+          "=> Path To Tarkov: '/client/locations' route called !",
         );
 
         this.updateSpawnPoints(this.getOffraidPosition(sessionId));
 
         return output;
-      }
+      },
     );
 
     this.staticRouterPeeker.register(
-      "Trap-PathToTarkov-Lua-CustomSpawnPoints-integration"
+      "Trap-PathToTarkov-Lua-CustomSpawnPoints-integration",
     );
 
     this.logger.info(
-      `=> PathToTarkov: Lua's Custom Spawn Points '${LUAS_CSP_ROUTE}' route hijacked!`
+      `=> PathToTarkov: Lua's Custom Spawn Points '${LUAS_CSP_ROUTE}' route hijacked!`,
     );
   }
 
@@ -353,13 +356,13 @@ export class PathToTarkovController {
                 spawnData.Position,
                 spawnData.Rotation,
                 this.entrypoints[mapName],
-                spawnId
+                spawnId,
               );
               this.addSpawnPoint(mapName, spawnPoint);
             }
           });
         }
-      }
+      },
     );
   }
 
@@ -374,7 +377,7 @@ export class PathToTarkovController {
 
     Object.keys(this.config.exfiltrations).forEach((mapName) => {
       const extractPoints = Object.keys(
-        this.config.exfiltrations[mapName as MapName]
+        this.config.exfiltrations[mapName as MapName],
       );
 
       const location = locations?.[mapName as MapName];
@@ -384,7 +387,7 @@ export class PathToTarkovController {
 
         if (entrypointsForMap.length === 0) {
           this.logger.error(
-            `Path To Tarkov: no entrypoints found for map '${mapName}'!`
+            `Path To Tarkov: no entrypoints found for map '${mapName}'!`,
           );
         }
 
@@ -408,7 +411,7 @@ export class PathToTarkovController {
         } else {
           // erase all exits and create custom exit points without requirements
           location.base.exits = extractPoints.map(
-            createExitPoint(entrypointsForMap)
+            createExitPoint(entrypointsForMap),
           );
         }
         exfilsCounter = exfilsCounter + location.base.exits.length;
@@ -418,7 +421,7 @@ export class PathToTarkovController {
     this.debug(
       `initialized ${exfilsCounter} exfiltrations ${
         this.config.vanilla_exfils_requirements ? "with vanilla" : "without"
-      } requirements`
+      } requirements`,
     );
   }
 
@@ -438,7 +441,7 @@ export class PathToTarkovController {
 
     if (!this.config.infiltrations[offraidPosition]) {
       this.debug(
-        `Unknown offraid position '${offraidPosition}', reset to default '${defaultOffraidPosition}'`
+        `Unknown offraid position '${offraidPosition}', reset to default '${defaultOffraidPosition}'`,
       );
 
       profile.PathToTarkov.offraidPosition = defaultOffraidPosition;
@@ -465,7 +468,7 @@ export class PathToTarkovController {
 
     if (prevOffraidPosition !== offraidPosition) {
       this.logger.info(
-        `=> PathToTarkov: player offraid position changed to '${offraidPosition}'`
+        `=> PathToTarkov: player offraid position changed to '${offraidPosition}'`,
       );
     }
     this.updateLockedMaps(offraidPosition);

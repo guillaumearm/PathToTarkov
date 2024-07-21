@@ -12,7 +12,7 @@ const restoreMainStash = (profile: Profile, logger: ILogger): void => {
 
   if (mainStashId !== pmcInventory.stash) {
     logger.success(
-      `=> PathToTarkov: restore the selected stash to main stash for profile '${profile.info.username}'`
+      `=> PathToTarkov: restore the selected stash to main stash for profile '${profile.info.username}'`,
     );
     pmcInventory.stash = mainStashId;
   }
@@ -49,13 +49,13 @@ const restoreTraders = (config: Config, profile: Profile, logger: ILogger) => {
     logger.success(
       `=> PathToTarkov: ${nbTradersRestored} trader${
         nbTradersRestored === 1 ? "" : "s"
-      } restored for profile '${profile.info.username}'`
+      } restored for profile '${profile.info.username}'`,
     );
   }
 
   if (jaegerLocked) {
     logger.success(
-      `=> PathToTarkov: Jaeger trader locked (because introduction quest is not completed) for profile '${profile.info.username}'`
+      `=> PathToTarkov: Jaeger trader locked (because introduction quest is not completed) for profile '${profile.info.username}'`,
     );
   }
 };
@@ -64,7 +64,7 @@ const restoreTraders = (config: Config, profile: Profile, logger: ILogger) => {
 export const purgeProfiles = (
   config: Config,
   saveServer: SaveServer,
-  logger: ILogger
+  logger: ILogger,
 ): void => {
   // because we want to be sure to be able to read `SaveServer.profiles`
   saveServer.load();

@@ -14,7 +14,7 @@ export type PathToTarkovAPI = {
 };
 
 export const createPathToTarkovAPI = (
-  controller: PathToTarkovController
+  controller: PathToTarkovController,
 ): [PathToTarkovAPI, (sessionId: string) => void] => {
   let onStartCallbacks: StartCallback[] = [];
 

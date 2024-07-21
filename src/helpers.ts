@@ -47,7 +47,7 @@ export const createSpawnPoint = (
   pos: SpawnPoint["Position"],
   rot: number,
   entrypoints: string[],
-  spawnId: string
+  spawnId: string,
 ): SpawnPointParam => {
   return {
     Id: spawnId,
@@ -118,7 +118,7 @@ export const getEntryPointsForMaps = (db: DatabaseServer): EntryPoints => {
 
 export const changeRestrictionsInRaid = (
   config: Config,
-  db: DatabaseServer
+  db: DatabaseServer,
 ): void => {
   const globals = db.getTables().globals;
 
@@ -165,7 +165,7 @@ type StaticRouteCallback = (
   url: string,
   info: any,
   sessionId: string,
-  output: string
+  output: string,
 ) => void;
 
 export type StaticRoutePeeker = {
@@ -174,7 +174,7 @@ export type StaticRoutePeeker = {
 };
 
 export const createStaticRoutePeeker = (
-  staticRouter: StaticRouterModService
+  staticRouter: StaticRouterModService,
 ): StaticRoutePeeker => {
   const routeActions: RouteAction[] = [];
 
@@ -201,21 +201,21 @@ export const createStaticRoutePeeker = (
 const QUEST_STATUS_SUCCESS = 4;
 
 export const isJaegerIntroQuestCompleted = (
-  quests: IQuestStatus[]
+  quests: IQuestStatus[],
 ): boolean => {
   return Boolean(
     quests.find(
       (quest) =>
         quest.qid === JAEGER_INTRO_QUEST &&
         (quest.status === QUEST_STATUS_SUCCESS ||
-          (quest as any).status === "Success") // compatibility with aki 3.1.x
-    )
+          (quest as any).status === "Success"), // compatibility with aki 3.1.x
+    ),
   );
 };
 
 const isModLoaded = (modLoader: ModLoader, modId: string): boolean => {
   const loadedModName = Object.keys(modLoader.imported).find(
-    (modName) => modLoader.imported[modName].name === modId
+    (modName) => modLoader.imported[modName].name === modId,
   );
 
   return Boolean(loadedModName);

@@ -16,7 +16,7 @@ export type PackageJson = {
 
 export const getModDisplayName = (
   packageJson: PackageJson,
-  withVersion = false
+  withVersion = false,
 ): string => {
   if (withVersion) {
     return `${packageJson.displayName} v${packageJson.version}`;

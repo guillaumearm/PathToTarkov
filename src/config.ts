@@ -141,7 +141,7 @@ export const PACKAGE_JSON_PATH = join(__dirname, "../package.json");
 export const CONFIG_PATH = join(__dirname, "../config/config.json");
 export const SPAWN_CONFIG_PATH = join(
   __dirname,
-  "../config/player_spawnpoints.json"
+  "../config/player_spawnpoints.json",
 );
 
 export const PRAPOR_ID = "54cb50c76803fa8b248b4571";

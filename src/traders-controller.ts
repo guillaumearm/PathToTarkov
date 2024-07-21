@@ -3,9 +3,8 @@ import type { ConfigServer } from "@spt/servers/ConfigServer";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
 import type { ConfigGetter, LocaleName } from "./config";
-import { FENCE_ID, JAEGER_ID, PRAPOR_ID } from "./config";
+import { JAEGER_ID, PRAPOR_ID } from "./config";
 import { checkAccessVia, isJaegerIntroQuestCompleted } from "./helpers";
-import type { IRepeatableTemplates } from "@spt/models/eft/common/tables/IRepeatableQuests";
 import { tweakRepeatableQuestTemplates } from "./repeatable-quests-fix";
 
 /**
@@ -18,7 +17,7 @@ export class TradersController {
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
     private readonly configServer: ConfigServer,
-    private readonly logger: ILogger
+    private readonly logger: ILogger,
   ) {}
 
   initTraders(): void {
@@ -28,7 +27,6 @@ export class TradersController {
     const tradersConfig = config.traders_config;
     const traders = this.db.getTables().traders;
     const locales = this.db.getTables().locales;
-    const templates = this.db.getTables().templates;
 
     const praporTrader = traders?.[PRAPOR_ID];
 
@@ -61,7 +59,7 @@ export class TradersController {
                 globalLocale[localeId] = desc;
               } else {
                 this.logger.warning(
-                  `=> PathToTarkov: no locales '${locale}' found for trader '${traderId}'`
+                  `=> PathToTarkov: no locales '${locale}' found for trader '${traderId}'`,
                 );
               }
             }
@@ -77,7 +75,7 @@ export class TradersController {
 
           if (!trader) {
             throw new Error(
-              `Fatal initTraders: unknown trader found '${traderId}'`
+              `Fatal initTraders: unknown trader found '${traderId}'`,
             );
           }
 
@@ -112,7 +110,7 @@ export class TradersController {
 
           if (!trader) {
             throw new Error(
-              `=> PathToTarkov: unknown trader found '${traderId}'`
+              `=> PathToTarkov: unknown trader found '${traderId}'`,
             );
           }
 
@@ -140,7 +138,7 @@ export class TradersController {
         }
       } else if (!this.getConfig().traders_config[traderId].disable_warning) {
         this.logger.warning(
-          `=> PathToTarkov: Unknown trader id found during init: '${traderId}'`
+          `=> PathToTarkov: Unknown trader id found during init: '${traderId}'`,
         );
       }
     });

@@ -16,7 +16,7 @@ export class StashController {
   constructor(
     private getConfig: ConfigGetter,
     private db: DatabaseServer,
-    private saveServer: SaveServer
+    private saveServer: SaveServer,
   ) {
     // null means stash is unlocked
     this.stashSizes = null;
@@ -123,10 +123,10 @@ export class StashController {
 
     const mainStashAvailable = checkAccessVia(
       this.getConfig().hideout_main_stash_access_via,
-      offraidPosition
+      offraidPosition,
     );
     const secondaryStash = this.getConfig().hideout_secondary_stashes.find(
-      (stash) => checkAccessVia(stash.access_via, offraidPosition)
+      (stash) => checkAccessVia(stash.access_via, offraidPosition),
     );
 
     if (!multiStashEnabled || mainStashAvailable) {

@@ -26,7 +26,7 @@ export class EndOfRaidController {
 
     if (!mapName) {
       this.ptt.logger.error(
-        `Path To Tarkov Error: cannot resolve map name from location '${locationName}'`
+        `Path To Tarkov Error: cannot resolve map name from location '${locationName}'`,
       );
       return;
     }
@@ -36,13 +36,13 @@ export class EndOfRaidController {
       !this.ptt.pathToTarkovController.config.player_scav_move_offraid_position
     ) {
       this.ptt.debug(
-        "end of raid: scav player detected, pmc offraid position not changed"
+        "end of raid: scav player detected, pmc offraid position not changed",
       );
       return;
     }
 
     this.ptt.debug(
-      `end of raid: exitName='${exitName}' and currentMapName='${mapName}'`
+      `end of raid: exitName='${exitName}' and currentMapName='${mapName}'`,
     );
 
     const playerIsDead = !exitName;
@@ -54,7 +54,7 @@ export class EndOfRaidController {
     ) {
       this.ptt.pathToTarkovController.updateOffraidPosition(
         sessionId,
-        this.ptt.pathToTarkovController.config.initial_offraid_position
+        this.ptt.pathToTarkovController.config.initial_offraid_position,
       );
     }
 
@@ -73,7 +73,7 @@ export class EndOfRaidController {
       this.ptt.debug(`end of raid: new offraid position ${newOffraidPosition}`);
       this.ptt.pathToTarkovController.updateOffraidPosition(
         sessionId,
-        newOffraidPosition
+        newOffraidPosition,
       );
     } else {
       this.ptt.logger.warning(`end of raid: no offraid position found`);

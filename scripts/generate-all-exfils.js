@@ -29,7 +29,7 @@ const lowerLocaleKeys = (locales) => {
 
   if (Object.keys(result).length < localeKeys.length) {
     console.warn(
-      "Warning: some locales has been lost during key lower casing!"
+      "Warning: some locales has been lost during key lower casing!",
     );
   }
 
@@ -37,15 +37,21 @@ const lowerLocaleKeys = (locales) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const LOCATION_NAME_MAPPING = require(`../${EXTERNAL_RESOURCES_DIR}/${LOCATION_NAME_MAPPING_FILENAME}`);
+const LOCATION_NAME_MAPPING = require(
+  `../${EXTERNAL_RESOURCES_DIR}/${LOCATION_NAME_MAPPING_FILENAME}`,
+);
 const LOCALES = lowerLocaleKeys(
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  require(`../${EXTERNAL_RESOURCES_DIR}/${LOCALES_FILENAME}`)
+  require(`../${EXTERNAL_RESOURCES_DIR}/${LOCALES_FILENAME}`),
 );
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const SCAVS_EXFILS = require(`../${EXTERNAL_RESOURCES_DIR}/${SCAVS_EXFILS_FILENAME}`);
+const SCAVS_EXFILS = require(
+  `../${EXTERNAL_RESOURCES_DIR}/${SCAVS_EXFILS_FILENAME}`,
+);
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const MAPGENIE_LOCATIONS = require(`../${EXTERNAL_RESOURCES_DIR}/${MAPGENIE_LOCATIONS_FILENAME}`);
+const MAPGENIE_LOCATIONS = require(
+  `../${EXTERNAL_RESOURCES_DIR}/${MAPGENIE_LOCATIONS_FILENAME}`,
+);
 
 const getMapJsonFilePath = (mapName) =>
   `${EXTERNAL_RESOURCES_DIR}/${MAPS_DIR}/${mapName}.json`;
@@ -61,17 +67,17 @@ const getMapGenieMapName = (mapName) => {
 const resolveMapGenieLocationId = (mapName, exitResolvedName) => {
   if (!MAPGENIE_LOCATIONS[mapName]) {
     throw new Error(
-      `Error: map name '${mapName}' does not exist in MAPGENIE_LOCATIONS`
+      `Error: map name '${mapName}' does not exist in MAPGENIE_LOCATIONS`,
     );
   }
 
   const mapLocation = MAPGENIE_LOCATIONS[mapName].find(
-    (l) => l.description.toLowerCase() === exitResolvedName.toLowerCase()
+    (l) => l.description.toLowerCase() === exitResolvedName.toLowerCase(),
   );
 
   if (!mapLocation) {
     console.error(
-      `Warning: cannot resolve map location ${exitResolvedName} for map '${mapName}'`
+      `Warning: cannot resolve map location ${exitResolvedName} for map '${mapName}'`,
     );
     return null;
   }
@@ -102,7 +108,7 @@ const assertValidMapNames = (mapNames) => {
   mapNames.forEach((mapName) => {
     if (!LOCATION_NAME_MAPPING[mapName]) {
       throw new ConfigError(
-        `Invalid map name '${mapName}' found in ${SCAVS_EXFILS_FILENAME} file!`
+        `Invalid map name '${mapName}' found in ${SCAVS_EXFILS_FILENAME} file!`,
       );
     }
   });
@@ -126,7 +132,7 @@ const loadMapExits = async (mapName) => {
     return JSON.parse(fileContent).exits.map((exit) => exit.Name);
   } catch (err) {
     throw new ConfigError(
-      `cannot load '${filePath}, reason=${err.toString()}'`
+      `cannot load '${filePath}, reason=${err.toString()}'`,
     );
   }
 };
@@ -181,16 +187,16 @@ const formatMapsExits = (mapsExits) => {
         const resolvedExitName = resolveLocale(exitName);
         const mapGenieLocationId = resolveMapGenieLocationId(
           mapName,
-          resolvedExitName
+          resolvedExitName,
         );
 
         const mapGenieLocationUrl = getMapGenieLocationUrl(
           mapName,
-          mapGenieLocationId
+          mapGenieLocationId,
         );
 
         return `| "${exitName}" | ${resolveLocale(
-          exitName
+          exitName,
         )} | ${mapGenieLocationUrl} |`;
       });
 

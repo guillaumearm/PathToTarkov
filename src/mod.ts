@@ -54,7 +54,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     const modLoader = getModLoader(container);
 
     const staticRouter = container.resolve<StaticRouterModService>(
-      "StaticRouterModService"
+      "StaticRouterModService",
     );
 
     if (!this.config.enabled) {
@@ -62,7 +62,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
       if (this.config.bypass_uninstall_procedure === true) {
         this.logger.warning(
-          "=> PathToTarkov: uninstall process aborted because 'bypass_uninstall_procedure' field is true in config.json"
+          "=> PathToTarkov: uninstall process aborted because 'bypass_uninstall_procedure' field is true in config.json",
         );
         return;
       }
@@ -91,7 +91,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       this.logger,
       this.debug,
       createStaticRoutePeeker(staticRouter),
-      modLoader
+      modLoader,
     );
 
     this.pathToTarkovController.hijackLuasCustomSpawnPointsUpdate();
@@ -103,7 +103,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     eventWatcher.register(createStaticRoutePeeker(staticRouter));
 
     this.logger.info(
-      `===> Loading ${getModDisplayName(this.packageJson, true)}`
+      `===> Loading ${getModDisplayName(this.packageJson, true)}`,
     );
   }
 
@@ -117,7 +117,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.pathToTarkovController.generateEntrypoints();
 
     const [api, executeOnStartAPICallbacks] = createPathToTarkovAPI(
-      this.pathToTarkovController
+      this.pathToTarkovController,
     );
 
     (globalThis as any).PathToTarkovAPI = api;
@@ -132,7 +132,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     }
 
     this.logger.success(
-      `===> Successfully loaded ${getModDisplayName(this.packageJson, true)}`
+      `===> Successfully loaded ${getModDisplayName(this.packageJson, true)}`,
     );
   }
 }

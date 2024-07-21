@@ -33,19 +33,19 @@ export const enableKeepFoundInRaidTweak = (ptt: PTTInstance): void => {
       const inraidHelper = Array.isArray(result) ? result[0] : result;
 
       inraidHelper.removeSpawnedInSessionPropertyFromItems = (
-        postRaidProfile
+        postRaidProfile,
       ) => {
         const isPlayerScav = postRaidProfile.Info.Side === "Savage";
         const count = setSpawnedInSessionOnAllItems(
-          postRaidProfile.Inventory.items
+          postRaidProfile.Inventory.items,
         );
         if (isPlayerScav) {
           ptt.debug(
-            `raid ran through with a scav, added 'SpawnedInSession' flag on ${count} items`
+            `raid ran through with a scav, added 'SpawnedInSession' flag on ${count} items`,
           );
         } else {
           ptt.debug(
-            `raid ran through with a pmc, added 'SpawnedInSession' flag on ${count} items`
+            `raid ran through with a pmc, added 'SpawnedInSession' flag on ${count} items`,
           );
         }
         return postRaidProfile;
@@ -56,6 +56,6 @@ export const enableKeepFoundInRaidTweak = (ptt: PTTInstance): void => {
           inraidHelper.removeSpawnedInSessionPropertyFromItems;
       }
     },
-    { frequency: "Always" }
+    { frequency: "Always" },
   );
 };

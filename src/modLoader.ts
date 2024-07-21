@@ -11,7 +11,7 @@ export function getModLoader(container: DependencyContainer): ModLoader {
 
   if (!modLoader.imported || typeof modLoader.imported !== "object") {
     throw new Error(
-      "Fatal getModLoader: 'modLoader.imported' object is required"
+      "Fatal getModLoader: 'modLoader.imported' object is required",
     );
   }
 
