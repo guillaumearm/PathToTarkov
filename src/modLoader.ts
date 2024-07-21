@@ -7,7 +7,7 @@ export type ModLoader = PreSptModLoader & {
 };
 
 export function getModLoader(container: DependencyContainer): ModLoader {
-  const modLoader = container.resolve<ModLoader>("PreAkiModLoader");
+  const modLoader = container.resolve<ModLoader>("PreSptModLoader");
 
   if (!modLoader.imported || typeof modLoader.imported !== "object") {
     throw new Error("Invalid ModLoader -> 'imported' object is missing");

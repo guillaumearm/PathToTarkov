@@ -189,7 +189,7 @@ export const createStaticRoutePeeker = (
   };
 
   const register = (name = "Trap-PathToTarkov-StaticRoutePeeking") => {
-    staticRouter.registerStaticRouter(name, routeActions, "aki");
+    staticRouter.registerStaticRouter(name, routeActions, "spt");
   };
 
   return {
