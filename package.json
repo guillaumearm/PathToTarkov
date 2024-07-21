@@ -31,7 +31,7 @@
     "test": "tsc --noEmit && npm run lint:all"
   },
   "devDependencies": {
-    "@mermaid-js/mermaid-cli": "^10.9.1",
+    "@mermaid-js/mermaid-cli": "^9.1.7",
     "@types/i18n": "^0.13.5",
     "@types/node": "^14.15.3",
     "@types/winston": "^2.4.4",
