@@ -36,7 +36,7 @@ export const purgeProfiles = (
     Object.keys(config.traders_config).forEach((traderId) => {
       const pmc = profile.characters.pmc;
       const trader = pmc.TradersInfo?.[traderId];
-      const jaegerAvailable = isJaegerIntroQuestCompleted(pmc);
+      const jaegerAvailable = isJaegerIntroQuestCompleted(pmc.Quests);
 
       if (
         trader &&

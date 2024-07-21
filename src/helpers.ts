@@ -3,7 +3,6 @@ import type {
   Exit,
   SpawnPointParam,
 } from "@spt/models/eft/common/ILocationBase";
-import type { IPmcData } from "@spt/models/eft/common/IPmcData";
 import type { IHideoutArea } from "@spt/models/eft/hideout/IHideoutArea";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
@@ -11,6 +10,7 @@ import type { StaticRouterModService } from "@spt/services/mod/staticRouter/Stat
 import type { AccessVia, Config, MapName, SpawnPoint } from "./config";
 import { JAEGER_INTRO_QUEST, MAPLIST } from "./config";
 import type { ModLoader } from "./modLoader";
+import type { IQuestStatus } from "@spt/models/eft/common/tables/IBotBase";
 
 // not used in theory (this is here to make TypeScript happy)
 const PVE_DEFAULT_PARAMS = {
@@ -200,9 +200,11 @@ export const createStaticRoutePeeker = (
 
 const QUEST_STATUS_SUCCESS = 4;
 
-export const isJaegerIntroQuestCompleted = (pmc: IPmcData): boolean => {
+export const isJaegerIntroQuestCompleted = (
+  quests: IQuestStatus[]
+): boolean => {
   return Boolean(
-    pmc.Quests.find(
+    quests.find(
       (quest) =>
         quest.qid === JAEGER_INTRO_QUEST &&
         (quest.status === QUEST_STATUS_SUCCESS ||

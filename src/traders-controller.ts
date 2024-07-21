@@ -3,8 +3,8 @@ import type { ConfigServer } from "@spt/servers/ConfigServer";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
 import type { ConfigGetter, LocaleName } from "./config";
-import { JAEGER_INTRO_QUEST, PRAPOR_ID } from "./config";
-import { checkAccessVia } from "./helpers";
+import { JAEGER_ID, PRAPOR_ID } from "./config";
+import { checkAccessVia, isJaegerIntroQuestCompleted } from "./helpers";
 
 /**
  * Used only when `traders_access_restriction` is true
@@ -19,21 +19,6 @@ export class TradersController {
     private readonly logger: ILogger
   ) {}
 
-  private disableUnlockJaegerViaIntroQuest(): void {
-    const quests = this.db.getTables().templates?.quests;
-    const quest = quests?.[JAEGER_INTRO_QUEST];
-
-    if (
-      quest &&
-      quest._id === JAEGER_INTRO_QUEST &&
-      quest.QuestName === "Introduction"
-    ) {
-      quest.rewards.Success = quest.rewards.Success?.filter(
-        (payload) => payload.type !== "TraderUnlock"
-      );
-    }
-  }
-
   initTraders(): void {
     const config = this.getConfig();
     const tradersConfig = config.traders_config;
@@ -45,8 +30,6 @@ export class TradersController {
     if (!praporTrader) {
       throw new Error("Fatal initTraders: prapor trador cannot be found");
     }
-
-    this.disableUnlockJaegerViaIntroQuest();
 
     Object.keys(tradersConfig).forEach((traderId) => {
       const trader = traders[traderId];
@@ -162,12 +145,19 @@ export class TradersController {
     const tradersConfig = this.getConfig().traders_config;
 
     const profile = this.saveServer.getProfile(sessionId);
-    const tradersInfo = profile.characters.pmc.TradersInfo;
+    const pmc = profile.characters.pmc;
+    const tradersInfo = pmc.TradersInfo;
+
+    const isJaegerAvailable = isJaegerIntroQuestCompleted(pmc.Quests);
 
     Object.keys(tradersConfig).forEach((traderId) => {
-      const unlocked =
+      let unlocked =
         checkAccessVia(tradersConfig[traderId].access_via, offraidPosition) &&
         !this.getIsTraderLocked(traderId);
+
+      if (traderId === JAEGER_ID) {
+        unlocked = unlocked && isJaegerAvailable;
+      }
 
       if (tradersInfo[traderId]) {
         tradersInfo[traderId].unlocked = unlocked;
