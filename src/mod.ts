@@ -21,6 +21,7 @@ import type { PackageJson } from "./utils";
 import { getModDisplayName, noop, readJsonFile } from "./utils";
 import { EndOfRaidController } from "./end-of-raid-controller";
 import { getModLoader } from "./modLoader";
+import { disableRepeatableQuests } from "./disable-repeatable-quests";
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;
@@ -71,13 +72,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       return;
     }
 
-    const tweakFoundInRaid = !this.config.bypass_keep_found_in_raid_tweak;
-
-    if (tweakFoundInRaid) {
-      enableKeepFoundInRaidTweak(this);
-      this.debug("option keep_found_in_raid_tweak enabled");
-    }
-
     // TODO: compat with Custom Quests
     const getIsTraderLocked = () => false;
 
@@ -94,8 +88,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       modLoader,
     );
 
-    this.pathToTarkovController.hijackLuasCustomSpawnPointsUpdate();
-
     const eventWatcher = new EventWatcher(this);
     const endOfRaidController = new EndOfRaidController(this);
 
@@ -105,6 +97,22 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.logger.info(
       `===> Loading ${getModDisplayName(this.packageJson, true)}`,
     );
+
+    const tweakFoundInRaid = !this.config.bypass_keep_found_in_raid_tweak;
+
+    if (tweakFoundInRaid) {
+      enableKeepFoundInRaidTweak(this);
+      this.debug("option keep_found_in_raid_tweak enabled");
+    }
+
+    this.pathToTarkovController.hijackLuasCustomSpawnPointsUpdate();
+
+    if (this.config.traders_access_restriction) {
+      disableRepeatableQuests(container, this.debug);
+      this.logger.warning(
+        "Path To Tarkov: all repeatable quests will be disabled when 'traders_access_restriction' is used",
+      );
+    }
   }
 
   public postSptLoad(container: DependencyContainer): void {

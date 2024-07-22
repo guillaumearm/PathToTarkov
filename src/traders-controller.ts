@@ -5,8 +5,6 @@ import type { SaveServer } from "@spt/servers/SaveServer";
 import type { ConfigGetter, LocaleName } from "./config";
 import { JAEGER_ID, PRAPOR_ID } from "./config";
 import { checkAccessVia, isJaegerIntroQuestCompleted } from "./helpers";
-import type { RepeatableTemplates } from "./repeatable-quests-fix";
-import { tweakRepeatableQuestTemplates } from "./repeatable-quests-fix";
 
 /**
  * Used only when `traders_access_restriction` is true
@@ -22,8 +20,6 @@ export class TradersController {
   ) {}
 
   initTraders(): void {
-    this.tweakRepeatableQuestTemplates();
-
     const config = this.getConfig();
     const tradersConfig = config.traders_config;
     const traders = this.db.getTables().traders;
@@ -143,14 +139,6 @@ export class TradersController {
         );
       }
     });
-  }
-
-  private tweakRepeatableQuestTemplates(): void {
-    const questTemplates = this.db.getTables().templates?.repeatableQuests
-      ?.templates as RepeatableTemplates;
-
-    tweakRepeatableQuestTemplates(questTemplates);
-    this.logger.info(`=> PathToTarkov: tweaked repeatable quests templates`);
   }
 
   updateTraders(offraidPosition: string, sessionId: string): void {
