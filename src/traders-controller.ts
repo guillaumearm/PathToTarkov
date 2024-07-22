@@ -1,10 +1,10 @@
 import type { ILogger } from "@spt/models/spt/utils/ILogger";
-import type { ConfigServer } from "@spt/servers/ConfigServer";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
 import type { ConfigGetter, LocaleName } from "./config";
 import { JAEGER_ID, PRAPOR_ID } from "./config";
 import { checkAccessVia, isJaegerIntroQuestCompleted } from "./helpers";
+import { isEmptyArray } from "./utils";
 
 /**
  * Used only when `traders_access_restriction` is true
@@ -15,20 +15,19 @@ export class TradersController {
     private readonly getIsTraderLocked: (traderId: string) => boolean,
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
-    private readonly configServer: ConfigServer,
     private readonly logger: ILogger,
   ) {}
 
   initTraders(): void {
+    this.fixInsuranceDialogues();
+
     const config = this.getConfig();
     const tradersConfig = config.traders_config;
     const traders = this.db.getTables().traders;
     const locales = this.db.getTables().locales;
 
-    const praporTrader = traders?.[PRAPOR_ID];
-
-    if (!praporTrader) {
-      throw new Error("Fatal initTraders: prapor trador cannot be found");
+    if (!traders) {
+      throw new Error("Fatal initTraders: no traders found in db");
     }
 
     Object.keys(tradersConfig).forEach((traderId) => {
@@ -74,11 +73,6 @@ export class TradersController {
             throw new Error(
               `Fatal initTraders: unknown trader found '${traderId}'`,
             );
-          }
-
-          if (!trader.dialogue) {
-            // prevent several issues (freeze and crash)
-            trader.dialogue = praporTrader.dialogue;
           }
 
           trader.base.insurance.availability = true;
@@ -137,6 +131,42 @@ export class TradersController {
         this.logger.warning(
           `=> PathToTarkov: Unknown trader id found during init: '${traderId}'`,
         );
+      }
+    });
+  }
+
+  // fix for missing `insuranceStart` and `insuranceFound` properties when player died
+  private fixInsuranceDialogues(): void {
+    const traders = this.db.getTables().traders ?? {};
+    const praporDialogue = traders?.[PRAPOR_ID]?.dialogue;
+
+    if (!praporDialogue) {
+      throw new Error(
+        "Fatal PTTController fixInsuranceDialogues: Prapor dialogue object is required",
+      );
+    }
+
+    Object.keys(traders).forEach((traderId) => {
+      const trader = traders?.[traderId];
+
+      if (trader && !trader.dialogue) {
+        trader.dialogue = praporDialogue;
+      } else if (trader?.dialogue) {
+        for (const dialogueKey of [
+          "insuranceStart",
+          "insuranceFound",
+          "insuranceFailed",
+          "insuranceFailedLabs",
+          "insuranceExpired",
+          "insuranceComplete",
+        ]) {
+          if (
+            !trader.dialogue[dialogueKey] ||
+            isEmptyArray(trader.dialogue[dialogueKey])
+          ) {
+            trader.dialogue[dialogueKey] = praporDialogue[dialogueKey] ?? [];
+          }
+        }
       }
     });
   }

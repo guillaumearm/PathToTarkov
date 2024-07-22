@@ -1,7 +1,6 @@
 import type { IBodyHealth, IEffects } from "@spt/models/eft/common/IGlobals";
 import type { SpawnPointParam } from "@spt/models/eft/common/ILocationBase";
 import type { ILogger } from "@spt/models/spt/utils/ILogger";
-import type { ConfigServer } from "@spt/servers/ConfigServer";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
 
@@ -12,7 +11,7 @@ import type {
   Profile,
   SpawnConfig,
 } from "./config";
-import { MAPLIST, PRAPOR_ID } from "./config";
+import { MAPLIST } from "./config";
 
 import type { EntryPoints, StaticRoutePeeker } from "./helpers";
 import { isLuasCSPModLoaded } from "./helpers";
@@ -28,7 +27,6 @@ import {
 import { StashController } from "./stash-controller";
 import { TradersController } from "./traders-controller";
 import type { ModLoader } from "./modLoader";
-import { isEmptyArray } from "./utils";
 
 class OffraidRegenController {
   private getRegenConfig: () => Config["offraid_regen_config"];
@@ -180,7 +178,6 @@ export class PathToTarkovController {
     public spawnConfig: SpawnConfig,
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
-    configServer: ConfigServer,
     getIsTraderLocked: (traderId: string) => boolean,
     private readonly logger: ILogger,
     private readonly debug: (data: string) => void,
@@ -197,7 +194,6 @@ export class PathToTarkovController {
       getIsTraderLocked,
       db,
       saveServer,
-      configServer,
       this.logger,
     );
     this.offraidRegenController = new OffraidRegenController(
@@ -220,33 +216,6 @@ export class PathToTarkovController {
     this.updateOffraidPosition(sessionId, offraidPosition);
 
     changeRestrictionsInRaid(this.config, this.db);
-    // this.hijackLuasCustomSpawnPointsUpdate();
-  }
-
-  // fix for missing `insuranceStart` and `insuranceFound` properties when player died
-  fixInsuranceDialogues(): void {
-    const traders = this.db.getTables().traders ?? {};
-    const praporDialogue = traders?.[PRAPOR_ID]?.dialogue;
-
-    if (!praporDialogue) {
-      throw new Error(
-        "Fatal PTTController fixInsuranceDialogues: Prapor dialogue object is required",
-      );
-    }
-
-    Object.keys(traders).forEach((traderId) => {
-      const trader = traders?.[traderId];
-
-      if (trader && !trader.dialogue) {
-        trader.dialogue = praporDialogue;
-      } else if (trader?.dialogue) {
-        for (const dialogueKey of ["insuranceStart", "insuranceFound"]) {
-          if (isEmptyArray(trader.dialogue[dialogueKey])) {
-            trader.dialogue[dialogueKey] = praporDialogue[dialogueKey] ?? [];
-          }
-        }
-      }
-    });
   }
 
   // This is a fix to ensure Lua's Custom Spawn Point mod do not override player spawn point
