@@ -1,7 +1,7 @@
 import type { RepeatableQuestController } from "@spt/controllers/RepeatableQuestController";
 import type { DependencyContainer } from "tsyringe";
 
-export const disableRepeatableQuests = (
+export const fixRepeatableQuests = (
   container: DependencyContainer,
   debug: (data: string) => void,
 ): void => {
@@ -11,12 +11,25 @@ export const disableRepeatableQuests = (
       const allResults = Array.isArray(result) ? result : [result];
 
       allResults.forEach((questController) => {
-        questController.getClientRepeatableQuests = () => {
+        const originalFn =
+          questController.getClientRepeatableQuests.bind(questController);
+
+        questController.getClientRepeatableQuests = (sessionId: string) => {
+          const repeatableQuests = originalFn(sessionId);
+
           debug(
             "RepeatableQuestController.getClientRepeatableQuests method called",
           );
 
-          return [];
+          return repeatableQuests.map((q) => {
+            return {
+              ...q,
+              activeQuests: q.activeQuests.filter((q) => Boolean(q.traderId)),
+              inactiveQuests: q.inactiveQuests.filter((q) =>
+                Boolean(q.traderId),
+              ),
+            };
+          });
         };
       });
     },

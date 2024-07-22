@@ -21,7 +21,7 @@ import type { PackageJson } from "./utils";
 import { getModDisplayName, noop, readJsonFile } from "./utils";
 import { EndOfRaidController } from "./end-of-raid-controller";
 import { getModLoader } from "./modLoader";
-import { disableRepeatableQuests } from "./disable-repeatable-quests";
+import { fixRepeatableQuests } from "./fix-repeatable-quests";
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;
@@ -108,9 +108,9 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.pathToTarkovController.hijackLuasCustomSpawnPointsUpdate();
 
     if (this.config.traders_access_restriction) {
-      disableRepeatableQuests(container, this.debug);
-      this.logger.warning(
-        "Path To Tarkov: all repeatable quests will be disabled when 'traders_access_restriction' is used",
+      fixRepeatableQuests(container, this.debug);
+      this.debug(
+        "Apply fix for unavailable repeatable quests (due to locked trader)",
       );
     }
   }
