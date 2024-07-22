@@ -12,8 +12,8 @@ flowchart TD
     Shoreline{Shoreline}
 
     Prapor[[Prapor's stash]]
-    Therapist[["Therapist's stash (home)"]]
-    Mechanic[[Mechanic's stash]]
+    Therapist[["Therapist's stash"]]
+    Mechanic[["Mechanic's stash (home)"]]
     Ragman[[Ragman's stash]]
     Skier[[Skier's stash]]
     Peacekeeper[[Peacekeeper's stash]]
