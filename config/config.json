@@ -285,6 +285,9 @@
       "lab_Elevator_Main": "PraporStash",
       "lab_Vent": "PraporStash",
       "lab_Elevator_Cargo": "PraporStash"
+    },
+    "sandbox": {
+      "Sandbox_VExit": "PraporStash"
     }
   },
   "infiltrations": {
