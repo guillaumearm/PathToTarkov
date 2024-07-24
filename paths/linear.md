@@ -19,8 +19,6 @@ flowchart TD
     Peacekeeper[[Peacekeeper's stash]]
     Jaeger[[Jaeger's stash]]
     MilitaryLighthouseStash[[a stash near the military reserve]]
-    ReserveInterchangeBunkerStash[[an underground stash in a bunker]]
-    ShorelineWoodsStash[[a stash between shoreline and woods]]
 
     %% The normal default path
     Lab <--Any--> Prapor
@@ -34,8 +32,4 @@ flowchart TD
     C <--Factory far corner--> Mechanic <--Gate 3--> F
     F <--Office window--> Jaeger <--Factory gate--> W
 
-    %% Additional shortcuts
-    Therapist <--Scav checkpoint--> GZ
-    I <--Safe room--> ReserveInterchangeBunkerStash <--"D-2"--> R
-    Shoreline <--Car--> ShorelineWoodsStash <--Car--> W
 ```
