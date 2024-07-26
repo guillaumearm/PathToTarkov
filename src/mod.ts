@@ -8,8 +8,13 @@ import type { SaveServer } from "@spt/servers/SaveServer";
 import type { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
 
 import { createPathToTarkovAPI } from "./api";
-import type { Config, SpawnConfig } from "./config";
-import { CONFIG_PATH, PACKAGE_JSON_PATH, SPAWN_CONFIG_PATH } from "./config";
+import type { Config, MapName, SpawnConfig } from "./config";
+import {
+  CONFIG_PATH,
+  MAPLIST,
+  PACKAGE_JSON_PATH,
+  SPAWN_CONFIG_PATH,
+} from "./config";
 import { EventWatcher } from "./event-watcher";
 import { createStaticRoutePeeker } from "./helpers";
 import { enableKeepFoundInRaidTweak } from "./keep-fir-tweak";
@@ -17,10 +22,44 @@ import { enableKeepFoundInRaidTweak } from "./keep-fir-tweak";
 import { PathToTarkovController } from "./path-to-tarkov-controller";
 import { purgeProfiles } from "./uninstall";
 import type { PackageJson } from "./utils";
-import { getModDisplayName, noop, readJsonFile } from "./utils";
+import { deepClone, getModDisplayName, noop, readJsonFile } from "./utils";
 import { EndOfRaidController } from "./end-of-raid-controller";
 import { getModLoader } from "./modLoader";
 import { fixRepeatableQuests } from "./fix-repeatable-quests";
+import type { LocationController } from "../types/controllers/LocationController";
+
+const overrideLockedMaps = (
+  container: DependencyContainer,
+  debug: (data: string) => void,
+): void => {
+  container.afterResolution<LocationController>(
+    "LocationContoller",
+    (_t, result): void => {
+      debug("LocationController resolved");
+      const locationController = Array.isArray(result) ? result[0] : result;
+
+      const originalFn = locationController.generateAll.bind(this);
+
+      locationController.generateAll = (sessionId) => {
+        debug("call locationController.generateAll");
+        const result = originalFn(sessionId);
+        const locations = deepClone(result.locations);
+
+        MAPLIST.forEach((mapName) => {
+          const locked = mapName === "sandbox"; // TODO: get locked maps for current user
+          const location = locations?.[mapName as MapName];
+
+          if (location) {
+            location.base.Locked = locked;
+          }
+        });
+
+        return { locations, paths: result.paths };
+      };
+    },
+    { frequency: "Always" },
+  );
+};
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;
@@ -121,6 +160,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       return;
     }
 
+    overrideLockedMaps(container, this.debug); // TODO: move it inside the ptt controller
     this.pathToTarkovController.generateEntrypoints();
 
     const [api, executeOnStartAPICallbacks] = createPathToTarkovAPI(
