@@ -11,6 +11,7 @@ type ByMap<T> = {
   shoreline: T;
   lighthouse: T;
   tarkovstreets: T;
+  sandbox: T;
 };
 
 export type MapName = keyof ByMap<unknown>;
