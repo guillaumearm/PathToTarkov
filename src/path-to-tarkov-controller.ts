@@ -220,11 +220,6 @@ export class PathToTarkovController {
 
   // This is a fix to ensure Lua's Custom Spawn Point mod do not override player spawn point
   public hijackLuasCustomSpawnPointsUpdate(): void {
-    // if disabled via config
-    if (this.config.bypass_luas_custom_spawn_points_tweak) {
-      return;
-    }
-
     const LUAS_CSP_ROUTE = "/client/locations";
 
     if (isLuasCSPModLoaded(this.modLoader)) {

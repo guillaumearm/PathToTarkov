@@ -102,7 +102,9 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       this.debug("option keep_found_in_raid_tweak enabled");
     }
 
-    this.pathToTarkovController.hijackLuasCustomSpawnPointsUpdate();
+    if (!this.config.bypass_luas_custom_spawn_points_tweak) {
+      this.pathToTarkovController.hijackLuasCustomSpawnPointsUpdate();
+    }
 
     if (this.config.traders_access_restriction) {
       fixRepeatableQuests(container, this.debug);
