@@ -1,5 +1,5 @@
 import type { IBodyHealth, IEffects } from "@spt/models/eft/common/IGlobals";
-import type { SpawnPointParam } from "@spt/models/eft/common/ILocationBase";
+import type { ILocationBase, SpawnPointParam } from "@spt/models/eft/common/ILocationBase";
 import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
@@ -27,6 +27,13 @@ import {
 import { StashController } from "./stash-controller";
 import { TradersController } from "./traders-controller";
 import type { ModLoader } from "./modLoader";
+import { DependencyContainer } from "tsyringe";
+import { LocationController } from "@spt/controllers/LocationController";
+import { deepClone } from "./utils";
+import { resolveMapNameFromLocation } from "./map-name-resolver";
+import { ILocationsGenerateAllResponse, Path } from "@spt/models/eft/common/ILocationsSourceDestinationBase";
+import { ILocations } from "@spt/models/spt/server/ILocations";
+import { IGetLocationRequestData } from "@spt/models/eft/location/IGetLocationRequestData";
 
 class OffraidRegenController {
   private getRegenConfig: () => Config["offraid_regen_config"];
@@ -166,6 +173,31 @@ class OffraidRegenController {
   }
 }
 
+const findLocation = (
+  locations: ILocationBase[],
+  mapName: string,
+): ILocationBase | undefined => {
+  return locations.find((l) => resolveMapNameFromLocation(l?.Id) === mapName);
+};
+
+type IndexedLocations = Record<string, ILocationBase>
+
+// indexed by mapName
+const getIndexedLocations = (locations: ILocations): IndexedLocations => {
+      // WARNING: type lies here
+      // TODO: improve type
+      const locationsList: ILocationBase[] = Object.values(locations).filter(
+        (l: ILocationBase) => l && l.Id,
+      );
+
+      return locationsList.reduce((indexed: IndexedLocations, location: ILocationBase) => {
+        return {
+          ...indexed,
+          [resolveMapNameFromLocation(location.Id)]: location
+        }
+      }, {})
+}
+
 export class PathToTarkovController {
   public stashController: StashController;
   public tradersController: TradersController;
@@ -176,6 +208,7 @@ export class PathToTarkovController {
   constructor(
     public config: Config,
     public spawnConfig: SpawnConfig,
+    private readonly container: DependencyContainer,
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
     getIsTraderLocked: (traderId: string) => boolean,
@@ -202,10 +235,91 @@ export class PathToTarkovController {
     );
 
     this.entrypoints = {};
+    this.overrideControllers()
   }
 
   generateEntrypoints(): void {
     this.entrypoints = getEntryPointsForMaps(this.db);
+  }
+
+  private getUIPaths(indexedLocations: IndexedLocations): Path[] {
+    // TODO: use the ptt config to generate paths
+    // TODO: migrate in a different class
+
+    const newPaths: Path[] = []
+    return newPaths
+  }
+
+  createGenerateAll(originalFn: (sessionId: string) => ILocationsGenerateAllResponse) {
+    return (sessionId: string): ILocationsGenerateAllResponse => {
+      this.debug("call locationController.generateAll");
+      const offraidPosition = this.getOffraidPosition(sessionId)
+      const result = originalFn(sessionId);
+      const locations = deepClone(result.locations);
+      const indexedLocations = getIndexedLocations(locations)
+
+      const unlockedMaps = this.config.infiltrations[offraidPosition];
+
+      // TODO: improve typing here
+      // const locationsList: ILocationBase[] = Object.values(locations).filter(
+      //   (l: ILocationBase) => l && l.Id,
+      // );
+
+      // this.debug(
+      //   JSON.stringify(
+      //     locationsList.map((l) => l.Id),
+      //     undefined,
+      //     2,
+      //   ),
+      // );
+
+      // debug(JSON.stringify(Object.keys(locationsList[0]), undefined, 2))
+      // debug(JSON.stringify(locationsList[0], undefined, 2))
+
+      MAPLIST.forEach((mapName) => {
+        const locked = Boolean(!unlockedMaps[mapName as MapName]);
+        const locationBase = indexedLocations[mapName]
+
+        if (locationBase) {
+          this.debug(`apply lock to map ${mapName} | locked=${locked}`);
+          locationBase.Locked = locked;
+          // this.updateSpawnPoints(locationBase, offraidPosition)
+        }
+      });
+
+
+      const newPaths = this.getUIPaths(indexedLocations)
+      return { locations, paths: newPaths };
+    }
+  }
+
+  private createGetLocation(originalFn: (sessionId: string, request: IGetLocationRequestData) => ILocationBase) {
+    return (sessionId: string, request: IGetLocationRequestData): ILocationBase => {
+      this.debug("call locationController.get");
+
+      const offraidPosition = this.getOffraidPosition(sessionId)
+      const locationBase = originalFn(sessionId, request);
+      this.updateSpawnPoints(locationBase, offraidPosition)
+
+      return locationBase
+    }
+  }
+
+  private overrideControllers(): void {
+    this.container.afterResolution<LocationController>(
+      "LocationController",
+      (_t, result): void => {
+        const locationController = Array.isArray(result) ? result[0] : result;
+        const originalGenerateAll =
+          locationController.generateAll.bind(locationController);
+
+        locationController.generateAll = this.createGenerateAll(originalGenerateAll)
+          
+        const originalGet = locationController.get.bind(locationController)
+        locationController.get = this.createGetLocation(originalGet)
+      },
+      { frequency: "Always" },
+    );
   }
 
   init(sessionId: string): void {
@@ -220,54 +334,46 @@ export class PathToTarkovController {
 
   // This is a fix to ensure Lua's Custom Spawn Point mod do not override player spawn point
   public hijackLuasCustomSpawnPointsUpdate(): void {
-    const LUAS_CSP_ROUTE = "/client/locations";
+    return
+  //   const LUAS_CSP_ROUTE = "/client/locations";
 
-    if (isLuasCSPModLoaded(this.modLoader)) {
-      this.debug(
-        `Lua's Custom Spawn Point detected, hijack '${LUAS_CSP_ROUTE}' route`,
-      );
-    } else {
-      this.debug("Lua's Custom Spawn Point not detected.");
-      return;
-    }
+  //   if (isLuasCSPModLoaded(this.modLoader)) {
+  //     this.debug(
+  //       `Lua's Custom Spawn Point detected, hijack '${LUAS_CSP_ROUTE}' route`,
+  //     );
+  //   } else {
+  //     this.debug("Lua's Custom Spawn Point not detected.");
+  //     return;
+  //   }
 
-    this.staticRouterPeeker.watchRoute(
-      LUAS_CSP_ROUTE,
-      (url, info, sessionId, output) => {
-        this.logger.info(
-          "=> Path To Tarkov: '/client/locations' route called !",
-        );
+  //   this.staticRouterPeeker.watchRoute(
+  //     LUAS_CSP_ROUTE,
+  //     (url, info, sessionId, output) => {
+  //       this.logger.info(
+  //         "=> Path To Tarkov: '/client/locations' route called !",
+  //       );
 
-        this.updateSpawnPoints(this.getOffraidPosition(sessionId));
+  //       this.updateSpawnPoints(this.getOffraidPosition(sessionId));
 
-        return output;
-      },
-    );
+  //       return output;
+  //     },
+  //   );
 
-    this.staticRouterPeeker.register(
-      "Trap-PathToTarkov-Lua-CustomSpawnPoints-integration",
-    );
+  //   this.staticRouterPeeker.register(
+  //     "Trap-PathToTarkov-Lua-CustomSpawnPoints-integration",
+  //   );
 
-    this.logger.info(
-      `=> PathToTarkov: Lua's Custom Spawn Points '${LUAS_CSP_ROUTE}' route hijacked!`,
-    );
+  //   this.logger.info(
+  //     `=> PathToTarkov: Lua's Custom Spawn Points '${LUAS_CSP_ROUTE}' route hijacked!`,
+  //   );
   }
 
-  private addSpawnPoint(mapName: string, spawnPoint: SpawnPointParam): void {
-    const location = this.db.getTables().locations?.[mapName as MapName];
-
-    location?.base.SpawnPointParams.push(spawnPoint);
+  private addSpawnPoint(locationBase: ILocationBase, spawnPoint: SpawnPointParam): void {
+    locationBase?.SpawnPointParams.push(spawnPoint);
   }
 
-  private removePlayerSpawns(mapName: string): void {
-    const location = this.db.getTables().locations?.[mapName as MapName];
-    const base = location?.base;
-
-    if (!base) {
-      return;
-    }
-
-    base.SpawnPointParams = base.SpawnPointParams.filter((params) => {
+  private removePlayerSpawns(locationBase: ILocationBase): void {
+    locationBase.SpawnPointParams = locationBase.SpawnPointParams.filter((params) => {
       // remove Player from Categories array
       params.Categories = params.Categories.filter((cat) => cat !== "Player");
 
@@ -280,11 +386,11 @@ export class PathToTarkovController {
     });
   }
 
-  private removeAllPlayerSpawns(): void {
-    MAPLIST.forEach((mapName) => {
-      this.removePlayerSpawns(mapName);
-    });
-  }
+  // private removeAllPlayerSpawns(): void {
+  //   MAPLIST.forEach((mapName) => {
+  //     this.removePlayerSpawns(mapName);
+  //   });
+  // }
 
   private updateLockedMaps(offraidPosition: string): void {
     const unlockedMaps = this.config.infiltrations[offraidPosition];
@@ -300,17 +406,27 @@ export class PathToTarkovController {
     });
   }
 
-  private updateSpawnPoints(offraidPosition: string): void {
-    // Remove all player spawn points
-    this.removeAllPlayerSpawns();
+  private updateSpawnPoints(locationBase: ILocationBase, offraidPosition: string): void {
+    this.removePlayerSpawns(locationBase);
 
     // Add new spawn points according to player offraid position
     Object.keys(this.config.infiltrations[offraidPosition]).forEach(
       (mapName) => {
+        if (mapName !== resolveMapNameFromLocation(locationBase.Id)) {
+          return
+        }
+
+        this.debug(`=> update spawn points for map ${mapName} on offraid position  ${offraidPosition}`)
+
         const spawnpoints: string[] | undefined =
           this.config.infiltrations[offraidPosition][mapName as MapName];
 
         if (spawnpoints) {
+
+          if (spawnpoints.length === 0) {
+            this.debug(`spawnpoints array is empty for map ${mapName}`)
+          }
+
           spawnpoints.forEach((spawnId) => {
             const spawnData =
               this.spawnConfig[mapName as MapName] &&
@@ -322,9 +438,14 @@ export class PathToTarkovController {
                 this.entrypoints[mapName],
                 spawnId,
               );
-              this.addSpawnPoint(mapName, spawnPoint);
+            this.debug('=========================== SPAWN POINT ADDED')
+              this.addSpawnPoint(locationBase, spawnPoint);
+            } else {
+              this.debug(`no spawn data found for spawnpoint ${spawnId} on map ${mapName}`)
             }
           });
+        } else {
+          this.debug(`no spawn point found for map ${mapName}`)
         }
       },
     );
@@ -435,8 +556,8 @@ export class PathToTarkovController {
         `=> PathToTarkov: player offraid position changed to '${offraidPosition}'`,
       );
     }
-    this.updateLockedMaps(offraidPosition);
-    this.updateSpawnPoints(offraidPosition);
+    // this.updateLockedMaps(offraidPosition);
+    // this.updateSpawnPoints(offraidPosition);
 
     this.stashController.updateStash(offraidPosition, sessionId);
     this.offraidRegenController.updateOffraidRegen(offraidPosition);

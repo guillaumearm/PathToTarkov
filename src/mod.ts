@@ -8,10 +8,9 @@ import type { SaveServer } from "@spt/servers/SaveServer";
 import type { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
 
 import { createPathToTarkovAPI } from "./api";
-import type { Config, MapName, SpawnConfig } from "./config";
+import type { Config, SpawnConfig } from "./config";
 import {
   CONFIG_PATH,
-  MAPLIST,
   PACKAGE_JSON_PATH,
   SPAWN_CONFIG_PATH,
 } from "./config";
@@ -22,97 +21,10 @@ import { enableKeepFoundInRaidTweak } from "./keep-fir-tweak";
 import { PathToTarkovController } from "./path-to-tarkov-controller";
 import { purgeProfiles } from "./uninstall";
 import type { PackageJson } from "./utils";
-import { deepClone, getModDisplayName, noop, readJsonFile } from "./utils";
+import { getModDisplayName, noop, readJsonFile } from "./utils";
 import { EndOfRaidController } from "./end-of-raid-controller";
 import { getModLoader } from "./modLoader";
 import { fixRepeatableQuests } from "./fix-repeatable-quests";
-import type { LocationController } from "../types/controllers/LocationController";
-import { ILocations } from "@spt/models/spt/server/ILocations";
-import { ILocation } from "@spt/models/eft/common/ILocation";
-import { ILocationBase } from "@spt/models/eft/common/ILocationBase";
-import { resolveMapNameFromLocation } from "./map-name-resolver";
-import { Path } from "@spt/models/eft/common/ILocationsSourceDestinationBase";
-
-const findLocation = (locations: ILocationBase[], mapName: string): ILocationBase | undefined => {
-  return locations.find(l => resolveMapNameFromLocation(l?.Id) === mapName)
-}
-
-const overrideLockedMaps = (
-  container: DependencyContainer,
-  debug: (data: string) => void,
-): void => {
-  container.afterResolution<LocationController>(
-    "LocationController",
-    (_t, result): void => {
-      const locationController = Array.isArray(result) ? result[0] : result;
-      const originalFn = locationController.generateAll.bind(locationController);
-
-      locationController.generateAll = (sessionId) => {
-        debug("call locationController.generateAll");
-        const result = originalFn(sessionId);
-        const locations = deepClone(result.locations);
-
-
-        // TODO: improve typing here
-        const locationsList: ILocationBase[] = Object.values(locations).filter((l: ILocationBase) => l && l.Id)
-
-        // debug(JSON.stringify(Object.keys(locationsList[0]), undefined, 2))
-        // debug(JSON.stringify(locationsList[0], undefined, 2))
-
-
-        MAPLIST.forEach((mapName) => {
-          const locked = mapName === "sandbox"; // TODO: get locked maps for current user
-          const location = findLocation(locationsList, mapName)
-
-          if (location) {
-            debug(`apply lock to map ${mapName} | locked=${locked}`)
-            location.Locked = locked;
-          }
-        });
-
-        // const newPaths: Path[] = [{
-        //   Source: findLocation(locationsList, "bigmap")!._Id,
-        //   Destination: findLocation(locationsList, "sandbox")!._Id,
-        // }, {
-        //   Source: findLocation(locationsList, "sandbox")!._Id,
-        //   Destination: findLocation(locationsList, "laboratory")!._Id,
-        // },{
-        //   Source: findLocation(locationsList, "bigmap")!._Id,
-        //   Destination: findLocation(locationsList, "interchange")!._Id,
-        // },{
-        //   Source: findLocation(locationsList, "rezervbase")!._Id,
-        //   Destination: findLocation(locationsList, "interchange")!._Id,
-        // },
-        // {
-        //   Source: findLocation(locationsList, "bigmap")!._Id,
-        //   Destination: findLocation(locationsList, "factory4_day")!._Id,
-        // },{
-        //   Source: findLocation(locationsList, "woods")!._Id,
-        //   Destination: findLocation(locationsList, "factory4_day")!._Id,
-        // },{
-        //   Source: findLocation(locationsList, "rezervbase")!._Id,
-        //   Destination: findLocation(locationsList, "lighthouse")!._Id,
-        // },
-        // {
-        //   Source: findLocation(locationsList, "shoreline")!._Id,
-        //   Destination: findLocation(locationsList, "lighthouse")!._Id,
-        // },
-        // {
-        //   Source: findLocation(locationsList, "shoreline")!._Id,
-        //   Destination: findLocation(locationsList, "woods")!._Id,
-        // }]
-
-        const newPaths: Path[] = [{
-          Source: findLocation(locationsList, "sandbox")!._Id,
-          Destination: findLocation(locationsList, "lighthouse")!._Id,
-        }]
-
-        return { locations, paths: newPaths };
-      };
-    },
-    { frequency: "Always" },
-  );
-};
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;
@@ -135,6 +47,10 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.debug = this.config.debug
       ? (data: string) => this.logger.debug(`Path To Tarkov: ${data}`, true)
       : noop;
+
+    this.logger.info(
+      `===> Loading ${getModDisplayName(this.packageJson, true)}`,
+    );
 
     if (this.config.debug) {
       this.debug("debug mode enabled");
@@ -168,6 +84,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.pathToTarkovController = new PathToTarkovController(
       this.config,
       this.spawnConfig,
+      container,
       db,
       saveServer,
       getIsTraderLocked,
@@ -182,12 +99,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     eventWatcher.onEndOfRaid((payload) => endOfRaidController.end(payload));
     eventWatcher.register(createStaticRoutePeeker(staticRouter));
-
-    this.logger.info(
-      `===> Loading ${getModDisplayName(this.packageJson, true)}`,
-    );
-
-    overrideLockedMaps(container, this.debug); // TODO: move it inside the ptt controller
 
     const tweakFoundInRaid = !this.config.bypass_keep_found_in_raid_tweak;
 
