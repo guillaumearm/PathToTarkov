@@ -1,4 +1,5 @@
 import type { ISptProfile } from "@spt/models/eft/profile/ISptProfile";
+import { ItemTpl } from "@spt/models/enums/ItemTpl";
 import { join } from "path";
 
 type ByMap<T> = {
@@ -152,14 +153,18 @@ export const JAEGER_INTRO_QUEST = "5d2495a886f77425cd51e403";
 
 export const STANDARD_STASH_ID = "566abbc34bdc2d92178b4576";
 
-export const STASH_IDS = [
+export const VANILLA_STASH_IDS = [
   STANDARD_STASH_ID, // Standard
   "5811ce572459770cba1a34ea", // Left Behind
   "5811ce662459770f6f490f32", // Prepare for escape
   "5811ce772459770e9e5f9532", // Edge of darkness
+  "6602bcf19cc643f44a04274b", // Unheard
 ];
 
-export const EMPTY_STASH_ID = "PathToTarkov_Empty_Stash";
+export const EMPTY_STASH: Omit<StashConfig, "access_via"> = {
+  id: "PathToTarkov_Empty_Stash",
+  size: 0,
+};
 
 export const MAPLIST = [
   "laboratory",

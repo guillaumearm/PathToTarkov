@@ -9,11 +9,7 @@ import type { StaticRouterModService } from "@spt/services/mod/staticRouter/Stat
 
 import { createPathToTarkovAPI } from "./api";
 import type { Config, SpawnConfig } from "./config";
-import {
-  CONFIG_PATH,
-  PACKAGE_JSON_PATH,
-  SPAWN_CONFIG_PATH,
-} from "./config";
+import { CONFIG_PATH, PACKAGE_JSON_PATH, SPAWN_CONFIG_PATH } from "./config";
 import { EventWatcher } from "./event-watcher";
 import { createStaticRoutePeeker } from "./helpers";
 import { enableKeepFoundInRaidTweak } from "./keep-fir-tweak";
@@ -21,10 +17,17 @@ import { enableKeepFoundInRaidTweak } from "./keep-fir-tweak";
 import { PathToTarkovController } from "./path-to-tarkov-controller";
 import { purgeProfiles } from "./uninstall";
 import type { PackageJson } from "./utils";
-import { getModDisplayName, noop, readJsonFile } from "./utils";
+import {
+  getBonusIdFromStashId,
+  getModDisplayName,
+  getTemplateIdFromStashId,
+  noop,
+  readJsonFile,
+} from "./utils";
 import { EndOfRaidController } from "./end-of-raid-controller";
 import { getModLoader } from "./modLoader";
 import { fixRepeatableQuests } from "./fix-repeatable-quests";
+import { HideoutAreas } from "@spt/models/enums/HideoutAreas";
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;
@@ -119,12 +122,34 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     }
   }
 
+  // TODO remove this
+  // private experimentAreas(container: DependencyContainer) {
+  //   const db = container.resolve<DatabaseServer>("DatabaseServer");
+
+  //   const areas = db.getTables().hideout?.areas ?? [];
+  //   const stashArea = areas.find(
+  //     (a) => a.type === (3 satisfies HideoutAreas.STASH),
+  //   );
+
+  //   if (!stashArea) {
+  //     throw new Error("Path To Tarkov: cannot retrieve stash areea in db");
+  //   }
+
+  //   const stashId = "PathToTarkov_Therapist_stash";
+  //   const stashTemplateId = getTemplateIdFromStashId(stashId);
+
+  //   stashArea.stages["1"].bonuses[0].templateId = stashTemplateId;
+  // }
+
   public postSptLoad(container: DependencyContainer): void {
     this.container = container;
 
     if (!this.config.enabled) {
       return;
     }
+
+    // TODO remove this
+    // this.experimentAreas(container)
 
     this.pathToTarkovController.generateEntrypoints();
 
@@ -141,6 +166,17 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     if (this.config.traders_access_restriction) {
       this.pathToTarkovController.tradersController.initTraders();
     }
+
+    const saveServer = container.resolve<SaveServer>("SaveServer");
+    const profiles = saveServer.getProfiles();
+
+    Object.keys(profiles).forEach((profileId) => {
+      this.pathToTarkovController.cleanupLegacySecondaryStashesLink(profileId);
+    });
+
+    const nbAddedTemplates =
+      this.pathToTarkovController.stashController.initSecondaryStashTemplates();
+    this.debug(`${nbAddedTemplates} secondary stash templates added`);
 
     this.logger.success(
       `===> Successfully loaded ${getModDisplayName(this.packageJson, true)}`,

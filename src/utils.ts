@@ -83,3 +83,8 @@ export const getMainStashId = (profile: Profile): string => {
     profile.PathToTarkov?.mainStashId ?? profile.characters.pmc.Inventory.stash
   );
 };
+
+export const getTemplateIdFromStashId = (stashId: string) =>
+  `template_${stashId}`;
+export const getGridIdFromStashId = (stashId: string) => `grid_${stashId}`;
+export const getBonusIdFromStashId = (stashId: string) => `bonus_${stashId}`;
