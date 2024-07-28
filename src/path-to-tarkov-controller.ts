@@ -291,8 +291,8 @@ export class PathToTarkovController {
         }
       });
 
-      const newPaths = this.getUIPaths(indexedLocations);
-      return { locations, paths: newPaths };
+      // const newPaths = this.getUIPaths(indexedLocations);
+      return { locations, paths: result.paths };
     };
   }
 
