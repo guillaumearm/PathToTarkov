@@ -41,7 +41,7 @@ export type SpawnConfig = ByMap<{
 /**
  * config.json
  */
-type StashConfig = {
+export type StashConfig = {
   id: string;
   size: number;
   access_via: AccessVia;

@@ -1,7 +1,7 @@
 import type { Inventory } from "@spt/models/eft/common/tables/IBotBase";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
-import type { ConfigGetter, Profile } from "./config";
+import type { ConfigGetter, Profile, StashConfig } from "./config";
 import { EMPTY_STASH, STANDARD_STASH_ID } from "./config";
 import { checkAccessVia, isIgnoredArea } from "./helpers";
 import {
@@ -42,29 +42,6 @@ export class StashController {
         area.enabled = true;
       }
     });
-  }
-
-  private setSecondaryStashLocales(templateId: string) {
-    const locales = this.db.getTables()?.locales?.global;
-
-    if (!locales) {
-      throw new Error("Path To Tarkov: cannot retrieve locales");
-    }
-
-    let nbLocalesUpdated = 0;
-    Object.keys(locales).forEach((localeName) => {
-      const locale = locales[localeName];
-
-      locale[`${templateId} Name`] = "stash name";
-      locale[`${templateId} ShortName`] = "stash short name";
-      locale[`${templateId} Description`] = "stash description";
-      // locale[`${templateId} Description`] = locale[`${STANDARD_STASH_ID} Description`]
-      nbLocalesUpdated = nbLocalesUpdated + 3;
-    });
-
-    this.debug(
-      `${nbLocalesUpdated} locales updated for template ${templateId}`,
-    );
   }
 
   initSecondaryStashTemplates(): number {
@@ -150,53 +127,50 @@ export class StashController {
     }
   }
 
-  updateStash(offraidPosition: string, sessionId: string): void {
+  private getMainStashAvailable(offraidPosition: string): boolean {
     const multiStashEnabled = this.getConfig().hideout_multistash_enabled;
 
     const mainStashAvailable = checkAccessVia(
       this.getConfig().hideout_main_stash_access_via,
       offraidPosition,
     );
-    const secondaryStash = this.getConfig().hideout_secondary_stashes.find(
-      (stash) => checkAccessVia(stash.access_via, offraidPosition),
-    );
 
-    if (!multiStashEnabled || mainStashAvailable) {
-      // this.enableHideout();
-      // this.resetSize();
+    return mainStashAvailable || multiStashEnabled === false;
+  }
+
+  private getSecondaryStash(
+    offraidPosition: string,
+  ): Omit<StashConfig, "access_via"> {
+    return (
+      this.getConfig().hideout_secondary_stashes.find((stash) =>
+        checkAccessVia(stash.access_via, offraidPosition),
+      ) ?? EMPTY_STASH
+    );
+  }
+
+  updateStash(offraidPosition: string, sessionId: string): void {
+    const mainStashAvailable = this.getMainStashAvailable(offraidPosition);
+    const secondaryStash = this.getSecondaryStash(offraidPosition);
+
+    if (mainStashAvailable) {
       this.setMainStash(sessionId);
-    } else if (secondaryStash) {
-      // this.disableHideout();
-      // this.setSize(secondaryStash.size);
-      this.setSecondaryStash(secondaryStash.id, sessionId);
     } else {
-      // this.disableHideout();
-      // this.setSize(0);
-      this.setSecondaryStash(EMPTY_STASH.id, sessionId);
+      this.setSecondaryStash(secondaryStash.id, sessionId);
     }
   }
 
-  // TODO: refactor with updateStash logic
   getStashSize(offraidPosition: string): number | null {
-    const multiStashEnabled = this.getConfig().hideout_multistash_enabled;
+    const mainStashAvailable = this.getMainStashAvailable(offraidPosition);
+    const secondaryStash = this.getSecondaryStash(offraidPosition);
 
-    const mainStashAvailable = checkAccessVia(
-      this.getConfig().hideout_main_stash_access_via,
-      offraidPosition,
-    );
-
-    const secondaryStash = this.getConfig().hideout_secondary_stashes.find(
-      (stash) => checkAccessVia(stash.access_via, offraidPosition),
-    );
-
-    if (multiStashEnabled === false || mainStashAvailable) {
+    if (mainStashAvailable) {
       return null;
     }
 
-    if (secondaryStash) {
-      return secondaryStash.size;
-    }
+    return secondaryStash.size;
+  }
 
-    return 0;
+  getHideoutEnabled(offraidPosition: string): boolean {
+    return this.getMainStashAvailable(offraidPosition);
   }
 }
