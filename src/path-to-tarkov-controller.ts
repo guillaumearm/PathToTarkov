@@ -21,6 +21,7 @@ import {
   createExitPoint,
   createSpawnPoint,
   getEntryPointsForMaps,
+  isIgnoredArea,
 } from "./helpers";
 
 import { StashController } from "./stash-controller";
@@ -39,6 +40,7 @@ import type { IGetLocationRequestData } from "@spt/models/eft/location/IGetLocat
 import type { DataCallbacks } from "@spt/callbacks/DataCallbacks";
 import type { IEmptyRequestData } from "@spt/models/eft/common/IEmptyRequestData";
 import type { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
+import type { IHideoutArea } from "@spt/models/eft/hideout/IHideoutArea";
 
 class OffraidRegenController {
   private getRegenConfig: () => Config["offraid_regen_config"];
@@ -359,6 +361,45 @@ export class PathToTarkovController {
     };
   }
 
+  private createGetHideoutAreas(
+    originalFn: (
+      url: string,
+      info: IEmptyRequestData,
+      sessionId: string,
+    ) => string,
+  ) {
+    return (
+      url: string,
+      info: IEmptyRequestData,
+      sessionId: string,
+    ): string => {
+      this.debug("call dataCallbacks.getHideoutAreas");
+
+      const offraidPosition = this.getOffraidPosition(sessionId);
+      const rawResult = originalFn(url, info, sessionId);
+
+      const parsed = JSON.parse(rawResult);
+      const areas: IHideoutArea[] = parsed.data;
+
+      const hideoutEnabled =
+        this.stashController.getHideoutEnabled(offraidPosition);
+
+      areas.forEach((area) => {
+        if (!isIgnoredArea(area, this.config)) {
+          area.enabled = hideoutEnabled;
+        }
+      });
+
+      if (hideoutEnabled) {
+        this.debug("main hideout enabled");
+      } else {
+        this.debug("main hideout disabled");
+      }
+
+      return JSON.stringify(parsed);
+    };
+  }
+
   private overrideControllers(): void {
     this.container.afterResolution<LocationController>(
       "LocationController",
@@ -387,6 +428,14 @@ export class PathToTarkovController {
         dataCallbacks.getTemplateItems = this.createGetTemplateItems(
           originalGetTemplateItems,
         );
+
+        const originalGetHideoutAreas =
+          dataCallbacks.getHideoutAreas.bind(dataCallbacks);
+
+        // TODO: improve types ?
+        dataCallbacks.getHideoutAreas = this.createGetHideoutAreas(
+          originalGetHideoutAreas as any,
+        ) as any;
       },
       { frequency: "Always" },
     );
