@@ -173,12 +173,6 @@ class OffraidRegenController {
   }
 }
 
-const findLocation = (
-  locations: ILocationBase[],
-  mapName: string,
-): ILocationBase | undefined => {
-  return locations.find((l) => resolveMapNameFromLocation(l?.Id) === mapName);
-};
 
 type IndexedLocations = Record<string, ILocationBase>
 
@@ -407,48 +401,42 @@ export class PathToTarkovController {
   }
 
   private updateSpawnPoints(locationBase: ILocationBase, offraidPosition: string): void {
-    this.removePlayerSpawns(locationBase);
+    const mapName = resolveMapNameFromLocation(locationBase.Id)
 
-    // Add new spawn points according to player offraid position
-    Object.keys(this.config.infiltrations[offraidPosition]).forEach(
-      (mapName) => {
-        if (mapName !== resolveMapNameFromLocation(locationBase.Id)) {
-          return
-        }
+    if (!this.config.infiltrations[offraidPosition]) {
+      this.debug(`no offraid position '${offraidPosition}' found in config.infiltrations`)
+      return
+    }
 
-        this.debug(`=> update spawn points for map ${mapName} on offraid position  ${offraidPosition}`)
+    const spawnpoints = this.config.infiltrations[offraidPosition][mapName as MapName]
+    
+    if (spawnpoints && spawnpoints.length > 0) {
+      if (spawnpoints[0] === '*') { // don't update the spawnpoints if wildcard is used
+        return
+      }
 
-        const spawnpoints: string[] | undefined =
-          this.config.infiltrations[offraidPosition][mapName as MapName];
+      this.removePlayerSpawns(locationBase);
 
-        if (spawnpoints) {
-
-          if (spawnpoints.length === 0) {
-            this.debug(`spawnpoints array is empty for map ${mapName}`)
-          }
-
-          spawnpoints.forEach((spawnId) => {
-            const spawnData =
-              this.spawnConfig[mapName as MapName] &&
-              this.spawnConfig[mapName as MapName][spawnId];
-            if (spawnData) {
-              const spawnPoint = createSpawnPoint(
-                spawnData.Position,
-                spawnData.Rotation,
-                this.entrypoints[mapName],
-                spawnId,
-              );
-            this.debug('=========================== SPAWN POINT ADDED')
-              this.addSpawnPoint(locationBase, spawnPoint);
-            } else {
-              this.debug(`no spawn data found for spawnpoint ${spawnId} on map ${mapName}`)
-            }
-          });
+      spawnpoints.forEach((spawnId) => {
+        const spawnData =
+          this.spawnConfig[mapName as MapName] &&
+          this.spawnConfig[mapName as MapName][spawnId];
+        if (spawnData) {
+          const spawnPoint = createSpawnPoint(
+            spawnData.Position,
+            spawnData.Rotation,
+            this.entrypoints[mapName],
+            spawnId,
+          );
+          this.addSpawnPoint(locationBase, spawnPoint);
+          this.debug(`player spawn '${spawnId}' added`)
         } else {
-          this.debug(`no spawn point found for map ${mapName}`)
+          this.debug(`no spawn data found for spawnpoint ${spawnId} on map ${mapName}`)
         }
-      },
-    );
+      });
+    } else {
+      this.debug(`no spawn point found for map ${mapName} at offraid position '${offraidPosition}'`)
+    }
   }
 
   initExfiltrations(): void {
