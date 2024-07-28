@@ -13,7 +13,7 @@ import type {
 } from "./config";
 import { MAPLIST, VANILLA_STASH_IDS } from "./config";
 
-import type { EntryPoints, StaticRoutePeeker } from "./helpers";
+import type { EntryPoints } from "./helpers";
 
 import {
   changeRestrictionsInRaid,
@@ -26,7 +26,6 @@ import {
 
 import { StashController } from "./stash-controller";
 import { TradersController } from "./traders-controller";
-import type { ModLoader } from "./modLoader";
 import type { DependencyContainer } from "tsyringe";
 import type { LocationController } from "@spt/controllers/LocationController";
 import { deepClone, getTemplateIdFromStashId } from "./utils";
@@ -217,8 +216,6 @@ export class PathToTarkovController {
     getIsTraderLocked: (traderId: string) => boolean,
     private readonly logger: ILogger,
     private readonly debug: (data: string) => void,
-    private staticRouterPeeker: StaticRoutePeeker,
-    private modLoader: ModLoader,
   ) {
     this.stashController = new StashController(
       () => this.config,
@@ -266,22 +263,6 @@ export class PathToTarkovController {
 
       const unlockedMaps = this.config.infiltrations[offraidPosition];
 
-      // TODO: improve typing here
-      // const locationsList: ILocationBase[] = Object.values(locations).filter(
-      //   (l: ILocationBase) => l && l.Id,
-      // );
-
-      // this.debug(
-      //   JSON.stringify(
-      //     locationsList.map((l) => l.Id),
-      //     undefined,
-      //     2,
-      //   ),
-      // );
-
-      // debug(JSON.stringify(Object.keys(locationsList[0]), undefined, 2))
-      // debug(JSON.stringify(locationsList[0], undefined, 2))
-
       MAPLIST.forEach((mapName) => {
         const locked = Boolean(!unlockedMaps[mapName as MapName]);
         const locationBase = indexedLocations[mapName];
@@ -289,7 +270,6 @@ export class PathToTarkovController {
         if (locationBase) {
           this.debug(`apply lock to map ${mapName} | locked=${locked}`);
           locationBase.Locked = locked;
-          // this.updateSpawnPoints(locationBase, offraidPosition)
         }
       });
 
@@ -472,8 +452,7 @@ export class PathToTarkovController {
   }
 
   init(sessionId: string): void {
-    changeRestrictionsInRaid(this.config, this.db);
-
+    changeRestrictionsInRaid(this.config, this.db); // TODO: no need to override everytime
     this.stashController.initProfile(sessionId);
     this.offraidRegenController.init();
 
@@ -483,38 +462,8 @@ export class PathToTarkovController {
 
   // This is a fix to ensure Lua's Custom Spawn Point mod do not override player spawn point
   public hijackLuasCustomSpawnPointsUpdate(): void {
+    // TODO: get rid of the config option "bypass_luas_custom_spawn_points_tweak"
     return;
-    //   const LUAS_CSP_ROUTE = "/client/locations";
-
-    //   if (isLuasCSPModLoaded(this.modLoader)) {
-    //     this.debug(
-    //       `Lua's Custom Spawn Point detected, hijack '${LUAS_CSP_ROUTE}' route`,
-    //     );
-    //   } else {
-    //     this.debug("Lua's Custom Spawn Point not detected.");
-    //     return;
-    //   }
-
-    //   this.staticRouterPeeker.watchRoute(
-    //     LUAS_CSP_ROUTE,
-    //     (url, info, sessionId, output) => {
-    //       this.logger.info(
-    //         "=> Path To Tarkov: '/client/locations' route called !",
-    //       );
-
-    //       this.updateSpawnPoints(this.getOffraidPosition(sessionId));
-
-    //       return output;
-    //     },
-    //   );
-
-    //   this.staticRouterPeeker.register(
-    //     "Trap-PathToTarkov-Lua-CustomSpawnPoints-integration",
-    //   );
-
-    //   this.logger.info(
-    //     `=> PathToTarkov: Lua's Custom Spawn Points '${LUAS_CSP_ROUTE}' route hijacked!`,
-    //   );
   }
 
   private removePlayerSpawnsForLocation(locationBase: ILocationBase): void {
@@ -531,26 +480,6 @@ export class PathToTarkovController {
         return true;
       },
     );
-  }
-
-  // private removeAllPlayerSpawns(): void {
-  //   MAPLIST.forEach((mapName) => {
-  //     this.removePlayerSpawns(mapName);
-  //   });
-  // }
-
-  private updateLockedMaps(offraidPosition: string): void {
-    const unlockedMaps = this.config.infiltrations[offraidPosition];
-    const locations = this.db.getTables().locations;
-
-    MAPLIST.forEach((mapName) => {
-      const locked = Boolean(!unlockedMaps[mapName as MapName]);
-      const location = locations?.[mapName as MapName];
-
-      if (location) {
-        location.base.Locked = locked;
-      }
-    });
   }
 
   private updateSpawnPoints(
@@ -708,11 +637,9 @@ export class PathToTarkovController {
         `=> PathToTarkov: player offraid position changed to '${offraidPosition}'`,
       );
     }
-    // this.updateLockedMaps(offraidPosition);
-    // this.updateSpawnPoints(offraidPosition);
 
     this.stashController.updateStash(offraidPosition, sessionId);
-    this.offraidRegenController.updateOffraidRegen(offraidPosition);
+    this.offraidRegenController.updateOffraidRegen(offraidPosition); // TODO: handle by sessionId
 
     if (this.config.traders_access_restriction) {
       this.tradersController.updateTraders(offraidPosition, sessionId);

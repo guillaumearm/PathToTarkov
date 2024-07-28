@@ -3,7 +3,7 @@ import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
 import type { ConfigGetter, Profile, StashConfig } from "./config";
 import { EMPTY_STASH, STANDARD_STASH_ID } from "./config";
-import { checkAccessVia, isIgnoredArea } from "./helpers";
+import { checkAccessVia } from "./helpers";
 import {
   deepClone,
   getGridIdFromStashId,
@@ -24,26 +24,6 @@ export class StashController {
     return profile.characters.pmc.Inventory;
   }
 
-  private disableHideout() {
-    const areas = this.db.getTables().hideout?.areas;
-
-    areas?.forEach((area) => {
-      if (!isIgnoredArea(area, this.getConfig())) {
-        area.enabled = false;
-      }
-    });
-  }
-
-  private enableHideout() {
-    const areas = this.db.getTables().hideout?.areas;
-
-    areas?.forEach((area) => {
-      if (!isIgnoredArea(area, this.getConfig())) {
-        area.enabled = true;
-      }
-    });
-  }
-
   initSecondaryStashTemplates(): number {
     const standardTemplate =
       this.db.getTables()?.templates?.items[STANDARD_STASH_ID];
@@ -62,8 +42,6 @@ export class StashController {
     stashConfigs.forEach(({ id, size }) => {
       const newTemplate = deepClone(standardTemplate);
       const templateId = getTemplateIdFromStashId(id);
-
-      // this.setSecondaryStashLocales(templateId);
 
       newTemplate._id = templateId;
       newTemplate._name = `${id} of size ${size}`;

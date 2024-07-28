@@ -19,7 +19,6 @@ import { purgeProfiles } from "./uninstall";
 import type { PackageJson } from "./utils";
 import { getModDisplayName, noop, readJsonFile } from "./utils";
 import { EndOfRaidController } from "./end-of-raid-controller";
-import { getModLoader } from "./modLoader";
 import { fixRepeatableQuests } from "./fix-repeatable-quests";
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
@@ -54,7 +53,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     const db = container.resolve<DatabaseServer>("DatabaseServer");
     const saveServer = container.resolve<SaveServer>("SaveServer");
-    const modLoader = getModLoader(container);
 
     const staticRouter = container.resolve<StaticRouterModService>(
       "StaticRouterModService",
@@ -86,8 +84,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       getIsTraderLocked,
       this.logger,
       this.debug,
-      createStaticRoutePeeker(staticRouter),
-      modLoader,
     );
 
     const eventWatcher = new EventWatcher(this);
@@ -115,34 +111,12 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     }
   }
 
-  // TODO remove this
-  // private experimentAreas(container: DependencyContainer) {
-  //   const db = container.resolve<DatabaseServer>("DatabaseServer");
-
-  //   const areas = db.getTables().hideout?.areas ?? [];
-  //   const stashArea = areas.find(
-  //     (a) => a.type === (3 satisfies HideoutAreas.STASH),
-  //   );
-
-  //   if (!stashArea) {
-  //     throw new Error("Path To Tarkov: cannot retrieve stash areea in db");
-  //   }
-
-  //   const stashId = "PathToTarkov_Therapist_stash";
-  //   const stashTemplateId = getTemplateIdFromStashId(stashId);
-
-  //   stashArea.stages["1"].bonuses[0].templateId = stashTemplateId;
-  // }
-
   public postSptLoad(container: DependencyContainer): void {
     this.container = container;
 
     if (!this.config.enabled) {
       return;
     }
-
-    // TODO remove this
-    // this.experimentAreas(container)
 
     this.pathToTarkovController.generateEntrypoints();
 
