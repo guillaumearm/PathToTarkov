@@ -104,9 +104,12 @@ export class StashController {
         );
       }
 
-      const items = this.db.getTables()?.templates?.items!;
-      items[newTemplate._id] = newTemplate;
-      nbAddedTemplates = nbAddedTemplates + 1;
+      const items = this.db.getTables()?.templates?.items;
+
+      if (items) {
+        items[newTemplate._id] = newTemplate;
+        nbAddedTemplates = nbAddedTemplates + 1;
+      }
     });
 
     return nbAddedTemplates;

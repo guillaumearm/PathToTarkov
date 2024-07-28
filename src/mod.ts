@@ -17,17 +17,10 @@ import { enableKeepFoundInRaidTweak } from "./keep-fir-tweak";
 import { PathToTarkovController } from "./path-to-tarkov-controller";
 import { purgeProfiles } from "./uninstall";
 import type { PackageJson } from "./utils";
-import {
-  getBonusIdFromStashId,
-  getModDisplayName,
-  getTemplateIdFromStashId,
-  noop,
-  readJsonFile,
-} from "./utils";
+import { getModDisplayName, noop, readJsonFile } from "./utils";
 import { EndOfRaidController } from "./end-of-raid-controller";
 import { getModLoader } from "./modLoader";
 import { fixRepeatableQuests } from "./fix-repeatable-quests";
-import { HideoutAreas } from "@spt/models/enums/HideoutAreas";
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;

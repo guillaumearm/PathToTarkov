@@ -1,8 +1,5 @@
 import type { IBodyHealth, IEffects } from "@spt/models/eft/common/IGlobals";
-import type {
-  ILocationBase,
-  SpawnPointParam,
-} from "@spt/models/eft/common/ILocationBase";
+import type { ILocationBase } from "@spt/models/eft/common/ILocationBase";
 import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
@@ -14,10 +11,9 @@ import type {
   Profile,
   SpawnConfig,
 } from "./config";
-import { MAPLIST, STANDARD_STASH_ID, VANILLA_STASH_IDS } from "./config";
+import { MAPLIST, VANILLA_STASH_IDS } from "./config";
 
 import type { EntryPoints, StaticRoutePeeker } from "./helpers";
-import { isLuasCSPModLoaded } from "./helpers";
 
 import {
   changeRestrictionsInRaid,
@@ -30,19 +26,19 @@ import {
 import { StashController } from "./stash-controller";
 import { TradersController } from "./traders-controller";
 import type { ModLoader } from "./modLoader";
-import { DependencyContainer } from "tsyringe";
-import { LocationController } from "@spt/controllers/LocationController";
+import type { DependencyContainer } from "tsyringe";
+import type { LocationController } from "@spt/controllers/LocationController";
 import { deepClone, getTemplateIdFromStashId } from "./utils";
 import { resolveMapNameFromLocation } from "./map-name-resolver";
-import {
+import type {
   ILocationsGenerateAllResponse,
   Path,
 } from "@spt/models/eft/common/ILocationsSourceDestinationBase";
-import { ILocations } from "@spt/models/spt/server/ILocations";
-import { IGetLocationRequestData } from "@spt/models/eft/location/IGetLocationRequestData";
-import { DataCallbacks } from "@spt/callbacks/DataCallbacks";
-import { IEmptyRequestData } from "@spt/models/eft/common/IEmptyRequestData";
-import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
+import type { ILocations } from "@spt/models/spt/server/ILocations";
+import type { IGetLocationRequestData } from "@spt/models/eft/location/IGetLocationRequestData";
+import type { DataCallbacks } from "@spt/callbacks/DataCallbacks";
+import type { IEmptyRequestData } from "@spt/models/eft/common/IEmptyRequestData";
+import type { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
 
 class OffraidRegenController {
   private getRegenConfig: () => Config["offraid_regen_config"];
@@ -248,7 +244,7 @@ export class PathToTarkovController {
     this.entrypoints = getEntryPointsForMaps(this.db);
   }
 
-  private getUIPaths(indexedLocations: IndexedLocations): Path[] {
+  private getUIPaths(_indexedLocations: IndexedLocations): Path[] {
     // TODO: use the ptt config to generate paths
     // TODO: migrate in a different class
 

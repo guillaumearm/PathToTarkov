@@ -84,7 +84,9 @@ export const getMainStashId = (profile: Profile): string => {
   );
 };
 
-export const getTemplateIdFromStashId = (stashId: string) =>
+export const getTemplateIdFromStashId = (stashId: string): string =>
   `template_${stashId}`;
-export const getGridIdFromStashId = (stashId: string) => `grid_${stashId}`;
-export const getBonusIdFromStashId = (stashId: string) => `bonus_${stashId}`;
+export const getGridIdFromStashId = (stashId: string): string =>
+  `grid_${stashId}`;
+export const getBonusIdFromStashId = (stashId: string): string =>
+  `bonus_${stashId}`;

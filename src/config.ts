@@ -1,5 +1,4 @@
 import type { ISptProfile } from "@spt/models/eft/profile/ISptProfile";
-import { ItemTpl } from "@spt/models/enums/ItemTpl";
 import { join } from "path";
 
 type ByMap<T> = {
