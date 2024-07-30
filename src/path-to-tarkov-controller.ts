@@ -11,7 +11,7 @@ import type {
   Profile,
   SpawnConfig,
 } from "./config";
-import { MAPLIST, VANILLA_STASH_IDS } from "./config";
+import { EMPTY_STASH, MAPLIST, VANILLA_STASH_IDS } from "./config";
 
 import type { EntryPoints } from "./helpers";
 
@@ -447,9 +447,9 @@ export class PathToTarkovController {
   cleanupLegacySecondaryStashesLink(sessionId: string): void {
     const profile: Profile = this.saveServer.getProfile(sessionId);
     const inventory = profile.characters.pmc.Inventory;
-    const secondaryStashIds = this.config.hideout_secondary_stashes.map(
+    const secondaryStashIds = [EMPTY_STASH.id, this.config.hideout_secondary_stashes.map(
       (config) => config.id,
-    );
+    )];
 
     let stashLinkRemoved = 0;
 
