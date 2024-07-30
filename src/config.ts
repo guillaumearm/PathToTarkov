@@ -124,6 +124,8 @@ export type Config = {
   hideout_main_stash_access_via: AccessVia;
   hideout_secondary_stashes: StashConfig[];
   traders_access_restriction: boolean;
+  flea_access_restriction: boolean;
+  flea_access_level: number;
   traders_config: Record<string, TraderConfig>;
   exfiltrations: Exfiltrations;
   infiltrations: Infiltrations;
