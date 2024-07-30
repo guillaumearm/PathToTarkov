@@ -40,6 +40,8 @@ import type { DataCallbacks } from "@spt/callbacks/DataCallbacks";
 import type { IEmptyRequestData } from "@spt/models/eft/common/IEmptyRequestData";
 import type { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
 import type { IHideoutArea } from "@spt/models/eft/hideout/IHideoutArea";
+import type { LocationCallbacks } from "@spt/callbacks/LocationCallbacks";
+import type { IGetBodyResponseData } from "@spt/models/eft/httpResponse/IGetBodyResponseData";
 
 class OffraidRegenController {
   private getRegenConfig: () => Config["offraid_regen_config"];
@@ -270,6 +272,9 @@ export class PathToTarkovController {
         if (locationBase) {
           this.debug(`apply lock to map ${mapName} | locked=${locked}`);
           locationBase.Locked = locked;
+
+          // necessary for Fika
+          this.updateSpawnPoints(locationBase, offraidPosition);
         }
       });
 
@@ -280,21 +285,28 @@ export class PathToTarkovController {
 
   private createGetLocation(
     originalFn: (
+      url: string,
+      info: IGetLocationRequestData,
       sessionId: string,
-      request: IGetLocationRequestData,
-    ) => ILocationBase,
+    ) => IGetBodyResponseData<ILocationBase>,
   ) {
     return (
+      url: string,
+      info: IGetLocationRequestData,
       sessionId: string,
-      request: IGetLocationRequestData,
-    ): ILocationBase => {
-      this.debug("call locationController.get");
+    ): IGetBodyResponseData<ILocationBase> => {
+      this.debug("call locationCallbacks.getLocation");
 
       const offraidPosition = this.getOffraidPosition(sessionId);
-      const locationBase = originalFn(sessionId, request);
+      const rawLocationBase = originalFn(url, info, sessionId) as any as string;
+      const parsed = JSON.parse(rawLocationBase);
+      const locationBase: ILocationBase = parsed.data;
+
+      // This will handle spawnpoints for SPT
+      // For fika, check the other call of `updateSpawnPoints`
       this.updateSpawnPoints(locationBase, offraidPosition);
 
-      return locationBase;
+      return JSON.stringify(parsed) as any;
     };
   }
 
@@ -346,17 +358,17 @@ export class PathToTarkovController {
       url: string,
       info: IEmptyRequestData,
       sessionId: string,
-    ) => string,
+    ) => IGetBodyResponseData<IHideoutArea[]>,
   ) {
     return (
       url: string,
       info: IEmptyRequestData,
       sessionId: string,
-    ): string => {
+    ): IGetBodyResponseData<IHideoutArea[]> => {
       this.debug("call dataCallbacks.getHideoutAreas");
 
       const offraidPosition = this.getOffraidPosition(sessionId);
-      const rawResult = originalFn(url, info, sessionId);
+      const rawResult = originalFn(url, info, sessionId) as any as string;
 
       const parsed = JSON.parse(rawResult);
       const areas: IHideoutArea[] = parsed.data;
@@ -376,7 +388,7 @@ export class PathToTarkovController {
         this.debug("main hideout disabled");
       }
 
-      return JSON.stringify(parsed);
+      return JSON.stringify(parsed) as any;
     };
   }
 
@@ -390,9 +402,18 @@ export class PathToTarkovController {
 
         locationController.generateAll =
           this.createGenerateAll(originalGenerateAll);
+      },
+      { frequency: "Always" },
+    );
 
-        const originalGet = locationController.get.bind(locationController);
-        locationController.get = this.createGetLocation(originalGet);
+    this.container.afterResolution<LocationCallbacks>(
+      "LocationCallbacks",
+      (_t, result): void => {
+        const locationCallbacks = Array.isArray(result) ? result[0] : result;
+
+        const originalGet =
+          locationCallbacks.getLocation.bind(locationCallbacks);
+        locationCallbacks.getLocation = this.createGetLocation(originalGet);
       },
       { frequency: "Always" },
     );
@@ -412,10 +433,9 @@ export class PathToTarkovController {
         const originalGetHideoutAreas =
           dataCallbacks.getHideoutAreas.bind(dataCallbacks);
 
-        // TODO: improve types ?
         dataCallbacks.getHideoutAreas = this.createGetHideoutAreas(
-          originalGetHideoutAreas as any,
-        ) as any;
+          originalGetHideoutAreas,
+        );
       },
       { frequency: "Always" },
     );
@@ -504,6 +524,7 @@ export class PathToTarkovController {
         return;
       }
 
+      this.debug(`all player spawns cleaned up`);
       this.removePlayerSpawnsForLocation(locationBase);
 
       spawnpoints.forEach((spawnId) => {
@@ -519,10 +540,6 @@ export class PathToTarkovController {
           );
           locationBase?.SpawnPointParams.push(spawnPoint);
           this.debug(`player spawn '${spawnId}' added`);
-        } else {
-          this.debug(
-            `no spawn data found for spawnpoint ${spawnId} on map ${mapName}`,
-          );
         }
       });
     } else {
