@@ -221,6 +221,13 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     if (selectedLocale) {
       updateLocale(selectedLocale);
     }
+
+  
+  // disable run-through
+  const runThroughDB = database.globals.config.exp.match_end;
+  runThroughDB.survived_exp_requirement = 0;
+  runThroughDB.survived_seconds_requirement = 0;
+
   }
 }
 
