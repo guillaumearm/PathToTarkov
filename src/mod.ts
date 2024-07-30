@@ -11,7 +11,7 @@ import { createPathToTarkovAPI } from "./api";
 import type { Config, SpawnConfig } from "./config";
 import { CONFIG_PATH, PACKAGE_JSON_PATH, SPAWN_CONFIG_PATH } from "./config";
 import { EventWatcher } from "./event-watcher";
-import { createStaticRoutePeeker } from "./helpers";
+import { createStaticRoutePeeker, disableRunThrough } from "./helpers";
 import { enableKeepFoundInRaidTweak } from "./keep-fir-tweak";
 
 import { PathToTarkovController } from "./path-to-tarkov-controller";
@@ -134,6 +134,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       this.pathToTarkovController.tradersController.initTraders();
     }
 
+    const databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
     const saveServer = container.resolve<SaveServer>("SaveServer");
     const profiles = saveServer.getProfiles();
 
@@ -145,17 +146,14 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       this.pathToTarkovController.stashController.initSecondaryStashTemplates();
     this.debug(`${nbAddedTemplates} secondary stash templates added`);
 
+    if (!this.config.bypass_disable_run_through) {
+      disableRunThrough(databaseServer);
+      this.debug("disabled run through in-raid status");
+    }
+
     this.logger.success(
       `===> Successfully loaded ${getModDisplayName(this.packageJson, true)}`,
     );
-  
-  // disable run-through
-  const databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
-  const database = databaseServer.getTables();
-  const runThroughDB = database.globals.config.exp.match_end;
-  runThroughDB.survived_exp_requirement = 0;
-  runThroughDB.survived_seconds_requirement = 0;
-    
   }
 }
 
