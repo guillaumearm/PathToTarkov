@@ -42,6 +42,7 @@ import type { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem"
 import type { IHideoutArea } from "@spt/models/eft/hideout/IHideoutArea";
 import type { LocationCallbacks } from "@spt/callbacks/LocationCallbacks";
 import type { IGetBodyResponseData } from "@spt/models/eft/httpResponse/IGetBodyResponseData";
+import type { Inventory } from "@spt/models/eft/common/tables/IBotBase";
 
 class OffraidRegenController {
   private getRegenConfig: () => Config["offraid_regen_config"];
@@ -446,11 +447,15 @@ export class PathToTarkovController {
    */
   cleanupLegacySecondaryStashesLink(sessionId: string): void {
     const profile: Profile = this.saveServer.getProfile(sessionId);
-    const inventory = profile.characters.pmc.Inventory;
+    const inventory = profile.characters.pmc.Inventory as Inventory | undefined;
     const secondaryStashIds = [
       EMPTY_STASH.id,
       this.config.hideout_secondary_stashes.map((config) => config.id),
     ];
+
+    if (!inventory) {
+      return;
+    }
 
     let stashLinkRemoved = 0;
 
