@@ -8,7 +8,11 @@ import type { SaveServer } from "@spt/servers/SaveServer";
 import type { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
 
 import { createPathToTarkovAPI } from "./api";
-import type { Config, SpawnConfig } from "./config";
+import type {
+  Config,
+  PathToTarkovReloadedTooltipsConfig,
+  SpawnConfig,
+} from "./config";
 import { CONFIG_PATH, PACKAGE_JSON_PATH, SPAWN_CONFIG_PATH } from "./config";
 import { EventWatcher } from "./event-watcher";
 import { createStaticRoutePeeker, disableRunThrough } from "./helpers";
@@ -20,12 +24,23 @@ import type { PackageJson } from "./utils";
 import { getModDisplayName, noop, readJsonFile } from "./utils";
 import { EndOfRaidController } from "./end-of-raid-controller";
 import { fixRepeatableQuests } from "./fix-repeatable-quests";
+import { pathToTarkovReloadedTooltipsConfigCompat } from "./compats";
+
+const getTooltipsConfig = ():
+  | PathToTarkovReloadedTooltipsConfig
+  | undefined => {
+  try {
+    return require("../config/Tooltips.json");
+  } catch (_err) {
+    return undefined;
+  }
+};
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;
   private config: Config;
   private spawnConfig: SpawnConfig;
-
+  private tooltipsConfig: PathToTarkovReloadedTooltipsConfig | undefined;
   public logger: ILogger;
   public debug: (data: string) => void;
   public container: DependencyContainer;
@@ -37,6 +52,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.packageJson = readJsonFile(PACKAGE_JSON_PATH);
     this.config = readJsonFile(CONFIG_PATH);
     this.spawnConfig = readJsonFile(SPAWN_CONFIG_PATH);
+    this.tooltipsConfig = getTooltipsConfig();
 
     this.logger = container.resolve<ILogger>("WinstonLogger");
     this.debug = this.config.debug
@@ -111,13 +127,20 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     }
   }
 
-  private modConfig = require("../config/Tooltips.json");
-  
   public postSptLoad(container: DependencyContainer): void {
     this.container = container;
 
     if (!this.config.enabled) {
       return;
+    }
+
+    const db = container.resolve<DatabaseServer>("DatabaseServer");
+    const saveServer = container.resolve<SaveServer>("SaveServer");
+    const profiles = saveServer.getProfiles();
+
+    if (this.tooltipsConfig) {
+      pathToTarkovReloadedTooltipsConfigCompat(db, this.tooltipsConfig);
+      this.debug("injected legacy PTTR Tooltips.json file");
     }
 
     this.pathToTarkovController.generateEntrypoints();
@@ -136,10 +159,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       this.pathToTarkovController.tradersController.initTraders();
     }
 
-    const databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
-    const saveServer = container.resolve<SaveServer>("SaveServer");
-    const profiles = saveServer.getProfiles();
-
     Object.keys(profiles).forEach((profileId) => {
       this.pathToTarkovController.cleanupLegacySecondaryStashesLink(profileId);
     });
@@ -149,90 +168,13 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.debug(`${nbAddedTemplates} secondary stash templates added`);
 
     if (!this.config.bypass_disable_run_through) {
-      disableRunThrough(databaseServer);
+      disableRunThrough(db);
       this.debug("disabled run through in-raid status");
     }
 
     this.logger.success(
       `===> Successfully loaded ${getModDisplayName(this.packageJson, true)}`,
     );
-
-    const databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
-    const database = databaseServer.getTables();
-    const locales = database.locales.global;
-    
-    const tooltipLocale = this.modConfig.language.toLowerCase();
-    const localesToChange = this.modConfig.localesToChange;
-    const localesToChangeAdditional = this.modConfig.localesToChangeAdditional;
-    const additionalLocalesToggle = this.modConfig.additionalLocalesToggle;
-    const moddedTraderExtracts = this.modConfig.moddedTraderExtracts;
-    const moddedTraderCompat = this.modConfig.moddedTraderCompat;
-
-    // updated to cover all language locales
-    const updateLocale = (localeObj) => {
-      for (let i = 0; i < localesToChange.length; i += 2) {
-        localeObj[localesToChange[i]] = localesToChange[i + 1];
-      }
-      if (additionalLocalesToggle) {
-        for (let i = 0; i < localesToChangeAdditional.length; i += 2) {
-          localeObj[localesToChangeAdditional[i]] = localesToChangeAdditional[i + 1];
-        }
-      }
-      if (moddedTraderCompat) {
-        for (let i = 0; i < moddedTraderExtracts.length; i += 2) {
-          localeObj[moddedTraderExtracts[i]] = moddedTraderExtracts[i + 1];
-        }
-      }
-    };
-
-    const localeMappings = {
-      english: locales.en,
-      en: locales.en,
-      chinese: locales.ch,
-      ch: locales.ch,
-      czech: locales.cz,
-      cz: locales.cz,
-      french: locales.fr,
-      fr: locales.fr,
-      german: locales.ge,
-      ge: locales.ge,
-      hungarian: locales.hu,
-      hu: locales.hu,
-      italian: locales.it,
-      it: locales.it,
-      japanese: locales.jp,
-      jp: locales.jp,
-      korean: locales.kr,
-      kr: locales.kr,
-      polish: locales.pl,
-      pl: locales.pl,
-      portuguese: locales.po,
-      po: locales.po,
-      slovakian: locales.sk,
-      sk: locales.sk,
-      spanish: locales.es,
-      es: locales.es,
-      turkish: locales.tu,
-      tu: locales.tu,
-      russian: locales.ru,
-      ru: locales.ru,
-      romanian: locales.ro,
-      ro: locales.ro
-    };
-
-    // Get the locale object based on tooltipLocale
-    const selectedLocale = localeMappings[tooltipLocale];
-
-    // Update the selected locale if it exists
-    if (selectedLocale) {
-      updateLocale(selectedLocale);
-    }
-
-  
-  // disable run-through
-  const runThroughDB = database.globals.config.exp.match_end;
-  runThroughDB.survived_exp_requirement = 0;
-  runThroughDB.survived_seconds_requirement = 0;
   }
 }
 
