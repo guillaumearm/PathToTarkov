@@ -4,6 +4,8 @@
   "initial_offraid_position": "MechanicStash",
   "reset_offraid_position_on_player_die": true,
   "traders_access_restriction": true,
+  "flea_access_restriction": true,
+  "flea_access_level": 1,
   "hideout_multistash_enabled": true,
   "vanilla_exfils_requirements": false,
   "player_scav_move_offraid_position": false,
@@ -249,6 +251,16 @@
         "currency_coefficient": 12,
         "repair_price_coef": 0
       }
+    },
+    "ragfair": {
+      "// Trader name": "Flea Market",
+      "override_description": true,
+      "location_description": {
+        "en": "To access the Flea Market, go to Ragman's encampment",
+      },
+      "access_via": [
+        "RagmanStash"
+      ]
     }
   },
   "exfiltrations": {
