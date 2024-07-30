@@ -92,16 +92,8 @@ export class TradersController {
 
         // insurances update
         if (tradersConfig[traderId].insurance_always_enabled) {
-          const traders = this.db.getTables().traders;
-          const trader = traders?.[traderId];
           const insuranceTraderConfig =
             tradersConfig[traderId].insurance_config || {};
-
-          if (!trader) {
-            throw new Error(
-              `Fatal initTraders: unknown trader found '${traderId}'`,
-            );
-          }
 
           trader.base.insurance.availability = true;
           trader.base.insurance.min_payment =
@@ -121,17 +113,8 @@ export class TradersController {
 
         // repairs update
         if (tradersConfig[traderId].repair_always_enabled) {
-          const traders = this.db.getTables().traders;
-          const trader = traders?.[traderId];
-
           const repairTraderConfig =
             tradersConfig[traderId].repair_config || {};
-
-          if (!trader) {
-            throw new Error(
-              `=> PathToTarkov: unknown trader found '${traderId}'`,
-            );
-          }
 
           trader.base.repair.availability = true;
 
@@ -154,6 +137,24 @@ export class TradersController {
               payloadLevel.repair_price_coef = repairPriceCoef;
             });
           }
+        }
+
+        // offraid pay-to-heal config
+        if (tradersConfig[traderId].heal_always_enabled) {
+          trader.base.loyaltyLevels = trader.base.loyaltyLevels.map(
+            (loyaltyLevel, index) => {
+              if (loyaltyLevel.heal_price_coef > 0) {
+                return loyaltyLevel;
+              }
+
+              const addedPriceCoef = index === 3 ? 35 : index * 10;
+
+              return {
+                ...loyaltyLevel,
+                heal_price_coef: 100 + addedPriceCoef,
+              };
+            },
+          );
         }
       } else if (!this.getConfig().traders_config[traderId].disable_warning) {
         this.logger.warning(
