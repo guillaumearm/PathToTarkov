@@ -131,7 +131,7 @@ export const changeRestrictionsInRaid = (
   });
 };
 
-export const disableRunThrough = (db: DatabaseServer) => {
+export const disableRunThrough = (db: DatabaseServer): void => {
   const database = db.getTables();
 
   if (!database.globals) {
