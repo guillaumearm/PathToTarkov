@@ -148,6 +148,82 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.logger.success(
       `===> Successfully loaded ${getModDisplayName(this.packageJson, true)}`,
     );
+
+    const databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
+    const database = databaseServer.getTables();
+    const locales = database.locales.global;
+    
+    const tooltipLocale = this.modConfig.language.toLowerCase();
+    const localesToChange = this.modConfig.localesToChange;
+    const localesToChangeAdditional = this.modConfig.localesToChangeAdditional;
+    const additionalLocalesToggle = this.modConfig.additionalLocalesToggle;
+    const moddedTraderExtracts = this.modConfig.moddedTraderExtracts;
+    const moddedTraderCompat = this.modConfig.moddedTraderCompat;
+
+    // disable run-through
+    const runThroughDB = database.globals.config.exp.match_end;
+    runThroughDB.survived_exp_requirement = 0;
+    runThroughDB.survived_seconds_requirement = 0;
+
+    // updated to cover all language locales
+    const updateLocale = (localeObj) => {
+      for (let i = 0; i < localesToChange.length; i += 2) {
+        localeObj[localesToChange[i]] = localesToChange[i + 1];
+      }
+      if (additionalLocalesToggle) {
+        for (let i = 0; i < localesToChangeAdditional.length; i += 2) {
+          localeObj[localesToChangeAdditional[i]] = localesToChangeAdditional[i + 1];
+        }
+      }
+      if (moddedTraderCompat) {
+        for (let i = 0; i < moddedTraderExtracts.length; i += 2) {
+          localeObj[moddedTraderExtracts[i]] = moddedTraderExtracts[i + 1];
+        }
+      }
+    };
+
+    const localeMappings = {
+      english: locales.en,
+      en: locales.en,
+      chinese: locales.ch,
+      ch: locales.ch,
+      czech: locales.cz,
+      cz: locales.cz,
+      french: locales.fr,
+      fr: locales.fr,
+      german: locales.ge,
+      ge: locales.ge,
+      hungarian: locales.hu,
+      hu: locales.hu,
+      italian: locales.it,
+      it: locales.it,
+      japanese: locales.jp,
+      jp: locales.jp,
+      korean: locales.kr,
+      kr: locales.kr,
+      polish: locales.pl,
+      pl: locales.pl,
+      portuguese: locales.po,
+      po: locales.po,
+      slovakian: locales.sk,
+      sk: locales.sk,
+      spanish: locales.es,
+      es: locales.es,
+      turkish: locales.tu,
+      tu: locales.tu,
+      russian: locales.ru,
+      ru: locales.ru,
+      romanian: locales.ro,
+      ro: locales.ro
+    };
+
+    // Get the locale object based on tooltipLocale
+    const selectedLocale = localeMappings[tooltipLocale];
+
+    // Update the selected locale if it exists
+    if (selectedLocale) {
+      updateLocale(selectedLocale);
+    }
   }
 }
 
