@@ -1,0 +1,116 @@
+{
+    "comment": "In the locales arrays below, even indexes (including 0) must be locale keywords, and odd indexes are the overwrite locale values.",
+    "comment": "If you are using the mode that includes the extra trader and specific trader/ stash locations, this should be set to true",
+    "comment": "If you are using the standard config, this should be set to false",
+    
+    "language": "english",
+    
+    "moddedTraderCompat": false,
+    "additionalLocalesToggle": false,
+  
+   "moddedTraderExtracts": [
+        "Saferoom Exfil", "Saferoom (Goblin King)",
+        "EXFIL_ZB013", "ZB-1013 Storage Bunker (Broker)"
+    ],
+  
+    "localesToChangeAdditional": [],
+    
+    "localesToChange": [    
+	"East Gate", "Scav Bunker (Prapor)",
+    "Unity_free_exit", "Emercom Checkpoint (Therapist)",
+    "Warehouse 17", "Warehouse 17 (Skier)",
+    "Mountain Stash", "Mountain Stash (Jaeger)",
+    "Interchange Cooperation", "Scav Camp (Ragman/Flea/Customs)",
+    "Trailer Park", "Trailer Park (Ragman/Flea/Interchange)",
+    "Trailer Park Workers Shack", "Trailer Park Workers' Shack (Legs)",
+    "EXFIL_Bunker_D2", "D-2 (Peacekeeper/Shoreline*)",
+	"South Fence Passage", "Old Bunker (Peacekeeper)",
+	"Camera Bunker Door", "Camera Bunker Door (Mechanic)",
+    "Railroad To Port", "RR to Port (Ref/Shoreline)",
+    "Road_at_railbridge", "Railbridge (Ref/Customs)",
+	"Scav_Hideout_at_the_grotto", "Hideout at the Grotto (Artem)",
+    "Railroad To Tarkov", "RR to Tarkov (Painter/Streets/Interchange)",
+    "NW Exfil", "Railway (Painter/Customs/Woods/Streets)",
+    "E4", "Crash Site (Painter/Customs/Interchange)",
+    "ZB-014", "ZB-014 (Scorpion)",
+    "EXFIL_Bunker", "Bunker Hermetic Door (Woods, ZB-014*)",
+
+    "Gate 3", "Gate 3 (Woods, ZB-1016)",
+    "Gate m", "Med Tent Gates (Customs, ZB-1012)",	
+	"Gate 0", "Gate 0 (Customs, ZB-1011)",	
+	"Cellars", "Cellars (Customs, ZB-1013)",
+    "Office Window", "Office Window (Customs/Woods)",
+	
+	"ZB-1011", "ZB-1011 (Hideout/Factory)",
+	"ZB-1012", "ZB-1012 (Factory, Med Tent Gates)",
+	"EXFIL_ZB013", "ZB-1013 (Factory, Cellars)",
+    "Military Checkpoint", "Scav Checkpoint (Woods/Lighthouse)", 
+    "Sniper Roadblock", "Sniper Roadblock (Reserve*/Shoreline)",    
+    "Smuggler's Boat", "Smuggler's Boat (Lighthouse*/Shoreline/Woods*",   
+    "Dorms V-Ex", "Dorms SUV (Shoreline, North Fence SUV)",   
+    "RUAF Roadblock", "RUAF Roadblock (Woods, UN Roadblock)",      
+    "Old Azs Gate", "Old Gas Gate (Factory/Woods)",   
+    "Shack", "Military Base Checkpoint (Reserve, Scav lands)",
+    "Crossroads", "Crossroads (Interchange/Shoreline*)",
+    "Railroad To Military Base", "RR to Military Base (Reserve, Scav land rails*)",
+    "Factory Far Corner", "Factory Corner (Woods, RUAF Gate)",
+	
+    "un-sec", "North UN Roadblock (Customs, RUAF Roadblock*)",
+    "Factory gate", "Factory Gate (Customs, Old Gas Gate)",
+    "ZB-016", "ZB-016 (Factory, Gate 3)",
+    "Outskirts", "Outskirts (Customs/Lighthouse)",
+    "UN Roadblock", "UN Roadblock (Customs/Interchange)",
+    "South V-Ex", "Bridge SUV (Streets/Interchange/GZ)",
+    "RUAF Gate", "RUAF Gate (Customs, Factory Corner)",
+	
+    "EXFIL_ScavCooperation", "Scav lands (Customs, Military Base CP)",
+    "EXFIL_Train", "Armored Train (all maps besides GZ*)",
+    "Exit1", "Hole in the Wall (Customs, Dorms Car*)",   
+    "Exit4", "Checkpoint Fence (Lighthouse, Northeast Mountains*)",   
+    "Alpinist", "Cliff Descent (Shoreline, Climber's Trail)",	
+	"EXFIL_Vent", "Manhole (Streets, Manhole)",
+	
+    "PP Exfil", "Power Station SUV (Painter/Streets/Woods/GZ)",
+    "SE Exfil", "Emercom Checkpoint (Customs, Crossroads)",
+	"Saferoom Exfil", "Saferoom (Stash)",
+
+    "E1", "Sylovate Elevator (Labs, Main Elevator)",
+    "E2", "Sewer River (Labs, Sewage Conduit)",
+	"E7", "Expo Checkpoint (Flea/Ground Zero)",
+    "E7_car", "Primorsky Ave Taxi (Woods/Interchange/GZ)",
+	"E9_sniper", "Klimov Ave (Ground Zero, Mira Ave)",
+    "scav_e1", "Basement Descent (Labs/Ground Zero)",
+    "scav_e2", "Entrance to Catacombs (Labs, Hangar Gate)",
+    "scav_e3", "Vent Shaft (Lab, Vents)", 
+    "scav_e4", "Manhole (Reserve, Manhole)",
+
+    "Road to Customs", "Road to Customs (Customs, Sniper Roadblock*)",
+    "Pier Boat", "Pier Boat (Lighthouse*/Customs/Woods*)",
+    "Tunnel", "Tunnel (Lighthouse, Side Tunnel)",
+	"Wrecked Road", "Ruined Road (Lighthouse, Southern Road)",
+	"Smugglers_Trail_coop", "Smuggler's Path (Customs/Reserve*)",
+	"Shorl_V-Ex", "North Fence SUV (Customs, Dorms SUV)",
+    "Lighthouse_pass", "Path to Lighthouse",
+	"RedRebel_alp", "Climber's Trail (Reserve, Cliff Descent)",
+
+    "Nothern_Checkpoint", "Northern Checkpoint (Woods/Customs)",
+    " V-ex_light", "Military Base SUV (Reserve, CP Fence)",
+    "Shorl_free", "Path to Shoreline",
+    "Coastal_South_road", "Southern Road (Shoreline, Ruined Road)",
+    "Alpinist_light", "Mountain Pass (Shoreline, Path to Shoreline*)",
+    "Tunnel_Shared", "Side Tunnel (Shoreline, Tunnel)",
+    "Scav_Hideout_at_the_grotto", "Hideout at the Grotto (Artem)",
+	"EXFIL_Train", "Armored Train (all maps besides GZ*)", 
+
+    "lab_Elevator_Cargo", "Cargo Elevator (Streets/Ground Zero)",
+    "lab_Elevator_Main", "Main Elevator (Streets, Sylobate Elevator)",
+    "lab_Hangar_Gate", "Hangar Gate (Streets, Catacombs)",
+    "lab_Under_Storage_Collector", "Sewage Conduit (Streets, Sewer River)",
+    "lab_Vent", "Vents (Streets, Vent Shaft)",
+	
+	"Sandbox_VExit", "Police Car (Woods/Interchange/Streets)",
+	"Nakatani_stairs_free_exit", "Nakatani Basement Stairs (Streets/Labs)",
+	"Sniper_exit", "Mira Ave (Streets, Klimov Ave)",
+	"Scav_coop_exit", "Scav Checkpoint (Flea/Streets)"
+    ]
+}
