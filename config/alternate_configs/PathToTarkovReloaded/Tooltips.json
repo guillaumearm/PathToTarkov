@@ -1,0 +1,216 @@
+{
+  "comment": "In the locales arrays below, even indexes (including 0) must be locale keywords, and odd indexes are the overwrite locale values.",
+  "comment": "If you are using the mode that includes the extra trader and specific trader/ stash locations, this should be set to true",
+  "comment": "If you are using the standard config, this should be set to false",
+
+  "moddedTraderCompat": false,
+  "additionalLocalesToggle": true,
+
+  "moddedTraderExtracts": [
+    "Saferoom Exfil",
+    "Saferoom (Goblin King)",
+    "EXFIL_ZB013",
+    "ZB-1013 Storage Bunker (Broker)"
+  ],
+
+  "localesToChangeAdditional": [
+    "RUAF Roadblock",
+    "North UN Woods(PeaceKeeper)",
+
+    "un-sec",
+    "RUAF Roadblock(PeaceKeeper)",
+
+    "Road to Customs",
+    "Road to Customs to Customs, SniperRoadblock(Skier)",
+
+    "Sniper Roadblock",
+    "Sniper Roadblock to Shoreline, Road to Customs(Skier)",
+
+    "Smuggler's Boat",
+    "Shoreline,Woods,Lighthouse(Machine,Artem,Jaeger)",
+
+    "PP Exfil",
+    "Car (Home,Prapor,Therapist,Rag,Jae,Harry)",
+
+    "South V-Ex",
+    "Car (Jaeger)",
+
+    "Dorms V-Ex",
+    "Car (Jaeger)",
+
+    " V-Ex_light",
+    "Car (Jaeger)",
+
+    "Pier Boat",
+    "Boat (Machine,Artem)",
+
+    "The Boat",
+    "Boat (Machine,Artem)",
+
+    "Smuggler's Boat",
+    "Boat (Machine,Artem)",
+
+    "Gate 0",
+    "WoodsFactoryGate (Prapor)",
+
+    "WoodsFactoryGate",
+    "Gate 0 (Prapor)",
+
+    "Hole Exfil",
+    "Crossroads (The Machine)",
+
+    "Crossroads",
+    "Hole Exfil (The Machine)",
+
+    "ZB-1012",
+    "ZB-1012 to Factory, Med tent gate(Mechanic)",
+
+    "ZB-1011",
+    "Zb-1011 to Factory, Cellars(Mechanic)",
+
+    "ZB-1013",
+    "ZB-1013 to Factory, Gate 3(Mechanic)",
+
+    "ZB-1014",
+    "ZB-1014 to Factory, Gate 3(Mechanic)",
+
+    "Outskirts",
+    "Outskirts to Reserve and Shoreline (Priscillu)",
+
+    "Checkpoint Fence",
+    "Checkpoint Fence to Woods and Shoreline (Priscillu)",
+
+    "Nakatani_stairs_free_exit",
+    "Nakatani Basement (Hideout)"
+  ],
+
+  "localesToChange": [
+    "Gate 0",
+    "Gate 0 (to Customs, Old Gas Gate)",
+    "Gate 3",
+    "Gate 3 (to Customs, Factory Far Corner)",
+    "Gate m",
+    "Medical Tent (to Woods, Factory Gate)",
+
+    "Outskirts Water",
+    "Northern Bridge (to Streets, Car)",
+    "South V-Ex",
+    "Bridge Car (to Streets, Car)",
+    "un-sec",
+    "N. UN Roadblock (to Customs, RUAF)",
+    "UN Roadblock",
+    "UN Roadblock (to Customs, RUAF)",
+    "Factory gate",
+    "Factory Gate (to Factory, Med Tent)",
+    "Outskirts",
+    "Outskirts (to Lighthouse, N. Checkpoint)",
+
+    "Old Azs Gate",
+    "Old Gas Gate (to Factory, Gate 0)",
+    "Factory Far Corner",
+    "Factory Far Corner (to Factory, Gate 3)",
+    "RUAF Roadblock",
+    "RUAF Roadblock (to Woods, N. UN Roadblock)",
+    "Railroad To Tarkov",
+    "RR to Tarkov (to Interchange, Railway)",
+    "Crossroads",
+    "Crossroads (to Shoreline, Road to Customs)",
+    "Railroad To Port",
+    "RR to Port (to Shoreline, Railbridge)",
+    "Railroad To Military Base",
+    "RR to Mil Base (to Reserve, Train Station *1way)",
+
+    "NW Exfil",
+    "Railway (to Customs, RR to Tarkov)",
+    "PP Exfil",
+    "Power Station Car (to Streets, Underpass)",
+    "SE Exfil",
+    "Emercom (to Streets, Underpass)",
+
+    "E1",
+    "Underpass (to Interchange, Emercom)",
+    "E2",
+    "Sewer River (to Lab, Sewage Conduit)",
+    "E4",
+    "Evac to Mil Base (to Reserve, Checkpoint Fence)",
+    "E7_car",
+    "Primorsky Ave Taxi (to Woods, Bridge Car)",
+    "scav_e1",
+    "Basement Descent (to Lab, Main Elevator)",
+    "scav_e2",
+    "Entrance to Catacombs (to Lab, Parking Gate)",
+    "scav_e3",
+    "Vents (to Lab, Vents)",
+    "scav_e4",
+    "Manhole (to Reserve, Manhole)",
+
+    "Alpinist",
+    "Cliff Descent (to Shoreline, N. Cliffs *1way)",
+    "EXFIL_vent",
+    "Manhole (to Streets, Manhole)",
+    "Exit4",
+    "Checkpoint Fence (to Streets, Evac to Mil Base)",
+    "EXFIL_Bunker",
+    "Bunker Hermetic Door (to Shoreline, Checkpoint *1way)",
+    "EXFIL_BUNKER_D2",
+    "D-2 (to Woods, Snip er Rock Bunker *1way)",
+
+    "Road to Customs",
+    "Road to Customs (to Customs, Crossroads)",
+    "Pier Boat",
+    "Pier Boat (to Lighthouse, Woods, Customs, Machine,Artem,Jaeger)",
+    "Tunnel",
+    "Tunnel (to Lighthouse, Side Tunnel)",
+    "Lighthouse_pass",
+    "Path to Lighthouse (... you get it)",
+    "South Fence Passage",
+    "North Fence Passage (to Reserve, Hole in Wall *1way)",
+    "Road_at_railbridge",
+    "Railbridge (to Customs, RR to Port)",
+
+    "Nothern_Checkpoint",
+    "Northern CP (to Woods, Outskirts)",
+    " V-ex_light",
+    "Car Ride Home",
+    "Shorl_free",
+    "Path to Shoreline (I swear if you ask)",
+    "Coastal_South_road",
+    "Southern Road (to Shoreline, Tunnel)",
+    "Alpinist_light",
+    "Mountain Pass (to Shoreline, Path to Shoreline)",
+    "Tunnel_Shared",
+    "Side Tunnel (to Shoreline, Tunnel)",
+    "Scav_Hideout_at_the_grotto",
+    "Hideout at the Grotto (to Shoreline, Pier Boat)",
+
+    "lab_Elevator_Cargo",
+    "Cargo Elevator (to Streets, Basement)",
+    "lab_Elevator_Main",
+    "Main Elevator (to Streets, Basement)",
+    "lab_Elevator_med",
+    "Medical Block Elevator (to Streets, Basement)",
+    "lab_Hangar_Gate",
+    "Hangar Gate (to Streets, Catacombs)",
+    "lab_Parking_Gate",
+    "Parking Gate (to Streets, Catacombs)",
+    "lab_Under_Storage_Collector",
+    "Sewage Conduit (to Streets, Sewer River)",
+    "lab_Vent",
+    "Vents (to Streets, Vents)",
+
+    "5a7c2eca46aef81a7ca2145d Location",
+    "",
+    "5ac3b934156ae10c4430e83c Location",
+    "",
+    "54cb50c76803fa8b248b4571 Location",
+    "",
+    "54cb57776803fa99248b456e Location",
+    "",
+    "58330581ace78e27b8b10cee Location",
+    "",
+    "5935c25fb3acc3127c3d8cd9 Location",
+    "",
+    "5c0647fdd443bc2504c2d371 Location",
+    ""
+  ]
+}
