@@ -148,6 +148,14 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.logger.success(
       `===> Successfully loaded ${getModDisplayName(this.packageJson, true)}`,
     );
+  
+  // disable run-through
+  const databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
+  const database = databaseServer.getTables();
+  const runThroughDB = database.globals.config.exp.match_end;
+  runThroughDB.survived_exp_requirement = 0;
+  runThroughDB.survived_seconds_requirement = 0;
+    
   }
 }
 
