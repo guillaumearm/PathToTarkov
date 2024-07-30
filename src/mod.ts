@@ -134,6 +134,10 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       this.pathToTarkovController.tradersController.initTraders();
     }
 
+    if (this.config.flea_access_restriction) {
+      this.pathToTarkovController.tradersController.initFlea();
+    }
+
     const saveServer = container.resolve<SaveServer>("SaveServer");
     const profiles = saveServer.getProfiles();
 
