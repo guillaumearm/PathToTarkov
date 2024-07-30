@@ -131,6 +131,18 @@ export const changeRestrictionsInRaid = (
   });
 };
 
+export const disableRunThrough = (db: DatabaseServer): void => {
+  const database = db.getTables();
+
+  if (!database.globals) {
+    throw new Error("Unable to retrive globals settings in db");
+  }
+
+  const runThroughDB = database.globals.config.exp.match_end;
+  runThroughDB.survived_exp_requirement = 0;
+  runThroughDB.survived_seconds_requirement = 0;
+};
+
 // more infos on areas here: https://hub.sp-tarkov.com/doc/entry/4-resources-hideout-areas-ids/
 export const isIgnoredArea = (area: IHideoutArea, config: Config): boolean => {
   if (typeof area.type !== "number") {

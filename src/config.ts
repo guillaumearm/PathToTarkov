@@ -89,6 +89,7 @@ type TraderConfig = {
   insurance_config?: InsuranceConfig;
   repair_always_enabled?: boolean;
   repair_config?: RepairConfig;
+  heal_always_enabled?: boolean;
 };
 
 type SpawnPointName = string;
@@ -114,6 +115,7 @@ export type Config = {
   vanilla_exfils_requirements?: boolean;
   bypass_exfils_override?: boolean;
   bypass_uninstall_procedure: boolean;
+  bypass_disable_run_through?: boolean;
   bypass_luas_custom_spawn_points_tweak?: boolean;
   restrictions_in_raid: Record<string, { Value: number }>;
   offraid_regen_config: {
