@@ -8,7 +8,11 @@ import type { SaveServer } from "@spt/servers/SaveServer";
 import type { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
 
 import { createPathToTarkovAPI } from "./api";
-import type { Config, SpawnConfig } from "./config";
+import type {
+  Config,
+  PathToTarkovReloadedTooltipsConfig,
+  SpawnConfig,
+} from "./config";
 import { CONFIG_PATH, PACKAGE_JSON_PATH, SPAWN_CONFIG_PATH } from "./config";
 import { EventWatcher } from "./event-watcher";
 import { createStaticRoutePeeker, disableRunThrough } from "./helpers";
@@ -20,12 +24,23 @@ import type { PackageJson } from "./utils";
 import { getModDisplayName, noop, readJsonFile } from "./utils";
 import { EndOfRaidController } from "./end-of-raid-controller";
 import { fixRepeatableQuests } from "./fix-repeatable-quests";
+import { pathToTarkovReloadedTooltipsConfigCompat } from "./compats";
+
+const getTooltipsConfig = ():
+  | PathToTarkovReloadedTooltipsConfig
+  | undefined => {
+  try {
+    return require("../config/Tooltips.json");
+  } catch (_err) {
+    return undefined;
+  }
+};
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;
   private config: Config;
   private spawnConfig: SpawnConfig;
-
+  private tooltipsConfig: PathToTarkovReloadedTooltipsConfig | undefined;
   public logger: ILogger;
   public debug: (data: string) => void;
   public container: DependencyContainer;
@@ -37,6 +52,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.packageJson = readJsonFile(PACKAGE_JSON_PATH);
     this.config = readJsonFile(CONFIG_PATH);
     this.spawnConfig = readJsonFile(SPAWN_CONFIG_PATH);
+    this.tooltipsConfig = getTooltipsConfig();
 
     this.logger = container.resolve<ILogger>("WinstonLogger");
     this.debug = this.config.debug
@@ -118,6 +134,15 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       return;
     }
 
+    const db = container.resolve<DatabaseServer>("DatabaseServer");
+    const saveServer = container.resolve<SaveServer>("SaveServer");
+    const profiles = saveServer.getProfiles();
+
+    if (this.tooltipsConfig) {
+      pathToTarkovReloadedTooltipsConfigCompat(db, this.tooltipsConfig);
+      this.debug("injected legacy PTTR Tooltips.json file");
+    }
+
     this.pathToTarkovController.generateEntrypoints();
 
     const [api, executeOnStartAPICallbacks] = createPathToTarkovAPI(
@@ -150,7 +175,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.debug(`${nbAddedTemplates} secondary stash templates added`);
 
     if (!this.config.bypass_disable_run_through) {
-      disableRunThrough(databaseServer);
+      disableRunThrough(db);
       this.debug("disabled run through in-raid status");
     }
 
