@@ -89,6 +89,7 @@ type TraderConfig = {
   insurance_config?: InsuranceConfig;
   repair_always_enabled?: boolean;
   repair_config?: RepairConfig;
+  heal_always_enabled?: boolean;
 };
 
 type SpawnPointName = string;
