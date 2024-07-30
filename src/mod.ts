@@ -111,6 +111,8 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     }
   }
 
+  private modConfig = require("../config/Tooltips.json");
+
   public postSptLoad(container: DependencyContainer): void {
     this.container = container;
 
