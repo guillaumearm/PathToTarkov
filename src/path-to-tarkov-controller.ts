@@ -271,7 +271,12 @@ export class PathToTarkovController {
         const locationBase = indexedLocations[mapName];
 
         if (locationBase) {
-          this.debug(`apply lock to map ${mapName} | locked=${locked}`);
+          if (locked && !locationBase.Locked) {
+            this.debug(`lock map ${mapName}`);
+          } else if (!locked && locationBase.Locked) {
+            this.debug(`unlock map ${mapName}`);
+          }
+
           locationBase.Locked = locked;
 
           // necessary for Fika
@@ -548,10 +553,6 @@ export class PathToTarkovController {
           this.debug(`player spawn '${spawnId}' added`);
         }
       });
-    } else {
-      this.debug(
-        `no spawn point found for map ${mapName} at offraid position '${offraidPosition}'`,
-      );
     }
   }
 
