@@ -12,11 +12,12 @@ export const pathToTarkovReloadedTooltipsConfigCompat = (
     throw new Error("Cannot load locales from db");
   }
 
-  const tooltipLocale = tooltipsConfig.language.toLowerCase();
-  const localesToChange = tooltipsConfig.localesToChange;
-  const localesToChangeAdditional = tooltipsConfig.localesToChangeAdditional;
+  const tooltipLocale = tooltipsConfig.language?.toLowerCase() ?? "en";
+  const localesToChange = tooltipsConfig.localesToChange ?? [];
+  const localesToChangeAdditional =
+    tooltipsConfig.localesToChangeAdditional ?? [];
   const additionalLocalesToggle = tooltipsConfig.additionalLocalesToggle;
-  const moddedTraderExtracts = tooltipsConfig.moddedTraderExtracts;
+  const moddedTraderExtracts = tooltipsConfig.moddedTraderExtracts ?? [];
   const moddedTraderCompat = tooltipsConfig.moddedTraderCompat;
 
   // updated to cover all language locales

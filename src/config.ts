@@ -132,12 +132,12 @@ export type Config = {
 };
 
 export type PathToTarkovReloadedTooltipsConfig = {
-  language: string;
-  moddedTraderCompat: boolean;
-  additionalLocalesToggle: boolean;
-  moddedTraderExtracts: string[];
-  localesToChangeAdditional: string[];
-  localesToChange: string[];
+  language?: string;
+  moddedTraderCompat?: boolean;
+  additionalLocalesToggle?: boolean;
+  moddedTraderExtracts?: string[];
+  localesToChangeAdditional?: string[];
+  localesToChange?: string[];
 };
 
 export type Profile = ISptProfile & {

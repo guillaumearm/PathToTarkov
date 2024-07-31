@@ -24,7 +24,7 @@ import type { PackageJson } from "./utils";
 import { getModDisplayName, noop, readJsonFile } from "./utils";
 import { EndOfRaidController } from "./end-of-raid-controller";
 import { fixRepeatableQuests } from "./fix-repeatable-quests";
-import { pathToTarkovReloadedTooltipsConfigCompat } from "./compats";
+import { pathToTarkovReloadedTooltipsConfigCompat } from "./pttr-tooltips";
 
 const getTooltipsConfig = ():
   | PathToTarkovReloadedTooltipsConfig
