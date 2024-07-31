@@ -492,12 +492,16 @@ export class PathToTarkovController {
         }
 
         if (this.config.vanilla_exfils_requirements) {
+          const usedExitNames = new Set<string>();
+
           // filter all exits and keep vanilla requirements (except for ScavCooperation requirements)
           location.base.exits = location.base.exits
             .filter((exit) => {
               return extractPoints.includes(exit.Name);
             })
             .map((exit) => {
+              usedExitNames.add(exit.Name);
+
               if (exit.PassageRequirement === "ScavCooperation") {
                 return createExitPoint(entrypointsForMap)(exit.Name);
               }
@@ -508,6 +512,14 @@ export class PathToTarkovController {
 
               return exit;
             });
+
+          // add missing extractPoints (potentially scav extracts)
+          extractPoints.forEach((extractName) => {
+            if (!usedExitNames.has(extractName)) {
+              const exitPoint = createExitPoint(entrypointsForMap)(extractName);
+              location.base.exits.push(exitPoint);
+            }
+          });
         } else {
           // erase all exits and create custom exit points without requirements
           location.base.exits = extractPoints.map(
