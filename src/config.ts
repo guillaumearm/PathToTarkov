@@ -117,6 +117,7 @@ export type Config = {
   bypass_uninstall_procedure: boolean;
   bypass_disable_run_through?: boolean;
   bypass_luas_custom_spawn_points_tweak?: boolean;
+  enable_legacy_ptt_api?: boolean;
   restrictions_in_raid: Record<string, { Value: number }>;
   offraid_regen_config: {
     hydration: { access_via: AccessVia };

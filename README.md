@@ -47,6 +47,13 @@ It does 2 things in all existing profiles:
 Check the [Path To Tarkov Additions](https://github.com/guillaumearm/PathToTarkovAdditions) mod to setup additional restrictions.
 
 ## Modding API
+
+⚠️Since PTT 5.2.0 the modding api is deprecated and disabled by default because any usage of `setConfig`, `setSpawnConfig` or `refresh` will not be guaranteed to work due to the rewrite for Fika.
+
+If you still want to play with it, you can add an option `enable_legacy_ptt_api` in your ptt config set to `true`.
+
+I'll try soon to provide a new better way to change a config dynamically.
+
 Example: 
 ```js
 if (!globalThis.PathToTarkovAPI) {
@@ -59,7 +66,7 @@ PathToTarkovAPI.onStart((sessionId) => {
     const spawnConfig = PathToTarkovAPI.getSpawnConfig();
 
     // make some config changes
-    config.player_scav_move_offraid_position = false;
+    config.reset_offraid_position_on_player_die = false;
 
     PathToTarkovAPI.setConfig(config);
     PathToTarkovAPI.setSpawnConfig(spawnConfig); // not needed if not changed, it's just for the example
