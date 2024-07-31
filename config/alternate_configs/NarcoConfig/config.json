@@ -20,7 +20,6 @@
   "workbench_always_enabled": true,
   "bypass_keep_found_in_raid_tweak": false,
   "bypass_uninstall_procedure": false,
-  "bypass_luas_custom_spawn_points_tweak": false,
   "restrictions_in_raid": {
     "5449016a4bdc2d6f028b456f": {
       "// type = roubles": true,

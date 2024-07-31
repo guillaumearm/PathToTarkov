@@ -402,12 +402,6 @@ export class PathToTarkovController {
     this.updateOffraidPosition(sessionId, offraidPosition);
   }
 
-  // This is a fix to ensure Lua's Custom Spawn Point mod do not override player spawn point
-  public hijackLuasCustomSpawnPointsUpdate(): void {
-    // TODO: get rid of the config option "bypass_luas_custom_spawn_points_tweak"
-    return;
-  }
-
   private removePlayerSpawnsForLocation(locationBase: ILocationBase): void {
     locationBase.SpawnPointParams = locationBase.SpawnPointParams.filter(
       (params) => {
