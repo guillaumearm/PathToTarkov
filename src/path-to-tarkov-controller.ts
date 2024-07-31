@@ -8,6 +8,7 @@ import type {
   Config,
   ConfigGetter,
   MapName,
+  OffraidRegenConfig,
   Profile,
   SpawnConfig,
 } from "./config";
@@ -45,7 +46,7 @@ import type { IGetBodyResponseData } from "@spt/models/eft/httpResponse/IGetBody
 import type { Inventory } from "@spt/models/eft/common/tables/IBotBase";
 
 class OffraidRegenController {
-  private getRegenConfig: () => Config["offraid_regen_config"];
+  private getRegenConfig: () => OffraidRegenConfig;
 
   private regen_hydration_enabled = true;
   private regen_energy_enabled = true;

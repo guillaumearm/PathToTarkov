@@ -103,6 +103,12 @@ type Infiltrations = {
   [exfiltrationPoint: ExfiltrationPoint]: ByMap<SpawnPointName[]>;
 };
 
+export type OffraidRegenConfig = {
+  hydration: { access_via: AccessVia };
+  energy: { access_via: AccessVia };
+  health: { access_via: AccessVia };
+};
+
 export type Config = {
   enabled: boolean;
   debug?: boolean;
@@ -119,11 +125,7 @@ export type Config = {
   bypass_luas_custom_spawn_points_tweak?: boolean;
   enable_legacy_ptt_api?: boolean;
   restrictions_in_raid: Record<string, { Value: number }>;
-  offraid_regen_config: {
-    hydration: { access_via: AccessVia };
-    energy: { access_via: AccessVia };
-    health: { access_via: AccessVia };
-  };
+  offraid_regen_config: OffraidRegenConfig;
   hideout_main_stash_access_via: AccessVia;
   hideout_secondary_stashes: StashConfig[];
   traders_access_restriction: boolean;
