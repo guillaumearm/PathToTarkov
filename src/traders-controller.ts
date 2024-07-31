@@ -113,6 +113,7 @@ export class TradersController {
 
         // offraid pay-to-heal config
         if (tradersConfig[traderId].heal_always_enabled) {
+          trader.base.medic = true;
           trader.base.loyaltyLevels = trader.base.loyaltyLevels.map(
             (loyaltyLevel, index) => {
               if (loyaltyLevel.heal_price_coef > 0) {
