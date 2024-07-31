@@ -29,22 +29,24 @@ export const fixRepeatableQuests = (
             pmcTraderInfo,
             questTypePool,
             repeatableConfig,
-          );
-
-          debug(
-            `Repeatable quest of type '${repeatableQuest.type}' generated!`,
-          );
+          ) as IRepeatableQuest | undefined;
 
           if (repeatableQuest) {
+            debug(
+              `Repeatable quest of type '${repeatableQuest.type}' generated!`,
+            );
+
             if (!repeatableQuest.traderId) {
               debug(
                 "no traderId found on generated repeatable quest, generating another quest...",
               );
               return null as any;
             }
+          } else {
+            debug(`Cannot generate repeatable quest`);
           }
 
-          return repeatableQuest;
+          return repeatableQuest!;
         };
       });
     },
