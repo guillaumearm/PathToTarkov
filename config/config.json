@@ -27,13 +27,13 @@
   },
   "offraid_regen_config": {
     "hydration": {
-      "access_via": "*"
+      "access_via": ["*"]
     },
     "energy": {
-      "access_via": "*"
+      "access_via": ["*"]
     },
     "health": {
-      "access_via": "*"
+      "access_via": ["*"]
     }
   },
   "hideout_main_stash_access_via": ["MechanicStash"],
