@@ -121,8 +121,8 @@ export type Config = {
   vanilla_exfils_requirements?: boolean;
   bypass_exfils_override?: boolean;
   bypass_uninstall_procedure: boolean;
-  bypass_disable_run_through?: boolean;
   bypass_luas_custom_spawn_points_tweak?: boolean;
+  enable_run_through?: boolean;
   enable_legacy_ptt_api?: boolean;
   restrictions_in_raid: Record<string, { Value: number }>;
   offraid_regen_config: OffraidRegenConfig;

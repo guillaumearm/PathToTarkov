@@ -171,7 +171,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       this.pathToTarkovController.stashController.initSecondaryStashTemplates();
     this.debug(`${nbAddedTemplates} secondary stash templates added`);
 
-    if (!this.config.bypass_disable_run_through) {
+    if (!this.config.enable_run_through) {
       disableRunThrough(db);
       this.debug("disabled run through in-raid status");
     }
