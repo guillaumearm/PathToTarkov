@@ -18,13 +18,13 @@ export type MapName = keyof ByMap<unknown>;
 
 export type AccessVia = string | string[];
 
-export type SpawnPointGenericPosition =
-  | [number, number, number]
-  | {
-      x: number;
-      y: number;
-      z: number;
-    };
+export type PositionXYZ = {
+  x: number;
+  y: number;
+  z: number;
+};
+
+export type SpawnPointGenericPosition = [number, number, number] | PositionXYZ;
 
 /**
  * player_spawnpoints.json

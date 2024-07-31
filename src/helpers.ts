@@ -7,20 +7,16 @@ import type { IHideoutArea } from "@spt/models/eft/hideout/IHideoutArea";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
 
-import type { AccessVia, Config, MapName, SpawnPoint } from "./config";
+import type {
+  AccessVia,
+  Config,
+  MapName,
+  PositionXYZ,
+  SpawnPoint,
+} from "./config";
 import { JAEGER_INTRO_QUEST, MAPLIST } from "./config";
 import type { ModLoader } from "./modLoader";
 import type { IQuestStatus } from "@spt/models/eft/common/tables/IBotBase";
-
-// not used in theory (this is here to make TypeScript happy)
-const PVE_DEFAULT_PARAMS = {
-  ChancePVE: 1,
-  CountPVE: 1,
-  ExfiltrationTimePVE: 10,
-  MinTimePVE: 1,
-  MaxTimePVE: 120,
-  PlayersCountPVE: 1,
-};
 
 export function checkAccessVia(access_via: AccessVia, value: string): boolean {
   return (
@@ -28,16 +24,11 @@ export function checkAccessVia(access_via: AccessVia, value: string): boolean {
   );
 }
 
-type PositionXYZ = {
-  x: number;
-  y: number;
-  z: number;
-};
-
 const getPosition = (pos: SpawnPoint["Position"]): PositionXYZ => {
   // work with Lua-CustomSpawnPointPointMaker format
   if (Array.isArray(pos)) {
-    return { x: pos[0], y: pos[1], z: pos[2] };
+    const [x, y, z] = pos;
+    return { x, y, z };
   }
 
   return pos;
@@ -76,21 +67,37 @@ export const createSpawnPoint = (
 export const createExitPoint =
   (entrypoints: string[]) =>
   (name: string): Exit => {
+    const Chance = 100;
+    const Count = 0;
+    const ExfiltrationTime = 10;
+    const MinTime = 0;
+    const MaxTime = 0;
+    const PlayersCount = 0;
+    const ExfiltrationType = "Individual";
+    const PassageRequirement = "None";
+    const RequirementTip = "";
+
     return {
+      Id: "",
       Name: name,
       EntryPoints: entrypoints.join(","),
+      Chance,
+      Count,
+      MinTime,
+      MaxTime,
+      ExfiltrationTime,
+      PlayersCount,
+      ExfiltrationType,
+      PassageRequirement,
+      RequirementTip,
       EventAvailable: true,
-      Chance: 100,
-      Count: 0,
-      Id: "",
-      MinTime: 0,
-      MaxTime: 0,
-      ExfiltrationType: "Individual",
-      PassageRequirement: "None",
-      PlayersCount: 0,
-      ExfiltrationTime: 10,
-      RequirementTip: "",
-      ...PVE_DEFAULT_PARAMS,
+      // the following properties are not used but needed to make TypeScript happy
+      ChancePVE: Chance,
+      CountPVE: Count,
+      ExfiltrationTimePVE: ExfiltrationTime,
+      MinTimePVE: MinTime,
+      MaxTimePVE: MaxTime,
+      PlayersCountPVE: PlayersCount,
     };
   };
 
