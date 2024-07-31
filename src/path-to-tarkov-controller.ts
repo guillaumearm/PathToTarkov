@@ -259,7 +259,6 @@ export class PathToTarkovController {
     originalFn: (sessionId: string) => ILocationsGenerateAllResponse,
   ) {
     return (sessionId: string): ILocationsGenerateAllResponse => {
-      this.debug("call locationController.generateAll");
       const offraidPosition = this.getOffraidPosition(sessionId);
       const result = originalFn(sessionId);
       const locations = deepClone(result.locations);
@@ -273,15 +272,15 @@ export class PathToTarkovController {
 
         if (locationBase) {
           if (locked && !locationBase.Locked) {
-            this.debug(`lock map ${mapName}`);
+            this.debug(`[${sessionId}] lock map ${mapName}`);
           } else if (!locked && locationBase.Locked) {
-            this.debug(`unlock map ${mapName}`);
+            this.debug(`[${sessionId}] unlock map ${mapName}`);
           }
 
           locationBase.Locked = locked;
 
           // necessary for Fika
-          this.updateSpawnPoints(locationBase, offraidPosition);
+          this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
         }
       });
 
@@ -302,8 +301,6 @@ export class PathToTarkovController {
       info: IGetLocationRequestData,
       sessionId: string,
     ): IGetBodyResponseData<ILocationBase> => {
-      this.debug("call locationCallbacks.getLocation");
-
       const offraidPosition = this.getOffraidPosition(sessionId);
       const rawLocationBase = originalFn(url, info, sessionId) as any as string;
       const parsed = JSON.parse(rawLocationBase);
@@ -311,7 +308,7 @@ export class PathToTarkovController {
 
       // This will handle spawnpoints for SPT
       // For fika, check the other call of `updateSpawnPoints`
-      this.updateSpawnPoints(locationBase, offraidPosition);
+      this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
 
       return JSON.stringify(parsed) as any;
     };
@@ -329,8 +326,6 @@ export class PathToTarkovController {
       info: IEmptyRequestData,
       sessionId: string,
     ): string => {
-      this.debug("call dataCallbacks.getTemplateItems");
-
       const offraidPosition = this.getOffraidPosition(sessionId);
       const rawResult = originalFn(url, info, sessionId);
 
@@ -340,8 +335,11 @@ export class PathToTarkovController {
       const size = this.stashController.getStashSize(offraidPosition);
 
       if (size === null) {
+        this.debug(`[${sessionId}] main stash selected`);
         return rawResult;
       }
+
+      this.debug(`[${sessionId}] override secondary stash size to ${size}`);
 
       VANILLA_STASH_IDS.forEach((stashId) => {
         const item = items[stashId];
@@ -372,8 +370,6 @@ export class PathToTarkovController {
       info: IEmptyRequestData,
       sessionId: string,
     ): IGetBodyResponseData<IHideoutArea[]> => {
-      this.debug("call dataCallbacks.getHideoutAreas");
-
       const offraidPosition = this.getOffraidPosition(sessionId);
       const rawResult = originalFn(url, info, sessionId) as any as string;
 
@@ -390,9 +386,9 @@ export class PathToTarkovController {
       });
 
       if (hideoutEnabled) {
-        this.debug("main hideout enabled");
+        this.debug(`[${sessionId}] main hideout enabled`);
       } else {
-        this.debug("main hideout disabled");
+        this.debug(`[${sessionId}] main hideout disabled`);
       }
 
       return JSON.stringify(parsed) as any;
@@ -478,7 +474,9 @@ export class PathToTarkovController {
     });
 
     if (stashLinkRemoved > 0) {
-      this.debug(`cleaned up ${stashLinkRemoved} legacy stash links`);
+      this.debug(
+        `[${sessionId}] cleaned up ${stashLinkRemoved} legacy stash links`,
+      );
       this.saveServer.saveProfile(sessionId);
     }
   }
@@ -517,12 +515,13 @@ export class PathToTarkovController {
   private updateSpawnPoints(
     locationBase: ILocationBase,
     offraidPosition: string,
+    sessionId: string,
   ): void {
     const mapName = resolveMapNameFromLocation(locationBase.Id);
 
     if (!this.config.infiltrations[offraidPosition]) {
       this.debug(
-        `no offraid position '${offraidPosition}' found in config.infiltrations`,
+        `[${sessionId}] no offraid position '${offraidPosition}' found in config.infiltrations`,
       );
       return;
     }
@@ -536,7 +535,9 @@ export class PathToTarkovController {
         return;
       }
 
-      this.debug(`all player spawns cleaned up`);
+      this.debug(
+        `[${sessionId}] all player spawns cleaned up for location ${locationBase.Name}`,
+      );
       this.removePlayerSpawnsForLocation(locationBase);
 
       spawnpoints.forEach((spawnId) => {
@@ -551,7 +552,9 @@ export class PathToTarkovController {
             spawnId,
           );
           locationBase?.SpawnPointParams.push(spawnPoint);
-          this.debug(`player spawn '${spawnId}' added`);
+          this.debug(
+            `[${sessionId}] player spawn '${spawnId}' added for location ${locationBase.Name}`,
+          );
         }
       });
     }
@@ -632,7 +635,7 @@ export class PathToTarkovController {
 
     if (!this.config.infiltrations[offraidPosition]) {
       this.debug(
-        `Unknown offraid position '${offraidPosition}', reset to default '${defaultOffraidPosition}'`,
+        `[${sessionId}] Unknown offraid position '${offraidPosition}', reset to default '${defaultOffraidPosition}'`,
       );
 
       profile.PathToTarkov.offraidPosition = defaultOffraidPosition;
