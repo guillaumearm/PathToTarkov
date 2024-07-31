@@ -1,17 +1,10 @@
-import type { IBodyHealth, IEffects } from "@spt/models/eft/common/IGlobals";
+import type { IBodyHealth, IGlobals } from "@spt/models/eft/common/IGlobals";
 import type { ILocationBase } from "@spt/models/eft/common/ILocationBase";
 import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
 
-import type {
-  Config,
-  ConfigGetter,
-  MapName,
-  OffraidRegenConfig,
-  Profile,
-  SpawnConfig,
-} from "./config";
+import type { Config, MapName, Profile, SpawnConfig } from "./config";
 import { EMPTY_STASH, MAPLIST, VANILLA_STASH_IDS } from "./config";
 
 import type { EntryPoints } from "./helpers";
@@ -45,144 +38,6 @@ import type { LocationCallbacks } from "@spt/callbacks/LocationCallbacks";
 import type { IGetBodyResponseData } from "@spt/models/eft/httpResponse/IGetBodyResponseData";
 import type { Inventory } from "@spt/models/eft/common/tables/IBotBase";
 
-class OffraidRegenController {
-  private getRegenConfig: () => OffraidRegenConfig;
-
-  private regen_hydration_enabled = true;
-  private regen_energy_enabled = true;
-  private regen_health_enabled = true;
-
-  // saved values
-  private energy_value: number | null = null;
-  private hydration_value: number | null = null;
-  private bodyhealth_values: Partial<IBodyHealth> = {};
-
-  constructor(
-    getConfig: ConfigGetter,
-    private db: DatabaseServer,
-  ) {
-    this.getRegenConfig = () => getConfig().offraid_regen_config;
-  }
-
-  private _getEmptyBodyHealthValues(): IBodyHealth {
-    const result: Partial<IBodyHealth> = {};
-
-    Object.keys(this.bodyhealth_values).forEach((bodyPart) => {
-      result[bodyPart as keyof IBodyHealth] = { Value: 0 };
-    });
-
-    return result as IBodyHealth;
-  }
-
-  private get regen_db(): IEffects["Regeneration"] {
-    const regen =
-      this.db.getTables().globals?.config.Health.Effects.Regeneration;
-
-    if (!regen) {
-      throw new Error(
-        "Fatal OffraidRegenController constructor: unable to get Regeneration health effects",
-      );
-    }
-
-    return regen;
-  }
-
-  // this will snapshot the current regen config
-  init(): void {
-    this.energy_value = this.regen_db.Energy;
-    this.hydration_value = this.regen_db.Hydration;
-
-    Object.keys(this.regen_db.BodyHealth).forEach((bodyPart) => {
-      this.bodyhealth_values[bodyPart as keyof IBodyHealth] = {
-        Value: this.regen_db.BodyHealth[bodyPart as keyof IBodyHealth].Value,
-      };
-    });
-  }
-
-  _enableHydration() {
-    if (this.regen_hydration_enabled) {
-      return;
-    }
-
-    this.regen_db.Hydration = this.hydration_value ?? 0;
-    this.regen_hydration_enabled = true;
-  }
-
-  _disableHydration() {
-    if (!this.regen_hydration_enabled) {
-      return;
-    }
-
-    this.regen_db.Hydration = 0;
-    this.regen_hydration_enabled = false;
-  }
-
-  _enableEnergy() {
-    if (this.regen_energy_enabled) {
-      return;
-    }
-
-    this.regen_db.Energy = this.energy_value ?? 0;
-    this.regen_energy_enabled = true;
-  }
-
-  _disableEnergy() {
-    if (!this.regen_energy_enabled) {
-      return;
-    }
-
-    this.regen_db.Energy = 0;
-    this.regen_energy_enabled = false;
-  }
-
-  _enableHealth() {
-    if (this.regen_health_enabled) {
-      return;
-    }
-
-    this.regen_db.BodyHealth = this.bodyhealth_values as IBodyHealth;
-    this.regen_health_enabled = true;
-  }
-
-  _disableHealth() {
-    if (!this.regen_health_enabled) {
-      return;
-    }
-
-    this.regen_db.BodyHealth = this._getEmptyBodyHealthValues();
-    this.regen_health_enabled = false;
-  }
-
-  updateOffraidRegen(offraidPosition: string): void {
-    if (
-      checkAccessVia(
-        this.getRegenConfig().hydration.access_via,
-        offraidPosition,
-      )
-    ) {
-      this._enableHydration();
-    } else {
-      this._disableHydration();
-    }
-
-    if (
-      checkAccessVia(this.getRegenConfig().energy.access_via, offraidPosition)
-    ) {
-      this._enableEnergy();
-    } else {
-      this._disableEnergy();
-    }
-
-    if (
-      checkAccessVia(this.getRegenConfig().health.access_via, offraidPosition)
-    ) {
-      this._enableHealth();
-    } else {
-      this._disableHealth();
-    }
-  }
-}
-
 type IndexedLocations = Record<string, ILocationBase>;
 
 // indexed by mapName
@@ -207,7 +62,6 @@ const getIndexedLocations = (locations: ILocations): IndexedLocations => {
 export class PathToTarkovController {
   public stashController: StashController;
   public tradersController: TradersController;
-  private offraidRegenController: OffraidRegenController;
 
   private entrypoints: EntryPoints;
 
@@ -234,11 +88,6 @@ export class PathToTarkovController {
       saveServer,
       this.logger,
     );
-    this.offraidRegenController = new OffraidRegenController(
-      () => this.config,
-      db,
-    );
-
     this.entrypoints = {};
     this.overrideControllers();
   }
@@ -271,9 +120,7 @@ export class PathToTarkovController {
         const locationBase = indexedLocations[mapName];
 
         if (locationBase) {
-          if (locked && !locationBase.Locked) {
-            this.debug(`[${sessionId}] lock map ${mapName}`);
-          } else if (!locked && locationBase.Locked) {
+          if (!locked) {
             this.debug(`[${sessionId}] unlock map ${mapName}`);
           }
 
@@ -395,6 +242,66 @@ export class PathToTarkovController {
     };
   }
 
+  private createGetGlobals(
+    originalFn: (
+      url: string,
+      info: IEmptyRequestData,
+      sessionId: string,
+    ) => IGetBodyResponseData<IGlobals>,
+  ) {
+    return (
+      url: string,
+      info: IEmptyRequestData,
+      sessionId: string,
+    ): IGetBodyResponseData<IGlobals> => {
+      this.debug(`[${sessionId}] Datacallbacks.getGlobals call`);
+      const offraidPosition = this.getOffraidPosition(sessionId);
+      const rawResult = originalFn(url, info, sessionId) as any as string;
+
+      const parsed = JSON.parse(rawResult);
+      const globals: IGlobals = parsed.data;
+      const regenDb = globals.config.Health.Effects.Regeneration;
+
+      // hydration restrictions
+      if (
+        !checkAccessVia(
+          this.config.offraid_regen_config.hydration.access_via,
+          offraidPosition,
+        )
+      ) {
+        this.debug(`[${sessionId}] disable hideout hydration regen`);
+        regenDb.Hydration = 0;
+      }
+
+      // energy restrictions
+      if (
+        !checkAccessVia(
+          this.config.offraid_regen_config.energy.access_via,
+          offraidPosition,
+        )
+      ) {
+        this.debug(`[${sessionId}] disable hideout energy regen`);
+        regenDb.Energy = 0;
+      }
+
+      // health restrictions
+      if (
+        !checkAccessVia(
+          this.config.offraid_regen_config.health.access_via,
+          offraidPosition,
+        )
+      ) {
+        this.debug(`[${sessionId}] disable hideout health regen`);
+        Object.keys(regenDb.BodyHealth).forEach((k) => {
+          const bodyHealth = regenDb.BodyHealth[k as keyof IBodyHealth];
+          bodyHealth.Value = 0;
+        });
+      }
+
+      return JSON.stringify(parsed) as any;
+    };
+  }
+
   private overrideControllers(): void {
     this.container.afterResolution<LocationController>(
       "LocationController",
@@ -426,6 +333,7 @@ export class PathToTarkovController {
       (_t, result): void => {
         const dataCallbacks = Array.isArray(result) ? result[0] : result;
 
+        // override getTemplateItems
         const originalGetTemplateItems =
           dataCallbacks.getTemplateItems.bind(dataCallbacks);
 
@@ -433,12 +341,17 @@ export class PathToTarkovController {
           originalGetTemplateItems,
         );
 
+        // override getHideoutAreas
         const originalGetHideoutAreas =
           dataCallbacks.getHideoutAreas.bind(dataCallbacks);
 
         dataCallbacks.getHideoutAreas = this.createGetHideoutAreas(
           originalGetHideoutAreas,
         );
+
+        // override getGlobals
+        const originalGetGlobals = dataCallbacks.getGlobals.bind(dataCallbacks);
+        dataCallbacks.getGlobals = this.createGetGlobals(originalGetGlobals);
       },
       { frequency: "Always" },
     );
@@ -484,7 +397,6 @@ export class PathToTarkovController {
   init(sessionId: string): void {
     changeRestrictionsInRaid(this.config, this.db); // TODO: no need to override everytime
     this.stashController.initProfile(sessionId);
-    this.offraidRegenController.init();
 
     const offraidPosition = this.getOffraidPosition(sessionId);
     this.updateOffraidPosition(sessionId, offraidPosition);
@@ -536,7 +448,7 @@ export class PathToTarkovController {
       }
 
       this.debug(
-        `[${sessionId}] all player spawns cleaned up for location ${locationBase.Name}`,
+        `[${sessionId}] all player spawns cleaned up for location ${mapName}`,
       );
       this.removePlayerSpawnsForLocation(locationBase);
 
@@ -553,7 +465,7 @@ export class PathToTarkovController {
           );
           locationBase?.SpawnPointParams.push(spawnPoint);
           this.debug(
-            `[${sessionId}] player spawn '${spawnId}' added for location ${locationBase.Name}`,
+            `[${sessionId}] player spawn '${spawnId}' added for location ${mapName}`,
           );
         }
       });
@@ -667,7 +579,6 @@ export class PathToTarkovController {
     }
 
     this.stashController.updateStash(offraidPosition, sessionId);
-    this.offraidRegenController.updateOffraidRegen(offraidPosition); // TODO: handle by sessionId
 
     if (this.config.traders_access_restriction) {
       this.tradersController.updateTraders(offraidPosition, sessionId);
