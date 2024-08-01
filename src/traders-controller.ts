@@ -76,27 +76,33 @@ export class TradersController {
             );
 
           trader.base.insurance.availability = true;
-          trader.base.insurance.min_payment =
-            insuranceTraderConfig.min_payment || 0;
+          if (insuranceTraderConfig.min_payment !== undefined) {
+            trader.base.insurance.min_payment =
+              insuranceTraderConfig.min_payment;
+          }
           if (insuranceTraderConfig.min_return_hour !== undefined) {
             trader.base.insurance.min_return_hour =
-              insuranceTraderConfig.min_return_hour || 0;
+              insuranceTraderConfig.min_return_hour;
           }
           if (insuranceTraderConfig.max_return_hour !== undefined) {
             trader.base.insurance.max_return_hour =
-              insuranceTraderConfig.max_return_hour || 0;
+              insuranceTraderConfig.max_return_hour;
           }
-          trader.base.insurance.max_storage_time =
-            insuranceTraderConfig.max_storage_time || 480;
+          if (insuranceTraderConfig.max_storage_time !== undefined) {
+            trader.base.insurance.max_storage_time =
+              insuranceTraderConfig.max_storage_time;
+          }
           if (insuranceTraderConfig.return_chance_percent !== undefined) {
             insuranceConfig.returnChancePercent[traderId] = 
-              insuranceTraderConfig.return_chance_percent || 0;
+              insuranceTraderConfig.return_chance_percent;
           }
-
-          trader.base.loyaltyLevels.forEach((payloadLevel) => {
-            payloadLevel.insurance_price_coef =
-              insuranceTraderConfig.insurance_price_coef || 1;
-          });
+          
+          if (insuranceTraderConfig.insurance_price_coef !== undefined) {
+            trader.base.loyaltyLevels.forEach((payloadLevel) => {
+              payloadLevel.insurance_price_coef =
+                insuranceTraderConfig.insurance_price_coef;
+            });
+          }
         }
 
         // repairs update
