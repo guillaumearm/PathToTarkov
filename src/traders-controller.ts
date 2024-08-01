@@ -2,6 +2,7 @@ import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
 import type { IInsuranceConfig } from "@spt/models/spt/config/IInsuranceConfig";
 import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
+import type { ConfigServer } from "@spt/servers/ConfigServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
 import type { ConfigGetter, LocaleName } from "./config";
 import { JAEGER_ID, PRAPOR_ID } from "./config";
@@ -16,6 +17,7 @@ export class TradersController {
     private readonly getConfig: ConfigGetter,
     private readonly getIsTraderLocked: (traderId: string) => boolean,
     private readonly db: DatabaseServer,
+    private readonly configServer: ConfigServer,
     private readonly saveServer: SaveServer,
     private readonly logger: ILogger,
   ) {}
@@ -76,19 +78,24 @@ export class TradersController {
           trader.base.insurance.availability = true;
           trader.base.insurance.min_payment =
             insuranceTraderConfig.min_payment || 0;
-          trader.base.insurance.min_return_hour =
-            insuranceTraderConfig.min_return_hour || 1;
-          trader.base.insurance.max_return_hour =
-            insuranceTraderConfig.max_return_hour || 2;
+          if (insuranceTraderConfig.min_return_hour !== undefined) {
+            trader.base.insurance.min_return_hour =
+              insuranceTraderConfig.min_return_hour || 0;
+          }
+          if (insuranceTraderConfig.max_return_hour !== undefined) {
+            trader.base.insurance.max_return_hour =
+              insuranceTraderConfig.max_return_hour || 0;
+          }
           trader.base.insurance.max_storage_time =
             insuranceTraderConfig.max_storage_time || 480;
+          if (insuranceTraderConfig.return_chance_percent !== undefined) {
+            insuranceConfig.returnChancePercent[traderId] = 
+              insuranceTraderConfig.return_chance_percent || 0;
+          }
 
           trader.base.loyaltyLevels.forEach((payloadLevel) => {
             payloadLevel.insurance_price_coef =
               insuranceTraderConfig.insurance_price_coef || 1;
-
-          insuranceConfig.returnChancePercent[traderId] =
-            insuranceTraderConfig.return_chance_percent || 0; // i keep this value (as well as the max_return times above) at 0 in my personal set up in case anybody wants to actually use the value 0, otherwise using 0 returns null
           });
         }
 
