@@ -17,8 +17,8 @@ export class TradersController {
     private readonly getConfig: ConfigGetter,
     private readonly getIsTraderLocked: (traderId: string) => boolean,
     private readonly db: DatabaseServer,
-    private readonly configServer: ConfigServer,
     private readonly saveServer: SaveServer,
+    private readonly configServer: ConfigServer,
     private readonly logger: ILogger,
   ) {}
 
@@ -100,7 +100,7 @@ export class TradersController {
           if (insuranceTraderConfig.insurance_price_coef !== undefined) {
             trader.base.loyaltyLevels.forEach((payloadLevel) => {
               payloadLevel.insurance_price_coef =
-                insuranceTraderConfig.insurance_price_coef;
+                insuranceTraderConfig.insurance_price_coef || 100;
             });
           }
         }
