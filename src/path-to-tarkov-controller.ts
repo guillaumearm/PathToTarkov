@@ -363,9 +363,9 @@ export class PathToTarkovController {
   cleanupLegacySecondaryStashesLink(sessionId: string): void {
     const profile: Profile = this.saveServer.getProfile(sessionId);
     const inventory = profile.characters.pmc.Inventory as Inventory | undefined;
-    const secondaryStashIds = [
+    const secondaryStashIds: string[] = [
       EMPTY_STASH.id,
-      this.config.hideout_secondary_stashes.map((config) => config.id),
+      ...this.config.hideout_secondary_stashes.map((config) => config.id),
     ];
 
     if (!inventory) {
