@@ -1,3 +1,5 @@
+import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
+import type { IInsuranceConfig } from "@spt/models/spt/config/IInsuranceConfig";
 import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
@@ -66,6 +68,10 @@ export class TradersController {
         if (tradersConfig[traderId].insurance_always_enabled) {
           const insuranceTraderConfig =
             tradersConfig[traderId].insurance_config || {};
+          const insuranceConfig: IInsuranceConfig =
+            this.configServer.getConfig<IInsuranceConfig>(
+              ConfigTypes.INSURANCE
+            );
 
           trader.base.insurance.availability = true;
           trader.base.insurance.min_payment =
@@ -80,6 +86,9 @@ export class TradersController {
           trader.base.loyaltyLevels.forEach((payloadLevel) => {
             payloadLevel.insurance_price_coef =
               insuranceTraderConfig.insurance_price_coef || 1;
+
+          insuranceConfig.returnChancePercent[traderId] =
+            insuranceTraderConfig.return_chance_percent || 0; // i keep this value (as well as the max_return times above) at 0 in my personal set up in case anybody wants to actually use the value 0, otherwise using 0 returns null
           });
         }
 
