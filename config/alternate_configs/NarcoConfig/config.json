@@ -471,8 +471,7 @@
         "currency_coefficient": 12,
         "repair_price_coef": 0
       },
-        "heal_always_enabled": true
-      }
+      "heal_always_enabled": true
     },
     "Priscilu": {
       "// mod integration for Priscilu": true,

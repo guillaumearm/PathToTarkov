@@ -20,7 +20,7 @@ export class TradersController {
     private readonly saveServer: SaveServer,
     private readonly configServer: ConfigServer,
     private readonly logger: ILogger,
-  ) {}
+  ) { }
 
   initTraders(): void {
     this.fixInsuranceDialogues();
@@ -93,14 +93,14 @@ export class TradersController {
               insuranceTraderConfig.max_storage_time;
           }
           if (insuranceTraderConfig.return_chance_percent !== undefined) {
-            insuranceConfig.returnChancePercent[traderId] = 
+            insuranceConfig.returnChancePercent[traderId] =
               insuranceTraderConfig.return_chance_percent;
           }
-          
-          if (insuranceTraderConfig.insurance_price_coef !== undefined) {
+
+          const insurancePriceCoef = insuranceTraderConfig.insurance_price_coef;
+          if (insurancePriceCoef !== undefined) {
             trader.base.loyaltyLevels.forEach((payloadLevel) => {
-              payloadLevel.insurance_price_coef =
-                insuranceTraderConfig.insurance_price_coef || 100;
+              payloadLevel.insurance_price_coef = insurancePriceCoef;
             });
           }
         }
