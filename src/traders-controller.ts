@@ -100,7 +100,7 @@ export class TradersController {
           if (insuranceTraderConfig.insurance_price_coef !== undefined) {
             trader.base.loyaltyLevels.forEach((payloadLevel) => {
               payloadLevel.insurance_price_coef =
-                insuranceTraderConfig.insurance_price_coef || 100;
+                insuranceTraderConfig.insurance_price_coef;
             });
           }
         }
