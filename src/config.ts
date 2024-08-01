@@ -1,5 +1,6 @@
 import type { ISptProfile } from "@spt/models/eft/profile/ISptProfile";
 import { join } from "path";
+import { deepClone } from "./utils";
 
 type ByMap<T> = {
   factory4_day: T;
@@ -12,6 +13,7 @@ type ByMap<T> = {
   lighthouse: T;
   tarkovstreets: T;
   sandbox: T;
+  sandbox_high: T;
 };
 
 export type MapName = keyof ByMap<unknown>;
@@ -93,14 +95,14 @@ type TraderConfig = {
 };
 
 type SpawnPointName = string;
-type ExfiltrationPoint = string;
+type OffraidPosition = string;
 
 type Exfiltrations = ByMap<{
-  [spawnPointName: SpawnPointName]: ExfiltrationPoint;
+  [spawnPointName: SpawnPointName]: OffraidPosition;
 }>;
 
 type Infiltrations = {
-  [exfiltrationPoint: ExfiltrationPoint]: ByMap<SpawnPointName[]>;
+  [exfiltrationPoint: OffraidPosition]: ByMap<SpawnPointName[]>;
 };
 
 export type OffraidRegenConfig = {
@@ -190,4 +192,35 @@ export const MAPLIST = [
   "woods",
   "tarkovstreets",
   "sandbox", // ground zero
+  "sandbox_high", // ground zero for high level player (> 20)
 ];
+
+// sandbox_high is a special map for high level players (> 20)
+export const prepareGroundZeroHigh = <T>(maps: ByMap<T>): ByMap<T> => {
+  if (maps.sandbox && !maps.sandbox_high) {
+    return {
+      ...maps,
+      sandbox_high: maps.sandbox,
+    };
+  }
+
+  return maps;
+};
+
+export const processConfig = (originalConfig: Config): Config => {
+  const config = deepClone(originalConfig);
+
+  config.exfiltrations = prepareGroundZeroHigh(config.exfiltrations);
+
+  Object.keys(config.infiltrations).forEach((offraidPosition) => {
+    config.infiltrations[offraidPosition] = prepareGroundZeroHigh(
+      config.infiltrations[offraidPosition],
+    );
+  });
+
+  return config;
+};
+
+export const processSpawnConfig = (spawnConfig: SpawnConfig): SpawnConfig => {
+  return prepareGroundZeroHigh(spawnConfig);
+};

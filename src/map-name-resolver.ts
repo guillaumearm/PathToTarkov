@@ -10,6 +10,7 @@ const LOCATIONS_MAPS: Record<string, string> = {
   lab: "laboratory",
   ["streets of tarkov"]: "tarkovstreets",
   groundzero: "sandbox",
+  sandbox: "sandbox_high",
 };
 
 export const resolveMapNameFromLocation = (location: string): string => {
