@@ -13,7 +13,13 @@ import type {
   PathToTarkovReloadedTooltipsConfig,
   SpawnConfig,
 } from "./config";
-import { CONFIG_PATH, PACKAGE_JSON_PATH, processConfig, processSpawnConfig, SPAWN_CONFIG_PATH } from "./config";
+import {
+  CONFIG_PATH,
+  PACKAGE_JSON_PATH,
+  processConfig,
+  processSpawnConfig,
+  SPAWN_CONFIG_PATH,
+} from "./config";
 import { EventWatcher } from "./event-watcher";
 import { createStaticRoutePeeker, disableRunThrough } from "./helpers";
 import { enableKeepFoundInRaidTweak } from "./keep-fir-tweak";
