@@ -239,7 +239,8 @@
         "min_payment": 0,
         "min_return_hour": 1,
         "max_return_hour": 2,
-        "max_storage_time": 480
+        "max_storage_time": 480,
+        "return_chance_percent": 100
       },
       "repair_always_enabled": true,
       "repair_config": {
