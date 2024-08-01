@@ -9,7 +9,13 @@ import type { StaticRouterModService } from "@spt/services/mod/staticRouter/Stat
 
 import { createPathToTarkovAPI } from "./api";
 import type { Config, SpawnConfig } from "./config";
-import { CONFIG_PATH, PACKAGE_JSON_PATH, SPAWN_CONFIG_PATH } from "./config";
+import {
+  CONFIG_PATH,
+  PACKAGE_JSON_PATH,
+  processConfig,
+  processSpawnConfig,
+  SPAWN_CONFIG_PATH,
+} from "./config";
 import { EventWatcher } from "./event-watcher";
 import { createStaticRoutePeeker } from "./helpers";
 import { enableKeepFoundInRaidTweak } from "./keep-fir-tweak";
@@ -36,8 +42,8 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   public preSptLoad(container: DependencyContainer): void {
     this.container = container;
     this.packageJson = readJsonFile(PACKAGE_JSON_PATH);
-    this.config = readJsonFile(CONFIG_PATH);
-    this.spawnConfig = readJsonFile(SPAWN_CONFIG_PATH);
+    this.config = processConfig(readJsonFile(CONFIG_PATH));
+    this.spawnConfig = processSpawnConfig(readJsonFile(SPAWN_CONFIG_PATH));
 
     this.logger = container.resolve<ILogger>("WinstonLogger");
     this.debug = this.config.debug
