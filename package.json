@@ -8,6 +8,7 @@
   "author": "Trap",
   "sptVersion": "3.9.x",
   "scripts": {
+    "git:check:status": "./scripts/check-git-status.sh",
     "gather:external:resources": "./scripts/gather-external-resources.sh && npm run prettier",
     "build:doc:mermaid": "mmdc -t dark -b transparent -i paths/default.md -o config/PathToTarkov.png",
     "build:doc:all-exfils": "node scripts/generate-all-exfils > ALL_EXFILS.md",
