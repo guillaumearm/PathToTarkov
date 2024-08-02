@@ -1,43 +1,37 @@
-import type { DependencyContainer } from "tsyringe";
+import type { DependencyContainer } from 'tsyringe';
 
-import type { IPostSptLoadMod } from "@spt/models/external/IPostSptLoadMod";
-import type { IPreSptLoadMod } from "@spt/models/external/IPreSptLoadMod";
-import type { ILogger } from "@spt/models/spt/utils/ILogger";
-import type { ConfigServer } from "@spt/servers/ConfigServer";
-import type { DatabaseServer } from "@spt/servers/DatabaseServer";
-import type { SaveServer } from "@spt/servers/SaveServer";
-import type { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
+import type { IPostSptLoadMod } from '@spt/models/external/IPostSptLoadMod';
+import type { IPreSptLoadMod } from '@spt/models/external/IPreSptLoadMod';
+import type { ILogger } from '@spt/models/spt/utils/ILogger';
+import type { ConfigServer } from '@spt/servers/ConfigServer';
+import type { DatabaseServer } from '@spt/servers/DatabaseServer';
+import type { SaveServer } from '@spt/servers/SaveServer';
+import type { StaticRouterModService } from '@spt/services/mod/staticRouter/StaticRouterModService';
 
-import { createPathToTarkovAPI } from "./api";
-import type {
-  Config,
-  PathToTarkovReloadedTooltipsConfig,
-  SpawnConfig,
-} from "./config";
+import { createPathToTarkovAPI } from './api';
+import type { Config, PathToTarkovReloadedTooltipsConfig, SpawnConfig } from './config';
 import {
   CONFIG_PATH,
   PACKAGE_JSON_PATH,
   processConfig,
   processSpawnConfig,
   SPAWN_CONFIG_PATH,
-} from "./config";
-import { EventWatcher } from "./event-watcher";
-import { createStaticRoutePeeker, disableRunThrough } from "./helpers";
-import { enableKeepFoundInRaidTweak } from "./keep-fir-tweak";
+} from './config';
+import { EventWatcher } from './event-watcher';
+import { createStaticRoutePeeker, disableRunThrough } from './helpers';
+import { enableKeepFoundInRaidTweak } from './keep-fir-tweak';
 
-import { PathToTarkovController } from "./path-to-tarkov-controller";
-import { purgeProfiles } from "./uninstall";
-import type { PackageJson } from "./utils";
-import { getModDisplayName, noop, readJsonFile } from "./utils";
-import { EndOfRaidController } from "./end-of-raid-controller";
-import { fixRepeatableQuests } from "./fix-repeatable-quests";
-import { pathToTarkovReloadedTooltipsConfigCompat } from "./pttr-tooltips";
+import { PathToTarkovController } from './path-to-tarkov-controller';
+import { purgeProfiles } from './uninstall';
+import type { PackageJson } from './utils';
+import { getModDisplayName, noop, readJsonFile } from './utils';
+import { EndOfRaidController } from './end-of-raid-controller';
+import { fixRepeatableQuests } from './fix-repeatable-quests';
+import { pathToTarkovReloadedTooltipsConfigCompat } from './pttr-tooltips';
 
-const getTooltipsConfig = ():
-  | PathToTarkovReloadedTooltipsConfig
-  | undefined => {
+const getTooltipsConfig = (): PathToTarkovReloadedTooltipsConfig | undefined => {
   try {
-    return require("../config/Tooltips.json");
+    return require('../config/Tooltips.json');
   } catch (_err) {
     return undefined;
   }
@@ -61,28 +55,24 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.spawnConfig = processSpawnConfig(readJsonFile(SPAWN_CONFIG_PATH));
     this.tooltipsConfig = getTooltipsConfig();
 
-    this.logger = container.resolve<ILogger>("WinstonLogger");
+    this.logger = container.resolve<ILogger>('WinstonLogger');
     this.debug = this.config.debug
       ? (data: string) => this.logger.debug(`Path To Tarkov: ${data}`, true)
       : noop;
 
-    this.logger.info(
-      `===> Loading ${getModDisplayName(this.packageJson, true)}`,
-    );
+    this.logger.info(`===> Loading ${getModDisplayName(this.packageJson, true)}`);
 
     if (this.config.debug) {
-      this.debug("debug mode enabled");
+      this.debug('debug mode enabled');
     }
-    const configServer = container.resolve<ConfigServer>("ConfigServer");
-    const db = container.resolve<DatabaseServer>("DatabaseServer");
-    const saveServer = container.resolve<SaveServer>("SaveServer");
+    const configServer = container.resolve<ConfigServer>('ConfigServer');
+    const db = container.resolve<DatabaseServer>('DatabaseServer');
+    const saveServer = container.resolve<SaveServer>('SaveServer');
 
-    const staticRouter = container.resolve<StaticRouterModService>(
-      "StaticRouterModService",
-    );
+    const staticRouter = container.resolve<StaticRouterModService>('StaticRouterModService');
 
     if (!this.config.enabled) {
-      this.logger.warning("=> Path To Tarkov is disabled!");
+      this.logger.warning('=> Path To Tarkov is disabled!');
 
       if (this.config.bypass_uninstall_procedure === true) {
         this.logger.warning(
@@ -113,21 +103,19 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     const eventWatcher = new EventWatcher(this);
     const endOfRaidController = new EndOfRaidController(this);
 
-    eventWatcher.onEndOfRaid((payload) => endOfRaidController.end(payload));
+    eventWatcher.onEndOfRaid(payload => endOfRaidController.end(payload));
     eventWatcher.register(createStaticRoutePeeker(staticRouter));
 
     const tweakFoundInRaid = !this.config.bypass_keep_found_in_raid_tweak;
 
     if (tweakFoundInRaid) {
       enableKeepFoundInRaidTweak(this);
-      this.debug("option keep_found_in_raid_tweak enabled");
+      this.debug('option keep_found_in_raid_tweak enabled');
     }
 
     if (this.config.traders_access_restriction) {
       fixRepeatableQuests(container, this.debug);
-      this.debug(
-        "Apply fix for unavailable repeatable quests (due to locked traders)",
-      );
+      this.debug('Apply fix for unavailable repeatable quests (due to locked traders)');
     }
   }
 
@@ -138,13 +126,13 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       return;
     }
 
-    const db = container.resolve<DatabaseServer>("DatabaseServer");
-    const saveServer = container.resolve<SaveServer>("SaveServer");
+    const db = container.resolve<DatabaseServer>('DatabaseServer');
+    const saveServer = container.resolve<SaveServer>('SaveServer');
     const profiles = saveServer.getProfiles();
 
     if (this.tooltipsConfig) {
       pathToTarkovReloadedTooltipsConfigCompat(db, this.tooltipsConfig);
-      this.debug("injected legacy PTTR Tooltips.json file");
+      this.debug('injected legacy PTTR Tooltips.json file');
     }
 
     this.pathToTarkovController.generateEntrypoints();
@@ -156,7 +144,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     if (this.config.enable_legacy_ptt_api) {
       (globalThis as any).PathToTarkovAPI = api;
-      this.debug("API enabled");
+      this.debug('API enabled');
     }
 
     this.executeOnStartAPICallbacks = executeOnStartAPICallbacks;
@@ -167,7 +155,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       this.pathToTarkovController.tradersController.initTraders();
     }
 
-    Object.keys(profiles).forEach((profileId) => {
+    Object.keys(profiles).forEach(profileId => {
       this.pathToTarkovController.cleanupLegacySecondaryStashesLink(profileId);
     });
 
@@ -177,12 +165,10 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     if (!this.config.enable_run_through) {
       disableRunThrough(db);
-      this.debug("disabled run through in-raid status");
+      this.debug('disabled run through in-raid status');
     }
 
-    this.logger.success(
-      `===> Successfully loaded ${getModDisplayName(this.packageJson, true)}`,
-    );
+    this.logger.success(`===> Successfully loaded ${getModDisplayName(this.packageJson, true)}`);
   }
 }
 

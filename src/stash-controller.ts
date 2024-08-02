@@ -1,13 +1,12 @@
-import type { Inventory } from "@spt/models/eft/common/tables/IBotBase";
-import type { DatabaseServer } from "@spt/servers/DatabaseServer";
-import type { SaveServer } from "@spt/servers/SaveServer";
-import type { ConfigGetter, Profile, StashConfig } from "./config";
-import { EMPTY_STASH, STANDARD_STASH_ID } from "./config";
-import { checkAccessVia, getMainStashId } from "./helpers";
-import { deepClone } from "./utils";
+import type { Inventory } from '@spt/models/eft/common/tables/IBotBase';
+import type { DatabaseServer } from '@spt/servers/DatabaseServer';
+import type { SaveServer } from '@spt/servers/SaveServer';
+import type { ConfigGetter, Profile, StashConfig } from './config';
+import { EMPTY_STASH, STANDARD_STASH_ID } from './config';
+import { checkAccessVia, getMainStashId } from './helpers';
+import { deepClone } from './utils';
 
-export const getTemplateIdFromStashId = (stashId: string): string =>
-  `template_${stashId}`;
+export const getTemplateIdFromStashId = (stashId: string): string => `template_${stashId}`;
 const getGridIdFromStashId = (stashId: string): string => `grid_${stashId}`;
 
 export class StashController {
@@ -24,17 +23,13 @@ export class StashController {
   }
 
   initSecondaryStashTemplates(): number {
-    const standardTemplate =
-      this.db.getTables()?.templates?.items[STANDARD_STASH_ID];
+    const standardTemplate = this.db.getTables()?.templates?.items[STANDARD_STASH_ID];
 
     if (!standardTemplate) {
-      throw new Error("Path To Tarkov: standard stash template not found");
+      throw new Error('Path To Tarkov: standard stash template not found');
     }
 
-    const stashConfigs = [
-      EMPTY_STASH,
-      ...this.getConfig().hideout_secondary_stashes,
-    ];
+    const stashConfigs = [EMPTY_STASH, ...this.getConfig().hideout_secondary_stashes];
 
     let nbAddedTemplates = 0;
 
@@ -53,9 +48,7 @@ export class StashController {
         grid._parent = templateId;
         gridProps.cellsV = size;
       } else {
-        throw new Error(
-          "Path To  Tarkov: cannot set size on custom stash template",
-        );
+        throw new Error('Path To  Tarkov: cannot set size on custom stash template');
       }
 
       const items = this.db.getTables()?.templates?.items;
@@ -97,11 +90,7 @@ export class StashController {
 
     const templateId = getTemplateIdFromStashId(stashId);
 
-    if (
-      !inventory.items.find(
-        (item) => item._id === stashId && item._tpl === templateId,
-      )
-    ) {
+    if (!inventory.items.find(item => item._id === stashId && item._tpl === templateId)) {
       inventory.items.push({ _id: stashId, _tpl: templateId });
     }
   }
@@ -117,11 +106,9 @@ export class StashController {
     return mainStashAvailable || multiStashEnabled === false;
   }
 
-  private getSecondaryStash(
-    offraidPosition: string,
-  ): Omit<StashConfig, "access_via"> {
+  private getSecondaryStash(offraidPosition: string): Omit<StashConfig, 'access_via'> {
     return (
-      this.getConfig().hideout_secondary_stashes.find((stash) =>
+      this.getConfig().hideout_secondary_stashes.find(stash =>
         checkAccessVia(stash.access_via, offraidPosition),
       ) ?? EMPTY_STASH
     );

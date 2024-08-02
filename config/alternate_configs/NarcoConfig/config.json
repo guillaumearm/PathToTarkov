@@ -36,20 +36,10 @@
   },
   "offraid_regen_config": {
     "hydration": {
-      "access_via": [
-        "FactoryZB-1011",
-        "FactoryZB-1012",
-        "FactoryZB-013",
-        "FactoryZB-016"
-      ]
+      "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-013", "FactoryZB-016"]
     },
     "energy": {
-      "access_via": [
-        "FactoryZB-1011",
-        "FactoryZB-1012",
-        "FactoryZB-013",
-        "FactoryZB-016"
-      ]
+      "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-013", "FactoryZB-016"]
     },
     "health": {
       "access_via": [
@@ -137,13 +127,7 @@
     {
       "id": "PathToTarkov_CustomsEast_stash",
       "size": 48,
-      "access_via": [
-        "TarkovRR",
-        "CrashSite",
-        "Railway",
-        "ScavCamp",
-        "TrailerPark"
-      ]
+      "access_via": ["TarkovRR", "CrashSite", "Railway", "ScavCamp", "TrailerPark"]
     },
     {
       "id": "PathToTarkov_CustomsShorelineEast_stash",

@@ -1,8 +1,8 @@
-import type { ILogger } from "@spt/models/spt/utils/ILogger";
-import type { SaveServer } from "@spt/servers/SaveServer";
-import type { Config, Profile } from "./config";
-import { JAEGER_ID } from "./config";
-import { isJaegerIntroQuestCompleted, getMainStashId } from "./helpers";
+import type { ILogger } from '@spt/models/spt/utils/ILogger';
+import type { SaveServer } from '@spt/servers/SaveServer';
+import type { Config, Profile } from './config';
+import { JAEGER_ID } from './config';
+import { isJaegerIntroQuestCompleted, getMainStashId } from './helpers';
 
 const restoreMainStash = (profile: Profile, logger: ILogger): void => {
   const pmcInventory = profile.characters.pmc.Inventory;
@@ -21,7 +21,7 @@ const restoreTraders = (config: Config, profile: Profile, logger: ILogger) => {
   let nbTradersRestored = 0;
   let jaegerLocked = false;
 
-  Object.keys(config.traders_config).forEach((traderId) => {
+  Object.keys(config.traders_config).forEach(traderId => {
     const pmc = profile.characters.pmc;
     const trader = pmc.TradersInfo?.[traderId];
     const jaegerAvailable = isJaegerIntroQuestCompleted(pmc.Quests);
@@ -33,12 +33,7 @@ const restoreTraders = (config: Config, profile: Profile, logger: ILogger) => {
     ) {
       trader.unlocked = true;
       nbTradersRestored += 1;
-    } else if (
-      trader &&
-      trader.unlocked === true &&
-      traderId === JAEGER_ID &&
-      !jaegerAvailable
-    ) {
+    } else if (trader && trader.unlocked === true && traderId === JAEGER_ID && !jaegerAvailable) {
       trader.unlocked = false;
       jaegerLocked = true;
     }
@@ -47,7 +42,7 @@ const restoreTraders = (config: Config, profile: Profile, logger: ILogger) => {
   if (nbTradersRestored > 0) {
     logger.success(
       `=> PathToTarkov: ${nbTradersRestored} trader${
-        nbTradersRestored === 1 ? "" : "s"
+        nbTradersRestored === 1 ? '' : 's'
       } restored for profile '${profile.info.username}'`,
     );
   }
@@ -60,15 +55,11 @@ const restoreTraders = (config: Config, profile: Profile, logger: ILogger) => {
 };
 
 // Used for uninstallation process
-export const purgeProfiles = (
-  config: Config,
-  saveServer: SaveServer,
-  logger: ILogger,
-): void => {
+export const purgeProfiles = (config: Config, saveServer: SaveServer, logger: ILogger): void => {
   // because we want to be sure to be able to read `SaveServer.profiles`
   saveServer.load();
 
-  Object.keys(saveServer.getProfiles()).forEach((sessionId) => {
+  Object.keys(saveServer.getProfiles()).forEach(sessionId => {
     const profile: Profile = saveServer.getProfile(sessionId);
 
     restoreMainStash(profile, logger);

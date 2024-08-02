@@ -1,32 +1,20 @@
-import type { RouteAction } from "@spt/di/Router";
-import type {
-  Exit,
-  SpawnPointParam,
-} from "@spt/models/eft/common/ILocationBase";
-import type { IHideoutArea } from "@spt/models/eft/hideout/IHideoutArea";
-import type { DatabaseServer } from "@spt/servers/DatabaseServer";
-import type { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
+import type { RouteAction } from '@spt/di/Router';
+import type { Exit, SpawnPointParam } from '@spt/models/eft/common/ILocationBase';
+import type { IHideoutArea } from '@spt/models/eft/hideout/IHideoutArea';
+import type { DatabaseServer } from '@spt/servers/DatabaseServer';
+import type { StaticRouterModService } from '@spt/services/mod/staticRouter/StaticRouterModService';
 
-import type {
-  AccessVia,
-  Config,
-  MapName,
-  PositionXYZ,
-  Profile,
-  SpawnPoint,
-} from "./config";
-import { JAEGER_INTRO_QUEST, MAPLIST, STANDARD_STASH_ID } from "./config";
-import type { ModLoader } from "./modLoader";
-import type { IQuestStatus } from "@spt/models/eft/common/tables/IBotBase";
-import { isDigit, isLetter } from "./utils";
+import type { AccessVia, Config, MapName, PositionXYZ, Profile, SpawnPoint } from './config';
+import { JAEGER_INTRO_QUEST, MAPLIST, STANDARD_STASH_ID } from './config';
+import type { ModLoader } from './modLoader';
+import type { IQuestStatus } from '@spt/models/eft/common/tables/IBotBase';
+import { isDigit, isLetter } from './utils';
 
 export function checkAccessVia(access_via: AccessVia, value: string): boolean {
-  return (
-    access_via === "*" || access_via[0] === "*" || access_via.includes(value)
-  );
+  return access_via === '*' || access_via[0] === '*' || access_via.includes(value);
 }
 
-const getPosition = (pos: SpawnPoint["Position"]): PositionXYZ => {
+const getPosition = (pos: SpawnPoint['Position']): PositionXYZ => {
   // work with Lua-CustomSpawnPointPointMaker format
   if (Array.isArray(pos)) {
     const [x, y, z] = pos;
@@ -37,7 +25,7 @@ const getPosition = (pos: SpawnPoint["Position"]): PositionXYZ => {
 };
 
 export const createSpawnPoint = (
-  pos: SpawnPoint["Position"],
+  pos: SpawnPoint['Position'],
   rot: number,
   entrypoints: string[],
   spawnId: string,
@@ -46,12 +34,12 @@ export const createSpawnPoint = (
     Id: spawnId,
     Position: getPosition(pos),
     Rotation: rot || 0.0,
-    Sides: ["All"],
-    Categories: ["Player"],
-    Infiltration: entrypoints[0] || "",
+    Sides: ['All'],
+    Categories: ['Player'],
+    Infiltration: entrypoints[0] || '',
     DelayToCanSpawnSec: 3,
     ColliderParams: {
-      _parent: "SpawnSphereParams",
+      _parent: 'SpawnSphereParams',
       _props: {
         Center: {
           x: 0,
@@ -62,7 +50,7 @@ export const createSpawnPoint = (
       },
     },
     CorePointId: 0,
-    BotZoneName: "",
+    BotZoneName: '',
   };
 };
 
@@ -75,14 +63,14 @@ export const createExitPoint =
     const MinTime = 0;
     const MaxTime = 0;
     const PlayersCount = 0;
-    const ExfiltrationType = "Individual";
-    const PassageRequirement = "None";
-    const RequirementTip = "";
+    const ExfiltrationType = 'Individual';
+    const PassageRequirement = 'None';
+    const RequirementTip = '';
 
     return {
-      Id: "",
+      Id: '',
       Name: name,
-      EntryPoints: entrypoints.join(","),
+      EntryPoints: entrypoints.join(','),
       Chance,
       Count,
       MinTime,
@@ -110,14 +98,14 @@ export const getEntryPointsForMaps = (db: DatabaseServer): EntryPoints => {
 
   const result: EntryPoints = {};
 
-  MAPLIST.forEach((mapName) => {
+  MAPLIST.forEach(mapName => {
     result[mapName] = [];
     const location = locations?.[mapName as MapName];
 
-    location?.base.exits.forEach((exitPayload) => {
-      const entrypoints = exitPayload.EntryPoints.split(",")
-        .map((x) => x.trim())
-        .filter((x) => !!x);
+    location?.base.exits.forEach(exitPayload => {
+      const entrypoints = exitPayload.EntryPoints.split(',')
+        .map(x => x.trim())
+        .filter(x => !!x);
       result[mapName] = [...result[mapName], ...entrypoints];
     });
   });
@@ -125,15 +113,12 @@ export const getEntryPointsForMaps = (db: DatabaseServer): EntryPoints => {
   return result;
 };
 
-export const changeRestrictionsInRaid = (
-  config: Config,
-  db: DatabaseServer,
-): void => {
+export const changeRestrictionsInRaid = (config: Config, db: DatabaseServer): void => {
   const globals = db.getTables().globals;
 
   const restrictionsConfig = config.restrictions_in_raid || {};
 
-  globals?.config.RestrictionsInRaid.forEach((payload) => {
+  globals?.config.RestrictionsInRaid.forEach(payload => {
     if (restrictionsConfig[payload.TemplateId]) {
       payload.Value = restrictionsConfig[payload.TemplateId].Value;
     }
@@ -144,7 +129,7 @@ export const disableRunThrough = (db: DatabaseServer): void => {
   const database = db.getTables();
 
   if (!database.globals) {
-    throw new Error("Unable to retrive globals settings in db");
+    throw new Error('Unable to retrive globals settings in db');
   }
 
   const runThroughDB = database.globals.config.exp.match_end;
@@ -154,7 +139,7 @@ export const disableRunThrough = (db: DatabaseServer): void => {
 
 // more infos on areas here: https://hub.sp-tarkov.com/doc/entry/4-resources-hideout-areas-ids/
 export const isIgnoredArea = (area: IHideoutArea, config: Config): boolean => {
-  if (typeof area.type !== "number") {
+  if (typeof area.type !== 'number') {
     // invalid area
     return true;
   }
@@ -182,12 +167,7 @@ export const isIgnoredArea = (area: IHideoutArea, config: Config): boolean => {
   return false;
 };
 
-type StaticRouteCallback = (
-  url: string,
-  info: any,
-  sessionId: string,
-  output: string,
-) => void;
+type StaticRouteCallback = (url: string, info: any, sessionId: string, output: string) => void;
 
 export type StaticRoutePeeker = {
   register: (name?: string) => void;
@@ -209,8 +189,8 @@ export const createStaticRoutePeeker = (
     });
   };
 
-  const register = (name = "Trap-PathToTarkov-StaticRoutePeeking") => {
-    staticRouter.registerStaticRouter(name, routeActions, "spt");
+  const register = (name = 'Trap-PathToTarkov-StaticRoutePeeking') => {
+    staticRouter.registerStaticRouter(name, routeActions, 'spt');
   };
 
   return {
@@ -221,37 +201,32 @@ export const createStaticRoutePeeker = (
 
 const QUEST_STATUS_SUCCESS = 4;
 
-export const isJaegerIntroQuestCompleted = (
-  quests: IQuestStatus[],
-): boolean => {
+export const isJaegerIntroQuestCompleted = (quests: IQuestStatus[]): boolean => {
   return Boolean(
     quests.find(
-      (quest) =>
+      quest =>
         quest.qid === JAEGER_INTRO_QUEST &&
-        (quest.status === QUEST_STATUS_SUCCESS ||
-          (quest as any).status === "Success"), // compatibility with aki 3.1.x
+        (quest.status === QUEST_STATUS_SUCCESS || (quest as any).status === 'Success'), // compatibility with aki 3.1.x
     ),
   );
 };
 
 const isModLoaded = (modLoader: ModLoader, modId: string): boolean => {
   const loadedModName = Object.keys(modLoader.imported).find(
-    (modName) => modLoader.imported[modName].name === modId,
+    modName => modLoader.imported[modName].name === modId,
   );
 
   return Boolean(loadedModName);
 };
 
-const LUAS_CSP_MOD_ID = "CustomSpawnPoints";
+const LUAS_CSP_MOD_ID = 'CustomSpawnPoints';
 
 export const isLuasCSPModLoaded = (modLoader: ModLoader): boolean => {
   return isModLoaded(modLoader, LUAS_CSP_MOD_ID);
 };
 
 export const getMainStashId = (profile: Profile): string => {
-  return (
-    profile.PathToTarkov?.mainStashId ?? profile.characters.pmc.Inventory.stash
-  );
+  return profile.PathToTarkov?.mainStashId ?? profile.characters.pmc.Inventory.stash;
 };
 
 export const isValidSptId = (id: string): boolean => {

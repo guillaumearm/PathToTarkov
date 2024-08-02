@@ -26,35 +26,16 @@
   },
   "offraid_regen_config": {
     "hydration": {
-      "access_via": [
-        "FactoryZB-1011",
-        "FactoryZB-1012",
-        "FactoryZB-1013",
-        "Car"
-      ]
+      "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-1013", "Car"]
     },
     "energy": {
-      "access_via": [
-        "FactoryZB-1011",
-        "FactoryZB-1012",
-        "FactoryZB-1013",
-        "WoodsCustoms"
-      ]
+      "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-1013", "WoodsCustoms"]
     },
     "health": {
-      "access_via": [
-        "FactoryZB-1011",
-        "FactoryZB-1012",
-        "FactoryZB-1013",
-        "WoodsFactoryGate"
-      ]
+      "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-1013", "WoodsFactoryGate"]
     }
   },
-  "hideout_main_stash_access_via": [
-    "FactoryZB-1011",
-    "FactoryZB-1012",
-    "FactoryZB-1013"
-  ],
+  "hideout_main_stash_access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-1013"],
   "hideout_secondary_stashes": [
     {
       "id": "PathToTarkov_Car_stash",

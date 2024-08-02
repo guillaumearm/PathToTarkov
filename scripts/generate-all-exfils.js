@@ -1,14 +1,14 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const fs = require("node:fs/promises");
+const fs = require('node:fs/promises');
 
-const EXTERNAL_RESOURCES_DIR = "external-resources";
-const LOCATION_NAME_MAPPING_FILENAME = "location_name_mapping.json";
-const LOCALES_FILENAME = "locales_global_en.json";
-const SCAVS_EXFILS_FILENAME = "scavs_exfils.json";
-const MAPGENIE_LOCATIONS_FILENAME = "mapgenie_locations.json";
-const MAPS_DIR = "maps";
+const EXTERNAL_RESOURCES_DIR = 'external-resources';
+const LOCATION_NAME_MAPPING_FILENAME = 'location_name_mapping.json';
+const LOCALES_FILENAME = 'locales_global_en.json';
+const SCAVS_EXFILS_FILENAME = 'scavs_exfils.json';
+const MAPGENIE_LOCATIONS_FILENAME = 'mapgenie_locations.json';
+const MAPS_DIR = 'maps';
 
-const MARKDOWN_MAIN_TITLE = "All exfiltrations";
+const MARKDOWN_MAIN_TITLE = 'All exfiltrations';
 
 const MARKDOWN_TABLE_HEADER = `
 |identifier|description|mapgenie.io|
@@ -16,21 +16,19 @@ const MARKDOWN_TABLE_HEADER = `
 `.trim();
 
 const MAPGENIE_REMAPPING = {
-  laboratory: "lab",
+  laboratory: 'lab',
 };
 
-const lowerLocaleKeys = (locales) => {
+const lowerLocaleKeys = locales => {
   const result = {};
   const localeKeys = Object.keys(locales);
 
-  localeKeys.forEach((localeKey) => {
+  localeKeys.forEach(localeKey => {
     result[localeKey.toLowerCase()] = locales[localeKey];
   });
 
   if (Object.keys(result).length < localeKeys.length) {
-    console.warn(
-      "Warning: some locales has been lost during key lower casing!",
-    );
+    console.warn('Warning: some locales has been lost during key lower casing!');
   }
 
   return result;
@@ -45,18 +43,13 @@ const LOCALES = lowerLocaleKeys(
   require(`../${EXTERNAL_RESOURCES_DIR}/${LOCALES_FILENAME}`),
 );
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const SCAVS_EXFILS = require(
-  `../${EXTERNAL_RESOURCES_DIR}/${SCAVS_EXFILS_FILENAME}`,
-);
+const SCAVS_EXFILS = require(`../${EXTERNAL_RESOURCES_DIR}/${SCAVS_EXFILS_FILENAME}`);
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const MAPGENIE_LOCATIONS = require(
-  `../${EXTERNAL_RESOURCES_DIR}/${MAPGENIE_LOCATIONS_FILENAME}`,
-);
+const MAPGENIE_LOCATIONS = require(`../${EXTERNAL_RESOURCES_DIR}/${MAPGENIE_LOCATIONS_FILENAME}`);
 
-const getMapJsonFilePath = (mapName) =>
-  `${EXTERNAL_RESOURCES_DIR}/${MAPS_DIR}/${mapName}.json`;
+const getMapJsonFilePath = mapName => `${EXTERNAL_RESOURCES_DIR}/${MAPS_DIR}/${mapName}.json`;
 
-const getMapGenieMapName = (mapName) => {
+const getMapGenieMapName = mapName => {
   if (MAPGENIE_REMAPPING[mapName]) {
     return MAPGENIE_REMAPPING[mapName];
   }
@@ -66,19 +59,15 @@ const getMapGenieMapName = (mapName) => {
 
 const resolveMapGenieLocationId = (mapName, exitResolvedName) => {
   if (!MAPGENIE_LOCATIONS[mapName]) {
-    throw new Error(
-      `Error: map name '${mapName}' does not exist in MAPGENIE_LOCATIONS`,
-    );
+    throw new Error(`Error: map name '${mapName}' does not exist in MAPGENIE_LOCATIONS`);
   }
 
   const mapLocation = MAPGENIE_LOCATIONS[mapName].find(
-    (l) => l.description.toLowerCase() === exitResolvedName.toLowerCase(),
+    l => l.description.toLowerCase() === exitResolvedName.toLowerCase(),
   );
 
   if (!mapLocation) {
-    console.error(
-      `Warning: cannot resolve map location ${exitResolvedName} for map '${mapName}'`,
-    );
+    console.error(`Warning: cannot resolve map location ${exitResolvedName} for map '${mapName}'`);
     return null;
   }
 
@@ -89,7 +78,7 @@ const getMapGenieLocationUrl = (mapName, locationId) => {
   const mapGenieMapName = getMapGenieMapName(mapName);
 
   if (!locationId) {
-    return "no link";
+    return 'no link';
   }
 
   return `[link](https://mapgenie.io/tarkov/maps/${mapGenieMapName}?locationIds=${locationId})`;
@@ -98,14 +87,14 @@ const getMapGenieLocationUrl = (mapName, locationId) => {
 class ConfigError extends Error {
   constructor(msg) {
     super(msg);
-    this.name = "Configuration Error";
+    this.name = 'Configuration Error';
   }
 }
 
-const resolveMapDisplayName = (mapName) => LOCATION_NAME_MAPPING[mapName];
+const resolveMapDisplayName = mapName => LOCATION_NAME_MAPPING[mapName];
 
-const assertValidMapNames = (mapNames) => {
-  mapNames.forEach((mapName) => {
+const assertValidMapNames = mapNames => {
+  mapNames.forEach(mapName => {
     if (!LOCATION_NAME_MAPPING[mapName]) {
       throw new ConfigError(
         `Invalid map name '${mapName}' found in ${SCAVS_EXFILS_FILENAME} file!`,
@@ -114,7 +103,7 @@ const assertValidMapNames = (mapNames) => {
   });
 };
 
-const resolveLocale = (localeId) => {
+const resolveLocale = localeId => {
   const value = LOCALES[localeId.toLowerCase()];
 
   if (!value) {
@@ -124,20 +113,18 @@ const resolveLocale = (localeId) => {
   return value;
 };
 
-const loadMapExits = async (mapName) => {
+const loadMapExits = async mapName => {
   const filePath = getMapJsonFilePath(mapName);
 
   try {
-    const fileContent = await fs.readFile(filePath, "utf-8");
-    return JSON.parse(fileContent).exits.map((exit) => exit.Name);
+    const fileContent = await fs.readFile(filePath, 'utf-8');
+    return JSON.parse(fileContent).exits.map(exit => exit.Name);
   } catch (err) {
-    throw new ConfigError(
-      `cannot load '${filePath}, reason=${err.toString()}'`,
-    );
+    throw new ConfigError(`cannot load '${filePath}, reason=${err.toString()}'`);
   }
 };
 
-const loadMapsExits = async (allMapNames) => {
+const loadMapsExits = async allMapNames => {
   const result = {};
 
   for (const mapName of allMapNames) {
@@ -148,10 +135,10 @@ const loadMapsExits = async (allMapNames) => {
   return result;
 };
 
-const simpleDedup = (array) => {
+const simpleDedup = array => {
   const resultObj = {};
 
-  array.forEach((elem) => {
+  array.forEach(elem => {
     resultObj[elem] = true;
   });
 
@@ -174,7 +161,7 @@ const mergeMapsExits = (mapsExitsLeft, mapsExitsRight) => {
   return result;
 };
 
-const formatMapsExits = (mapsExits) => {
+const formatMapsExits = mapsExits => {
   const allMapNames = Object.keys(mapsExits);
   assertValidMapNames(allMapNames);
 
@@ -183,28 +170,17 @@ const formatMapsExits = (mapsExits) => {
       const title = `## ${resolveMapDisplayName(mapName)}`;
       const exits = mapsExits[mapName];
 
-      const formattedRow = exits.map((exitName) => {
+      const formattedRow = exits.map(exitName => {
         const resolvedExitName = resolveLocale(exitName);
-        const mapGenieLocationId = resolveMapGenieLocationId(
-          mapName,
-          resolvedExitName,
-        );
+        const mapGenieLocationId = resolveMapGenieLocationId(mapName, resolvedExitName);
 
-        const mapGenieLocationUrl = getMapGenieLocationUrl(
-          mapName,
-          mapGenieLocationId,
-        );
+        const mapGenieLocationUrl = getMapGenieLocationUrl(mapName, mapGenieLocationId);
 
-        return `| "${exitName}" | ${resolveLocale(
-          exitName,
-        )} | ${mapGenieLocationUrl} |`;
+        return `| "${exitName}" | ${resolveLocale(exitName)} | ${mapGenieLocationUrl} |`;
       });
 
-      return (
-        output +
-        `${title}\n${MARKDOWN_TABLE_HEADER}\n${formattedRow.join("\n")}\n\n`
-      );
-    }, "")
+      return output + `${title}\n${MARKDOWN_TABLE_HEADER}\n${formattedRow.join('\n')}\n\n`;
+    }, '')
     .trim();
 };
 
@@ -222,11 +198,11 @@ ${formatMapsExits(allMapsExits)}
 };
 
 main()
-  .then((result) => {
+  .then(result => {
     process.stdout.write(result);
-    process.stdout.write("\n");
+    process.stdout.write('\n');
   })
-  .catch((err) => {
+  .catch(err => {
     if (err instanceof ConfigError) {
       console.error(err.toString());
     } else {

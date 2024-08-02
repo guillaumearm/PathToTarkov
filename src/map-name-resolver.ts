@@ -1,16 +1,16 @@
 const LOCATIONS_MAPS: Record<string, string> = {
-  customs: "bigmap",
-  factory: "factory4_day",
-  reservebase: "rezervbase",
-  interchange: "interchange",
-  woods: "woods",
-  lighthouse: "lighthouse",
-  shoreline: "shoreline",
-  laboratory: "laboratory",
-  lab: "laboratory",
-  ["streets of tarkov"]: "tarkovstreets",
-  groundzero: "sandbox",
-  sandbox_high: "sandbox",
+  customs: 'bigmap',
+  factory: 'factory4_day',
+  reservebase: 'rezervbase',
+  interchange: 'interchange',
+  woods: 'woods',
+  lighthouse: 'lighthouse',
+  shoreline: 'shoreline',
+  laboratory: 'laboratory',
+  lab: 'laboratory',
+  ['streets of tarkov']: 'tarkovstreets',
+  groundzero: 'sandbox',
+  sandbox_high: 'sandbox',
 };
 
 export const resolveMapNameFromLocation = (location: string): string => {

@@ -1,5 +1,5 @@
-import type { DatabaseServer } from "@spt/servers/DatabaseServer";
-import type { PathToTarkovReloadedTooltipsConfig } from "./config";
+import type { DatabaseServer } from '@spt/servers/DatabaseServer';
+import type { PathToTarkovReloadedTooltipsConfig } from './config';
 
 export const pathToTarkovReloadedTooltipsConfigCompat = (
   db: DatabaseServer,
@@ -9,13 +9,12 @@ export const pathToTarkovReloadedTooltipsConfigCompat = (
   const locales = database.locales?.global;
 
   if (!locales) {
-    throw new Error("Cannot load locales from db");
+    throw new Error('Cannot load locales from db');
   }
 
-  const tooltipLocale = tooltipsConfig.language?.toLowerCase() ?? "en";
+  const tooltipLocale = tooltipsConfig.language?.toLowerCase() ?? 'en';
   const localesToChange = tooltipsConfig.localesToChange ?? [];
-  const localesToChangeAdditional =
-    tooltipsConfig.localesToChangeAdditional ?? [];
+  const localesToChangeAdditional = tooltipsConfig.localesToChangeAdditional ?? [];
   const additionalLocalesToggle = tooltipsConfig.additionalLocalesToggle;
   const moddedTraderExtracts = tooltipsConfig.moddedTraderExtracts ?? [];
   const moddedTraderCompat = tooltipsConfig.moddedTraderCompat;
@@ -27,8 +26,7 @@ export const pathToTarkovReloadedTooltipsConfigCompat = (
     }
     if (additionalLocalesToggle) {
       for (let i = 0; i < localesToChangeAdditional.length; i += 2) {
-        localeObj[localesToChangeAdditional[i]] =
-          localesToChangeAdditional[i + 1];
+        localeObj[localesToChangeAdditional[i]] = localesToChangeAdditional[i + 1];
       }
     }
     if (moddedTraderCompat) {
@@ -74,13 +72,10 @@ export const pathToTarkovReloadedTooltipsConfigCompat = (
   };
 
   // Get the locale object based on tooltipLocale
-  const selectedLocale =
-    localeMappings[tooltipLocale as keyof typeof localeMappings];
+  const selectedLocale = localeMappings[tooltipLocale as keyof typeof localeMappings];
 
   if (!selectedLocale) {
-    throw new Error(
-      `incorrect language '${tooltipLocale}' found in Tooltips.json`,
-    );
+    throw new Error(`incorrect language '${tooltipLocale}' found in Tooltips.json`);
   }
 
   updateLocale(selectedLocale);
