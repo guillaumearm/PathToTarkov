@@ -145,6 +145,8 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     if (this.config.enable_legacy_ptt_api) {
       (globalThis as any).PathToTarkovAPI = api;
       this.debug('API enabled');
+    } else {
+      this.debug('API disabled');
     }
 
     this.executeOnStartAPICallbacks = executeOnStartAPICallbacks;
