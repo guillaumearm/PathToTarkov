@@ -28,7 +28,8 @@
     "build:client": "cd PTT-Extracts && dotnet.exe build",
     "clean:client": "cd PTT-Extracts && dotnet.exe clean && rimraf bin obj",
     "test:all": "npm run lint:all && npm run build:release",
-    "test": "tsc --noEmit && npm run lint:all"
+    "test": "tsc --noEmit && npm run lint:all",
+    "test:ci": "npm run build && npm run lint:all && npm run build:doc:all-exfils"
   },
   "devDependencies": {
     "@mermaid-js/mermaid-cli": "^9.1.7",
