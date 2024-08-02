@@ -3,6 +3,7 @@ import type { DependencyContainer } from "tsyringe";
 import type { IPostSptLoadMod } from "@spt/models/external/IPostSptLoadMod";
 import type { IPreSptLoadMod } from "@spt/models/external/IPreSptLoadMod";
 import type { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ConfigServer } from "@spt/servers/ConfigServer";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
 import type { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
@@ -72,7 +73,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     if (this.config.debug) {
       this.debug("debug mode enabled");
     }
-
+    const configServer = container.resolve<ConfigServer>("ConfigServer");
     const db = container.resolve<DatabaseServer>("DatabaseServer");
     const saveServer = container.resolve<SaveServer>("SaveServer");
 
@@ -103,6 +104,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       container,
       db,
       saveServer,
+      configServer,
       getIsTraderLocked,
       this.logger,
       this.debug,

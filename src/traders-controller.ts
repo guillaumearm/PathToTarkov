@@ -1,5 +1,8 @@
+import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
+import type { IInsuranceConfig } from "@spt/models/spt/config/IInsuranceConfig";
 import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
+import type { ConfigServer } from "@spt/servers/ConfigServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
 import type { ConfigGetter, LocaleName } from "./config";
 import { JAEGER_ID, PRAPOR_ID } from "./config";
@@ -15,8 +18,9 @@ export class TradersController {
     private readonly getIsTraderLocked: (traderId: string) => boolean,
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
+    private readonly configServer: ConfigServer,
     private readonly logger: ILogger,
-  ) {}
+  ) { }
 
   initTraders(): void {
     this.fixInsuranceDialogues();
@@ -66,21 +70,39 @@ export class TradersController {
         if (tradersConfig[traderId].insurance_always_enabled) {
           const insuranceTraderConfig =
             tradersConfig[traderId].insurance_config || {};
+          const insuranceConfig: IInsuranceConfig =
+            this.configServer.getConfig<IInsuranceConfig>(
+              ConfigTypes.INSURANCE
+            );
 
           trader.base.insurance.availability = true;
-          trader.base.insurance.min_payment =
-            insuranceTraderConfig.min_payment || 0;
-          trader.base.insurance.min_return_hour =
-            insuranceTraderConfig.min_return_hour || 1;
-          trader.base.insurance.max_return_hour =
-            insuranceTraderConfig.max_return_hour || 2;
-          trader.base.insurance.max_storage_time =
-            insuranceTraderConfig.max_storage_time || 480;
+          if (insuranceTraderConfig.min_payment !== undefined) {
+            trader.base.insurance.min_payment =
+              insuranceTraderConfig.min_payment;
+          }
+          if (insuranceTraderConfig.min_return_hour !== undefined) {
+            trader.base.insurance.min_return_hour =
+              insuranceTraderConfig.min_return_hour;
+          }
+          if (insuranceTraderConfig.max_return_hour !== undefined) {
+            trader.base.insurance.max_return_hour =
+              insuranceTraderConfig.max_return_hour;
+          }
+          if (insuranceTraderConfig.max_storage_time !== undefined) {
+            trader.base.insurance.max_storage_time =
+              insuranceTraderConfig.max_storage_time;
+          }
+          if (insuranceTraderConfig.return_chance_percent !== undefined) {
+            insuranceConfig.returnChancePercent[traderId] =
+              insuranceTraderConfig.return_chance_percent;
+          }
 
-          trader.base.loyaltyLevels.forEach((payloadLevel) => {
-            payloadLevel.insurance_price_coef =
-              insuranceTraderConfig.insurance_price_coef || 1;
-          });
+          const insurancePriceCoef = insuranceTraderConfig.insurance_price_coef;
+          if (insurancePriceCoef !== undefined) {
+            trader.base.loyaltyLevels.forEach((payloadLevel) => {
+              payloadLevel.insurance_price_coef = insurancePriceCoef;
+            });
+          }
         }
 
         // repairs update

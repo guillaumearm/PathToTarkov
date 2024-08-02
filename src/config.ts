@@ -73,6 +73,7 @@ type InsuranceConfig = {
   min_return_hour?: number;
   max_return_hour?: number;
   max_storage_time?: number;
+  return_chance_percent?: number;
 };
 
 type RepairConfig = {

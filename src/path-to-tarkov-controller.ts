@@ -1,6 +1,7 @@
 import type { IBodyHealth, IGlobals } from "@spt/models/eft/common/IGlobals";
 import type { ILocationBase } from "@spt/models/eft/common/ILocationBase";
 import type { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ConfigServer } from "@spt/servers/ConfigServer";
 import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
 
@@ -71,6 +72,7 @@ export class PathToTarkovController {
     private readonly container: DependencyContainer,
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
+    configServer: ConfigServer,
     getIsTraderLocked: (traderId: string) => boolean,
     private readonly logger: ILogger,
     private readonly debug: (data: string) => void,
@@ -86,6 +88,7 @@ export class PathToTarkovController {
       getIsTraderLocked,
       db,
       saveServer,
+      configServer,
       this.logger,
     );
     this.entrypoints = {};
