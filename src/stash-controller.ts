@@ -3,7 +3,12 @@ import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { SaveServer } from '@spt/servers/SaveServer';
 import type { ConfigGetter, Profile, StashConfig } from './config';
 import { EMPTY_STASH, STANDARD_STASH_ID } from './config';
-import { checkAccessVia, getMainStashId, retrieveMainStashIdFromItems } from './helpers';
+import {
+  checkAccessVia,
+  getMainStashId,
+  isVanillaSptId,
+  retrieveMainStashIdFromItems,
+} from './helpers';
 import { deepClone } from './utils';
 
 export const getTemplateIdFromStashId = (stashId: string): string => `template_${stashId}`;
@@ -70,7 +75,9 @@ export class StashController {
       profile.PathToTarkov = {};
     }
 
-    if (!profile.PathToTarkov.mainStashId) {
+    const initialMainStashId = profile.PathToTarkov.mainStashId;
+
+    if (!initialMainStashId || !isVanillaSptId(initialMainStashId)) {
       const mainStashId = retrieveMainStashIdFromItems(pmc.Inventory.items);
       profile.PathToTarkov.mainStashId = mainStashId ?? pmc.Inventory.stash;
     }
