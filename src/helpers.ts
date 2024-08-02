@@ -5,9 +5,10 @@ import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { StaticRouterModService } from '@spt/services/mod/staticRouter/StaticRouterModService';
 
 import type { AccessVia, Config, MapName, PositionXYZ, Profile, SpawnPoint } from './config';
-import { JAEGER_INTRO_QUEST, MAPLIST, STANDARD_STASH_ID } from './config';
+import { JAEGER_INTRO_QUEST, MAPLIST, STANDARD_STASH_ID, VANILLA_STASH_IDS } from './config';
 import type { IQuestStatus } from '@spt/models/eft/common/tables/IBotBase';
 import { isDigit, isLetter } from './utils';
+import type { Item } from '@spt/models/eft/common/tables/IItem';
 
 export function checkAccessVia(access_via: AccessVia, value: string): boolean {
   return access_via === '*' || access_via[0] === '*' || access_via.includes(value);
@@ -217,7 +218,7 @@ export const getMainStashId = (profile: Profile): string => {
 // the length should be 24
 const SPT_ID_LENGTH = STANDARD_STASH_ID.length;
 
-export const isValidSptId = (id: string): boolean => {
+export const isVanillaSptId = (id: string): boolean => {
   if (id.length !== SPT_ID_LENGTH) {
     return false;
   }
@@ -231,4 +232,23 @@ export const isValidSptId = (id: string): boolean => {
   }
 
   return true;
+};
+
+const isStashLink = (item: Item): boolean => {
+  return (
+    Boolean(item._id) &&
+    Boolean(item._tpl) &&
+    Object.keys(item).length === 2 &&
+    VANILLA_STASH_IDS.includes(item._tpl)
+  );
+};
+
+export const retrieveMainStashIdFromItems = (items: Item[]): string | null => {
+  for (const item of items) {
+    if (isStashLink(item) && isVanillaSptId(item._id)) {
+      return item._id;
+    }
+  }
+
+  return null;
 };
