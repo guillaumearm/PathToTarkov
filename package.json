@@ -15,7 +15,7 @@
     "build:doc": "npm run build:doc:all-exfils && npm run build:doc:mermaid",
     "zip:files": "cd dist && bestzip ../mod.zip user BepInEx && cd .. && node scripts/rename-zip.js",
     "prepare:files": "node scripts/prepare-files.js",
-    "build:release": "npm run rebuild:all && npm run prepare:files && npm run zip:files",
+    "build:release": "npm run rebuild:all && npm run prepare:files && npm run zip:files && npm run git:check:status",
     "clean": "rimraf dist tmp 'src/**/*.js' Trap-PathToTarkov*",
     "clean:all": "npm run clean:client && npm run clean",
     "prettier": "prettier --write .",
