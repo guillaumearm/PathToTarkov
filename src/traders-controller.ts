@@ -20,7 +20,7 @@ export class TradersController {
     private readonly saveServer: SaveServer,
     private readonly configServer: ConfigServer,
     private readonly logger: ILogger,
-  ) { }
+  ) {}
 
   initTraders(): void {
     this.fixInsuranceDialogues();
@@ -72,7 +72,7 @@ export class TradersController {
             tradersConfig[traderId].insurance_config || {};
           const insuranceConfig: IInsuranceConfig =
             this.configServer.getConfig<IInsuranceConfig>(
-              ConfigTypes.INSURANCE
+              ConfigTypes.INSURANCE,
             );
 
           trader.base.insurance.availability = true;
