@@ -19,11 +19,11 @@ import {
   isIgnoredArea,
 } from "./helpers";
 
-import { StashController } from "./stash-controller";
+import { getTemplateIdFromStashId, StashController } from "./stash-controller";
 import { TradersController } from "./traders-controller";
 import type { DependencyContainer } from "tsyringe";
 import type { LocationController } from "@spt/controllers/LocationController";
-import { deepClone, getTemplateIdFromStashId } from "./utils";
+import { deepClone } from "./utils";
 import { resolveMapNameFromLocation } from "./map-name-resolver";
 import type {
   ILocationsGenerateAllResponse,

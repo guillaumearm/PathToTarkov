@@ -12,11 +12,13 @@ import type {
   Config,
   MapName,
   PositionXYZ,
+  Profile,
   SpawnPoint,
 } from "./config";
-import { JAEGER_INTRO_QUEST, MAPLIST } from "./config";
+import { JAEGER_INTRO_QUEST, MAPLIST, STANDARD_STASH_ID } from "./config";
 import type { ModLoader } from "./modLoader";
 import type { IQuestStatus } from "@spt/models/eft/common/tables/IBotBase";
+import { isDigit, isLetter } from "./utils";
 
 export function checkAccessVia(access_via: AccessVia, value: string): boolean {
   return (
@@ -244,4 +246,27 @@ const LUAS_CSP_MOD_ID = "CustomSpawnPoints";
 
 export const isLuasCSPModLoaded = (modLoader: ModLoader): boolean => {
   return isModLoaded(modLoader, LUAS_CSP_MOD_ID);
+};
+
+export const getMainStashId = (profile: Profile): string => {
+  return (
+    profile.PathToTarkov?.mainStashId ?? profile.characters.pmc.Inventory.stash
+  );
+};
+
+export const isValidSptId = (id: string): boolean => {
+  if (id.length !== STANDARD_STASH_ID.length) {
+    // length should be 24
+    return false;
+  }
+
+  for (const char of id) {
+    const isValidChar = isLetter(char) || isDigit(char);
+
+    if (!isValidChar) {
+      return false;
+    }
+  }
+
+  return true;
 };

@@ -3,13 +3,12 @@ import type { DatabaseServer } from "@spt/servers/DatabaseServer";
 import type { SaveServer } from "@spt/servers/SaveServer";
 import type { ConfigGetter, Profile, StashConfig } from "./config";
 import { EMPTY_STASH, STANDARD_STASH_ID } from "./config";
-import { checkAccessVia } from "./helpers";
-import {
-  deepClone,
-  getGridIdFromStashId,
-  getMainStashId,
-  getTemplateIdFromStashId,
-} from "./utils";
+import { checkAccessVia, getMainStashId } from "./helpers";
+import { deepClone } from "./utils";
+
+export const getTemplateIdFromStashId = (stashId: string): string =>
+  `template_${stashId}`;
+const getGridIdFromStashId = (stashId: string): string => `grid_${stashId}`;
 
 export class StashController {
   constructor(
@@ -78,7 +77,9 @@ export class StashController {
     }
 
     if (!profile.PathToTarkov.mainStashId) {
-      profile.PathToTarkov.mainStashId = profile.characters.pmc.Inventory.stash;
+      const defaultStashId = profile.characters.pmc.Inventory.stash;
+      // TODO: be sure to retrieve the correct stash id here
+      profile.PathToTarkov.mainStashId = defaultStashId;
     }
   }
 

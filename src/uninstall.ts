@@ -2,8 +2,7 @@ import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import type { SaveServer } from "@spt/servers/SaveServer";
 import type { Config, Profile } from "./config";
 import { JAEGER_ID } from "./config";
-import { isJaegerIntroQuestCompleted } from "./helpers";
-import { getMainStashId } from "./utils";
+import { isJaegerIntroQuestCompleted, getMainStashId } from "./helpers";
 
 const restoreMainStash = (profile: Profile, logger: ILogger): void => {
   const pmcInventory = profile.characters.pmc.Inventory;

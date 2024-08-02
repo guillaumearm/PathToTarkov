@@ -1,5 +1,4 @@
 import { readFileSync } from "fs";
-import type { Profile } from "./config";
 
 export const readJsonFile = <T>(path: string): T => {
   return JSON.parse(readFileSync(path, "utf-8"));
@@ -78,13 +77,10 @@ export const isEmptyArray = <T>(arr: T[] | undefined): boolean => {
   return Boolean(arr && arr.length > 0);
 };
 
-export const getMainStashId = (profile: Profile): string => {
-  return (
-    profile.PathToTarkov?.mainStashId ?? profile.characters.pmc.Inventory.stash
-  );
+export const isLetter = (char: string): boolean => {
+  return char.length === 1 && char.toUpperCase() !== char.toLowerCase();
 };
 
-export const getTemplateIdFromStashId = (stashId: string): string =>
-  `template_${stashId}`;
-export const getGridIdFromStashId = (stashId: string): string =>
-  `grid_${stashId}`;
+export const isDigit = (char: string): boolean => {
+  return char.length === 1 && char >= "0" && char <= "9";
+};
