@@ -15,3 +15,11 @@ export function getModLoader(container: DependencyContainer): ModLoader {
 
   return modLoader;
 }
+
+export const isModLoaded = (modLoader: ModLoader, modId: string): boolean => {
+  const loadedModName = Object.keys(modLoader.imported).find(
+    modName => modLoader.imported[modName].name === modId,
+  );
+
+  return Boolean(loadedModName);
+};

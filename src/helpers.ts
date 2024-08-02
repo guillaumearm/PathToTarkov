@@ -6,7 +6,6 @@ import type { StaticRouterModService } from '@spt/services/mod/staticRouter/Stat
 
 import type { AccessVia, Config, MapName, PositionXYZ, Profile, SpawnPoint } from './config';
 import { JAEGER_INTRO_QUEST, MAPLIST, STANDARD_STASH_ID } from './config';
-import type { ModLoader } from './modLoader';
 import type { IQuestStatus } from '@spt/models/eft/common/tables/IBotBase';
 import { isDigit, isLetter } from './utils';
 
@@ -211,27 +210,15 @@ export const isJaegerIntroQuestCompleted = (quests: IQuestStatus[]): boolean => 
   );
 };
 
-const isModLoaded = (modLoader: ModLoader, modId: string): boolean => {
-  const loadedModName = Object.keys(modLoader.imported).find(
-    modName => modLoader.imported[modName].name === modId,
-  );
-
-  return Boolean(loadedModName);
-};
-
-const LUAS_CSP_MOD_ID = 'CustomSpawnPoints';
-
-export const isLuasCSPModLoaded = (modLoader: ModLoader): boolean => {
-  return isModLoaded(modLoader, LUAS_CSP_MOD_ID);
-};
-
 export const getMainStashId = (profile: Profile): string => {
   return profile.PathToTarkov?.mainStashId ?? profile.characters.pmc.Inventory.stash;
 };
 
+// the length should be 24
+const SPT_ID_LENGTH = STANDARD_STASH_ID.length;
+
 export const isValidSptId = (id: string): boolean => {
-  if (id.length !== STANDARD_STASH_ID.length) {
-    // length should be 24
+  if (id.length !== SPT_ID_LENGTH) {
     return false;
   }
 
