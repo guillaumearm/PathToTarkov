@@ -9,18 +9,18 @@ const { mkdirp } = require('mkdirp');
 
 const main = async modName => {
   [
-    'rm -rf dist/user',
-    'rm -rf dist/BepInEx',
+    'rimraf dist/user',
+    'rimraf dist/BepInEx',
     () => mkdirp.sync(`./dist/user/mods/${modName}`),
     () => mkdirp.sync('./dist/BepInEx/plugins'),
-    'npx cpr ./PTT-Extracts/bin/Debug/netstandard2.0/PTTExtracts.dll ./dist/BepInEx/plugins/PTTExtracts.dll -o',
-    `npx cpr package.json ./dist/user/mods/${modName}/package.json -o`,
-    `npx cpr dist/src ./dist/user/mods/${modName} -o`,
-    `npx cpr config ./dist/user/mods/${modName} -o`,
-    `npx cpr ALL_EXFILS.md ./dist/user/mods/${modName}/ALL_EXFILS.md -o`,
-    `npx cpr LOGO.jpg ./dist/user/mods/${modName}/LOGO.jpg -o`,
-    `npx cpr README.md ./dist/user/mods/${modName}/README.md -o`,
-    `npx cpr LICENSE ./dist/user/mods/${modName}/LICENSE -o`,
+    'cpr ./PTT-Extracts/bin/Debug/netstandard2.0/PTTExtracts.dll ./dist/BepInEx/plugins/PTTExtracts.dll -o',
+    `cpr package.json ./dist/user/mods/${modName}/package.json -o`,
+    `cpr dist/src ./dist/user/mods/${modName} -o`,
+    `cpr config ./dist/user/mods/${modName} -o`,
+    `cpr ALL_EXFILS.md ./dist/user/mods/${modName}/ALL_EXFILS.md -o`,
+    `cpr LOGO.jpg ./dist/user/mods/${modName}/LOGO.jpg -o`,
+    `cpr README.md ./dist/user/mods/${modName}/README.md -o`,
+    `cpr LICENSE ./dist/user/mods/${modName}/LICENSE -o`,
     'echo "> Successfully prepared files!"',
   ].forEach(cmd => {
     if (typeof cmd === 'string') {
