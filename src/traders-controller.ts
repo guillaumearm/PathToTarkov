@@ -1,4 +1,4 @@
-import { ConfigTypes } from '@spt/models/enums/ConfigTypes';
+import type { ConfigTypes } from '@spt/models/enums/ConfigTypes';
 import type { IInsuranceConfig } from '@spt/models/spt/config/IInsuranceConfig';
 import type { ILogger } from '@spt/models/spt/utils/ILogger';
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
@@ -68,7 +68,7 @@ export class TradersController {
         if (tradersConfig[traderId].insurance_always_enabled) {
           const insuranceTraderConfig = tradersConfig[traderId].insurance_config || {};
           const insuranceConfig: IInsuranceConfig = this.configServer.getConfig<IInsuranceConfig>(
-            ConfigTypes.INSURANCE,
+            'spt-insurance' as ConfigTypes.INSURANCE,
           );
 
           trader.base.insurance.availability = true;
