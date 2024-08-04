@@ -1,7 +1,7 @@
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { SaveServer } from '@spt/servers/SaveServer';
 import type { ConfigGetter, Profile, StashConfig } from './config';
-import { EMPTY_STASH, STANDARD_STASH_ID } from './config';
+import { EMPTY_STASH, SLOT_ID_HIDEOUT, SLOT_ID_LOCKED_STASH, STANDARD_STASH_ID } from './config';
 import {
   checkAccessVia,
   getMainStashId,
@@ -124,6 +124,19 @@ export class StashController {
     } else {
       this.setSecondaryStash(secondaryStash.id, profile);
     }
+
+    const inventory = profile.characters.pmc.Inventory;
+    const stashId = inventory.stash;
+
+    inventory.items.forEach(item => {
+      if (item.slotId === SLOT_ID_HIDEOUT || item.slotId === SLOT_ID_LOCKED_STASH) {
+        if (item.parentId === stashId) {
+          item.slotId = SLOT_ID_HIDEOUT;
+        } else {
+          item.slotId = SLOT_ID_LOCKED_STASH;
+        }
+      }
+    });
   }
 
   getStashSize(offraidPosition: string): number | null {

@@ -178,6 +178,9 @@ export const EMPTY_STASH: Omit<StashConfig, 'access_via'> = {
   size: 0,
 };
 
+export const SLOT_ID_HIDEOUT = 'hideout';
+export const SLOT_ID_LOCKED_STASH = 'ptt_locked_stash';
+
 export const MAPLIST = [
   'laboratory',
   'factory4_day',
