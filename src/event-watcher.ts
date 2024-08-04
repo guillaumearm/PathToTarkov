@@ -1,5 +1,6 @@
 import type { StaticRoutePeeker } from './helpers';
 import type { EndOfRaidPayload, PTTInstance } from './end-of-raid-controller';
+import type { SaveServer } from '@spt/servers/SaveServer';
 
 type EndOfRaidCallback = (payload: EndOfRaidPayload) => void;
 
@@ -25,7 +26,10 @@ export class EventWatcher {
   private raidCaches: Record<string, RaidCache>; // indexed by sessionId
   private endOfRaidCallback: EndOfRaidCallback | null = null;
 
-  constructor(private ptt: PTTInstance) {
+  constructor(
+    private ptt: PTTInstance,
+    private saveServer: SaveServer,
+  ) {
     this.raidCaches = {};
   }
 
@@ -52,7 +56,10 @@ export class EventWatcher {
     staticRoutePeeker.watchRoute('/client/game/start', (url, info: unknown, sessionId) => {
       this.initRaidCache(sessionId);
 
-      if (!this.ptt.pathToTarkovController.stashController.getInventory(sessionId)) {
+      const profile = this.ptt.pathToTarkovController.saveServer.getProfile(sessionId);
+      const inventory = profile.characters.pmc.Inventory;
+
+      if (!inventory) {
         this.ptt.debug(
           `/client/game/start: no pmc data found, init will be handled on profile creation`,
         );

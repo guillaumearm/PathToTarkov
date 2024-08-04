@@ -100,7 +100,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       this.debug,
     );
 
-    const eventWatcher = new EventWatcher(this);
+    const eventWatcher = new EventWatcher(this, saveServer);
     const endOfRaidController = new EndOfRaidController(this);
 
     eventWatcher.onEndOfRaid(payload => endOfRaidController.end(payload));

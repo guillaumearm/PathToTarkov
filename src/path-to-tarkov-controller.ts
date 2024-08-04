@@ -68,7 +68,7 @@ export class PathToTarkovController {
     public spawnConfig: SpawnConfig,
     private readonly container: DependencyContainer,
     private readonly db: DatabaseServer,
-    private readonly saveServer: SaveServer,
+    public readonly saveServer: SaveServer,
     configServer: ConfigServer,
     getIsTraderLocked: (traderId: string) => boolean,
     private readonly logger: ILogger,
