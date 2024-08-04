@@ -1,4 +1,3 @@
-import type { Inventory } from '@spt/models/eft/common/tables/IBotBase';
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { SaveServer } from '@spt/servers/SaveServer';
 import type { ConfigGetter, Profile, StashConfig } from './config';
@@ -21,11 +20,6 @@ export class StashController {
     private saveServer: SaveServer,
     private readonly debug: (data: string) => void,
   ) {}
-
-  getInventory(sessionId: string): Inventory {
-    const profile = this.saveServer.getProfile(sessionId);
-    return profile.characters.pmc.Inventory;
-  }
 
   initSecondaryStashTemplates(): number {
     const standardTemplate = this.db.getTables()?.templates?.items[STANDARD_STASH_ID];
@@ -83,16 +77,15 @@ export class StashController {
     }
   }
 
-  private setMainStash(sessionId: string): void {
-    const inventory = this.getInventory(sessionId);
-    const profile: Profile = this.saveServer.getProfile(sessionId);
-    inventory.stash = getMainStashId(profile);
+  private setMainStash(profile: Profile): void {
+    const mainStashId = getMainStashId(profile);
+
+    const inventory = profile.characters.pmc.Inventory;
+    inventory.stash = mainStashId;
   }
 
-  private setSecondaryStash(stashId: string, sessionId: string): void {
-    const profile = this.saveServer.getProfile(sessionId);
+  private setSecondaryStash(stashId: string, profile: Profile): void {
     const inventory = profile.characters.pmc.Inventory;
-
     inventory.stash = stashId;
 
     const templateId = getTemplateIdFromStashId(stashId);
@@ -124,11 +117,12 @@ export class StashController {
   updateStash(offraidPosition: string, sessionId: string): void {
     const mainStashAvailable = this.getMainStashAvailable(offraidPosition);
     const secondaryStash = this.getSecondaryStash(offraidPosition);
+    const profile: Profile = this.saveServer.getProfile(sessionId);
 
     if (mainStashAvailable) {
-      this.setMainStash(sessionId);
+      this.setMainStash(profile);
     } else {
-      this.setSecondaryStash(secondaryStash.id, sessionId);
+      this.setSecondaryStash(secondaryStash.id, profile);
     }
   }
 
