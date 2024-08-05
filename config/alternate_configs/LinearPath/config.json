@@ -226,6 +226,27 @@
       },
       "access_via": ["PeacekeeperStash"]
     },
+    "6617beeaa9cfa777ca915b7c": {
+      "// Trader name": "Arena (Ref)",
+      "override_description": true,
+      "location_description": {
+        "ch": "To customs",
+        "cz": "To customs",
+        "en": "To customs",
+        "es-mx": "To customs",
+        "es": "To customs",
+        "fr": "Vers les douanes",
+        "ge": "To customs",
+        "hu": "To customs",
+        "it": "To customs",
+        "jp": "To customs",
+        "kr": "To customs",
+        "pl": "To customs",
+        "po": "To customs",
+        "ru": "To customs"
+      },
+      "access_via": ["SkierStash"]
+    },
     "579dc571d53a0658a154fbec": {
       "// Trader name": "Fence",
       "// Fence is accessible everywhere": true,
