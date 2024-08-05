@@ -95,7 +95,8 @@
         "jp": "Between woods and factory",
         "kr": "Between woods and factory",
         "pl": "Between woods and factory",
-        "po": "Between woods and factory"
+        "po": "Between woods and factory",
+        "ru": "Between woods and factory"
       },
       "access_via": ["WoodsFactoryGate"]
     },
@@ -115,7 +116,8 @@
         "jp": "Between woods and factory",
         "kr": "Between woods and factory",
         "pl": "Between woods and factory",
-        "po": "Between woods and factory"
+        "po": "Between woods and factory",
+        "ru": "Between woods and factory"
       },
       "access_via": ["WoodsFactoryGate"]
     },
@@ -135,7 +137,8 @@
         "jp": "In ZB-* bunkers",
         "kr": "In ZB-* bunkers",
         "pl": "In ZB-* bunkers",
-        "po": "In ZB-* bunkers"
+        "po": "In ZB-* bunkers",
+        "ru": "In ZB-* bunkers"
       },
       "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-1013"]
     },
@@ -155,7 +158,8 @@
         "jp": "Between woods and customs",
         "kr": "Between woods and customs",
         "pl": "Between woods and customs",
-        "po": "Between woods and customs"
+        "po": "Between woods and customs",
+        "ru": "Between woods and customs"
       },
       "access_via": ["WoodsCustoms"]
     },
@@ -175,7 +179,8 @@
         "jp": "Between interchange and customs",
         "kr": "Between interchange and customs",
         "pl": "Between interchange and customs",
-        "po": "Between interchange and customs"
+        "po": "Between interchange and customs",
+        "ru": "Between interchange and customs"
       },
       "access_via": ["InterchangeCustoms"]
     },
@@ -195,7 +200,8 @@
         "jp": "In car",
         "kr": "In car",
         "pl": "In car",
-        "po": "In car"
+        "po": "In car",
+        "ru": "In car"
       },
       "access_via": ["Car"]
     },
@@ -215,7 +221,8 @@
         "jp": "In boat",
         "kr": "In boat",
         "pl": "In boat",
-        "po": "In boat"
+        "po": "In boat",
+        "ru": "In boat"
       },
       "access_via": ["Boat"]
     },
@@ -259,7 +266,8 @@
         "jp": "Somewhere between woods, military reserve and shoreline",
         "kr": "Somewhere between woods, military reserve and shoreline",
         "pl": "Somewhere between woods, military reserve and shoreline",
-        "po": "Somewhere between woods, military reserve and shoreline"
+        "po": "Somewhere between woods, military reserve and shoreline",
+        "ru": "Somewhere between woods, military reserve and shoreline"
       },
       "access_via": ["WoodsReserveShoreline"]
     },
@@ -281,7 +289,8 @@
         "jp": "Between interchange and customs",
         "kr": "Between interchange and customs",
         "pl": "Between interchange and customs",
-        "po": "Between interchange and customs"
+        "po": "Between interchange and customs",
+        "ru": "Between interchange and customs"
       },
       "access_via": ["InterchangeCustoms"]
     },
@@ -303,7 +312,8 @@
         "jp": "Between woods and customs",
         "kr": "Between woods and customs",
         "pl": "Between woods and customs",
-        "po": "Between woods and customs"
+        "po": "Between woods and customs",
+        "ru": "Between woods and customs"
       },
       "access_via": ["WoodsCustoms"]
     },
@@ -325,7 +335,8 @@
         "jp": "Between lighthouse and shoreline",
         "kr": "Between lighthouse and shoreline",
         "pl": "Between lighthouse and shoreline",
-        "po": "Between lighthouse and shoreline"
+        "po": "Between lighthouse and shoreline",
+        "ru": "Between lighthouse and shoreline"
       },
       "access_via": ["ShorelineLighthouseTunnel"]
     },
@@ -347,7 +358,8 @@
         "jp": "Between customs and military reserve",
         "kr": "Between customs and military reserve",
         "pl": "Between customs and military reserve",
-        "po": "Between customs and military reserve"
+        "po": "Between customs and military reserve",
+        "ru": "Between customs and military reserve"
       },
       "access_via": ["CustomsMilitaryBaseCP"]
     },
@@ -369,7 +381,8 @@
         "jp": "In ZB-* bunkers",
         "kr": "In ZB-* bunkers",
         "pl": "In ZB-* bunkers",
-        "po": "In ZB-* bunkers"
+        "po": "In ZB-* bunkers",
+        "ru": "In ZB-* bunkers"
       },
       "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-1013"]
     },
@@ -391,7 +404,8 @@
         "jp": "In ZB-* bunkers",
         "kr": "In ZB-* bunkers",
         "pl": "In ZB-* bunkers",
-        "po": "In ZB-* bunkers"
+        "po": "In ZB-* bunkers",
+        "ru": "In ZB-* bunkers"
       },
       "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-1013"]
     },
@@ -413,7 +427,8 @@
         "jp": "In car",
         "kr": "In car",
         "pl": "In car",
-        "po": "In car"
+        "po": "In car",
+        "ru": "In car"
       },
       "access_via": ["Car"]
     },
@@ -435,7 +450,8 @@
         "jp": "In car",
         "kr": "In car",
         "pl": "In car",
-        "po": "In car"
+        "po": "In car",
+        "ru": "In car"
       },
       "access_via": ["Car"]
     },
@@ -457,7 +473,8 @@
         "jp": "In boat",
         "kr": "In boat",
         "pl": "In boat",
-        "po": "In boat"
+        "po": "In boat",
+        "ru": "In boat"
       },
       "access_via": ["Boat"]
     },
@@ -479,7 +496,8 @@
         "jp": "Between interchange and military reserve",
         "kr": "Between interchange and military reserve",
         "pl": "Between interchange and military reserve",
-        "po": "Between interchange and military reserve"
+        "po": "Between interchange and military reserve",
+        "ru": "Between interchange and military reserve"
       },
       "access_via": ["SafeRoom"]
     }

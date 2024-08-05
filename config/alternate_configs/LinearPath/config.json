@@ -95,7 +95,8 @@
         "jp": "In his car, he hangs around the city",
         "kr": "In his car, he hangs around the city",
         "pl": "In his car, he hangs around the city",
-        "po": "In his car, he hangs around the city"
+        "po": "In his car, he hangs around the city",
+        "ru": "In his car, he hangs around the city"
       },
       "access_via": ["PraporStash"]
     },
@@ -115,7 +116,8 @@
         "jp": "In the city",
         "kr": "In the city",
         "pl": "In the city",
-        "po": "In the city"
+        "po": "In the city",
+        "ru": "In the city"
       },
       "access_via": ["TherapistStash"]
     },
@@ -135,7 +137,8 @@
         "jp": "inside the factory (at home)",
         "kr": "inside the factory (at home)",
         "pl": "inside the factory (at home)",
-        "po": "inside the factory (at home)"
+        "po": "inside the factory (at home)",
+        "ru": "inside the factory (at home)"
       },
       "access_via": ["MechanicStash"]
     },
@@ -155,7 +158,8 @@
         "jp": "To customs",
         "kr": "To customs",
         "pl": "To customs",
-        "po": "To customs"
+        "po": "To customs",
+        "ru": "To customs"
       },
       "access_via": ["SkierStash"]
     },
@@ -175,7 +179,8 @@
         "jp": "To interchange",
         "kr": "To interchange",
         "pl": "To interchange",
-        "po": "To interchange"
+        "po": "To interchange",
+        "ru": "To interchange"
       },
       "access_via": ["RagmanStash"]
     },
@@ -195,7 +200,8 @@
         "jp": "In the woods, not far from the factory",
         "kr": "In the woods, not far from the factory",
         "pl": "In the woods, not far from the factory",
-        "po": "In the woods, not far from the factory"
+        "po": "In the woods, not far from the factory",
+        "ru": "In the woods, not far from the factory"
       },
       "access_via": ["JaegerStash"]
     },
@@ -215,7 +221,8 @@
         "jp": "In the tunnel between the shoreline and the lighthouse",
         "kr": "In the tunnel between the shoreline and the lighthouse",
         "pl": "In the tunnel between the shoreline and the lighthouse",
-        "po": "In the tunnel between the shoreline and the lighthouse"
+        "po": "In the tunnel between the shoreline and the lighthouse",
+        "ru": "In the tunnel between the shoreline and the lighthouse"
       },
       "access_via": ["PeacekeeperStash"]
     },
