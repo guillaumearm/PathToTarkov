@@ -13,6 +13,8 @@ import { deepClone } from './utils';
 export const getTemplateIdFromStashId = (stashId: string): string => `template_${stashId}`;
 const getGridIdFromStashId = (stashId: string): string => `grid_${stashId}`;
 
+type IndexedStashByIds = Record<string, true | undefined>;
+
 export class StashController {
   constructor(
     private getConfig: ConfigGetter,
@@ -114,6 +116,17 @@ export class StashController {
     );
   }
 
+  private getAllStashByIds(profile: Profile): IndexedStashByIds {
+    const initialAcc: IndexedStashByIds = { [getMainStashId(profile)]: true };
+
+    return this.getConfig().hideout_secondary_stashes.reduce((acc, stashConfig) => {
+      return {
+        ...acc,
+        [stashConfig.id]: true,
+      };
+    }, initialAcc);
+  }
+
   updateStash(offraidPosition: string, sessionId: string): void {
     const mainStashAvailable = this.getMainStashAvailable(offraidPosition);
     const secondaryStash = this.getSecondaryStash(offraidPosition);
@@ -128,11 +141,13 @@ export class StashController {
     const inventory = profile.characters.pmc.Inventory;
     const stashId = inventory.stash;
 
+    const stashByIds = this.getAllStashByIds(profile);
+
     inventory.items.forEach(item => {
       if (item.slotId === SLOT_ID_HIDEOUT || item.slotId === SLOT_ID_LOCKED_STASH) {
         if (item.parentId === stashId) {
           item.slotId = SLOT_ID_HIDEOUT;
-        } else {
+        } else if (stashByIds[item.parentId ?? '']) {
           item.slotId = SLOT_ID_LOCKED_STASH;
         }
       }
