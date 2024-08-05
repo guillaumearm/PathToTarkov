@@ -278,11 +278,13 @@
     },
     "interchange": {
       "NW Exfil": "RagmanStash",
-      "Saferoom Exfil": "ReserveInterchangeStash"
+      "Saferoom Exfil": "ReserveInterchangeStash",
+      "PP Exfil": "PraporStash"
     },
     "shoreline": {
       "Tunnel": "PeacekeeperStash",
-      "Shorl_V-Ex": "ShorelineWoodsStash"
+      "Shorl_V-Ex": "ShorelineWoodsStash",
+      "South Fence Passage": "ReserveInterchangeStash"
     },
     "lighthouse": {
       "Coastal_South_Road": "PeacekeeperStash",
@@ -323,7 +325,8 @@
         "Main Elevator",
         "Med Block Elevator",
         "Parking Gate"
-      ]
+      ],
+      "interchange": ["Car at Power Station"]
     },
     "MechanicStash": {
       "factory4_day": ["Gate 3"],
@@ -353,7 +356,8 @@
     },
     "ReserveInterchangeStash": {
       "rezervbase": ["D-2"],
-      "interchange": ["Safe Room"]
+      "interchange": ["Safe Room"],
+      "shoreline": ["North Fence Passage"]
     },
     "ShorelineWoodsStash": {
       "shoreline": ["Road to Customs"],
