@@ -1,7 +1,11 @@
 {
   "enabled": true,
   "debug": true,
-  "override_by_profiles": {},
+  "override_by_profiles": {
+    "Stalker On Tarkov": {
+      "initial_offraid_position": "TherapistStash"
+    }
+  },
   "initial_offraid_position": "MechanicStash",
   "reset_offraid_position_on_player_die": true,
   "traders_access_restriction": true,

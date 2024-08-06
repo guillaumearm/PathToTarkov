@@ -17,6 +17,8 @@ type ByMap<T> = {
   terminal: T;
 };
 
+type ByProfileId<T> = Record<string, T | undefined>;
+
 export type MapName = keyof ByMap<unknown>;
 
 export type AccessVia = string | string[];
@@ -113,9 +115,14 @@ export type OffraidRegenConfig = {
   health: { access_via: AccessVia };
 };
 
+export type OverrideByProfiles = ByProfileId<{
+  initial_offraid_position?: string;
+}>;
+
 export type Config = {
   enabled: boolean;
   debug?: boolean;
+  override_by_profiles: OverrideByProfiles;
   bypass_keep_found_in_raid_tweak?: boolean;
   initial_offraid_position: string;
   reset_offraid_position_on_player_die: boolean;

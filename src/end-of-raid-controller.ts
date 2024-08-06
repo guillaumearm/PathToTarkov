@@ -44,10 +44,10 @@ export class EndOfRaidController {
       playerIsDead &&
       this.ptt.pathToTarkovController.config.reset_offraid_position_on_player_die
     ) {
-      this.ptt.pathToTarkovController.updateOffraidPosition(
-        sessionId,
-        this.ptt.pathToTarkovController.config.initial_offraid_position,
-      );
+      const initialOffraidPosition =
+        this.ptt.pathToTarkovController.getInitialOffraidPosition(sessionId);
+
+      this.ptt.pathToTarkovController.updateOffraidPosition(sessionId, initialOffraidPosition);
     }
 
     if (playerIsDead) {

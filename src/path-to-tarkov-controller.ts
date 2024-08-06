@@ -490,8 +490,17 @@ export class PathToTarkovController {
     );
   }
 
+  getInitialOffraidPosition = (sessionId: string): string => {
+    const profile: Profile = this.saveServer.getProfile(sessionId);
+    const profileTemplateId = profile.info.edition;
+
+    const overrideByProfiles = this.config.override_by_profiles[profileTemplateId] ?? {};
+
+    return overrideByProfiles.initial_offraid_position ?? this.config.initial_offraid_position;
+  };
+
   getOffraidPosition = (sessionId: string): string => {
-    const defaultOffraidPosition = this.config.initial_offraid_position;
+    const defaultOffraidPosition = this.getInitialOffraidPosition(sessionId);
     const profile: Profile = this.saveServer.getProfile(sessionId);
 
     if (!profile.PathToTarkov) {
