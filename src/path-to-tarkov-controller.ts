@@ -118,14 +118,15 @@ export class PathToTarkovController {
           }
 
           locationBase.Locked = locked;
+          locationBase.Enabled = !locked;
 
           // necessary for Fika
           this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
         }
       });
 
-      // const newPaths = this.getUIPaths(indexedLocations);
-      return { locations, paths: result.paths };
+      const newPaths = this.getUIPaths(indexedLocations);
+      return { locations, paths: newPaths };
     };
   }
 
