@@ -91,11 +91,17 @@ export class PathToTarkovController {
     this.entrypoints = getEntryPointsForMaps(this.db);
   }
 
-  private getUIPaths(_indexedLocations: IndexedLocations): Path[] {
-    // TODO: use the ptt config to generate paths
-    // TODO: migrate in a different class
-
+  private getUIPaths(locations: ILocationBase[]): Path[] {
     const newPaths: Path[] = [];
+
+    locations.forEach(sourceLocation => {
+      locations.forEach(destinationLocation => {
+        if (sourceLocation._Id !== destinationLocation._Id) {
+          newPaths.push({ Source: sourceLocation._Id, Destination: destinationLocation._Id });
+        }
+      });
+    });
+
     return newPaths;
   }
 
@@ -107,6 +113,7 @@ export class PathToTarkovController {
       const indexedLocations = getIndexedLocations(locations);
 
       const unlockedMaps = this.config.infiltrations[offraidPosition];
+      const unlockedLocationBases: ILocationBase[] = [];
 
       MAPLIST.forEach(mapName => {
         const locked = Boolean(!unlockedMaps[mapName as MapName]);
@@ -115,6 +122,7 @@ export class PathToTarkovController {
         if (locationBase) {
           if (!locked) {
             this.debug(`[${sessionId}] unlock map ${mapName}`);
+            unlockedLocationBases.push(locationBase);
           }
 
           locationBase.Locked = locked;
@@ -125,7 +133,7 @@ export class PathToTarkovController {
         }
       });
 
-      const newPaths = this.getUIPaths(indexedLocations);
+      const newPaths = this.getUIPaths(unlockedLocationBases);
       return { locations, paths: newPaths };
     };
   }
