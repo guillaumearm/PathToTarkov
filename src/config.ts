@@ -14,6 +14,7 @@ type ByMap<T> = {
   tarkovstreets: T;
   sandbox: T;
   sandbox_high: T;
+  terminal: T;
 };
 
 export type MapName = keyof ByMap<unknown>;
