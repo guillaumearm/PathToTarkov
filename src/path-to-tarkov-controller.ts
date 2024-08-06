@@ -91,17 +91,35 @@ export class PathToTarkovController {
     this.entrypoints = getEntryPointsForMaps(this.db);
   }
 
-  private getUIPaths(locations: ILocationBase[]): Path[] {
-    const newPaths: Path[] = [];
+  private getUIPaths(givenLocations: ILocationBase[]): Path[] {
+    // skip factory4_night to avoid ui bug
+    const locations = givenLocations.filter(location => location.Id !== 'factory4_night');
+
+    const newPathIds: Set<string> = new Set();
 
     locations.forEach(sourceLocation => {
       locations.forEach(destinationLocation => {
         if (sourceLocation._Id !== destinationLocation._Id) {
-          newPaths.push({ Source: sourceLocation._Id, Destination: destinationLocation._Id });
+          const pairOfSourceAndDest = [sourceLocation._Id, destinationLocation._Id].sort() as [
+            string,
+            string,
+          ];
+          newPathIds.add(pairOfSourceAndDest.join('|'));
         }
       });
     });
 
+    const newPaths: Path[] = [];
+
+    newPathIds.forEach(pathId => {
+      const [sourceId, DestinationId] = pathId.split('|');
+      newPaths.push({
+        Source: sourceId,
+        Destination: DestinationId,
+      });
+    });
+
+    this.debug(`${newPaths.length} paths built for the UI`);
     return newPaths;
   }
 
