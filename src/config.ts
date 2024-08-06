@@ -194,6 +194,7 @@ export const MAPLIST = [
   'tarkovstreets',
   'sandbox', // ground zero
   'sandbox_high', // ground zero for high level player (> 20)
+  'terminal', // even if it's always locked, this is listed here in order to be able to hide the icon in the UI
 ];
 
 // sandbox_high is a special map for high level players (> 20)
