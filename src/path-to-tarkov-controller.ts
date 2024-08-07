@@ -191,7 +191,7 @@ export class PathToTarkovController {
       const parsed = JSON.parse(rawResult);
       const items: Record<string, ITemplateItem> = parsed.data;
 
-      const size = this.stashController.getStashSize(offraidPosition);
+      const size = this.stashController.getStashSize(offraidPosition, sessionId);
 
       if (size === null) {
         this.debug(`[${sessionId}] main stash selected`);
@@ -235,7 +235,7 @@ export class PathToTarkovController {
       const parsed = JSON.parse(rawResult);
       const areas: IHideoutArea[] = parsed.data;
 
-      const hideoutEnabled = this.stashController.getHideoutEnabled(offraidPosition);
+      const hideoutEnabled = this.stashController.getHideoutEnabled(offraidPosition, sessionId);
 
       areas.forEach(area => {
         if (!isIgnoredArea(area, this.config)) {
@@ -512,9 +512,9 @@ export class PathToTarkovController {
     const profile: Profile = this.saveServer.getProfile(sessionId);
     const profileTemplateId = profile.info.edition;
 
-    const overrideByProfiles = this.config.override_by_profiles?.[profileTemplateId] ?? {};
+    const overrideByProfiles = this.config.override_by_profiles?.[profileTemplateId];
 
-    return overrideByProfiles.initial_offraid_position ?? this.config.initial_offraid_position;
+    return overrideByProfiles?.initial_offraid_position ?? this.config.initial_offraid_position;
   };
 
   getOffraidPosition = (sessionId: string): string => {

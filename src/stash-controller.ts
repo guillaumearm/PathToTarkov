@@ -1,6 +1,6 @@
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { SaveServer } from '@spt/servers/SaveServer';
-import type { ConfigGetter, Profile, StashConfig } from './config';
+import type { AccessVia, ConfigGetter, Profile, StashConfig } from './config';
 import { EMPTY_STASH, SLOT_ID_HIDEOUT, SLOT_ID_LOCKED_STASH, STANDARD_STASH_ID } from './config';
 import {
   checkAccessVia,
@@ -97,13 +97,20 @@ export class StashController {
     }
   }
 
-  private getMainStashAvailable(offraidPosition: string): boolean {
-    const multiStashEnabled = this.getConfig().hideout_multistash_enabled;
+  private getMainStashAccessVia(sessionId: string): AccessVia {
+    const defaultMainStashAccessVia = this.getConfig().hideout_main_stash_access_via;
+    const profile: Profile = this.saveServer.getProfile(sessionId);
+    const profileTemplateId = profile.info.edition;
 
-    const mainStashAvailable = checkAccessVia(
-      this.getConfig().hideout_main_stash_access_via,
-      offraidPosition,
-    );
+    const overrideByProfiles = this.getConfig().override_by_profiles?.[profileTemplateId];
+
+    return overrideByProfiles?.hideout_main_stash_access_via ?? defaultMainStashAccessVia;
+  }
+
+  private getMainStashAvailable(offraidPosition: string, sessionId: string): boolean {
+    const multiStashEnabled = this.getConfig().hideout_multistash_enabled;
+    const mainStashAccessVia = this.getMainStashAccessVia(sessionId);
+    const mainStashAvailable = checkAccessVia(mainStashAccessVia, offraidPosition);
 
     return mainStashAvailable || multiStashEnabled === false;
   }
@@ -128,7 +135,7 @@ export class StashController {
   }
 
   updateStash(offraidPosition: string, sessionId: string): void {
-    const mainStashAvailable = this.getMainStashAvailable(offraidPosition);
+    const mainStashAvailable = this.getMainStashAvailable(offraidPosition, sessionId);
     const secondaryStash = this.getSecondaryStash(offraidPosition);
     const profile: Profile = this.saveServer.getProfile(sessionId);
 
@@ -154,8 +161,8 @@ export class StashController {
     });
   }
 
-  getStashSize(offraidPosition: string): number | null {
-    const mainStashAvailable = this.getMainStashAvailable(offraidPosition);
+  getStashSize(offraidPosition: string, sessionId: string): number | null {
+    const mainStashAvailable = this.getMainStashAvailable(offraidPosition, sessionId);
     const secondaryStash = this.getSecondaryStash(offraidPosition);
 
     if (mainStashAvailable) {
@@ -165,7 +172,7 @@ export class StashController {
     return secondaryStash.size;
   }
 
-  getHideoutEnabled(offraidPosition: string): boolean {
-    return this.getMainStashAvailable(offraidPosition);
+  getHideoutEnabled(offraidPosition: string, sessionId: string): boolean {
+    return this.getMainStashAvailable(offraidPosition, sessionId);
   }
 }

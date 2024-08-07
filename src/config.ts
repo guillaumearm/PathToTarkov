@@ -117,6 +117,7 @@ export type OffraidRegenConfig = {
 
 export type OverrideByProfiles = ByProfileId<{
   initial_offraid_position?: string;
+  hideout_main_stash_access_via: AccessVia;
 }>;
 
 export type Config = {

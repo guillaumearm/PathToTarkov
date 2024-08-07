@@ -3,7 +3,8 @@
   "debug": true,
   "override_by_profiles": {
     "Stalker On Tarkov": {
-      "initial_offraid_position": "TherapistStash"
+      "initial_offraid_position": "TherapistStash",
+      "hideout_main_stash_access_via": ["TherapistStash"]
     }
   },
   "initial_offraid_position": "MechanicStash",
