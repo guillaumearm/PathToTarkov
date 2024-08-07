@@ -38,6 +38,7 @@ import type { IHideoutArea } from '@spt/models/eft/hideout/IHideoutArea';
 import type { LocationCallbacks } from '@spt/callbacks/LocationCallbacks';
 import type { IGetBodyResponseData } from '@spt/models/eft/httpResponse/IGetBodyResponseData';
 import type { Inventory } from '@spt/models/eft/common/tables/IBotBase';
+import { Dialogue } from '@spt/models/eft/profile/ISptProfile';
 
 type IndexedLocations = Record<string, ILocationBase>;
 
@@ -569,5 +570,203 @@ export class PathToTarkovController {
     }
 
     this.saveServer.saveProfile(sessionId);
+  }
+  setStartingQuests(sessionId: string): void {
+    
+    const profile: Profile = this.saveServer.getProfile(sessionId);
+    const startedQuests =
+      [
+        {
+          "qid": "657315ddab5a49b71f098853",
+          "startTime": 0,
+          "status": 2,
+          "statusTimers": {
+            "AvailableForStart": 1722997316.408,
+            "Started": 1722999488.0
+          },
+          "completedConditions": [],
+          "availableAfter": 0
+        },
+        {
+          "qid": "657315df034d76585f032e01",
+          "startTime": 0,
+          "status": 2,
+          "statusTimers": {
+            "AvailableForStart": 1722997316.4099998,
+            "Started": 1722999489.0
+          },
+          "completedConditions": [],
+          "availableAfter": 0
+        },
+        {
+          "qid": "657315e270bb0b8dba00cc48",
+          "startTime": 0,
+          "status": 2,
+          "statusTimers": {
+            "AvailableForStart": 1722997316.411,
+            "Started": 1722999491.0
+          },
+          "completedConditions": [],
+          "availableAfter": 0
+        },
+        {
+          "qid": "657315e4a6af4ab4b50f3459",
+          "startTime": 0,
+          "status": 2,
+          "statusTimers": {
+            "AvailableForStart": 1722997316.412,
+            "Started": 1722999492.0
+          },
+          "completedConditions": [],
+          "availableAfter": 0
+        }
+      ];
+    const completedQuests = 
+    [
+      {
+        "qid": "657315ddab5a49b71f098853",
+        "startTime": 0,
+        "status": 4,
+        "statusTimers": {
+          "AvailableForStart": 1722997316.408,
+          "Started": 1722999488.0,
+          "Success": 1722999592.0
+        },
+        "completedConditions": [],
+        "availableAfter": 0
+      },
+      {
+        "qid": "657315df034d76585f032e01",
+        "startTime": 0,
+        "status": 4,
+        "statusTimers": {
+          "AvailableForStart": 1722997316.4099998,
+          "Started": 1722999489.0,
+          "Success": 1722999592.0
+        },
+        "completedConditions": [],
+        "availableAfter": 0
+      },
+      {
+        "qid": "657315e270bb0b8dba00cc48",
+        "startTime": 0,
+        "status": 4,
+        "statusTimers": {
+          "AvailableForStart": 1722997316.411,
+          "Started": 1722999491.0,
+          "Success": 1722999592.0
+        },
+        "completedConditions": [],
+        "availableAfter": 0
+      },
+      {
+        "qid": "657315e4a6af4ab4b50f3459",
+        "startTime": 0,
+        "status": 4,
+        "statusTimers": {
+          "AvailableForStart": 1722997316.412,
+          "Started": 1722999492.0,
+          "Success": 1722999592.0
+        },
+        "completedConditions": [],
+        "availableAfter": 0
+      }
+    ];
+    const questDialogue: Record<string, Dialogue> = 
+    {
+      "58330581ace78e27b8b10cee": {
+        "_id": "58330581ace78e27b8b10cee",
+        "type": 2,
+        "messages": [
+          {
+            "_id": "96f1fdf3b3fb87fc2b3f6000",
+            "uid": "58330581ace78e27b8b10cee",
+            "type": 10,
+            "dt": 1722880852,
+            "text": "",
+            "templateId": "657315e270bb0b8dba00cc48 description",
+            "hasRewards": false,
+            "rewardCollected": true,
+            "items": {
+              "stash": "98f25546a7e487279fa251a8",
+              "data": []
+            },
+            "maxStorageTime": 172800
+          }
+        ],
+        "pinned": false,
+        "new": 1,
+        "attachmentsNew": 0
+      },
+      "5a7c2eca46aef81a7ca2145d": {
+        "_id": "5a7c2eca46aef81a7ca2145d",
+        "type": 2,
+        "messages": [
+          {
+            "_id": "c3f50c45a78c4e9535790573",
+            "uid": "5a7c2eca46aef81a7ca2145d",
+            "type": 10,
+            "dt": 1722884413,
+            "text": "",
+            "templateId": "657315e4a6af4ab4b50f3459 description",
+            "hasRewards": false,
+            "rewardCollected": false,
+            "items": {}
+          }
+        ],
+        "pinned": false,
+        "new": 1,
+        "attachmentsNew": 0
+      },
+      "54cb50c76803fa8b248b4571": {
+        "_id": "54cb50c76803fa8b248b4571",
+        "type": 2,
+        "messages": [
+          {
+            "_id": "f05a425f3c30a5e18a8ae674",
+            "uid": "54cb50c76803fa8b248b4571",
+            "type": 10,
+            "dt": 1722887464,
+            "text": "",
+            "templateId": "657315df034d76585f032e01 description",
+            "hasRewards": false,
+            "rewardCollected": false,
+            "items": {}
+          }
+        ],
+        "pinned": false,
+        "new": 1,
+        "attachmentsNew": 0
+      },
+      "54cb57776803fa99248b456e": {
+        "_id": "54cb57776803fa99248b456e",
+        "type": 2,
+        "messages": [
+          {
+            "_id": "4c9a390b139109bbd68ddcef",
+            "uid": "54cb57776803fa99248b456e",
+            "type": 10,
+            "dt": 1723010724,
+            "text": "",
+            "templateId": "657315ddab5a49b71f098853 description",
+            "hasRewards": false,
+            "rewardCollected": false,
+            "items": {}
+          }
+        ],
+        "pinned": false,
+        "new": 1,
+        "attachmentsNew": 0
+      }
+    };
+    if (this.config.set_tutorial_quests_started) {
+      profile.characters.pmc.Quests.push(...startedQuests);
+      profile.dialogues = questDialogue;
+      this.logger.info(`=> PathToTarkov: tutorial quests started!`);
+    }
+    if (this.config.skip_tutorial_quests) {
+      profile.characters.pmc.Quests.push(...completedQuests)
+      this.logger.info(`=> PathToTarkov: tutorial quests skipped!`);
+    }
   }
 }

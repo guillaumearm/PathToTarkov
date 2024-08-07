@@ -82,6 +82,8 @@ export class EventWatcher {
       this.ptt.executeOnStartAPICallbacks(sessionId);
 
       this.ptt.logger.info(`=> PathToTarkov: pmc created!`);
+
+      this.ptt.pathToTarkovController.setStartingQuests(sessionId);
     });
   }
 
