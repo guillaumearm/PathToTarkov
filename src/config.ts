@@ -125,7 +125,7 @@ export type Config = {
   debug?: boolean;
   override_by_profiles?: OverrideByProfiles;
   bypass_keep_found_in_raid_tweak?: boolean;
-  set_tutorial_quests_started?: boolean;
+  start_tutorial_quests?: boolean;
   skip_tutorial_quests?: boolean;
   initial_offraid_position: string;
   reset_offraid_position_on_player_die: boolean;

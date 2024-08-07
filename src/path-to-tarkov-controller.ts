@@ -759,7 +759,7 @@ export class PathToTarkovController {
         "attachmentsNew": 0
       }
     };
-    if (this.config.set_tutorial_quests_started) {
+    if (this.config.start_tutorial_quests) {
       profile.characters.pmc.Quests.push(...startedQuests);
       profile.dialogues = questDialogue;
       this.logger.info(`=> PathToTarkov: tutorial quests started!`);

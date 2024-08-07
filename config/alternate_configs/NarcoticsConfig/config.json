@@ -7,7 +7,7 @@
   "flea_access_restriction": true,
   "flea_access_level": 1,
   "hideout_multistash_enabled": true,
-  "vanilla_exfils_requirements": false,
+  "vanilla_exfils_requirements": true,
   "laboratory_access_restriction": true,
   "laboratory_access_via": [
     "SewerRiver",
@@ -18,6 +18,8 @@
   ],
   "player_scav_move_offraid_position": false,
   "workbench_always_enabled": true,
+  "start_tutorial_quests": true,
+  "skip_tutorial_quests": false,
   "bypass_keep_found_in_raid_tweak": false,
   "bypass_uninstall_procedure": false,
   "restrictions_in_raid": {
