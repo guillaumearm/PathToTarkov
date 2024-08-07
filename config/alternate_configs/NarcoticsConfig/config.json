@@ -7,7 +7,7 @@
   "flea_access_restriction": true,
   "flea_access_level": 1,
   "hideout_multistash_enabled": true,
-  "vanilla_exfils_requirements": false,
+  "vanilla_exfils_requirements": true,
   "laboratory_access_restriction": true,
   "laboratory_access_via": [
     "SewerRiver",
