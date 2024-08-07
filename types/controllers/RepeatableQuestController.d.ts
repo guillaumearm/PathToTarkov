@@ -24,23 +24,23 @@ import { RandomUtil } from "@spt/utils/RandomUtil";
 import { TimeUtil } from "@spt/utils/TimeUtil";
 import { ICloner } from "@spt/utils/cloners/ICloner";
 export declare class RepeatableQuestController {
-    protected logger: ILogger;
+    public logger: ILogger;
     protected databaseService: DatabaseService;
-    protected timeUtil: TimeUtil;
-    protected randomUtil: RandomUtil;
+    public timeUtil: TimeUtil;
+    public randomUtil: RandomUtil;
     protected httpResponse: HttpResponseUtil;
-    protected profileHelper: ProfileHelper;
+    public profileHelper: ProfileHelper;
     protected profileFixerService: ProfileFixerService;
     protected localisationService: LocalisationService;
     protected eventOutputHolder: EventOutputHolder;
     protected paymentService: PaymentService;
     protected objectId: ObjectId;
-    protected repeatableQuestGenerator: RepeatableQuestGenerator;
+    public repeatableQuestGenerator: RepeatableQuestGenerator;
     protected repeatableQuestHelper: RepeatableQuestHelper;
     protected questHelper: QuestHelper;
     protected configServer: ConfigServer;
     protected cloner: ICloner;
-    protected questConfig: IQuestConfig;
+    public questConfig: IQuestConfig;
     constructor(logger: ILogger, databaseService: DatabaseService, timeUtil: TimeUtil, randomUtil: RandomUtil, httpResponse: HttpResponseUtil, profileHelper: ProfileHelper, profileFixerService: ProfileFixerService, localisationService: LocalisationService, eventOutputHolder: EventOutputHolder, paymentService: PaymentService, objectId: ObjectId, repeatableQuestGenerator: RepeatableQuestGenerator, repeatableQuestHelper: RepeatableQuestHelper, questHelper: QuestHelper, configServer: ConfigServer, cloner: ICloner);
     /**
      * Handle client/repeatalbeQuests/activityPeriods
@@ -73,14 +73,14 @@ export declare class RepeatableQuestController {
      * @param generatedRepeatables Repeatables to process (daily/weekly)
      * @param pmcData Player profile
      */
-    protected processExpiredQuests(generatedRepeatables: IPmcDataRepeatableQuest, pmcData: IPmcData): void;
+    public processExpiredQuests(generatedRepeatables: IPmcDataRepeatableQuest, pmcData: IPmcData): void;
     /**
      * Check if a repeatable quest type (daily/weekly) is active for the given profile
      * @param repeatableConfig Repeatable quest config
      * @param pmcData Player profile
      * @returns True if profile is allowed to access dailies
      */
-    protected canProfileAccessRepeatableQuests(repeatableConfig: IRepeatableQuestConfig, pmcData: IPmcData): boolean;
+    public canProfileAccessRepeatableQuests(repeatableConfig: IRepeatableQuestConfig, pmcData: IPmcData): boolean;
     /**
      * Does player have daily scav quests unlocked
      * @param pmcData Player profile to check
@@ -100,14 +100,14 @@ export declare class RepeatableQuestController {
      * @param pmcData Player profile
      * @returns Quest count
      */
-    protected getQuestCount(repeatableConfig: IRepeatableQuestConfig, pmcData: IPmcData): number;
+    public getQuestCount(repeatableConfig: IRepeatableQuestConfig, pmcData: IPmcData): number;
     /**
      * Get repeatable quest data from profile from name (daily/weekly), creates base repeatable quest object if none exists
      * @param repeatableConfig daily/weekly config
      * @param pmcData Profile to search
      * @returns IPmcDataRepeatableQuest
      */
-    protected getRepeatableQuestSubTypeFromProfile(repeatableConfig: IRepeatableQuestConfig, pmcData: IPmcData): IPmcDataRepeatableQuest;
+    public getRepeatableQuestSubTypeFromProfile(repeatableConfig: IRepeatableQuestConfig, pmcData: IPmcData): IPmcDataRepeatableQuest;
     /**
      * Just for debug reasons. Draws dailies a random assort of dailies extracted from dumps
      */
@@ -120,7 +120,7 @@ export declare class RepeatableQuestController {
      * @param pmcLevel level of pmc generating quest pool
      * @returns IQuestTypePool
      */
-    protected generateQuestPool(repeatableConfig: IRepeatableQuestConfig, pmcLevel: number): IQuestTypePool;
+    public generateQuestPool(repeatableConfig: IRepeatableQuestConfig, pmcLevel: number): IQuestTypePool;
     protected createBaseQuestPool(repeatableConfig: IRepeatableQuestConfig): IQuestTypePool;
     /**
      * Return the locations this PMC is allowed to get daily quests for based on their level

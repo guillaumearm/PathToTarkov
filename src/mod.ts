@@ -114,7 +114,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     }
 
     if (this.config.traders_access_restriction) {
-      fixRepeatableQuests(container, this.debug);
+      fixRepeatableQuests(container);
       this.debug('Apply fix for unavailable repeatable quests (due to locked traders)');
     }
   }
