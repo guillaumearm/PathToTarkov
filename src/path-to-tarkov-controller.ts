@@ -512,7 +512,7 @@ export class PathToTarkovController {
     const profile: Profile = this.saveServer.getProfile(sessionId);
     const profileTemplateId = profile.info.edition;
 
-    const overrideByProfiles = this.config.override_by_profiles[profileTemplateId] ?? {};
+    const overrideByProfiles = this.config.override_by_profiles?.[profileTemplateId] ?? {};
 
     return overrideByProfiles.initial_offraid_position ?? this.config.initial_offraid_position;
   };

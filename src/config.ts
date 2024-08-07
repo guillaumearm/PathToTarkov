@@ -122,7 +122,7 @@ export type OverrideByProfiles = ByProfileId<{
 export type Config = {
   enabled: boolean;
   debug?: boolean;
-  override_by_profiles: OverrideByProfiles;
+  override_by_profiles?: OverrideByProfiles;
   bypass_keep_found_in_raid_tweak?: boolean;
   initial_offraid_position: string;
   reset_offraid_position_on_player_die: boolean;
