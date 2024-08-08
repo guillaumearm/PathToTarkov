@@ -8,6 +8,7 @@
   "author": "Trap",
   "sptVersion": "3.9.x",
   "scripts": {
+    "dev:install": "npm run build && npm run build:client && npm run prepare:files && node scripts/install-files.js",
     "git:check:status": "bash scripts/check-git-status.sh",
     "gather:external:resources": "bash scripts/gather-external-resources.sh && npm run prettier",
     "build:doc:mermaid": "mmdc --width 1600 --height 1200 -t dark -b transparent -i paths/default.md -o config/PathToTarkov.png",
