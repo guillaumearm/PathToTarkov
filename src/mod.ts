@@ -135,8 +135,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       this.debug('injected legacy PTTR Tooltips.json file');
     }
 
-    this.pathToTarkovController.generateEntrypoints();
-
     const [api, executeOnStartAPICallbacks] = createPathToTarkovAPI(
       this.pathToTarkovController,
       this.logger,
@@ -150,8 +148,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     }
 
     this.executeOnStartAPICallbacks = executeOnStartAPICallbacks;
-
-    this.pathToTarkovController.initExfiltrations();
 
     if (this.config.traders_access_restriction) {
       this.pathToTarkovController.tradersController.initTraders();

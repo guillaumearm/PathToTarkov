@@ -50,7 +50,6 @@ export const createPathToTarkovAPI = (
     },
     refresh: (sessionId: string) => {
       logger.warning(warnDeprecationMessage('refresh'));
-      controller.initExfiltrations();
 
       if (controller.config.traders_access_restriction) {
         controller.tradersController.initTraders();

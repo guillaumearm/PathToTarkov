@@ -4,8 +4,8 @@ import type { IHideoutArea } from '@spt/models/eft/hideout/IHideoutArea';
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { StaticRouterModService } from '@spt/services/mod/staticRouter/StaticRouterModService';
 
-import type { AccessVia, Config, MapName, PositionXYZ, Profile, SpawnPoint } from './config';
-import { JAEGER_INTRO_QUEST, MAPLIST, STANDARD_STASH_ID, VANILLA_STASH_IDS } from './config';
+import type { AccessVia, Config, PositionXYZ, Profile, SpawnPoint } from './config';
+import { JAEGER_INTRO_QUEST, STANDARD_STASH_ID, VANILLA_STASH_IDS } from './config';
 import type { IQuestStatus } from '@spt/models/eft/common/tables/IBotBase';
 import { isDigit, isLetter } from './utils';
 import type { Item } from '@spt/models/eft/common/tables/IItem';
@@ -24,10 +24,11 @@ const getPosition = (pos: SpawnPoint['Position']): PositionXYZ => {
   return pos;
 };
 
+export const PTT_INFILTRATION = 'PTT_INFILTRATION';
+
 export const createSpawnPoint = (
   pos: SpawnPoint['Position'],
   rot: number,
-  entrypoints: string[],
   spawnId: string,
 ): SpawnPointParam => {
   return {
@@ -36,7 +37,7 @@ export const createSpawnPoint = (
     Rotation: rot || 0.0,
     Sides: ['All'],
     Categories: ['Player'],
-    Infiltration: entrypoints[0] || '',
+    Infiltration: PTT_INFILTRATION,
     DelayToCanSpawnSec: 3,
     ColliderParams: {
       _parent: 'SpawnSphereParams',
@@ -54,64 +55,42 @@ export const createSpawnPoint = (
   };
 };
 
-export const createExitPoint =
-  (entrypoints: string[]) =>
-  (name: string): Exit => {
-    const Chance = 100;
-    const Count = 0;
-    const ExfiltrationTime = 10;
-    const MinTime = 0;
-    const MaxTime = 0;
-    const PlayersCount = 0;
-    const ExfiltrationType = 'Individual';
-    const PassageRequirement = 'None';
-    const RequirementTip = '';
+export const createExitPoint = (name: string): Exit => {
+  const Chance = 100;
+  const Count = 0;
+  const ExfiltrationTime = 10;
+  const MinTime = 0;
+  const MaxTime = 0;
+  const PlayersCount = 0;
+  const ExfiltrationType = 'Individual';
+  const PassageRequirement = 'None';
+  const RequirementTip = '';
 
-    return {
-      Id: '',
-      Name: name,
-      EntryPoints: entrypoints.join(','),
-      Chance,
-      Count,
-      MinTime,
-      MaxTime,
-      ExfiltrationTime,
-      PlayersCount,
-      ExfiltrationType,
-      PassageRequirement,
-      RequirementTip,
-      EventAvailable: true,
-      // the following properties are not used but needed to make TypeScript happy
-      ChancePVE: Chance,
-      CountPVE: Count,
-      ExfiltrationTimePVE: ExfiltrationTime,
-      MinTimePVE: MinTime,
-      MaxTimePVE: MaxTime,
-      PlayersCountPVE: PlayersCount,
-    };
+  return {
+    Id: '',
+    Name: name,
+    EntryPoints: PTT_INFILTRATION,
+    Chance,
+    Count,
+    MinTime,
+    MaxTime,
+    ExfiltrationTime,
+    PlayersCount,
+    ExfiltrationType,
+    PassageRequirement,
+    RequirementTip,
+    EventAvailable: true,
+    // the following properties are not used but needed to make TypeScript happy
+    ChancePVE: Chance,
+    CountPVE: Count,
+    ExfiltrationTimePVE: ExfiltrationTime,
+    MinTimePVE: MinTime,
+    MaxTimePVE: MaxTime,
+    PlayersCountPVE: PlayersCount,
   };
+};
 
 export type EntryPoints = Record<string, string[]>;
-
-export const getEntryPointsForMaps = (db: DatabaseServer): EntryPoints => {
-  const locations = db.getTables().locations;
-
-  const result: EntryPoints = {};
-
-  MAPLIST.forEach(mapName => {
-    result[mapName] = [];
-    const location = locations?.[mapName as MapName];
-
-    location?.base.exits.forEach(exitPayload => {
-      const entrypoints = exitPayload.EntryPoints.split(',')
-        .map(x => x.trim())
-        .filter(x => !!x);
-      result[mapName] = [...result[mapName], ...entrypoints];
-    });
-  });
-
-  return result;
-};
 
 export const changeRestrictionsInRaid = (config: Config, db: DatabaseServer): void => {
   const globals = db.getTables().globals;

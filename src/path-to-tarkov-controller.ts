@@ -8,15 +8,13 @@ import type { SaveServer } from '@spt/servers/SaveServer';
 import type { Config, MapName, Profile, SpawnConfig } from './config';
 import { EMPTY_STASH, MAPLIST, VANILLA_STASH_IDS } from './config';
 
-import type { EntryPoints } from './helpers';
-
 import {
   changeRestrictionsInRaid,
   checkAccessVia,
   createExitPoint,
   createSpawnPoint,
-  getEntryPointsForMaps,
   isIgnoredArea,
+  PTT_INFILTRATION,
 } from './helpers';
 
 import { getTemplateIdFromStashId, StashController } from './stash-controller';
@@ -61,8 +59,6 @@ export class PathToTarkovController {
   public stashController: StashController;
   public tradersController: TradersController;
 
-  private entrypoints: EntryPoints;
-
   constructor(
     public config: Config,
     public spawnConfig: SpawnConfig,
@@ -83,12 +79,7 @@ export class PathToTarkovController {
       configServer,
       this.logger,
     );
-    this.entrypoints = {};
     this.overrideControllers();
-  }
-
-  generateEntrypoints(): void {
-    this.entrypoints = getEntryPointsForMaps(this.db);
   }
 
   private getUIPaths(givenLocations: ILocationBase[]): Path[] {
@@ -148,6 +139,7 @@ export class PathToTarkovController {
 
           // necessary for Fika
           this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
+          this.updateLocationBaseExits(locationBase);
         }
       });
 
@@ -173,9 +165,10 @@ export class PathToTarkovController {
       const parsed = JSON.parse(rawLocationBase);
       const locationBase: ILocationBase = parsed.data;
 
-      // This will handle spawnpoints for SPT
+      // This will handle spawnpoints and exfils for SPT
       // For fika, check the other call of `updateSpawnPoints`
       this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
+      this.updateLocationBaseExits(locationBase);
 
       return JSON.stringify(parsed) as any;
     };
@@ -380,7 +373,7 @@ export class PathToTarkovController {
   }
 
   init(sessionId: string): void {
-    changeRestrictionsInRaid(this.config, this.db); // TODO: no need to override everytime
+    changeRestrictionsInRaid(this.config, this.db);
     this.stashController.initProfile(sessionId);
 
     const offraidPosition = this.getOffraidPosition(sessionId);
@@ -430,12 +423,12 @@ export class PathToTarkovController {
         const spawnData =
           this.spawnConfig[mapName as MapName] && this.spawnConfig[mapName as MapName][spawnId];
         if (spawnData) {
-          const spawnPoint = createSpawnPoint(
-            spawnData.Position,
-            spawnData.Rotation,
-            this.entrypoints[mapName],
-            spawnId,
-          );
+          const spawnPoint = createSpawnPoint(spawnData.Position, spawnData.Rotation, spawnId);
+
+          if (!spawnPoint.Infiltration) {
+            this.logger.warning(`=> PathToTarkov: spawn '${spawnId}' has no Infiltration`);
+          }
+
           locationBase?.SpawnPointParams.push(spawnPoint);
           this.debug(`[${sessionId}] player spawn '${spawnId}' added for location ${mapName}`);
         }
@@ -443,69 +436,55 @@ export class PathToTarkovController {
     }
   }
 
-  initExfiltrations(): void {
+  private updateLocationBaseExits(locationBase: ILocationBase): boolean {
     if (this.config.bypass_exfils_override) {
-      return;
+      return false;
     }
 
-    // Exfiltrations tweaks without requirements
-    const locations = this.db.getTables().locations;
-    let exfilsCounter = 0;
+    const mapName = resolveMapNameFromLocation(locationBase.Id);
+    const extractPoints = Object.keys(this.config.exfiltrations[mapName as MapName] ?? {});
 
-    Object.keys(this.config.exfiltrations).forEach(mapName => {
-      const extractPoints = Object.keys(this.config.exfiltrations[mapName as MapName]);
+    if (extractPoints.length === 0) {
+      this.logger.error(`Path To Tarkov: no exfils found for map '${mapName}'!`);
 
-      const location = locations?.[mapName as MapName];
+      return false;
+    }
 
-      if (location) {
-        const entrypointsForMap = this.entrypoints[mapName] ?? [];
+    if (this.config.vanilla_exfils_requirements) {
+      const usedExitNames = new Set<string>();
 
-        if (entrypointsForMap.length === 0) {
-          this.logger.error(`Path To Tarkov: no entrypoints found for map '${mapName}'!`);
+      // filter all exits and keep vanilla requirements (except for ScavCooperation requirements)
+      locationBase.exits = locationBase.exits
+        .filter(exit => {
+          return extractPoints.includes(exit.Name);
+        })
+        .map(exit => {
+          usedExitNames.add(exit.Name);
+
+          if (exit.PassageRequirement === 'ScavCooperation') {
+            return createExitPoint(exit.Name);
+          }
+
+          exit.EntryPoints = PTT_INFILTRATION;
+          exit.ExfiltrationTime = 10;
+          exit.Chance = 100;
+
+          return exit;
+        });
+
+      // add missing extractPoints (potentially scav extracts)
+      extractPoints.forEach(extractName => {
+        if (!usedExitNames.has(extractName)) {
+          const exitPoint = createExitPoint(extractName);
+          locationBase.exits.push(exitPoint);
         }
+      });
+    } else {
+      // erase all exits and create custom exit points without requirements
+      locationBase.exits = extractPoints.map(createExitPoint);
+    }
 
-        if (this.config.vanilla_exfils_requirements) {
-          const usedExitNames = new Set<string>();
-
-          // filter all exits and keep vanilla requirements (except for ScavCooperation requirements)
-          location.base.exits = location.base.exits
-            .filter(exit => {
-              return extractPoints.includes(exit.Name);
-            })
-            .map(exit => {
-              usedExitNames.add(exit.Name);
-
-              if (exit.PassageRequirement === 'ScavCooperation') {
-                return createExitPoint(entrypointsForMap)(exit.Name);
-              }
-
-              exit.EntryPoints = entrypointsForMap.join(',');
-              exit.ExfiltrationTime = 10;
-              exit.Chance = 100;
-
-              return exit;
-            });
-
-          // add missing extractPoints (potentially scav extracts)
-          extractPoints.forEach(extractName => {
-            if (!usedExitNames.has(extractName)) {
-              const exitPoint = createExitPoint(entrypointsForMap)(extractName);
-              location.base.exits.push(exitPoint);
-            }
-          });
-        } else {
-          // erase all exits and create custom exit points without requirements
-          location.base.exits = extractPoints.map(createExitPoint(entrypointsForMap));
-        }
-        exfilsCounter = exfilsCounter + location.base.exits.length;
-      }
-    });
-
-    this.debug(
-      `initialized ${exfilsCounter} exfiltrations ${
-        this.config.vanilla_exfils_requirements ? 'with vanilla' : 'without'
-      } requirements`,
-    );
+    return true;
   }
 
   getInitialOffraidPosition = (sessionId: string): string => {
