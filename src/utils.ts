@@ -1,8 +1,7 @@
-import { readFileSync } from "fs";
-import type { Profile } from "./config";
+import { readFileSync } from 'fs';
 
 export const readJsonFile = <T>(path: string): T => {
-  return JSON.parse(readFileSync(path, "utf-8"));
+  return JSON.parse(readFileSync(path, 'utf-8'));
 };
 
 /**
@@ -14,10 +13,7 @@ export type PackageJson = {
   version: string;
 };
 
-export const getModDisplayName = (
-  packageJson: PackageJson,
-  withVersion = false,
-): string => {
+export const getModDisplayName = (packageJson: PackageJson, withVersion = false): string => {
   if (withVersion) {
     return `${packageJson.displayName} v${packageJson.version}`;
   }
@@ -40,13 +36,13 @@ export function deepClone<T>(item: T): T {
     }
   });
 
-  if (typeof result == "undefined") {
-    if (Object.prototype.toString.call(item) === "[object Array]") {
+  if (typeof result == 'undefined') {
+    if (Object.prototype.toString.call(item) === '[object Array]') {
       result = [];
       (item as unknown as any[]).forEach(function (child, index) {
         result[index] = deepClone(child);
       });
-    } else if (typeof item == "object") {
+    } else if (typeof item == 'object') {
       if (item && !(item as any).prototype) {
         // check that this is a literal
         if (item instanceof Date) {
@@ -78,8 +74,10 @@ export const isEmptyArray = <T>(arr: T[] | undefined): boolean => {
   return Boolean(arr && arr.length > 0);
 };
 
-export const getMainStashId = (profile: Profile): string => {
-  return (
-    profile.PathToTarkov?.mainStashId ?? profile.characters.pmc.Inventory.stash
-  );
+export const isLetter = (char: string): boolean => {
+  return char.length === 1 && char.toUpperCase() !== char.toLowerCase();
+};
+
+export const isDigit = (char: string): boolean => {
+  return char.length === 1 && char >= '0' && char <= '9';
 };

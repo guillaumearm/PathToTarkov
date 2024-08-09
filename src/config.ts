@@ -1,6 +1,6 @@
-import type { ISptProfile } from "@spt/models/eft/profile/ISptProfile";
-import { join } from "path";
-import { deepClone } from "./utils";
+import type { ISptProfile } from '@spt/models/eft/profile/ISptProfile';
+import { join } from 'path';
+import { deepClone } from './utils';
 
 type ByMap<T> = {
   factory4_day: T;
@@ -14,19 +14,22 @@ type ByMap<T> = {
   tarkovstreets: T;
   sandbox: T;
   sandbox_high: T;
+  terminal: T;
 };
+
+type ByProfileId<T> = Record<string, T | undefined>;
 
 export type MapName = keyof ByMap<unknown>;
 
 export type AccessVia = string | string[];
 
-export type SpawnPointGenericPosition =
-  | [number, number, number]
-  | {
-      x: number;
-      y: number;
-      z: number;
-    };
+export type PositionXYZ = {
+  x: number;
+  y: number;
+  z: number;
+};
+
+export type SpawnPointGenericPosition = [number, number, number] | PositionXYZ;
 
 /**
  * player_spawnpoints.json
@@ -43,7 +46,7 @@ export type SpawnConfig = ByMap<{
 /**
  * config.json
  */
-type StashConfig = {
+export type StashConfig = {
   id: string;
   size: number;
   access_via: AccessVia;
@@ -53,7 +56,7 @@ type AllLocales<T> = {
   ch?: T;
   cz?: T;
   en?: T;
-  "es-mx"?: T;
+  'es-mx'?: T;
   es?: T;
   fr?: T;
   ge?: T;
@@ -73,6 +76,7 @@ type InsuranceConfig = {
   min_return_hour?: number;
   max_return_hour?: number;
   max_storage_time?: number;
+  return_chance_percent?: number;
 };
 
 type RepairConfig = {
@@ -91,6 +95,7 @@ type TraderConfig = {
   insurance_config?: InsuranceConfig;
   repair_always_enabled?: boolean;
   repair_config?: RepairConfig;
+  heal_always_enabled?: boolean;
 };
 
 type SpawnPointName = string;
@@ -104,9 +109,21 @@ type Infiltrations = {
   [exfiltrationPoint: OffraidPosition]: ByMap<SpawnPointName[]>;
 };
 
+export type OffraidRegenConfig = {
+  hydration: { access_via: AccessVia };
+  energy: { access_via: AccessVia };
+  health: { access_via: AccessVia };
+};
+
+export type OverrideByProfiles = ByProfileId<{
+  initial_offraid_position?: string;
+  hideout_main_stash_access_via: AccessVia;
+}>;
+
 export type Config = {
   enabled: boolean;
   debug?: boolean;
+  override_by_profiles?: OverrideByProfiles;
   bypass_keep_found_in_raid_tweak?: boolean;
   initial_offraid_position: string;
   reset_offraid_position_on_player_die: boolean;
@@ -116,19 +133,25 @@ export type Config = {
   vanilla_exfils_requirements?: boolean;
   bypass_exfils_override?: boolean;
   bypass_uninstall_procedure: boolean;
-  bypass_luas_custom_spawn_points_tweak?: boolean;
+  enable_run_through?: boolean;
+  enable_legacy_ptt_api?: boolean;
   restrictions_in_raid: Record<string, { Value: number }>;
-  offraid_regen_config: {
-    hydration: { access_via: AccessVia };
-    energy: { access_via: AccessVia };
-    health: { access_via: AccessVia };
-  };
+  offraid_regen_config: OffraidRegenConfig;
   hideout_main_stash_access_via: AccessVia;
   hideout_secondary_stashes: StashConfig[];
   traders_access_restriction: boolean;
   traders_config: Record<string, TraderConfig>;
   exfiltrations: Exfiltrations;
   infiltrations: Infiltrations;
+};
+
+export type PathToTarkovReloadedTooltipsConfig = {
+  language?: string;
+  moddedTraderCompat?: boolean;
+  additionalLocalesToggle?: boolean;
+  moddedTraderExtracts?: string[];
+  localesToChangeAdditional?: string[];
+  localesToChange?: string[];
 };
 
 export type Profile = ISptProfile & {
@@ -140,42 +163,47 @@ export type Profile = ISptProfile & {
 
 export type ConfigGetter = () => Config;
 
-export const PACKAGE_JSON_PATH = join(__dirname, "../package.json");
-export const CONFIG_PATH = join(__dirname, "../config/config.json");
-export const SPAWN_CONFIG_PATH = join(
-  __dirname,
-  "../config/player_spawnpoints.json",
-);
+export const PACKAGE_JSON_PATH = join(__dirname, '../package.json');
+export const CONFIG_PATH = join(__dirname, '../config/config.json');
+export const SPAWN_CONFIG_PATH = join(__dirname, '../config/player_spawnpoints.json');
 
-export const PRAPOR_ID = "54cb50c76803fa8b248b4571";
-export const FENCE_ID = "579dc571d53a0658a154fbec";
-export const JAEGER_ID = "5c0647fdd443bc2504c2d371";
-export const JAEGER_INTRO_QUEST = "5d2495a886f77425cd51e403";
+export const PRAPOR_ID = '54cb50c76803fa8b248b4571';
+export const FENCE_ID = '579dc571d53a0658a154fbec';
+export const JAEGER_ID = '5c0647fdd443bc2504c2d371';
+export const JAEGER_INTRO_QUEST = '5d2495a886f77425cd51e403';
 
-export const STANDARD_STASH_ID = "566abbc34bdc2d92178b4576";
+export const STANDARD_STASH_ID = '566abbc34bdc2d92178b4576';
 
-export const STASH_IDS = [
+export const VANILLA_STASH_IDS = [
   STANDARD_STASH_ID, // Standard
-  "5811ce572459770cba1a34ea", // Left Behind
-  "5811ce662459770f6f490f32", // Prepare for escape
-  "5811ce772459770e9e5f9532", // Edge of darkness
+  '5811ce572459770cba1a34ea', // Left Behind
+  '5811ce662459770f6f490f32', // Prepare for escape
+  '5811ce772459770e9e5f9532', // Edge of darkness
+  '6602bcf19cc643f44a04274b', // Unheard
 ];
 
-export const EMPTY_STASH_ID = "PathToTarkov_Empty_Stash";
+export const EMPTY_STASH: Omit<StashConfig, 'access_via'> = {
+  id: 'PathToTarkov_Empty_Stash',
+  size: 0,
+};
+
+export const SLOT_ID_HIDEOUT = 'hideout';
+export const SLOT_ID_LOCKED_STASH = 'ptt_locked_stash';
 
 export const MAPLIST = [
-  "laboratory",
-  "factory4_day",
-  "factory4_night",
-  "bigmap", // customs
-  "interchange",
-  "lighthouse",
-  "rezervbase", // military reserve
-  "shoreline",
-  "woods",
-  "tarkovstreets",
-  "sandbox", // ground zero
-  "sandbox_high", // ground zero for high level player (> 20)
+  'laboratory',
+  'factory4_day',
+  'factory4_night',
+  'bigmap', // customs
+  'interchange',
+  'lighthouse',
+  'rezervbase', // military reserve
+  'shoreline',
+  'woods',
+  'tarkovstreets',
+  'sandbox', // ground zero
+  'sandbox_high', // ground zero for high level player (> 20)
+  'terminal', // even if it's always locked, this is listed here in order to be able to hide the icon in the UI
 ];
 
 // sandbox_high is a special map for high level players (> 20)
@@ -195,7 +223,7 @@ export const processConfig = (originalConfig: Config): Config => {
 
   config.exfiltrations = prepareGroundZeroHigh(config.exfiltrations);
 
-  Object.keys(config.infiltrations).forEach((offraidPosition) => {
+  Object.keys(config.infiltrations).forEach(offraidPosition => {
     config.infiltrations[offraidPosition] = prepareGroundZeroHigh(
       config.infiltrations[offraidPosition],
     );

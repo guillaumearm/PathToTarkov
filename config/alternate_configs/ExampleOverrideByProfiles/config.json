@@ -1,6 +1,12 @@
 {
   "enabled": true,
   "debug": true,
+  "override_by_profiles": {
+    "Stalker On Tarkov": {
+      "initial_offraid_position": "TherapistStash",
+      "hideout_main_stash_access_via": ["TherapistStash"]
+    }
+  },
   "initial_offraid_position": "MechanicStash",
   "reset_offraid_position_on_player_die": true,
   "traders_access_restriction": true,
@@ -76,6 +82,16 @@
       "id": "PathToTarkov_MilitaryLighthouse_stash",
       "size": 22,
       "access_via": ["MilitaryLighthouseStash"]
+    },
+    {
+      "id": "PathToTarkov_ReserveBunker_stash",
+      "size": 22,
+      "access_via": ["ReserveInterchangeStash"]
+    },
+    {
+      "id": "PathToTarkov_Car_stash",
+      "size": 22,
+      "access_via": ["ShorelineWoodsStash"]
     }
   ],
   "traders_config": {
@@ -257,14 +273,15 @@
         "min_payment": 0,
         "min_return_hour": 1,
         "max_return_hour": 2,
-        "max_storage_time": 480
+        "max_storage_time": 480,
+        "return_chance_percent": 100
       },
       "repair_always_enabled": true,
       "repair_config": {
         "quality": 1,
         "currency": "5449016a4bdc2d6f028b456f",
         "currency_coefficient": 12,
-        "repair_price_coef": 0
+        "repair_price_coef": 100
       },
       "heal_always_enabled": true
     }
@@ -285,17 +302,23 @@
       "Old Azs Gate": "RagmanStash"
     },
     "woods": {
-      "Factory Gate": "JaegerStash"
+      "Factory Gate": "JaegerStash",
+      "South V-Ex": "ShorelineWoodsStash"
     },
     "rezervbase": {
       "EXFIL_ScavCooperation": "SkierStash",
-      "Exit4": "MilitaryLighthouseStash"
+      "Exit4": "MilitaryLighthouseStash",
+      "EXFIL_Bunker_D2": "ReserveInterchangeStash"
     },
     "interchange": {
-      "NW Exfil": "RagmanStash"
+      "NW Exfil": "RagmanStash",
+      "Saferoom Exfil": "ReserveInterchangeStash",
+      "PP Exfil": "PraporStash"
     },
     "shoreline": {
-      "Tunnel": "PeacekeeperStash"
+      "Tunnel": "PeacekeeperStash",
+      "Shorl_V-Ex": "ShorelineWoodsStash",
+      "South Fence Passage": "ReserveInterchangeStash"
     },
     "lighthouse": {
       "Coastal_South_Road": "PeacekeeperStash",
@@ -315,12 +338,14 @@
       "lab_Elevator_Cargo": "PraporStash"
     },
     "sandbox": {
+      "Scav_coop_exit": "TherapistStash",
       "Sandbox_VExit": "PraporStash"
     }
   },
   "infiltrations": {
     "TherapistStash": {
       "bigmap": ["Crossroads"],
+      "sandbox": ["GZ Scav checkpoint"],
       "tarkovstreets": ["Zmeevsky Alley"]
     },
     "PraporStash": {
@@ -334,7 +359,8 @@
         "Main Elevator",
         "Med Block Elevator",
         "Parking Gate"
-      ]
+      ],
+      "interchange": ["Car at Power Station"]
     },
     "MechanicStash": {
       "factory4_day": ["Gate 3"],
@@ -361,6 +387,15 @@
     "MilitaryLighthouseStash": {
       "lighthouse": ["Lighthouse Vehicle Extract"],
       "rezervbase": ["CP Fence"]
+    },
+    "ReserveInterchangeStash": {
+      "rezervbase": ["D-2"],
+      "interchange": ["Safe Room"],
+      "shoreline": ["North Fence Passage"]
+    },
+    "ShorelineWoodsStash": {
+      "shoreline": ["Road to Customs"],
+      "woods": ["Bridge Car"]
     }
   }
 }
