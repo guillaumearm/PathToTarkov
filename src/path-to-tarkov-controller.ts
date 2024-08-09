@@ -436,8 +436,21 @@ export class PathToTarkovController {
     }
   }
 
+  private isLocationBaseAvailable(locationBase: ILocationBase): boolean {
+    if (locationBase.Scene.path && locationBase.Scene.rcid) {
+      return true;
+    }
+
+    return false;
+  }
+
   private updateLocationBaseExits(locationBase: ILocationBase): boolean {
     if (this.config.bypass_exfils_override) {
+      return false;
+    }
+
+    // this will ignore unavailable maps (like terminal)
+    if (!this.isLocationBaseAvailable(locationBase)) {
       return false;
     }
 
