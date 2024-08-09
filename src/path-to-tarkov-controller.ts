@@ -1,275 +1,389 @@
-import type { IBodyHealth, IEffects } from "@spt/models/eft/common/IGlobals";
-import type { SpawnPointParam } from "@spt/models/eft/common/ILocationBase";
-import type { ILogger } from "@spt/models/spt/utils/ILogger";
-import type { DatabaseServer } from "@spt/servers/DatabaseServer";
-import type { SaveServer } from "@spt/servers/SaveServer";
+import type { IBodyHealth, IGlobals } from '@spt/models/eft/common/IGlobals';
+import type { ILocationBase } from '@spt/models/eft/common/ILocationBase';
+import type { ILogger } from '@spt/models/spt/utils/ILogger';
+import type { ConfigServer } from '@spt/servers/ConfigServer';
+import type { DatabaseServer } from '@spt/servers/DatabaseServer';
+import type { SaveServer } from '@spt/servers/SaveServer';
 
-import type {
-  Config,
-  ConfigGetter,
-  MapName,
-  Profile,
-  SpawnConfig,
-} from "./config";
-import { MAPLIST } from "./config";
-
-import type { EntryPoints, StaticRoutePeeker } from "./helpers";
-import { isLuasCSPModLoaded } from "./helpers";
+import type { Config, MapName, Profile, SpawnConfig } from './config';
+import { EMPTY_STASH, MAPLIST, VANILLA_STASH_IDS } from './config';
 
 import {
   changeRestrictionsInRaid,
   checkAccessVia,
   createExitPoint,
   createSpawnPoint,
-  getEntryPointsForMaps,
-} from "./helpers";
+  isIgnoredArea,
+  PTT_INFILTRATION,
+} from './helpers';
 
-import { StashController } from "./stash-controller";
-import { TradersController } from "./traders-controller";
-import type { ModLoader } from "./modLoader";
+import { getTemplateIdFromStashId, StashController } from './stash-controller';
+import { TradersController } from './traders-controller';
+import type { DependencyContainer } from 'tsyringe';
+import type { LocationController } from '@spt/controllers/LocationController';
+import { deepClone } from './utils';
+import { resolveMapNameFromLocation } from './map-name-resolver';
+import type {
+  ILocationsGenerateAllResponse,
+  Path,
+} from '@spt/models/eft/common/ILocationsSourceDestinationBase';
+import type { ILocations } from '@spt/models/spt/server/ILocations';
+import type { IGetLocationRequestData } from '@spt/models/eft/location/IGetLocationRequestData';
+import type { DataCallbacks } from '@spt/callbacks/DataCallbacks';
+import type { IEmptyRequestData } from '@spt/models/eft/common/IEmptyRequestData';
+import type { ITemplateItem } from '@spt/models/eft/common/tables/ITemplateItem';
+import type { IHideoutArea } from '@spt/models/eft/hideout/IHideoutArea';
+import type { LocationCallbacks } from '@spt/callbacks/LocationCallbacks';
+import type { IGetBodyResponseData } from '@spt/models/eft/httpResponse/IGetBodyResponseData';
+import type { Inventory } from '@spt/models/eft/common/tables/IBotBase';
 
-class OffraidRegenController {
-  private getRegenConfig: () => Config["offraid_regen_config"];
+type IndexedLocations = Record<string, ILocationBase>;
 
-  private regen_hydration_enabled = true;
-  private regen_energy_enabled = true;
-  private regen_health_enabled = true;
+// indexed by mapName
+const getIndexedLocations = (locations: ILocations): IndexedLocations => {
+  // WARNING: type lies here
+  // TODO: improve type
+  const locationsList: ILocationBase[] = Object.values(locations).filter(
+    (l: ILocationBase) => l && l.Id,
+  );
 
-  // saved values
-  private energy_value: number | null = null;
-  private hydration_value: number | null = null;
-  private bodyhealth_values: Partial<IBodyHealth> = {};
-
-  constructor(
-    getConfig: ConfigGetter,
-    private db: DatabaseServer,
-  ) {
-    this.getRegenConfig = () => getConfig().offraid_regen_config;
-  }
-
-  private _getEmptyBodyHealthValues(): IBodyHealth {
-    const result: Partial<IBodyHealth> = {};
-
-    Object.keys(this.bodyhealth_values).forEach((bodyPart) => {
-      result[bodyPart as keyof IBodyHealth] = { Value: 0 };
-    });
-
-    return result as IBodyHealth;
-  }
-
-  private get regen_db(): IEffects["Regeneration"] {
-    const regen =
-      this.db.getTables().globals?.config.Health.Effects.Regeneration;
-
-    if (!regen) {
-      throw new Error(
-        "Fatal OffraidRegenController constructor: unable to get Regeneration health effects",
-      );
-    }
-
-    return regen;
-  }
-
-  // this will snapshot the current regen config
-  init(): void {
-    this.energy_value = this.regen_db.Energy;
-    this.hydration_value = this.regen_db.Hydration;
-
-    Object.keys(this.regen_db.BodyHealth).forEach((bodyPart) => {
-      this.bodyhealth_values[bodyPart as keyof IBodyHealth] = {
-        Value: this.regen_db.BodyHealth[bodyPart as keyof IBodyHealth].Value,
-      };
-    });
-  }
-
-  _enableHydration() {
-    if (this.regen_hydration_enabled) {
-      return;
-    }
-
-    this.regen_db.Hydration = this.hydration_value ?? 0;
-    this.regen_hydration_enabled = true;
-  }
-
-  _disableHydration() {
-    if (!this.regen_hydration_enabled) {
-      return;
-    }
-
-    this.regen_db.Hydration = 0;
-    this.regen_hydration_enabled = false;
-  }
-
-  _enableEnergy() {
-    if (this.regen_energy_enabled) {
-      return;
-    }
-
-    this.regen_db.Energy = this.energy_value ?? 0;
-    this.regen_energy_enabled = true;
-  }
-
-  _disableEnergy() {
-    if (!this.regen_energy_enabled) {
-      return;
-    }
-
-    this.regen_db.Energy = 0;
-    this.regen_energy_enabled = false;
-  }
-
-  _enableHealth() {
-    if (this.regen_health_enabled) {
-      return;
-    }
-
-    this.regen_db.BodyHealth = this.bodyhealth_values as IBodyHealth;
-    this.regen_health_enabled = true;
-  }
-
-  _disableHealth() {
-    if (!this.regen_health_enabled) {
-      return;
-    }
-
-    this.regen_db.BodyHealth = this._getEmptyBodyHealthValues();
-    this.regen_health_enabled = false;
-  }
-
-  updateOffraidRegen(offraidPosition: string): void {
-    if (
-      checkAccessVia(
-        this.getRegenConfig().hydration.access_via,
-        offraidPosition,
-      )
-    ) {
-      this._enableHydration();
-    } else {
-      this._disableHydration();
-    }
-
-    if (
-      checkAccessVia(this.getRegenConfig().energy.access_via, offraidPosition)
-    ) {
-      this._enableEnergy();
-    } else {
-      this._disableEnergy();
-    }
-
-    if (
-      checkAccessVia(this.getRegenConfig().health.access_via, offraidPosition)
-    ) {
-      this._enableHealth();
-    } else {
-      this._disableHealth();
-    }
-  }
-}
+  return locationsList.reduce((indexed: IndexedLocations, location: ILocationBase) => {
+    return {
+      ...indexed,
+      [resolveMapNameFromLocation(location.Id)]: location,
+    };
+  }, {});
+};
 
 export class PathToTarkovController {
   public stashController: StashController;
   public tradersController: TradersController;
-  private offraidRegenController: OffraidRegenController;
-
-  private entrypoints: EntryPoints;
 
   constructor(
     public config: Config,
     public spawnConfig: SpawnConfig,
+    private readonly container: DependencyContainer,
     private readonly db: DatabaseServer,
-    private readonly saveServer: SaveServer,
+    public readonly saveServer: SaveServer,
+    configServer: ConfigServer,
     getIsTraderLocked: (traderId: string) => boolean,
     private readonly logger: ILogger,
     private readonly debug: (data: string) => void,
-    private staticRouterPeeker: StaticRoutePeeker,
-    private modLoader: ModLoader,
   ) {
-    this.stashController = new StashController(
-      () => this.config,
-      db,
-      saveServer,
-    );
+    this.stashController = new StashController(() => this.config, db, saveServer, this.debug);
     this.tradersController = new TradersController(
       () => this.config,
       getIsTraderLocked,
       db,
       saveServer,
+      configServer,
       this.logger,
     );
-    this.offraidRegenController = new OffraidRegenController(
-      () => this.config,
-      db,
-    );
-
-    this.entrypoints = {};
+    this.overrideControllers();
   }
 
-  generateEntrypoints(): void {
-    this.entrypoints = getEntryPointsForMaps(this.db);
+  private getUIPaths(givenLocations: ILocationBase[]): Path[] {
+    // skip factory4_night to avoid ui bug
+    const locations = givenLocations.filter(location => location.Id !== 'factory4_night');
+
+    const newPathIds: Set<string> = new Set();
+
+    locations.forEach(sourceLocation => {
+      locations.forEach(destinationLocation => {
+        if (sourceLocation._Id !== destinationLocation._Id) {
+          const pairOfSourceAndDest = [sourceLocation._Id, destinationLocation._Id].sort() as [
+            string,
+            string,
+          ];
+          newPathIds.add(pairOfSourceAndDest.join('|'));
+        }
+      });
+    });
+
+    const newPaths: Path[] = [];
+
+    newPathIds.forEach(pathId => {
+      const [sourceId, DestinationId] = pathId.split('|');
+      newPaths.push({
+        Source: sourceId,
+        Destination: DestinationId,
+      });
+    });
+
+    this.debug(`${newPaths.length} paths built for the UI`);
+    return newPaths;
+  }
+
+  createGenerateAll(originalFn: (sessionId: string) => ILocationsGenerateAllResponse) {
+    return (sessionId: string): ILocationsGenerateAllResponse => {
+      const offraidPosition = this.getOffraidPosition(sessionId);
+      const result = originalFn(sessionId);
+      const locations = deepClone(result.locations);
+      const indexedLocations = getIndexedLocations(locations);
+
+      const unlockedMaps = this.config.infiltrations[offraidPosition];
+      const unlockedLocationBases: ILocationBase[] = [];
+
+      MAPLIST.forEach(mapName => {
+        const locked = Boolean(!unlockedMaps[mapName as MapName]);
+        const locationBase = indexedLocations[mapName];
+
+        if (locationBase) {
+          if (!locked) {
+            this.debug(`[${sessionId}] unlock map ${mapName}`);
+            unlockedLocationBases.push(locationBase);
+          }
+
+          locationBase.Locked = locked;
+          locationBase.Enabled = !locked;
+
+          // necessary for Fika
+          this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
+          this.updateLocationBaseExits(locationBase);
+        }
+      });
+
+      const newPaths = this.getUIPaths(unlockedLocationBases);
+      return { locations, paths: newPaths };
+    };
+  }
+
+  private createGetLocation(
+    originalFn: (
+      url: string,
+      info: IGetLocationRequestData,
+      sessionId: string,
+    ) => IGetBodyResponseData<ILocationBase>,
+  ) {
+    return (
+      url: string,
+      info: IGetLocationRequestData,
+      sessionId: string,
+    ): IGetBodyResponseData<ILocationBase> => {
+      const offraidPosition = this.getOffraidPosition(sessionId);
+      const rawLocationBase = originalFn(url, info, sessionId) as any as string;
+      const parsed = JSON.parse(rawLocationBase);
+      const locationBase: ILocationBase = parsed.data;
+
+      // This will handle spawnpoints and exfils for SPT
+      // For fika, check the other call of `updateSpawnPoints`
+      this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
+      this.updateLocationBaseExits(locationBase);
+
+      return JSON.stringify(parsed) as any;
+    };
+  }
+
+  private createGetTemplateItems(
+    originalFn: (url: string, info: IEmptyRequestData, sessionId: string) => string,
+  ) {
+    return (url: string, info: IEmptyRequestData, sessionId: string): string => {
+      const offraidPosition = this.getOffraidPosition(sessionId);
+      const rawResult = originalFn(url, info, sessionId);
+
+      const parsed = JSON.parse(rawResult);
+      const items: Record<string, ITemplateItem> = parsed.data;
+
+      const size = this.stashController.getStashSize(offraidPosition, sessionId);
+
+      if (size === null) {
+        this.debug(`[${sessionId}] main stash selected`);
+        return rawResult;
+      }
+
+      this.debug(`[${sessionId}] override secondary stash size to ${size}`);
+
+      VANILLA_STASH_IDS.forEach(stashId => {
+        const item = items[stashId];
+
+        const grid = item?._props?.Grids?.[0];
+        const gridProps = grid?._props;
+
+        if (gridProps) {
+          gridProps.cellsV = size;
+        } else {
+          throw new Error('Path To  Tarkov: cannot set size for custom stash');
+        }
+      });
+
+      return JSON.stringify(parsed);
+    };
+  }
+
+  private createGetHideoutAreas(
+    originalFn: (
+      url: string,
+      info: IEmptyRequestData,
+      sessionId: string,
+    ) => IGetBodyResponseData<IHideoutArea[]>,
+  ) {
+    return (
+      url: string,
+      info: IEmptyRequestData,
+      sessionId: string,
+    ): IGetBodyResponseData<IHideoutArea[]> => {
+      const offraidPosition = this.getOffraidPosition(sessionId);
+      const rawResult = originalFn(url, info, sessionId) as any as string;
+
+      const parsed = JSON.parse(rawResult);
+      const areas: IHideoutArea[] = parsed.data;
+
+      const hideoutEnabled = this.stashController.getHideoutEnabled(offraidPosition, sessionId);
+
+      areas.forEach(area => {
+        if (!isIgnoredArea(area, this.config)) {
+          area.enabled = hideoutEnabled;
+        }
+      });
+
+      if (hideoutEnabled) {
+        this.debug(`[${sessionId}] main hideout enabled`);
+      } else {
+        this.debug(`[${sessionId}] main hideout disabled`);
+      }
+
+      return JSON.stringify(parsed) as any;
+    };
+  }
+
+  private createGetGlobals(
+    originalFn: (
+      url: string,
+      info: IEmptyRequestData,
+      sessionId: string,
+    ) => IGetBodyResponseData<IGlobals>,
+  ) {
+    return (
+      url: string,
+      info: IEmptyRequestData,
+      sessionId: string,
+    ): IGetBodyResponseData<IGlobals> => {
+      this.debug(`[${sessionId}] Datacallbacks.getGlobals call`);
+      const offraidPosition = this.getOffraidPosition(sessionId);
+      const rawResult = originalFn(url, info, sessionId) as any as string;
+
+      const parsed = JSON.parse(rawResult);
+      const globals: IGlobals = parsed.data;
+      const regenDb = globals.config.Health.Effects.Regeneration;
+
+      // hydration restrictions
+      if (!checkAccessVia(this.config.offraid_regen_config.hydration.access_via, offraidPosition)) {
+        this.debug(`[${sessionId}] disable hideout hydration regen`);
+        regenDb.Hydration = 0;
+      }
+
+      // energy restrictions
+      if (!checkAccessVia(this.config.offraid_regen_config.energy.access_via, offraidPosition)) {
+        this.debug(`[${sessionId}] disable hideout energy regen`);
+        regenDb.Energy = 0;
+      }
+
+      // health restrictions
+      if (!checkAccessVia(this.config.offraid_regen_config.health.access_via, offraidPosition)) {
+        this.debug(`[${sessionId}] disable hideout health regen`);
+        Object.keys(regenDb.BodyHealth).forEach(k => {
+          const bodyHealth = regenDb.BodyHealth[k as keyof IBodyHealth];
+          bodyHealth.Value = 0;
+        });
+      }
+
+      return JSON.stringify(parsed) as any;
+    };
+  }
+
+  private overrideControllers(): void {
+    this.container.afterResolution<LocationController>(
+      'LocationController',
+      (_t, result): void => {
+        const locationController = Array.isArray(result) ? result[0] : result;
+        const originalGenerateAll = locationController.generateAll.bind(locationController);
+
+        locationController.generateAll = this.createGenerateAll(originalGenerateAll);
+      },
+      { frequency: 'Always' },
+    );
+
+    this.container.afterResolution<LocationCallbacks>(
+      'LocationCallbacks',
+      (_t, result): void => {
+        const locationCallbacks = Array.isArray(result) ? result[0] : result;
+
+        const originalGet = locationCallbacks.getLocation.bind(locationCallbacks);
+        locationCallbacks.getLocation = this.createGetLocation(originalGet);
+      },
+      { frequency: 'Always' },
+    );
+
+    this.container.afterResolution<DataCallbacks>(
+      'DataCallbacks',
+      (_t, result): void => {
+        const dataCallbacks = Array.isArray(result) ? result[0] : result;
+
+        // override getTemplateItems
+        const originalGetTemplateItems = dataCallbacks.getTemplateItems.bind(dataCallbacks);
+
+        dataCallbacks.getTemplateItems = this.createGetTemplateItems(originalGetTemplateItems);
+
+        // override getHideoutAreas
+        const originalGetHideoutAreas = dataCallbacks.getHideoutAreas.bind(dataCallbacks);
+
+        dataCallbacks.getHideoutAreas = this.createGetHideoutAreas(originalGetHideoutAreas);
+
+        // override getGlobals
+        const originalGetGlobals = dataCallbacks.getGlobals.bind(dataCallbacks);
+        dataCallbacks.getGlobals = this.createGetGlobals(originalGetGlobals);
+      },
+      { frequency: 'Always' },
+    );
+  }
+
+  /**
+   * This is for upgrading profiles for PTT versions < 5.2.0
+   */
+  cleanupLegacySecondaryStashesLink(sessionId: string): void {
+    const profile: Profile = this.saveServer.getProfile(sessionId);
+    const inventory = profile.characters.pmc.Inventory as Inventory | undefined;
+    const secondaryStashIds: string[] = [
+      EMPTY_STASH.id,
+      ...this.config.hideout_secondary_stashes.map(config => config.id),
+    ];
+
+    if (!inventory) {
+      return;
+    }
+
+    let stashLinkRemoved = 0;
+
+    inventory.items = inventory.items.filter(item => {
+      if (
+        secondaryStashIds.includes(item._id) &&
+        item._tpl !== getTemplateIdFromStashId(item._id)
+      ) {
+        stashLinkRemoved = stashLinkRemoved + 1;
+        return false;
+      }
+
+      return true;
+    });
+
+    if (stashLinkRemoved > 0) {
+      this.debug(`[${sessionId}] cleaned up ${stashLinkRemoved} legacy stash links`);
+      this.saveServer.saveProfile(sessionId);
+    }
   }
 
   init(sessionId: string): void {
+    changeRestrictionsInRaid(this.config, this.db);
     this.stashController.initProfile(sessionId);
-    this.offraidRegenController.init();
 
     const offraidPosition = this.getOffraidPosition(sessionId);
     this.updateOffraidPosition(sessionId, offraidPosition);
-
-    changeRestrictionsInRaid(this.config, this.db);
   }
 
-  // This is a fix to ensure Lua's Custom Spawn Point mod do not override player spawn point
-  public hijackLuasCustomSpawnPointsUpdate(): void {
-    const LUAS_CSP_ROUTE = "/client/locations";
-
-    if (isLuasCSPModLoaded(this.modLoader)) {
-      this.debug(
-        `Lua's Custom Spawn Point detected, hijack '${LUAS_CSP_ROUTE}' route`,
-      );
-    } else {
-      this.debug("Lua's Custom Spawn Point not detected.");
-      return;
-    }
-
-    this.staticRouterPeeker.watchRoute(
-      LUAS_CSP_ROUTE,
-      (url, info, sessionId, output) => {
-        this.logger.info(
-          "=> Path To Tarkov: '/client/locations' route called !",
-        );
-
-        this.updateSpawnPoints(this.getOffraidPosition(sessionId));
-
-        return output;
-      },
-    );
-
-    this.staticRouterPeeker.register(
-      "Trap-PathToTarkov-Lua-CustomSpawnPoints-integration",
-    );
-
-    this.logger.info(
-      `=> PathToTarkov: Lua's Custom Spawn Points '${LUAS_CSP_ROUTE}' route hijacked!`,
-    );
-  }
-
-  private addSpawnPoint(mapName: string, spawnPoint: SpawnPointParam): void {
-    const location = this.db.getTables().locations?.[mapName as MapName];
-
-    location?.base.SpawnPointParams.push(spawnPoint);
-  }
-
-  private removePlayerSpawns(mapName: string): void {
-    const location = this.db.getTables().locations?.[mapName as MapName];
-    const base = location?.base;
-
-    if (!base) {
-      return;
-    }
-
-    base.SpawnPointParams = base.SpawnPointParams.filter((params) => {
+  private removePlayerSpawnsForLocation(locationBase: ILocationBase): void {
+    locationBase.SpawnPointParams = locationBase.SpawnPointParams.filter(params => {
       // remove Player from Categories array
-      params.Categories = params.Categories.filter((cat) => cat !== "Player");
+      params.Categories = params.Categories.filter(cat => cat !== 'Player');
 
       if (!params.Categories.length) {
         // remove the spawn point if Categories is empty
@@ -280,117 +394,123 @@ export class PathToTarkovController {
     });
   }
 
-  private removeAllPlayerSpawns(): void {
-    MAPLIST.forEach((mapName) => {
-      this.removePlayerSpawns(mapName);
-    });
-  }
+  private updateSpawnPoints(
+    locationBase: ILocationBase,
+    offraidPosition: string,
+    sessionId: string,
+  ): void {
+    const mapName = resolveMapNameFromLocation(locationBase.Id);
 
-  private updateLockedMaps(offraidPosition: string): void {
-    const unlockedMaps = this.config.infiltrations[offraidPosition];
-    const locations = this.db.getTables().locations;
-
-    MAPLIST.forEach((mapName) => {
-      const locked = Boolean(!unlockedMaps[mapName as MapName]);
-      const location = locations?.[mapName as MapName];
-
-      if (location) {
-        location.base.Locked = locked;
-      }
-    });
-  }
-
-  private updateSpawnPoints(offraidPosition: string): void {
-    // Remove all player spawn points
-    this.removeAllPlayerSpawns();
-
-    // Add new spawn points according to player offraid position
-    Object.keys(this.config.infiltrations[offraidPosition]).forEach(
-      (mapName) => {
-        const spawnpoints: string[] | undefined =
-          this.config.infiltrations[offraidPosition][mapName as MapName];
-
-        if (spawnpoints) {
-          spawnpoints.forEach((spawnId) => {
-            const spawnData =
-              this.spawnConfig[mapName as MapName] &&
-              this.spawnConfig[mapName as MapName][spawnId];
-            if (spawnData) {
-              const spawnPoint = createSpawnPoint(
-                spawnData.Position,
-                spawnData.Rotation,
-                this.entrypoints[mapName],
-                spawnId,
-              );
-              this.addSpawnPoint(mapName, spawnPoint);
-            }
-          });
-        }
-      },
-    );
-  }
-
-  initExfiltrations(): void {
-    if (this.config.bypass_exfils_override) {
+    if (!this.config.infiltrations[offraidPosition]) {
+      this.debug(
+        `[${sessionId}] no offraid position '${offraidPosition}' found in config.infiltrations`,
+      );
       return;
     }
 
-    // Exfiltrations tweaks without requirements
-    const locations = this.db.getTables().locations;
-    let exfilsCounter = 0;
+    const spawnpoints = this.config.infiltrations[offraidPosition][mapName as MapName];
 
-    Object.keys(this.config.exfiltrations).forEach((mapName) => {
-      const extractPoints = Object.keys(
-        this.config.exfiltrations[mapName as MapName],
-      );
-
-      const location = locations?.[mapName as MapName];
-
-      if (location) {
-        const entrypointsForMap = this.entrypoints[mapName] ?? [];
-
-        if (entrypointsForMap.length === 0) {
-          this.logger.error(
-            `Path To Tarkov: no entrypoints found for map '${mapName}'!`,
-          );
-        }
-
-        if (this.config.vanilla_exfils_requirements) {
-          // filter all exits and keep vanilla requirements (except for ScavCooperation requirements)
-          location.base.exits = location.base.exits
-            .filter((exit) => {
-              return extractPoints.includes(exit.Name);
-            })
-            .map((exit) => {
-              if (exit.PassageRequirement === "ScavCooperation") {
-                return createExitPoint(entrypointsForMap)(exit.Name);
-              }
-
-              exit.EntryPoints = entrypointsForMap.join(",");
-              exit.ExfiltrationTime = 10;
-              exit.Chance = 100;
-
-              return exit;
-            });
-        } else {
-          // erase all exits and create custom exit points without requirements
-          location.base.exits = extractPoints.map(
-            createExitPoint(entrypointsForMap),
-          );
-        }
-        exfilsCounter = exfilsCounter + location.base.exits.length;
+    if (spawnpoints && spawnpoints.length > 0) {
+      if (spawnpoints[0] === '*') {
+        // don't update the spawnpoints if wildcard is used
+        return;
       }
-    });
 
-    this.debug(
-      `initialized ${exfilsCounter} exfiltrations ${
-        this.config.vanilla_exfils_requirements ? "with vanilla" : "without"
-      } requirements`,
-    );
+      this.debug(`[${sessionId}] all player spawns cleaned up for location ${mapName}`);
+      this.removePlayerSpawnsForLocation(locationBase);
+
+      spawnpoints.forEach(spawnId => {
+        const spawnData =
+          this.spawnConfig[mapName as MapName] && this.spawnConfig[mapName as MapName][spawnId];
+        if (spawnData) {
+          const spawnPoint = createSpawnPoint(spawnData.Position, spawnData.Rotation, spawnId);
+
+          if (!spawnPoint.Infiltration) {
+            this.logger.warning(`=> PathToTarkov: spawn '${spawnId}' has no Infiltration`);
+          }
+
+          locationBase?.SpawnPointParams.push(spawnPoint);
+          this.debug(`[${sessionId}] player spawn '${spawnId}' added for location ${mapName}`);
+        }
+      });
+    }
   }
 
+  private isLocationBaseAvailable(locationBase: ILocationBase): boolean {
+    if (locationBase.Scene.path && locationBase.Scene.rcid) {
+      return true;
+    }
+
+    return false;
+  }
+
+  private updateLocationBaseExits(locationBase: ILocationBase): boolean {
+    if (this.config.bypass_exfils_override) {
+      return false;
+    }
+
+    // this will ignore unavailable maps (like terminal)
+    if (!this.isLocationBaseAvailable(locationBase)) {
+      return false;
+    }
+
+    const mapName = resolveMapNameFromLocation(locationBase.Id);
+    const extractPoints = Object.keys(this.config.exfiltrations[mapName as MapName] ?? {});
+
+    if (extractPoints.length === 0) {
+      this.logger.error(`Path To Tarkov: no exfils found for map '${mapName}'!`);
+
+      return false;
+    }
+
+    if (this.config.vanilla_exfils_requirements) {
+      const usedExitNames = new Set<string>();
+
+      // filter all exits and keep vanilla requirements (except for ScavCooperation requirements)
+      locationBase.exits = locationBase.exits
+        .filter(exit => {
+          return extractPoints.includes(exit.Name);
+        })
+        .map(exit => {
+          usedExitNames.add(exit.Name);
+
+          if (exit.PassageRequirement === 'ScavCooperation') {
+            return createExitPoint(exit.Name);
+          }
+
+          exit.EntryPoints = PTT_INFILTRATION;
+          exit.ExfiltrationTime = 10;
+          exit.Chance = 100;
+
+          return exit;
+        });
+
+      // add missing extractPoints (potentially scav extracts)
+      extractPoints.forEach(extractName => {
+        if (!usedExitNames.has(extractName)) {
+          const exitPoint = createExitPoint(extractName);
+          locationBase.exits.push(exitPoint);
+        }
+      });
+    } else {
+      // erase all exits and create custom exit points without requirements
+      locationBase.exits = extractPoints.map(createExitPoint);
+    }
+
+    return true;
+  }
+
+  getInitialOffraidPosition = (sessionId: string): string => {
+    const profile: Profile = this.saveServer.getProfile(sessionId);
+    const profileTemplateId = profile.info.edition;
+
+    const overrideByProfiles = this.config.override_by_profiles?.[profileTemplateId];
+
+    return overrideByProfiles?.initial_offraid_position ?? this.config.initial_offraid_position;
+  };
+
   getOffraidPosition = (sessionId: string): string => {
-    const defaultOffraidPosition = this.config.initial_offraid_position;
+    const defaultOffraidPosition = this.getInitialOffraidPosition(sessionId);
     const profile: Profile = this.saveServer.getProfile(sessionId);
 
     if (!profile.PathToTarkov) {
@@ -405,7 +525,7 @@ export class PathToTarkovController {
 
     if (!this.config.infiltrations[offraidPosition]) {
       this.debug(
-        `Unknown offraid position '${offraidPosition}', reset to default '${defaultOffraidPosition}'`,
+        `[${sessionId}] Unknown offraid position '${offraidPosition}', reset to default '${defaultOffraidPosition}'`,
       );
 
       profile.PathToTarkov.offraidPosition = defaultOffraidPosition;
@@ -431,15 +551,10 @@ export class PathToTarkovController {
     profile.PathToTarkov.offraidPosition = offraidPosition;
 
     if (prevOffraidPosition !== offraidPosition) {
-      this.logger.info(
-        `=> PathToTarkov: player offraid position changed to '${offraidPosition}'`,
-      );
+      this.logger.info(`=> PathToTarkov: player offraid position changed to '${offraidPosition}'`);
     }
-    this.updateLockedMaps(offraidPosition);
-    this.updateSpawnPoints(offraidPosition);
 
     this.stashController.updateStash(offraidPosition, sessionId);
-    this.offraidRegenController.updateOffraidRegen(offraidPosition);
 
     if (this.config.traders_access_restriction) {
       this.tradersController.updateTraders(offraidPosition, sessionId);

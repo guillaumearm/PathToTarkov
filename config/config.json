@@ -1,6 +1,7 @@
 {
   "enabled": true,
   "debug": true,
+  "override_by_profiles": {},
   "initial_offraid_position": "MechanicStash",
   "reset_offraid_position_on_player_die": true,
   "traders_access_restriction": true,
@@ -10,7 +11,6 @@
   "workbench_always_enabled": true,
   "bypass_keep_found_in_raid_tweak": false,
   "bypass_uninstall_procedure": false,
-  "bypass_luas_custom_spawn_points_tweak": false,
   "restrictions_in_raid": {
     "5449016a4bdc2d6f028b456f": {
       "// type = roubles": true,
@@ -27,13 +27,13 @@
   },
   "offraid_regen_config": {
     "hydration": {
-      "access_via": "*"
+      "access_via": ["*"]
     },
     "energy": {
-      "access_via": "*"
+      "access_via": ["*"]
     },
     "health": {
-      "access_via": "*"
+      "access_via": ["*"]
     }
   },
   "hideout_main_stash_access_via": ["MechanicStash"],
@@ -106,7 +106,8 @@
         "jp": "In his car, he hangs around the city",
         "kr": "In his car, he hangs around the city",
         "pl": "In his car, he hangs around the city",
-        "po": "In his car, he hangs around the city"
+        "po": "In his car, he hangs around the city",
+        "ru": "In his car, he hangs around the city"
       },
       "access_via": ["PraporStash"]
     },
@@ -126,7 +127,8 @@
         "jp": "In the city",
         "kr": "In the city",
         "pl": "In the city",
-        "po": "In the city"
+        "po": "In the city",
+        "ru": "In the city"
       },
       "access_via": ["TherapistStash"]
     },
@@ -146,7 +148,8 @@
         "jp": "inside the factory (at home)",
         "kr": "inside the factory (at home)",
         "pl": "inside the factory (at home)",
-        "po": "inside the factory (at home)"
+        "po": "inside the factory (at home)",
+        "ru": "inside the factory (at home)"
       },
       "access_via": ["MechanicStash"]
     },
@@ -166,7 +169,8 @@
         "jp": "To customs",
         "kr": "To customs",
         "pl": "To customs",
-        "po": "To customs"
+        "po": "To customs",
+        "ru": "To customs"
       },
       "access_via": ["SkierStash"]
     },
@@ -186,7 +190,8 @@
         "jp": "To interchange",
         "kr": "To interchange",
         "pl": "To interchange",
-        "po": "To interchange"
+        "po": "To interchange",
+        "ru": "To interchange"
       },
       "access_via": ["RagmanStash"]
     },
@@ -206,7 +211,8 @@
         "jp": "In the woods, not far from the factory",
         "kr": "In the woods, not far from the factory",
         "pl": "In the woods, not far from the factory",
-        "po": "In the woods, not far from the factory"
+        "po": "In the woods, not far from the factory",
+        "ru": "In the woods, not far from the factory"
       },
       "access_via": ["JaegerStash"]
     },
@@ -226,9 +232,31 @@
         "jp": "In the tunnel between the shoreline and the lighthouse",
         "kr": "In the tunnel between the shoreline and the lighthouse",
         "pl": "In the tunnel between the shoreline and the lighthouse",
-        "po": "In the tunnel between the shoreline and the lighthouse"
+        "po": "In the tunnel between the shoreline and the lighthouse",
+        "ru": "In the tunnel between the shoreline and the lighthouse"
       },
       "access_via": ["PeacekeeperStash"]
+    },
+    "6617beeaa9cfa777ca915b7c": {
+      "// Trader name": "Arena (Ref)",
+      "override_description": true,
+      "location_description": {
+        "ch": "To customs",
+        "cz": "To customs",
+        "en": "To customs",
+        "es-mx": "To customs",
+        "es": "To customs",
+        "fr": "Vers les douanes",
+        "ge": "To customs",
+        "hu": "To customs",
+        "it": "To customs",
+        "jp": "To customs",
+        "kr": "To customs",
+        "pl": "To customs",
+        "po": "To customs",
+        "ru": "To customs"
+      },
+      "access_via": ["SkierStash"]
     },
     "579dc571d53a0658a154fbec": {
       "// Trader name": "Fence",
@@ -240,15 +268,17 @@
         "min_payment": 0,
         "min_return_hour": 1,
         "max_return_hour": 2,
-        "max_storage_time": 480
+        "max_storage_time": 480,
+        "return_chance_percent": 100
       },
       "repair_always_enabled": true,
       "repair_config": {
         "quality": 1,
         "currency": "5449016a4bdc2d6f028b456f",
         "currency_coefficient": 12,
-        "repair_price_coef": 0
-      }
+        "repair_price_coef": 100
+      },
+      "heal_always_enabled": true
     }
   },
   "exfiltrations": {
@@ -277,11 +307,13 @@
     },
     "interchange": {
       "NW Exfil": "RagmanStash",
-      "Saferoom Exfil": "ReserveInterchangeStash"
+      "Saferoom Exfil": "ReserveInterchangeStash",
+      "PP Exfil": "PraporStash"
     },
     "shoreline": {
       "Tunnel": "PeacekeeperStash",
-      "Shorl_V-Ex": "ShorelineWoodsStash"
+      "Shorl_V-Ex": "ShorelineWoodsStash",
+      "South Fence Passage": "ReserveInterchangeStash"
     },
     "lighthouse": {
       "Coastal_South_Road": "PeacekeeperStash",
@@ -322,7 +354,8 @@
         "Main Elevator",
         "Med Block Elevator",
         "Parking Gate"
-      ]
+      ],
+      "interchange": ["Car at Power Station"]
     },
     "MechanicStash": {
       "factory4_day": ["Gate 3"],
@@ -352,7 +385,8 @@
     },
     "ReserveInterchangeStash": {
       "rezervbase": ["D-2"],
-      "interchange": ["Safe Room"]
+      "interchange": ["Safe Room"],
+      "shoreline": ["North Fence Passage"]
     },
     "ShorelineWoodsStash": {
       "shoreline": ["Road to Customs"],

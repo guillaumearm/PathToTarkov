@@ -38,4 +38,7 @@ flowchart TD
     Therapist <--Scav checkpoint--> GZ
     I <--Safe room--> ReserveInterchangeBunkerStash <--"D-2"--> R
     Shoreline <--Car--> ShorelineWoodsStash <--Car--> W
+
+    Shoreline <--Old bunker--> ReserveInterchangeBunkerStash
+    I <--Car--> Prapor
 ```
