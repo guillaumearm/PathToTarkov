@@ -711,8 +711,8 @@
     },
     "ScavWindow": {
       "bigmap": ["OfficePath"],
-      "factory4_day": ["OfficeWindow"],
-      "factory4_night": ["OfficeWindow"]
+      "factory4_day": ["Office Window"],
+      "factory4_night": ["Office Window"]
     },
     "WoodsFactoryGate": {
       "woods": ["Factory Gate"],
