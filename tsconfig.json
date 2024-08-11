@@ -15,7 +15,7 @@
     "strictPropertyInitialization": false,
     "strict": true,
     "strictNullChecks": true,
-    "outDir": "dist/src/",
+    "outDir": "dist/",
     "baseUrl": ".",
     "paths": {
       "@spt/*": ["./types/*"]
