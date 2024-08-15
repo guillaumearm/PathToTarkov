@@ -117,7 +117,8 @@ export type OffraidRegenConfig = {
 
 export type OverrideByProfiles = ByProfileId<{
   initial_offraid_position?: string;
-  hideout_main_stash_access_via: AccessVia;
+  respawn_at?: string[];
+  hideout_main_stash_access_via?: AccessVia;
 }>;
 
 export type Config = {
@@ -126,6 +127,7 @@ export type Config = {
   override_by_profiles?: OverrideByProfiles;
   bypass_keep_found_in_raid_tweak?: boolean;
   initial_offraid_position: string;
+  respawn_at?: string[];
   reset_offraid_position_on_player_die: boolean;
   hideout_multistash_enabled: boolean;
   player_scav_move_offraid_position: boolean;

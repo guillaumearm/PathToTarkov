@@ -4,10 +4,12 @@
   "override_by_profiles": {
     "Stalker On Tarkov": {
       "initial_offraid_position": "TherapistStash",
-      "hideout_main_stash_access_via": ["TherapistStash"]
+      "hideout_main_stash_access_via": ["TherapistStash"],
+      "respawn_at": ["MechanicStash", "RagmanStash", "SkierStash"]
     }
   },
   "initial_offraid_position": "MechanicStash",
+  "respawn_at": ["MechanicStash"],
   "reset_offraid_position_on_player_die": true,
   "traders_access_restriction": true,
   "hideout_multistash_enabled": true,

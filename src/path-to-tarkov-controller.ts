@@ -21,7 +21,7 @@ import { getTemplateIdFromStashId, StashController } from './stash-controller';
 import { TradersController } from './traders-controller';
 import type { DependencyContainer } from 'tsyringe';
 import type { LocationController } from '@spt/controllers/LocationController';
-import { deepClone } from './utils';
+import { deepClone, shuffle } from './utils';
 import { resolveMapNameFromLocation } from './map-name-resolver';
 import type {
   ILocationsGenerateAllResponse,
@@ -507,6 +507,22 @@ export class PathToTarkovController {
     const overrideByProfiles = this.config.override_by_profiles?.[profileTemplateId];
 
     return overrideByProfiles?.initial_offraid_position ?? this.config.initial_offraid_position;
+  };
+
+  getRespawnOffraidPosition = (sessionId: string): string => {
+    const profile: Profile = this.saveServer.getProfile(sessionId);
+    const profileTemplateId = profile.info.edition;
+
+    const overrideByProfiles = this.config.override_by_profiles?.[profileTemplateId];
+
+    const respawnAt = shuffle(overrideByProfiles?.respawn_at ?? this.config.respawn_at ?? []);
+
+    if (respawnAt.length === 0) {
+      return this.getInitialOffraidPosition(sessionId);
+    }
+
+    // TODO: if '*' -> pick a random offraid position from all available
+    return respawnAt[0];
   };
 
   getOffraidPosition = (sessionId: string): string => {

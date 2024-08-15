@@ -45,7 +45,7 @@ export class EndOfRaidController {
       this.ptt.pathToTarkovController.config.reset_offraid_position_on_player_die
     ) {
       const initialOffraidPosition =
-        this.ptt.pathToTarkovController.getInitialOffraidPosition(sessionId);
+        this.ptt.pathToTarkovController.getRespawnOffraidPosition(sessionId);
 
       this.ptt.pathToTarkovController.updateOffraidPosition(sessionId, initialOffraidPosition);
     }

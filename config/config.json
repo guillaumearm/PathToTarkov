@@ -3,6 +3,7 @@
   "debug": true,
   "override_by_profiles": {},
   "initial_offraid_position": "MechanicStash",
+  "respawn_at": ["MechanicStash"],
   "reset_offraid_position_on_player_die": true,
   "traders_access_restriction": true,
   "hideout_multistash_enabled": true,
