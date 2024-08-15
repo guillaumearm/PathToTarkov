@@ -1,5 +1,7 @@
-import type { InRaidHelper } from '@spt/helpers/InRaidHelper';
+import type { MatchCallbacks } from '@spt/callbacks/MatchCallbacks';
+import type { IPmcData } from '@spt/models/eft/common/IPmcData';
 import type { Item } from '@spt/models/eft/common/tables/IItem';
+import type { SaveServer } from '@spt/servers/SaveServer';
 
 import type { DependencyContainer } from 'tsyringe';
 
@@ -27,28 +29,25 @@ const setSpawnedInSessionOnAllItems = (items: Item[]): number => {
 };
 
 export const enableKeepFoundInRaidTweak = (ptt: PTTInstance): void => {
-  ptt.container.afterResolution<InRaidHelper>(
-    'InRaidHelper',
+  const saveServer = ptt.container.resolve<SaveServer>('SaveServer');
+
+  ptt.container.afterResolution<MatchCallbacks>(
+    'MatchCallbacks',
     (_t, result): void => {
-      const inraidHelper = Array.isArray(result) ? result[0] : result;
+      const matchCallbacks = Array.isArray(result) ? result[0] : result;
 
-      inraidHelper.removeSpawnedInSessionPropertyFromItems = postRaidProfile => {
-        const isPlayerScav = postRaidProfile.Info.Side === 'Savage';
-        const count = setSpawnedInSessionOnAllItems(postRaidProfile.Inventory.items);
-        if (isPlayerScav) {
-          ptt.debug(
-            `raid ran through with a scav, added 'SpawnedInSession' flag on ${count} items`,
-          );
-        } else {
-          ptt.debug(`raid ran through with a pmc, added 'SpawnedInSession' flag on ${count} items`);
-        }
-        return postRaidProfile;
+      const originalEndOfflineRaid = matchCallbacks.endOfflineRaid.bind(matchCallbacks);
+
+      matchCallbacks.endOfflineRaid = (url, info, sessionId) => {
+        const result = originalEndOfflineRaid(url, info, sessionId);
+
+        const profile = saveServer.getProfile(sessionId);
+        const pmcData: IPmcData = profile.characters.pmc;
+        const count = setSpawnedInSessionOnAllItems(pmcData.Inventory.items);
+        ptt.debug(`added 'SpawnedInSession' flag on ${count} items`);
+
+        return result;
       };
-
-      if ('removeFoundInRaidStatusFromItems' in inraidHelper) {
-        (inraidHelper as any).removeFoundInRaidStatusFromItems =
-          inraidHelper.removeSpawnedInSessionPropertyFromItems;
-      }
     },
     { frequency: 'Always' },
   );
