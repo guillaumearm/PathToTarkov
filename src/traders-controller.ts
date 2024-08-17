@@ -8,6 +8,7 @@ import type { ConfigGetter, LocaleName } from './config';
 import { JAEGER_ID, PRAPOR_ID } from './config';
 import { checkAccessVia, isJaegerIntroQuestCompleted } from './helpers';
 import { isEmptyArray } from './utils';
+import type { ITraderConfig } from '@spt/models/spt/config/ITraderConfig';
 
 /**
  * Used only when `traders_access_restriction` is true
@@ -24,6 +25,7 @@ export class TradersController {
 
   initTraders(): void {
     this.fixInsuranceDialogues();
+    this.disableFenceGiftForCoopExtracts();
 
     const config = this.getConfig();
     const tradersConfig = config.traders_config;
@@ -143,6 +145,13 @@ export class TradersController {
         this.logger.warning(`=> PathToTarkov: Unknown trader id found during init: '${traderId}'`);
       }
     });
+  }
+
+  private disableFenceGiftForCoopExtracts(): void {
+    const traderConfig = this.configServer.getConfig<ITraderConfig>(
+      'spt-trader' as ConfigTypes.TRADER,
+    );
+    traderConfig.fence.coopExtractGift.sendGift = false;
   }
 
   // fix for missing `insuranceStart` and `insuranceFound` properties when player died

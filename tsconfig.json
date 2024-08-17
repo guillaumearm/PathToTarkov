@@ -15,13 +15,13 @@
     "strictPropertyInitialization": false,
     "strict": true,
     "strictNullChecks": true,
-    "outDir": "dist/src/",
+    "outDir": "dist/",
     "baseUrl": ".",
     "paths": {
       "@spt/*": ["./types/*"]
     }
   },
   "lib": ["es2020"],
-  "include": ["src/*", "src/**/*", "types/**/*"],
+  "include": ["src/*", "src/**/*", "types/**/*", "tests/**/*"],
   "exclude": ["tmp/**/*", "dist/**/*"]
 }

@@ -365,6 +365,10 @@
     "GZ Scav checkpoint": {
       "Position": [31.74341, 22.59711, -85.79424],
       "Rotation": 43.04764
+    },
+    "Police Car": {
+      "Position": [-12.97, 22.6, 116.99],
+      "Rotation": 90.0
     }
   }
 }
