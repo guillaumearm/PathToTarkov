@@ -56,7 +56,7 @@ export class EventWatcher {
     staticRoutePeeker.watchRoute('/client/game/start', (url, info: unknown, sessionId) => {
       this.initRaidCache(sessionId);
 
-      const profile = this.ptt.pathToTarkovController.saveServer.getProfile(sessionId);
+      const profile = this.saveServer.getProfile(sessionId);
       const inventory = profile.characters.pmc.Inventory;
 
       if (!inventory) {
@@ -67,7 +67,7 @@ export class EventWatcher {
         return;
       }
 
-      this.ptt.pathToTarkovController.init(sessionId);
+      this.ptt.pathToTarkovController.initPlayer(sessionId, false);
       this.ptt.executeOnStartAPICallbacks(sessionId);
 
       this.ptt.logger.info(`=> PathToTarkov: game started!`);
@@ -78,7 +78,7 @@ export class EventWatcher {
     staticRoutePeeker.watchRoute('/client/game/profile/create', (url, info: unknown, sessionId) => {
       this.initRaidCache(sessionId);
 
-      this.ptt.pathToTarkovController.init(sessionId);
+      this.ptt.pathToTarkovController.initPlayer(sessionId, true);
       this.ptt.executeOnStartAPICallbacks(sessionId);
 
       this.ptt.logger.info(`=> PathToTarkov: pmc created!`);

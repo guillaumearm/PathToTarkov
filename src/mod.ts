@@ -85,9 +85,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       return;
     }
 
-    // TODO: compat with Custom Quests
-    const getIsTraderLocked = () => false;
-
     this.pathToTarkovController = new PathToTarkovController(
       this.config,
       this.spawnConfig,
@@ -95,7 +92,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       db,
       saveServer,
       configServer,
-      getIsTraderLocked,
       this.logger,
       this.debug,
     );

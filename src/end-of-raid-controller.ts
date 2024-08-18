@@ -22,7 +22,7 @@ export class EndOfRaidController {
 
   public end(payload: EndOfRaidPayload): void {
     const { sessionId, locationName, exitName, isPlayerScav } = payload;
-    const mapName = resolveMapNameFromLocation(locationName);
+    const mapName = resolveMapNameFromLocation(locationName) as MapName;
 
     if (!mapName) {
       this.ptt.logger.error(
@@ -31,7 +31,7 @@ export class EndOfRaidController {
       return;
     }
 
-    if (isPlayerScav && !this.ptt.pathToTarkovController.config.player_scav_move_offraid_position) {
+    if (isPlayerScav && !this.ptt.pathToTarkovController.isScavMoveOffraidPosition()) {
       this.ptt.debug('end of raid: scav player detected, pmc offraid position not changed');
       return;
     }
@@ -40,28 +40,20 @@ export class EndOfRaidController {
 
     const playerIsDead = !exitName;
 
-    if (
-      playerIsDead &&
-      this.ptt.pathToTarkovController.config.reset_offraid_position_on_player_die
-    ) {
-      const initialOffraidPosition =
-        this.ptt.pathToTarkovController.getRespawnOffraidPosition(sessionId);
-
-      this.ptt.pathToTarkovController.updateOffraidPosition(sessionId, initialOffraidPosition);
-    }
-
     if (playerIsDead) {
       this.ptt.debug('end of raid: player dies');
+      this.ptt.pathToTarkovController.onPlayerDies(sessionId);
       return;
     }
 
-    const extractsConf = this.ptt.pathToTarkovController.config.exfiltrations[mapName as MapName];
-
-    const newOffraidPosition = extractsConf && exitName && extractsConf[exitName];
+    const newOffraidPosition = this.ptt.pathToTarkovController.onPlayerExtracts(
+      sessionId,
+      mapName,
+      exitName,
+    );
 
     if (newOffraidPosition) {
       this.ptt.debug(`end of raid: new offraid position ${newOffraidPosition}`);
-      this.ptt.pathToTarkovController.updateOffraidPosition(sessionId, newOffraidPosition);
     } else {
       this.ptt.logger.warning(`end of raid: no offraid position found`);
     }

@@ -16,7 +16,6 @@ import type { ITraderConfig } from '@spt/models/spt/config/ITraderConfig';
 export class TradersController {
   constructor(
     private readonly getConfig: ConfigGetter,
-    private readonly getIsTraderLocked: (traderId: string) => boolean,
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
     private readonly configServer: ConfigServer,
@@ -196,9 +195,7 @@ export class TradersController {
     const isJaegerAvailable = isJaegerIntroQuestCompleted(pmc.Quests);
 
     Object.keys(tradersConfig).forEach(traderId => {
-      let unlocked =
-        checkAccessVia(tradersConfig[traderId].access_via, offraidPosition) &&
-        !this.getIsTraderLocked(traderId);
+      let unlocked = checkAccessVia(tradersConfig[traderId].access_via, offraidPosition);
 
       if (traderId === JAEGER_ID) {
         unlocked = unlocked && isJaegerAvailable;

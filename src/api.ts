@@ -38,11 +38,11 @@ export const createPathToTarkovAPI = (
 
       onStartCallbacks.push(cb);
     },
-    getConfig: () => deepClone(controller.config),
+    getConfig: () => deepClone(controller.getConfig()),
     getSpawnConfig: () => deepClone(controller.spawnConfig),
     setConfig: (newConfig: Config) => {
       logger.warning(warnDeprecationMessage('setConfig'));
-      controller.config = newConfig;
+      controller.setConfig(newConfig);
     },
     setSpawnConfig: (newSpawnConfig: SpawnConfig) => {
       logger.warning(warnDeprecationMessage('setSpawnConfig'));
@@ -51,11 +51,11 @@ export const createPathToTarkovAPI = (
     refresh: (sessionId: string) => {
       logger.warning(warnDeprecationMessage('refresh'));
 
-      if (controller.config.traders_access_restriction) {
+      if (controller.getConfig().traders_access_restriction) {
         controller.tradersController.initTraders();
       }
 
-      controller.init(sessionId);
+      controller.initPlayer(sessionId, false);
     },
   };
 

@@ -59,21 +59,25 @@ export class PathToTarkovController {
   public stashController: StashController;
   public tradersController: TradersController;
 
+  private config: Config;
+  public getConfig: () => Config;
+
   constructor(
-    public config: Config,
+    private readonly baseConfig: Config,
     public spawnConfig: SpawnConfig,
     private readonly container: DependencyContainer,
     private readonly db: DatabaseServer,
-    public readonly saveServer: SaveServer,
+    private readonly saveServer: SaveServer,
     configServer: ConfigServer,
-    getIsTraderLocked: (traderId: string) => boolean,
     private readonly logger: ILogger,
     private readonly debug: (data: string) => void,
   ) {
-    this.stashController = new StashController(() => this.config, db, saveServer, this.debug);
+    this.config = deepClone(this.baseConfig);
+    this.getConfig = () => this.config;
+
+    this.stashController = new StashController(this.getConfig, db, saveServer, this.debug);
     this.tradersController = new TradersController(
-      () => this.config,
-      getIsTraderLocked,
+      this.getConfig,
       db,
       saveServer,
       configServer,
@@ -82,8 +86,90 @@ export class PathToTarkovController {
     this.overrideControllers();
   }
 
+  // used by the legacy api
+  setConfig(config: Config): void {
+    // TODO: validation ?
+    this.config = config;
+  }
+
+  // used by the legacy api
+  setSpawnConfig(spawnConfig: SpawnConfig): void {
+    // TODO: validation ?
+    this.spawnConfig = spawnConfig;
+  }
+
+  /**
+   * This is for upgrading profiles for PTT versions < 5.2.0
+   */
+  cleanupLegacySecondaryStashesLink(sessionId: string): void {
+    const profile: Profile = this.saveServer.getProfile(sessionId);
+    const inventory = profile.characters.pmc.Inventory as Inventory | undefined;
+    const secondaryStashIds: string[] = [
+      EMPTY_STASH.id,
+      ...this.config.hideout_secondary_stashes.map(config => config.id),
+    ];
+
+    if (!inventory) {
+      return;
+    }
+
+    let stashLinkRemoved = 0;
+
+    inventory.items = inventory.items.filter(item => {
+      if (
+        secondaryStashIds.includes(item._id) &&
+        item._tpl !== getTemplateIdFromStashId(item._id)
+      ) {
+        stashLinkRemoved = stashLinkRemoved + 1;
+        return false;
+      }
+
+      return true;
+    });
+
+    if (stashLinkRemoved > 0) {
+      this.debug(`[${sessionId}] cleaned up ${stashLinkRemoved} legacy stash links`);
+      this.saveServer.saveProfile(sessionId);
+    }
+  }
+
+  // on game start (or profile creation)
+  initPlayer(sessionId: string, _freshProfile: boolean): void {
+    changeRestrictionsInRaid(this.config, this.db);
+    this.stashController.initProfile(sessionId);
+
+    const offraidPosition = this.getOffraidPosition(sessionId);
+    this.updateOffraidPosition(sessionId, offraidPosition);
+  }
+
+  isScavMoveOffraidPosition(): boolean {
+    return this.config.player_scav_move_offraid_position;
+  }
+
+  onPlayerDies(sessionId: string): void {
+    if (this.config.reset_offraid_position_on_player_die) {
+      const initialOffraidPosition = this.getRespawnOffraidPosition(sessionId);
+
+      this.updateOffraidPosition(sessionId, initialOffraidPosition);
+    }
+  }
+
+  // returns the new offraid position (or null if not found)
+  onPlayerExtracts(sessionId: string, mapName: MapName, exitName: string): string | null {
+    const extractsConf = this.config.exfiltrations[mapName];
+
+    const newOffraidPosition = extractsConf && exitName && extractsConf[exitName];
+
+    if (newOffraidPosition) {
+      this.updateOffraidPosition(sessionId, newOffraidPosition);
+      return newOffraidPosition;
+    }
+
+    return null;
+  }
+
   private getUIPaths(givenLocations: ILocationBase[]): Path[] {
-    // skip factory4_night to avoid ui bug
+    // skip factory4_night to avoid weird ui bug
     const locations = givenLocations.filter(location => location.Id !== 'factory4_night');
 
     const newPathIds: Set<string> = new Set();
@@ -114,7 +200,51 @@ export class PathToTarkovController {
     return newPaths;
   }
 
-  createGenerateAll(originalFn: (sessionId: string) => ILocationsGenerateAllResponse) {
+  private getRespawnOffraidPosition = (sessionId: string): string => {
+    const profile: Profile = this.saveServer.getProfile(sessionId);
+    const profileTemplateId = profile.info.edition;
+
+    const overrideByProfiles = this.config.override_by_profiles?.[profileTemplateId];
+
+    const respawnAt = shuffle(overrideByProfiles?.respawn_at ?? this.config.respawn_at ?? []);
+
+    if (respawnAt.length === 0) {
+      return this.getInitialOffraidPosition(sessionId);
+    }
+
+    // TODO: if '*' -> pick a random offraid position from all available
+    return respawnAt[0];
+  };
+
+  private updateOffraidPosition(sessionId: string, offraidPosition?: string): void {
+    if (!offraidPosition) {
+      offraidPosition = this.getOffraidPosition(sessionId);
+    }
+
+    const profile: Profile = this.saveServer.getProfile(sessionId);
+
+    const prevOffraidPosition = profile?.PathToTarkov?.offraidPosition;
+
+    if (!profile.PathToTarkov) {
+      profile.PathToTarkov = {};
+    }
+
+    profile.PathToTarkov.offraidPosition = offraidPosition;
+
+    if (prevOffraidPosition !== offraidPosition) {
+      this.logger.info(`=> PathToTarkov: player offraid position changed to '${offraidPosition}'`);
+    }
+
+    this.stashController.updateStash(offraidPosition, sessionId);
+
+    if (this.config.traders_access_restriction) {
+      this.tradersController.updateTraders(offraidPosition, sessionId);
+    }
+
+    this.saveServer.saveProfile(sessionId);
+  }
+
+  private createGenerateAll(originalFn: (sessionId: string) => ILocationsGenerateAllResponse) {
     return (sessionId: string): ILocationsGenerateAllResponse => {
       const offraidPosition = this.getOffraidPosition(sessionId);
       const result = originalFn(sessionId);
@@ -144,7 +274,7 @@ export class PathToTarkovController {
       });
 
       const newPaths = this.getUIPaths(unlockedLocationBases);
-      return { locations, paths: newPaths };
+      return { ...result, locations, paths: newPaths };
     };
   }
 
@@ -337,49 +467,6 @@ export class PathToTarkovController {
     );
   }
 
-  /**
-   * This is for upgrading profiles for PTT versions < 5.2.0
-   */
-  cleanupLegacySecondaryStashesLink(sessionId: string): void {
-    const profile: Profile = this.saveServer.getProfile(sessionId);
-    const inventory = profile.characters.pmc.Inventory as Inventory | undefined;
-    const secondaryStashIds: string[] = [
-      EMPTY_STASH.id,
-      ...this.config.hideout_secondary_stashes.map(config => config.id),
-    ];
-
-    if (!inventory) {
-      return;
-    }
-
-    let stashLinkRemoved = 0;
-
-    inventory.items = inventory.items.filter(item => {
-      if (
-        secondaryStashIds.includes(item._id) &&
-        item._tpl !== getTemplateIdFromStashId(item._id)
-      ) {
-        stashLinkRemoved = stashLinkRemoved + 1;
-        return false;
-      }
-
-      return true;
-    });
-
-    if (stashLinkRemoved > 0) {
-      this.debug(`[${sessionId}] cleaned up ${stashLinkRemoved} legacy stash links`);
-      this.saveServer.saveProfile(sessionId);
-    }
-  }
-
-  init(sessionId: string): void {
-    changeRestrictionsInRaid(this.config, this.db);
-    this.stashController.initProfile(sessionId);
-
-    const offraidPosition = this.getOffraidPosition(sessionId);
-    this.updateOffraidPosition(sessionId, offraidPosition);
-  }
-
   private removePlayerSpawnsForLocation(locationBase: ILocationBase): void {
     locationBase.SpawnPointParams = locationBase.SpawnPointParams.filter(params => {
       // remove Player from Categories array
@@ -500,7 +587,7 @@ export class PathToTarkovController {
     return true;
   }
 
-  getInitialOffraidPosition = (sessionId: string): string => {
+  private getInitialOffraidPosition = (sessionId: string): string => {
     const profile: Profile = this.saveServer.getProfile(sessionId);
     const profileTemplateId = profile.info.edition;
 
@@ -509,23 +596,7 @@ export class PathToTarkovController {
     return overrideByProfiles?.initial_offraid_position ?? this.config.initial_offraid_position;
   };
 
-  getRespawnOffraidPosition = (sessionId: string): string => {
-    const profile: Profile = this.saveServer.getProfile(sessionId);
-    const profileTemplateId = profile.info.edition;
-
-    const overrideByProfiles = this.config.override_by_profiles?.[profileTemplateId];
-
-    const respawnAt = shuffle(overrideByProfiles?.respawn_at ?? this.config.respawn_at ?? []);
-
-    if (respawnAt.length === 0) {
-      return this.getInitialOffraidPosition(sessionId);
-    }
-
-    // TODO: if '*' -> pick a random offraid position from all available
-    return respawnAt[0];
-  };
-
-  getOffraidPosition = (sessionId: string): string => {
+  private getOffraidPosition = (sessionId: string): string => {
     const defaultOffraidPosition = this.getInitialOffraidPosition(sessionId);
     const profile: Profile = this.saveServer.getProfile(sessionId);
 
@@ -550,32 +621,4 @@ export class PathToTarkovController {
 
     return offraidPosition;
   };
-
-  updateOffraidPosition(sessionId: string, offraidPosition?: string): void {
-    if (!offraidPosition) {
-      offraidPosition = this.getOffraidPosition(sessionId);
-    }
-
-    const profile: Profile = this.saveServer.getProfile(sessionId);
-
-    const prevOffraidPosition = profile?.PathToTarkov?.offraidPosition;
-
-    if (!profile.PathToTarkov) {
-      profile.PathToTarkov = {};
-    }
-
-    profile.PathToTarkov.offraidPosition = offraidPosition;
-
-    if (prevOffraidPosition !== offraidPosition) {
-      this.logger.info(`=> PathToTarkov: player offraid position changed to '${offraidPosition}'`);
-    }
-
-    this.stashController.updateStash(offraidPosition, sessionId);
-
-    if (this.config.traders_access_restriction) {
-      this.tradersController.updateTraders(offraidPosition, sessionId);
-    }
-
-    this.saveServer.saveProfile(sessionId);
-  }
 }
