@@ -1,5 +1,5 @@
 import type { ILogger } from '@spt/models/spt/utils/ILogger';
-import type { Config, SpawnConfig } from './config';
+import type { Config, ConfigGetter, SpawnConfig } from './config';
 import type { PathToTarkovController } from './path-to-tarkov-controller';
 import { deepClone } from './utils';
 
@@ -7,9 +7,9 @@ export type StartCallback = (sessionId: string) => void;
 
 export type PathToTarkovAPI = {
   onStart(cb: StartCallback): void;
-  getConfig(): Config;
+  getConfig: ConfigGetter;
   getSpawnConfig(): SpawnConfig;
-  setConfig(newConfig: Config): void;
+  setConfig(newConfig: Config, sessionId: string): void;
   setSpawnConfig(newSpawnConfig: SpawnConfig): void;
   refresh(sessionId: string): void;
 };
@@ -29,7 +29,7 @@ export const createPathToTarkovAPI = (
     onStartCallbacks = [];
   };
 
-  const api = {
+  const api: PathToTarkovAPI = {
     onStart: (cb: StartCallback) => {
       logger.warning(warnDeprecationMessage());
       if (!cb) {
@@ -38,11 +38,25 @@ export const createPathToTarkovAPI = (
 
       onStartCallbacks.push(cb);
     },
-    getConfig: () => deepClone(controller.getConfig()),
-    getSpawnConfig: () => deepClone(controller.spawnConfig),
-    setConfig: (newConfig: Config) => {
+    getConfig: (sessionId: string) => {
+      logger.warning(warnDeprecationMessage('getConfig'));
+
+      if (!sessionId) {
+        throw new Error('PTT api -> no sessionId provided');
+      }
+
+      return deepClone(controller.getConfig(sessionId));
+    },
+    getSpawnConfig: () => {
+      logger.warning(warnDeprecationMessage('getSpawnConfig'));
+      return deepClone(controller.spawnConfig);
+    },
+    setConfig: (newConfig: Config, sessionId: string) => {
       logger.warning(warnDeprecationMessage('setConfig'));
-      controller.setConfig(newConfig);
+      if (!sessionId) {
+        throw new Error('PTT api -> no sessionId provided');
+      }
+      controller.setConfig(newConfig, sessionId);
     },
     setSpawnConfig: (newSpawnConfig: SpawnConfig) => {
       logger.warning(warnDeprecationMessage('setSpawnConfig'));
@@ -50,9 +64,12 @@ export const createPathToTarkovAPI = (
     },
     refresh: (sessionId: string) => {
       logger.warning(warnDeprecationMessage('refresh'));
+      if (!sessionId) {
+        throw new Error('PTT api -> no sessionId provided');
+      }
 
-      if (controller.getConfig().traders_access_restriction) {
-        controller.tradersController.initTraders();
+      if (controller.getConfig(sessionId).traders_access_restriction) {
+        controller.tradersController.initTraders(controller.getConfig(sessionId).traders_config);
       }
 
       controller.initPlayer(sessionId, false);

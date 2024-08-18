@@ -23,14 +23,12 @@ export class StashController {
     private readonly debug: (data: string) => void,
   ) {}
 
-  initSecondaryStashTemplates(): number {
+  initSecondaryStashTemplates(stashConfigs: StashConfig[]): number {
     const standardTemplate = this.db.getTables()?.templates?.items[STANDARD_STASH_ID];
 
     if (!standardTemplate) {
       throw new Error('Path To Tarkov: standard stash template not found');
     }
-
-    const stashConfigs = [EMPTY_STASH, ...this.getConfig().hideout_secondary_stashes];
 
     let nbAddedTemplates = 0;
 
@@ -98,35 +96,39 @@ export class StashController {
   }
 
   private getMainStashAccessVia(sessionId: string): AccessVia {
-    const defaultMainStashAccessVia = this.getConfig().hideout_main_stash_access_via;
+    const defaultMainStashAccessVia = this.getConfig(sessionId).hideout_main_stash_access_via;
     const profile: Profile = this.saveServer.getProfile(sessionId);
     const profileTemplateId = profile.info.edition;
 
-    const overrideByProfiles = this.getConfig().override_by_profiles?.[profileTemplateId];
+    const overrideByProfiles = this.getConfig(sessionId).override_by_profiles?.[profileTemplateId];
 
     return overrideByProfiles?.hideout_main_stash_access_via ?? defaultMainStashAccessVia;
   }
 
   private getMainStashAvailable(offraidPosition: string, sessionId: string): boolean {
-    const multiStashEnabled = this.getConfig().hideout_multistash_enabled;
+    const multiStashEnabled = this.getConfig(sessionId).hideout_multistash_enabled;
     const mainStashAccessVia = this.getMainStashAccessVia(sessionId);
     const mainStashAvailable = checkAccessVia(mainStashAccessVia, offraidPosition);
 
     return mainStashAvailable || multiStashEnabled === false;
   }
 
-  private getSecondaryStash(offraidPosition: string): Omit<StashConfig, 'access_via'> {
+  private getSecondaryStash(
+    offraidPosition: string,
+    sessionId: string,
+  ): Omit<StashConfig, 'access_via'> {
     return (
-      this.getConfig().hideout_secondary_stashes.find(stash =>
+      this.getConfig(sessionId).hideout_secondary_stashes.find(stash =>
         checkAccessVia(stash.access_via, offraidPosition),
       ) ?? EMPTY_STASH
     );
   }
 
-  private getAllStashByIds(profile: Profile): IndexedStashByIds {
+  private getAllStashByIds(sessionId: string): IndexedStashByIds {
+    const profile: Profile = this.saveServer.getProfile(sessionId);
     const initialAcc: IndexedStashByIds = { [getMainStashId(profile)]: true };
 
-    return this.getConfig().hideout_secondary_stashes.reduce((acc, stashConfig) => {
+    return this.getConfig(sessionId).hideout_secondary_stashes.reduce((acc, stashConfig) => {
       return {
         ...acc,
         [stashConfig.id]: true,
@@ -136,7 +138,7 @@ export class StashController {
 
   updateStash(offraidPosition: string, sessionId: string): void {
     const mainStashAvailable = this.getMainStashAvailable(offraidPosition, sessionId);
-    const secondaryStash = this.getSecondaryStash(offraidPosition);
+    const secondaryStash = this.getSecondaryStash(offraidPosition, sessionId);
     const profile: Profile = this.saveServer.getProfile(sessionId);
 
     if (mainStashAvailable) {
@@ -148,7 +150,7 @@ export class StashController {
     const inventory = profile.characters.pmc.Inventory;
     const stashId = inventory.stash;
 
-    const stashByIds = this.getAllStashByIds(profile);
+    const stashByIds = this.getAllStashByIds(sessionId);
 
     inventory.items.forEach(item => {
       if (item.slotId === SLOT_ID_HIDEOUT || item.slotId === SLOT_ID_LOCKED_STASH) {
@@ -163,7 +165,7 @@ export class StashController {
 
   getStashSize(offraidPosition: string, sessionId: string): number | null {
     const mainStashAvailable = this.getMainStashAvailable(offraidPosition, sessionId);
-    const secondaryStash = this.getSecondaryStash(offraidPosition);
+    const secondaryStash = this.getSecondaryStash(offraidPosition, sessionId);
 
     if (mainStashAvailable) {
       return null;

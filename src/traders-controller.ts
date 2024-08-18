@@ -4,7 +4,7 @@ import type { ILogger } from '@spt/models/spt/utils/ILogger';
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { ConfigServer } from '@spt/servers/ConfigServer';
 import type { SaveServer } from '@spt/servers/SaveServer';
-import type { ConfigGetter, LocaleName } from './config';
+import type { LocaleName, StaticTradersConfig, TradersConfig } from './config';
 import { JAEGER_ID, PRAPOR_ID } from './config';
 import { checkAccessVia, isJaegerIntroQuestCompleted } from './helpers';
 import { isEmptyArray } from './utils';
@@ -15,19 +15,16 @@ import type { ITraderConfig } from '@spt/models/spt/config/ITraderConfig';
  */
 export class TradersController {
   constructor(
-    private readonly getConfig: ConfigGetter,
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
     private readonly configServer: ConfigServer,
     private readonly logger: ILogger,
   ) {}
 
-  initTraders(): void {
+  initTraders(tradersConfig: StaticTradersConfig): void {
     this.fixInsuranceDialogues();
     this.disableFenceGiftForCoopExtracts();
 
-    const config = this.getConfig();
-    const tradersConfig = config.traders_config;
     const traders = this.db.getTables().traders;
     const locales = this.db.getTables().locales;
 
@@ -140,7 +137,7 @@ export class TradersController {
             };
           });
         }
-      } else if (!this.getConfig().traders_config[traderId].disable_warning) {
+      } else if (!tradersConfig[traderId].disable_warning) {
         this.logger.warning(`=> PathToTarkov: Unknown trader id found during init: '${traderId}'`);
       }
     });
@@ -186,9 +183,7 @@ export class TradersController {
     });
   }
 
-  updateTraders(offraidPosition: string, sessionId: string): void {
-    const tradersConfig = this.getConfig().traders_config;
-
+  updateTraders(tradersConfig: TradersConfig, offraidPosition: string, sessionId: string): void {
     const profile = this.saveServer.getProfile(sessionId);
     const pmc = profile.characters.pmc;
     const tradersInfo = pmc.TradersInfo;

@@ -86,17 +86,24 @@ type RepairConfig = {
   repair_price_coef?: number;
 };
 
-type TraderConfig = {
+type StaticTraderConfig = {
   disable_warning?: boolean;
   override_description?: boolean;
   location_description?: AllLocales<string>;
-  access_via: AccessVia;
   insurance_always_enabled?: boolean;
   insurance_config?: InsuranceConfig;
   repair_always_enabled?: boolean;
   repair_config?: RepairConfig;
   heal_always_enabled?: boolean;
 };
+
+export type StaticTradersConfig = Record<string, StaticTraderConfig>;
+
+type TraderConfig = StaticTraderConfig & {
+  access_via: AccessVia;
+};
+
+export type TradersConfig = Record<string, TraderConfig>;
 
 type SpawnPointName = string;
 type OffraidPosition = string;
@@ -142,7 +149,7 @@ export type Config = {
   hideout_main_stash_access_via: AccessVia;
   hideout_secondary_stashes: StashConfig[];
   traders_access_restriction: boolean;
-  traders_config: Record<string, TraderConfig>;
+  traders_config: TradersConfig;
   exfiltrations: Exfiltrations;
   infiltrations: Infiltrations;
 };
@@ -163,7 +170,7 @@ export type Profile = ISptProfile & {
   };
 };
 
-export type ConfigGetter = () => Config;
+export type ConfigGetter = (sessionId: string) => Config;
 
 export const PACKAGE_JSON_PATH = join(__dirname, '../package.json');
 export const CONFIG_PATH = join(__dirname, '../config/config.json');

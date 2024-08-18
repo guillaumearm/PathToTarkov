@@ -146,7 +146,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.executeOnStartAPICallbacks = executeOnStartAPICallbacks;
 
     if (this.config.traders_access_restriction) {
-      this.pathToTarkovController.tradersController.initTraders();
+      this.pathToTarkovController.tradersController.initTraders(this.config.traders_config);
     }
 
     Object.keys(profiles).forEach(profileId => {
@@ -154,7 +154,9 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     });
 
     const nbAddedTemplates =
-      this.pathToTarkovController.stashController.initSecondaryStashTemplates();
+      this.pathToTarkovController.stashController.initSecondaryStashTemplates(
+        this.config.hideout_secondary_stashes,
+      );
     this.debug(`${nbAddedTemplates} secondary stash templates added`);
 
     if (!this.config.enable_run_through) {
