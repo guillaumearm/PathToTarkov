@@ -74,13 +74,13 @@ if (!globalThis.PathToTarkovAPI) {
 }
 
 PathToTarkovAPI.onStart(sessionId => {
-  const config = PathToTarkovAPI.getConfig();
+  const config = PathToTarkovAPI.getConfig(sessionId);
   const spawnConfig = PathToTarkovAPI.getSpawnConfig();
 
   // make some config changes
   config.reset_offraid_position_on_player_die = false;
 
-  PathToTarkovAPI.setConfig(config);
+  PathToTarkovAPI.setConfig(config, sessionId);
   PathToTarkovAPI.setSpawnConfig(spawnConfig); // not needed if not changed, it's just for the example
 
   // should be called after setting new configs
