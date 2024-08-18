@@ -60,7 +60,7 @@ export class PathToTarkovController {
   public tradersController: TradersController;
 
   // configs are indexed by sessionId
-  private configCache: Record<string, Config>;
+  private configCache: Record<string, Config> = {};
   public getConfig: ConfigGetter;
 
   constructor(
