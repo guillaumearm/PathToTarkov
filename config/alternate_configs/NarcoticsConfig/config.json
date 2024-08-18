@@ -110,6 +110,11 @@
       "access_via": ["SafeRoom"]
     },
     {
+      "id": "PathToTarkov_Coyote_stash",
+      "size": 48,
+      "access_via": ["BasementDescent"]
+    },
+    {
       "id": "PathToTarkov_CustomsNorth_stash",
       "size": 32,
       "access_via": [
