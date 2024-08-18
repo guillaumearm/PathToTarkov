@@ -80,7 +80,6 @@ export class PathToTarkovController {
         return existingConfig;
       }
 
-      // here: deepClone the config only when cannot retrieve the persited one
       // TODO: instead of persisting the config directly, persist the performed action and replay them in order to rebuild the config
       const newConfig = deepClone(this.baseConfig);
       this.configCache[sessionId] = newConfig;
