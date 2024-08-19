@@ -38,159 +38,112 @@
       "access_via": "*"
     }
   },
-  "hideout_main_stash_access_via": [
-    "FactoryZB-1011",
-    "FactoryZB-1012"
-  ],
+  "hideout_main_stash_access_via": ["FactoryZB-1011", "FactoryZB-1012"],
   "hideout_secondary_stashes": [
     {
       "id": "WelcomeToTarkov_ReservFlea_stash",
       "size": 48,
-      "access_via": [
-        "ReservFlea"
-      ]
+      "access_via": ["ReservFlea"]
     },
     {
       "id": "WelcomeToTarkov_SafeRoomFlea_stash",
       "size": 48,
-      "access_via": [
-        "SafeRoomFlea"
-      ]
+      "access_via": ["SafeRoomFlea"]
     },
     {
       "id": "WelcomeToTarkov_ExpoCPFlea_stash",
       "size": 48,
-      "access_via": [
-        "ExpoCPFlea"
-      ]
+      "access_via": ["ExpoCPFlea"]
     },
     {
       "id": "WelcomeToTarkov_Therapist_stash",
       "size": 38,
-      "access_via": [
-        "TherapistHideout"
-      ]
+      "access_via": ["TherapistHideout"]
     },
     {
       "id": "WelcomeToTarkov_Mechanic_stash",
       "size": 38,
-      "access_via": [
-        "MechanicHideout"
-      ]
+      "access_via": ["MechanicHideout"]
     },
     {
       "id": "WelcomeToTarkov_Skier_stash",
       "size": 38,
-      "access_via": [
-        "SkierHideout"
-      ]
+      "access_via": ["SkierHideout"]
     },
     {
       "id": "WelcomeToTarkov_Ragman_stash",
       "size": 38,
-      "access_via": [
-        "RagmanHideout"
-      ]
+      "access_via": ["RagmanHideout"]
     },
     {
       "id": "WelcomeToTarkov_Jaeger_stash",
       "size": 38,
-      "access_via": [
-        "JaegerHideout"
-      ]
+      "access_via": ["JaegerHideout"]
     },
     {
       "id": "WelcomeToTarkov_Peacekeeper_stash",
       "size": 38,
-      "access_via": [
-        "PeacekeeperHideout"
-      ]
+      "access_via": ["PeacekeeperHideout"]
     },
     {
       "id": "WelcomeToTarkov_Artem_stash",
       "size": 38,
-      "access_via": [
-        "ArtemHideout"
-      ]
+      "access_via": ["ArtemHideout"]
     },
     {
       "id": "WelcomeToTarkov_Painter_stash",
       "size": 38,
-      "access_via": [
-        "PainterHideout"
-      ]
+      "access_via": ["PainterHideout"]
     },
     {
       "id": "WelcomeToTarkov_Scorpion_stash",
       "size": 38,
-      "access_via": [
-        "ScorpionHideout"
-      ]
+      "access_via": ["ScorpionHideout"]
     },
     {
       "id": "WelcomeToTarkov_Lotus_stash",
       "size": 38,
-      "access_via": [
-        "LotusHideout"
-      ]
+      "access_via": ["LotusHideout"]
     },
     {
       "id": "WelcomeToTarkov_Requisitions_stash",
       "size": 38,
-      "access_via": [
-        "RequisitionsHideout"
-      ]
+      "access_via": ["RequisitionsHideout"]
     },
     {
       "id": "WelcomeToTarkov_Ref_stash",
       "size": 38,
-      "access_via": [
-        "RefHideout"
-      ]
+      "access_via": ["RefHideout"]
     },
     {
       "id": "WelcomeToTarkov_PainterHideout_stash",
       "size": 38,
-      "access_via": [
-        "PainterHideout"
-      ]
+      "access_via": ["PainterHideout"]
     },
     {
       "id": "WelcomeToTarkov_Boat_stash",
       "size": 16,
-      "access_via": [
-        "Boat"
-      ]
+      "access_via": ["Boat"]
     },
     {
       "id": "WelcomeToTarkov_ArmoredTrain_stash",
       "size": 22,
-      "access_via": [
-        "ArmoredTrain"
-      ]
+      "access_via": ["ArmoredTrain"]
     },
     {
       "id": "PathToTarkov_NorthCar_stash",
       "size": 16,
-      "access_via": [
-        "NorthCar",
-        "StreetsCarToLabs"
-      ]
+      "access_via": ["NorthCar", "StreetsCarToLabs"]
     },
     {
       "id": "PathToTarkov_SouthCar_stash",
       "size": 16,
-      "access_via": [
-        "DormsCar",
-        "LighthouseCar"
-      ]
+      "access_via": ["DormsCar", "LighthouseCar"]
     },
     {
       "id": "WelcomeToTarkov_ZB-014Stash_stash",
       "size": 22,
-      "access_via": [
-        "ZB-014Stash"
-      ]
+      "access_via": ["ZB-014Stash"]
     }
   ],
   "traders_config": {
@@ -213,11 +166,7 @@
         "po": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
         "ru": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange"
       },
-      "access_via": [
-        "ReservFlea",
-        "ExpoCPFlea",
-        "SafeRoomFlea"
-      ]
+      "access_via": ["ReservFlea", "ExpoCPFlea", "SafeRoomFlea"]
     },
     "54cb50c76803fa8b248b4571": {
       "// Trader name": "Prapor",
@@ -238,10 +187,7 @@
         "po": "Customs (ZB-1011, ZB-1012), Factory (Med Tent Gates, Gate 3)",
         "ru": "Между лесом и заводом"
       },
-      "access_via": [
-        "FactoryZB-1011",
-        "FactoryZB-1012"
-      ]
+      "access_via": ["FactoryZB-1011", "FactoryZB-1012"]
     },
     "54cb57776803fa99248b456e": {
       "// Trader name": "Therapist",
@@ -262,9 +208,7 @@
         "po": "No Campo de Escavação no Ground Zero",
         "ru": "В лагере диких на эпицентре"
       },
-      "access_via": [
-        "TherapistHideout"
-      ]
+      "access_via": ["TherapistHideout"]
     },
     "6617beeaa9cfa777ca915b7c": {
       "// Trader name": "Ref",
@@ -285,9 +229,7 @@
         "po": "Near the Airpit outside Shoreline (Railway Bridge)",
         "ru": "Near the Airpit outside Shoreline (Railway Bridge)"
       },
-      "access_via": [
-        "RefHideout"
-      ]
+      "access_via": ["RefHideout"]
     },
     "5a7c2eca46aef81a7ca2145d": {
       "// Trader name": "Mechanic",
@@ -308,9 +250,7 @@
         "po": "Inside a bunker in Factory (Camera Bunker Door)",
         "ru": "В бункерах ЗБ-*"
       },
-      "access_via": [
-        "MechanicHideout"
-      ]
+      "access_via": ["MechanicHideout"]
     },
     "58330581ace78e27b8b10cee": {
       "// Trader name": "Skier",
@@ -331,9 +271,7 @@
         "po": "Inside a warehouse (Warehouse 17)",
         "ru": "Между берегом и таможней"
       },
-      "access_via": [
-        "SkierHideout"
-      ]
+      "access_via": ["SkierHideout"]
     },
     "5ac3b934156ae10c4430e83c": {
       "// Trader name": "Ragman",
@@ -354,9 +292,7 @@
         "po": "Near an  Emercom checkpoint outside Ultra",
         "ru": "Между развязкой и таможней"
       },
-      "access_via": [
-        "RagmanHideout"
-      ]
+      "access_via": ["RagmanHideout"]
     },
     "5c0647fdd443bc2504c2d371": {
       "// Trader name": "Jaeger",
@@ -377,9 +313,7 @@
         "po": "Tucked in the mountains (Mountain Stash)",
         "ru": "В машине"
       },
-      "access_via": [
-        "JaegerHideout"
-      ]
+      "access_via": ["JaegerHideout"]
     },
     "5935c25fb3acc3127c3d8cd9": {
       "// Trader name": "Peacekeeper",
@@ -400,9 +334,7 @@
         "po": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
         "ru": "На блокпосте ООН"
       },
-      "access_via": [
-        "PeacekeeperHideout"
-      ]
+      "access_via": ["PeacekeeperHideout"]
     },
     "579dc571d53a0658a154fbec": {
       "// Trader name": "Fence",
@@ -423,11 +355,7 @@
         "po": "In a car",
         "ru": "На блокпосте ООН"
       },
-      "access_via": [
-        "DormsCar",
-        "StreetsToLabsSewer",
-        "NorthCar"
-      ],
+      "access_via": ["DormsCar", "StreetsToLabsSewer", "NorthCar"],
       "insurance_always_enabled": true,
       "insurance_config": {
         "returnChancePercent": 50,
@@ -467,9 +395,7 @@
         "po": "In a hideout in Lighthouse (Hideout at the Grotto)",
         "ru": "В лодке"
       },
-      "access_via": [
-        "ArtemHideout"
-      ]
+      "access_via": ["ArtemHideout"]
     },
     "6688d464bc40c867f60e7d7e": {
       "// mod integration for Scorpion": true,
@@ -492,9 +418,7 @@
         "po": "Labs (Cargo Elevator)",
         "ru": "Рядом с военной железной дорогой"
       },
-      "access_via": [
-        "ScorpionHideout"
-      ]
+      "access_via": ["ScorpionHideout"]
     },
     "668aaff35fd574b6dcc4a686": {
       "// mod integration for PAINTER": true,
@@ -517,9 +441,7 @@
         "po": "Suburbs (Cardinal Appartement)",
         "ru": "Рядом с военной железной дорогой"
       },
-      "access_via": [
-        "PainterHideout"
-      ]
+      "access_via": ["PainterHideout"]
     },
     "lotus": {
       "// mod integration for lotus": true,
@@ -542,9 +464,7 @@
         "po": "Between the City (crash Site) and Interchange (Railway)",
         "ru": "Между городом и развязкой"
       },
-      "access_via": [
-      "LotusHideout"
-      ]
+      "access_via": ["LotusHideout"]
     },
     "Requisitions": {
       "// Trader name": "Requisitions",
@@ -590,10 +510,7 @@
         "po": "Close to Factory",
         "ru": "В лодке"
       },
-      "access_via": [
-        "FactoryZB-1011",
-        "FactoryZB-1012"
-      ]
+      "access_via": ["FactoryZB-1011", "FactoryZB-1012"]
     },
     "Evelyn": {
       "// mod integration for Evelyn": true,
@@ -616,10 +533,7 @@
         "po": "Close to Factory",
         "ru": "В лодке"
       },
-      "access_via": [
-        "FactoryZB-1011",
-        "FactoryZB-1012"
-      ]
+      "access_via": ["FactoryZB-1011", "FactoryZB-1012"]
     },
     "Anastasia": {
       "// mod integration for Anastasia": true,
@@ -642,9 +556,7 @@
         "po": "In Resever Depot hermetic",
         "ru": "В лодке"
       },
-      "access_via": [
-        "HermaticToCellars"
-      ]
+      "access_via": ["HermaticToCellars"]
     }
   },
   "exfiltrations": {
@@ -654,7 +566,6 @@
       "Gate 0": "WoodsFactoryGate",
       "Cellars": "HermaticToCellars",
       "Camera Bunker Door": "MechanicHideout"
-
     },
     "factory4_night": {
       "Gate 3": "FactoryZB-1011",
@@ -662,7 +573,6 @@
       "Gate 0": "WoodsFactoryGate",
       "Cellars": "HermaticToCellars",
       "Camera Bunker Door": "MechanicHideout"
-
     },
     "bigmap": {
       "ZB-1011": "FactoryZB-1011",
@@ -711,7 +621,6 @@
       "Smugglers_Trail_coop": "CustomsToShoreline",
       "Shorl_V-Ex": "DormsCar",
       "Road_at_railbridge": "RefHideout"
-
     },
     "lighthouse": {
       " V-Ex_light": "LighthouseCar",
@@ -725,7 +634,7 @@
     },
     "tarkovstreets": {
       "E1": "ScorpionHideout",
-      "E2": "StreetsToLabsSewer",    
+      "E2": "StreetsToLabsSewer",
       "E3": "HoleToDamagedHouse",
       "scav_e2": "Catacombs",
       "scav_e3": "VentShaft",
