@@ -191,6 +191,20 @@ const main = async () => {
   const mapsExits = await loadMapsExits(allMapNames);
   const allMapsExits = mergeMapsExits(mapsExits, SCAVS_EXFILS);
 
+  // const allFlattenedExfils = {};
+  // Object.keys(allMapsExits).forEach(mapName => {
+  //   const exfils = allMapsExits[mapName];
+  //   exfils.forEach(exfilName => {
+  //     if (allFlattenedExfils[exfilName]) {
+  //       throw new Error(`Duplicate exfilName "${exfilName}" found for map "${mapName}"`);
+  //     }
+  //     allFlattenedExfils[exfilName] = true;
+  //   });
+  // });
+
+  process.stderr.write(JSON.stringify(allMapsExits, undefined, 2));
+  process.stderr.write('\n');
+
   return `
 # ${MARKDOWN_MAIN_TITLE}
 ${formatMapsExits(allMapsExits)}

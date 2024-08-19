@@ -5,6 +5,7 @@
 /src/**/*.js.map
 /Trap-PathToTarkov*
 /mod.zip
+/configs/UserConfig.json
 
 /PTT-Extracts/bin
 /PTT-Extracts/obj

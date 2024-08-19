@@ -1,6 +1,6 @@
 import type { ISptProfile } from '@spt/models/eft/profile/ISptProfile';
 import { join } from 'path';
-import { deepClone } from './utils';
+import { deepClone, fileExists, readJsonFile, writeJsonFile } from './utils';
 
 type ByMap<T> = {
   factory4_day: T;
@@ -86,11 +86,10 @@ type RepairConfig = {
   repair_price_coef?: number;
 };
 
-type TraderConfig = {
+type StaticTraderConfig = {
   disable_warning?: boolean;
   override_description?: boolean;
   location_description?: AllLocales<string>;
-  access_via: AccessVia;
   insurance_always_enabled?: boolean;
   insurance_config?: InsuranceConfig;
   repair_always_enabled?: boolean;
@@ -98,15 +97,24 @@ type TraderConfig = {
   heal_always_enabled?: boolean;
 };
 
+export type StaticTradersConfig = Record<string, StaticTraderConfig>;
+
+type TraderConfig = StaticTraderConfig & {
+  access_via: AccessVia;
+};
+
+export type TradersConfig = Record<string, TraderConfig>;
+
 type SpawnPointName = string;
 type OffraidPosition = string;
+type ExtractName = string;
 
 type Exfiltrations = ByMap<{
-  [spawnPointName: SpawnPointName]: OffraidPosition;
+  [extractName: ExtractName]: OffraidPosition;
 }>;
 
 type Infiltrations = {
-  [exfiltrationPoint: OffraidPosition]: ByMap<SpawnPointName[]>;
+  [offraidPosition: OffraidPosition]: ByMap<SpawnPointName[]>;
 };
 
 export type OffraidRegenConfig = {
@@ -117,7 +125,8 @@ export type OffraidRegenConfig = {
 
 export type OverrideByProfiles = ByProfileId<{
   initial_offraid_position?: string;
-  hideout_main_stash_access_via: AccessVia;
+  respawn_at?: string[];
+  hideout_main_stash_access_via?: AccessVia;
 }>;
 
 export type Config = {
@@ -126,6 +135,7 @@ export type Config = {
   override_by_profiles?: OverrideByProfiles;
   bypass_keep_found_in_raid_tweak?: boolean;
   initial_offraid_position: string;
+  respawn_at?: string[];
   reset_offraid_position_on_player_die: boolean;
   hideout_multistash_enabled: boolean;
   player_scav_move_offraid_position: boolean;
@@ -140,7 +150,7 @@ export type Config = {
   hideout_main_stash_access_via: AccessVia;
   hideout_secondary_stashes: StashConfig[];
   traders_access_restriction: boolean;
-  traders_config: Record<string, TraderConfig>;
+  traders_config: TradersConfig;
   exfiltrations: Exfiltrations;
   infiltrations: Infiltrations;
 };
@@ -154,6 +164,10 @@ export type PathToTarkovReloadedTooltipsConfig = {
   localesToChange?: string[];
 };
 
+export type UserConfig = {
+  selectedConfig: string;
+};
+
 export type Profile = ISptProfile & {
   PathToTarkov?: {
     offraidPosition?: string;
@@ -161,11 +175,15 @@ export type Profile = ISptProfile & {
   };
 };
 
-export type ConfigGetter = () => Config;
+export type ConfigGetter = (sessionId: string) => Config;
 
 export const PACKAGE_JSON_PATH = join(__dirname, '../package.json');
-export const CONFIG_PATH = join(__dirname, '../config/config.json');
-export const SPAWN_CONFIG_PATH = join(__dirname, '../config/player_spawnpoints.json');
+
+export const CONFIGS_DIR = join(__dirname, '../configs');
+export const USER_CONFIG_PATH = join(CONFIGS_DIR, 'UserConfig.json');
+
+export const CONFIG_FILENAME = 'config.json';
+export const SPAWN_CONFIG_FILENAME = 'player_spawnpoints.json';
 
 export const PRAPOR_ID = '54cb50c76803fa8b248b4571';
 export const FENCE_ID = '579dc571d53a0658a154fbec';
@@ -234,4 +252,16 @@ export const processConfig = (originalConfig: Config): Config => {
 
 export const processSpawnConfig = (spawnConfig: SpawnConfig): SpawnConfig => {
   return prepareGroundZeroHigh(spawnConfig);
+};
+
+export const getUserConfig = (): UserConfig => {
+  if (!fileExists(USER_CONFIG_PATH)) {
+    const userConfig: UserConfig = {
+      selectedConfig: 'Default',
+    };
+    writeJsonFile(USER_CONFIG_PATH, userConfig);
+    return userConfig;
+  }
+
+  return readJsonFile(USER_CONFIG_PATH);
 };

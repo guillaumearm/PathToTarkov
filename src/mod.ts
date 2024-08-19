@@ -9,13 +9,15 @@ import type { SaveServer } from '@spt/servers/SaveServer';
 import type { StaticRouterModService } from '@spt/services/mod/staticRouter/StaticRouterModService';
 
 import { createPathToTarkovAPI } from './api';
-import type { Config, PathToTarkovReloadedTooltipsConfig, SpawnConfig } from './config';
+import type { Config, PathToTarkovReloadedTooltipsConfig, SpawnConfig, UserConfig } from './config';
 import {
-  CONFIG_PATH,
+  CONFIG_FILENAME,
+  CONFIGS_DIR,
+  getUserConfig,
   PACKAGE_JSON_PATH,
   processConfig,
   processSpawnConfig,
-  SPAWN_CONFIG_PATH,
+  SPAWN_CONFIG_FILENAME,
 } from './config';
 import { EventWatcher } from './event-watcher';
 import { createStaticRoutePeeker, disableRunThrough } from './helpers';
@@ -28,10 +30,14 @@ import { getModDisplayName, noop, readJsonFile } from './utils';
 import { EndOfRaidController } from './end-of-raid-controller';
 import { fixRepeatableQuests } from './fix-repeatable-quests';
 import { pathToTarkovReloadedTooltipsConfigCompat } from './pttr-tooltips';
+import path from 'path';
+import { analyzeConfig } from './config-analysis';
 
-const getTooltipsConfig = (): PathToTarkovReloadedTooltipsConfig | undefined => {
+const getTooltipsConfig = (
+  userConfig: UserConfig,
+): PathToTarkovReloadedTooltipsConfig | undefined => {
   try {
-    return require('../config/Tooltips.json');
+    return require(path.join(CONFIGS_DIR, userConfig.selectedConfig, 'Tooltips.json'));
   } catch (_err) {
     return undefined;
   }
@@ -51,9 +57,16 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   public preSptLoad(container: DependencyContainer): void {
     this.container = container;
     this.packageJson = readJsonFile(PACKAGE_JSON_PATH);
-    this.config = processConfig(readJsonFile(CONFIG_PATH));
-    this.spawnConfig = processSpawnConfig(readJsonFile(SPAWN_CONFIG_PATH));
-    this.tooltipsConfig = getTooltipsConfig();
+
+    const userConfig = getUserConfig();
+    this.config = processConfig(
+      readJsonFile(path.join(CONFIGS_DIR, userConfig.selectedConfig, CONFIG_FILENAME)),
+    );
+    this.spawnConfig = processSpawnConfig(
+      readJsonFile(path.join(CONFIGS_DIR, userConfig.selectedConfig, SPAWN_CONFIG_FILENAME)),
+    );
+
+    this.tooltipsConfig = getTooltipsConfig(userConfig);
 
     this.logger = container.resolve<ILogger>('WinstonLogger');
     this.debug = this.config.debug
@@ -65,6 +78,23 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     if (this.config.debug) {
       this.debug('debug mode enabled');
     }
+
+    const analysisResult = analyzeConfig(this.config, this.spawnConfig);
+
+    analysisResult.warnings.forEach(warn => {
+      this.logger.warning(`[Path To Tarkov Config] ${warn}`);
+    });
+
+    analysisResult.errors.forEach(err => {
+      this.logger.error(`[Path To Tarkov Config] ${err}`);
+    });
+
+    if (analysisResult.errors.length > 0) {
+      throw new Error(
+        `Fatal Error when loading the selected Path To Tarkov config "${userConfig.selectedConfig}"`,
+      );
+    }
+
     const configServer = container.resolve<ConfigServer>('ConfigServer');
     const db = container.resolve<DatabaseServer>('DatabaseServer');
     const saveServer = container.resolve<SaveServer>('SaveServer');
@@ -85,9 +115,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       return;
     }
 
-    // TODO: compat with Custom Quests
-    const getIsTraderLocked = () => false;
-
     this.pathToTarkovController = new PathToTarkovController(
       this.config,
       this.spawnConfig,
@@ -95,7 +122,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       db,
       saveServer,
       configServer,
-      getIsTraderLocked,
       this.logger,
       this.debug,
     );
@@ -150,7 +176,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.executeOnStartAPICallbacks = executeOnStartAPICallbacks;
 
     if (this.config.traders_access_restriction) {
-      this.pathToTarkovController.tradersController.initTraders();
+      this.pathToTarkovController.tradersController.initTraders(this.config.traders_config);
     }
 
     Object.keys(profiles).forEach(profileId => {
@@ -158,7 +184,9 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     });
 
     const nbAddedTemplates =
-      this.pathToTarkovController.stashController.initSecondaryStashTemplates();
+      this.pathToTarkovController.stashController.initSecondaryStashTemplates(
+        this.config.hideout_secondary_stashes,
+      );
     this.debug(`${nbAddedTemplates} secondary stash templates added`);
 
     if (!this.config.enable_run_through) {

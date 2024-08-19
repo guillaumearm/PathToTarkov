@@ -2,7 +2,7 @@
   "name": "path-to-tarkov",
   "displayName": "Path To Tarkov",
   "fullName": "Trap-PathToTarkov",
-  "version": "5.2.1",
+  "version": "5.3.0-rc.1",
   "main": "src/mod.js",
   "license": "MIT",
   "author": "Trap",
@@ -11,13 +11,13 @@
     "dev:install": "npm run build && npm run build:client && npm run prepare:files && node scripts/install-files.js",
     "git:check:status": "bash scripts/check-git-status.sh",
     "gather:external:resources": "bash scripts/gather-external-resources.sh && npm run prettier",
-    "build:doc:mermaid": "mmdc --width 1600 --height 1200 -t dark -b transparent -i paths/default.md -o config/PathToTarkov.png",
+    "build:doc:mermaid": "mmdc --width 1600 --height 1200 -t dark -b transparent -i paths/default.md -o configs/Default/PathToTarkov.png",
     "build:doc:all-exfils": "node scripts/generate-all-exfils > ALL_EXFILS.md",
     "build:doc": "npm run build:doc:all-exfils && npm run build:doc:mermaid",
     "zip:files": "cd dist && bestzip ../mod.zip user BepInEx && cd .. && node scripts/rename-zip.js",
     "prepare:files": "node scripts/prepare-files.js",
     "build:release": "npm run rebuild:all && npm run prepare:files && npm run zip:files && npm run git:check:status",
-    "clean": "rimraf dist tmp 'src/**/*.js' Trap-PathToTarkov*",
+    "clean": "rimraf -g dist tmp src/**/*.js src/**/*.js.map Trap-PathToTarkov*",
     "clean:all": "npm run clean:client && npm run clean",
     "prettier": "prettier --write .",
     "prettier:check": "prettier --check .",
@@ -32,7 +32,7 @@
     "test:all": "npm run lint:all && npm run test && npm run build:release",
     "test": "npx jest",
     "test:watch": "npx jest --watch",
-    "test:ci": "npm run build && npm run lint:all && npm run build:doc:all-exfils"
+    "test:ci": "npm run build && npm run test && npm run lint:all && npm run build:doc:all-exfils"
   },
   "devDependencies": {
     "@mermaid-js/mermaid-cli": "^9.1.7",

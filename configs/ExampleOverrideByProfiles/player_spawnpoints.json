@@ -354,17 +354,21 @@
     }
   },
   "sandbox": {
-    "hideout_gz": {
+    "Nakatani Basement": {
       "Position": [5.295958, 22.73891, 331.8584],
       "Rotation": 132.0392
     },
-    "From Streets": {
+    "Mira Ave": {
       "Position": [233.1694, 16.01762, 56.08633],
       "Rotation": 251.7702
     },
-    "Crow Hideout": {
+    "GZ Scav checkpoint": {
       "Position": [31.74341, 22.59711, -85.79424],
       "Rotation": 43.04764
+    },
+    "Police Car": {
+      "Position": [-12.97, 22.6, 116.99],
+      "Rotation": 90.0
     }
   }
 }

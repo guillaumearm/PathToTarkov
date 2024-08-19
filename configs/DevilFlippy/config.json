@@ -1,0 +1,830 @@
+{
+  "enabled": true,
+  "debug": true,
+  "initial_offraid_position": "FactoryZB-1011",
+  "reset_offraid_position_on_player_die": true,
+  "traders_access_restriction": true,
+  "flea_access_restriction": true,
+  "flea_access_level": 1,
+  "hideout_multistash_enabled": true,
+  "vanilla_exfils_requirements": false,
+  "player_scav_move_offraid_position": false,
+  "workbench_always_enabled": true,
+  "bypass_keep_found_in_raid_tweak": false,
+  "bypass_uninstall_procedure": false,
+  "bypass_luas_Customs_spawn_points_tweak": false,
+  "restrictions_in_raid": {
+    "5449016a4bdc2d6f028b456f": {
+      "// type = roubles": true,
+      "Value": 10000000
+    },
+    "5696686a4bdc2da3298b456a": {
+      "// type = dollars": true,
+      "Value": 100000
+    },
+    "569668774bdc2da2298b4568": {
+      "// type = euros": true,
+      "Value": 100000
+    }
+  },
+  "offraid_regen_config": {
+    "hydration": {
+      "access_via": "*"
+    },
+    "energy": {
+      "access_via": "*"
+    },
+    "health": {
+      "access_via": "*"
+    }
+  },
+  "hideout_main_stash_access_via": ["FactoryZB-1011", "FactoryZB-1012"],
+  "hideout_secondary_stashes": [
+    {
+      "id": "WelcomeToTarkov_ReservFlea_stash",
+      "size": 48,
+      "access_via": ["ReservFlea"]
+    },
+    {
+      "id": "WelcomeToTarkov_SafeRoomFlea_stash",
+      "size": 48,
+      "access_via": ["SafeRoomFlea"]
+    },
+    {
+      "id": "WelcomeToTarkov_ExpoCPFlea_stash",
+      "size": 48,
+      "access_via": ["ExpoCPFlea"]
+    },
+    {
+      "id": "WelcomeToTarkov_Therapist_stash",
+      "size": 38,
+      "access_via": ["TherapistHideout"]
+    },
+    {
+      "id": "WelcomeToTarkov_Mechanic_stash",
+      "size": 38,
+      "access_via": ["MechanicHideout"]
+    },
+    {
+      "id": "WelcomeToTarkov_Skier_stash",
+      "size": 38,
+      "access_via": ["SkierHideout"]
+    },
+    {
+      "id": "WelcomeToTarkov_Ragman_stash",
+      "size": 38,
+      "access_via": ["RagmanHideout"]
+    },
+    {
+      "id": "WelcomeToTarkov_Jaeger_stash",
+      "size": 38,
+      "access_via": ["JaegerHideout"]
+    },
+    {
+      "id": "WelcomeToTarkov_Peacekeeper_stash",
+      "size": 38,
+      "access_via": ["PeacekeeperHideout"]
+    },
+    {
+      "id": "WelcomeToTarkov_Artem_stash",
+      "size": 38,
+      "access_via": ["ArtemHideout"]
+    },
+    {
+      "id": "WelcomeToTarkov_Painter_stash",
+      "size": 38,
+      "access_via": ["PainterHideout"]
+    },
+    {
+      "id": "WelcomeToTarkov_Scorpion_stash",
+      "size": 38,
+      "access_via": ["ScorpionHideout"]
+    },
+    {
+      "id": "WelcomeToTarkov_Lotus_stash",
+      "size": 38,
+      "access_via": ["LotusHideout"]
+    },
+    {
+      "id": "WelcomeToTarkov_Requisitions_stash",
+      "size": 38,
+      "access_via": ["RequisitionsHideout"]
+    },
+    {
+      "id": "WelcomeToTarkov_Ref_stash",
+      "size": 38,
+      "access_via": ["RefHideout"]
+    },
+    {
+      "id": "WelcomeToTarkov_PainterHideout_stash",
+      "size": 38,
+      "access_via": ["PainterHideout"]
+    },
+    {
+      "id": "WelcomeToTarkov_Boat_stash",
+      "size": 16,
+      "access_via": ["Boat"]
+    },
+    {
+      "id": "WelcomeToTarkov_ArmoredTrain_stash",
+      "size": 22,
+      "access_via": ["ArmoredTrain"]
+    },
+    {
+      "id": "PathToTarkov_NorthCar_stash",
+      "size": 16,
+      "access_via": ["NorthCar", "StreetsCarToLabs"]
+    },
+    {
+      "id": "PathToTarkov_SouthCar_stash",
+      "size": 16,
+      "access_via": ["DormsCar", "LighthouseCar"]
+    },
+    {
+      "id": "WelcomeToTarkov_ZB-014Stash_stash",
+      "size": 22,
+      "access_via": ["ZB-014Stash"]
+    }
+  ],
+  "traders_config": {
+    "ragfair": {
+      "// Trader name": "Flea Market",
+      "override_description": true,
+      "location_description": {
+        "ch": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
+        "cz": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
+        "en": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
+        "es-mx": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
+        "es": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
+        "fr": "Pour accéder au marché noir, rendez vous aux camps scav de Base Militaire, Echangeur, ou en ville",
+        "ge": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
+        "hu": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
+        "it": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
+        "jp": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
+        "kr": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
+        "pl": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
+        "po": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
+        "ru": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange"
+      },
+      "access_via": ["ReservFlea", "ExpoCPFlea", "SafeRoomFlea"]
+    },
+    "54cb50c76803fa8b248b4571": {
+      "// Trader name": "Prapor",
+      "override_description": true,
+      "location_description": {
+        "ch": "Customs (ZB-1011, ZB-1012), Factory (Med Tent Gates, Gate 3)",
+        "cz": "Customs (ZB-1011, ZB-1012), Factory (Med Tent Gates, Gate 3)",
+        "en": "Customs (ZB-1011, ZB-1012), Factory (Med Tent Gates, Gate 3)",
+        "es-mx": "Customs (ZB-1011, ZB-1012), Factory (Med Tent Gates, Gate 3)",
+        "es": "Customs (ZB-1011, ZB-1012), Factory (Med Tent Gates, Gate 3)",
+        "fr": "Entre les Douanes et l'Usine",
+        "ge": "Customs (ZB-1011, ZB-1012), Factory (Med Tent Gates, Gate 3)",
+        "hu": "Customs (ZB-1011, ZB-1012), Factory (Med Tent Gates, Gate 3)",
+        "it": "Customs (ZB-1011, ZB-1012), Factory (Med Tent Gates, Gate 3)",
+        "jp": "Customs (ZB-1011, ZB-1012), Factory (Med Tent Gates, Gate 3)",
+        "kr": "Customs (ZB-1011, ZB-1012), Factory (Med Tent Gates, Gate 3)",
+        "pl": "Customs (ZB-1011, ZB-1012), Factory (Med Tent Gates, Gate 3)",
+        "po": "Customs (ZB-1011, ZB-1012), Factory (Med Tent Gates, Gate 3)",
+        "ru": "Между лесом и заводом"
+      },
+      "access_via": ["FactoryZB-1011", "FactoryZB-1012"]
+    },
+    "54cb57776803fa99248b456e": {
+      "// Trader name": "Therapist",
+      "override_description": true,
+      "location_description": {
+        "ch": "在 “地面零点 ”的拾荒者营地",
+        "cz": "V táboře mrchožroutů v Ground Zero",
+        "en": "Treating survivors in the heart of the city (Emercom)",
+        "es-mx": "En el campamento de carroñeros de la Zona Cero",
+        "es": "En el campamento de carroñeros de la Zona Cero",
+        "fr": "Dans le camp de scav à Ground Zero",
+        "ge": "Im Scav Camp am Ground Zero",
+        "hu": "A Scav táborban a Ground Zero-nál",
+        "it": "Nel campo Scav a Ground Zero",
+        "jp": "グラウンド・ゼロのスカブ・キャンプにて",
+        "kr": "그라운드 제로에 있는 스캐브 캠프에서",
+        "pl": "W obozie Scav w Ground Zero",
+        "po": "No Campo de Escavação no Ground Zero",
+        "ru": "В лагере диких на эпицентре"
+      },
+      "access_via": ["TherapistHideout"]
+    },
+    "6617beeaa9cfa777ca915b7c": {
+      "// Trader name": "Ref",
+      "override_description": true,
+      "location_description": {
+        "ch": "Near the Airpit outside Shoreline (Railway Bridge)",
+        "cz": "Near the Airpit outside Shoreline (Railway Bridge)",
+        "en": "Near the Airpit outside Shoreline (Railway Bridge)",
+        "es-mx": "Near the Airpit outside Shoreline (Railway Bridge)",
+        "es": "Near the Airpit outside Shoreline (Railway Bridge)",
+        "fr": "Près de l'aéroport, en dehors de Littoral",
+        "ge": "Near the Airpit outside Shoreline (Railway Bridge)",
+        "hu": "Near the Airpit outside Shoreline (Railway Bridge)",
+        "it": "Near the Airpit outside Shoreline (Railway Bridge)",
+        "jp": "Near the Airpit outside Shoreline (Railway Bridge)",
+        "kr": "Near the Airpit outside Shoreline (Railway Bridge)",
+        "pl": "Near the Airpit outside Shoreline (Railway Bridge)",
+        "po": "Near the Airpit outside Shoreline (Railway Bridge)",
+        "ru": "Near the Airpit outside Shoreline (Railway Bridge)"
+      },
+      "access_via": ["RefHideout"]
+    },
+    "5a7c2eca46aef81a7ca2145d": {
+      "// Trader name": "Mechanic",
+      "override_description": true,
+      "location_description": {
+        "ch": "Inside a bunker in Factory (Camera Bunker Door)",
+        "cz": "Inside a bunker in Factory (Camera Bunker Door)",
+        "en": "Inside a bunker in Factory (Camera Bunker Door)",
+        "es-mx": "Inside a bunker in Factory (Camera Bunker Door)",
+        "es": "Inside a bunker in Factory (Camera Bunker Door)",
+        "fr": "Dans un Bunker, à l'intérieur de l'Usine",
+        "ge": "Inside a bunker in Factory (Camera Bunker Door)",
+        "hu": "Inside a bunker in Factory (Camera Bunker Door)",
+        "it": "Inside a bunker in Factory (Camera Bunker Door)",
+        "jp": "Inside a bunker in Factory (Camera Bunker Door)",
+        "kr": "Inside a bunker in Factory (Camera Bunker Door)",
+        "pl": "Inside a bunker in Factory (Camera Bunker Door)",
+        "po": "Inside a bunker in Factory (Camera Bunker Door)",
+        "ru": "В бункерах ЗБ-*"
+      },
+      "access_via": ["MechanicHideout"]
+    },
+    "58330581ace78e27b8b10cee": {
+      "// Trader name": "Skier",
+      "override_description": true,
+      "location_description": {
+        "ch": "Inside a warehouse (Warehouse 17)",
+        "cz": "Inside a warehouse (Warehouse 17)",
+        "en": "Inside a warehouse on Customs (Warehouse 17)",
+        "es-mx": "Inside a warehouse on Customs (Warehouse 17)",
+        "es": "Inside a warehouse (Warehouse 17)",
+        "fr": "Dans l'entrepôt 17 des Douanes",
+        "ge": "Inside a warehouse (Warehouse 17)",
+        "hu": "Inside a warehouse (Warehouse 17)",
+        "it": "Inside a warehouse (Warehouse 17)",
+        "jp": "Inside a warehouse (Warehouse 17)",
+        "kr": "Inside a warehouse (Warehouse 17)",
+        "pl": "Inside a warehouse (Warehouse 17)",
+        "po": "Inside a warehouse (Warehouse 17)",
+        "ru": "Между берегом и таможней"
+      },
+      "access_via": ["SkierHideout"]
+    },
+    "5ac3b934156ae10c4430e83c": {
+      "// Trader name": "Ragman",
+      "override_description": true,
+      "location_description": {
+        "ch": "Near an  Emercom checkpoint outside Ultra",
+        "cz": "Near an  Emercom checkpoint outside Ultra",
+        "en": "Near an  Emercom checkpoint outside Ultra",
+        "es-mx": "Near an  Emercom checkpoint outside Ultra",
+        "es": "Near an  Emercom checkpoint outside Ultra",
+        "fr": "Près d’un poste de contrôle Emercom à l’extérieur d’Ultra",
+        "ge": "Near an  Emercom checkpoint outside Ultra",
+        "hu": "Near an  Emercom checkpoint outside Ultra",
+        "it": "Near an  Emercom checkpoint outside Ultra",
+        "jp": "Near an  Emercom checkpoint outside Ultra",
+        "kr": "Near an  Emercom checkpoint outside Ultra",
+        "pl": "Near an  Emercom checkpoint outside Ultra",
+        "po": "Near an  Emercom checkpoint outside Ultra",
+        "ru": "Между развязкой и таможней"
+      },
+      "access_via": ["RagmanHideout"]
+    },
+    "5c0647fdd443bc2504c2d371": {
+      "// Trader name": "Jaeger",
+      "override_description": true,
+      "location_description": {
+        "ch": "Tucked in the mountains (Mountain Stash)",
+        "cz": "Tucked in the mountains (Mountain Stash)",
+        "en": "Tucked in the mountains in the woods (Mountain Stash)",
+        "es-mx": "Tucked in the mountains (Mountain Stash)",
+        "es": "Tucked in the mountains (Mountain Stash)",
+        "fr": "Niché dans les montagnes, dans les bois",
+        "ge": "Tucked in the mountains (Mountain Stash)",
+        "hu": "Tucked in the mountains (Mountain Stash)",
+        "it": "Tucked in the mountains (Mountain Stash)",
+        "jp": "Tucked in the mountains (Mountain Stash)",
+        "kr": "Tucked in the mountains (Mountain Stash)",
+        "pl": "Tucked in the mountains (Mountain Stash)",
+        "po": "Tucked in the mountains (Mountain Stash)",
+        "ru": "В машине"
+      },
+      "access_via": ["JaegerHideout"]
+    },
+    "5935c25fb3acc3127c3d8cd9": {
+      "// Trader name": "Peacekeeper",
+      "override_description": true,
+      "location_description": {
+        "ch": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
+        "cz": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
+        "en": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
+        "es-mx": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
+        "es": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
+        "fr": "Dans un Bunker, entre le littoral et la Base militaire",
+        "ge": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
+        "hu": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
+        "it": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
+        "jp": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
+        "kr": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
+        "pl": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
+        "po": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
+        "ru": "На блокпосте ООН"
+      },
+      "access_via": ["PeacekeeperHideout"]
+    },
+    "579dc571d53a0658a154fbec": {
+      "// Trader name": "Fence",
+      "// Fence is accessible everywhere": false,
+      "location_description": {
+        "ch": "In a car",
+        "cz": "In a car",
+        "en": "In a car",
+        "es-mx": "In a car",
+        "es": "In a car",
+        "fr": "En voiture",
+        "ge": "In a car",
+        "hu": "In a car",
+        "it": "In a car",
+        "jp": "In a car",
+        "kr": "In a car",
+        "pl": "In a car",
+        "po": "In a car",
+        "ru": "На блокпосте ООН"
+      },
+      "access_via": ["DormsCar", "StreetsToLabsSewer", "NorthCar"],
+      "insurance_always_enabled": true,
+      "insurance_config": {
+        "returnChancePercent": 50,
+        "insurance_price_coef": 25,
+        "min_payment": 0,
+        "min_return_hour": 0,
+        "max_return_hour": 0,
+        "max_storage_time": 480
+      },
+      "repair_always_enabled": false,
+      "repair_config": {
+        "quality": 1,
+        "currency": "5449016a4bdc2d6f028b456f",
+        "currency_coefficient": 20,
+        "repair_price_coef": 20
+      },
+      "heal_always_enabled": false
+    },
+    "ArtemTrader": {
+      "// mod integration for ArtemTrader": true,
+      "// ArtemTrader is available at ArtemHideout": true,
+      "disable_warning": false,
+      "override_description": true,
+      "location_description": {
+        "ch": "In a hideout in Lighthouse (Hideout at the Grotto)",
+        "cz": "In a hideout in Lighthouse (Hideout at the Grotto)",
+        "en": "In a hideout in Lighthouse (Hideout at the Grotto)",
+        "es-mx": "In a hideout in Lighthouse (Hideout at the Grotto)",
+        "es": "In a hideout in Lighthouse (Hideout at the Grotto)",
+        "fr": "Caché dans une grotte au Phare",
+        "ge": "In a hideout in Lighthouse (Hideout at the Grotto)",
+        "hu": "In a hideout in Lighthouse (Hideout at the Grotto)",
+        "it": "In a hideout in Lighthouse (Hideout at the Grotto)",
+        "jp": "In a hideout in Lighthouse (Hideout at the Grotto)",
+        "kr": "In a hideout in Lighthouse (Hideout at the Grotto)",
+        "pl": "In a hideout in Lighthouse (Hideout at the Grotto)",
+        "po": "In a hideout in Lighthouse (Hideout at the Grotto)",
+        "ru": "В лодке"
+      },
+      "access_via": ["ArtemHideout"]
+    },
+    "6688d464bc40c867f60e7d7e": {
+      "// mod integration for Scorpion": true,
+      "// Scorpion is available at ScorpionHideout": true,
+      "disable_warning": false,
+      "override_description": true,
+      "location_description": {
+        "ch": "Labs (Cargo Elevator)",
+        "cz": "Labs (Cargo Elevator)",
+        "en": "Labs (Cargo Elevator)",
+        "es-mx": "Labs (Cargo Elevator)",
+        "es": "Labs (Cargo Elevator)",
+        "fr": "Dans le Laboratoire, prenez l'ascenseur principale",
+        "ge": "Labs (Cargo Elevator)",
+        "hu": "Labs (Cargo Elevator)",
+        "it": "Labs (Cargo Elevator)",
+        "jp": "Labs (Cargo Elevator)",
+        "kr": "Labs (Cargo Elevator)",
+        "pl": "Labs (Cargo Elevator)",
+        "po": "Labs (Cargo Elevator)",
+        "ru": "Рядом с военной железной дорогой"
+      },
+      "access_via": ["ScorpionHideout"]
+    },
+    "668aaff35fd574b6dcc4a686": {
+      "// mod integration for PAINTER": true,
+      "// PAINTERSHOP is available at PainterHideout": true,
+      "disable_warning": false,
+      "override_description": true,
+      "location_description": {
+        "ch": "Suburbs (Cardinal Appartement)",
+        "cz": "Suburbs (Cardinal Appartement)",
+        "en": "Suburbs (Cardinal Appartement)",
+        "es-mx": "Suburbs (Cardinal Appartement)",
+        "es": "Suburbs (Cardinal Appartement)",
+        "fr": "Dans la Banlieu. Passez par le parking du complexe d'appartements Cardinal ",
+        "ge": "Suburbs (Cardinal Appartement)",
+        "hu": "Suburbs (Cardinal Appartement)",
+        "it": "Suburbs (Cardinal Appartement)",
+        "jp": "Suburbs (Cardinal Appartement)",
+        "kr": "Suburbs (Cardinal Appartement)",
+        "pl": "Suburbs (Cardinal Appartement)",
+        "po": "Suburbs (Cardinal Appartement)",
+        "ru": "Рядом с военной железной дорогой"
+      },
+      "access_via": ["PainterHideout"]
+    },
+    "lotus": {
+      "// mod integration for lotus": true,
+      "// lotus is available at LotusHideout": true,
+      "disable_warning": false,
+      "override_description": true,
+      "location_description": {
+        "ch": "Between the City (crash Site) and Interchange (Railway)",
+        "cz": "Between the City (crash Site) and Interchange (Railway)",
+        "en": "Between the City (crash Site) and Interchange (Railway)",
+        "es-mx": "Between the City (crash Site) and Interchange (Railway)",
+        "es": "Between the City (crash Site) and Interchange (Railway)",
+        "fr": "Entre la Ville et Interchange",
+        "ge": "Between the City (crash Site) and Interchange (Railway)",
+        "hu": "Between the City (crash Site) and Interchange (Railway)",
+        "it": "Between the City (crash Site) and Interchange (Railway)",
+        "jp": "Between the City (crash Site) and Interchange (Railway)",
+        "kr": "Between the City (crash Site) and Interchange (Railway)",
+        "pl": "Between the City (crash Site) and Interchange (Railway)",
+        "po": "Between the City (crash Site) and Interchange (Railway)",
+        "ru": "Между городом и развязкой"
+      },
+      "access_via": ["LotusHideout"]
+    },
+    "Requisitions": {
+      "// Trader name": "Requisitions",
+      "override_description": true,
+      "// Requisitions is available at Near Kamchatskaya Arch": true,
+      "disable_warning": false,
+      "location_description": {
+        "ch": "In the city near Kamchatskaya Arch",
+        "cz": "In the city near Kamchatskaya Arch",
+        "en": "In the city near Kamchatskaya Arch",
+        "es-mx": "In the city near Kamchatskaya Arch",
+        "es": "In the city near Kamchatskaya Arch",
+        "fr": "Dans la ville près de l’arche de Kamchatskaya",
+        "ge": "In the city near Kamchatskaya Arch",
+        "hu": "In the city near Kamchatskaya Arch",
+        "it": "In the city near Kamchatskaya Arch",
+        "jp": "In the city near Kamchatskaya Arch",
+        "kr": "In the city near Kamchatskaya Arch",
+        "pl": "In the city near Kamchatskaya Arch",
+        "po": "In the city near Kamchatskaya Arch",
+        "ru": "Между лесом и заводом"
+      },
+      "access_via": ["RequisitionsHideout"]
+    },
+    "Svetlana": {
+      "// mod integration for Svetlana": true,
+      "// Svetlana is available at Hideout": true,
+      "disable_warning": false,
+      "override_description": true,
+      "location_description": {
+        "ch": "Close to Factory",
+        "cz": "Close to Factory",
+        "en": "Close to Factory",
+        "es-mx": "Close to Factory",
+        "es": "Close to Factory",
+        "fr": "Proche de l'usine",
+        "ge": "Close to Factory",
+        "hu": "Close to Factory",
+        "it": "Close to Factory",
+        "jp": "Close to Factory",
+        "kr": "Close to Factory",
+        "pl": "Close to Factory",
+        "po": "Close to Factory",
+        "ru": "В лодке"
+      },
+      "access_via": ["FactoryZB-1011", "FactoryZB-1012"]
+    },
+    "Evelyn": {
+      "// mod integration for Evelyn": true,
+      "// Evelyn is available at Hideout": true,
+      "disable_warning": false,
+      "override_description": true,
+      "location_description": {
+        "ch": "Close to Factory",
+        "cz": "Close to Factory",
+        "en": "Close to Factory",
+        "es-mx": "Close to Factory",
+        "es": "Close to Factory",
+        "fr": "Proche de l'usine",
+        "ge": "Close to Factory",
+        "hu": "Close to Factory",
+        "it": "Close to Factory",
+        "jp": "Close to Factory",
+        "kr": "Close to Factory",
+        "pl": "Close to Factory",
+        "po": "Close to Factory",
+        "ru": "В лодке"
+      },
+      "access_via": ["FactoryZB-1011", "FactoryZB-1012"]
+    },
+    "Anastasia": {
+      "// mod integration for Anastasia": true,
+      "// Anastasia is available at HermaticToCellars": true,
+      "disable_warning": false,
+      "override_description": true,
+      "location_description": {
+        "ch": "In Resever Depot hermetic",
+        "cz": "In Resever Depot hermetic",
+        "en": "In Resever Depot hermetic",
+        "es-mx": "In Resever Depot hermetic",
+        "es": "In Resever Depot hermetic",
+        "fr": "A la Porte hermétique du dépôt de la base militaire",
+        "ge": "In Resever Depot hermetic",
+        "hu": "In Resever Depot hermetic",
+        "it": "In Resever Depot hermetic",
+        "jp": "In Resever Depot hermetic",
+        "kr": "In Resever Depot hermetic",
+        "pl": "In Resever Depot hermetic",
+        "po": "In Resever Depot hermetic",
+        "ru": "В лодке"
+      },
+      "access_via": ["HermaticToCellars"]
+    }
+  },
+  "exfiltrations": {
+    "factory4_day": {
+      "Gate 3": "FactoryZB-1011",
+      "Gate m": "FactoryZB-1012",
+      "Gate 0": "WoodsFactoryGate",
+      "Cellars": "HermaticToCellars",
+      "Camera Bunker Door": "MechanicHideout"
+    },
+    "factory4_night": {
+      "Gate 3": "FactoryZB-1011",
+      "Gate m": "FactoryZB-1012",
+      "Gate 0": "WoodsFactoryGate",
+      "Cellars": "HermaticToCellars",
+      "Camera Bunker Door": "MechanicHideout"
+    },
+    "bigmap": {
+      "ZB-1011": "FactoryZB-1011",
+      "ZB-1012": "FactoryZB-1012",
+      "EXFIL_ZB013": "FactoryZB-1013",
+      "Smuggler's Boat": "Boat",
+      "Dorms V-Ex": "DormsCar",
+      "RUAF Roadblock": "WoodsMilitaryPath",
+      "Crossroads": "RagmanHideout",
+      "Sniper Roadblock": "CustomsToShoreline",
+      "Military Checkpoint": "RoadToWoods",
+      "Warehouse 17": "SkierHideout"
+    },
+    "woods": {
+      "South V-Ex": "NorthCar",
+      "ZB-014": "ZB-014Stash",
+      "ZB-016": "FactoryZB-1013",
+      "un-sec": "WoodsMilitaryPath",
+      "Factory Gate": "WoodsFactoryGate",
+      "Outskirts": "WoodsLighthouse",
+      "RUAF Gate": "RoadToWoods",
+      "Mountain Stash": "JaegerHideout"
+    },
+    "rezervbase": {
+      "EXFIL_ScavCooperation": "ReservFlea",
+      "EXFIL_Train": "ArmoredTrain",
+      "EXFIL_Bunker": "HermaticToCellars",
+      "Alpinist": "PeacekeeperHideout",
+      "EXFIL_vent": "PeacekeeperHideout",
+      "EXFIL_Bunker_D2": "PeacekeeperHideout"
+    },
+    "interchange": {
+      "PP Exfil": "NorthCar",
+      "Saferoom Exfil": "SafeRoomFlea",
+      "NW Exfil": "LotusHideout",
+      "SE Exfil": "RagmanHideout",
+      "Hole Exfill": "HoleToDamagedHouse"
+    },
+    "shoreline": {
+      "Wrecked Road": "SouthernRoad",
+      "RedRebel_alp": "PeacekeeperHideout",
+      "Road to Customs": "CustomsToShoreline",
+      "Pier Boat": "Boat",
+      "Tunnel": "ShorelineLighthouseTunnel",
+      "Lighthouse_pass": "ShorelineLighthousePath",
+      "Smugglers_Trail_coop": "CustomsToShoreline",
+      "Shorl_V-Ex": "DormsCar",
+      "Road_at_railbridge": "RefHideout"
+    },
+    "lighthouse": {
+      " V-Ex_light": "LighthouseCar",
+      "Shorl_free": "ShorelineLighthousePath",
+      "Coastal_South_Road": "SouthernRoad",
+      "Scav_Hideout_at_the_grotto": "ArtemHideout",
+      "EXFIL_Train": "ArmoredTrain",
+      "Nothern_Checkpoint": "WoodsLighthouse",
+      "Alpinist_light": "MountainPass",
+      "tunnel_shared": "ShorelineLighthouseTunnel"
+    },
+    "tarkovstreets": {
+      "E1": "ScorpionHideout",
+      "E2": "StreetsToLabsSewer",
+      "E3": "HoleToDamagedHouse",
+      "scav_e2": "Catacombs",
+      "scav_e3": "VentShaft",
+      "E4": "LotusHideout",
+      "E7": "ExpoCPFlea",
+      "E7_car": "StreetsCarToLabs",
+      "E8": "PainterHideout",
+      "E9_sniper": "KlimovStreet",
+      "scav_e1": "BasementDescent",
+      "scav_e5": "RequisitionsHideout"
+    },
+    "laboratory": {
+      "lab_Hangar_Gate": "Catacombs",
+      "lab_Under_Storage_Collector": "StreetsToLabsSewer",
+      "lab_Elevator_Main": "ScorpionHideout",
+      "lab_Elevator_Cargo": "BasementDescent",
+      "lab_Vent": "VentShaft",
+      "lab_Parking_Gate": "StreetsCarToLabs"
+    },
+    "sandbox": {
+      "Unity_free_exit": "TherapistHideout",
+      "Sandbox_VExit": "NorthCar",
+      "Nakatani_stairs_free_exit": "BasementDescent",
+      "Sniper_exit": "KlimovStreet",
+      "Scav_coop_exit": "ExpoCPFlea"
+    }
+  },
+  "infiltrations": {
+    "ReservFlea": {
+      "rezervbase": ["Scav lands"]
+    },
+    "ExpoCPFlea": {
+      "tarkovstreets": ["Expo Checkpoint"],
+      "sandbox": ["Scav Hideout"]
+    },
+    "SafeRoomFlea": {
+      "interchange": ["Safe Room"]
+    },
+    "SkierHideout": {
+      "bigmap": ["Warehouse 17"]
+    },
+    "JaegerHideout": {
+      "woods": ["Mountain Stash"]
+    },
+    "PeacekeeperHideout": {
+      "rezervbase": ["Cliff"],
+      "shoreline": ["North Fence Passage"]
+    },
+    "RagmanHideout": {
+      "bigmap": ["Crossroads"],
+      "interchange": ["EmercomMall"]
+    },
+    "TherapistHideout": {
+      "sandbox": ["EmercomGZ"]
+    },
+    "MechanicHideout": {
+      "factory4_day": ["Camera Bunker Door"],
+      "factory4_night": ["Camera Bunker Door"]
+    },
+    "ArtemHideout": {
+      "lighthouse": ["Grotto"]
+    },
+    "RequisitionsHideout": {
+      "tarkovstreets": ["Near Kamchatskaya Arch"]
+    },
+    "PainterHideout": {
+      "tarkovstreets": ["Cardinal Appartments Parking"]
+    },
+    "RefHideout": {
+      "shoreline": ["Railway Bridge"]
+    },
+    "LotusHideout": {
+      "tarkovstreets": ["Crash Site"],
+      "interchange": ["Railway"]
+    },
+    "ScorpionHideout": {
+      "tarkovstreets": ["Stylobate Building Elevator"],
+      "laboratory": ["Main Elevator"]
+    },
+    "DormsCar": {
+      "bigmap": ["Dorms Car"],
+      "shoreline": ["North Fence Passage"]
+    },
+    "NorthCar": {
+      "interchange": ["Car at Power Station"],
+      "sandbox": ["Police Car"],
+      "woods": ["Woods Vehicle Extract"]
+    },
+    "LighthouseCar": {
+      "rezervbase": ["Checkpoint Fence"],
+      "lighthouse": ["Lighthouse Vehicle Extract"]
+    },
+    "Boat": {
+      "bigmap": ["Smuggler's Boat"],
+      "shoreline": ["Pier Boat"],
+      "woods": ["ScavVillage"],
+      "lighthouse": ["Lighthouse Docks Boat"]
+    },
+    "ArmoredTrain": {
+      "rezervbase": ["Train Station"],
+      "lighthouse": ["Armored Train LH"],
+      "shoreline": ["Railway Bridge"]
+    },
+    "FactoryZB-1011": {
+      "bigmap": ["ZB-1011"],
+      "factory4_day": ["Gate 3"],
+      "factory4_night": ["Gate 3"]
+    },
+    "FactoryZB-1012": {
+      "bigmap": ["ZB-1012"],
+      "factory4_day": ["Med tent gates"],
+      "factory4_night": ["Med tent gates"]
+    },
+    "FactoryZB-1013": {
+      "bigmap": ["ZB-1013"],
+      "woods": ["ZB-016"]
+    },
+    "RoadToWoods": {
+      "bigmap": ["Scav CP"],
+      "woods": ["RUAF Gate"]
+    },
+    "CustomsToShoreline": {
+      "bigmap": ["Sniper Roadblock"],
+      "shoreline": ["Road to Customs"]
+    },
+    "WoodsMilitaryPath": {
+      "bigmap": ["RUAF Roadblock"],
+      "woods": ["Northern UN Roadblock"]
+    },
+    "WoodsFactoryGate": {
+      "factory4_day": ["Gate 0"],
+      "factory4_night": ["Gate 0"],
+      "woods": ["Factory Gate"]
+    },
+    "HermaticToCellars": {
+      "factory4_day": ["Cellars"],
+      "factory4_night": ["Cellars"],
+      "rezervbase": ["Bunker Hermetic"]
+    },
+    "WoodsLighthouse": {
+      "woods": ["Outskirts"],
+      "lighthouse": ["NorthernRoad"]
+    },
+    "ZB-014Stash": {
+      "woods": ["ZB-014"]
+    },
+    "HoleToDamagedHouse": {
+      "interchange": ["Fence Gap"],
+      "tarkovstreets": ["Streets Ruined House"]
+    },
+    "ShorelineLighthouseTunnel": {
+      "shoreline": ["Tunnel"],
+      "lighthouse": ["Lighthouse tunnel"]
+    },
+    "ShorelineLighthousePath": {
+      "shoreline": ["Path to Lighthouse"],
+      "lighthouse": ["Path to Shoreline"]
+    },
+    "SouthernRoad": {
+      "shoreline": ["Ruined Road"],
+      "lighthouse": ["Southern Road"]
+    },
+    "MountainPass": {
+      "shoreline": ["Path to Lighthouse"],
+      "lighthouse": ["Mountain Pass"]
+    },
+    "StreetsToLabsSewer": {
+      "tarkovstreets": ["Sewer River"],
+      "laboratory": ["Lab Sewage Conduit"]
+    },
+    "StreetsCarToLabs": {
+      "tarkovstreets": ["Primorsky Vehicle Extract"],
+      "laboratory": ["Parking Gate"]
+    },
+    "Catacombs": {
+      "tarkovstreets": ["Catacombs"],
+      "laboratory": ["Hangar Gate"]
+    },
+    "VentShaft": {
+      "tarkovstreets": ["Streets Vents"],
+      "laboratory": ["Lab Vents"]
+    },
+    "KlimovStreet": {
+      "sandbox": ["Mira Ave"],
+      "tarkovstreets": ["Klimov Street"]
+    },
+    "BasementDescent": {
+      "sandbox": ["Nakatani Basement"],
+      "tarkovstreets": ["Basement Descent"],
+      "laboratory": ["Cargo Elevator"]
+    }
+  }
+}

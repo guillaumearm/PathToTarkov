@@ -117,7 +117,7 @@ export const disableRunThrough = (db: DatabaseServer): void => {
 };
 
 // more infos on areas here: https://hub.sp-tarkov.com/doc/entry/4-resources-hideout-areas-ids/
-export const isIgnoredArea = (area: IHideoutArea, config: Config): boolean => {
+export const isIgnoredArea = (area: IHideoutArea, isWorkbenchAlwaysEnabled: boolean): boolean => {
   if (typeof area.type !== 'number') {
     // invalid area
     return true;
@@ -129,7 +129,7 @@ export const isIgnoredArea = (area: IHideoutArea, config: Config): boolean => {
   } else if (area.type === 6) {
     // water collector (prevent infinite loading menu at start)
     return true;
-  } else if (config.workbench_always_enabled && area.type === 10) {
+  } else if (isWorkbenchAlwaysEnabled && area.type === 10) {
     // workbench
     return true;
   } else if (area.type === 16) {

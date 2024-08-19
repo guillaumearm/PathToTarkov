@@ -1,7 +1,20 @@
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync, writeFileSync } from 'fs';
+
+export const fileExists = (path: string): boolean => {
+  return existsSync(path);
+};
 
 export const readJsonFile = <T>(path: string): T => {
+  if (!existsSync(path)) {
+    throw new Error(`Path To Tarkov cannot read json file "${path}"`);
+  }
+
   return JSON.parse(readFileSync(path, 'utf-8'));
+};
+
+export const writeJsonFile = <T>(path: string, x: T): void => {
+  const str = JSON.stringify(x, undefined, 2);
+  return writeFileSync(path, str, 'utf-8');
 };
 
 /**
@@ -67,6 +80,25 @@ export function deepClone<T>(item: T): T {
   return result as T;
 }
 
+export function shuffle<T>(givenArray: T[]): T[] {
+  const array = [...givenArray];
+
+  let currentIndex = array.length,
+    randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export function noop(): void {}
 
@@ -80,4 +112,12 @@ export const isLetter = (char: string): boolean => {
 
 export const isDigit = (char: string): boolean => {
   return char.length === 1 && char >= '0' && char <= '9';
+};
+
+export const ensureArray = <T>(x: T | T[]): T[] => {
+  if (Array.isArray(x)) {
+    return x;
+  }
+
+  return [x];
 };

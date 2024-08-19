@@ -1,5 +1,5 @@
-name: Build and Lint
-on: [push]
+name: Build and Test
+on: [push, pull_request, pull_request_target]
 
 jobs:
   build:
