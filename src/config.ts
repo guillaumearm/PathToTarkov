@@ -1,6 +1,6 @@
 import type { ISptProfile } from '@spt/models/eft/profile/ISptProfile';
 import { join } from 'path';
-import { deepClone } from './utils';
+import { deepClone, fileExists, readJsonFile, writeJsonFile } from './utils';
 
 type ByMap<T> = {
   factory4_day: T;
@@ -164,6 +164,10 @@ export type PathToTarkovReloadedTooltipsConfig = {
   localesToChange?: string[];
 };
 
+export type UserConfig = {
+  selectedConfig: string;
+};
+
 export type Profile = ISptProfile & {
   PathToTarkov?: {
     offraidPosition?: string;
@@ -174,8 +178,12 @@ export type Profile = ISptProfile & {
 export type ConfigGetter = (sessionId: string) => Config;
 
 export const PACKAGE_JSON_PATH = join(__dirname, '../package.json');
-export const CONFIG_PATH = join(__dirname, '../config/config.json');
-export const SPAWN_CONFIG_PATH = join(__dirname, '../config/player_spawnpoints.json');
+
+export const CONFIGS_DIR = join(__dirname, 'configs');
+export const USER_CONFIG_PATH = join(CONFIGS_DIR, 'UserConfig.json');
+
+export const CONFIG_FILENAME = 'config.json';
+export const SPAWN_CONFIG_FILENAME = 'player_spawnpoints.json';
 
 export const PRAPOR_ID = '54cb50c76803fa8b248b4571';
 export const FENCE_ID = '579dc571d53a0658a154fbec';
@@ -244,4 +252,16 @@ export const processConfig = (originalConfig: Config): Config => {
 
 export const processSpawnConfig = (spawnConfig: SpawnConfig): SpawnConfig => {
   return prepareGroundZeroHigh(spawnConfig);
+};
+
+export const getUserConfig = (): UserConfig => {
+  if (!fileExists(USER_CONFIG_PATH)) {
+    const userConfig: UserConfig = {
+      selectedConfig: 'Default',
+    };
+    writeJsonFile(USER_CONFIG_PATH, userConfig);
+    return userConfig;
+  }
+
+  return readJsonFile(join(CONFIGS_DIR, ''));
 };

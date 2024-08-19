@@ -42,26 +42,26 @@ describe('PTT embedded configs', () => {
   };
 
   it('should validate the default config', () => {
-    testConfig('./config');
+    testConfig('./configs/Default');
   });
 
   it('should validate the ExampleOverrideByProfiles config', () => {
-    testConfig('./config/alternate_configs/ExampleOverrideByProfiles');
+    testConfig('./configs/ExampleOverrideByProfiles');
   });
 
   it('should validate the LegacyPathToTarkovV4 config', () => {
-    testConfig('./config/alternate_configs/LegacyPathToTarkovV4');
+    testConfig('./configs/LegacyPathToTarkovV4');
   });
 
   it('should validate the LinearPath config', () => {
-    testConfig('./config/alternate_configs/LinearPath');
+    testConfig('./configs/LinearPath');
   });
 
-  it.skip('should validate the NarcoticsConfig config', () => {
-    testConfig('./config/alternate_configs/NarcoticsConfig');
+  it('should validate the NarcoticsConfig config', () => {
+    testConfig('./configs/NarcoticsConfig');
   });
 
   it('should validate the PathToTarkovReloaded config', () => {
-    testConfig('./config/alternate_configs/PathToTarkovReloaded');
+    testConfig('./configs/PathToTarkovReloaded');
   });
 });

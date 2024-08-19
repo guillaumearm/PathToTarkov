@@ -1,7 +1,16 @@
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync, writeFileSync } from 'fs';
 
 export const readJsonFile = <T>(path: string): T => {
   return JSON.parse(readFileSync(path, 'utf-8'));
+};
+
+export const writeJsonFile = <T>(path: string, x: T): void => {
+  const str = JSON.stringify(x, undefined, 2);
+  return writeFileSync(path, str, 'utf-8');
+};
+
+export const fileExists = (path: string): boolean => {
+  return existsSync(path);
 };
 
 /**
