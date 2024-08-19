@@ -100,3 +100,11 @@ export const isLetter = (char: string): boolean => {
 export const isDigit = (char: string): boolean => {
   return char.length === 1 && char >= '0' && char <= '9';
 };
+
+export const ensureArray = <T>(x: T | T[]): T[] => {
+  if (Array.isArray(x)) {
+    return x;
+  }
+
+  return [x];
+};

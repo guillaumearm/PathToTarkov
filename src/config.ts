@@ -107,13 +107,14 @@ export type TradersConfig = Record<string, TraderConfig>;
 
 type SpawnPointName = string;
 type OffraidPosition = string;
+type ExtractName = string;
 
 type Exfiltrations = ByMap<{
-  [spawnPointName: SpawnPointName]: OffraidPosition;
+  [extractName: ExtractName]: OffraidPosition;
 }>;
 
 type Infiltrations = {
-  [exfiltrationPoint: OffraidPosition]: ByMap<SpawnPointName[]>;
+  [offraidPosition: OffraidPosition]: ByMap<SpawnPointName[]>;
 };
 
 export type OffraidRegenConfig = {
