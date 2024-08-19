@@ -1,16 +1,20 @@
 import { readFileSync, existsSync, writeFileSync } from 'fs';
 
+export const fileExists = (path: string): boolean => {
+  return existsSync(path);
+};
+
 export const readJsonFile = <T>(path: string): T => {
+  if (!existsSync(path)) {
+    throw new Error(`Path To Tarkov cannot read json file "${path}"`);
+  }
+
   return JSON.parse(readFileSync(path, 'utf-8'));
 };
 
 export const writeJsonFile = <T>(path: string, x: T): void => {
   const str = JSON.stringify(x, undefined, 2);
   return writeFileSync(path, str, 'utf-8');
-};
-
-export const fileExists = (path: string): boolean => {
-  return existsSync(path);
 };
 
 /**
