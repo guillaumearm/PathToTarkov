@@ -2,6 +2,8 @@ import type { ILogger } from '@spt/models/spt/utils/ILogger';
 import type { Config, ConfigGetter, SpawnConfig } from './config';
 import type { PathToTarkovController } from './path-to-tarkov-controller';
 import { deepClone } from './utils';
+import type { ConfigValidationResult } from './config-analysis';
+import { analyzeConfig } from './config-analysis';
 
 export type StartCallback = (sessionId: string) => void;
 
@@ -51,12 +53,19 @@ export const createPathToTarkovAPI = (
       logger.warning(warnDeprecationMessage('getSpawnConfig'));
       return deepClone(controller.spawnConfig);
     },
-    setConfig: (newConfig: Config, sessionId: string) => {
+    setConfig: (newConfig: Config, sessionId: string): ConfigValidationResult => {
       logger.warning(warnDeprecationMessage('setConfig'));
       if (!sessionId) {
         throw new Error('PTT api -> no sessionId provided');
       }
-      controller.setConfig(newConfig, sessionId);
+
+      const result = analyzeConfig(newConfig, controller.spawnConfig);
+
+      if (result.errors.length === 0) {
+        controller.setConfig(newConfig, sessionId);
+      }
+
+      return result;
     },
     setSpawnConfig: (newSpawnConfig: SpawnConfig) => {
       logger.warning(warnDeprecationMessage('setSpawnConfig'));
