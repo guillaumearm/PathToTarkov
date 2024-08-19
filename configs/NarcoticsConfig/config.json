@@ -619,7 +619,7 @@
         "po": "Interchange/Customs",
         "ru": "Interchange/Customs"
       },
-      "access_via": ["Emercom","Crossroads"]
+      "access_via": ["Emercom", "Crossroads"]
     },
     "Coyote": {
       "// mod integration for Coyote": true,

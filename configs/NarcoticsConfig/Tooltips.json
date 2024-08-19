@@ -35,7 +35,7 @@
     "Basement Descent (Coyote/Labs/Ground Zero)",
     "lab_Elevator_Cargo",
     "Cargo Elevator (Coyote/Streets/Ground Zero)",
-    "E3", 
+    "E3",
     "Ruined House (Hephaestus)",
     "EXFIL_Vent",
     "Manhole (Sally/Streets)",
@@ -43,10 +43,7 @@
     "Manhole (Sally/Reserve)"
   ],
 
-  "localesToChangeAdditional": [
-    "Saferoom Exfil",
-    "Saferoom (Flea Market)"
-  ],
+  "localesToChangeAdditional": ["Saferoom Exfil", "Saferoom (Flea Market)"],
 
   "localesToChange": [
     "East Gate",
