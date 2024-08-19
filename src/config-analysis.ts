@@ -95,11 +95,7 @@ const getErrorsForOffraidPositions = (config: Config): string[] => {
   Object.keys(config.traders_config).forEach(traderId => {
     const trader = config.traders_config[traderId];
     errors.push(
-      ...checkAccessViaErrors(
-        `hideout_secondary_stashes.${traderId}.access_via`,
-        trader.access_via,
-        config,
-      ),
+      ...checkAccessViaErrors(`traders_config.${traderId}.access_via`, trader.access_via, config),
     );
   });
 
