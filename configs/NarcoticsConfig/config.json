@@ -100,6 +100,21 @@
       "access_via": ["ReserveZB-014"]
     },
     {
+      "id": "PathToTarkov_Hephaestus_stash",
+      "size": 48,
+      "access_via": ["RuinedHouse"]
+    },
+    {
+      "id": "PathToTarkov_Saferoom_stash",
+      "size": 48,
+      "access_via": ["SafeRoom"]
+    },
+    {
+      "id": "PathToTarkov_Coyote_stash",
+      "size": 48,
+      "access_via": ["BasementDescent"]
+    },
+    {
       "id": "PathToTarkov_CustomsNorth_stash",
       "size": 32,
       "access_via": [
@@ -550,6 +565,52 @@
       },
       "access_via": ["ArtemHideout"]
     },
+    "hephaestus_alxk": {
+      "// mod integration for Hephaestus": true,
+      "// Hephaestus is available at Streets": true,
+      "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "Streets",
+        "cz": "Streets",
+        "en": "Streets",
+        "es-mx": "Streets",
+        "es": "Streets",
+        "fr": "Streets",
+        "ge": "Streets",
+        "hu": "Streets",
+        "it": "Streets",
+        "jp": "Streets",
+        "kr": "Streets",
+        "pl": "Streets",
+        "po": "Streets",
+        "ru": "Streets"
+      },
+      "access_via": ["RuinedHouse"]
+    },
+    "lotus": {
+      "// mod integration for lotus": true,
+      "// lotus is available at SafeRoom": true,
+      "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "Interchange",
+        "cz": "Interchange",
+        "en": "Interchange",
+        "es-mx": "Interchange",
+        "es": "Interchange",
+        "fr": "Interchange",
+        "ge": "Interchange",
+        "hu": "Interchange",
+        "it": "Interchange",
+        "jp": "Interchange",
+        "kr": "Interchange",
+        "pl": "Interchange",
+        "po": "Interchange",
+        "ru": "Interchange"
+      },
+      "access_via": ["SafeRoom"]
+    },
     "Coyote": {
       "// mod integration for Coyote": true,
       "// Coyote is available at BasementDescent": true,
@@ -734,6 +795,7 @@
     "tarkovstreets": {
       "E1": "SylobateElevator",
       "scav_e3": "VentShaft",
+      "E3": "RuinedHouse",
       "E4": "CrashSite",
       "E7_car": "StreetsCar",
       "E9_sniper": "KlimovStreet",
@@ -1026,6 +1088,9 @@
       "sandbox": ["Nakatani Basement Stairs"],
       "tarkovstreets": ["Basement Descent"],
       "laboratory": ["Cargo Elevator"]
+    },
+    "RuinedHouse": {
+      "tarkovstreets": ["Streets Ruined House"]
     },
     "ExpoCP": {
       "sandbox": ["Scav Hideout"],
