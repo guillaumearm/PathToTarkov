@@ -13,17 +13,55 @@ const loadSpawnConfig = (dirPath: string): SpawnConfig => {
 };
 
 describe('PTT embedded configs', () => {
+  const jestConsole = console;
+
+  beforeEach(() => {
+    global.console = require('console');
+  });
+
+  afterEach(() => {
+    global.console = jestConsole;
+  });
+
   const testConfig = (dirPath: string) => {
-    const config = loadConfig('./config');
-    const spawnConfig = loadSpawnConfig('./config');
+    const config = loadConfig(dirPath);
+    const spawnConfig = loadSpawnConfig(dirPath);
 
     const { errors, warnings } = analyzeConfig(config, spawnConfig);
 
-    expect(errors).toHaveLength(0);
-    expect(warnings).toHaveLength(0);
+    if (errors.length > 0) {
+      errors.forEach(err => console.error(err));
+    }
+
+    if (warnings.length > 0) {
+      warnings.forEach(warn => console.warn(warn));
+    }
+
+    expect(errors.length).toBe(0);
+    expect(warnings.length).toBe(0);
   };
 
   it('should validate the default config', () => {
     testConfig('./config');
+  });
+
+  it('should validate the ExampleOverrideByProfiles config', () => {
+    testConfig('./config/alternate_configs/ExampleOverrideByProfiles');
+  });
+
+  it('should validate the LegacyPathToTarkovV4 config', () => {
+    testConfig('./config/alternate_configs/LegacyPathToTarkovV4');
+  });
+
+  it('should validate the LinearPath config', () => {
+    testConfig('./config/alternate_configs/LinearPath');
+  });
+
+  it.skip('should validate the NarcoticsConfig config', () => {
+    testConfig('./config/alternate_configs/NarcoticsConfig');
+  });
+
+  it.skip('should validate the PathToTarkovReloaded config', () => {
+    testConfig('./config/alternate_configs/PathToTarkovReloaded');
   });
 });
