@@ -314,6 +314,10 @@
     "Ruined Road": {
         "Position": [350.51, -59.67, 324.86],
         "Rotation": 55.0321
+      },
+      "Railway Bridge": {
+        "Position": [-1023.37292, -60.67251, 314.364075],
+        "Rotation": 24.1157665
       }
   },
   "lighthouse": {
