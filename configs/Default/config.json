@@ -88,6 +88,11 @@
       "id": "PathToTarkov_Car_stash",
       "size": 22,
       "access_via": ["ShorelineWoodsStash"]
+    },
+    {
+      "id": "PathToTarkov_Klimov_stash",
+      "size": 22,
+      "access_via": ["KlimovStash"]
     }
   ],
   "traders_config": {
@@ -343,7 +348,8 @@
     },
     "tarkovstreets": {
       "E5": "TherapistStash",
-      "E7_car": "PraporStash"
+      "E7_car": "PraporStash",
+      "E9_sniper": "KlimovStash"
     },
     "laboratory": {
       "lab_Parking_Gate": "PraporStash",
@@ -366,7 +372,7 @@
       "tarkovstreets": ["Zmeevsky Alley"]
     },
     "PraporStash": {
-      "tarkovstreets": ["Klimov Street"],
+      "tarkovstreets": ["Primorsky Vehicle Extract"],
       "sandbox": ["Police Car"],
       "laboratory": [
         "Cargo Elevator",
@@ -413,6 +419,9 @@
     "ShorelineWoodsStash": {
       "shoreline": ["Road to Customs"],
       "woods": ["Bridge Car"]
+    },
+    "KlimovStash": {
+      "tarkovstreets": ["Klimov Street"]
     }
   }
 }
