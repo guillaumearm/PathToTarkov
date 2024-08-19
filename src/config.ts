@@ -179,7 +179,7 @@ export type ConfigGetter = (sessionId: string) => Config;
 
 export const PACKAGE_JSON_PATH = join(__dirname, '../package.json');
 
-export const CONFIGS_DIR = join(__dirname, 'configs');
+export const CONFIGS_DIR = join(__dirname, '../configs');
 export const USER_CONFIG_PATH = join(CONFIGS_DIR, 'UserConfig.json');
 
 export const CONFIG_FILENAME = 'config.json';
