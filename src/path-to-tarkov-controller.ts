@@ -177,38 +177,6 @@ export class PathToTarkovController {
     return null;
   }
 
-  private getUIPaths(givenLocations: ILocationBase[]): Path[] {
-    // skip factory4_night to avoid weird ui bug
-    const locations = givenLocations.filter(location => location.Id !== 'factory4_night');
-
-    const newPathIds: Set<string> = new Set();
-
-    locations.forEach(sourceLocation => {
-      locations.forEach(destinationLocation => {
-        if (sourceLocation._Id !== destinationLocation._Id) {
-          const pairOfSourceAndDest = [sourceLocation._Id, destinationLocation._Id].sort() as [
-            string,
-            string,
-          ];
-          newPathIds.add(pairOfSourceAndDest.join('|'));
-        }
-      });
-    });
-
-    const newPaths: Path[] = [];
-
-    newPathIds.forEach(pathId => {
-      const [sourceId, DestinationId] = pathId.split('|');
-      newPaths.push({
-        Source: sourceId,
-        Destination: DestinationId,
-      });
-    });
-
-    this.debug(`${newPaths.length} paths built for the UI`);
-    return newPaths;
-  }
-
   private getRespawnOffraidPosition = (sessionId: string): string => {
     const profile: Profile = this.saveServer.getProfile(sessionId);
     const profileTemplateId = profile.info.edition;
@@ -288,7 +256,7 @@ export class PathToTarkovController {
         }
       });
 
-      const newPaths = this.getUIPaths(unlockedLocationBases);
+      const newPaths: Path[] = []; // TODO: keep the original path (with filter on locked maps)
       return { ...result, locations, paths: newPaths };
     };
   }
