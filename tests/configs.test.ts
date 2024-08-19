@@ -68,4 +68,7 @@ describe('PTT embedded configs', () => {
   it('should validate the DevilFlippy config', () => {
     testConfig('./configs/DevilFlippy');
   });
+  it('should validate the DevilFlippy FR config', () => {
+    testConfig('./configs/DevilFlippy/FR');
+  });
 });
