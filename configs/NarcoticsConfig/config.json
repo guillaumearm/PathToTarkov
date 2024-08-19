@@ -85,6 +85,16 @@
       "access_via": ["PeacekeeperHideout"]
     },
     {
+      "id": "PathToTarkov_Ref_stash",
+      "size": 48,
+      "access_via": ["PortRR", "RailwayBridge"]
+    },
+    {
+      "id": "PathToTarkov_Lotus_stash",
+      "size": 48,
+      "access_via": ["Crossroads", "Emercom"]
+    },
+    {
       "id": "PathToTarkov_Artem_stash",
       "size": 48,
       "access_via": ["ArtemHideout"]
@@ -100,19 +110,24 @@
       "access_via": ["ReserveZB-014"]
     },
     {
+      "id": "PathToTarkov_Coyote_stash",
+      "size": 48,
+      "access_via": ["BasementDescent"]
+    },
+    {
       "id": "PathToTarkov_Hephaestus_stash",
       "size": 48,
       "access_via": ["RuinedHouse"]
     },
     {
+      "id": "PathToTarkov_Sally_stash",
+      "size": 48,
+      "access_via": ["Manhole"]
+    },
+    {
       "id": "PathToTarkov_Saferoom_stash",
       "size": 48,
       "access_via": ["SafeRoom"]
-    },
-    {
-      "id": "PathToTarkov_Coyote_stash",
-      "size": 48,
-      "access_via": ["BasementDescent"]
     },
     {
       "id": "PathToTarkov_CustomsNorth_stash",
@@ -131,7 +146,7 @@
       "size": 32,
       "access_via": [
         "MilBaseCP",
-        "Scavlands",
+        "ScavLands",
         "MilBaseRR",
         "HoleinWall",
         "SniperRB",
@@ -143,11 +158,6 @@
       "id": "PathToTarkov_CustomsEast_stash",
       "size": 48,
       "access_via": ["TarkovRR", "CrashSite", "Railway", "ScavCamp", "TrailerPark"]
-    },
-    {
-      "id": "PathToTarkov_CustomsShorelineEast_stash",
-      "size": 48,
-      "access_via": ["PortRR", "Crossroads", "Emercom", "RailwayBridge"]
     },
     {
       "id": "PathToTarkov_CustomsWest_stash",
@@ -230,22 +240,22 @@
       "// Trader name": "Flea Market",
       "override_description": true,
       "location_description": {
-        "ch": "要访问跳蚤市场，请前往Interchange或Ground Zero的Scav Camps",
-        "cz": "Chcete-li přistupovat k Tržišti, jděte do Scav Camps v Interchange nebo Ground Zero",
-        "en": "To access the Flea Market, go to the Scav Camps in Interchange or Ground Zero",
-        "es-mx": "Para acceder al Mercado de Pulgas, ve a los Campamentos Scav en Interchange o Ground Zero",
-        "es": "Para acceder al Mercado de Pulgas, ve a los Campamentos Scav en Interchange o Ground Zero",
-        "fr": "Pour accéder au Marché aux Puces, rendez-vous aux Camps Scav dans Interchange ou Ground Zero",
-        "ge": "Um auf den Flohmarkt zuzugreifen, gehen Sie zu den Scav Camps in Interchange oder Ground Zero",
-        "hu": "A Bolhapiac eléréséhez menjen az Interchange vagy Ground Zero Scav táboraihoz",
-        "it": "Per accedere al Mercato delle Pulci, vai ai Campi Scav in Interchange o Ground Zero",
-        "jp": "フリーマーケットにアクセスするには、インターチェンジまたはグラウンドゼロのスカブキャンプに行ってください",
-        "kr": "벼룩시장을 이용하려면 인터체인지 또는 그라운드 제로의 스캐브 캠프에 가십시오",
-        "pl": "Aby uzyskać dostęp do Targu, udaj się do obozów Scav w Interchange lub Ground Zero",
-        "po": "Para aceder ao Mercado de Pulgas, vá aos Campos Scav em Interchange ou Ground Zero",
-        "ru": "Чтобы получить доступ к рынку, отправляйтесь в лагеря Scav на Interchange или Ground Zero"
+        "ch": "To access the Flea Market, gain entry to the Saferoom in Interchange",
+        "cz": "To access the Flea Market, gain entry to the Saferoom in Interchange",
+        "en": "To access the Flea Market, gain entry to the Saferoom in Interchange",
+        "es-mx": "To access the Flea Market, gain entry to the Saferoom in Interchange",
+        "es": "To access the Flea Market, gain entry to the Saferoom in Interchange",
+        "fr": "To access the Flea Market, gain entry to the Saferoom in Interchange",
+        "ge": "To access the Flea Market, gain entry to the Saferoom in Interchange",
+        "hu": "To access the Flea Market, gain entry to the Saferoom in Interchange",
+        "it": "To access the Flea Market, gain entry to the Saferoom in Interchange",
+        "jp": "To access the Flea Market, gain entry to the Saferoom in Interchange",
+        "kr": "To access the Flea Market, gain entry to the Saferoom in Interchange",
+        "pl": "To access the Flea Market, gain entry to the Saferoom in Interchange",
+        "po": "To access the Flea Market, gain entry to the Saferoom in Interchange",
+        "ru": "To access the Flea Market, gain entry to the Saferoom in Interchange"
       },
-      "access_via": ["ScavCamp", "TrailerPark", "ExpoCP"]
+      "access_via": ["SafeRoom"]
     },
     "54cb50c76803fa8b248b4571": {
       "// Trader name": "Prapor",
@@ -260,20 +270,20 @@
       },
       "override_description": true,
       "location_description": {
-        "ch": "In an underground bunker (ZB-016)",
-        "cz": "In an underground bunker (ZB-016)",
+        "ch": "Woods",
+        "cz": "Woods",
         "en": "Woods",
-        "es-mx": "In an underground bunker (ZB-016)",
-        "es": "In an underground bunker (ZB-016)",
-        "fr": "Entre les bois et l'usine",
-        "ge": "In an underground bunker (ZB-016)",
-        "hu": "In an underground bunker (ZB-016)",
-        "it": "In an underground bunker (ZB-016)",
-        "jp": "In an underground bunker (ZB-016)",
-        "kr": "In an underground bunker (ZB-016)",
-        "pl": "In an underground bunker (ZB-016)",
-        "po": "Inside a warehouse (Warehouse 17)",
-        "ru": "Между лесом и заводом"
+        "es-mx": "Woods",
+        "es": "Woods",
+        "fr": "Woods",
+        "ge": "Woods",
+        "hu": "Woods",
+        "it": "Woods",
+        "jp": "Woods",
+        "kr": "Woods",
+        "pl": "Woods",
+        "po": "Woods",
+        "ru": "Woods"
       },
       "access_via": ["PraporHideout"]
     },
@@ -290,20 +300,20 @@
       },
       "override_description": true,
       "location_description": {
-        "ch": "在 “地面零点 ”的拾荒者营地",
-        "cz": "V táboře mrchožroutů v Ground Zero",
+        "ch": "Ground Zero",
+        "cz": "Ground Zero",
         "en": "Ground Zero",
-        "es-mx": "En el campamento de carroñeros de la Zona Cero",
-        "es": "En el campamento de carroñeros de la Zona Cero",
-        "fr": "Dans le camp de scav à Ground Zero",
-        "ge": "Im Scav Camp am Ground Zero",
-        "hu": "A Scav táborban a Ground Zero-nál",
-        "it": "Nel campo Scav a Ground Zero",
-        "jp": "グラウンド・ゼロのスカブ・キャンプにて",
-        "kr": "그라운드 제로에 있는 스캐브 캠프에서",
-        "pl": "W obozie Scav w Ground Zero",
-        "po": "No Campo de Escavação no Ground Zero",
-        "ru": "В лагере диких на эпицентре"
+        "es-mx": "Ground Zero",
+        "es": "Ground Zero",
+        "fr": "Ground Zero",
+        "ge": "Ground Zero",
+        "hu": "Ground Zero",
+        "it": "Ground Zero",
+        "jp": "Ground Zero",
+        "kr": "Ground Zero",
+        "pl": "Ground Zero",
+        "po": "Ground Zero",
+        "ru": "Ground Zero"
       },
       "access_via": ["TherapistHideout"]
     },
@@ -311,20 +321,20 @@
       "// Trader name": "Ref",
       "override_description": true,
       "location_description": {
-        "ch": "Near the Airpit outside Shoreline (Railway Bridge/RR to Port)",
-        "cz": "Near the Airpit outside Shoreline (Railway Bridge/RR to Port)",
-        "en": "Shoreline",
-        "es-mx": "Near the Airpit outside Shoreline (Railway Bridge/RR to Port)",
-        "es": "Near the Airpit outside Shoreline (Railway Bridge/RR to Port)",
-        "fr": "Near the Airpit outside Shoreline (Railway Bridge/RR to Port)",
-        "ge": "Near the Airpit outside Shoreline (Railway Bridge/RR to Port)",
-        "hu": "Near the Airpit outside Shoreline (Railway Bridge/RR to Port)",
-        "it": "Near the Airpit outside Shoreline (Railway Bridge/RR to Port)",
-        "jp": "Near the Airpit outside Shoreline (Railway Bridge/RR to Port)",
-        "kr": "Near the Airpit outside Shoreline (Railway Bridge/RR to Port)",
-        "pl": "Near the Airpit outside Shoreline (Railway Bridge/RR to Port)",
-        "po": "Near the Airpit outside Shoreline (Railway Bridge/RR to Port)",
-        "ru": "Near the Airpit outside Shoreline (Railway Bridge/RR to Port)"
+        "ch": "Shoreline/Customs",
+        "cz": "Shoreline/Customs",
+        "en": "Shoreline/Customs",
+        "es-mx": "Shoreline/Customs",
+        "es": "Shoreline/Customs",
+        "fr": "Shoreline/Customs",
+        "ge": "Shoreline/Customs",
+        "hu": "Shoreline/Customs",
+        "it": "Shoreline/Customs",
+        "jp": "Shoreline/Customs",
+        "kr": "Shoreline/Customs",
+        "pl": "Shoreline/Customs",
+        "po": "Shoreline/Customs",
+        "ru": "Shoreline/Customs"
       },
       "access_via": ["RailwayBridge", "PortRR"]
     },
@@ -332,20 +342,20 @@
       "// Trader name": "Mechanic",
       "override_description": true,
       "location_description": {
-        "ch": "Underground (ZB-1011,1012,1013,1014)",
-        "cz": "Underground (ZB-1011,1012,1013,1014)",
+        "ch": "Factory",
+        "cz": "Factory",
         "en": "Factory",
-        "es-mx": "Inside a bunker in Factory (Camera Bunker Door)",
-        "es": "Underground (ZB-1011,1012,1013,1014)",
-        "fr": "Dans les bunkers ZB-*",
-        "ge": "Underground (ZB-1011,1012,1013,1014)",
-        "hu": "Underground (ZB-1011,1012,1013,1014)",
-        "it": "Underground (ZB-1011,1012,1013,1014)",
-        "jp": "Underground (ZB-1011,1012,1013,1014)",
-        "kr": "Underground (ZB-1011,1012,1013,1014)",
-        "pl": "Underground (ZB-1011,1012,1013,1014)",
-        "po": "Underground (ZB-1011,1012,1013,1014)",
-        "ru": "В бункерах ЗБ-*"
+        "es-mx": "Factory",
+        "es": "Factory",
+        "fr": "Factory",
+        "ge": "Factory",
+        "hu": "Factory",
+        "it": "Factory",
+        "jp": "Factory",
+        "kr": "Factory",
+        "pl": "Factory",
+        "po": "Factory",
+        "ru": "Factory"
       },
       "access_via": ["MechanicHideout"]
     },
@@ -362,20 +372,20 @@
       },
       "override_description": true,
       "location_description": {
-        "ch": "Inside a warehouse (Warehouse 17)",
-        "cz": "Inside a warehouse (Warehouse 17)",
+        "ch": "Customs",
+        "cz": "Customs",
         "en": "Customs",
-        "es-mx": "Inside a warehouse on Customs (Warehouse 17)",
-        "es": "Inside a warehouse (Warehouse 17)",
-        "fr": "Entre les bois et les douanes",
-        "ge": "Inside a warehouse (Warehouse 17)",
-        "hu": "Inside a warehouse (Warehouse 17)",
-        "it": "Inside a warehouse (Warehouse 17)",
-        "jp": "Inside a warehouse (Warehouse 17)",
-        "kr": "Inside a warehouse (Warehouse 17)",
-        "pl": "Inside a warehouse (Warehouse 17)",
-        "po": "Inside a warehouse (Warehouse 17)",
-        "ru": "Между берегом и таможней"
+        "es-mx": "Customs",
+        "es": "Customs",
+        "fr": "Customs",
+        "ge": "Customs",
+        "hu": "Customs",
+        "it": "Customs",
+        "jp": "Customs",
+        "kr": "Customs",
+        "pl": "Customs",
+        "po": "Customs",
+        "ru": "Customs"
       },
       "access_via": ["SkierHideout"]
     },
@@ -392,20 +402,20 @@
       },
       "override_description": true,
       "location_description": {
-        "ch": "Near an  Emercom checkpoint outside Ultra (Emercom)",
-        "cz": "Near an  Emercom checkpoint outside Ultra (Emercom)",
-        "en": "Interchange",
-        "es-mx": "Near an  Emercom checkpoint outside Ultra (Emercom)",
-        "es": "Near an  Emercom checkpoint outside Ultra (Emercom)",
-        "fr": "Entre l'échangeur et les douanes",
-        "ge": "Near an  Emercom checkpoint outside Ultra (Emercom)",
-        "hu": "Near an  Emercom checkpoint outside Ultra (Emercom)",
-        "it": "Near an  Emercom checkpoint outside Ultra (Emercom)",
-        "jp": "Near an  Emercom checkpoint outside Ultra (Emercom)",
-        "kr": "Near an  Emercom checkpoint outside Ultra (Emercom)",
-        "pl": "Near an  Emercom checkpoint outside Ultra (Emercom)",
-        "po": "Near an  Emercom checkpoint outside Ultra (Emercom)",
-        "ru": "Между развязкой и таможней"
+        "ch": "Interchange/Customs",
+        "cz": "Interchange/Customs",
+        "en": "Interchange/Customs",
+        "es-mx": "Interchange/Customs",
+        "es": "Interchange/Customs",
+        "fr": "Interchange/Customs",
+        "ge": "Interchange/Customs",
+        "hu": "Interchange/Customs",
+        "it": "Interchange/Customs",
+        "jp": "Interchange/Customs",
+        "kr": "Interchange/Customs",
+        "pl": "Interchange/Customs",
+        "po": "Interchange/Customs",
+        "ru": "Interchange/Customs"
       },
       "access_via": ["TrailerPark", "ScavCamp"]
     },
@@ -413,20 +423,20 @@
       "// Trader name": "Jaeger",
       "override_description": true,
       "location_description": {
-        "ch": "Tucked in the mountains (Mountain Stash)",
-        "cz": "Tucked in the mountains (Mountain Stash)",
+        "ch": "Woods",
+        "cz": "Woods",
         "en": "Woods",
-        "es-mx": "Tucked in the mountains (Mountain Stash)",
-        "es": "Tucked in the mountains (Mountain Stash)",
-        "fr": "En voiture",
-        "ge": "Tucked in the mountains (Mountain Stash)",
-        "hu": "Tucked in the mountains (Mountain Stash)",
-        "it": "Tucked in the mountains (Mountain Stash)",
-        "jp": "Tucked in the mountains (Mountain Stash)",
-        "kr": "Tucked in the mountains (Mountain Stash)",
-        "pl": "Tucked in the mountains (Mountain Stash)",
-        "po": "Tucked in the mountains (Mountain Stash)",
-        "ru": "В машине"
+        "es-mx": "Woods",
+        "es": "Woods",
+        "fr": "Woods",
+        "ge": "Woods",
+        "hu": "Woods",
+        "it": "Woods",
+        "jp": "Woods",
+        "kr": "Woods",
+        "pl": "Woods",
+        "po": "Woods",
+        "ru": "Woods"
       },
       "access_via": ["JaegerHideout"]
     },
@@ -434,20 +444,20 @@
       "// Trader name": "Peacekeeper",
       "override_description": true,
       "location_description": {
-        "ch": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
-        "cz": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
-        "en": "Shoreline",
-        "es-mx": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
-        "es": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
-        "fr": "En bateau",
-        "ge": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
-        "hu": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
-        "it": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
-        "jp": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
-        "kr": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
-        "pl": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
-        "po": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
-        "ru": "На блокпосте ООН"
+        "ch": "Shoreline/Reserve",
+        "cz": "Shoreline/Reserve",
+        "en": "Shoreline/Reserve",
+        "es-mx": "Shoreline/Reserve",
+        "es": "Shoreline/Reserve",
+        "fr": "Shoreline/Reserve",
+        "ge": "Shoreline/Reserve",
+        "hu": "Shoreline/Reserve",
+        "it": "Shoreline/Reserve",
+        "jp": "Shoreline/Reserve",
+        "kr": "Shoreline/Reserve",
+        "pl": "Shoreline/Reserve",
+        "po": "Shoreline/Reserve",
+        "ru": "Shoreline/Reserve"
       },
       "access_via": ["PeacekeeperHideout"]
     },
@@ -479,20 +489,20 @@
       "disable_warning": true,
       "override_description": true,
       "location_description": {
-        "ch": "Somewhere between woods, military reserve and shoreline",
-        "cz": "Somewhere between woods, military reserve and shoreline",
-        "en": "Somewhere between woods, military reserve and shoreline",
-        "es-mx": "Somewhere between woods, military reserve and shoreline",
-        "es": "Somewhere between woods, military reserve and shoreline",
-        "fr": "Quelque part entre les bois, la base militaire et le littoral",
-        "ge": "Somewhere between woods, military reserve and shoreline",
-        "hu": "Somewhere between woods, military reserve and shoreline",
-        "it": "Somewhere between woods, military reserve and shoreline",
-        "jp": "Somewhere between woods, military reserve and shoreline",
-        "kr": "Somewhere between woods, military reserve and shoreline",
-        "pl": "Somewhere between woods, military reserve and shoreline",
-        "po": "Somewhere between woods, military reserve and shoreline",
-        "ru": "Где-то между лесом, резервом и берегом"
+        "ch": "Woods",
+        "cz": "Woods",
+        "en": "Woods",
+        "es-mx": "Woods",
+        "es": "Woods",
+        "fr": "Woods",
+        "ge": "Woods",
+        "hu": "Woods",
+        "it": "Woods",
+        "jp": "Woods",
+        "kr": "Woods",
+        "pl": "Woods",
+        "po": "Woods",
+        "ru": "Woods"
       },
       "access_via": ["Outskirts"]
     },
@@ -502,20 +512,20 @@
       "disable_warning": true,
       "override_description": true,
       "location_description": {
-        "ch": "Between lighthouse and shoreline",
-        "cz": "Between lighthouse and shoreline",
+        "ch": "Customs",
+        "cz": "Customs",
         "en": "Customs",
-        "es-mx": "Between lighthouse and shoreline",
-        "es": "Between lighthouse and shoreline",
-        "fr": "Entre le phare et le littoral",
-        "ge": "Between lighthouse and shoreline",
-        "hu": "Between lighthouse and shoreline",
-        "it": "Between lighthouse and shoreline",
-        "jp": "Between lighthouse and shoreline",
-        "kr": "Between lighthouse and shoreline",
-        "pl": "Between lighthouse and shoreline",
-        "po": "Between lighthouse and shoreline",
-        "ru": "Между маяком и берегом"
+        "es-mx": "Customs",
+        "es": "Customs",
+        "fr": "Customs",
+        "ge": "Customs",
+        "hu": "Customs",
+        "it": "Customs",
+        "jp": "Customs",
+        "kr": "Customs",
+        "pl": "Customs",
+        "po": "Customs",
+        "ru": "Customs"
       },
       "access_via": ["LegsHideout"]
     },
@@ -525,20 +535,20 @@
       "disable_warning": true,
       "override_description": true,
       "location_description": {
-        "ch": "在藏身处附近的地面零点",
-        "cz": "Na Ground Zero poblíž úkrytu",
-        "en": "On Ground Zero near the hideout",
-        "es-mx": "Between lighthouse and shoreline",
-        "es": "En la Zona Cero cerca del escondite",
-        "fr": "À Ground Zero, près de la cachette",
-        "ge": "Am Ground Zero in der Nähe des Verstecks",
-        "hu": "A Ground Zero-n, a rejtekhely közelében",
-        "it": "A Ground Zero, vicino al nascondiglio",
-        "jp": "アジト近くのグラウンドゼロで",
-        "kr": "은신처 근처 그라운드 제로에서",
-        "pl": "Na Ground Zero w pobliżu kryjówki",
-        "po": "No Ground Zero, perto do esconderijo",
-        "ru": "В эпицентре рядом с убежищем"
+        "ch": "Hideout",
+        "cz": "Hideout",
+        "en": "Hideout",
+        "es-mx": "Hideout",
+        "es": "Hideout",
+        "fr": "Hideout",
+        "ge": "Hideout",
+        "hu": "Hideout",
+        "it": "Hideout",
+        "jp": "Hideout",
+        "kr": "Hideout",
+        "pl": "Hideout",
+        "po": "Hideout",
+        "ru": "Hideout"
       },
       "access_via": ["FactoryZB-1011"]
     },
@@ -548,20 +558,20 @@
       "disable_warning": true,
       "override_description": true,
       "location_description": {
-        "ch": "On the railroad (any train extract)",
-        "cz": "On the railroad (any train extract)",
+        "ch": "Lighthouse",
+        "cz": "Lighthouse",
         "en": "Lighthouse",
-        "es-mx": "On the railroad (any train extract)",
-        "es": "On the railroad (any train extract)",
-        "fr": "On the railroad (any train extract)",
-        "ge": "On the railroad (any train extract)",
-        "hu": "On the railroad (any train extract)",
-        "it": "On the railroad (any train extract)",
-        "jp": "On the railroad (any train extract)",
-        "kr": "On the railroad (any train extract)",
-        "pl": "On the railroad (any train extract)",
-        "po": "On the railroad (any train extract)",
-        "ru": "В лодке"
+        "es-mx": "Lighthouse",
+        "es": "Lighthouse",
+        "fr": "Lighthouse",
+        "ge": "Lighthouse",
+        "hu": "Lighthouse",
+        "it": "Lighthouse",
+        "jp": "Lighthouse",
+        "kr": "Lighthouse",
+        "pl": "Lighthouse",
+        "po": "Lighthouse",
+        "ru": "Lighthouse"
       },
       "access_via": ["ArtemHideout"]
     },
@@ -590,47 +600,47 @@
     },
     "lotus": {
       "// mod integration for lotus": true,
-      "// lotus is available at SafeRoom": true,
+      "// lotus is available at Emercom": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
-        "ch": "Interchange",
-        "cz": "Interchange",
-        "en": "Interchange",
-        "es-mx": "Interchange",
-        "es": "Interchange",
-        "fr": "Interchange",
-        "ge": "Interchange",
-        "hu": "Interchange",
-        "it": "Interchange",
-        "jp": "Interchange",
-        "kr": "Interchange",
-        "pl": "Interchange",
-        "po": "Interchange",
-        "ru": "Interchange"
+        "ch": "Interchange/Customs",
+        "cz": "Interchange/Customs",
+        "en": "Interchange/Customs",
+        "es-mx": "Interchange/Customs",
+        "es": "Interchange/Customs",
+        "fr": "Interchange/Customs",
+        "ge": "Interchange/Customs",
+        "hu": "Interchange/Customs",
+        "it": "Interchange/Customs",
+        "jp": "Interchange/Customs",
+        "kr": "Interchange/Customs",
+        "pl": "Interchange/Customs",
+        "po": "Interchange/Customs",
+        "ru": "Interchange/Customs"
       },
-      "access_via": ["SafeRoom"]
+      "access_via": ["Emercom","Crossroads"]
     },
     "Coyote": {
       "// mod integration for Coyote": true,
       "// Coyote is available at BasementDescent": true,
       "disable_warning": true,
-      "override_description": false,
+      "override_description": true,
       "location_description": {
-        "ch": "Between the City and Interchange",
-        "cz": "Between the City and Interchange",
-        "en": "Ground Zero",
-        "es-mx": "Between the City and Interchange",
-        "es": "Between the City and Interchange",
-        "fr": "Between the City and Interchange",
-        "ge": "Between the City and Interchange",
-        "hu": "Between the City and Interchange",
-        "it": "Between the City and Interchange",
-        "jp": "Between the City and Interchange",
-        "kr": "Between the City and Interchange",
-        "pl": "Between the City and Interchange",
-        "po": "Between the City and Interchange",
-        "ru": "Между городом и развязкой"
+        "ch": "Ground Zero/Labs/Streets",
+        "cz": "Ground Zero/Labs/Streets",
+        "en": "Ground Zero/Labs/Streets",
+        "es-mx": "Ground Zero/Labs/Streets",
+        "es": "Ground Zero/Labs/Streets",
+        "fr": "Ground Zero/Labs/Streets",
+        "ge": "Ground Zero/Labs/Streets",
+        "hu": "Ground Zero/Labs/Streets",
+        "it": "Ground Zero/Labs/Streets",
+        "jp": "Ground Zero/Labs/Streets",
+        "kr": "Ground Zero/Labs/Streets",
+        "pl": "Ground Zero/Labs/Streets",
+        "po": "Ground Zero/Labs/Streets",
+        "ru": "Ground Zero/Labs/Streets"
       },
       "access_via": ["BasementDescent"]
     },
@@ -640,45 +650,45 @@
       "disable_warning": true,
       "override_description": true,
       "location_description": {
-        "ch": "By the military railroad",
-        "cz": "By the military railroad",
-        "en": "Woods",
-        "es-mx": "By the military railroad",
-        "es": "By the military railroad",
-        "fr": "By the military railroad",
-        "ge": "By the military railroad",
-        "hu": "By the military railroad",
-        "it": "By the military railroad",
-        "jp": "By the military railroad",
-        "kr": "By the military railroad",
-        "pl": "By the military railroad",
-        "po": "By the military railroad",
-        "ru": "Рядом с военной железной дорогой"
+        "ch": "Woods/Reserve",
+        "cz": "Woods/Reserve",
+        "en": "Woods/Reserve",
+        "es-mx": "Woods/Reserve",
+        "es": "Woods/Reserve",
+        "fr": "Woods/Reserve",
+        "ge": "Woods/Reserve",
+        "hu": "Woods/Reserve",
+        "it": "Woods/Reserve",
+        "jp": "Woods/Reserve",
+        "kr": "Woods/Reserve",
+        "pl": "Woods/Reserve",
+        "po": "Woods/Reserve",
+        "ru": "Woods/Reserve"
       },
       "access_via": ["ReserveZB-014"]
     },
-    "themachine": {
-      "// mod integration for themachine": true,
-      "// themachine is available at MilitaryBaseRail": true,
+    "Sally": {
+      "// mod integration for Sally": true,
+      "// Sally is available at Manhole": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
-        "ch": "By the military railroad",
-        "cz": "By the military railroad",
-        "en": "By the military railroad",
-        "es-mx": "By the military railroad",
-        "es": "By the military railroad",
-        "fr": "By the military railroad",
-        "ge": "By the military railroad",
-        "hu": "By the military railroad",
-        "it": "By the military railroad",
-        "jp": "By the military railroad",
-        "kr": "By the military railroad",
-        "pl": "By the military railroad",
-        "po": "By the military railroad",
-        "ru": "Рядом с военной железной дорогой"
+        "ch": "Reserve/Streets",
+        "cz": "Reserve/Streets",
+        "en": "Reserve/Streets",
+        "es-mx": "Reserve/Streets",
+        "es": "Reserve/Streets",
+        "fr": "Reserve/Streets",
+        "ge": "Reserve/Streets",
+        "hu": "Reserve/Streets",
+        "it": "Reserve/Streets",
+        "jp": "Reserve/Streets",
+        "kr": "Reserve/Streets",
+        "pl": "Reserve/Streets",
+        "po": "Reserve/Streets",
+        "ru": "Reserve/Streets"
       },
-      "access_via": ["MilBaseRR"]
+      "access_via": ["Manhole"]
     },
     "668aaff35fd574b6dcc4a686": {
       "// mod integration for PAINTER": true,
@@ -686,20 +696,20 @@
       "disable_warning": true,
       "override_description": true,
       "location_description": {
-        "ch": "On the road (any car extract)",
-        "cz": "On the road (any car extract)",
-        "en": "Suburbs",
-        "es-mx": "On the road (any car extract)",
-        "es": "On the road (any car extract)",
-        "fr": "On the road (any car extract)",
-        "ge": "On the road (any car extract)",
-        "hu": "On the road (any car extract)",
-        "it": "On the road (any car extract)",
-        "jp": "On the road (any car extract)",
-        "kr": "On the road (any car extract)",
-        "pl": "On the road (any car extract)",
-        "po": "On the road (any car extract)",
-        "ru": "Рядом с военной железной дорогой"
+        "ch": "Customs/Streets/Interchange",
+        "cz": "Customs/Streets/Interchange",
+        "en": "Customs/Streets/Interchange",
+        "es-mx": "Customs/Streets/Interchange",
+        "es": "Customs/Streets/Interchange",
+        "fr": "Customs/Streets/Interchange",
+        "ge": "Customs/Streets/Interchange",
+        "hu": "Customs/Streets/Interchange",
+        "it": "Customs/Streets/Interchange",
+        "jp": "Customs/Streets/Interchange",
+        "kr": "Customs/Streets/Interchange",
+        "pl": "Customs/Streets/Interchange",
+        "po": "Customs/Streets/Interchange",
+        "ru": "Customs/Streets/Interchange"
       },
       "access_via": ["TarkovRR", "CrashSite", "Railway"]
     }
@@ -790,7 +800,7 @@
       "EXFIL_Train": "LighthouseTrain",
       "Nothern_Checkpoint": "NorthernCP",
       "Alpinist_light": "MountainPass",
-      "Tunnel_Shared": "SideTunnel"
+      "tunnel_shared": "SideTunnel"
     },
     "tarkovstreets": {
       "E1": "SylobateElevator",
@@ -960,15 +970,14 @@
       "woods": ["RUAF Gate"]
     },
     "ReserveZB-014": {
-      "woods": ["ZB-014"],
-      "rezervbase": ["Bunker Hermetic"]
+      "woods": ["ZB-014"]
     },
     "ScavLands": {
-      "customs": ["Military Base CP"],
+      "bigmap": ["Military Base CP"],
       "rezervbase": ["Scav lands"]
     },
     "ReserveTrain": {
-      "customs": ["RR to Military Base"],
+      "bigmap": ["RR to Military Base"],
       "woods": ["Factory Gate"],
       "lighthouse": ["Armored Train LH"],
       "shoreline": ["Railway Bridge"],
@@ -998,7 +1007,7 @@
       "sandbox": ["Police Car"],
       "woods": ["Woods Vehicle Extract"]
     },
-    "Saferoom": {
+    "SafeRoom": {
       "interchange": ["Safe Room"]
     },
     "Railway": {
@@ -1026,7 +1035,7 @@
       "woods": ["Sawmill River"]
     },
     "Tunnel": {
-      "shoreline": ["Tunnel"],
+      "shoreline": ["Shoreline Tunnel"],
       "lighthouse": ["Lighthouse Tunnel"]
     },
     "RuinedRoad": {
@@ -1063,7 +1072,7 @@
       "lighthouse": ["Southern Road"]
     },
     "LighthouseTrain": {
-      "customs": ["RR to Military Base"],
+      "bigmap": ["RR to Military Base"],
       "woods": ["Factory Gate"],
       "lighthouse": ["Armored Train LH"],
       "shoreline": ["Railway Bridge"],
@@ -1081,7 +1090,7 @@
       "lighthouse": ["Mountain Pass"]
     },
     "SideTunnel": {
-      "shoreline": ["Tunnel"],
+      "shoreline": ["Shoreline Tunnel"],
       "lighthouse": ["Lighthouse Tunnel"]
     },
     "BasementDescent": {
@@ -1115,7 +1124,7 @@
     "CrashSite": {
       "tarkovstreets": ["Evacuation Zone"],
       "interchange": ["Railway"],
-      "woods": ["Bridge Car"]
+      "woods": ["Woods Vehicle Extract"]
     },
     "Catacombs": {
       "tarkovstreets": ["Catacombs"],
