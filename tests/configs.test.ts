@@ -64,4 +64,8 @@ describe('PTT embedded configs', () => {
   it('should validate the PathToTarkovReloaded config', () => {
     testConfig('./configs/PathToTarkovReloaded');
   });
+
+  it('should validate the DevilFlippy config', () => {
+    testConfig('./configs/DevilFlippy');
+  });
 });
