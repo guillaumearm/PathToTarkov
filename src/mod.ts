@@ -31,6 +31,7 @@ import { EndOfRaidController } from './end-of-raid-controller';
 import { fixRepeatableQuests } from './fix-repeatable-quests';
 import { pathToTarkovReloadedTooltipsConfigCompat } from './pttr-tooltips';
 import path from 'path';
+import { analyzeConfig } from './config-analysis';
 
 const getTooltipsConfig = (
   userConfig: UserConfig,
@@ -77,6 +78,23 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     if (this.config.debug) {
       this.debug('debug mode enabled');
     }
+
+    const analysisResult = analyzeConfig(this.config, this.spawnConfig);
+
+    analysisResult.warnings.forEach(warn => {
+      this.logger.warning(`[Path To Tarkov Config] ${warn}`);
+    });
+
+    analysisResult.errors.forEach(err => {
+      this.logger.error(`[Path To Tarkov Config] ${err}`);
+    });
+
+    if (analysisResult.errors.length > 0) {
+      throw new Error(
+        `Fatal Error when loading the selected Path To Tarkov config "${userConfig.selectedConfig}"`,
+      );
+    }
+
     const configServer = container.resolve<ConfigServer>('ConfigServer');
     const db = container.resolve<DatabaseServer>('DatabaseServer');
     const saveServer = container.resolve<SaveServer>('SaveServer');
