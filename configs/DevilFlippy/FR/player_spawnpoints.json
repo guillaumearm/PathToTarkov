@@ -85,6 +85,10 @@
         "z": 40.92688
       },
       "Rotation": 158.9888
+    },
+    "Camera Bunker Door": {
+      "Position": [-20.8695526, -2.63423038, 34.9322433],
+      "Rotation": 0.891350448
     }
   },
   "bigmap": {
@@ -315,7 +319,7 @@
         "Position": [350.51, -59.67, 324.86],
         "Rotation": 55.0321
       },
-      "Railway Bridge": {
+    "Railway Bridge": {
         "Position": [-1023.37292, -60.67251, 314.364075],
         "Rotation": 24.1157665
       }
@@ -340,10 +344,6 @@
     "Grotto": {
       "Position": [194.516525, -0.48209092, -491.773224],
       "Rotation": 182.743759
-    },
-    "Railway Bridge": {
-      "Position": [-1023.37292, -60.67251, 314.364075],
-      "Rotation": 24.1157665
     },
     "Armored Train LH": {
         "Position": [10.00, 11.97, -870.85],

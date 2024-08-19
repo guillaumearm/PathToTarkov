@@ -721,7 +721,7 @@
       "EXFIL_Train": "ArmoredTrain",
       "Nothern_Checkpoint": "WoodsLighthouse",
       "Alpinist_light": "MountainPass",
-      "Tunnel": "ShorelineLighthouseTunnel"
+      "tunnel_shared": "ShorelineLighthouseTunnel"
     },
     "tarkovstreets": {
       "E1": "ScorpionHideout",
