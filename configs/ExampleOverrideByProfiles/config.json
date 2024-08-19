@@ -88,12 +88,17 @@
     {
       "id": "PathToTarkov_ReserveBunker_stash",
       "size": 22,
-      "access_via": ["ReserveInterchangeStash"]
+      "access_via": ["ReserveBunkerStash"]
     },
     {
       "id": "PathToTarkov_Car_stash",
       "size": 22,
       "access_via": ["ShorelineWoodsStash"]
+    },
+    {
+      "id": "PathToTarkov_Klimov_stash",
+      "size": 22,
+      "access_via": ["KlimovStash"]
     }
   ],
   "traders_config": {
@@ -286,6 +291,27 @@
         "repair_price_coef": 100
       },
       "heal_always_enabled": true
+    },
+    "Sally": {
+      "// Trader name": "Sally",
+      "override_description": true,
+      "location_description": {
+        "ch": "Somewhere in the Military reserve",
+        "cz": "Somewhere in the Military reserve",
+        "en": "Somewhere in the Military reserve",
+        "es-mx": "Somewhere in the Military reserve",
+        "es": "Somewhere in the Military reserve",
+        "fr": "Quelque part dans la réserve militaire",
+        "ge": "Somewhere in the Military reserve",
+        "hu": "Somewhere in the Military reserve",
+        "it": "Somewhere in the Military reserve",
+        "jp": "Somewhere in the Military reserve",
+        "kr": "Somewhere in the Military reserve",
+        "pl": "Somewhere in the Military reserve",
+        "po": "Somewhere in the Military reserve",
+        "ru": "Somewhere in the Military reserve"
+      },
+      "access_via": ["ReserveBunkerStash"]
     }
   },
   "exfiltrations": {
@@ -300,7 +326,7 @@
     "bigmap": {
       "Railroad To Tarkov": "TherapistStash",
       "Railroad To Military Base": "SkierStash",
-      "Factory Far Corner": "MechanicStash",
+      "ZB-1011": "MechanicStash",
       "Old Azs Gate": "RagmanStash"
     },
     "woods": {
@@ -310,17 +336,17 @@
     "rezervbase": {
       "EXFIL_ScavCooperation": "SkierStash",
       "Exit4": "MilitaryLighthouseStash",
-      "EXFIL_Bunker_D2": "ReserveInterchangeStash"
+      "EXFIL_Bunker_D2": "ReserveBunkerStash"
     },
     "interchange": {
       "NW Exfil": "RagmanStash",
-      "Saferoom Exfil": "ReserveInterchangeStash",
+      "Saferoom Exfil": "ReserveBunkerStash",
       "PP Exfil": "PraporStash"
     },
     "shoreline": {
       "Tunnel": "PeacekeeperStash",
       "Shorl_V-Ex": "ShorelineWoodsStash",
-      "South Fence Passage": "ReserveInterchangeStash"
+      "South Fence Passage": "ReserveBunkerStash"
     },
     "lighthouse": {
       "Coastal_South_Road": "PeacekeeperStash",
@@ -328,7 +354,8 @@
     },
     "tarkovstreets": {
       "E5": "TherapistStash",
-      "E7_car": "PraporStash"
+      "E7_car": "PraporStash",
+      "E9_sniper": "KlimovStash"
     },
     "laboratory": {
       "lab_Parking_Gate": "PraporStash",
@@ -351,8 +378,8 @@
       "tarkovstreets": ["Zmeevsky Alley"]
     },
     "PraporStash": {
-      "tarkovstreets": ["Klimov Street"],
-      "sandbox": ["Mira Ave"],
+      "tarkovstreets": ["Primorsky Vehicle Extract"],
+      "sandbox": ["Police Car"],
       "laboratory": [
         "Cargo Elevator",
         "Hangar Gate",
@@ -390,7 +417,7 @@
       "lighthouse": ["Lighthouse Vehicle Extract"],
       "rezervbase": ["CP Fence"]
     },
-    "ReserveInterchangeStash": {
+    "ReserveBunkerStash": {
       "rezervbase": ["D-2"],
       "interchange": ["Safe Room"],
       "shoreline": ["North Fence Passage"]
@@ -398,6 +425,9 @@
     "ShorelineWoodsStash": {
       "shoreline": ["Road to Customs"],
       "woods": ["Bridge Car"]
+    },
+    "KlimovStash": {
+      "tarkovstreets": ["Klimov Street"]
     }
   }
 }
