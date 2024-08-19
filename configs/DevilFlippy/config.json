@@ -117,7 +117,7 @@
       "id": "WelcomeToTarkov_Painter_stash",
       "size": 38,
       "access_via": [
-        "PaiinterHideout"
+        "PainterHideout"
       ]
     },
     {
@@ -721,7 +721,7 @@
       "EXFIL_Train": "ArmoredTrain",
       "Nothern_Checkpoint": "WoodsLighthouse",
       "Alpinist_light": "MountainPass",
-      "Tunnel_Shared": "ShorelineLighthouseTunnel"
+      "tunnel_shared": "ShorelineLighthouseTunnel"
     },
     "tarkovstreets": {
       "E1": "ScorpionHideout",
