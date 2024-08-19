@@ -4,7 +4,7 @@ const { execSync } = require('child_process');
 const packageJson = require('../package.json');
 
 const dllFileName = 'PTTExtracts.dll';
-const cprFlags = '--overwrite --delete-first';
+const cprFlags = '--overwrite';
 
 const main = async modName => {
   [
