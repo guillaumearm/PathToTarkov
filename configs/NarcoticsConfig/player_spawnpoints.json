@@ -46,6 +46,10 @@
     "Camera Bunker Door": {
       "Position": [-20.8695526, -2.63423038, 34.9322433],
       "Rotation": 0.891350448
+    },
+    "Office Window": {
+      "Position": [17.66614, 8.210876, 40.92688],
+      "Rotation": 158.9888
     }
   },
   "Comment": "N: 180, NE: 225, E: 270, SE: 315, S: 0, SW: 45, W: 90, NW: 135",
@@ -98,16 +102,16 @@
       "Position": [302.545, 2.91025, -185.017761],
       "Rotation": 202.349335
     },
-    "RR To Military Base": {
+    "RR to Military Base": {
       "Position": [458.392639, 4.95283127, 181.01564],
       "Rotation": 256.057983
     },
-    "RR To Port": {
-      "Position": [-145.3853, 2.62803984, -23.7549515],
+    "RR to Port": {
+      "Position": [-150.3853, 2.62803984, 23.7549515],
       "Rotation": 1.93337643
     },
-    "RR To Tarkov": {
-      "Position": [-149.420151, 3.40357137, -178.949509],
+    "RR to Tarkov": {
+      "Position": [-165.420151, 3.40357137, -200.949509],
       "Rotation": 6.05172825
     },
     "Warehouse 17": {
@@ -436,6 +440,10 @@
     "Kamchatskya Arch": {
       "Position": [260.6, -4.5, 49.6],
       "Rotation": 304.3322
+    },
+    "Sylobate Elevator": {
+      "Position": [-47.23, 9.6, -68.04],
+      "Rotation": 15.33
     }
   },
   "Comment": "N: 180, NE: 225, E: 270, SE: 315, S: 0, SW: 45, W: 90, NW: 135",
