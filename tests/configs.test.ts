@@ -61,7 +61,7 @@ describe('PTT embedded configs', () => {
     testConfig('./config/alternate_configs/NarcoticsConfig');
   });
 
-  it.skip('should validate the PathToTarkovReloaded config', () => {
+  it('should validate the PathToTarkovReloaded config', () => {
     testConfig('./config/alternate_configs/PathToTarkovReloaded');
   });
 });
