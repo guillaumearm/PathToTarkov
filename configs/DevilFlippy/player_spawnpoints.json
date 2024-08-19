@@ -160,7 +160,7 @@
       "Position": [647.141, -0.3182248, -25.9616776],
       "Rotation": 307.1494
     },
-	  "Trailer Park": {
+    "Trailer Park": {
       "Position": [-310.01, 0.89, -215.43],
       "Rotation": 31.98688
     }
@@ -202,12 +202,12 @@
       "Position": [-487.348541, 15.0604687, -497.965179],
       "Rotation": 24.781599
     },
-    "ScavVillage":  {
+    "ScavVillage": {
       "Comment": "Scav Village in the north end",
       "Position": [-58.53, 7.66, -757.22],
       "Rotation": 180
     },
-	  "ZB-016": {
+    "ZB-016": {
       "Position": [-388.16, 3.25, 20.05],
       "Rotation": 115.467377
     },
@@ -290,9 +290,9 @@
       "Rotation": 105.2137
     },
     "Fence Gap": {
-        "Position": [-220.849625, 21.35, -40.680878],
-        "Rotation": 52.06011
-      }
+      "Position": [-220.849625, 21.35, -40.680878],
+      "Rotation": 52.06011
+    }
   },
   "shoreline": {
     "North Fence Passage": {
@@ -316,12 +316,12 @@
       "Rotation": 335.1047
     },
     "Ruined Road": {
-        "Position": [350.51, -59.67, 324.86],
-        "Rotation": 55.0321
+      "Position": [350.51, -59.67, 324.86],
+      "Rotation": 55.0321
     },
-      "Railway Bridge": {
-        "Position": [-1023.37292, -60.67251, 314.364075],
-        "Rotation": 24.1157665
+    "Railway Bridge": {
+      "Position": [-1023.37292, -60.67251, 314.364075],
+      "Rotation": 24.1157665
     }
   },
   "lighthouse": {
@@ -346,8 +346,8 @@
       "Rotation": 182.743759
     },
     "Armored Train LH": {
-        "Position": [10.00, 11.97, -870.85],
-        "Rotation": 180.236305
+      "Position": [10.0, 11.97, -870.85],
+      "Rotation": 180.236305
     },
     "NorthernRoad": {
       "Position": [108.83, 4.61, -982.84],
@@ -361,7 +361,6 @@
       "Position": [-147.143173, 30.5996075, -4.088336],
       "Rotation": 74.17951
     }
-  
   },
   "tarkovstreets": {
     "Primorsky Vehicle Extract": {
@@ -425,7 +424,7 @@
       "Rotation": 87.62667
     },
     "Stylobate Building Elevator": {
-      "Position": [-45.63, 9.60, -64.12],
+      "Position": [-45.63, 9.6, -64.12],
       "Rotation": 200
     },
     "Expo Checkpoint": {
@@ -477,16 +476,16 @@
       "Rotation": 43.04764
     },
     "EmercomGZ": {
-        "Position": [152.5, 24.1, -89.4],
-        "Rotation": 0.85
+      "Position": [152.5, 24.1, -89.4],
+      "Rotation": 0.85
     },
     "Police Car": {
-        "Position": [-12.97, 22.6, 116.99],
-        "Rotation": 90.0
-      },
-      "Scav Hideout": {
-        "Position": [31.74341, 22.59711, -85.79424],
-        "Rotation": 43.04764
-      }
+      "Position": [-12.97, 22.6, 116.99],
+      "Rotation": 90.0
+    },
+    "Scav Hideout": {
+      "Position": [31.74341, 22.59711, -85.79424],
+      "Rotation": 43.04764
+    }
   }
 }
