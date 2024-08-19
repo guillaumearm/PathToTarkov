@@ -263,5 +263,5 @@ export const getUserConfig = (): UserConfig => {
     return userConfig;
   }
 
-  return readJsonFile(join(CONFIGS_DIR, ''));
+  return readJsonFile(USER_CONFIG_PATH);
 };
