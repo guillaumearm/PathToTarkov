@@ -23,7 +23,8 @@ export class StashController {
     private readonly debug: (data: string) => void,
   ) {}
 
-  initSecondaryStashTemplates(stashConfigs: StashConfig[]): number {
+  initSecondaryStashTemplates(givenStashConfigs: StashConfig[]): number {
+    const stashConfigs = [EMPTY_STASH, ...givenStashConfigs];
     const standardTemplate = this.db.getTables()?.templates?.items[STANDARD_STASH_ID];
 
     if (!standardTemplate) {
