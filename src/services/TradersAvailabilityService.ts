@@ -23,7 +23,11 @@ export class TradersAvailabilityService {
       const rewards = quests[questId].rewards.Success ?? [];
       rewards.forEach(reward => {
         if (reward.type === 'TraderUnlock' && reward.target) {
-          tradersLockedByQuests[questId][reward.target] = true;
+          if (!tradersLockedByQuests[reward.target]) {
+            tradersLockedByQuests[reward.target] = {};
+          }
+
+          tradersLockedByQuests[reward.target][questId] = true;
         }
       });
     });
