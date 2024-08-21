@@ -187,7 +187,6 @@ export const SPAWN_CONFIG_FILENAME = 'player_spawnpoints.json';
 
 export const PRAPOR_ID = '54cb50c76803fa8b248b4571';
 export const FENCE_ID = '579dc571d53a0658a154fbec';
-export const JAEGER_ID = '5c0647fdd443bc2504c2d371';
 export const JAEGER_INTRO_QUEST = '5d2495a886f77425cd51e403';
 
 export const STANDARD_STASH_ID = '566abbc34bdc2d92178b4576';

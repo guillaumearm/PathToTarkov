@@ -5,8 +5,7 @@ import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { StaticRouterModService } from '@spt/services/mod/staticRouter/StaticRouterModService';
 
 import type { AccessVia, Config, PositionXYZ, Profile, SpawnPoint } from './config';
-import { JAEGER_INTRO_QUEST, STANDARD_STASH_ID, VANILLA_STASH_IDS } from './config';
-import type { IQuestStatus } from '@spt/models/eft/common/tables/IBotBase';
+import { STANDARD_STASH_ID, VANILLA_STASH_IDS } from './config';
 import { isDigit, isLetter } from './utils';
 import type { Item } from '@spt/models/eft/common/tables/IItem';
 
@@ -176,18 +175,6 @@ export const createStaticRoutePeeker = (
     register,
     watchRoute,
   };
-};
-
-const QUEST_STATUS_SUCCESS = 4;
-
-export const isJaegerIntroQuestCompleted = (quests: IQuestStatus[]): boolean => {
-  return Boolean(
-    quests.find(
-      quest =>
-        quest.qid === JAEGER_INTRO_QUEST &&
-        (quest.status === QUEST_STATUS_SUCCESS || (quest as any).status === 'Success'), // compatibility with aki 3.1.x
-    ),
-  );
 };
 
 export const getMainStashId = (profile: Profile): string => {

@@ -32,6 +32,7 @@ import { fixRepeatableQuests } from './fix-repeatable-quests';
 import { pathToTarkovReloadedTooltipsConfigCompat } from './pttr-tooltips';
 import path from 'path';
 import { analyzeConfig } from './config-analysis';
+import { TradersAvailabilityService } from './services/TradersAvailabilityService';
 
 const getTooltipsConfig = (
   userConfig: UserConfig,
@@ -73,6 +74,10 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       ? (data: string) => this.logger.debug(`Path To Tarkov: ${data}`, true)
       : noop;
 
+    if (!this.config.enabled) {
+      return;
+    }
+
     this.logger.info(`===> Loading ${getModDisplayName(this.packageJson, true)}`);
 
     if (this.config.debug) {
@@ -101,23 +106,10 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     const staticRouter = container.resolve<StaticRouterModService>('StaticRouterModService');
 
-    if (!this.config.enabled) {
-      this.logger.warning('=> Path To Tarkov is disabled!');
-
-      if (this.config.bypass_uninstall_procedure === true) {
-        this.logger.warning(
-          "=> PathToTarkov: uninstall process aborted because 'bypass_uninstall_procedure' field is true in config.json",
-        );
-        return;
-      }
-
-      purgeProfiles(this.config, saveServer, this.logger);
-      return;
-    }
-
     this.pathToTarkovController = new PathToTarkovController(
       this.config,
       this.spawnConfig,
+      new TradersAvailabilityService(),
       container,
       db,
       saveServer,
@@ -155,6 +147,27 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     const db = container.resolve<DatabaseServer>('DatabaseServer');
     const saveServer = container.resolve<SaveServer>('SaveServer');
     const profiles = saveServer.getProfiles();
+    const quests = db.getTables()?.templates?.quests;
+
+    if (!quests) {
+      throw new Error('cannot retrieve quests templates from db');
+    }
+
+    if (!this.config.enabled) {
+      this.logger.warning('=> Path To Tarkov is disabled!');
+
+      if (this.config.bypass_uninstall_procedure === true) {
+        this.logger.warning(
+          "=> PathToTarkov: uninstall process aborted because 'bypass_uninstall_procedure' field is true in config.json",
+        );
+        return;
+      }
+
+      purgeProfiles(this.config, quests, saveServer, this.logger);
+      return;
+    }
+
+    this.pathToTarkovController.tradersAvailabilityService.init(quests);
 
     if (this.tooltipsConfig) {
       pathToTarkovReloadedTooltipsConfigCompat(db, this.tooltipsConfig);
@@ -175,9 +188,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     this.executeOnStartAPICallbacks = executeOnStartAPICallbacks;
 
-    if (this.config.traders_access_restriction) {
-      this.pathToTarkovController.tradersController.initTraders(this.config.traders_config);
-    }
+    this.pathToTarkovController.tradersController.initTraders(this.config);
 
     Object.keys(profiles).forEach(profileId => {
       this.pathToTarkovController.cleanupLegacySecondaryStashesLink(profileId);
