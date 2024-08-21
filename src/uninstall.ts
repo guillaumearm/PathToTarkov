@@ -1,7 +1,7 @@
 import type { ILogger } from '@spt/models/spt/utils/ILogger';
 import type { SaveServer } from '@spt/servers/SaveServer';
 import type { Config, Profile } from './config';
-import { getMainStashId } from './helpers';
+import { getMainStashId, setInventorySlotIds } from './helpers';
 import type { IQuest } from '@spt/models/eft/common/tables/IQuest';
 import { TradersAvailabilityService } from './services/TradersAvailabilityService';
 
@@ -77,9 +77,11 @@ export const purgeProfiles = (
 
   Object.keys(saveServer.getProfiles()).forEach(sessionId => {
     const profile: Profile = saveServer.getProfile(sessionId);
+    const mainStashId = getMainStashId(profile);
 
     restoreMainStash(profile, logger);
     restoreTraders(config, tradersAvailabilityService, profile, logger);
+    setInventorySlotIds(profile, mainStashId, config.hideout_secondary_stashes);
   });
 
   saveServer.save();

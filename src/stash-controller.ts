@@ -1,12 +1,13 @@
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { SaveServer } from '@spt/servers/SaveServer';
 import type { AccessVia, ConfigGetter, Profile, StashConfig } from './config';
-import { EMPTY_STASH, SLOT_ID_HIDEOUT, SLOT_ID_LOCKED_STASH, STANDARD_STASH_ID } from './config';
+import { EMPTY_STASH, STANDARD_STASH_ID } from './config';
 import {
   checkAccessVia,
   getMainStashId,
   isVanillaSptId,
   retrieveMainStashIdFromItems,
+  setInventorySlotIds,
 } from './helpers';
 import { deepClone } from './utils';
 
@@ -125,11 +126,13 @@ export class StashController {
     );
   }
 
-  private getAllStashByIds(sessionId: string): IndexedStashByIds {
-    const profile: Profile = this.saveServer.getProfile(sessionId);
+  private getAllStashByIds(
+    profile: Profile,
+    stashConfigs: Omit<StashConfig, 'access_via'>[],
+  ): IndexedStashByIds {
     const initialAcc: IndexedStashByIds = { [getMainStashId(profile)]: true };
 
-    return this.getConfig(sessionId).hideout_secondary_stashes.reduce((acc, stashConfig) => {
+    return stashConfigs.reduce((acc, stashConfig) => {
       return {
         ...acc,
         [stashConfig.id]: true,
@@ -150,18 +153,9 @@ export class StashController {
 
     const inventory = profile.characters.pmc.Inventory;
     const stashId = inventory.stash;
+    const secondaryStashes = this.getConfig(sessionId).hideout_secondary_stashes;
 
-    const stashByIds = this.getAllStashByIds(sessionId);
-
-    inventory.items.forEach(item => {
-      if (item.slotId === SLOT_ID_HIDEOUT || item.slotId === SLOT_ID_LOCKED_STASH) {
-        if (item.parentId === stashId) {
-          item.slotId = SLOT_ID_HIDEOUT;
-        } else if (stashByIds[item.parentId ?? '']) {
-          item.slotId = SLOT_ID_LOCKED_STASH;
-        }
-      }
-    });
+    setInventorySlotIds(profile, stashId, secondaryStashes);
   }
 
   getStashSize(offraidPosition: string, sessionId: string): number | null {

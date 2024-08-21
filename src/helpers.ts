@@ -4,8 +4,14 @@ import type { IHideoutArea } from '@spt/models/eft/hideout/IHideoutArea';
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { StaticRouterModService } from '@spt/services/mod/staticRouter/StaticRouterModService';
 
-import type { AccessVia, Config, PositionXYZ, Profile, SpawnPoint } from './config';
-import { STANDARD_STASH_ID, VANILLA_STASH_IDS } from './config';
+import type { AccessVia, Config, PositionXYZ, Profile, SpawnPoint, StashConfig } from './config';
+import {
+  EMPTY_STASH,
+  SLOT_ID_HIDEOUT,
+  SLOT_ID_LOCKED_STASH,
+  STANDARD_STASH_ID,
+  VANILLA_STASH_IDS,
+} from './config';
 import { isDigit, isLetter } from './utils';
 import type { Item } from '@spt/models/eft/common/tables/IItem';
 
@@ -179,6 +185,42 @@ export const createStaticRoutePeeker = (
 
 export const getMainStashId = (profile: Profile): string => {
   return profile.PathToTarkov?.mainStashId ?? profile.characters.pmc.Inventory.stash;
+};
+
+type IndexedStashByIds = Record<string, true | undefined>;
+
+const getAllStashByIds = (
+  profile: Profile,
+  stashConfigs: Omit<StashConfig, 'access_via'>[],
+): IndexedStashByIds => {
+  const initialAcc: IndexedStashByIds = { [getMainStashId(profile)]: true };
+
+  return stashConfigs.reduce((acc, stashConfig) => {
+    return {
+      ...acc,
+      [stashConfig.id]: true,
+    };
+  }, initialAcc);
+};
+
+export const setInventorySlotIds = (
+  profile: Profile,
+  stashId: string,
+  stashConfigs: StashConfig[],
+): void => {
+  const inventory = profile.characters.pmc.Inventory;
+  const secondaryStashes = [EMPTY_STASH, ...stashConfigs];
+  const stashByIds = getAllStashByIds(profile, secondaryStashes);
+
+  inventory.items.forEach(item => {
+    if (item.slotId === SLOT_ID_HIDEOUT || item.slotId === SLOT_ID_LOCKED_STASH) {
+      if (item.parentId === stashId) {
+        item.slotId = SLOT_ID_HIDEOUT;
+      } else if (stashByIds[item.parentId ?? '']) {
+        item.slotId = SLOT_ID_LOCKED_STASH;
+      }
+    }
+  });
 };
 
 // the length should be 24
