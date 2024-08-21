@@ -139,11 +139,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
   public postSptLoad(container: DependencyContainer): void {
     this.container = container;
-
-    if (!this.config.enabled) {
-      return;
-    }
-
     const db = container.resolve<DatabaseServer>('DatabaseServer');
     const saveServer = container.resolve<SaveServer>('SaveServer');
     const profiles = saveServer.getProfiles();
