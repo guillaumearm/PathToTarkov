@@ -137,7 +137,28 @@ const ALL_DUMPED_EXFILS_FROM_SCRIPT = {
     'Nakatani_stairs_free_exit',
   ],
 };
-
+const ALL_NEW_CUSTOM_EXFILS = {
+  customs: [
+  ],
+  factory: ['this_is_a_test'],
+  interchange: [
+  ],
+  woods: [
+  ],
+  shoreline: [
+  ],
+  reserve: [
+  ],
+  lighthouse: [
+  ],
+  streets: [
+  ],
+  laboratory: [
+  ],
+  groundzero: [
+    'to_kilmov_street',
+  ],
+};
 // APPLY ALIASES FOR MAP
 const ALL_EXFILS: Record<string, string[]> = {
   ...ALL_DUMPED_EXFILS_FROM_SCRIPT,
@@ -149,8 +170,20 @@ const ALL_EXFILS: Record<string, string[]> = {
   sandbox: ALL_DUMPED_EXFILS_FROM_SCRIPT.groundzero,
   sandbox_high: ALL_DUMPED_EXFILS_FROM_SCRIPT.groundzero,
 };
+const NEW_CUSTOM_EXFILS: Record<string, string[]> = {
+  ...ALL_NEW_CUSTOM_EXFILS,
+  bigmap: ALL_NEW_CUSTOM_EXFILS.customs,
+  rezervbase: ALL_NEW_CUSTOM_EXFILS.reserve,
+  factory4_day: ALL_NEW_CUSTOM_EXFILS.factory,
+  factory4_night: ALL_NEW_CUSTOM_EXFILS.factory,
+  tarkovstreets: ALL_NEW_CUSTOM_EXFILS.streets,
+  sandbox: ALL_NEW_CUSTOM_EXFILS.groundzero,
+  sandbox_high: ALL_NEW_CUSTOM_EXFILS.groundzero,
+};
 
 export const isValidExfilForMap = (mapName: string, exfilName: string): boolean => {
   const exfils = ALL_EXFILS[mapName] ?? [];
+  const customExfils = NEW_CUSTOM_EXFILS[mapName] ?? [];
+  exfils.push(...customExfils);
   return exfils.includes(exfilName);
 };

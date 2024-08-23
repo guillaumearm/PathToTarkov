@@ -30,9 +30,10 @@ import { getModDisplayName, noop, readJsonFile } from './utils';
 import { EndOfRaidController } from './end-of-raid-controller';
 import { fixRepeatableQuests } from './fix-repeatable-quests';
 import { pathToTarkovReloadedTooltipsConfigCompat } from './pttr-tooltips';
-import path from 'path';
+import path from 'node:path';
 import { analyzeConfig } from './config-analysis';
 import { TradersAvailabilityService } from './services/TradersAvailabilityService';
+import { InstanceManager } from './instance-manager';
 
 const getTooltipsConfig = (
   userConfig: UserConfig,
@@ -54,9 +55,12 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   public container: DependencyContainer;
   public executeOnStartAPICallbacks: (sessionId: string) => void = noop;
   public pathToTarkovController: PathToTarkovController;
+  private instanceManager: InstanceManager = new InstanceManager();
+  public modName = 'PathToTarkov';
 
   public preSptLoad(container: DependencyContainer): void {
     this.container = container;
+    this.instanceManager.preSptLoad(container, this.modName);
     this.packageJson = readJsonFile(PACKAGE_JSON_PATH);
 
     const userConfig = getUserConfig();
@@ -139,6 +143,12 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
   public postSptLoad(container: DependencyContainer): void {
     this.container = container;
+    this.instanceManager.postDBLoad(container);
+
+    if (!this.config.enabled) {
+      return;
+    }
+
     const db = container.resolve<DatabaseServer>('DatabaseServer');
     const saveServer = container.resolve<SaveServer>('SaveServer');
     const profiles = saveServer.getProfiles();

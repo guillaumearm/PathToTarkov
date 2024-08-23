@@ -311,11 +311,13 @@
   "exfiltrations": {
     "factory4_day": {
       "Gate 3": "MechanicStash",
-      "Office Window": "JaegerStash"
+      "Office Window": "JaegerStash",
+      "this_is_a_test": "ThisIsATest"
     },
     "factory4_night": {
       "Gate 3": "MechanicStash",
-      "Office Window": "JaegerStash"
+      "Office Window": "JaegerStash",
+      "this_is_a_test": "ThisIsATest"
     },
     "bigmap": {
       "Railroad To Tarkov": "TherapistStash",
@@ -362,7 +364,8 @@
     },
     "sandbox": {
       "Scav_coop_exit": "TherapistStash",
-      "Sandbox_VExit": "PraporStash"
+      "Sandbox_VExit": "PraporStash",
+      "to_kilmov_street": "ToKilmovStreet"
     }
   },
   "infiltrations": {
@@ -385,10 +388,19 @@
       ],
       "interchange": ["Car at Power Station"]
     },
+    "ToKilmovStreet": {
+      "sandbox": ["Entrance to Kilmov Street"],
+      "tarkovstreets": ["Klimov Street"]
+    },
     "MechanicStash": {
       "factory4_day": ["Gate 3"],
       "factory4_night": ["Gate 3"],
       "bigmap": ["ZB-1011"]
+    },
+    "ThisIsATest": {
+      "factory4_day": ["This Is a Test"],
+      "factory4_night": ["This Is a Test"],
+      "sandbox": ["GZ Scav checkpoint"]
     },
     "RagmanStash": {
       "bigmap": ["Old Gas Scav"],

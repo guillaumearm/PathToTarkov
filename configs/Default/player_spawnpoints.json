@@ -39,6 +39,14 @@
         "z": 40.92688
       },
       "Rotation": 158.9888
+    },
+    "This Is a Test": {
+      "Position": {
+        "x": 46,
+        "y": 0,
+        "z": -40
+      },
+      "Rotation": 129.412323
     }
   },
   "factory4_night": {
@@ -81,6 +89,14 @@
         "z": 40.92688
       },
       "Rotation": 158.9888
+    },
+    "This Is a Test": {
+      "Position": {
+        "x": 46,
+        "y": 0,
+        "z": -40
+      },
+      "Rotation": 129.412323
     }
   },
   "bigmap": {
@@ -369,6 +385,11 @@
     "Police Car": {
       "Position": [-12.97, 22.6, 116.99],
       "Rotation": 90.0
+    },
+    "Entrance to Kilmov Street":
+    {
+      "Position": [46, 0, -40],
+      "Rotation": 10.636034
     }
   }
 }
