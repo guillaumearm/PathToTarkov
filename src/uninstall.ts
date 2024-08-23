@@ -1,8 +1,9 @@
 import type { ILogger } from '@spt/models/spt/utils/ILogger';
 import type { SaveServer } from '@spt/servers/SaveServer';
 import type { Config, Profile } from './config';
-import { JAEGER_ID } from './config';
-import { isJaegerIntroQuestCompleted, getMainStashId } from './helpers';
+import { getMainStashId, setInventorySlotIds } from './helpers';
+import type { IQuest } from '@spt/models/eft/common/tables/IQuest';
+import { TradersAvailabilityService } from './services/TradersAvailabilityService';
 
 const restoreMainStash = (profile: Profile, logger: ILogger): void => {
   const pmcInventory = profile.characters.pmc.Inventory;
@@ -17,53 +18,70 @@ const restoreMainStash = (profile: Profile, logger: ILogger): void => {
   }
 };
 
-const restoreTraders = (config: Config, profile: Profile, logger: ILogger) => {
-  let nbTradersRestored = 0;
-  let jaegerLocked = false;
+const restoreTraders = (
+  config: Config,
+  tradersAvailabilityService: TradersAvailabilityService,
+  profile: Profile,
+  logger: ILogger,
+) => {
+  let nbTradersLocked = 0;
+  let nbTradersUnlocked = 0;
 
   Object.keys(config.traders_config).forEach(traderId => {
     const pmc = profile.characters.pmc;
     const trader = pmc.TradersInfo?.[traderId];
-    const jaegerAvailable = isJaegerIntroQuestCompleted(pmc.Quests);
 
-    if (
-      trader &&
-      trader.unlocked === false &&
-      ((traderId === JAEGER_ID && jaegerAvailable) || traderId !== JAEGER_ID)
-    ) {
-      trader.unlocked = true;
-      nbTradersRestored += 1;
-    } else if (trader && trader.unlocked === true && traderId === JAEGER_ID && !jaegerAvailable) {
-      trader.unlocked = false;
-      jaegerLocked = true;
+    if (!trader) {
+      return;
     }
+
+    const unlocked = tradersAvailabilityService.isAvailable(traderId, pmc.Quests);
+
+    if (trader.unlocked && !unlocked) {
+      nbTradersLocked += 1;
+    } else if (!trader.unlocked && unlocked) {
+      nbTradersUnlocked += 1;
+    }
+
+    trader.unlocked = unlocked;
   });
 
-  if (nbTradersRestored > 0) {
+  if (nbTradersLocked > 0) {
     logger.success(
-      `=> PathToTarkov: ${nbTradersRestored} trader${
-        nbTradersRestored === 1 ? '' : 's'
-      } restored for profile '${profile.info.username}'`,
+      `=> PathToTarkov: ${nbTradersLocked} trader${
+        nbTradersLocked === 1 ? '' : 's'
+      } locked for profile '${profile.info.username}'`,
     );
   }
 
-  if (jaegerLocked) {
+  if (nbTradersUnlocked > 0) {
     logger.success(
-      `=> PathToTarkov: Jaeger trader locked (because introduction quest is not completed) for profile '${profile.info.username}'`,
+      `=> PathToTarkov: ${nbTradersUnlocked} trader${
+        nbTradersUnlocked === 1 ? '' : 's'
+      } unlocked for profile '${profile.info.username}'`,
     );
   }
 };
 
 // Used for uninstallation process
-export const purgeProfiles = (config: Config, saveServer: SaveServer, logger: ILogger): void => {
+export const purgeProfiles = (
+  config: Config,
+  quests: Record<string, IQuest>,
+  saveServer: SaveServer,
+  logger: ILogger,
+): void => {
   // because we want to be sure to be able to read `SaveServer.profiles`
   saveServer.load();
 
+  const tradersAvailabilityService = new TradersAvailabilityService().init(quests);
+
   Object.keys(saveServer.getProfiles()).forEach(sessionId => {
     const profile: Profile = saveServer.getProfile(sessionId);
+    const mainStashId = getMainStashId(profile);
 
     restoreMainStash(profile, logger);
-    restoreTraders(config, profile, logger);
+    restoreTraders(config, tradersAvailabilityService, profile, logger);
+    setInventorySlotIds(profile, mainStashId, config.hideout_secondary_stashes);
   });
 
   saveServer.save();

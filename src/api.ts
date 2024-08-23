@@ -78,7 +78,7 @@ export const createPathToTarkovAPI = (
       }
 
       if (controller.getConfig(sessionId).traders_access_restriction) {
-        controller.tradersController.initTraders(controller.getConfig(sessionId).traders_config);
+        controller.tradersController.initTraders(controller.getConfig(sessionId));
       }
 
       controller.initPlayer(sessionId, false);

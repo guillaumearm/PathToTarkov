@@ -36,6 +36,7 @@ import type { IHideoutArea } from '@spt/models/eft/hideout/IHideoutArea';
 import type { LocationCallbacks } from '@spt/callbacks/LocationCallbacks';
 import type { IGetBodyResponseData } from '@spt/models/eft/httpResponse/IGetBodyResponseData';
 import type { Inventory } from '@spt/models/eft/common/tables/IBotBase';
+import { TradersAvailabilityService } from './services/TradersAvailabilityService';
 
 type IndexedLocations = Record<string, ILocationBase>;
 
@@ -66,6 +67,7 @@ export class PathToTarkovController {
   constructor(
     private readonly baseConfig: Config,
     public spawnConfig: SpawnConfig,
+    public tradersAvailabilityService: TradersAvailabilityService,
     private readonly container: DependencyContainer,
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
@@ -87,8 +89,15 @@ export class PathToTarkovController {
       return newConfig;
     };
 
+    this.tradersAvailabilityService = new TradersAvailabilityService();
     this.stashController = new StashController(this.getConfig, db, saveServer, this.debug);
-    this.tradersController = new TradersController(db, saveServer, configServer, this.logger);
+    this.tradersController = new TradersController(
+      this.tradersAvailabilityService,
+      db,
+      saveServer,
+      configServer,
+      this.logger,
+    );
     this.overrideControllers();
   }
 
@@ -216,13 +225,14 @@ export class PathToTarkovController {
 
     this.stashController.updateStash(offraidPosition, sessionId);
 
-    if (this.getConfig(sessionId).traders_access_restriction) {
-      this.tradersController.updateTraders(
-        this.getConfig(sessionId).traders_config,
-        offraidPosition,
-        sessionId,
-      );
-    }
+    const config = this.getConfig(sessionId);
+
+    this.tradersController.updateTraders(
+      config.traders_config,
+      config.traders_access_restriction,
+      offraidPosition,
+      sessionId,
+    );
 
     this.saveServer.saveProfile(sessionId);
   }

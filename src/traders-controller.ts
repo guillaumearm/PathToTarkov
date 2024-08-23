@@ -1,12 +1,13 @@
+import type { TradersAvailabilityService } from './services/TradersAvailabilityService';
 import type { ConfigTypes } from '@spt/models/enums/ConfigTypes';
 import type { IInsuranceConfig } from '@spt/models/spt/config/IInsuranceConfig';
 import type { ILogger } from '@spt/models/spt/utils/ILogger';
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { ConfigServer } from '@spt/servers/ConfigServer';
 import type { SaveServer } from '@spt/servers/SaveServer';
-import type { LocaleName, StaticTradersConfig, TradersConfig } from './config';
-import { JAEGER_ID, PRAPOR_ID } from './config';
-import { checkAccessVia, isJaegerIntroQuestCompleted } from './helpers';
+import type { Config, LocaleName, TradersConfig } from './config';
+import { PRAPOR_ID } from './config';
+import { checkAccessVia } from './helpers';
 import { isEmptyArray } from './utils';
 import type { ITraderConfig } from '@spt/models/spt/config/ITraderConfig';
 
@@ -15,14 +16,14 @@ import type { ITraderConfig } from '@spt/models/spt/config/ITraderConfig';
  */
 export class TradersController {
   constructor(
+    private readonly tradersAvailabilityService: TradersAvailabilityService,
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
     private readonly configServer: ConfigServer,
     private readonly logger: ILogger,
   ) {}
 
-  initTraders(tradersConfig: StaticTradersConfig): void {
-    this.fixInsuranceDialogues();
+  initTraders(config: Config): void {
     this.disableFenceGiftForCoopExtracts();
 
     const traders = this.db.getTables().traders;
@@ -32,6 +33,13 @@ export class TradersController {
       throw new Error('Fatal initTraders: no traders found in db');
     }
 
+    if (!config.traders_access_restriction) {
+      return;
+    }
+
+    this.fixInsuranceDialogues();
+
+    const tradersConfig = config.traders_config;
     Object.keys(tradersConfig).forEach(traderId => {
       const trader = traders[traderId];
 
@@ -183,18 +191,24 @@ export class TradersController {
     });
   }
 
-  updateTraders(tradersConfig: TradersConfig, offraidPosition: string, sessionId: string): void {
+  updateTraders(
+    tradersConfig: TradersConfig,
+    tradersAccessRestriction: boolean,
+    offraidPosition: string,
+    sessionId: string,
+  ): void {
     const profile = this.saveServer.getProfile(sessionId);
     const pmc = profile.characters.pmc;
     const tradersInfo = pmc.TradersInfo;
-    const isJaegerAvailable = isJaegerIntroQuestCompleted(pmc.Quests);
+
+    const allUnlocked = !tradersAccessRestriction;
 
     Object.keys(tradersConfig).forEach(traderId => {
-      let unlocked = checkAccessVia(tradersConfig[traderId].access_via, offraidPosition);
+      const isAvailable = this.tradersAvailabilityService.isAvailable(traderId, pmc.Quests);
 
-      if (traderId === JAEGER_ID) {
-        unlocked = unlocked && isJaegerAvailable;
-      }
+      const unlocked =
+        isAvailable &&
+        (allUnlocked || checkAccessVia(tradersConfig[traderId].access_via, offraidPosition));
 
       if (tradersInfo[traderId]) {
         tradersInfo[traderId].unlocked = unlocked;
