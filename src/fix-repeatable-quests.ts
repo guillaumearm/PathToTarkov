@@ -5,6 +5,7 @@ import type { IRepeatableQuestConfig } from '@spt/models/spt/config/IQuestConfig
 import type { IQuestTypePool } from '@spt/models/spt/repeatable/IQuestTypePool';
 import type { DependencyContainer } from 'tsyringe';
 import { deepClone } from './utils';
+import type { IPmcData } from '@spt/models/eft/common/IPmcData';
 
 export const fixRepeatableQuests = (container: DependencyContainer): void => {
   container.afterResolution<RepeatableQuestGenerator>(
@@ -39,4 +40,30 @@ export const fixRepeatableQuests = (container: DependencyContainer): void => {
       };
     },
   );
+};
+
+// Repeatable quests without traderId will break the client
+const isBrokenRepeatableQuest = (quest: IRepeatableQuest): boolean => {
+  return !quest.traderId;
+};
+
+// this will fix corrupted profiles from previous version (< 5.3.3)
+export const fixRepeatableQuestsForPmc = (pmc: IPmcData): number => {
+  let nbQuestsRemoved = 0;
+
+  const questFilterFn = (q: IRepeatableQuest): boolean => {
+    const isBroken = isBrokenRepeatableQuest(q);
+    if (isBroken) {
+      nbQuestsRemoved += 1;
+      return false;
+    }
+    return true;
+  };
+
+  pmc.RepeatableQuests.forEach(repeatableQuest => {
+    repeatableQuest.activeQuests = repeatableQuest.activeQuests.filter(questFilterFn);
+    repeatableQuest.inactiveQuests = repeatableQuest.inactiveQuests.filter(questFilterFn);
+  });
+
+  return nbQuestsRemoved;
 };
