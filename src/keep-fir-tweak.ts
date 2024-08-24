@@ -1,4 +1,4 @@
-import type { MatchCallbacks } from '@spt/callbacks/MatchCallbacks';
+import type { MatchController } from '@spt/controllers/MatchController';
 import type { IPmcData } from '@spt/models/eft/common/IPmcData';
 import type { Item } from '@spt/models/eft/common/tables/IItem';
 import type { SaveServer } from '@spt/servers/SaveServer';
@@ -31,22 +31,20 @@ const setSpawnedInSessionOnAllItems = (items: Item[]): number => {
 export const enableKeepFoundInRaidTweak = (ptt: PTTInstance): void => {
   const saveServer = ptt.container.resolve<SaveServer>('SaveServer');
 
-  ptt.container.afterResolution<MatchCallbacks>(
-    'MatchCallbacks',
+  ptt.container.afterResolution<MatchController>(
+    'MatchController',
     (_t, result): void => {
-      const matchCallbacks = Array.isArray(result) ? result[0] : result;
+      const matchController = Array.isArray(result) ? result[0] : result;
 
-      const originalEndOfflineRaid = matchCallbacks.endOfflineRaid.bind(matchCallbacks);
+      const originalEndOfflineRaid = matchController.endOfflineRaid.bind(matchController);
 
-      matchCallbacks.endOfflineRaid = (url, info, sessionId) => {
-        const result = originalEndOfflineRaid(url, info, sessionId);
+      matchController.endOfflineRaid = (info, sessionId) => {
+        originalEndOfflineRaid(info, sessionId);
 
         const profile = saveServer.getProfile(sessionId);
         const pmcData: IPmcData = profile.characters.pmc;
         const count = setSpawnedInSessionOnAllItems(pmcData.Inventory.items);
         ptt.debug(`added 'SpawnedInSession' flag on ${count} items`);
-
-        return result;
       };
     },
     { frequency: 'Always' },
