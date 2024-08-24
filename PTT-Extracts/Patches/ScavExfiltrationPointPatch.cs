@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using SPT.Reflection.Patching;
 using EFT.Interactive;
-using HarmonyLib;
 
-namespace PTTExtracts.Patches
+namespace PTT.Extracts
 {
     public class ScavExfiltrationPointPatch : ModulePatch
     {

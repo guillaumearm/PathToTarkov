@@ -7,7 +7,7 @@ using EFT.Interactive;
 using HarmonyLib;
 using PTTExtracts.Core;
 
-namespace PTTExtracts.Patches
+namespace PTT.Extracts
 {
     public class InitAllExfiltrationPointsPatch : ModulePatch
     {
