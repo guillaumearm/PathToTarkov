@@ -1,28 +1,14 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using SPT.Reflection.Patching;
 using EFT.Interactive;
 using HarmonyLib;
+using PTTExtracts.Core;
 
-namespace PTTExtracts
+namespace PTTExtracts.Patches
 {
-    public class ScavExfiltrationPointPatch : ModulePatch
-    {
-        protected override MethodBase GetTargetMethod()
-        {
-            return typeof(ScavExfiltrationPoint).GetMethod("InfiltrationMatch", BindingFlags.Public | BindingFlags.Instance);
-        }
-
-        [PatchPrefix]
-        private static bool Prefix(ref bool __result)
-        {
-            __result = true;
-            return false;
-        }
-    }
-
     public class InitAllExfiltrationPointsPatch : ModulePatch
     {
         public static bool NameMatches(LocationExitClass x)
@@ -61,6 +47,8 @@ namespace PTTExtracts
 
             List<ExfiltrationPoint> pmcExfilList = pmcExfilArr.ToList<ExfiltrationPoint>();
 
+            CustomExtractHandler.PatchExfiltrationPoints(pmcExfilList);
+
             foreach (ExfiltrationPoint scavExfil in scavExfilArr)
             {
                 if (!pmcExfilList.Any(k => k.Settings.Name == scavExfil.Settings.Name))
@@ -95,7 +83,7 @@ namespace PTTExtracts
             AccessTools.Field(typeof(ExfiltrationControllerClass), "list_0").SetValue(__instance, list_0);
             AccessTools.Field(typeof(ExfiltrationControllerClass), "list_1").SetValue(__instance, list_1);
 
-            UnityEngine.Random.InitState((int) DateTimeOffset.UtcNow.ToUnixTimeSeconds());
+            UnityEngine.Random.InitState((int)DateTimeOffset.UtcNow.ToUnixTimeSeconds());
 
             foreach (ExfiltrationPoint exfiltrationPoint in __instance.ExfiltrationPoints)
             {
@@ -119,4 +107,5 @@ namespace PTTExtracts
             return false;
         }
     }
+
 }

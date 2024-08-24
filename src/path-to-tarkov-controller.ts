@@ -17,6 +17,8 @@ import {
   PTT_INFILTRATION,
 } from './helpers';
 
+import { CustomExtracts } from './custom-extracts';
+
 import { getTemplateIdFromStashId, StashController } from './stash-controller';
 import { TradersController } from './traders-controller';
 import type { DependencyContainer } from 'tsyringe';
@@ -60,6 +62,7 @@ const getIndexedLocations = (locations: ILocations): IndexedLocations => {
 export class PathToTarkovController {
   public stashController: StashController;
   public tradersController: TradersController;
+  public customExtracts: CustomExtracts;
 
   // configs are indexed by sessionId
   private configCache: Record<string, Config> = {};
@@ -100,6 +103,7 @@ export class PathToTarkovController {
       this.logger,
     );
     this.overrideControllers();
+    this.customExtracts = new CustomExtracts();
   }
 
   setConfig(config: Config, sessionId: string): void {
@@ -591,6 +595,8 @@ export class PathToTarkovController {
       // erase all exits and create custom exit points without requirements
       locationBase.exits = extractPoints.map(createExitPoint);
     }
+    // combine custom extracts with vanilla ones
+    locationBase.exits = this.customExtracts.initCustomExtracts(locationBase);
 
     return true;
   }

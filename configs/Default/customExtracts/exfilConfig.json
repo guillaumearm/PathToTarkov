@@ -1,0 +1,155 @@
+[
+  {
+    "Id": "sandbox",
+    "exits": [
+      {
+        "CubeData": {
+          "Name": "newExtract_ToKilmovStreet",
+          "Scale": {
+            "x": 2,
+            "y": 2,
+            "z": 2
+          },
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Position": {
+            "x": 232.3745,
+            "y": 17.5048,
+            "z": 76.0496
+          }
+        },
+        "ExtractData": {
+          "Name": "to_kilmov_street",
+          "RequirementTip": "",
+          "EntryPoints": "west",
+          "ExfiltrationTime": 10,
+          "ExfiltrationType": "Individual",
+          "Chance": 100,
+          "MaxTime": 0,
+          "MinTime": 0,
+          "PassageRequirement": "None",
+          "Id": "",
+          "Count": 350,
+          "PlayersCount": 0,
+          "RequiredSlot": "",
+          "EventAvailable": true,
+          "ChancePVE": 100,
+          "CountPVE": 0,
+          "ExfiltrationTimePVE": 10,
+          "MinTimePVE": 0,
+          "MaxTimePVE": 0,
+          "PlayersCountPVE": 0
+        },
+        "AdditionalSettings": {
+          "StartTime": 0,
+          "Status": ""
+        }
+      }
+    ]
+  },
+  {
+    "Id": "sandbox_high",
+    "exits": [
+      {
+        "CubeData": {
+          "Name": "newExtract_ToKilmovStreet",
+          "Scale": {
+            "x": 2,
+            "y": 2,
+            "z": 2
+          },
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Position": {
+            "x": 232.3745,
+            "y": 17.5048,
+            "z": 76.0496
+          }
+        },
+        "ExtractData": {
+          "Name": "to_kilmov_street",
+          "RequirementTip": "",
+          "EntryPoints": "west",
+          "ExfiltrationTime": 10,
+          "ExfiltrationType": "Individual",
+          "Chance": 100,
+          "MaxTime": 0,
+          "MinTime": 0,
+          "PassageRequirement": "None",
+          "Id": "",
+          "Count": 350,
+          "PlayersCount": 0,
+          "RequiredSlot": "",
+          "EventAvailable": true,
+          "ChancePVE": 100,
+          "CountPVE": 0,
+          "ExfiltrationTimePVE": 10,
+          "MinTimePVE": 0,
+          "MaxTimePVE": 0,
+          "PlayersCountPVE": 0
+        },
+        "AdditionalSettings": {
+          "StartTime": 0,
+          "Status": ""
+        }
+      }
+    ]
+  },
+  {
+    "Id": "factory4_day",
+    "exits": [
+      {
+        "CubeData": {
+          "Name": "newExtract_THISISATEST",
+          "Scale": {
+            "x": 2.5,
+            "y": 2.5,
+            "z": 2.5
+          },
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Position": {
+            "x": 46,
+            "y": 0,
+            "z": -40
+          }
+        },
+        "ExtractData": {
+          "Chance": 100,
+          "Count": 350,
+          "EntryPoints": "Factory",
+          "ExfiltrationTime": 10,
+          "ExfiltrationType": "Individual",
+          "Id": "5449016a4bdc2d6f028b456f",
+          "MaxTime": 0,
+          "MinTime": 0,
+          "Name": "this_is_a_test",
+          "PassageRequirement": "TransferItem",
+          "PlayersCount": 0,
+          "RequiredSlot": "FirstPrimaryWeapon",
+          "RequirementTip": "tree_fiddy",
+          "EventAvailable": true,
+          "ChancePVE": 100,
+          "CountPVE": 0,
+          "ExfiltrationTimePVE": 10,
+          "MinTimePVE": 0,
+          "MaxTimePVE": 0,
+          "PlayersCountPVE": 0
+        },
+        "AdditionalSettings": {
+          "StartTime": 0,
+          "Status": "UncompleteRequirements"
+        }
+      }
+    ]
+  }
+]
