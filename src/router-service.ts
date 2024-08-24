@@ -1,5 +1,3 @@
-import { LogTextColor } from '@spt/models/spt/logging/LogTextColor';
-// WTT imports
 import type { InstanceManager } from './instance-manager';
 import { CustomExtracts } from './custom-extracts';
 
@@ -13,7 +11,7 @@ export class RouterService {
     this.registerGetAllCustomExtractsRoute();
     this.instanceManager.logger.log(
       `[${this.instanceManager.modName}] WTTRouter: Initialized and registered routes.`,
-      LogTextColor.GREEN,
+      'green',
     );
   }
 
@@ -30,7 +28,7 @@ export class RouterService {
             if (!allCustomExtracts || allCustomExtracts.length === 0) {
               this.instanceManager.logger.log(
                 `[${this.instanceManager.modName}] No custom extracts found.`,
-                LogTextColor.RED,
+                'red',
               );
               return JSON.stringify({ success: false, message: 'No custom extracts found' });
             }
@@ -38,7 +36,7 @@ export class RouterService {
             // Send all custom extracts data to the client
             this.instanceManager.logger.log(
               `[${this.instanceManager.modName}] All custom extracts sent.`,
-              LogTextColor.GREEN,
+              'green',
             );
             return JSON.stringify({ success: true, data: allCustomExtracts });
           },
