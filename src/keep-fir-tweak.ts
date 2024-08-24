@@ -38,8 +38,6 @@ export const enableKeepFoundInRaidTweak = (ptt: PTTInstance): void => {
 
       const originalEndOfflineRaid = matchController.endOfflineRaid.bind(matchController);
 
-      ptt.debug('Hello world here is the override of MatchCOntroller.endOfflineRaid');
-
       matchController.endOfflineRaid = (info, sessionId) => {
         originalEndOfflineRaid(info, sessionId);
 
