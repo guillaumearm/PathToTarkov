@@ -23,7 +23,7 @@ export class RouterService {
       [
         {
           url: '/PathToTarkov/CustomExtracts',
-          action: async (url, info, sessionId) => {
+          action: async (_url, _info, _sessionId) => {
             // Call the method to load all custom extracts
             const allCustomExtracts = this.customExtracts.loadAllCustomExtractConfigs();
 
