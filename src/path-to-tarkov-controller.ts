@@ -17,7 +17,7 @@ import {
   PTT_INFILTRATION,
 } from './helpers';
 
-import { CustomExtracts } from "./custom-extracts";
+import { CustomExtracts } from './custom-extracts';
 
 import { getTemplateIdFromStashId, StashController } from './stash-controller';
 import { TradersController } from './traders-controller';

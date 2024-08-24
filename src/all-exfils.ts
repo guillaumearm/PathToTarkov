@@ -138,26 +138,16 @@ const ALL_DUMPED_EXFILS_FROM_SCRIPT = {
   ],
 };
 const ALL_NEW_CUSTOM_EXFILS = {
-  customs: [
-  ],
+  customs: [],
   factory: ['this_is_a_test'],
-  interchange: [
-  ],
-  woods: [
-  ],
-  shoreline: [
-  ],
-  reserve: [
-  ],
-  lighthouse: [
-  ],
-  streets: [
-  ],
-  laboratory: [
-  ],
-  groundzero: [
-    'to_kilmov_street',
-  ],
+  interchange: [],
+  woods: [],
+  shoreline: [],
+  reserve: [],
+  lighthouse: [],
+  streets: [],
+  laboratory: [],
+  groundzero: ['to_kilmov_street'],
 };
 // APPLY ALIASES FOR MAP
 const ALL_EXFILS: Record<string, string[]> = {
