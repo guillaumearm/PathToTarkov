@@ -37,6 +37,7 @@ import type { LocationCallbacks } from '@spt/callbacks/LocationCallbacks';
 import type { IGetBodyResponseData } from '@spt/models/eft/httpResponse/IGetBodyResponseData';
 import type { Inventory } from '@spt/models/eft/common/tables/IBotBase';
 import { TradersAvailabilityService } from './services/TradersAvailabilityService';
+import { fixRepeatableQuestsForPmc } from './fix-repeatable-quests';
 
 type IndexedLocations = Record<string, ILocationBase>;
 
@@ -155,6 +156,7 @@ export class PathToTarkovController {
     void this.getConfig(sessionId);
 
     this.stashController.initProfile(sessionId);
+    this.fixRepeatableQuestsForProfile(sessionId);
 
     const offraidPosition = this.getOffraidPosition(sessionId);
     this.updateOffraidPosition(sessionId, offraidPosition);
@@ -203,6 +205,14 @@ export class PathToTarkovController {
     // TODO: if '*' -> pick a random offraid position from all available
     return respawnAt[0];
   };
+
+  private fixRepeatableQuestsForProfile(sessionId: string): void {
+    const profile = this.saveServer.getProfile(sessionId);
+    const pmc = profile.characters.pmc;
+
+    const nbRemovedQuests = fixRepeatableQuestsForPmc(pmc);
+    this.debug(`${nbRemovedQuests} removed broken repeatable quests in profile ${sessionId}`);
+  }
 
   private updateOffraidPosition(sessionId: string, offraidPosition?: string): void {
     if (!offraidPosition) {
