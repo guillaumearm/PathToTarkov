@@ -95,7 +95,7 @@ namespace PTTExtracts
             AccessTools.Field(typeof(ExfiltrationControllerClass), "list_0").SetValue(__instance, list_0);
             AccessTools.Field(typeof(ExfiltrationControllerClass), "list_1").SetValue(__instance, list_1);
 
-            UnityEngine.Random.InitState((int) DateTimeOffset.UtcNow.ToUnixTimeSeconds());
+            UnityEngine.Random.InitState((int)DateTimeOffset.UtcNow.ToUnixTimeSeconds());
 
             foreach (ExfiltrationPoint exfiltrationPoint in __instance.ExfiltrationPoints)
             {
@@ -104,7 +104,7 @@ namespace PTTExtracts
                 LocationExitClass gclass = settings.FirstOrDefault(new Func<LocationExitClass, bool>(NameMatches));
                 if (gclass != null)
                 {
-                    exfiltrationPoint.LoadSettings(gclass, giveAuthority);
+                    exfiltrationPoint.LoadSettings(exfiltrationPoint.Id, gclass, giveAuthority);
                     if (!justLoadSettings && !RandomRange(exfiltrationPoint))
                     {
                         exfiltrationPoint.SetStatusLogged(EExfiltrationStatus.NotPresent, "ExfiltrationController.InitAllExfiltrationPoints-2");
