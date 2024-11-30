@@ -224,7 +224,7 @@ export const MAPLIST = [
 ];
 
 // sandbox_high is a special map for high level players (> 20)
-export const prepareGroundZeroHigh = <T>(maps: ByMap<T>): ByMap<T> => {
+const prepareGroundZeroHigh = <T>(maps: ByMap<T>): ByMap<T> => {
   if (maps.sandbox && !maps.sandbox_high) {
     return {
       ...maps,
