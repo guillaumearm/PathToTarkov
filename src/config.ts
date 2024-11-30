@@ -1,6 +1,6 @@
 import type { ISptProfile } from '@spt/models/eft/profile/ISptProfile';
 import { join } from 'path';
-import { deepClone, fileExists, readJsonFile, writeJsonFile } from './utils';
+import { deepClone, fileExists, getPTTMongoId, readJsonFile, writeJsonFile } from './utils';
 
 type ByMap<T> = {
   factory4_day: T;
@@ -47,6 +47,15 @@ export type SpawnConfig = ByMap<{
  * config.json
  */
 export type StashConfig = {
+  mongoId: string; // generated from name
+  mongoGridId: string; // generated from name
+  mongoTemplateId: string; // generated from name
+  name: string; // should be uniq
+  size: number;
+  access_via: AccessVia;
+};
+
+export type RawStashConfig = {
   id: string;
   size: number;
   access_via: AccessVia;
@@ -129,7 +138,7 @@ export type OverrideByProfiles = ByProfileId<{
   hideout_main_stash_access_via?: AccessVia;
 }>;
 
-export type Config = {
+type RawConfig = {
   enabled: boolean;
   debug?: boolean;
   override_by_profiles?: OverrideByProfiles;
@@ -148,11 +157,15 @@ export type Config = {
   restrictions_in_raid: Record<string, { Value: number }>;
   offraid_regen_config: OffraidRegenConfig;
   hideout_main_stash_access_via: AccessVia;
-  hideout_secondary_stashes: StashConfig[];
+  hideout_secondary_stashes: RawStashConfig[];
   traders_access_restriction: boolean;
   traders_config: TradersConfig;
   exfiltrations: Exfiltrations;
   infiltrations: Infiltrations;
+};
+
+export type Config = Omit<RawConfig, 'hideout_secondary_stashes'> & {
+  hideout_secondary_stashes: StashConfig[];
 };
 
 export type PathToTarkovReloadedTooltipsConfig = {
@@ -199,10 +212,27 @@ export const VANILLA_STASH_IDS = [
   '6602bcf19cc643f44a04274b', // Unheard
 ];
 
-export const EMPTY_STASH: Omit<StashConfig, 'access_via'> = {
+const toStashConfig = (rawStashConfig: RawStashConfig): StashConfig => {
+  const name = rawStashConfig.id; // the id is actually the name (this is to avoid breaking changes in the ptt configs)
+  const mongoId = getPTTMongoId(name);
+  const mongoTemplateId = getPTTMongoId(`template_${name}`);
+  const mongoGridId = getPTTMongoId(`grid_${name}`);
+
+  return {
+    name,
+    size: rawStashConfig.size,
+    access_via: rawStashConfig.access_via,
+    mongoId,
+    mongoTemplateId,
+    mongoGridId,
+  };
+};
+
+export const EMPTY_STASH = toStashConfig({
   id: 'PathToTarkov_Empty_Stash',
   size: 0,
-};
+  access_via: [], // not used but this simplify typing
+});
 
 export const SLOT_ID_HIDEOUT = 'hideout';
 export const SLOT_ID_LOCKED_STASH = 'ptt_locked_stash';
@@ -235,7 +265,7 @@ const prepareGroundZeroHigh = <T>(maps: ByMap<T>): ByMap<T> => {
   return maps;
 };
 
-export const processConfig = (originalConfig: Config): Config => {
+export const processConfig = (originalConfig: RawConfig): Config => {
   const config = deepClone(originalConfig);
 
   config.exfiltrations = prepareGroundZeroHigh(config.exfiltrations);
@@ -246,7 +276,12 @@ export const processConfig = (originalConfig: Config): Config => {
     );
   });
 
-  return config;
+  const stashConfigs: StashConfig[] = config.hideout_secondary_stashes.map(toStashConfig);
+
+  return {
+    ...config,
+    hideout_secondary_stashes: stashConfigs,
+  };
 };
 
 export const processSpawnConfig = (spawnConfig: SpawnConfig): SpawnConfig => {

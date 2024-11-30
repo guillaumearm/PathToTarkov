@@ -5,14 +5,7 @@ import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { StaticRouterModService } from '@spt/services/mod/staticRouter/StaticRouterModService';
 
 import type { AccessVia, Config, PositionXYZ, Profile, SpawnPoint, StashConfig } from './config';
-import {
-  EMPTY_STASH,
-  SLOT_ID_HIDEOUT,
-  SLOT_ID_LOCKED_STASH,
-  STANDARD_STASH_ID,
-  VANILLA_STASH_IDS,
-} from './config';
-import { isDigit, isLetter } from './utils';
+import { EMPTY_STASH, SLOT_ID_HIDEOUT, SLOT_ID_LOCKED_STASH, VANILLA_STASH_IDS } from './config';
 import type { IItem } from '@spt/models/eft/common/tables/IItem';
 
 export function checkAccessVia(access_via: AccessVia, value: string): boolean {
@@ -199,7 +192,7 @@ const getAllStashByIds = (
   return stashConfigs.reduce((acc, stashConfig) => {
     return {
       ...acc,
-      [stashConfig.id]: true,
+      [stashConfig.mongoId]: true,
     };
   }, initialAcc);
 };
@@ -224,25 +217,6 @@ export const setInventorySlotIds = (
   });
 };
 
-// the length should be 24
-const SPT_ID_LENGTH = STANDARD_STASH_ID.length;
-
-export const isVanillaSptId = (id: string): boolean => {
-  if (id.length !== SPT_ID_LENGTH) {
-    return false;
-  }
-
-  for (const char of id) {
-    const isValidChar = isLetter(char) || isDigit(char);
-
-    if (!isValidChar) {
-      return false;
-    }
-  }
-
-  return true;
-};
-
 const isStashLink = (item: IItem): boolean => {
   return (
     Boolean(item._id) &&
@@ -252,9 +226,20 @@ const isStashLink = (item: IItem): boolean => {
   );
 };
 
-export const retrieveMainStashIdFromItems = (items: IItem[]): string | null => {
+const isPTTMongoId = (id: string, stashes: StashConfig[]): boolean => {
+  const foundId = stashes.find(stash => {
+    return id === stash.mongoId || id === stash.mongoTemplateId || id === stash.mongoGridId;
+  });
+
+  return Boolean(foundId);
+};
+
+export const retrieveMainStashIdFromItems = (
+  items: IItem[],
+  stashes: StashConfig[],
+): string | null => {
   for (const item of items) {
-    if (isStashLink(item) && isVanillaSptId(item._id)) {
+    if (isStashLink(item) && !isPTTMongoId(item._id, stashes)) {
       return item._id;
     }
   }

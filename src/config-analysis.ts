@@ -85,7 +85,7 @@ const getErrorsForOffraidPositions = (config: Config): string[] => {
   config.hideout_secondary_stashes.forEach(secondaryStashConfig => {
     errors.push(
       ...checkAccessViaErrors(
-        `hideout_secondary_stashes.${secondaryStashConfig.id}.access_via`,
+        `hideout_secondary_stashes.${secondaryStashConfig.name}.access_via`,
         secondaryStashConfig.access_via,
         config,
       ),
@@ -153,19 +153,19 @@ const getErrorsForExfils = (config: Config): string[] => {
 // Note: offraidPosition is already checked by `getErrorsForOffraidPositions`
 const getErrorsSecondaryStashes = (config: Config): string[] => {
   const errors: string[] = [];
-  const ids: Set<string> = new Set();
+  const names: Set<string> = new Set();
 
   config.hideout_secondary_stashes.forEach(stashConfig => {
-    if (stashConfig.id === EMPTY_STASH.id) {
+    if (stashConfig.name === EMPTY_STASH.name) {
       errors.push(
-        `secondary stash ${stashConfig.id} is a special reserved name, please choose another.`,
+        `secondary stash ${stashConfig.name} is a special reserved name, please choose another.`,
       );
     }
 
-    if (ids.has(stashConfig.id)) {
-      errors.push(`duplicated secondary stash ${stashConfig.id} found`);
+    if (names.has(stashConfig.name)) {
+      errors.push(`duplicated secondary stash ${stashConfig.name} found`);
     }
-    ids.add(stashConfig.id);
+    names.add(stashConfig.name);
   });
 
   return errors;

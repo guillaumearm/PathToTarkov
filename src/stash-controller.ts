@@ -5,14 +5,10 @@ import { EMPTY_STASH, STANDARD_STASH_ID } from './config';
 import {
   checkAccessVia,
   getMainStashId,
-  isVanillaSptId,
   retrieveMainStashIdFromItems,
   setInventorySlotIds,
 } from './helpers';
 import { deepClone } from './utils';
-
-export const getTemplateIdFromStashId = (stashId: string): string => `template_${stashId}`;
-const getGridIdFromStashId = (stashId: string): string => `grid_${stashId}`;
 
 export class StashController {
   constructor(
@@ -32,19 +28,18 @@ export class StashController {
 
     let nbAddedTemplates = 0;
 
-    stashConfigs.forEach(({ id, size }) => {
+    stashConfigs.forEach(({ name, mongoTemplateId, mongoGridId, size }) => {
       const newTemplate = deepClone(standardTemplate);
-      const templateId = getTemplateIdFromStashId(id);
 
-      newTemplate._id = templateId;
-      newTemplate._name = `${id} of size ${size}`;
+      newTemplate._id = mongoTemplateId;
+      newTemplate._name = `${name} of size ${size}`;
 
       const grid = newTemplate?._props?.Grids?.[0];
       const gridProps = grid?._props;
 
       if (gridProps) {
-        grid._id = getGridIdFromStashId(id);
-        grid._parent = templateId;
+        grid._id = mongoGridId;
+        grid._parent = mongoTemplateId;
         gridProps.cellsV = size;
       } else {
         throw new Error('Path To  Tarkov: cannot set size on custom stash template');
@@ -71,8 +66,9 @@ export class StashController {
 
     const initialMainStashId = profile.PathToTarkov.mainStashId;
 
-    if (!initialMainStashId || !isVanillaSptId(initialMainStashId)) {
-      const mainStashId = retrieveMainStashIdFromItems(pmc.Inventory.items);
+    if (!initialMainStashId) {
+      const allStashConfigs = [EMPTY_STASH, ...this.getConfig(sessionId).hideout_secondary_stashes];
+      const mainStashId = retrieveMainStashIdFromItems(pmc.Inventory.items, allStashConfigs);
       profile.PathToTarkov.mainStashId = mainStashId ?? pmc.Inventory.stash;
     }
   }
@@ -84,11 +80,12 @@ export class StashController {
     inventory.stash = mainStashId;
   }
 
-  private setSecondaryStash(stashId: string, profile: Profile): void {
+  private setSecondaryStash(stash: Omit<StashConfig, 'access_via'>, profile: Profile): void {
+    const stashId = stash.mongoId;
+    const templateId = stash.mongoTemplateId;
+
     const inventory = profile.characters.pmc.Inventory;
     inventory.stash = stashId;
-
-    const templateId = getTemplateIdFromStashId(stashId);
 
     if (!inventory.items.find(item => item._id === stashId && item._tpl === templateId)) {
       inventory.items.push({ _id: stashId, _tpl: templateId });
@@ -132,7 +129,7 @@ export class StashController {
     if (mainStashAvailable) {
       this.setMainStash(profile);
     } else {
-      this.setSecondaryStash(secondaryStash.id, profile);
+      this.setSecondaryStash(secondaryStash, profile);
     }
 
     const inventory = profile.characters.pmc.Inventory;

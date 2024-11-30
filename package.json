@@ -30,7 +30,7 @@
     "build:client": "cd PTT-Extracts && dotnet.exe build",
     "clean:client": "cd PTT-Extracts && dotnet.exe clean && rimraf bin obj",
     "test:all": "npm run lint:all && npm run test && npm run build:release",
-    "test": "npx jest",
+    "test": "npx jest --verbose",
     "test:watch": "npx jest --watch",
     "test:ci": "npm run build && npm run test && npm run lint:all && npm run build:doc:all-exfils"
   },

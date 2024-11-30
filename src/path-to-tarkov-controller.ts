@@ -6,7 +6,7 @@ import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { SaveServer } from '@spt/servers/SaveServer';
 
 import type { Config, ConfigGetter, MapName, Profile, SpawnConfig } from './config';
-import { EMPTY_STASH, MAPLIST, VANILLA_STASH_IDS } from './config';
+import { MAPLIST, VANILLA_STASH_IDS } from './config';
 
 import {
   changeRestrictionsInRaid,
@@ -17,7 +17,7 @@ import {
   PTT_INFILTRATION,
 } from './helpers';
 
-import { getTemplateIdFromStashId, StashController } from './stash-controller';
+import { StashController } from './stash-controller';
 import { TradersController } from './traders-controller';
 import type { DependencyContainer } from 'tsyringe';
 import type { LocationController } from '@spt/controllers/LocationController';
@@ -35,7 +35,6 @@ import type { ITemplateItem } from '@spt/models/eft/common/tables/ITemplateItem'
 import type { IHideoutArea } from '@spt/models/eft/hideout/IHideoutArea';
 // import type { LocationCallbacks } from '@spt/callbacks/LocationCallbacks';
 import type { IGetBodyResponseData } from '@spt/models/eft/httpResponse/IGetBodyResponseData';
-import type { IInventory } from '@spt/models/eft/common/tables/IBotBase';
 import { TradersAvailabilityService } from './services/TradersAvailabilityService';
 import { fixRepeatableQuestsForPmc } from './fix-repeatable-quests';
 
@@ -110,41 +109,6 @@ export class PathToTarkovController {
   setSpawnConfig(spawnConfig: SpawnConfig): void {
     // TODO: validation ?
     this.spawnConfig = spawnConfig;
-  }
-
-  /**
-   * This is for upgrading profiles for PTT versions < 5.2.0
-   */
-  cleanupLegacySecondaryStashesLink(sessionId: string): void {
-    const profile: Profile = this.saveServer.getProfile(sessionId);
-    const inventory = profile.characters.pmc.Inventory as IInventory | undefined;
-    const secondaryStashIds: string[] = [
-      EMPTY_STASH.id,
-      ...this.getConfig(sessionId).hideout_secondary_stashes.map(config => config.id),
-    ];
-
-    if (!inventory) {
-      return;
-    }
-
-    let stashLinkRemoved = 0;
-
-    inventory.items = inventory.items.filter(item => {
-      if (
-        secondaryStashIds.includes(item._id) &&
-        item._tpl !== getTemplateIdFromStashId(item._id)
-      ) {
-        stashLinkRemoved = stashLinkRemoved + 1;
-        return false;
-      }
-
-      return true;
-    });
-
-    if (stashLinkRemoved > 0) {
-      this.debug(`[${sessionId}] cleaned up ${stashLinkRemoved} legacy stash links`);
-      this.saveServer.saveProfile(sessionId);
-    }
   }
 
   // on game start (or profile creation)
@@ -281,6 +245,7 @@ export class PathToTarkovController {
     };
   }
 
+  // TODO: iterate over MAPLIST to get locations
   // private createGetLocation(
   //   originalFn: (
   //     url: string,
@@ -297,8 +262,7 @@ export class PathToTarkovController {
   //     const rawLocationBase = originalFn(url, info, sessionId) as any as string;
   //     const parsed = JSON.parse(rawLocationBase);
   //     const locationResponse: ILocationsGenerateAllResponse = parsed.data;
-
-  //     // TODO: iterate over MAPLIST to get locations
+  //
   //     // This will handle spawnpoints and exfils for SPT
   //     // For fika, check the other call of `updateSpawnPoints`
   //     this.updateSpawnPoints(locationResponse.locations, offraidPosition, sessionId);

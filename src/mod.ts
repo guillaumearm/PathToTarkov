@@ -141,7 +141,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.container = container;
     const db = container.resolve<DatabaseServer>('DatabaseServer');
     const saveServer = container.resolve<SaveServer>('SaveServer');
-    const profiles = saveServer.getProfiles();
     const quests = db.getTables()?.templates?.quests;
 
     if (!quests) {
@@ -184,10 +183,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.executeOnStartAPICallbacks = executeOnStartAPICallbacks;
 
     this.pathToTarkovController.tradersController.initTraders(this.config);
-
-    Object.keys(profiles).forEach(profileId => {
-      this.pathToTarkovController.cleanupLegacySecondaryStashesLink(profileId);
-    });
 
     const nbAddedTemplates =
       this.pathToTarkovController.stashController.initSecondaryStashTemplates(
