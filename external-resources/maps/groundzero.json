@@ -1,5 +1,6 @@
 {
   "AccessKeys": [],
+  "AccessKeysPvE": [],
   "AirdropParameters": [
     {
       "AirdropPointDeactivateDistance": 100,
@@ -18,23 +19,194 @@
   "AveragePlayTime": 35,
   "AveragePlayerLevel": 20,
   "Banners": [],
-  "BossLocationSpawn": [],
+  "BossLocationSpawn": [
+    {
+      "BossChance": 50,
+      "BossDifficult": "easy",
+      "BossEscortAmount": "0,0,2,2,2,1,1,1,1,1,0",
+      "BossEscortDifficult": "easy",
+      "BossEscortType": "pmcBEAR",
+      "BossName": "pmcBEAR",
+      "BossPlayer": false,
+      "BossZone": "",
+      "IgnoreMaxBots": true,
+      "RandomTimeSpawn": false,
+      "SpawnMode": ["pve"],
+      "Supports": null,
+      "Time": -1,
+      "TriggerId": "",
+      "TriggerName": ""
+    },
+    {
+      "BossChance": 50,
+      "BossDifficult": "easy",
+      "BossEscortAmount": "0,0,2,2,2,1,1,1,1,1,0",
+      "BossEscortDifficult": "easy",
+      "BossEscortType": "pmcBEAR",
+      "BossName": "pmcBEAR",
+      "BossPlayer": false,
+      "BossZone": "",
+      "IgnoreMaxBots": true,
+      "RandomTimeSpawn": false,
+      "SpawnMode": ["pve"],
+      "Supports": null,
+      "Time": -1,
+      "TriggerId": "",
+      "TriggerName": ""
+    },
+    {
+      "BossChance": 50,
+      "BossDifficult": "easy",
+      "BossEscortAmount": "0,0,2,2,2,1,1,1,1,1,0",
+      "BossEscortDifficult": "easy",
+      "BossEscortType": "pmcUSEC",
+      "BossName": "pmcUSEC",
+      "BossPlayer": false,
+      "BossZone": "",
+      "IgnoreMaxBots": true,
+      "RandomTimeSpawn": false,
+      "SpawnMode": ["pve"],
+      "Supports": null,
+      "Time": -1,
+      "TriggerId": "",
+      "TriggerName": ""
+    },
+    {
+      "BossChance": 50,
+      "BossDifficult": "easy",
+      "BossEscortAmount": "0,0,2,2,2,1,1,1,1,1,0",
+      "BossEscortDifficult": "easy",
+      "BossEscortType": "pmcUSEC",
+      "BossName": "pmcUSEC",
+      "BossPlayer": false,
+      "BossZone": "",
+      "IgnoreMaxBots": true,
+      "RandomTimeSpawn": false,
+      "SpawnMode": ["pve"],
+      "Supports": null,
+      "Time": -1,
+      "TriggerId": "",
+      "TriggerName": ""
+    }
+  ],
   "BotAssault": 100,
   "BotEasy": 100,
   "BotHard": 0,
   "BotImpossible": 0,
   "BotLocationModifier": {
     "AccuracySpeed": 1,
+    "AdditionalHostilitySettings": [
+      {
+        "AlwaysEnemies": [
+          "pmcBot",
+          "exUsec",
+          "bossBully",
+          "bossBoar",
+          "bossTagilla",
+          "bossKilla",
+          "bossKojaniy",
+          "bossSanitar",
+          "bossKolontay",
+          "bossGluhar",
+          "bossKnight"
+        ],
+        "AlwaysFriends": [
+          "bossZryachiy",
+          "followerZryachiy",
+          "peacefullZryachiyEvent",
+          "ravangeZryachiyEvent",
+          "gifter"
+        ],
+        "BearEnemyChance": 35,
+        "BearPlayerBehaviour": "ChancedEnemies",
+        "BotRole": "pmcBEAR",
+        "ChancedEnemies": [
+          {
+            "EnemyChance": 70,
+            "Role": "assault"
+          },
+          {
+            "EnemyChance": 70,
+            "Role": "marksman"
+          },
+          {
+            "EnemyChance": 75,
+            "Role": "pmcUSEC"
+          }
+        ],
+        "Neutral": ["sectantPriest", "sectantWarrior"],
+        "SavagePlayerBehaviour": "Warn",
+        "UsecEnemyChance": 50,
+        "UsecPlayerBehaviour": "ChancedEnemies",
+        "Warn": ["sectactPriestEvent"]
+      },
+      {
+        "AlwaysEnemies": [
+          "pmcBot",
+          "bossBully",
+          "bossBoar",
+          "bossTagilla",
+          "bossKilla",
+          "bossKojaniy",
+          "bossSanitar",
+          "bossKolontay",
+          "bossGluhar"
+        ],
+        "AlwaysFriends": [
+          "bossZryachiy",
+          "followerZryachiy",
+          "peacefullZryachiyEvent",
+          "ravangeZryachiyEvent",
+          "gifter"
+        ],
+        "BearEnemyChance": 50,
+        "BearPlayerBehaviour": "ChancedEnemies",
+        "BotRole": "pmcUSEC",
+        "ChancedEnemies": [
+          {
+            "EnemyChance": 70,
+            "Role": "assault"
+          },
+          {
+            "EnemyChance": 70,
+            "Role": "marksman"
+          },
+          {
+            "EnemyChance": 75,
+            "Role": "pmcBEAR"
+          },
+          {
+            "EnemyChance": 15,
+            "Role": "exUsec"
+          },
+          {
+            "EnemyChance": 15,
+            "Role": "bossKnight"
+          }
+        ],
+        "Neutral": ["sectantPriest", "sectantWarrior"],
+        "SavagePlayerBehaviour": "Warn",
+        "UsecEnemyChance": 35,
+        "UsecPlayerBehaviour": "ChancedEnemies",
+        "Warn": ["sectactPriestEvent"]
+      }
+    ],
+    "DistToActivate": 260,
+    "DistToActivatePvE": 260,
+    "DistToSleep": 300,
+    "DistToSleepPvE": 300,
     "GainSight": 1,
     "MarksmanAccuratyCoef": 1,
+    "MaxExfiltrationTime": 1500,
+    "MinExfiltrationTime": 1200,
     "Scattering": 1,
     "VisibleDistance": 1
   },
   "BotMarksman": 0,
-  "BotMax": 20,
-  "BotMaxPlayer": 0,
+  "BotMax": 12,
+  "BotMaxPlayer": 10,
   "BotMaxPvE": 20,
-  "BotMaxTimePlayer": 0,
+  "BotMaxTimePlayer": 1000,
   "BotNormal": 0,
   "BotSpawnCountStep": 3,
   "BotSpawnPeriodCheck": 14,
@@ -43,7 +215,7 @@
   "BotSpawnTimeOnMax": 380,
   "BotSpawnTimeOnMin": 290,
   "BotStart": 120,
-  "BotStartPlayer": 0,
+  "BotStartPlayer": 126,
   "BotStop": 1800,
   "Description": "The downtown Tarkov with banks, malls, hotels and all the other things a striving modern city could have needed.",
   "DisabledForScav": false,
@@ -53,15 +225,93 @@
   "EscapeTimeLimit": 35,
   "EscapeTimeLimitCoop": 30,
   "EscapeTimeLimitPVE": 35,
-  "ExitZones": {
-    "$oid": "5c82534488a45046451a2386"
+  "Events": {
+    "Halloween2024": {
+      "CrowdAttackBlockRadius": 100,
+      "CrowdAttackSpawnParams": [
+        {
+          "Difficulty": "easy",
+          "Role": "infectedAssault",
+          "Weight": 20
+        },
+        {
+          "Difficulty": "normal",
+          "Role": "infectedAssault",
+          "Weight": 80
+        },
+        {
+          "Difficulty": "hard",
+          "Role": "infectedAssault",
+          "Weight": 40
+        },
+        {
+          "Difficulty": "easy",
+          "Role": "infectedPmc",
+          "Weight": 5
+        },
+        {
+          "Difficulty": "normal",
+          "Role": "infectedPmc",
+          "Weight": 35
+        },
+        {
+          "Difficulty": "hard",
+          "Role": "infectedPmc",
+          "Weight": 20
+        },
+        {
+          "Difficulty": "easy",
+          "Role": "infectedCivil",
+          "Weight": 15
+        },
+        {
+          "Difficulty": "normal",
+          "Role": "infectedCivil",
+          "Weight": 60
+        },
+        {
+          "Difficulty": "hard",
+          "Role": "infectedCivil",
+          "Weight": 0
+        },
+        {
+          "Difficulty": "easy",
+          "Role": "infectedLaborant",
+          "Weight": 0
+        },
+        {
+          "Difficulty": "normal",
+          "Role": "infectedLaborant",
+          "Weight": 0
+        },
+        {
+          "Difficulty": "hard",
+          "Role": "infectedLaborant",
+          "Weight": 0
+        }
+      ],
+      "CrowdCooldownPerPlayerSec": 300,
+      "CrowdsLimit": 2,
+      "InfectedLookCoeff": 2,
+      "InfectionPercentage": 0,
+      "MaxCrowdAttackSpawnLimit": 18,
+      "MinInfectionPercentage": 0,
+      "MinSpawnDistToPlayer": 50,
+      "TargetPointSearchRadiusLimit": 150,
+      "ZombieCallDeltaRadius": 20,
+      "ZombieCallPeriodSec": 1,
+      "ZombieCallRadiusLimit": 100,
+      "ZombieMultiplier": 5
+    }
   },
+  "ExitZones": "5c82534488a45046451a2386",
+  "ForceOnlineRaidInPVE": false,
   "GenerateLocalLootCache": true,
   "GlobalContainerChanceModifier": 1,
-  "GlobalLootChanceModifier": 0.72,
+  "GlobalLootChanceModifier": 0.34,
   "GlobalLootChanceModifierPvE": 0.72,
   "IconX": 760,
-  "IconY": 740,
+  "IconY": 735,
   "Id": "Sandbox",
   "Insurance": true,
   "IsSecret": false,
@@ -108,6 +358,7 @@
   "MinPlayers": 9,
   "Name": "Sandbox",
   "NewSpawn": true,
+  "NewSpawnForPlayers": true,
   "NonWaveGroupScenario": {
     "Chance": 50,
     "Enabled": true,
@@ -116,8 +367,8 @@
   },
   "OcculsionCullingEnabled": false,
   "OfflineNewSpawn": true,
-  "OfflineOldSpawn": false,
-  "OldSpawn": false,
+  "OfflineOldSpawn": true,
+  "OldSpawn": true,
   "OpenZones": "",
   "PlayersRequestCount": -1,
   "PmcMaxPlayersInGroup": 5,
@@ -4936,7 +5187,7 @@
       "Sides": ["Savage"]
     }
   ],
-  "UnixDateTime": 1707141759,
+  "UnixDateTime": 1621511450,
   "_Id": "653e6760052c01c1c805532f",
   "doors": [],
   "exit_access_time": 35,
@@ -5060,178 +5311,33 @@
   "matching_min_seconds": 60,
   "sav_summon_seconds": 60,
   "tmp_location_field_remove_me": 0,
+  "transits": [
+    {
+      "activateAfterSec": 60,
+      "active": true,
+      "conditions": "SAN_TRANSIT_1_COND",
+      "description": "SAN_TRANSIT_1_DESC",
+      "id": 1,
+      "location": "TarkovStreets",
+      "name": "SAN_TRANSIT_1",
+      "target": "5714dc692459777137212e12",
+      "time": 30
+    },
+    {
+      "activateAfterSec": 60,
+      "active": false,
+      "conditions": "SAN_TRANSIT_2_COND",
+      "description": "SAN_TRANSIT_2_DESC",
+      "id": 2,
+      "location": "laboratory",
+      "name": "SAN_TRANSIT_2",
+      "target": "5b0fc42d86f7744a585f9105",
+      "time": 30
+    }
+  ],
   "users_gather_seconds": 0,
   "users_spawn_seconds_n": 120,
   "users_spawn_seconds_n2": 200,
   "users_summon_seconds": 0,
-  "waves": [
-    {
-      "BotPreset": "normal",
-      "BotSide": "Savage",
-      "SpawnPoints": "ZoneSW00",
-      "WildSpawnType": "assault",
-      "isPlayers": false,
-      "number": 0,
-      "slots_max": 4,
-      "slots_min": 3,
-      "time_max": 10,
-      "time_min": 1
-    },
-    {
-      "BotPreset": "normal",
-      "BotSide": "Savage",
-      "SpawnPoints": "ZoneSandbox",
-      "WildSpawnType": "assault",
-      "isPlayers": false,
-      "number": 1,
-      "slots_max": 4,
-      "slots_min": 2,
-      "time_max": 10,
-      "time_min": 1
-    },
-    {
-      "BotPreset": "hard",
-      "BotSide": "Savage",
-      "SpawnPoints": "ZoneSandbox",
-      "WildSpawnType": "assault",
-      "isPlayers": true,
-      "number": 2,
-      "slots_max": 4,
-      "slots_min": 2,
-      "time_max": 30,
-      "time_min": 10
-    },
-    {
-      "BotPreset": "normal",
-      "BotSide": "Savage",
-      "SpawnPoints": "ZoneSandbox",
-      "WildSpawnType": "assault",
-      "isPlayers": true,
-      "number": 3,
-      "slots_max": 4,
-      "slots_min": 2,
-      "time_max": 40,
-      "time_min": 15
-    },
-    {
-      "BotPreset": "hard",
-      "BotSide": "Savage",
-      "SpawnPoints": "ZoneSandSnipeCenter",
-      "WildSpawnType": "marksman",
-      "isPlayers": false,
-      "number": 4,
-      "slots_max": 1,
-      "slots_min": 1,
-      "time_max": 100,
-      "time_min": 1
-    },
-    {
-      "BotPreset": "hard",
-      "BotSide": "Savage",
-      "SpawnPoints": "ZoneSandbox",
-      "WildSpawnType": "assault",
-      "isPlayers": true,
-      "number": 5,
-      "slots_max": 5,
-      "slots_min": 2,
-      "time_max": 60,
-      "time_min": 20
-    },
-    {
-      "BotPreset": "hard",
-      "BotSide": "Savage",
-      "SpawnPoints": "ZoneSandSnipeCenter",
-      "WildSpawnType": "marksman",
-      "isPlayers": false,
-      "number": 6,
-      "slots_max": 1,
-      "slots_min": 1,
-      "time_max": 120,
-      "time_min": 1
-    },
-    {
-      "BotPreset": "normal",
-      "BotSide": "Savage",
-      "SpawnPoints": "ZoneSandbox",
-      "WildSpawnType": "assault",
-      "isPlayers": true,
-      "number": 7,
-      "slots_max": 3,
-      "slots_min": 2,
-      "time_max": 90,
-      "time_min": 40
-    },
-    {
-      "BotPreset": "hard",
-      "BotSide": "Savage",
-      "SpawnPoints": "ZoneSandSnipeCenter",
-      "WildSpawnType": "marksman",
-      "isPlayers": false,
-      "number": 8,
-      "slots_max": 1,
-      "slots_min": 1,
-      "time_max": 120,
-      "time_min": 1
-    },
-    {
-      "BotPreset": "hard",
-      "BotSide": "Savage",
-      "SpawnPoints": "ZoneSandSnipeCenter",
-      "WildSpawnType": "marksman",
-      "isPlayers": false,
-      "number": 9,
-      "slots_max": 1,
-      "slots_min": 1,
-      "time_max": 120,
-      "time_min": 1
-    },
-    {
-      "BotPreset": "hard",
-      "BotSide": "Savage",
-      "SpawnPoints": "ZoneSandbox",
-      "WildSpawnType": "assault",
-      "isPlayers": true,
-      "number": 10,
-      "slots_max": 4,
-      "slots_min": 1,
-      "time_max": 90,
-      "time_min": 30
-    },
-    {
-      "BotPreset": "hard",
-      "BotSide": "Savage",
-      "SpawnPoints": "ZoneSandbox",
-      "WildSpawnType": "assault",
-      "isPlayers": false,
-      "number": 11,
-      "slots_max": 4,
-      "slots_min": 1,
-      "time_max": 100,
-      "time_min": 50
-    },
-    {
-      "BotPreset": "normal",
-      "BotSide": "Savage",
-      "SpawnPoints": "ZoneSandbox",
-      "WildSpawnType": "assault",
-      "isPlayers": false,
-      "number": 12,
-      "slots_max": 3,
-      "slots_min": 2,
-      "time_max": 110,
-      "time_min": 70
-    },
-    {
-      "BotPreset": "hard",
-      "BotSide": "Savage",
-      "SpawnPoints": "ZoneSandbox",
-      "WildSpawnType": "assault",
-      "isPlayers": true,
-      "number": 13,
-      "slots_max": 4,
-      "slots_min": 2,
-      "time_max": 120,
-      "time_min": 90
-    }
-  ]
+  "waves": []
 }

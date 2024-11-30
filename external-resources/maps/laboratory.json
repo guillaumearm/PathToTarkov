@@ -1,5 +1,6 @@
 {
   "AccessKeys": ["5c94bbff86f7747ee735c08f"],
+  "AccessKeysPvE": ["5c94bbff86f7747ee735c08f"],
   "Area": 0,
   "AveragePlayTime": 30,
   "AveragePlayerLevel": 45,
@@ -44,8 +45,10 @@
       "BossPlayer": false,
       "BossZone": "BotZoneFloor1",
       "Delay": 0,
+      "IgnoreMaxBots": false,
       "RandomTimeSpawn": false,
       "SpawnMode": ["regular", "pve"],
+      "Supports": null,
       "Time": 900,
       "TriggerId": "",
       "TriggerName": ""
@@ -60,8 +63,10 @@
       "BossPlayer": false,
       "BossZone": "BotZoneFloor2",
       "Delay": 0,
+      "IgnoreMaxBots": false,
       "RandomTimeSpawn": false,
       "SpawnMode": ["regular", "pve"],
+      "Supports": null,
       "Time": 300,
       "TriggerId": "",
       "TriggerName": ""
@@ -76,8 +81,10 @@
       "BossPlayer": false,
       "BossZone": "BotZoneBasement",
       "Delay": 0,
+      "IgnoreMaxBots": false,
       "RandomTimeSpawn": false,
       "SpawnMode": ["regular", "pve"],
+      "Supports": null,
       "Time": 450,
       "TriggerId": "autoId_00008_EXFIL",
       "TriggerName": "interactObject"
@@ -92,8 +99,10 @@
       "BossPlayer": false,
       "BossZone": "BotZoneBasement",
       "Delay": 0,
+      "IgnoreMaxBots": false,
       "RandomTimeSpawn": false,
       "SpawnMode": ["regular", "pve"],
+      "Supports": null,
       "Time": 800,
       "TriggerId": "autoId_00010_EXFIL",
       "TriggerName": "interactObject"
@@ -108,8 +117,10 @@
       "BossPlayer": false,
       "BossZone": "BotZoneBasement",
       "Delay": 0,
+      "IgnoreMaxBots": false,
       "RandomTimeSpawn": false,
       "SpawnMode": ["regular", "pve"],
+      "Supports": null,
       "Time": -1,
       "TriggerId": "autoId_00007_EXFIL",
       "TriggerName": "interactObject"
@@ -124,8 +135,10 @@
       "BossPlayer": false,
       "BossZone": "BotZoneFloor2",
       "Delay": 0,
+      "IgnoreMaxBots": false,
       "RandomTimeSpawn": false,
       "SpawnMode": ["regular", "pve"],
+      "Supports": null,
       "Time": -1,
       "TriggerId": "autoId_00007_EXFIL",
       "TriggerName": "interactObject"
@@ -140,8 +153,10 @@
       "BossPlayer": false,
       "BossZone": "BotZoneFloor1",
       "Delay": 0,
+      "IgnoreMaxBots": false,
       "RandomTimeSpawn": false,
       "SpawnMode": ["regular", "pve"],
+      "Supports": null,
       "Time": 600,
       "TriggerId": "autoId_00632_EXFIL",
       "TriggerName": "interactObject"
@@ -156,8 +171,10 @@
       "BossPlayer": false,
       "BossZone": "BotZoneFloor2",
       "Delay": 0,
+      "IgnoreMaxBots": false,
       "RandomTimeSpawn": false,
       "SpawnMode": ["regular", "pve"],
+      "Supports": null,
       "Time": 600,
       "TriggerId": "autoId_00632_EXFIL",
       "TriggerName": "interactObject"
@@ -172,8 +189,10 @@
       "BossPlayer": false,
       "BossZone": "BotZoneFloor1",
       "Delay": 0,
+      "IgnoreMaxBots": false,
       "RandomTimeSpawn": false,
       "SpawnMode": ["regular", "pve"],
+      "Supports": null,
       "Time": -1,
       "TriggerId": "autoId_00012_EXFIL",
       "TriggerName": "interactObject"
@@ -188,8 +207,10 @@
       "BossPlayer": false,
       "BossZone": "BotZoneFloor2",
       "Delay": 0,
+      "IgnoreMaxBots": false,
       "RandomTimeSpawn": false,
       "SpawnMode": ["regular", "pve"],
+      "Supports": null,
       "Time": -1,
       "TriggerId": "autoId_00012_EXFIL",
       "TriggerName": "interactObject"
@@ -204,8 +225,10 @@
       "BossPlayer": false,
       "BossZone": "BotZoneFloor1",
       "Delay": 0,
+      "IgnoreMaxBots": false,
       "RandomTimeSpawn": false,
       "SpawnMode": ["regular", "pve"],
+      "Supports": null,
       "Time": 1200,
       "TriggerId": "autoId_00014_EXFIL",
       "TriggerName": "interactObject"
@@ -220,8 +243,10 @@
       "BossPlayer": false,
       "BossZone": "BotZoneFloor2",
       "Delay": 0,
+      "IgnoreMaxBots": false,
       "RandomTimeSpawn": false,
       "SpawnMode": ["regular", "pve"],
+      "Supports": null,
       "Time": 1200,
       "TriggerId": "autoId_00014_EXFIL",
       "TriggerName": "interactObject"
@@ -236,8 +261,10 @@
       "BossPlayer": false,
       "BossZone": "BotZoneFloor1",
       "Delay": 0,
+      "IgnoreMaxBots": false,
       "RandomTimeSpawn": false,
       "SpawnMode": ["regular", "pve"],
+      "Supports": null,
       "Time": -1,
       "TriggerId": "autoId_00009_EXFIL",
       "TriggerName": "interactObject"
@@ -252,14 +279,16 @@
       "BossPlayer": false,
       "BossZone": "BotZoneFloor2",
       "Delay": 0,
+      "IgnoreMaxBots": false,
       "RandomTimeSpawn": false,
       "SpawnMode": ["regular", "pve"],
+      "Supports": null,
       "Time": -1,
       "TriggerId": "autoId_00009_EXFIL",
       "TriggerName": "interactObject"
     },
     {
-      "BossChance": 40,
+      "BossChance": 35,
       "BossDifficult": "normal",
       "BossEscortAmount": "1,1,1,1,2,2,2,1,1,1,1,2,2,2,3",
       "BossEscortDifficult": "normal",
@@ -268,8 +297,10 @@
       "BossPlayer": false,
       "BossZone": "BotZoneGate2",
       "Delay": 8,
+      "IgnoreMaxBots": false,
       "RandomTimeSpawn": false,
       "SpawnMode": ["regular", "pve"],
+      "Supports": null,
       "Time": -1,
       "TriggerId": "autoId_00014_EXFIL",
       "TriggerName": "interactObject"
@@ -284,11 +315,85 @@
       "BossPlayer": false,
       "BossZone": "BotZoneGate1",
       "Delay": 8,
+      "IgnoreMaxBots": false,
       "RandomTimeSpawn": false,
       "SpawnMode": ["regular", "pve"],
+      "Supports": null,
       "Time": -1,
       "TriggerId": "autoId_00632_EXFIL",
       "TriggerName": "interactObject"
+    },
+    {
+      "BossChance": 50,
+      "BossDifficult": "normal",
+      "BossEscortAmount": "0,0,0,0,2,2,2,1,1,1,1,1,0,2,3",
+      "BossEscortDifficult": "normal",
+      "BossEscortType": "pmcUSEC",
+      "BossName": "pmcUSEC",
+      "BossPlayer": false,
+      "BossZone": "BotZoneFloor1",
+      "Delay": 0,
+      "IgnoreMaxBots": false,
+      "RandomTimeSpawn": false,
+      "SpawnMode": ["pve"],
+      "Supports": null,
+      "Time": -1,
+      "TriggerId": "",
+      "TriggerName": ""
+    },
+    {
+      "BossChance": 50,
+      "BossDifficult": "normal",
+      "BossEscortAmount": "0,0,0,0,2,2,2,1,1,1,1,1,0,2,3",
+      "BossEscortDifficult": "normal",
+      "BossEscortType": "pmcUSEC",
+      "BossName": "pmcUSEC",
+      "BossPlayer": false,
+      "BossZone": "BotZoneFloor2",
+      "Delay": 0,
+      "IgnoreMaxBots": false,
+      "RandomTimeSpawn": false,
+      "SpawnMode": ["pve"],
+      "Supports": null,
+      "Time": -1,
+      "TriggerId": "",
+      "TriggerName": ""
+    },
+    {
+      "BossChance": 50,
+      "BossDifficult": "normal",
+      "BossEscortAmount": "0,0,0,0,2,2,2,1,1,1,1,1,0,2,3",
+      "BossEscortDifficult": "normal",
+      "BossEscortType": "pmcBEAR",
+      "BossName": "pmcBEAR",
+      "BossPlayer": false,
+      "BossZone": "BotZoneFloor1",
+      "Delay": 0,
+      "IgnoreMaxBots": false,
+      "RandomTimeSpawn": false,
+      "SpawnMode": ["pve"],
+      "Supports": null,
+      "Time": -1,
+      "TriggerId": "",
+      "TriggerName": ""
+    },
+    {
+      "BossChance": 50,
+      "BossDifficult": "normal",
+      "BossEscortAmount": "0,0,0,0,2,2,2,1,1,1,1,1,0,2,3",
+      "BossEscortDifficult": "normal",
+      "BossEscortType": "pmcBEAR",
+      "BossName": "pmcBEAR",
+      "BossPlayer": false,
+      "BossZone": "BotZoneFloor2",
+      "Delay": 0,
+      "IgnoreMaxBots": false,
+      "RandomTimeSpawn": false,
+      "SpawnMode": ["pve"],
+      "Supports": null,
+      "Time": -1,
+      "TriggerId": "",
+      "TriggerName": ""
     }
   ],
   "BotAssault": 100,
@@ -297,18 +402,118 @@
   "BotImpossible": 0,
   "BotLocationModifier": {
     "AccuracySpeed": 1,
+    "AdditionalHostilitySettings": [
+      {
+        "AlwaysEnemies": [
+          "pmcBot",
+          "exUsec",
+          "bossBully",
+          "bossBoar",
+          "bossTagilla",
+          "bossKilla",
+          "bossKojaniy",
+          "bossSanitar",
+          "bossKolontay",
+          "bossGluhar",
+          "bossKnight"
+        ],
+        "AlwaysFriends": [
+          "bossZryachiy",
+          "followerZryachiy",
+          "peacefullZryachiyEvent",
+          "ravangeZryachiyEvent",
+          "gifter"
+        ],
+        "BearEnemyChance": 100,
+        "BearPlayerBehaviour": "ChancedEnemies",
+        "BotRole": "pmcBEAR",
+        "ChancedEnemies": [
+          {
+            "EnemyChance": 70,
+            "Role": "assault"
+          },
+          {
+            "EnemyChance": 70,
+            "Role": "marksman"
+          },
+          {
+            "EnemyChance": 75,
+            "Role": "pmcUSEC"
+          }
+        ],
+        "Neutral": ["sectantPriest", "sectantWarrior"],
+        "SavagePlayerBehaviour": "Warn",
+        "UsecEnemyChance": 100,
+        "UsecPlayerBehaviour": "ChancedEnemies",
+        "Warn": ["sectactPriestEvent"]
+      },
+      {
+        "AlwaysEnemies": [
+          "pmcBot",
+          "bossBully",
+          "bossBoar",
+          "bossTagilla",
+          "bossKilla",
+          "bossKojaniy",
+          "bossSanitar",
+          "bossKolontay",
+          "bossGluhar"
+        ],
+        "AlwaysFriends": [
+          "bossZryachiy",
+          "followerZryachiy",
+          "peacefullZryachiyEvent",
+          "ravangeZryachiyEvent",
+          "gifter"
+        ],
+        "BearEnemyChance": 100,
+        "BearPlayerBehaviour": "ChancedEnemies",
+        "BotRole": "pmcUSEC",
+        "ChancedEnemies": [
+          {
+            "EnemyChance": 70,
+            "Role": "assault"
+          },
+          {
+            "EnemyChance": 70,
+            "Role": "marksman"
+          },
+          {
+            "EnemyChance": 75,
+            "Role": "pmcBEAR"
+          },
+          {
+            "EnemyChance": 15,
+            "Role": "exUsec"
+          },
+          {
+            "EnemyChance": 15,
+            "Role": "bossKnight"
+          }
+        ],
+        "Neutral": ["sectantPriest", "sectantWarrior"],
+        "SavagePlayerBehaviour": "Warn",
+        "UsecEnemyChance": 100,
+        "UsecPlayerBehaviour": "ChancedEnemies",
+        "Warn": ["sectactPriestEvent"]
+      }
+    ],
     "DistToActivate": 140,
+    "DistToActivatePvE": 140,
     "DistToPersueAxemanCoef": 1,
     "DistToSleep": 160,
+    "DistToSleepPvE": 160,
     "GainSight": 1,
     "KhorovodChance": 0,
     "MagnetPower": 10,
     "MarksmanAccuratyCoef": 1,
+    "MaxExfiltrationTime": 1800,
+    "MinExfiltrationTime": 1200,
     "Scattering": 1,
     "VisibleDistance": 1
   },
   "BotMarksman": 0,
-  "BotMax": 14,
+  "BotMax": 15,
   "BotMaxPlayer": 14,
   "BotMaxPvE": 25,
   "BotMaxTimePlayer": 1000,
@@ -329,10 +534,90 @@
   "Enabled": true,
   "EscapeTimeLimit": 35,
   "EscapeTimeLimitCoop": 30,
-  "EscapeTimeLimitPVE": 27,
+  "EscapeTimeLimitPVE": 35,
+  "Events": {
+    "Halloween2024": {
+      "CrowdAttackBlockRadius": 100,
+      "CrowdAttackSpawnParams": [
+        {
+          "Difficulty": "easy",
+          "Role": "infectedAssault",
+          "Weight": 0
+        },
+        {
+          "Difficulty": "normal",
+          "Role": "infectedAssault",
+          "Weight": 0
+        },
+        {
+          "Difficulty": "hard",
+          "Role": "infectedAssault",
+          "Weight": 0
+        },
+        {
+          "Difficulty": "easy",
+          "Role": "infectedPmc",
+          "Weight": 22
+        },
+        {
+          "Difficulty": "normal",
+          "Role": "infectedPmc",
+          "Weight": 90
+        },
+        {
+          "Difficulty": "hard",
+          "Role": "infectedPmc",
+          "Weight": 60
+        },
+        {
+          "Difficulty": "easy",
+          "Role": "infectedCivil",
+          "Weight": 0
+        },
+        {
+          "Difficulty": "normal",
+          "Role": "infectedCivil",
+          "Weight": 0
+        },
+        {
+          "Difficulty": "hard",
+          "Role": "infectedCivil",
+          "Weight": 0
+        },
+        {
+          "Difficulty": "easy",
+          "Role": "infectedLaborant",
+          "Weight": 23
+        },
+        {
+          "Difficulty": "normal",
+          "Role": "infectedLaborant",
+          "Weight": 75
+        },
+        {
+          "Difficulty": "hard",
+          "Role": "infectedLaborant",
+          "Weight": 0
+        }
+      ],
+      "CrowdCooldownPerPlayerSec": 300,
+      "CrowdsLimit": 2,
+      "InfectedLookCoeff": 2,
+      "InfectionPercentage": 0,
+      "MaxCrowdAttackSpawnLimit": 13,
+      "MinInfectionPercentage": 0,
+      "MinSpawnDistToPlayer": 40,
+      "TargetPointSearchRadiusLimit": 80,
+      "ZombieCallDeltaRadius": 20,
+      "ZombieCallPeriodSec": 1,
+      "ZombieCallRadiusLimit": 50,
+      "ZombieMultiplier": 5
+    }
+  },
+  "ForceOnlineRaidInPVE": false,
   "GenerateLocalLootCache": true,
   "GlobalContainerChanceModifier": 1,
-  "GlobalLootChanceModifier": 0.77,
+  "GlobalLootChanceModifier": 0.33,
   "GlobalLootChanceModifierPvE": 0.77,
   "IconX": 700,
   "IconY": 800,
@@ -382,6 +667,7 @@
   "MinPlayers": 8,
   "Name": "Laboratory",
   "NewSpawn": false,
+  "NewSpawnForPlayers": false,
   "NonWaveGroupScenario": {
     "Chance": 50,
     "Enabled": false,
@@ -460,32 +746,6 @@
       },
       "Rotation": 88.9786758,
       "Sides": ["All"]
-    },
-    {
-      "BotZoneName": "BotZoneFloor2",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 27
-        }
-      },
-      "CorePointId": 3,
-      "DelayToCanSpawnSec": 4,
-      "Id": "0171ec0f-4050-4303-8504-b742922cf80b",
-      "Infiltration": "",
-      "Position": {
-        "x": -255.632,
-        "y": 4.146,
-        "z": -376.374
-      },
-      "Rotation": 0,
-      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -644,58 +904,6 @@
       "Sides": ["Pmc"]
     },
     {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 35
-        }
-      },
-      "CorePointId": 7,
-      "DelayToCanSpawnSec": 4,
-      "Id": "04f71bcb-922f-48bc-992b-3a64a20d589c",
-      "Infiltration": "",
-      "Position": {
-        "x": -178.15,
-        "y": 0.114,
-        "z": -415.292
-      },
-      "Rotation": 0,
-      "Sides": ["Savage"]
-    },
-    {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 35
-        }
-      },
-      "CorePointId": 2,
-      "DelayToCanSpawnSec": 4,
-      "Id": "07863ac5-27c5-4001-85a2-13356eda6133",
-      "Infiltration": "",
-      "Position": {
-        "x": -116.4,
-        "y": 0.004,
-        "z": -256.52
-      },
-      "Rotation": 263.038635,
-      "Sides": ["Savage"]
-    },
-    {
       "BotZoneName": "",
       "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
@@ -748,32 +956,6 @@
       "Sides": ["All"]
     },
     {
-      "BotZoneName": "BotZoneGate1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 7
-        }
-      },
-      "CorePointId": 2,
-      "DelayToCanSpawnSec": 4,
-      "Id": "0b5e336a-2cb6-4619-b9a5-07ff0afad1ee",
-      "Infiltration": "",
-      "Position": {
-        "x": -183.645,
-        "y": 2.711,
-        "z": -227.118988
-      },
-      "Rotation": 0,
-      "Sides": ["Savage"]
-    },
-    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -798,6 +980,32 @@
       },
       "Rotation": 185.57,
       "Sides": ["All"]
+    },
+    {
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 35
+        }
+      },
+      "CorePointId": 8,
+      "DelayToCanSpawnSec": 4,
+      "Id": "0e00d2de-8c18-4b98-a5b2-9d5d6db335e6",
+      "Infiltration": "",
+      "Position": {
+        "x": -279.23,
+        "y": 0.078,
+        "z": -349.22998
+      },
+      "Rotation": 126.849854,
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -878,6 +1086,32 @@
       "Sides": ["Pmc"]
     },
     {
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 35
+        }
+      },
+      "CorePointId": 7,
+      "DelayToCanSpawnSec": 4,
+      "Id": "12caf244-967e-4bc8-9900-e66d2f1bb4b0",
+      "Infiltration": "",
+      "Position": {
+        "x": -179.44,
+        "y": 0.114,
+        "z": -407.409973
+      },
+      "Rotation": 0,
+      "Sides": ["Savage"]
+    },
+    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -902,32 +1136,6 @@
       },
       "Rotation": 92.55,
       "Sides": ["All"]
-    },
-    {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 35
-        }
-      },
-      "CorePointId": 5,
-      "DelayToCanSpawnSec": 4,
-      "Id": "15c0ac46-c1e4-498b-9466-1c071554be06",
-      "Infiltration": "",
-      "Position": {
-        "x": -116.011,
-        "y": 0.036,
-        "z": -336.378
-      },
-      "Rotation": 0,
-      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -1008,8 +1216,8 @@
       "Sides": ["Pmc"]
     },
     {
-      "BotZoneName": "BotZoneFloor2",
-      "Categories": ["Bot"],
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1018,19 +1226,45 @@
             "y": 0,
             "z": 0
           },
-          "Radius": 27
+          "Radius": 35
         }
       },
-      "CorePointId": 5,
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
-      "Id": "19e75b93-4470-4d65-b5f8-e3a09fb4a71d",
+      "Id": "1a9ca4f6-edea-4a52-9b99-162ad016e81d",
       "Infiltration": "",
       "Position": {
-        "x": -127.768,
-        "y": 4.2,
-        "z": -382.271973
+        "x": -260.287,
+        "y": 0.04,
+        "z": -390.578
       },
       "Rotation": 0,
+      "Sides": ["Savage"]
+    },
+    {
+      "BotZoneName": "BotZoneGate1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 7
+        }
+      },
+      "CorePointId": 2,
+      "DelayToCanSpawnSec": 4,
+      "Id": "1ad2a57c-64ff-4c87-961b-8a1226cdaf36",
+      "Infiltration": "",
+      "Position": {
+        "x": -157.568,
+        "y": 2.711,
+        "z": -222.756989
+      },
+      "Rotation": 201.596924,
       "Sides": ["Savage"]
     },
     {
@@ -1164,6 +1398,32 @@
       "Sides": ["Pmc"]
     },
     {
+      "BotZoneName": "BotZoneGate2",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 7
+        }
+      },
+      "CorePointId": 3,
+      "DelayToCanSpawnSec": 4,
+      "Id": "24169507-5cd9-42d3-9944-4345f96fe01e",
+      "Infiltration": "",
+      "Position": {
+        "x": -244.976,
+        "y": 2.664,
+        "z": -448.615
+      },
+      "Rotation": 181.596954,
+      "Sides": ["Savage"]
+    },
+    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -1214,6 +1474,32 @@
       },
       "Rotation": 270.47,
       "Sides": ["All"]
+    },
+    {
+      "BotZoneName": "BotZoneFloor2",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 27
+        }
+      },
+      "CorePointId": 4,
+      "DelayToCanSpawnSec": 4,
+      "Id": "2535f603-e3ed-4e23-8765-4c1c9ddc8c08",
+      "Infiltration": "",
+      "Position": {
+        "x": -208.019,
+        "y": 4.207,
+        "z": -297.85498
+      },
+      "Rotation": 113.883675,
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -1294,6 +1580,84 @@
       "Sides": ["All"]
     },
     {
+      "BotZoneName": "BotZoneFloor2",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 27
+        }
+      },
+      "CorePointId": 3,
+      "DelayToCanSpawnSec": 4,
+      "Id": "2b1ad2d6-7e44-4282-b557-ac0c72cca19a",
+      "Infiltration": "",
+      "Position": {
+        "x": -255.632,
+        "y": 4.146,
+        "z": -376.374
+      },
+      "Rotation": 0,
+      "Sides": ["Savage"]
+    },
+    {
+      "BotZoneName": "BotZoneFloor2",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 27
+        }
+      },
+      "CorePointId": 3,
+      "DelayToCanSpawnSec": 4,
+      "Id": "2c447dc9-2865-4803-bb14-2302b3890a9c",
+      "Infiltration": "",
+      "Position": {
+        "x": -253.55899,
+        "y": 4.146,
+        "z": -376.292
+      },
+      "Rotation": 0,
+      "Sides": ["Savage"]
+    },
+    {
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 35
+        }
+      },
+      "CorePointId": 2,
+      "DelayToCanSpawnSec": 4,
+      "Id": "2dfb3a5d-9977-4697-812b-288e9ba36357",
+      "Infiltration": "",
+      "Position": {
+        "x": -226.68,
+        "y": 0.082,
+        "z": -279.617
+      },
+      "Rotation": 164.3535,
+      "Sides": ["Savage"]
+    },
+    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -1346,32 +1710,6 @@
       "Sides": ["All"]
     },
     {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 35
-        }
-      },
-      "CorePointId": 7,
-      "DelayToCanSpawnSec": 4,
-      "Id": "330b076f-bd90-494d-8c3d-bed9e5959378",
-      "Infiltration": "",
-      "Position": {
-        "x": -202.231,
-        "y": 0.0499999523,
-        "z": -393.883972
-      },
-      "Rotation": 0,
-      "Sides": ["Savage"]
-    },
-    {
       "BotZoneName": "",
       "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
@@ -1396,6 +1734,58 @@
       },
       "Rotation": 175.539871,
       "Sides": ["Pmc"]
+    },
+    {
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 35
+        }
+      },
+      "CorePointId": 8,
+      "DelayToCanSpawnSec": 4,
+      "Id": "35f11413-d269-4cf0-b9dc-2ea7f0bbdbf3",
+      "Infiltration": "",
+      "Position": {
+        "x": -279.68,
+        "y": 0.078,
+        "z": -352.99
+      },
+      "Rotation": 126.849854,
+      "Sides": ["Savage"]
+    },
+    {
+      "BotZoneName": "BotZoneBasement",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 25
+        }
+      },
+      "CorePointId": 9,
+      "DelayToCanSpawnSec": 4,
+      "Id": "35fd4e75-132a-4ff0-b208-49d150bb5bc1",
+      "Infiltration": "",
+      "Position": {
+        "x": -128.38,
+        "y": -4.041,
+        "z": -417.949982
+      },
+      "Rotation": 0,
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -1424,8 +1814,34 @@
       "Sides": ["Pmc"]
     },
     {
+      "BotZoneName": "BotZoneGate2",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 7
+        }
+      },
+      "CorePointId": 3,
+      "DelayToCanSpawnSec": 4,
+      "Id": "3ac16ebd-106a-4357-8410-da375bbe07bd",
+      "Infiltration": "",
+      "Position": {
+        "x": -218.066,
+        "y": 2.664,
+        "z": -448.59198
+      },
+      "Rotation": 181.596954,
+      "Sides": ["Savage"]
+    },
+    {
       "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1437,14 +1853,14 @@
           "Radius": 35
         }
       },
-      "CorePointId": 3,
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
-      "Id": "3a7f4c28-ea1f-466d-8920-3f2871d69cf3",
+      "Id": "3b4c3c07-59e9-4ff1-9a22-bbd0665d09c3",
       "Infiltration": "",
       "Position": {
-        "x": -260.287,
-        "y": 0.04,
-        "z": -390.578
+        "x": -202.231,
+        "y": 0.0499999523,
+        "z": -393.883972
       },
       "Rotation": 0,
       "Sides": ["Savage"]
@@ -1476,32 +1892,6 @@
       "Sides": ["All"]
     },
     {
-      "BotZoneName": "BotZoneFloor2",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 27
-        }
-      },
-      "CorePointId": 5,
-      "DelayToCanSpawnSec": 4,
-      "Id": "3dbca587-2589-4370-9594-407655be3186",
-      "Infiltration": "",
-      "Position": {
-        "x": -134.355011,
-        "y": 4.181,
-        "z": -341.102
-      },
-      "Rotation": 273.155945,
-      "Sides": ["Savage"]
-    },
-    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -1526,6 +1916,32 @@
       },
       "Rotation": 15.050004,
       "Sides": ["All"]
+    },
+    {
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 35
+        }
+      },
+      "CorePointId": 3,
+      "DelayToCanSpawnSec": 4,
+      "Id": "461de8d5-6efe-4d47-8833-4298d14d5dc0",
+      "Infiltration": "",
+      "Position": {
+        "x": -279.611,
+        "y": 0.078,
+        "z": -365.445984
+      },
+      "Rotation": 197.191254,
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -1606,34 +2022,8 @@
       "Sides": ["Pmc"]
     },
     {
-      "BotZoneName": "BotZoneFloor2",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 27
-        }
-      },
-      "CorePointId": 4,
-      "DelayToCanSpawnSec": 4,
-      "Id": "4cd0a70e-8349-4707-b3f6-4b0d18cf989b",
-      "Infiltration": "",
-      "Position": {
-        "x": -207.064,
-        "y": 4.207,
-        "z": -295.159
-      },
-      "Rotation": 113.883675,
-      "Sides": ["Savage"]
-    },
-    {
       "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1645,16 +2035,42 @@
           "Radius": 35
         }
       },
-      "CorePointId": 3,
+      "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
-      "Id": "4e9cd17c-ae56-4408-a308-4b9722e6e344",
+      "Id": "4f5d267c-f86b-4cde-ba2c-1558f6be7279",
       "Infiltration": "",
       "Position": {
-        "x": -257.955017,
-        "y": 0.0090277195,
-        "z": -385.453
+        "x": -205.29,
+        "y": 0.0499999523,
+        "z": -390.55
       },
-      "Rotation": 184.764816,
+      "Rotation": 0,
+      "Sides": ["Savage"]
+    },
+    {
+      "BotZoneName": "BotZoneFloor2",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 27
+        }
+      },
+      "CorePointId": 5,
+      "DelayToCanSpawnSec": 4,
+      "Id": "4f8abb15-998a-47ff-9352-84e5be19f44b",
+      "Infiltration": "",
+      "Position": {
+        "x": -134.355011,
+        "y": 4.181,
+        "z": -341.102
+      },
+      "Rotation": 273.155945,
       "Sides": ["Savage"]
     },
     {
@@ -1684,8 +2100,8 @@
       "Sides": ["Pmc"]
     },
     {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
+      "BotZoneName": "BotZoneFloor2",
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -1694,97 +2110,19 @@
             "y": 0,
             "z": 0
           },
-          "Radius": 35
+          "Radius": 27
         }
       },
-      "CorePointId": 5,
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
-      "Id": "50bda7e6-480e-412c-a91c-8dda1faffa45",
+      "Id": "53f65149-ac7d-453a-8536-364911b6a114",
       "Infiltration": "",
       "Position": {
-        "x": -116.089,
-        "y": 0.036,
-        "z": -339.412
+        "x": -199.41,
+        "y": 4.127,
+        "z": -296.5
       },
-      "Rotation": 0,
-      "Sides": ["Savage"]
-    },
-    {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 35
-        }
-      },
-      "CorePointId": 7,
-      "DelayToCanSpawnSec": 4,
-      "Id": "51d82d49-97b2-4fba-b1f8-219b20005c17",
-      "Infiltration": "",
-      "Position": {
-        "x": -205.29,
-        "y": 0.0499999523,
-        "z": -390.55
-      },
-      "Rotation": 0,
-      "Sides": ["Savage"]
-    },
-    {
-      "BotZoneName": "BotZoneGate2",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 7
-        }
-      },
-      "CorePointId": 3,
-      "DelayToCanSpawnSec": 4,
-      "Id": "52005238-4fb5-4775-9052-c1f52bfd1c94",
-      "Infiltration": "",
-      "Position": {
-        "x": -244.101,
-        "y": 2.664,
-        "z": -452.923981
-      },
-      "Rotation": 0,
-      "Sides": ["Savage"]
-    },
-    {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 35
-        }
-      },
-      "CorePointId": 8,
-      "DelayToCanSpawnSec": 4,
-      "Id": "584031bc-1dbb-4fec-a95f-7297e0b6a540",
-      "Infiltration": "",
-      "Position": {
-        "x": -213.124,
-        "y": 0.05,
-        "z": -378.754974
-      },
-      "Rotation": 0,
+      "Rotation": 85.5867,
       "Sides": ["Savage"]
     },
     {
@@ -1944,6 +2282,32 @@
       "Sides": ["All"]
     },
     {
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 35
+        }
+      },
+      "CorePointId": 8,
+      "DelayToCanSpawnSec": 4,
+      "Id": "606fbd9c-1111-4536-99cb-79b9c2479593",
+      "Infiltration": "",
+      "Position": {
+        "x": -213.124,
+        "y": 0.05,
+        "z": -378.754974
+      },
+      "Rotation": 0,
+      "Sides": ["Savage"]
+    },
+    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -2074,32 +2438,6 @@
       "Sides": ["All"]
     },
     {
-      "BotZoneName": "BotZoneFloor2",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 27
-        }
-      },
-      "CorePointId": 8,
-      "DelayToCanSpawnSec": 4,
-      "Id": "66d2a253-d1a0-490c-93d3-b1e3dd589c3d",
-      "Infiltration": "",
-      "Position": {
-        "x": -248.84,
-        "y": 4.231,
-        "z": -362.24
-      },
-      "Rotation": 175.868637,
-      "Sides": ["Savage"]
-    },
-    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -2204,6 +2542,32 @@
       "Sides": ["All"]
     },
     {
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 35
+        }
+      },
+      "CorePointId": 2,
+      "DelayToCanSpawnSec": 4,
+      "Id": "6b60909d-5251-4149-ae99-2e5fd8204f23",
+      "Infiltration": "",
+      "Position": {
+        "x": -116.4,
+        "y": 0.004,
+        "z": -256.52
+      },
+      "Rotation": 263.038635,
+      "Sides": ["Savage"]
+    },
+    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -2228,32 +2592,6 @@
       },
       "Rotation": 188.05,
       "Sides": ["All"]
-    },
-    {
-      "BotZoneName": "BotZoneGate2",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 7
-        }
-      },
-      "CorePointId": 3,
-      "DelayToCanSpawnSec": 4,
-      "Id": "6e35cbe7-b819-40df-9262-656d3ac42a31",
-      "Infiltration": "",
-      "Position": {
-        "x": -215.217,
-        "y": 2.664,
-        "z": -448.71
-      },
-      "Rotation": 181.596954,
-      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -2308,8 +2646,8 @@
       "Sides": ["All"]
     },
     {
-      "BotZoneName": "BotZoneBasement",
-      "Categories": ["Bot"],
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2318,17 +2656,69 @@
             "y": 0,
             "z": 0
           },
-          "Radius": 25
+          "Radius": 35
         }
       },
-      "CorePointId": 5,
+      "CorePointId": 3,
       "DelayToCanSpawnSec": 4,
-      "Id": "75a36d48-cf3e-48f6-98cd-ca520bf8ff2d",
+      "Id": "71528dc9-436b-4b2f-9cd0-86e843178faa",
       "Infiltration": "",
       "Position": {
-        "x": -128.38,
-        "y": -4.041,
-        "z": -417.949982
+        "x": -257.955017,
+        "y": 0.0090277195,
+        "z": -385.453
+      },
+      "Rotation": 184.764816,
+      "Sides": ["Savage"]
+    },
+    {
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 35
+        }
+      },
+      "CorePointId": 7,
+      "DelayToCanSpawnSec": 4,
+      "Id": "74619df7-5a9c-40a0-8558-f7eec50cf388",
+      "Infiltration": "",
+      "Position": {
+        "x": -178.15,
+        "y": 0.114,
+        "z": -415.292
+      },
+      "Rotation": 0,
+      "Sides": ["Savage"]
+    },
+    {
+      "BotZoneName": "BotZoneGate2",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 7
+        }
+      },
+      "CorePointId": 3,
+      "DelayToCanSpawnSec": 4,
+      "Id": "747f2875-8f64-4629-94f3-71321cf8d00e",
+      "Infiltration": "",
+      "Position": {
+        "x": -245.28,
+        "y": 2.664,
+        "z": -452.873
       },
       "Rotation": 0,
       "Sides": ["Savage"]
@@ -2358,32 +2748,6 @@
       },
       "Rotation": 90.05,
       "Sides": ["All"]
-    },
-    {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 35
-        }
-      },
-      "CorePointId": 4,
-      "DelayToCanSpawnSec": 4,
-      "Id": "7716a644-0c23-4f0b-9613-b9fc4767ba35",
-      "Infiltration": "",
-      "Position": {
-        "x": -231.636,
-        "y": 0.082,
-        "z": -286.69397
-      },
-      "Rotation": 164.3535,
-      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -2438,6 +2802,32 @@
       "Sides": ["All"]
     },
     {
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 35
+        }
+      },
+      "CorePointId": 3,
+      "DelayToCanSpawnSec": 4,
+      "Id": "7af1c11a-5946-4356-add6-409b9c7d54be",
+      "Infiltration": "",
+      "Position": {
+        "x": -279.611,
+        "y": 0.078,
+        "z": -365.445984
+      },
+      "Rotation": 197.191254,
+      "Sides": ["Savage"]
+    },
+    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -2490,8 +2880,8 @@
       "Sides": ["All"]
     },
     {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
+      "BotZoneName": "BotZoneGate1",
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2500,50 +2890,24 @@
             "y": 0,
             "z": 0
           },
-          "Radius": 35
+          "Radius": 7
         }
       },
-      "CorePointId": 3,
+      "CorePointId": 2,
       "DelayToCanSpawnSec": 4,
-      "Id": "7eb7a024-be39-49ab-8a3c-82aecf4c1f95",
+      "Id": "7d2e52a2-4f79-4be7-8082-a59bba591c28",
       "Infiltration": "",
       "Position": {
-        "x": -279.611,
-        "y": 0.078,
-        "z": -365.445984
+        "x": -183.645,
+        "y": 2.711,
+        "z": -227.118988
       },
-      "Rotation": 197.191254,
+      "Rotation": 0,
       "Sides": ["Savage"]
     },
     {
       "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 35
-        }
-      },
-      "CorePointId": 3,
-      "DelayToCanSpawnSec": 4,
-      "Id": "7ffdd6c9-29dc-43d3-8348-349bbf64c128",
-      "Infiltration": "",
-      "Position": {
-        "x": -279.611,
-        "y": 0.078,
-        "z": -365.445984
-      },
-      "Rotation": 197.191254,
-      "Sides": ["Savage"]
-    },
-    {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2557,12 +2921,38 @@
       },
       "CorePointId": 7,
       "DelayToCanSpawnSec": 4,
-      "Id": "81e2c355-e3dd-4a70-a076-0fea62aec9f1",
+      "Id": "7e5708fe-ef38-4a0c-8525-356be4e04dc7",
       "Infiltration": "",
       "Position": {
         "x": -184.597,
         "y": 0.114,
         "z": -416.456
+      },
+      "Rotation": 0,
+      "Sides": ["Savage"]
+    },
+    {
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 35
+        }
+      },
+      "CorePointId": 3,
+      "DelayToCanSpawnSec": 4,
+      "Id": "7f166814-529e-46fd-8526-e7e1eea2af17",
+      "Infiltration": "",
+      "Position": {
+        "x": -275.248,
+        "y": 0.078,
+        "z": -381.095978
       },
       "Rotation": 0,
       "Sides": ["Savage"]
@@ -2594,32 +2984,6 @@
       "Sides": ["Pmc"]
     },
     {
-      "BotZoneName": "BotZoneBasement",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 25
-        }
-      },
-      "CorePointId": 3,
-      "DelayToCanSpawnSec": 4,
-      "Id": "8442480f-2fd2-4867-a558-7f95aa75211b",
-      "Infiltration": "",
-      "Position": {
-        "x": -244.796,
-        "y": -4.001,
-        "z": -414.788
-      },
-      "Rotation": 0,
-      "Sides": ["Savage"]
-    },
-    {
       "BotZoneName": "",
       "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
@@ -2644,6 +3008,32 @@
       },
       "Rotation": 3.2020905,
       "Sides": ["Pmc"]
+    },
+    {
+      "BotZoneName": "BotZoneGate1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 7
+        }
+      },
+      "CorePointId": 2,
+      "DelayToCanSpawnSec": 4,
+      "Id": "85bdcb26-519e-464d-bc60-90c0d496cd25",
+      "Infiltration": "",
+      "Position": {
+        "x": -157.212,
+        "y": 2.711,
+        "z": -227.040985
+      },
+      "Rotation": 324.67,
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -2698,34 +3088,8 @@
       "Sides": ["Pmc"]
     },
     {
-      "BotZoneName": "BotZoneGate2",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 7
-        }
-      },
-      "CorePointId": 3,
-      "DelayToCanSpawnSec": 4,
-      "Id": "8ae99f32-2b96-4a1a-9ff6-62bbf3f452bb",
-      "Infiltration": "",
-      "Position": {
-        "x": -245.28,
-        "y": 2.664,
-        "z": -452.873
-      },
-      "Rotation": 0,
-      "Sides": ["Savage"]
-    },
-    {
       "BotZoneName": "BotZoneFloor2",
-      "Categories": ["Bot"],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -2737,16 +3101,16 @@
           "Radius": 27
         }
       },
-      "CorePointId": 3,
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
-      "Id": "8f0dd3c2-9339-484e-b4ed-785a7929a545",
+      "Id": "8ce350f3-7654-45b1-8e6e-5818c2686426",
       "Infiltration": "",
       "Position": {
-        "x": -253.55899,
-        "y": 4.146,
-        "z": -376.292
+        "x": -207.064,
+        "y": 4.207,
+        "z": -295.159
       },
-      "Rotation": 0,
+      "Rotation": 113.883675,
       "Sides": ["Savage"]
     },
     {
@@ -3088,32 +3452,6 @@
       "Sides": ["Pmc"]
     },
     {
-      "BotZoneName": "BotZoneGate1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 7
-        }
-      },
-      "CorePointId": 2,
-      "DelayToCanSpawnSec": 4,
-      "Id": "9dbe0dc5-6380-41d3-9798-75b98f89c8a8",
-      "Infiltration": "",
-      "Position": {
-        "x": -157.568,
-        "y": 2.711,
-        "z": -222.756989
-      },
-      "Rotation": 201.596924,
-      "Sides": ["Savage"]
-    },
-    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -3138,6 +3476,32 @@
       },
       "Rotation": 75.25,
       "Sides": ["All"]
+    },
+    {
+      "BotZoneName": "BotZoneGate2",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 7
+        }
+      },
+      "CorePointId": 3,
+      "DelayToCanSpawnSec": 4,
+      "Id": "a273a838-1560-4423-8194-d95185114493",
+      "Infiltration": "",
+      "Position": {
+        "x": -215.217,
+        "y": 2.664,
+        "z": -448.71
+      },
+      "Rotation": 181.596954,
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -3166,6 +3530,32 @@
       "Sides": ["Pmc"]
     },
     {
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 35
+        }
+      },
+      "CorePointId": 5,
+      "DelayToCanSpawnSec": 4,
+      "Id": "a3789b1a-5689-4609-a15e-35ecb8910e6d",
+      "Infiltration": "",
+      "Position": {
+        "x": -116.089,
+        "y": 0.036,
+        "z": -339.412
+      },
+      "Rotation": 0,
+      "Sides": ["Savage"]
+    },
+    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -3190,58 +3580,6 @@
       },
       "Rotation": 100.34,
       "Sides": ["All"]
-    },
-    {
-      "BotZoneName": "BotZoneGate1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 7
-        }
-      },
-      "CorePointId": 2,
-      "DelayToCanSpawnSec": 4,
-      "Id": "a66912bd-3583-4285-bb40-bf5a0bb2d7ad",
-      "Infiltration": "",
-      "Position": {
-        "x": -184.359,
-        "y": 2.711,
-        "z": -222.758987
-      },
-      "Rotation": 151.039291,
-      "Sides": ["Savage"]
-    },
-    {
-      "BotZoneName": "BotZoneGate1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 7
-        }
-      },
-      "CorePointId": 2,
-      "DelayToCanSpawnSec": 4,
-      "Id": "a7c8500d-3a45-4ab4-8bde-4891ebdb33be",
-      "Infiltration": "",
-      "Position": {
-        "x": -157.212,
-        "y": 2.711,
-        "z": -227.040985
-      },
-      "Rotation": 324.67,
-      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -3270,6 +3608,58 @@
       "Sides": ["All"]
     },
     {
+      "BotZoneName": "BotZoneFloor2",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 27
+        }
+      },
+      "CorePointId": 8,
+      "DelayToCanSpawnSec": 4,
+      "Id": "a9cdf626-2906-405c-a39b-669cb741c98c",
+      "Infiltration": "",
+      "Position": {
+        "x": -248.84,
+        "y": 4.231,
+        "z": -362.24
+      },
+      "Rotation": 175.868637,
+      "Sides": ["Savage"]
+    },
+    {
+      "BotZoneName": "BotZoneFloor2",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 27
+        }
+      },
+      "CorePointId": 5,
+      "DelayToCanSpawnSec": 4,
+      "Id": "aa22008a-0429-4f85-9024-b6118b73a5d6",
+      "Infiltration": "",
+      "Position": {
+        "x": -134.647,
+        "y": 4.181,
+        "z": -346.005981
+      },
+      "Rotation": 0,
+      "Sides": ["Savage"]
+    },
+    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -3294,32 +3684,6 @@
       },
       "Rotation": 53.9400024,
       "Sides": ["All"]
-    },
-    {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 35
-        }
-      },
-      "CorePointId": 7,
-      "DelayToCanSpawnSec": 4,
-      "Id": "ad4dd281-ed1d-4bbb-a15e-1b719c90fe8f",
-      "Infiltration": "",
-      "Position": {
-        "x": -179.44,
-        "y": 0.114,
-        "z": -407.409973
-      },
-      "Rotation": 0,
-      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -3374,58 +3738,6 @@
       "Sides": ["Pmc"]
     },
     {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 35
-        }
-      },
-      "CorePointId": 2,
-      "DelayToCanSpawnSec": 4,
-      "Id": "b25de2ee-d9fb-4c35-a73b-fe516b436d10",
-      "Infiltration": "",
-      "Position": {
-        "x": -224.879,
-        "y": 0.082,
-        "z": -279.867
-      },
-      "Rotation": 164.3535,
-      "Sides": ["Savage"]
-    },
-    {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 35
-        }
-      },
-      "CorePointId": 3,
-      "DelayToCanSpawnSec": 4,
-      "Id": "b53cfa11-2ce4-4a85-a3c2-674068472d58",
-      "Infiltration": "",
-      "Position": {
-        "x": -275.248,
-        "y": 0.078,
-        "z": -381.095978
-      },
-      "Rotation": 0,
-      "Sides": ["Savage"]
-    },
-    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -3452,6 +3764,32 @@
       "Sides": ["All"]
     },
     {
+      "BotZoneName": "BotZoneGate1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 7
+        }
+      },
+      "CorePointId": 2,
+      "DelayToCanSpawnSec": 4,
+      "Id": "b757f551-4421-436b-af49-91844c1b848f",
+      "Infiltration": "",
+      "Position": {
+        "x": -184.359,
+        "y": 2.711,
+        "z": -222.758987
+      },
+      "Rotation": 151.039291,
+      "Sides": ["Savage"]
+    },
+    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -3476,32 +3814,6 @@
       },
       "Rotation": 89.0511551,
       "Sides": ["All"]
-    },
-    {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 35
-        }
-      },
-      "CorePointId": 2,
-      "DelayToCanSpawnSec": 4,
-      "Id": "bb29ab56-4425-40e2-b133-8abc10c4fe39",
-      "Infiltration": "",
-      "Position": {
-        "x": -226.68,
-        "y": 0.082,
-        "z": -279.617
-      },
-      "Rotation": 164.3535,
-      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -3556,8 +3868,8 @@
       "Sides": ["All"]
     },
     {
-      "BotZoneName": "BotZoneFloor2",
-      "Categories": ["Bot"],
+      "BotZoneName": "BotZoneBasement",
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3566,45 +3878,19 @@
             "y": 0,
             "z": 0
           },
-          "Radius": 27
+          "Radius": 25
         }
       },
-      "CorePointId": 4,
+      "CorePointId": 9,
       "DelayToCanSpawnSec": 4,
-      "Id": "c18b92b0-7915-4e30-995e-e163bc06d9fb",
+      "Id": "c1270e3a-65da-430f-9522-8bc2fecbfc63",
       "Infiltration": "",
       "Position": {
-        "x": -199.41,
-        "y": 4.127,
-        "z": -296.5
+        "x": -141.92,
+        "y": -4.041,
+        "z": -416.659973
       },
-      "Rotation": 85.5867,
-      "Sides": ["Savage"]
-    },
-    {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 35
-        }
-      },
-      "CorePointId": 8,
-      "DelayToCanSpawnSec": 4,
-      "Id": "c260494b-0ace-42f0-9b3c-945cbb77d608",
-      "Infiltration": "",
-      "Position": {
-        "x": -279.23,
-        "y": 0.078,
-        "z": -349.22998
-      },
-      "Rotation": 126.849854,
+      "Rotation": 0,
       "Sides": ["Savage"]
     },
     {
@@ -3686,32 +3972,6 @@
       "Sides": ["Pmc"]
     },
     {
-      "BotZoneName": "BotZoneGate2",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 7
-        }
-      },
-      "CorePointId": 3,
-      "DelayToCanSpawnSec": 4,
-      "Id": "c6928e60-e4ce-40db-94c3-8c84915366e2",
-      "Infiltration": "",
-      "Position": {
-        "x": -218.066,
-        "y": 2.664,
-        "z": -448.59198
-      },
-      "Rotation": 181.596954,
-      "Sides": ["Savage"]
-    },
-    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -3791,7 +4051,7 @@
     },
     {
       "BotZoneName": "BotZoneFloor2",
-      "Categories": ["Bot"],
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -3803,40 +4063,14 @@
           "Radius": 27
         }
       },
-      "CorePointId": 4,
+      "CorePointId": 9,
       "DelayToCanSpawnSec": 4,
-      "Id": "cb64847e-76a6-42a9-ab3d-9e5629e4bf5b",
+      "Id": "cb6fb7f0-2ecc-4cb0-a3f6-5814d8ecc410",
       "Infiltration": "",
       "Position": {
-        "x": -208.019,
-        "y": 4.207,
-        "z": -297.85498
-      },
-      "Rotation": 113.883675,
-      "Sides": ["Savage"]
-    },
-    {
-      "BotZoneName": "BotZoneFloor2",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 27
-        }
-      },
-      "CorePointId": 5,
-      "DelayToCanSpawnSec": 4,
-      "Id": "cde4c94f-1f0a-43bc-a0d7-b07758171d61",
-      "Infiltration": "",
-      "Position": {
-        "x": -134.647,
-        "y": 4.181,
-        "z": -346.005981
+        "x": -127.768,
+        "y": 4.2,
+        "z": -382.271973
       },
       "Rotation": 0,
       "Sides": ["Savage"]
@@ -3892,6 +4126,58 @@
       },
       "Rotation": 176.03,
       "Sides": ["All"]
+    },
+    {
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 35
+        }
+      },
+      "CorePointId": 4,
+      "DelayToCanSpawnSec": 4,
+      "Id": "cff559a6-e9cf-447c-a432-2e872fa14e1d",
+      "Infiltration": "",
+      "Position": {
+        "x": -206.267,
+        "y": 1.51,
+        "z": -290.977
+      },
+      "Rotation": 184.024811,
+      "Sides": ["Savage"]
+    },
+    {
+      "BotZoneName": "BotZoneBasement",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 25
+        }
+      },
+      "CorePointId": 3,
+      "DelayToCanSpawnSec": 4,
+      "Id": "d03b1791-4b04-40bc-b099-46c565862277",
+      "Infiltration": "",
+      "Position": {
+        "x": -244.796,
+        "y": -4.001,
+        "z": -414.788
+      },
+      "Rotation": 0,
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -4050,32 +4336,6 @@
       "Sides": ["Pmc"]
     },
     {
-      "BotZoneName": "BotZoneBasement",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 25
-        }
-      },
-      "CorePointId": 7,
-      "DelayToCanSpawnSec": 4,
-      "Id": "d67c127c-7f89-4ad6-a4c4-90f56a6bf666",
-      "Infiltration": "",
-      "Position": {
-        "x": -141.92,
-        "y": -4.041,
-        "z": -416.659973
-      },
-      "Rotation": 0,
-      "Sides": ["Savage"]
-    },
-    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -4100,6 +4360,32 @@
       },
       "Rotation": 89.0511551,
       "Sides": ["All"]
+    },
+    {
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 35
+        }
+      },
+      "CorePointId": 2,
+      "DelayToCanSpawnSec": 4,
+      "Id": "d997c558-0b61-4fab-bdc3-9b7543fee051",
+      "Infiltration": "",
+      "Position": {
+        "x": -224.879,
+        "y": 0.082,
+        "z": -279.867
+      },
+      "Rotation": 164.3535,
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -4258,32 +4544,6 @@
       "Sides": ["All"]
     },
     {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 35
-        }
-      },
-      "CorePointId": 4,
-      "DelayToCanSpawnSec": 4,
-      "Id": "e9147ec4-61b7-43e9-8e9b-515e127167d2",
-      "Infiltration": "",
-      "Position": {
-        "x": -206.267,
-        "y": 1.51,
-        "z": -290.977
-      },
-      "Rotation": 184.024811,
-      "Sides": ["Savage"]
-    },
-    {
       "BotZoneName": "",
       "Categories": ["Coop", "Opposite"],
       "ColliderParams": {
@@ -4308,6 +4568,32 @@
       },
       "Rotation": 3.2020905,
       "Sides": ["Pmc"]
+    },
+    {
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 35
+        }
+      },
+      "CorePointId": 5,
+      "DelayToCanSpawnSec": 4,
+      "Id": "ec7553c5-ee02-4c0f-9c68-4879ae217556",
+      "Infiltration": "",
+      "Position": {
+        "x": -116.011,
+        "y": 0.036,
+        "z": -336.378
+      },
+      "Rotation": 0,
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -4336,32 +4622,6 @@
       "Sides": ["Pmc"]
     },
     {
-      "BotZoneName": "BotZoneFloor1",
-      "Categories": ["Bot"],
-      "ColliderParams": {
-        "_parent": "SpawnSphereParams",
-        "_props": {
-          "Center": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          "Radius": 35
-        }
-      },
-      "CorePointId": 8,
-      "DelayToCanSpawnSec": 4,
-      "Id": "f1cf8f15-cc59-48ef-8d98-840d12972120",
-      "Infiltration": "",
-      "Position": {
-        "x": -279.68,
-        "y": 0.078,
-        "z": -352.99
-      },
-      "Rotation": 126.849854,
-      "Sides": ["Savage"]
-    },
-    {
       "BotZoneName": "",
       "Categories": ["Player"],
       "ColliderParams": {
@@ -4386,6 +4646,32 @@
       },
       "Rotation": 204.36,
       "Sides": ["All"]
+    },
+    {
+      "BotZoneName": "BotZoneGate2",
+      "Categories": ["Bot", "Boss"],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 7
+        }
+      },
+      "CorePointId": 3,
+      "DelayToCanSpawnSec": 4,
+      "Id": "f41dc624-2d0a-4f46-9f46-57956e3892a2",
+      "Infiltration": "",
+      "Position": {
+        "x": -244.101,
+        "y": 2.664,
+        "z": -452.923981
+      },
+      "Rotation": 0,
+      "Sides": ["Savage"]
     },
     {
       "BotZoneName": "",
@@ -4440,8 +4726,8 @@
       "Sides": ["Pmc"]
     },
     {
-      "BotZoneName": "BotZoneGate2",
-      "Categories": ["Bot"],
+      "BotZoneName": "BotZoneFloor1",
+      "Categories": ["Bot", "Boss"],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
         "_props": {
@@ -4450,23 +4736,23 @@
             "y": 0,
             "z": 0
           },
-          "Radius": 7
+          "Radius": 35
         }
       },
-      "CorePointId": 3,
+      "CorePointId": 4,
       "DelayToCanSpawnSec": 4,
-      "Id": "fe0e7112-8129-4749-8aed-e357368172af",
+      "Id": "fa6ab194-d384-4730-979f-cc84e7fac828",
       "Infiltration": "",
       "Position": {
-        "x": -244.976,
-        "y": 2.664,
-        "z": -448.615
+        "x": -231.636,
+        "y": 0.082,
+        "z": -286.69397
       },
-      "Rotation": 181.596954,
+      "Rotation": 164.3535,
       "Sides": ["Savage"]
     }
   ],
-  "UnixDateTime": 1707142616,
+  "UnixDateTime": 1636383862,
   "_Id": "5b0fc42d86f7744a585f9105",
   "doors": [],
   "exit_access_time": 60,
@@ -4633,12 +4919,29 @@
   "matching_min_seconds": 60,
   "maxItemCountInLocation": [
     {
-      "TemplateId": "54009119af1c881c07000029",
-      "Value": 0
+      "TemplateId": "634959225289190e5e773b3b",
+      "Value": 7
+    },
+    {
+      "TemplateId": "5c0530ee86f774697952d952",
+      "Value": 2
     }
   ],
   "sav_summon_seconds": 60,
   "tmp_location_field_remove_me": 111,
+  "transits": [
+    {
+      "activateAfterSec": 60,
+      "active": true,
+      "conditions": "LAB_TRANSIT_8_COND",
+      "description": "LAB_TRANSIT_8_DESC",
+      "id": 8,
+      "location": "TarkovStreets",
+      "name": "LAB_TRANSIT_8",
+      "target": "5714dc692459777137212e12",
+      "time": 30
+    }
+  ],
   "users_gather_seconds": 0,
   "users_spawn_seconds_n": 120,
   "users_spawn_seconds_n2": 200,

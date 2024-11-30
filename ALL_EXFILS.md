@@ -35,6 +35,7 @@
 | "Gate 3" | Gate 3 | [link](https://mapgenie.io/tarkov/maps/factory?locationIds=25056) |
 | "Gate 0" | Gate 0 | [link](https://mapgenie.io/tarkov/maps/factory?locationIds=25057) |
 | "Gate m" | Med Tent Gate | [link](https://mapgenie.io/tarkov/maps/factory?locationIds=88025) |
+| "Gate_o" | Courtyard Gate | [link](https://mapgenie.io/tarkov/maps/factory?locationIds=403860) |
 | "Office Window" | Office Window | [link](https://mapgenie.io/tarkov/maps/factory?locationIds=25060) |
 | "Camera Bunker Door" | Camera Bunker Door | [link](https://mapgenie.io/tarkov/maps/factory?locationIds=25058) |
 
@@ -57,8 +58,9 @@
 | "RUAF Gate" | RUAF Gate | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24857) |
 | "ZB-014" | ZB-014 | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24862) |
 | "South V-Ex" | Bridge V-Ex | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=65037) |
-| "Factory Gate" | Factory Gate (Co-Op) | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24856) |
+| "Factory Gate" | Friendship Bridge (Co-Op) | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24856) |
 | "un-sec" | Northern UN Roadblock | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=65038) |
+| "wood_sniper_exit" | Power Line Passage | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=410432) |
 | "East Gate" | Scav Bunker | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=65036) |
 | "Outskirts Water" | Scav Bridge | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=65035) |
 | "Mountain Stash" | Mountain Stash | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24859) |
