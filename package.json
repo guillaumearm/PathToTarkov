@@ -6,7 +6,7 @@
   "main": "src/mod.js",
   "license": "MIT",
   "author": "Trap",
-  "sptVersion": "3.9.x",
+  "sptVersion": "3.10.x",
   "scripts": {
     "dev:install": "npm run build && npm run build:client && npm run prepare:files && node scripts/install-files.js",
     "git:check:status": "bash scripts/check-git-status.sh",
