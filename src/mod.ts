@@ -122,7 +122,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     const endOfRaidController = new EndOfRaidController(this);
 
     eventWatcher.onEndOfRaid(payload => endOfRaidController.end(payload));
-    eventWatcher.register(createStaticRoutePeeker(staticRouter));
+    eventWatcher.register(createStaticRoutePeeker(staticRouter), container);
 
     const tweakFoundInRaid = !this.config.bypass_keep_found_in_raid_tweak;
 
