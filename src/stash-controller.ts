@@ -14,8 +14,6 @@ import { deepClone } from './utils';
 export const getTemplateIdFromStashId = (stashId: string): string => `template_${stashId}`;
 const getGridIdFromStashId = (stashId: string): string => `grid_${stashId}`;
 
-type IndexedStashByIds = Record<string, true | undefined>;
-
 export class StashController {
   constructor(
     private getConfig: ConfigGetter,
@@ -124,20 +122,6 @@ export class StashController {
         checkAccessVia(stash.access_via, offraidPosition),
       ) ?? EMPTY_STASH
     );
-  }
-
-  private getAllStashByIds(
-    profile: Profile,
-    stashConfigs: Omit<StashConfig, 'access_via'>[],
-  ): IndexedStashByIds {
-    const initialAcc: IndexedStashByIds = { [getMainStashId(profile)]: true };
-
-    return stashConfigs.reduce((acc, stashConfig) => {
-      return {
-        ...acc,
-        [stashConfig.id]: true,
-      };
-    }, initialAcc);
   }
 
   updateStash(offraidPosition: string, sessionId: string): void {
