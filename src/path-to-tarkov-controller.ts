@@ -25,17 +25,17 @@ import { deepClone, shuffle } from './utils';
 import { resolveMapNameFromLocation } from './map-name-resolver';
 import type {
   ILocationsGenerateAllResponse,
-  Path,
+  IPath,
 } from '@spt/models/eft/common/ILocationsSourceDestinationBase';
 import type { ILocations } from '@spt/models/spt/server/ILocations';
-import type { IGetLocationRequestData } from '@spt/models/eft/location/IGetLocationRequestData';
+// import type { IGetLocationRequestData } from '@spt/models/eft/location/IGetLocationRequestData';
 import type { DataCallbacks } from '@spt/callbacks/DataCallbacks';
 import type { IEmptyRequestData } from '@spt/models/eft/common/IEmptyRequestData';
 import type { ITemplateItem } from '@spt/models/eft/common/tables/ITemplateItem';
 import type { IHideoutArea } from '@spt/models/eft/hideout/IHideoutArea';
-import type { LocationCallbacks } from '@spt/callbacks/LocationCallbacks';
+// import type { LocationCallbacks } from '@spt/callbacks/LocationCallbacks';
 import type { IGetBodyResponseData } from '@spt/models/eft/httpResponse/IGetBodyResponseData';
-import type { Inventory } from '@spt/models/eft/common/tables/IBotBase';
+import type { IInventory } from '@spt/models/eft/common/tables/IBotBase';
 import { TradersAvailabilityService } from './services/TradersAvailabilityService';
 import { fixRepeatableQuestsForPmc } from './fix-repeatable-quests';
 
@@ -117,7 +117,7 @@ export class PathToTarkovController {
    */
   cleanupLegacySecondaryStashesLink(sessionId: string): void {
     const profile: Profile = this.saveServer.getProfile(sessionId);
-    const inventory = profile.characters.pmc.Inventory as Inventory | undefined;
+    const inventory = profile.characters.pmc.Inventory as IInventory | undefined;
     const secondaryStashIds: string[] = [
       EMPTY_STASH.id,
       ...this.getConfig(sessionId).hideout_secondary_stashes.map(config => config.id),
@@ -276,36 +276,37 @@ export class PathToTarkovController {
         }
       });
 
-      const newPaths: Path[] = []; // TODO: keep the original path (with filter on locked maps)
+      const newPaths: IPath[] = []; // TODO: keep the original path (with filter on locked maps)
       return { ...result, locations, paths: newPaths };
     };
   }
 
-  private createGetLocation(
-    originalFn: (
-      url: string,
-      info: IGetLocationRequestData,
-      sessionId: string,
-    ) => IGetBodyResponseData<ILocationBase>,
-  ) {
-    return (
-      url: string,
-      info: IGetLocationRequestData,
-      sessionId: string,
-    ): IGetBodyResponseData<ILocationBase> => {
-      const offraidPosition = this.getOffraidPosition(sessionId);
-      const rawLocationBase = originalFn(url, info, sessionId) as any as string;
-      const parsed = JSON.parse(rawLocationBase);
-      const locationBase: ILocationBase = parsed.data;
+  // private createGetLocation(
+  //   originalFn: (
+  //     url: string,
+  //     info: IEmptyRequestData,
+  //     sessionId: string,
+  //   ) => IGetBodyResponseData<ILocationsGenerateAllResponse>,
+  // ) {
+  //   return (
+  //     url: string,
+  //     info: IEmptyRequestData,
+  //     sessionId: string,
+  //   ): IGetBodyResponseData<ILocationsGenerateAllResponse> => {
+  //     const offraidPosition = this.getOffraidPosition(sessionId);
+  //     const rawLocationBase = originalFn(url, info, sessionId) as any as string;
+  //     const parsed = JSON.parse(rawLocationBase);
+  //     const locationResponse: ILocationsGenerateAllResponse = parsed.data;
 
-      // This will handle spawnpoints and exfils for SPT
-      // For fika, check the other call of `updateSpawnPoints`
-      this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
-      this.updateLocationBaseExits(locationBase, sessionId);
+  //     // TODO: iterate over MAPLIST to get locations
+  //     // This will handle spawnpoints and exfils for SPT
+  //     // For fika, check the other call of `updateSpawnPoints`
+  //     this.updateSpawnPoints(locationResponse.locations, offraidPosition, sessionId);
+  //     this.updateLocationBaseExits(locationBase, sessionId);
 
-      return JSON.stringify(parsed) as any;
-    };
-  }
+  //     return JSON.stringify(parsed) as any;
+  //   };
+  // }
 
   private createGetTemplateItems(
     originalFn: (url: string, info: IEmptyRequestData, sessionId: string) => string,
@@ -438,16 +439,16 @@ export class PathToTarkovController {
       { frequency: 'Always' },
     );
 
-    this.container.afterResolution<LocationCallbacks>(
-      'LocationCallbacks',
-      (_t, result): void => {
-        const locationCallbacks = Array.isArray(result) ? result[0] : result;
+    // this.container.afterResolution<LocationCallbacks>(
+    //   'LocationCallbacks',
+    //   (_t, result): void => {
+    //     const locationCallbacks = Array.isArray(result) ? result[0] : result;
 
-        const originalGet = locationCallbacks.getLocation.bind(locationCallbacks);
-        locationCallbacks.getLocation = this.createGetLocation(originalGet);
-      },
-      { frequency: 'Always' },
-    );
+    //     const originalGet = locationCallbacks.getLocationData.bind(locationCallbacks);
+    //     locationCallbacks.getLocationData = this.createGetLocation(originalGet);
+    //   },
+    //   { frequency: 'Always' },
+    // );
 
     this.container.afterResolution<DataCallbacks>(
       'DataCallbacks',

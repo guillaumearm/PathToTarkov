@@ -1,5 +1,5 @@
 import type { RouteAction } from '@spt/di/Router';
-import type { Exit, SpawnPointParam } from '@spt/models/eft/common/ILocationBase';
+import type { IExit, ISpawnPointParam } from '@spt/models/eft/common/ILocationBase';
 import type { IHideoutArea } from '@spt/models/eft/hideout/IHideoutArea';
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { StaticRouterModService } from '@spt/services/mod/staticRouter/StaticRouterModService';
@@ -13,7 +13,7 @@ import {
   VANILLA_STASH_IDS,
 } from './config';
 import { isDigit, isLetter } from './utils';
-import type { Item } from '@spt/models/eft/common/tables/IItem';
+import type { IItem } from '@spt/models/eft/common/tables/IItem';
 
 export function checkAccessVia(access_via: AccessVia, value: string): boolean {
   return access_via === '*' || access_via[0] === '*' || access_via.includes(value);
@@ -35,7 +35,7 @@ export const createSpawnPoint = (
   pos: SpawnPoint['Position'],
   rot: number,
   spawnId: string,
-): SpawnPointParam => {
+): ISpawnPointParam => {
   return {
     Id: spawnId,
     Position: getPosition(pos),
@@ -60,7 +60,7 @@ export const createSpawnPoint = (
   };
 };
 
-export const createExitPoint = (name: string): Exit => {
+export const createExitPoint = (name: string): IExit => {
   const Chance = 100;
   const Count = 0;
   const ExfiltrationTime = 10;
@@ -104,7 +104,8 @@ export const changeRestrictionsInRaid = (config: Config, db: DatabaseServer): vo
 
   globals?.config.RestrictionsInRaid.forEach(payload => {
     if (restrictionsConfig[payload.TemplateId]) {
-      payload.Value = restrictionsConfig[payload.TemplateId].Value;
+      payload.MaxInRaid = restrictionsConfig[payload.TemplateId].Value;
+      payload.MaxInLobby = Math.max(payload.MaxInRaid, payload.MaxInLobby);
     }
   });
 };
@@ -242,7 +243,7 @@ export const isVanillaSptId = (id: string): boolean => {
   return true;
 };
 
-const isStashLink = (item: Item): boolean => {
+const isStashLink = (item: IItem): boolean => {
   return (
     Boolean(item._id) &&
     Boolean(item._tpl) &&
@@ -251,7 +252,7 @@ const isStashLink = (item: Item): boolean => {
   );
 };
 
-export const retrieveMainStashIdFromItems = (items: Item[]): string | null => {
+export const retrieveMainStashIdFromItems = (items: IItem[]): string | null => {
   for (const item of items) {
     if (isStashLink(item) && isVanillaSptId(item._id)) {
       return item._id;
