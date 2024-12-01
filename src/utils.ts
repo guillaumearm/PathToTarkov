@@ -161,7 +161,7 @@ const sha1 = (data: string): string => {
 export const MONGO_ID_PTT_PREFIX = 'deadbeef';
 
 /**
- * This function is used to generate predictible mongo ids
+ * This function is used to generate predictable mongo ids
  * a "deadbeef" prefix is added to help debugging profiles
  */
 export const getPTTMongoId = (data: string): string => {

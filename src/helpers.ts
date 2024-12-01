@@ -139,6 +139,9 @@ export const isIgnoredArea = (area: IHideoutArea, isWorkbenchAlwaysEnabled: bool
   } else if (area.type === 21) {
     // christmas tree
     return true;
+  } else if (area.type === 27) {
+    // circle of cultist
+    return true;
   }
 
   return false;

@@ -443,13 +443,11 @@ export class PathToTarkovController {
 
         // override getTemplateItems
         const originalGetTemplateItems = dataCallbacks.getTemplateItems.bind(dataCallbacks);
-
         dataCallbacks.getTemplateItems = this.createGetTemplateItems(originalGetTemplateItems);
 
         // override getHideoutAreas
-        const originalGetHideoutAreas = dataCallbacks.getHideoutAreas.bind(dataCallbacks);
-
-        dataCallbacks.getHideoutAreas = this.createGetHideoutAreas(originalGetHideoutAreas);
+        // const originalGetHideoutAreas = dataCallbacks.getHideoutAreas.bind(dataCallbacks);
+        // dataCallbacks.getHideoutAreas = this.createGetHideoutAreas(originalGetHideoutAreas);
 
         // override getGlobals
         const originalGetGlobals = dataCallbacks.getGlobals.bind(dataCallbacks);
