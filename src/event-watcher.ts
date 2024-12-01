@@ -108,14 +108,9 @@ export class EventWatcher {
             return originalResult;
           }
 
-          // void data.mode; // => ""
-          // void data.playerSide; // => "" | ""
-          // TODO: remove those lines ?
-          this.ptt.debug(`playerSide = ${data.playerSide}`);
-          this.ptt.debug(`mode = ${data.mode}`);
-
-          // TODO: find a way to detect if it's a scav raid
-          raidCache.isPlayerScav = false;
+          // void data.mode; // => "PVE_OFFLINE"
+          // void data.playerSide; // => "Pmc" | "Savage"
+          raidCache.isPlayerScav = data.playerSide === 'Savage';
           raidCache.currentLocationName = data.location;
 
           this.ptt.debug(
