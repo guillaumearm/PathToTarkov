@@ -1,12 +1,15 @@
 // import type { MatchController } from '@spt/controllers/MatchController';
 // import type { IPmcData } from '@spt/models/eft/common/IPmcData';
+import type { IPmcData } from '@spt/models/eft/common/IPmcData';
 import type { IItem } from '@spt/models/eft/common/tables/IItem';
 import type { SaveServer } from '@spt/servers/SaveServer';
 
 import type { DependencyContainer } from 'tsyringe';
+import type { PathToTarkovController } from './path-to-tarkov-controller';
 
 type PTTInstance = {
   readonly container: DependencyContainer;
+  readonly pathToTarkovController: PathToTarkovController;
   readonly debug: (data: string) => void;
 };
 
@@ -28,29 +31,17 @@ const setSpawnedInSessionOnAllItems = (items: IItem[]): number => {
   return counter;
 };
 
-export const enableKeepFoundInRaidTweak = (ptt: PTTInstance): void => {
+export const applyKeepFoundInRaidTweak = (ptt: PTTInstance, sessionId: string): void => {
+  const config = ptt.pathToTarkovController.getConfig(sessionId);
+  const bypassTweak = config.bypass_keep_found_in_raid_tweak;
+
+  if (bypassTweak) {
+    return;
+  }
+
   const saveServer = ptt.container.resolve<SaveServer>('SaveServer');
-
-  // TODO: fix
-  void saveServer;
-  void setSpawnedInSessionOnAllItems;
-
-  // ptt.container.afterResolution<MatchController>(
-  //   'MatchController',
-  //   (_t, result): void => {
-  //     const matchController = Array.isArray(result) ? result[0] : result;
-
-  //     const originalEndOfflineRaid = matchController.endOfflineRaid.bind(matchController);
-
-  //     matchController.endOfflineRaid = (info, sessionId) => {
-  //       originalEndOfflineRaid(info, sessionId);
-
-  //       const profile = saveServer.getProfile(sessionId);
-  //       const pmcData: IPmcData = profile.characters.pmc;
-  //       const count = setSpawnedInSessionOnAllItems(pmcData.Inventory.items);
-  //       ptt.debug(`added 'SpawnedInSession' flag on ${count} items`);
-  //     };
-  //   },
-  //   { frequency: 'Always' },
-  // );
+  const profile = saveServer.getProfile(sessionId);
+  const pmcData: IPmcData = profile.characters.pmc;
+  const count = setSpawnedInSessionOnAllItems(pmcData.Inventory.items);
+  ptt.debug(`added 'SpawnedInSession' flag on ${count} items`);
 };

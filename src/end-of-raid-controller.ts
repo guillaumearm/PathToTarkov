@@ -2,6 +2,8 @@ import type { MapName } from './config';
 import type { ILogger } from '@spt/models/spt/utils/ILogger';
 import type { PathToTarkovController } from './path-to-tarkov-controller';
 import { resolveMapNameFromLocation } from './map-name-resolver';
+import { applyKeepFoundInRaidTweak } from './keep-fir-tweak';
+import type { DependencyContainer } from 'tsyringe';
 
 export type EndOfRaidPayload = {
   sessionId: string;
@@ -11,6 +13,7 @@ export type EndOfRaidPayload = {
 };
 
 export type PTTInstance = {
+  readonly container: DependencyContainer;
   readonly pathToTarkovController: PathToTarkovController;
   readonly executeOnStartAPICallbacks: (sessionId: string) => void;
   readonly logger: ILogger;
@@ -22,8 +25,10 @@ export class EndOfRaidController {
 
   public end(payload: EndOfRaidPayload): void {
     const { sessionId, locationName, exitName, isPlayerScav } = payload;
-    const mapName = resolveMapNameFromLocation(locationName) as MapName;
 
+    applyKeepFoundInRaidTweak(this.ptt, sessionId);
+
+    const mapName = resolveMapNameFromLocation(locationName) as MapName;
     if (!mapName) {
       this.ptt.logger.error(
         `Path To Tarkov Error: cannot resolve map name from location '${locationName}'`,

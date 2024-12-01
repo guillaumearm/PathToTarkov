@@ -21,7 +21,6 @@ import {
 } from './config';
 import { EventWatcher } from './event-watcher';
 import { createStaticRoutePeeker, disableRunThrough } from './helpers';
-import { enableKeepFoundInRaidTweak } from './keep-fir-tweak';
 
 import { PathToTarkovController } from './path-to-tarkov-controller';
 import { purgeProfiles } from './uninstall';
@@ -123,13 +122,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     eventWatcher.onEndOfRaid(payload => endOfRaidController.end(payload));
     eventWatcher.register(createStaticRoutePeeker(staticRouter), container);
-
-    const tweakFoundInRaid = !this.config.bypass_keep_found_in_raid_tweak;
-
-    if (tweakFoundInRaid) {
-      enableKeepFoundInRaidTweak(this);
-      this.debug('option keep_found_in_raid_tweak enabled');
-    }
 
     if (this.config.traders_access_restriction) {
       fixRepeatableQuests(container);
