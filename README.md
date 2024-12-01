@@ -24,7 +24,7 @@ New spawn points can be added in `player_spawnpoints.json`
 
 ## The Default configuration
 
-![PathToTarkov mermaid image](./configs/Default/PathToTarkov.png)
+![PathToTarkov config image](./configs/Default/TarkovMapV2.jpg)
 
 By default, you are on `MechanicStash` offraid position. It means you can spawn on Customs or Factory maps only.
 
