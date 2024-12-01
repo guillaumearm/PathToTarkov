@@ -98,7 +98,7 @@ export class EventWatcher {
         matchController.startLocalRaid = (sessionId: string, data: IStartLocalRaidRequestData) => {
           const originalResult = deepClone(originalStartLocalRaid(sessionId, data));
           const locationBase: ILocationBase = originalResult.locationLoot;
-          this.ptt.pathToTarkovController.onRaidStarted(locationBase, sessionId);
+          this.ptt.pathToTarkovController.syncLocationBase(locationBase, sessionId);
 
           this.initRaidCache(sessionId);
           const raidCache = this.getRaidCache(sessionId);

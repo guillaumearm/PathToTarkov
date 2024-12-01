@@ -155,10 +155,11 @@ export class PathToTarkovController {
   /**
    * Warning: this function will mutate the given locationBase
    */
-  onRaidStarted(locationBase: ILocationBase, sessionId: string): void {
+  syncLocationBase(locationBase: ILocationBase, sessionId: string): void {
     const offraidPosition = this.getOffraidPosition(sessionId);
     this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
-    this.updateLocationBaseTransits(locationBase, sessionId);
+    this.updateLocationBaseExits(locationBase, sessionId);
+    // this.updateLocationBaseTransits(locationBase, sessionId);
   }
 
   private getRespawnOffraidPosition = (sessionId: string): string => {
@@ -242,7 +243,7 @@ export class PathToTarkovController {
 
           locationBase.Locked = locked;
           locationBase.Enabled = !locked;
-          this.updateLocationBaseExits(locationBase, sessionId);
+          this.syncLocationBase(locationBase, sessionId);
 
           /**
            * This was necessary before for Fika (3.9.x fix)
