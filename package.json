@@ -11,9 +11,8 @@
     "dev:install": "npm run build && npm run build:client && npm run prepare:files && node scripts/install-files.js",
     "git:check:status": "bash scripts/check-git-status.sh",
     "gather:external:resources": "bash scripts/gather-external-resources.sh && npm run prettier",
-    "build:doc:mermaid": "mmdc --width 1600 --height 1200 -t dark -b transparent -i paths/default.md -o configs/Default/PathToTarkov.png",
     "build:doc:all-exfils": "node scripts/generate-all-exfils > ALL_EXFILS.md",
-    "build:doc": "npm run build:doc:all-exfils && npm run build:doc:mermaid",
+    "build:doc": "npm run build:doc:all-exfils",
     "zip:files": "cd dist && bestzip ../mod.zip user BepInEx && cd .. && node scripts/rename-zip.js",
     "prepare:files": "node scripts/prepare-files.js",
     "build:release": "npm run rebuild:all && npm run prepare:files && npm run zip:files && npm run git:check:status",
@@ -35,7 +34,6 @@
     "test:ci": "npm run build && npm run test && npm run lint:all && npm run build:doc:all-exfils"
   },
   "devDependencies": {
-    "@mermaid-js/mermaid-cli": "^9.1.7",
     "@types/i18n": "^0.13.5",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.14.11",
