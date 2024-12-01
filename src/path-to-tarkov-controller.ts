@@ -159,7 +159,7 @@ export class PathToTarkovController {
     const offraidPosition = this.getOffraidPosition(sessionId);
     this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
     this.updateLocationBaseExits(locationBase, sessionId);
-    // this.updateLocationBaseTransits(locationBase, sessionId);
+    this.updateLocationBaseTransits(locationBase, sessionId);
   }
 
   private getRespawnOffraidPosition = (sessionId: string): string => {
@@ -528,9 +528,22 @@ export class PathToTarkovController {
       return;
     }
 
-    // TODO: handle transits
-    locationBase.transits = [];
-    this.debug(`all transits wiped for map "${locationBase.Name}"`);
+    if (!locationBase.transits) {
+      this.logger.error(
+        `WTF there is not transits on this location base: ${JSON.stringify(locationBase, undefined, 2)}`,
+      );
+      return;
+    }
+
+    let nbTransitsWiped = 0;
+    locationBase.transits.forEach(transit => {
+      transit.active = false;
+      nbTransitsWiped += 1;
+    });
+
+    if (nbTransitsWiped) {
+      this.debug(`${nbTransitsWiped} transits disabled for map "${locationBase.Name}"`);
+    }
   }
 
   private updateLocationBaseExits(locationBase: ILocationBase, sessionId: string): void {
