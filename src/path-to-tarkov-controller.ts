@@ -28,19 +28,19 @@ import type {
   IPath,
 } from '@spt/models/eft/common/ILocationsSourceDestinationBase';
 import type { ILocations } from '@spt/models/spt/server/ILocations';
-// import type { IGetLocationRequestData } from '@spt/models/eft/location/IGetLocationRequestData';
 import type { DataCallbacks } from '@spt/callbacks/DataCallbacks';
 import type { IEmptyRequestData } from '@spt/models/eft/common/IEmptyRequestData';
 import type { ITemplateItem } from '@spt/models/eft/common/tables/ITemplateItem';
 import type { IHideoutArea } from '@spt/models/eft/hideout/IHideoutArea';
-// import type { LocationCallbacks } from '@spt/callbacks/LocationCallbacks';
 import type { IGetBodyResponseData } from '@spt/models/eft/httpResponse/IGetBodyResponseData';
 import { TradersAvailabilityService } from './services/TradersAvailabilityService';
 import { fixRepeatableQuestsForPmc } from './fix-repeatable-quests';
+// import type { LocationCallbacks } from '@spt/callbacks/LocationCallbacks';
 
 type IndexedLocations = Record<string, ILocationBase>;
 
 // indexed by mapName
+// Warning: do not re-use, it should only be use by the `generateAll` override
 const getIndexedLocations = (locations: ILocations): IndexedLocations => {
   // WARNING: type lies here
   // TODO: improve type
@@ -152,6 +152,15 @@ export class PathToTarkovController {
     return null;
   }
 
+  /**
+   * Warning: this function will mutate the given locationBase
+   */
+  onRaidStarted(locationBase: ILocationBase, sessionId: string): void {
+    const offraidPosition = this.getOffraidPosition(sessionId);
+    this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
+    this.updateLocationBaseTransits(locationBase, sessionId);
+  }
+
   private getRespawnOffraidPosition = (sessionId: string): string => {
     const profile: Profile = this.saveServer.getProfile(sessionId);
     const profileTemplateId = profile.info.edition;
@@ -233,10 +242,13 @@ export class PathToTarkovController {
 
           locationBase.Locked = locked;
           locationBase.Enabled = !locked;
-
-          // necessary for Fika
-          this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
           this.updateLocationBaseExits(locationBase, sessionId);
+
+          /**
+           * This was necessary before for Fika (3.9.x fix)
+           * spawn points update is now handled at the `startLocalRaid` layer
+           */
+          // this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
         }
       });
 
@@ -245,8 +257,8 @@ export class PathToTarkovController {
     };
   }
 
-  // TODO: iterate over MAPLIST to get locations
-  // private createGetLocation(
+  // the 3.9.x way (TODO: remove this)
+  // private createGetLocationData(
   //   originalFn: (
   //     url: string,
   //     info: IEmptyRequestData,
@@ -261,12 +273,21 @@ export class PathToTarkovController {
   //     const offraidPosition = this.getOffraidPosition(sessionId);
   //     const rawLocationBase = originalFn(url, info, sessionId) as any as string;
   //     const parsed = JSON.parse(rawLocationBase);
-  //     const locationResponse: ILocationsGenerateAllResponse = parsed.data;
-  //
-  //     // This will handle spawnpoints and exfils for SPT
-  //     // For fika, check the other call of `updateSpawnPoints`
-  //     this.updateSpawnPoints(locationResponse.locations, offraidPosition, sessionId);
-  //     this.updateLocationBaseExits(locationBase, sessionId);
+  //     const locationsResponse: ILocationsGenerateAllResponse = parsed.data;
+  //     const indexedLocations = getIndexedLocations(locationsResponse.locations);
+
+  //     this.debug('getLocationData called!');
+
+  //     // const db = this.container.resolve<DatabaseServer>('DatabaseServer');
+
+  //     MAPLIST.forEach(mapName => {
+  //       const locationBase = indexedLocations[mapName];
+  //       if (locationBase) {
+  //         void offraidPosition;
+  //         this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
+  //         this.updateLocationBaseExits(locationBase, sessionId);
+  //       }
+  //     });
 
   //     return JSON.stringify(parsed) as any;
   //   };
@@ -409,7 +430,7 @@ export class PathToTarkovController {
     //     const locationCallbacks = Array.isArray(result) ? result[0] : result;
 
     //     const originalGet = locationCallbacks.getLocationData.bind(locationCallbacks);
-    //     locationCallbacks.getLocationData = this.createGetLocation(originalGet);
+    //     locationCallbacks.getLocationData = this.createGetLocationData(originalGet);
     //   },
     //   { frequency: 'Always' },
     // );
@@ -439,11 +460,10 @@ export class PathToTarkovController {
 
   private removePlayerSpawnsForLocation(locationBase: ILocationBase): void {
     locationBase.SpawnPointParams = locationBase.SpawnPointParams.filter(params => {
-      // remove Player from Categories array
-      params.Categories = params.Categories.filter(cat => cat !== 'Player');
+      const playerCategoryFound = params.Categories.find(cat => cat === 'Player');
 
-      if (!params.Categories.length) {
-        // remove the spawn point if Categories is empty
+      // remove the spawn point if Category is related to player
+      if (playerCategoryFound) {
         return false;
       }
 
@@ -487,7 +507,7 @@ export class PathToTarkovController {
             this.logger.warning(`=> PathToTarkov: spawn '${spawnId}' has no Infiltration`);
           }
 
-          locationBase?.SpawnPointParams.push(spawnPoint);
+          locationBase.SpawnPointParams.push(spawnPoint);
           this.debug(`[${sessionId}] player spawn '${spawnId}' added for location ${mapName}`);
         }
       });
@@ -502,16 +522,28 @@ export class PathToTarkovController {
     return false;
   }
 
-  private updateLocationBaseExits(locationBase: ILocationBase, sessionId: string): boolean {
+  private updateLocationBaseTransits(locationBase: ILocationBase, sessionId: string): void {
+    const config = this.getConfig(sessionId);
+
+    if (config.bypass_exfils_override || config.bypass_transits_override) {
+      return;
+    }
+
+    // TODO: handle transits
+    locationBase.transits = [];
+    this.debug(`all transits wiped for map "${locationBase.Name}"`);
+  }
+
+  private updateLocationBaseExits(locationBase: ILocationBase, sessionId: string): void {
     const config = this.getConfig(sessionId);
 
     if (config.bypass_exfils_override) {
-      return false;
+      return;
     }
 
     // this will ignore unavailable maps (like terminal)
     if (!this.isLocationBaseAvailable(locationBase)) {
-      return false;
+      return;
     }
 
     const mapName = resolveMapNameFromLocation(locationBase.Id);
@@ -520,7 +552,7 @@ export class PathToTarkovController {
     if (extractPoints.length === 0) {
       this.logger.error(`Path To Tarkov: no exfils found for map '${mapName}'!`);
 
-      return false;
+      return;
     }
 
     if (config.vanilla_exfils_requirements) {
@@ -556,8 +588,6 @@ export class PathToTarkovController {
       // erase all exits and create custom exit points without requirements
       locationBase.exits = extractPoints.map(createExitPoint);
     }
-
-    return true;
   }
 
   private getInitialOffraidPosition = (sessionId: string): string => {

@@ -5,6 +5,8 @@ import type { IStartLocalRaidRequestData } from '@spt/models/eft/match/IStartLoc
 import type { IEndLocalRaidRequestData } from '@spt/models/eft/match/IEndLocalRaidRequestData';
 import type { MatchController } from '@spt/controllers/MatchController';
 import type { DependencyContainer } from 'tsyringe';
+import type { ILocationBase } from '@spt/models/eft/common/ILocationBase';
+import { deepClone } from './utils';
 
 type EndOfRaidCallback = (payload: EndOfRaidPayload) => void;
 
@@ -94,7 +96,9 @@ export class EventWatcher {
         const originalStartLocalRaid = matchController.startLocalRaid.bind(matchController);
 
         matchController.startLocalRaid = (sessionId: string, data: IStartLocalRaidRequestData) => {
-          const originalResult = originalStartLocalRaid(sessionId, data);
+          const originalResult = deepClone(originalStartLocalRaid(sessionId, data));
+          const locationBase: ILocationBase = originalResult.locationLoot;
+          this.ptt.pathToTarkovController.onRaidStarted(locationBase, sessionId);
 
           this.initRaidCache(sessionId);
           const raidCache = this.getRaidCache(sessionId);
@@ -104,6 +108,8 @@ export class EventWatcher {
             return originalResult;
           }
 
+          // void data.mode; // => ""
+          // void data.playerSide; // => "" | ""
           // TODO: remove those lines ?
           this.ptt.debug(`playerSide = ${data.playerSide}`);
           this.ptt.debug(`mode = ${data.mode}`);
@@ -122,31 +128,6 @@ export class EventWatcher {
       { frequency: 'Always' },
     );
   }
-
-  // private watchSave(staticRoutePeeker: StaticRoutePeeker): void {
-  //   staticRoutePeeker.watchRoute(
-  //     '/raid/profile/save',
-  //     (url, data: { isPlayerScav: boolean }, sessionId: string) => {
-  //       const raidCache = this.getRaidCache(sessionId);
-
-  //       if (!raidCache) {
-  //         return;
-  //       }
-
-  //       raidCache.saved = true;
-  //       raidCache.isPlayerScav = data.isPlayerScav;
-
-  //       this.ptt.debug(`profile saved: raidCache.isPlayerScav=${data.isPlayerScav}`);
-
-  //       if (!raidCache.endOfRaid) {
-  //         this.ptt.debug('end of raid: callback execution delayed...');
-  //         return;
-  //       }
-
-  //       return this.runEndOfRaidCallback(sessionId);
-  //     },
-  //   );
-  // }
 
   private watchEndOfRaid(container: DependencyContainer): void {
     container.afterResolution<MatchController>(

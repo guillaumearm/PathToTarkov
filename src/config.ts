@@ -151,6 +151,7 @@ type RawConfig = {
   workbench_always_enabled: boolean;
   vanilla_exfils_requirements?: boolean;
   bypass_exfils_override?: boolean;
+  bypass_transits_override?: boolean;
   bypass_uninstall_procedure: boolean;
   enable_run_through?: boolean;
   enable_legacy_ptt_api?: boolean;

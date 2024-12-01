@@ -78,7 +78,6 @@ export const createExitPoint = (name: string): IExit => {
     PassageRequirement,
     RequirementTip,
     EventAvailable: true,
-    // the following properties are not used but needed to make TypeScript happy
     ChancePVE: Chance,
     CountPVE: Count,
     ExfiltrationTimePVE: ExfiltrationTime,
