@@ -32,6 +32,7 @@ import { pathToTarkovReloadedTooltipsConfigCompat } from './pttr-tooltips';
 import path from 'path';
 import { analyzeConfig } from './config-analysis';
 import { TradersAvailabilityService } from './services/TradersAvailabilityService';
+import { applyKeepFoundInRaidTweak } from './keep-fir-tweak';
 
 const getTooltipsConfig = (
   userConfig: UserConfig,
@@ -129,6 +130,14 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     }
   }
 
+  public postDBLoad(container: DependencyContainer): void {
+    if (!this.config.enabled) {
+      return;
+    }
+
+    void container;
+  }
+
   public postSptLoad(container: DependencyContainer): void {
     this.container = container;
     const db = container.resolve<DatabaseServer>('DatabaseServer');
@@ -151,6 +160,12 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
       purgeProfiles(this.config, quests, saveServer, this.logger);
       return;
+    }
+
+    if (!this.config.bypass_keep_found_in_raid_tweak) {
+      applyKeepFoundInRaidTweak(container);
+      // this.debug('keep FIR tweak applied');
+      this.logger.warning('keep FIR tweak does not work on this verison');
     }
 
     this.pathToTarkovController.tradersAvailabilityService.init(quests);

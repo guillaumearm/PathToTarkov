@@ -2,7 +2,6 @@ import type { MapName } from './config';
 import type { ILogger } from '@spt/models/spt/utils/ILogger';
 import type { PathToTarkovController } from './path-to-tarkov-controller';
 import { resolveMapNameFromLocation } from './map-name-resolver';
-import { applyKeepFoundInRaidTweak } from './keep-fir-tweak';
 import type { DependencyContainer } from 'tsyringe';
 
 export type EndOfRaidPayload = {
@@ -25,8 +24,6 @@ export class EndOfRaidController {
 
   public end(payload: EndOfRaidPayload): void {
     const { sessionId, locationName, exitName, isPlayerScav } = payload;
-
-    applyKeepFoundInRaidTweak(this.ptt, sessionId);
 
     const mapName = resolveMapNameFromLocation(locationName) as MapName;
     if (!mapName) {
