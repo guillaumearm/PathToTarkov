@@ -244,12 +244,6 @@ export class PathToTarkovController {
           locationBase.Locked = locked;
           locationBase.Enabled = !locked;
           this.syncLocationBase(locationBase, sessionId);
-
-          /**
-           * This was necessary before for Fika (3.9.x fix)
-           * spawn points update is now handled at the `startLocalRaid` layer
-           */
-          // this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
         }
       });
 
@@ -257,42 +251,6 @@ export class PathToTarkovController {
       return { ...result, locations, paths: newPaths };
     };
   }
-
-  // the 3.9.x way (TODO: remove this)
-  // private createGetLocationData(
-  //   originalFn: (
-  //     url: string,
-  //     info: IEmptyRequestData,
-  //     sessionId: string,
-  //   ) => IGetBodyResponseData<ILocationsGenerateAllResponse>,
-  // ) {
-  //   return (
-  //     url: string,
-  //     info: IEmptyRequestData,
-  //     sessionId: string,
-  //   ): IGetBodyResponseData<ILocationsGenerateAllResponse> => {
-  //     const offraidPosition = this.getOffraidPosition(sessionId);
-  //     const rawLocationBase = originalFn(url, info, sessionId) as any as string;
-  //     const parsed = JSON.parse(rawLocationBase);
-  //     const locationsResponse: ILocationsGenerateAllResponse = parsed.data;
-  //     const indexedLocations = getIndexedLocations(locationsResponse.locations);
-
-  //     this.debug('getLocationData called!');
-
-  //     // const db = this.container.resolve<DatabaseServer>('DatabaseServer');
-
-  //     MAPLIST.forEach(mapName => {
-  //       const locationBase = indexedLocations[mapName];
-  //       if (locationBase) {
-  //         void offraidPosition;
-  //         this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
-  //         this.updateLocationBaseExits(locationBase, sessionId);
-  //       }
-  //     });
-
-  //     return JSON.stringify(parsed) as any;
-  //   };
-  // }
 
   private createGetTemplateItems(
     originalFn: (url: string, info: IEmptyRequestData, sessionId: string) => string,
@@ -528,15 +486,10 @@ export class PathToTarkovController {
       return;
     }
 
-    if (!locationBase.transits) {
-      this.logger.error(
-        `WTF there is not transits on this location base: ${JSON.stringify(locationBase, undefined, 2)}`,
-      );
-      return;
-    }
+    const transits = locationBase.transits ?? []; // fallback on empty array because the type can lie (for `terminal` map)
 
     let nbTransitsWiped = 0;
-    locationBase.transits.forEach(transit => {
+    transits.forEach(transit => {
       transit.active = false;
       nbTransitsWiped += 1;
     });
