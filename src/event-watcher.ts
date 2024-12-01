@@ -7,6 +7,7 @@ import type { MatchController } from '@spt/controllers/MatchController';
 import type { DependencyContainer } from 'tsyringe';
 import type { ILocationBase } from '@spt/models/eft/common/ILocationBase';
 import { deepClone } from './utils';
+import type { MatchCallbacks } from '@spt/callbacks/MatchCallbacks';
 
 type EndOfRaidCallback = (payload: EndOfRaidPayload) => void;
 
@@ -125,20 +126,24 @@ export class EventWatcher {
   }
 
   private watchEndOfRaid(container: DependencyContainer): void {
-    container.afterResolution<MatchController>(
-      'MatchController',
+    container.afterResolution<MatchCallbacks>(
+      'MatchCallbacks',
       (_t, result): void => {
-        const matchController = Array.isArray(result) ? result[0] : result;
-        const originalEndLocalRaid = matchController.endLocalRaid.bind(matchController);
+        const matchCallbacks = Array.isArray(result) ? result[0] : result;
+        const originalEndLocalRaid = matchCallbacks.endLocalRaid.bind(matchCallbacks);
 
-        matchController.endLocalRaid = (sessionId: string, data: IEndLocalRaidRequestData) => {
-          const originalResult = originalEndLocalRaid(sessionId, data);
+        matchCallbacks.endLocalRaid = (
+          url: string,
+          data: IEndLocalRaidRequestData,
+          sessionId: string,
+        ) => {
+          const originalResult = originalEndLocalRaid(url, data, sessionId);
 
           const raidCache = this.getRaidCache(sessionId);
 
           if (!raidCache) {
             this.ptt.logger.error(`no PTT raid cache found`);
-            return;
+            return originalResult;
           }
 
           raidCache.sessionId = sessionId;
