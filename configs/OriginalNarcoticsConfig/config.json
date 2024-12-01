@@ -475,7 +475,7 @@
       },
       "access_via": ["Outskirts"]
     },
-    "Legs": {
+    "6748edbcb936f1098d4303e4": {
       "// mod integration for Legs the Trader": true,
       "// Gunsmith is available after extracting from Tunnel (shoreline map) or Lighthouse Tunnel (lighthouse map)": true,
       "disable_warning": true,
