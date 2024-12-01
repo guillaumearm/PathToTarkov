@@ -4,18 +4,8 @@
   "initial_offraid_position": "FactoryZB-1011",
   "reset_offraid_position_on_player_die": true,
   "traders_access_restriction": true,
-  "flea_access_restriction": true,
-  "flea_access_level": 1,
   "hideout_multistash_enabled": true,
   "vanilla_exfils_requirements": true,
-  "laboratory_access_restriction": true,
-  "laboratory_access_via": [
-    "SewerRiver",
-    "BasementDescent",
-    "Catacombs",
-    "VentShaft",
-    "SylobateElevator"
-  ],
   "player_scav_move_offraid_position": false,
   "workbench_always_enabled": true,
   "bypass_keep_found_in_raid_tweak": false,
@@ -236,27 +226,6 @@
     }
   ],
   "traders_config": {
-    "ragfair": {
-      "// Trader name": "Flea Market",
-      "override_description": true,
-      "location_description": {
-        "ch": "To access the Flea Market, gain entry to the Saferoom in Interchange",
-        "cz": "To access the Flea Market, gain entry to the Saferoom in Interchange",
-        "en": "To access the Flea Market, gain entry to the Saferoom in Interchange",
-        "es-mx": "To access the Flea Market, gain entry to the Saferoom in Interchange",
-        "es": "To access the Flea Market, gain entry to the Saferoom in Interchange",
-        "fr": "To access the Flea Market, gain entry to the Saferoom in Interchange",
-        "ge": "To access the Flea Market, gain entry to the Saferoom in Interchange",
-        "hu": "To access the Flea Market, gain entry to the Saferoom in Interchange",
-        "it": "To access the Flea Market, gain entry to the Saferoom in Interchange",
-        "jp": "To access the Flea Market, gain entry to the Saferoom in Interchange",
-        "kr": "To access the Flea Market, gain entry to the Saferoom in Interchange",
-        "pl": "To access the Flea Market, gain entry to the Saferoom in Interchange",
-        "po": "To access the Flea Market, gain entry to the Saferoom in Interchange",
-        "ru": "To access the Flea Market, gain entry to the Saferoom in Interchange"
-      },
-      "access_via": ["SafeRoom"]
-    },
     "54cb50c76803fa8b248b4571": {
       "// Trader name": "Prapor",
       "insurance_always_enabled": true,

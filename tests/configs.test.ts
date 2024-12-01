@@ -53,12 +53,16 @@ describe('PTT embedded configs', () => {
     testConfig('./configs/LegacyPathToTarkovV4');
   });
 
+  it('should validate the LegacyPathToTarkovV5 config', () => {
+    testConfig('./configs/LegacyPathToTarkovV5');
+  });
+
   it('should validate the LinearPath config', () => {
     testConfig('./configs/LinearPath');
   });
 
-  it('should validate the NarcoticsConfig config', () => {
-    testConfig('./configs/NarcoticsConfig');
+  it('should validate the OriginalNarcoticsConfig config', () => {
+    testConfig('./configs/OriginalNarcoticsConfig');
   });
 
   it('should validate the PathToTarkovReloaded config', () => {

@@ -1,0 +1,5 @@
+YOU MUST HAVE DYNAMIC MAPS ALREADY DOWNLOADED
+
+Copy the "DynamicMaps" folder above and paste it into the BepInEx/plugins folder, replacing the files when prompted.
+
+If you want to revert, just redownload dynamic maps.

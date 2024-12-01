@@ -1,0 +1,96 @@
+{
+  "comment": "In the locales arrays below, even indexes (including 0) must be locale keywords, and odd indexes are the overwrite locale values.",
+  "comment": "If you are using the mode that includes the extra trader and specific trader/ stash locations, this should be set to true",
+  "comment": "If you are using the standard config, this should be set to false",
+
+  "language": "english",
+
+  "moddedTraderCompat": false,
+  "additionalLocalesToggle": false,
+
+  "moddedTraderExtracts": [
+    "Saferoom Exfil",
+    "Saferoom (Goblin King)",
+    "EXFIL_ZB013",
+    "ZB-1013 Storage Bunker (Broker)"
+  ],
+
+  "localesToChangeAdditional": [],
+
+  "localesToChange": [
+    "Gate 3",
+    "Gate 3 to Customs - Mechanic (Hideout)",
+    "Office Window",
+    "Office Window to woods - Jeager",
+
+    "Gate 3",
+    "Gate 3 to Customs - Mechanic (Hideout)",
+    "Office Window",
+    "Office Window to woods - Jeager",
+
+    "Railroad To Tarkov",
+    "Railroad To Tarkov to Streets, GZ - Therapist, ",
+    "Railroad To Military Base",
+    "Railroad To Military Base to Reserve - Skier",
+    "ZB-1011",
+    "ZB-1011 to Factory - Mechanic (Hideout)",
+    "Old Azs Gate",
+    "Old Gas Station Gate to Interchange - Ragman",
+
+    "Factory Gate",
+    "Factory Gate to Factory - Jeager",
+    "South V-Ex",
+    "South V-Ex to Shoreline",
+
+    "EXFIL_ScavCooperation",
+    "Scav Lands to Customs - Skier",
+    "Exit4",
+    "Checkpoint Fence to Lighthouse",
+    "EXFIL_Bunker_D2",
+    "D-2 to interchange",
+
+    "NW Exfil",
+    "Railway Exfil to Customs - Ragman",
+    "Saferoom Exfil",
+    "Saferoom to Reserve, Shoreline",
+    "PP Exfil",
+    "Power Station V-Ex to Customs, Streets, GZ, Labs - Prapor",
+
+    "Tunnel",
+    "Tunnel to Lighthouse - Peacekeeper",
+    "Shorl_V-Ex",
+    "Road to North V-Ex to Woods",
+    "South Fence Passage",
+    "Old Bunker to Reserve, Interchange",
+
+    "Coastal_South_Road",
+    "Southern Road to Shoreline - Peacekeeper",
+    " V-Ex_light",
+    "Road to Military Base V-Ex to Reserve",
+
+    "E5",
+    "Collapsed Crane to Customs, GZ - Therapist",
+    "E7_car",
+    "Primorsky Ave Taxi V-Ex to Customs, Interchange, GZ, Labs - Prapor",
+
+    "lab_Parking_Gate",
+    "Parking Gate",
+    "lab_Hangar_Gate",
+    "Hangar Gate",
+    "lab_Elevator_Med",
+    "Medical Block Elevator",
+    "lab_Under_Storage_Collector",
+    "Sewage Conduit",
+    "lab_Elevator_Main",
+    "Main Elevator",
+    "lab_Vent",
+    "Ventilation Shaft",
+    "lab_Elevator_Cargo",
+    "Cargo Elevator",
+
+    "Scav_coop_exit",
+    "Scav Checkpoint to Customs, Streets - Therapist",
+    "Sandbox_VExit",
+    "Police Cordon V-Ex to Customs, Interchange, Streets, Labs - Prapor"
+  ]
+}
