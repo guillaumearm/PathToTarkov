@@ -422,6 +422,10 @@ export class PathToTarkovController {
     offraidPosition: string,
     sessionId: string,
   ): void {
+    if (!this.isLocationBaseAvailable(locationBase)) {
+      return;
+    }
+
     const mapName = resolveMapNameFromLocation(locationBase.Id);
     const infiltrations = this.getConfig(sessionId).infiltrations;
 
@@ -460,6 +464,7 @@ export class PathToTarkovController {
     }
   }
 
+  // this will ignore unavailable maps (like terminal)
   private isLocationBaseAvailable(locationBase: ILocationBase): boolean {
     if (locationBase.Scene.path && locationBase.Scene.rcid) {
       return true;
@@ -475,7 +480,11 @@ export class PathToTarkovController {
       return;
     }
 
-    const transits = locationBase.transits ?? []; // fallback on empty array because the type can lie (for `terminal` map)
+    if (!this.isLocationBaseAvailable(locationBase)) {
+      return;
+    }
+
+    const transits = locationBase.transits ?? [];
 
     let nbTransitsWiped = 0;
     transits.forEach(transit => {
@@ -495,7 +504,6 @@ export class PathToTarkovController {
       return;
     }
 
-    // this will ignore unavailable maps (like terminal)
     if (!this.isLocationBaseAvailable(locationBase)) {
       return;
     }
