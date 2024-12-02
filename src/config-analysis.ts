@@ -107,7 +107,7 @@ const getErrorsForOffraidPositions = (config: Config): string[] => {
       const offraidPosition = offraidByExfil[extractName];
       if (!config.infiltrations[offraidPosition]) {
         errors.push(
-          `wrong offraidPosition: "${offraidPosition}" in infiltrations.${mapName}.${extractName}`,
+          `wrong offraidPosition: "${offraidPosition}" in exfiltrations.${mapName}.${extractName}`,
         );
       }
     });
