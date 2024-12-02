@@ -383,17 +383,6 @@ export class PathToTarkovController {
       { frequency: 'Always' },
     );
 
-    // this.container.afterResolution<LocationCallbacks>(
-    //   'LocationCallbacks',
-    //   (_t, result): void => {
-    //     const locationCallbacks = Array.isArray(result) ? result[0] : result;
-
-    //     const originalGet = locationCallbacks.getLocationData.bind(locationCallbacks);
-    //     locationCallbacks.getLocationData = this.createGetLocationData(originalGet);
-    //   },
-    //   { frequency: 'Always' },
-    // );
-
     this.container.afterResolution<DataCallbacks>(
       'DataCallbacks',
       (_t, result): void => {
@@ -404,8 +393,8 @@ export class PathToTarkovController {
         dataCallbacks.getTemplateItems = this.createGetTemplateItems(originalGetTemplateItems);
 
         // override getHideoutAreas
-        // const originalGetHideoutAreas = dataCallbacks.getHideoutAreas.bind(dataCallbacks);
-        // dataCallbacks.getHideoutAreas = this.createGetHideoutAreas(originalGetHideoutAreas);
+        const originalGetHideoutAreas = dataCallbacks.getHideoutAreas.bind(dataCallbacks);
+        dataCallbacks.getHideoutAreas = this.createGetHideoutAreas(originalGetHideoutAreas);
 
         // override getGlobals
         const originalGetGlobals = dataCallbacks.getGlobals.bind(dataCallbacks);
