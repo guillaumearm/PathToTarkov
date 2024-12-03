@@ -14,6 +14,7 @@ import {
   createExitPoint,
   createSpawnPoint,
   isIgnoredArea,
+  isPlayerSpawnPoint,
   PTT_INFILTRATION,
 } from './helpers';
 
@@ -156,8 +157,8 @@ export class PathToTarkovController {
    * Warning: this function will mutate the given locationBase
    */
   syncLocationBase(locationBase: ILocationBase, sessionId: string): void {
-    const offraidPosition = this.getOffraidPosition(sessionId);
-    this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
+    this.updateInfiltrationForPlayerSpawnPoints(locationBase);
+    this.updateSpawnPoints(locationBase, sessionId);
     this.updateLocationBaseExits(locationBase, sessionId);
     this.updateLocationBaseTransits(locationBase, sessionId);
   }
@@ -406,28 +407,18 @@ export class PathToTarkovController {
 
   private removePlayerSpawnsForLocation(locationBase: ILocationBase): void {
     locationBase.SpawnPointParams = locationBase.SpawnPointParams.filter(params => {
-      const playerCategoryFound = params.Categories.find(cat => cat === 'Player');
-
-      // remove the spawn point if Category is related to player
-      if (playerCategoryFound) {
-        return false;
-      }
-
-      return true;
+      return !isPlayerSpawnPoint(params);
     });
   }
 
-  private updateSpawnPoints(
-    locationBase: ILocationBase,
-    offraidPosition: string,
-    sessionId: string,
-  ): void {
+  private updateSpawnPoints(locationBase: ILocationBase, sessionId: string): void {
     if (!this.isLocationBaseAvailable(locationBase)) {
       return;
     }
 
     const mapName = resolveMapNameFromLocation(locationBase.Id);
     const infiltrations = this.getConfig(sessionId).infiltrations;
+    const offraidPosition = this.getOffraidPosition(sessionId);
 
     if (!infiltrations[offraidPosition]) {
       this.debug(
@@ -464,6 +455,22 @@ export class PathToTarkovController {
     }
   }
 
+  /**
+   * The purpose of this function is to set the PTT Infiltration field for all player spawnpoints
+   * It will allow exfils to be available even when player took a transit
+   */
+  private updateInfiltrationForPlayerSpawnPoints(locationBase: ILocationBase): void {
+    if (!this.isLocationBaseAvailable(locationBase)) {
+      return;
+    }
+
+    locationBase.SpawnPointParams.forEach(spawnPoint => {
+      if (isPlayerSpawnPoint(spawnPoint)) {
+        spawnPoint.Infiltration = PTT_INFILTRATION;
+      }
+    });
+  }
+
   // this will ignore unavailable maps (like terminal)
   private isLocationBaseAvailable(locationBase: ILocationBase): boolean {
     if (locationBase.Scene.path && locationBase.Scene.rcid) {
@@ -473,17 +480,26 @@ export class PathToTarkovController {
     return false;
   }
 
+  /**
+   * Disable transits if specified by the config
+   */
   private updateLocationBaseTransits(locationBase: ILocationBase, sessionId: string): void {
-    const config = this.getConfig(sessionId);
-
-    if (config.bypass_exfils_override || config.bypass_transits_override) {
-      return;
-    }
-
     if (!this.isLocationBaseAvailable(locationBase)) {
       return;
     }
 
+    const config = this.getConfig(sessionId);
+
+    if (!config.disable_all_transits) {
+      return;
+    }
+
+    if (config.disable_all_transits) {
+      this.updateLocationDisableAllTransits(locationBase);
+    }
+  }
+
+  private updateLocationDisableAllTransits(locationBase: ILocationBase): void {
     const transits = locationBase.transits ?? [];
 
     let nbTransitsWiped = 0;
@@ -498,13 +514,13 @@ export class PathToTarkovController {
   }
 
   private updateLocationBaseExits(locationBase: ILocationBase, sessionId: string): void {
-    const config = this.getConfig(sessionId);
-
-    if (config.bypass_exfils_override) {
+    if (!this.isLocationBaseAvailable(locationBase)) {
       return;
     }
 
-    if (!this.isLocationBaseAvailable(locationBase)) {
+    const config = this.getConfig(sessionId);
+
+    if (config.bypass_exfils_override) {
       return;
     }
 

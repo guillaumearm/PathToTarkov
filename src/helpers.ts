@@ -24,6 +24,10 @@ const getPosition = (pos: SpawnPoint['Position']): PositionXYZ => {
 
 export const PTT_INFILTRATION = 'PTT_INFILTRATION';
 
+export const isPlayerSpawnPoint = (spawnPoint: ISpawnPointParam): boolean => {
+  return Boolean(spawnPoint.Categories.find(cat => cat === 'Player'));
+};
+
 export const createSpawnPoint = (
   pos: SpawnPoint['Position'],
   rot: number,
