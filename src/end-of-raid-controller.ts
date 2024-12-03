@@ -48,11 +48,12 @@ export class EndOfRaidController {
       return;
     }
 
-    const newOffraidPosition = this.ptt.pathToTarkovController.onPlayerExtracts(
+    const newOffraidPosition = this.ptt.pathToTarkovController.onPlayerExtracts({
       sessionId,
       mapName,
       exitName,
-    );
+      isPlayerScav,
+    });
 
     if (newOffraidPosition) {
       this.ptt.debug(`end of raid: new offraid position ${newOffraidPosition}`);

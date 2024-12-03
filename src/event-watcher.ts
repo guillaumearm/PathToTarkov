@@ -23,7 +23,6 @@ const createInitialRaidCache = (sessionId: string): RaidCache => ({
   currentLocationName: null,
   exitName: undefined,
   isPlayerScav: null,
-  // TODO: add the exitStatus
 });
 
 export class EventWatcher {
@@ -97,8 +96,8 @@ export class EventWatcher {
         const originalStartLocalRaid = matchController.startLocalRaid.bind(matchController);
 
         matchController.startLocalRaid = (sessionId: string, data: IStartLocalRaidRequestData) => {
-          const originalResult = deepClone(originalStartLocalRaid(sessionId, data));
-          const locationBase: ILocationBase = originalResult.locationLoot;
+          const result = deepClone(originalStartLocalRaid(sessionId, data));
+          const locationBase: ILocationBase = result.locationLoot;
           this.ptt.pathToTarkovController.syncLocationBase(locationBase, sessionId);
 
           this.initRaidCache(sessionId);
@@ -106,7 +105,7 @@ export class EventWatcher {
 
           if (!raidCache) {
             this.ptt.logger.error(`no PTT raid cache found when starting the raid`);
-            return originalResult;
+            return result;
           }
 
           // void data.mode; // => "PVE_OFFLINE"
@@ -118,7 +117,7 @@ export class EventWatcher {
             `offline raid started on location '${data.location}' with sessionId '${sessionId}'`,
           );
 
-          return originalResult;
+          return result;
         };
       },
       { frequency: 'Always' },
@@ -137,13 +136,12 @@ export class EventWatcher {
           data: IEndLocalRaidRequestData,
           sessionId: string,
         ) => {
-          const originalResult = originalEndLocalRaid(url, data, sessionId);
+          const result = originalEndLocalRaid(url, data, sessionId);
 
           const raidCache = this.getRaidCache(sessionId);
-
           if (!raidCache) {
             this.ptt.logger.error(`no PTT raid cache found`);
-            return originalResult;
+            return result;
           }
 
           raidCache.sessionId = sessionId;
@@ -156,7 +154,7 @@ export class EventWatcher {
           );
           this.runEndOfRaidCallback(sessionId);
 
-          return originalResult;
+          return result;
         };
       },
       { frequency: 'Always' },

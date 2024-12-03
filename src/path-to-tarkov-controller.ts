@@ -36,6 +36,7 @@ import type { IHideoutArea } from '@spt/models/eft/hideout/IHideoutArea';
 import type { IGetBodyResponseData } from '@spt/models/eft/httpResponse/IGetBodyResponseData';
 import { TradersAvailabilityService } from './services/TradersAvailabilityService';
 import { fixRepeatableQuestsForPmc } from './fix-repeatable-quests';
+import { KeepFoundInRaidTweak } from './keep-fir-tweak';
 // import type { LocationCallbacks } from '@spt/callbacks/LocationCallbacks';
 
 type IndexedLocations = Record<string, ILocationBase>;
@@ -140,9 +141,26 @@ export class PathToTarkovController {
   }
 
   // returns the new offraid position (or null if not found)
-  onPlayerExtracts(sessionId: string, mapName: MapName, exitName: string): string | null {
-    const extractsConf = this.getConfig(sessionId).exfiltrations[mapName];
+  onPlayerExtracts(params: {
+    sessionId: string;
+    mapName: MapName;
+    exitName: string;
+    isPlayerScav: boolean;
+  }): string | null {
+    const { sessionId, mapName, exitName, isPlayerScav } = params;
+    const config = this.getConfig(sessionId);
 
+    if (config.bypass_keep_found_in_raid_tweak) {
+      this.debug(`[${sessionId}] FIR tweak disabled`);
+    } else {
+      const firTweak = new KeepFoundInRaidTweak(this.saveServer);
+      const nbImpactedItems = firTweak.setFoundInRaidOnEquipment(sessionId, isPlayerScav);
+      this.debug(
+        `[${sessionId}] FIR tweak added SpawnedInSession on ${nbImpactedItems} item${nbImpactedItems > 1 ? 's' : ''}`,
+      );
+    }
+
+    const extractsConf = config.exfiltrations[mapName];
     const newOffraidPosition = extractsConf && exitName && extractsConf[exitName];
 
     if (newOffraidPosition) {

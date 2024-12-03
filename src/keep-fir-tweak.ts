@@ -1,31 +1,57 @@
-import type { DependencyContainer } from 'tsyringe';
-import type { ConfigServer } from '@spt/servers/ConfigServer';
-import type { ConfigTypes } from '@spt/models/enums/ConfigTypes';
-import type { IInRaidConfig } from '@spt/models/spt/config/IInRaidConfig';
+import type { SaveServer } from '@spt/servers/SaveServer';
+import type { IItem } from '@spt/models/eft/common/tables/IItem';
 
-// TODO: filter to get only items that are in the player equipment (need to use "equipment" field as a parentId)
-// const setSpawnedInSessionOnAllItems = (items: IItem[]): number => {
-//   let counter = 0;
+export class KeepFoundInRaidTweak {
+  constructor(private saveServer: SaveServer) {}
 
-//   items.forEach(item => {
-//     if (item.upd) {
-//       if (!item.upd.SpawnedInSession) {
-//         item.upd.SpawnedInSession = true;
-//         counter = counter + 1;
-//       }
-//     } else {
-//       item.upd = { SpawnedInSession: true };
-//       counter = counter + 1;
-//     }
-//   });
+  public setFoundInRaidOnEquipment(sessionId: string, isPlayerScav: boolean): number {
+    const profile = this.saveServer.getProfile(sessionId);
+    const characterData = profile.characters[isPlayerScav ? 'scav' : 'pmc'];
+    const inventory = characterData.Inventory;
+    const allEquipmentItems = KeepFoundInRaidTweak.getItemsContainedIn(
+      inventory.items,
+      inventory.equipment,
+    );
 
-//   return counter;
-// };
+    const nbImpactedItems = KeepFoundInRaidTweak.setSpawnedInSessionOnItems(allEquipmentItems);
+    this.saveServer.saveProfile(sessionId);
 
-export const applyKeepFoundInRaidTweak = (container: DependencyContainer): void => {
-  const configServer = container.resolve<ConfigServer>('ConfigServer');
-  const inRaidConfig = configServer.getConfig<IInRaidConfig>('spt-inraid' as ConfigTypes.IN_RAID);
+    return nbImpactedItems;
+  }
 
-  // this does not work
-  inRaidConfig.alwaysKeepFoundInRaidonRaidEnd = true;
-};
+  private static getItemsContainedIn(items: IItem[], parentId: string): IItem[] {
+    const resultItems: IItem[] = [];
+
+    items.forEach(item => {
+      if (!item._id || !item.parentId) {
+        return;
+      }
+
+      if (item.parentId === parentId) {
+        resultItems.push(item);
+        const deeperItems = this.getItemsContainedIn(items, item._id);
+        resultItems.push(...deeperItems);
+      }
+    });
+
+    return resultItems;
+  }
+
+  private static setSpawnedInSessionOnItems(items: IItem[]): number {
+    let counter = 0;
+
+    items.forEach(item => {
+      if (item.upd) {
+        if (!item.upd.SpawnedInSession) {
+          item.upd.SpawnedInSession = true;
+          counter = counter + 1;
+        }
+      } else {
+        item.upd = { SpawnedInSession: true };
+        counter = counter + 1;
+      }
+    });
+
+    return counter;
+  }
+}
