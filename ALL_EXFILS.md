@@ -36,7 +36,6 @@
 | "Gate 0" | Gate 0 | [link](https://mapgenie.io/tarkov/maps/factory?locationIds=25057) |
 | "Gate m" | Med Tent Gate | [link](https://mapgenie.io/tarkov/maps/factory?locationIds=88025) |
 | "Gate_o" | Courtyard Gate | [link](https://mapgenie.io/tarkov/maps/factory?locationIds=403860) |
-| "Office Window" | Office Window | [link](https://mapgenie.io/tarkov/maps/factory?locationIds=25060) |
 | "Camera Bunker Door" | Camera Bunker Door | [link](https://mapgenie.io/tarkov/maps/factory?locationIds=25058) |
 
 ## Interchange

@@ -691,7 +691,7 @@
       "Cellars": "FactoryZB-013",
       "Camera Bunker Door": "MechanicHideout",
       "Gate 0": "FactoryZB-1011",
-      "Office Window": "GasGate"
+      "Gate_o": "GasGate"
     },
     "factory4_night": {
       "Gate 3": "FactoryZB-016",
@@ -699,7 +699,7 @@
       "Cellars": "FactoryZB-013",
       "Camera Bunker Door": "MechanicHideout",
       "Gate 0": "FactoryZB-1011",
-      "Office Window": "GasGate"
+      "Gate_o": "GasGate"
     },
     "bigmap": {
       "Military Checkpoint": "ScavCP",
@@ -883,8 +883,8 @@
     "GasGate": {
       "bigmap": ["Old Gas Scav"],
       "woods": ["Factory Gate"],
-      "factory4_day": ["Office Window"],
-      "factory4_night": ["Office Window"]
+      "factory4_day": ["Courtyard"],
+      "factory4_night": ["Courtyard"]
     },
     "TarkovRR": {
       "bigmap": ["RR to Tarkov"],

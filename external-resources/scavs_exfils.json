@@ -16,7 +16,7 @@
     "Administration Gate",
     "Factory Far Corner"
   ],
-  "factory": ["Office Window", "Camera Bunker Door"],
+  "factory": ["Camera Bunker Door"],
   "interchange": [],
   "woods": [
     "East Gate",
