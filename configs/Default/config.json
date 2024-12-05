@@ -437,7 +437,6 @@
     },
     "579dc571d53a0658a154fbec": {
       "// Trader name": "Fence",
-      "// Fence is accessible everywhere": true,
       "access_via": "*",
       "insurance_always_enabled": true,
       "insurance_config": {
@@ -459,7 +458,6 @@
     },
     "6748adca5c70634464b214a8": {
       "// mod integration for Priscilu": true,
-      "// Priscilu is available after extracting from Outskirts (woods map)": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -482,7 +480,6 @@
     },
     "6748edbcb936f1098d4303e4": {
       "// mod integration for Legs the Trader": true,
-      "// Gunsmith is available after extracting from Tunnel (shoreline map) or Lighthouse Tunnel (lighthouse map)": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -505,7 +502,6 @@
     },
     "67419e9d0d4541ce671543bb": {
       "// mod integration for HarryHideout": true,
-      "// HarryHideout is available at PlayerHideout": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -528,7 +524,6 @@
     },
     "66bf757f27d0b097db0acea5": {
       "// mod integration for ArtemTrader": true,
-      "// ArtemTrader is available at ArtemHideout": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -549,32 +544,8 @@
       },
       "access_via": ["ArtemHideout"]
     },
-    "hephaestus_alxk": {
-      "// mod integration for Hephaestus": true,
-      "// Hephaestus is available at Streets": true,
-      "disable_warning": true,
-      "override_description": true,
-      "location_description": {
-        "ch": "Streets",
-        "cz": "Streets",
-        "en": "Streets",
-        "es-mx": "Streets",
-        "es": "Streets",
-        "fr": "Streets",
-        "ge": "Streets",
-        "hu": "Streets",
-        "it": "Streets",
-        "jp": "Streets",
-        "kr": "Streets",
-        "pl": "Streets",
-        "po": "Streets",
-        "ru": "Streets"
-      },
-      "access_via": ["RuinedHouse"]
-    },
     "6688d464bc40c867f60e7d7e": {
       "// mod integration for Scorpion": true,
-      "// Scorpion is available at ReserveZB-014": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -597,7 +568,6 @@
     },
     "668aaff35fd574b6dcc4a686": {
       "// mod integration for PAINTER": true,
-      "// PAINTERSHOP is available at Car": false,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -620,7 +590,6 @@
     },
     "lotus": {
       "// mod integration for lotus": true,
-      "// lotus is available at Emercom": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -643,7 +612,6 @@
     },
     "Coyote": {
       "// mod integration for Coyote": true,
-      "// Coyote is available at BasementDescent": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -664,9 +632,30 @@
       },
       "access_via": ["BasementDescent"]
     },
+    "hephaestus_alxk": {
+      "// mod integration for Hephaestus": true,
+      "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "Streets",
+        "cz": "Streets",
+        "en": "Streets",
+        "es-mx": "Streets",
+        "es": "Streets",
+        "fr": "Streets",
+        "ge": "Streets",
+        "hu": "Streets",
+        "it": "Streets",
+        "jp": "Streets",
+        "kr": "Streets",
+        "pl": "Streets",
+        "po": "Streets",
+        "ru": "Streets"
+      },
+      "access_via": ["RuinedHouse"]
+    },
     "Sally": {
       "// mod integration for Sally": true,
-      "// Sally is available at Manhole": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
