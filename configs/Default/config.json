@@ -499,7 +499,7 @@
       },
       "access_via": ["LegsHideout"]
     },
-    "HarryHideout": {
+    "67419e9d0d4541ce671543bb": {
       "// mod integration for HarryHideout": true,
       "// HarryHideout is available at PlayerHideout": true,
       "disable_warning": true,
@@ -568,6 +568,52 @@
       },
       "access_via": ["RuinedHouse"]
     },
+    "6688d464bc40c867f60e7d7e": {
+      "// mod integration for Scorpion": true,
+      "// Scorpion is available at ReserveZB-014": true,
+      "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "Woods/Reserve",
+        "cz": "Woods/Reserve",
+        "en": "Woods/Reserve",
+        "es-mx": "Woods/Reserve",
+        "es": "Woods/Reserve",
+        "fr": "Woods/Reserve",
+        "ge": "Woods/Reserve",
+        "hu": "Woods/Reserve",
+        "it": "Woods/Reserve",
+        "jp": "Woods/Reserve",
+        "kr": "Woods/Reserve",
+        "pl": "Woods/Reserve",
+        "po": "Woods/Reserve",
+        "ru": "Woods/Reserve"
+      },
+      "access_via": ["ReserveZB-014"]
+    },
+    "668aaff35fd574b6dcc4a686": {
+      "// mod integration for PAINTER": true,
+      "// PAINTERSHOP is available at Car": false,
+      "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "Customs/Streets/Interchange",
+        "cz": "Customs/Streets/Interchange",
+        "en": "Customs/Streets/Interchange",
+        "es-mx": "Customs/Streets/Interchange",
+        "es": "Customs/Streets/Interchange",
+        "fr": "Customs/Streets/Interchange",
+        "ge": "Customs/Streets/Interchange",
+        "hu": "Customs/Streets/Interchange",
+        "it": "Customs/Streets/Interchange",
+        "jp": "Customs/Streets/Interchange",
+        "kr": "Customs/Streets/Interchange",
+        "pl": "Customs/Streets/Interchange",
+        "po": "Customs/Streets/Interchange",
+        "ru": "Customs/Streets/Interchange"
+      },
+      "access_via": ["TarkovRR", "CrashSite", "Railway"]
+    },
     "lotus": {
       "// mod integration for lotus": true,
       "// lotus is available at Emercom": true,
@@ -614,29 +660,6 @@
       },
       "access_via": ["BasementDescent"]
     },
-    "6688d464bc40c867f60e7d7e": {
-      "// mod integration for Scorpion": true,
-      "// Scorpion is available at ReserveZB-014": true,
-      "disable_warning": true,
-      "override_description": true,
-      "location_description": {
-        "ch": "Woods/Reserve",
-        "cz": "Woods/Reserve",
-        "en": "Woods/Reserve",
-        "es-mx": "Woods/Reserve",
-        "es": "Woods/Reserve",
-        "fr": "Woods/Reserve",
-        "ge": "Woods/Reserve",
-        "hu": "Woods/Reserve",
-        "it": "Woods/Reserve",
-        "jp": "Woods/Reserve",
-        "kr": "Woods/Reserve",
-        "pl": "Woods/Reserve",
-        "po": "Woods/Reserve",
-        "ru": "Woods/Reserve"
-      },
-      "access_via": ["ReserveZB-014"]
-    },
     "Sally": {
       "// mod integration for Sally": true,
       "// Sally is available at Manhole": true,
@@ -659,29 +682,6 @@
         "ru": "Reserve/Streets"
       },
       "access_via": ["Manhole"]
-    },
-    "668aaff35fd574b6dcc4a686": {
-      "// mod integration for PAINTER": true,
-      "// PAINTERSHOP is available at Car": false,
-      "disable_warning": true,
-      "override_description": true,
-      "location_description": {
-        "ch": "Customs/Streets/Interchange",
-        "cz": "Customs/Streets/Interchange",
-        "en": "Customs/Streets/Interchange",
-        "es-mx": "Customs/Streets/Interchange",
-        "es": "Customs/Streets/Interchange",
-        "fr": "Customs/Streets/Interchange",
-        "ge": "Customs/Streets/Interchange",
-        "hu": "Customs/Streets/Interchange",
-        "it": "Customs/Streets/Interchange",
-        "jp": "Customs/Streets/Interchange",
-        "kr": "Customs/Streets/Interchange",
-        "pl": "Customs/Streets/Interchange",
-        "po": "Customs/Streets/Interchange",
-        "ru": "Customs/Streets/Interchange"
-      },
-      "access_via": ["TarkovRR", "CrashSite", "Railway"]
     }
   },
   "exfiltrations": {

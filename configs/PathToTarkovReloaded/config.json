@@ -402,7 +402,7 @@
       },
       "access_via": ["ShorelineLighthouseTunnel"]
     },
-    "HarryHideout": {
+    "67419e9d0d4541ce671543bb": {
       "// mod integration for HarryHideout": true,
       "// HarryHideout is available at PlayerHideout": true,
       "disable_warning": true,
