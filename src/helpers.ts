@@ -57,19 +57,75 @@ export const createSpawnPoint = (
   };
 };
 
-export const createExitPoint = (name: string): IExit => {
-  const Chance = 100;
-  const Count = 0;
-  const ExfiltrationTime = 10;
-  const MinTime = 0;
-  const MaxTime = 0;
-  const PlayersCount = 0;
-  const ExfiltrationType = 'Individual';
-  const PassageRequirement = 'None';
-  const RequirementTip = '';
+type ExitProps = {
+  Id: string;
+  PassageRequirement: string;
+  ExfiltrationType: string;
+  RequirementTip: string;
+  Count: number;
+  MaxTime: number;
+  MinTime: number;
+  PlayersCount: number;
+  Chance: number;
+  ExfiltrationTime: number;
+};
+
+// TODO: default_exfiltration_time_seconds field in config ?
+const DEFAULT_EXFILTRATION_TIME_IN_SECONDS = 10;
+
+const getDefaultExitProps = (): ExitProps => ({
+  Id: '',
+  PassageRequirement: 'None',
+  ExfiltrationType: 'Individual',
+  RequirementTip: '',
+  Count: 0,
+  MinTime: 0,
+  MaxTime: 0,
+  PlayersCount: 0,
+  Chance: 100,
+  ExfiltrationTime: DEFAULT_EXFILTRATION_TIME_IN_SECONDS,
+});
+
+const getExitProps = (originalExit: IExit | undefined): ExitProps => {
+  const newExitProps = getDefaultExitProps();
+
+  if (!originalExit) {
+    return newExitProps;
+  }
+
+  if (originalExit.PassageRequirement === 'WorldEvent') {
+    newExitProps.PassageRequirement = originalExit.PassageRequirement;
+    newExitProps.ExfiltrationType = originalExit.ExfiltrationType;
+    newExitProps.RequirementTip = originalExit.RequirementTip;
+  } else if (originalExit.PassageRequirement === 'Train') {
+    newExitProps.PassageRequirement = originalExit.PassageRequirement;
+    newExitProps.ExfiltrationType = originalExit.ExfiltrationType;
+    newExitProps.RequirementTip = originalExit.RequirementTip;
+    newExitProps.Id = originalExit.Id;
+    newExitProps.Count = originalExit.Count;
+    newExitProps.MinTime = originalExit.MinTime;
+    newExitProps.MaxTime = originalExit.MaxTime;
+  }
+
+  return newExitProps;
+};
+
+export const createExitPoint = (name: string, originalExit: IExit | undefined): IExit => {
+  const {
+    Id,
+    Count,
+    MinTime,
+    MaxTime,
+    ExfiltrationType,
+    PassageRequirement,
+    RequirementTip,
+    PlayersCount,
+    Chance,
+    ExfiltrationTime,
+  } = getExitProps(originalExit);
 
   return {
-    Id: '',
+    Id,
     Name: name,
     EntryPoints: PTT_INFILTRATION,
     Chance,
@@ -81,7 +137,7 @@ export const createExitPoint = (name: string): IExit => {
     ExfiltrationType,
     PassageRequirement,
     RequirementTip,
-    EventAvailable: true,
+    EventAvailable: false,
     ChancePVE: Chance,
     CountPVE: Count,
     ExfiltrationTimePVE: ExfiltrationTime,

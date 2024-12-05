@@ -1,5 +1,5 @@
 import type { IBodyHealth, IGlobals } from '@spt/models/eft/common/IGlobals';
-import type { ILocationBase } from '@spt/models/eft/common/ILocationBase';
+import type { IExit, ILocationBase } from '@spt/models/eft/common/ILocationBase';
 import type { ILogger } from '@spt/models/spt/utils/ILogger';
 import type { ConfigServer } from '@spt/servers/ConfigServer';
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
@@ -547,43 +547,31 @@ export class PathToTarkovController {
 
     if (extractPoints.length === 0) {
       this.logger.error(`Path To Tarkov: no exfils found for map '${mapName}'!`);
-
       return;
     }
 
+    // TODO: move this into config-analysis
     if (config.vanilla_exfils_requirements) {
-      const usedExitNames = new Set<string>();
-
-      // filter all exits and keep vanilla requirements (except for ScavCooperation requirements)
-      locationBase.exits = locationBase.exits
-        .filter(exit => {
-          return extractPoints.includes(exit.Name);
-        })
-        .map(exit => {
-          usedExitNames.add(exit.Name);
-
-          if (exit.PassageRequirement === 'ScavCooperation') {
-            return createExitPoint(exit.Name);
-          }
-
-          exit.EntryPoints = PTT_INFILTRATION;
-          exit.ExfiltrationTime = 10;
-          exit.Chance = 100;
-
-          return exit;
-        });
-
-      // add missing extractPoints (potentially scav extracts)
-      extractPoints.forEach(extractName => {
-        if (!usedExitNames.has(extractName)) {
-          const exitPoint = createExitPoint(extractName);
-          locationBase.exits.push(exitPoint);
-        }
-      });
-    } else {
-      // erase all exits and create custom exit points without requirements
-      locationBase.exits = extractPoints.map(createExitPoint);
+      this.logger.error('Path To Tarkov: "vanilla_exfils_requirements" is no longer supported');
+      return;
     }
+
+    // TODO(refactor): implement an indexBy util
+    const indexedExits = locationBase.exits.reduce<Record<string, IExit | undefined>>(
+      (indexed, exit) => {
+        return {
+          ...indexed,
+          [exit.Name]: exit,
+        };
+      },
+      {},
+    );
+
+    // erase all exits and create custom exit points without requirements
+    locationBase.exits = extractPoints.map(exitName => {
+      const originalExit = indexedExits[exitName];
+      return createExitPoint(exitName, originalExit);
+    });
   }
 
   private getInitialOffraidPosition = (sessionId: string): string => {
