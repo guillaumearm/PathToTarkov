@@ -223,6 +223,11 @@
       "id": "PathToTarkov_Catacombs_stash",
       "size": 16,
       "access_via": ["Catacombs"]
+    },
+    {
+      "id": "PathToTarkov_Therapist_stash",
+      "size": 16,
+      "access_via": ["TherapistHideout"]
     }
   ],
   "traders_config": {
