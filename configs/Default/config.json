@@ -5,7 +5,6 @@
   "reset_offraid_position_on_player_die": true,
   "traders_access_restriction": true,
   "hideout_multistash_enabled": true,
-  "vanilla_exfils_requirements": true,
   "player_scav_move_offraid_position": false,
   "workbench_always_enabled": true,
   "disable_all_transits": false,
