@@ -779,9 +779,11 @@
     },
     "laboratory": {
       "lab_Hangar_Gate": "Catacombs",
+      "lab_Parking_Gate": "BasementDescent",
       "lab_Under_Storage_Collector": "SewerRiver",
       "lab_Elevator_Main": "SylobateElevator",
       "lab_Elevator_Cargo": "BasementDescent",
+      "lab_Elevator_Med": "BasementDescent",
       "lab_Vent": "VentShaft"
     },
     "sandbox": {
@@ -1058,7 +1060,7 @@
     "BasementDescent": {
       "sandbox": ["Nakatani Basement Stairs"],
       "tarkovstreets": ["Basement Descent"],
-      "laboratory": ["Cargo Elevator"]
+      "laboratory": ["Cargo Elevator", "Parking Gate", "Med Block Elevator"]
     },
     "RuinedHouse": {
       "tarkovstreets": ["Streets Ruined House"]
