@@ -521,7 +521,7 @@
       },
       "access_via": ["FactoryZB-1011"]
     },
-    "ArtemTrader": {
+    "66bf757f27d0b097db0acea5": {
       "// mod integration for ArtemTrader": true,
       "// ArtemTrader is available at ArtemHideout": true,
       "disable_warning": true,

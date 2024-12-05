@@ -425,7 +425,7 @@
       },
       "access_via": ["PlayerHideout"]
     },
-    "ArtemTrader": {
+    "66bf757f27d0b097db0acea5": {
       "// mod integration for ArtemTrader": true,
       "// ArtemTrader is available at Boat": true,
       "disable_warning": true,
