@@ -520,7 +520,7 @@
         "po": "Hideout",
         "ru": "Hideout"
       },
-      "access_via": ["FactoryZB-1011"]
+      "access_via": ["BasementDescent"]
     },
     "66bf757f27d0b097db0acea5": {
       "// mod integration for ArtemTrader": true,
