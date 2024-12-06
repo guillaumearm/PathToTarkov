@@ -7,5 +7,5 @@
 /mod.zip
 /configs/UserConfig.json
 
-/PTT-Extracts/bin
-/PTT-Extracts/obj
+/PTT-BepInEx/bin
+/PTT-BepInEx/obj

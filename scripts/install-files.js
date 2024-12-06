@@ -3,7 +3,7 @@ const { execSync } = require('child_process');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageJson = require('../package.json');
 
-const dllFileName = 'PTTExtracts.dll';
+const dllFileName = 'Trap.PathToTarkov.dll';
 const cprFlags = '--overwrite';
 
 const main = async modName => {

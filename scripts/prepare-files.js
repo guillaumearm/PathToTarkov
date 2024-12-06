@@ -7,13 +7,16 @@ const { mkdirp } = require('mkdirp');
 // // eslint-disable-next-line @typescript-eslint/no-var-requires
 // const cpr = require('cpr');
 
+const PTTClientDir = 'PTT-BepInEx'
+const dllFileName = 'Trap.PathToTarkov.dll';
+
 const main = async modName => {
   [
     'rimraf dist/user',
     'rimraf dist/BepInEx',
     () => mkdirp.sync(`./dist/user/mods/${modName}`),
     () => mkdirp.sync('./dist/BepInEx/plugins'),
-    'cpr ./PTT-Extracts/bin/Debug/netstandard2.0/PTTExtracts.dll ./dist/BepInEx/plugins/PTTExtracts.dll -o',
+    `cpr ./${PTTClientDir}/bin/Debug/netstandard2.0/${dllFileName} ./dist/BepInEx/plugins/${dllFileName} -o`,
     `cpr package.json ./dist/user/mods/${modName}/package.json -o`,
     `cpr dist/src ./dist/user/mods/${modName}/src -o`,
     `cpr configs ./dist/user/mods/${modName}/configs -o`,

@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>PTTExtracts</AssemblyName>
-    <Description>Extract Patches for Path to Tarkov</Description>
-    <Version>1.0.2</Version>
+    <AssemblyName>Trap.PathToTarkov</AssemblyName>
+    <Description>Client patches for Path to Tarkov</Description>
+    <Version>1.1.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
