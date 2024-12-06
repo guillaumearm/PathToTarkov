@@ -9,6 +9,8 @@ namespace PTTExtracts
         {
             new PTT.Extracts.InitAllExfiltrationPointsPatch().Enable();
             new PTT.Extracts.ScavExfiltrationPointPatch().Enable();
+            new PTT.Traders.LockTraderCardPatch().Enable();
+            new PTT.Traders.LockTraderPanelPatch().Enable();
 
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
         }
