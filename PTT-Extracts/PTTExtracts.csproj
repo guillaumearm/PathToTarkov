@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>PTTExtracts</AssemblyName>
-    <Description>Unlock scavs exfiltrations for PMCs (Patches for Path to Tarkov)</Description>
-    <Version>1.0.1</Version>
+    <Description>Extract Patches for Path to Tarkov</Description>
+    <Version>1.0.2</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>

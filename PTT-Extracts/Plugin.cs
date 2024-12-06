@@ -7,8 +7,8 @@ namespace PTTExtracts
     {
         public void Awake()
         {
-            new InitAllExfiltrationPointsPatch().Enable();
-            new ScavExfiltrationPointPatch().Enable();
+            new PTT.Extracts.InitAllExfiltrationPointsPatch().Enable();
+            new PTT.Extracts.ScavExfiltrationPointPatch().Enable();
 
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
         }
