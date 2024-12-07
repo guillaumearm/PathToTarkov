@@ -10,6 +10,7 @@ import { IPmcData } from "@spt/models/eft/common/IPmcData";
 import { Common, IQuestStatus } from "@spt/models/eft/common/tables/IBotBase";
 import { IItem } from "@spt/models/eft/common/tables/IItem";
 import { IQuest, IQuestCondition, IQuestReward } from "@spt/models/eft/common/tables/IQuest";
+import { IHideoutProduction } from "@spt/models/eft/hideout/IHideoutProduction";
 import { IItemEventRouterResponse } from "@spt/models/eft/itemEvent/IItemEventRouterResponse";
 import { IAcceptQuestRequestData } from "@spt/models/eft/quests/IAcceptQuestRequestData";
 import { ICompleteQuestRequestData } from "@spt/models/eft/quests/ICompleteQuestRequestData";
@@ -281,6 +282,13 @@ export declare class QuestHelper {
      */
     protected findAndAddHideoutProductionIdToProfile(pmcData: IPmcData, craftUnlockReward: IQuestReward, questDetails: IQuest, sessionID: string, response: IItemEventRouterResponse): void;
     /**
+     * Find hideout craft for the specified quest reward
+     * @param craftUnlockReward Reward item from quest with craft unlock details
+     * @param questDetails Quest with craft unlock reward
+     * @returns Hideout craft
+     */
+    getRewardProductionMatch(craftUnlockReward: IQuestReward, questDetails: IQuest): IHideoutProduction[];
+    /**
      * Get players money reward bonus from profile
      * @param pmcData player profile
      * @returns bonus as a percent
@@ -324,16 +332,15 @@ export declare class QuestHelper {
     /**
      * Create a clone of the given quest array with the rewards updated to reflect the
      * given game version
-     *
-     * @param quests The list of quests to check
-     * @param gameVersion The game version of the profile
-     * @returns array of IQuest objects with the rewards filtered correctly for the game version
+     * @param quests List of quests to check
+     * @param gameVersion Game version of the profile
+     * @returns Array of IQuest objects with the rewards filtered correctly for the game version
      */
     protected updateQuestsForGameEdition(quests: IQuest[], gameVersion: string): IQuest[];
     /**
      * Return a list of quests that would fail when supplied quest is completed
-     * @param completedQuestId quest completed id
-     * @returns array of IQuest objects
+     * @param completedQuestId Quest completed id
+     * @returns Array of IQuest objects
      */
     protected getQuestsFromProfileFailedByCompletingQuest(completedQuestId: string, pmcProfile: IPmcData): IQuest[];
     /**
