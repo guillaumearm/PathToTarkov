@@ -4,7 +4,6 @@ const fs = require('node:fs/promises');
 const EXTERNAL_RESOURCES_DIR = 'external-resources';
 const LOCATION_NAME_MAPPING_FILENAME = 'location_name_mapping.json';
 const LOCALES_FILENAME = 'locales_global_en.json';
-const SCAVS_EXFILS_FILENAME = 'scavs_exfils.json';
 const MAPGENIE_LOCATIONS_FILENAME = 'mapgenie_locations.json';
 const MAPS_DIR = 'maps';
 
@@ -43,11 +42,11 @@ const LOCALES = lowerLocaleKeys(
   require(`../${EXTERNAL_RESOURCES_DIR}/${LOCALES_FILENAME}`),
 );
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const SCAVS_EXFILS = require(`../${EXTERNAL_RESOURCES_DIR}/${SCAVS_EXFILS_FILENAME}`);
+// const SCAVS_EXFILS = require(`../${EXTERNAL_RESOURCES_DIR}/${SCAVS_EXFILS_FILENAME}`);
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const MAPGENIE_LOCATIONS = require(`../${EXTERNAL_RESOURCES_DIR}/${MAPGENIE_LOCATIONS_FILENAME}`);
 
-const getMapJsonFilePath = mapName => `${EXTERNAL_RESOURCES_DIR}/${MAPS_DIR}/${mapName}.json`;
+const getMapJsonFilePath = mapName => `${EXTERNAL_RESOURCES_DIR}/${MAPS_DIR}/${mapName}_allExtracts.json`;
 
 const getMapGenieMapName = mapName => {
   if (MAPGENIE_REMAPPING[mapName]) {
@@ -93,16 +92,6 @@ class ConfigError extends Error {
 
 const resolveMapDisplayName = mapName => LOCATION_NAME_MAPPING[mapName];
 
-const assertValidMapNames = mapNames => {
-  mapNames.forEach(mapName => {
-    if (!LOCATION_NAME_MAPPING[mapName]) {
-      throw new ConfigError(
-        `Invalid map name '${mapName}' found in ${SCAVS_EXFILS_FILENAME} file!`,
-      );
-    }
-  });
-};
-
 const resolveLocale = localeId => {
   const value = LOCALES[localeId.toLowerCase()];
 
@@ -118,7 +107,7 @@ const loadMapExits = async mapName => {
 
   try {
     const fileContent = await fs.readFile(filePath, 'utf-8');
-    return JSON.parse(fileContent).exits.map(exit => exit.Name);
+    return JSON.parse(fileContent).map(exit => exit.Name);
   } catch (err) {
     throw new ConfigError(`cannot load '${filePath}, reason=${err.toString()}'`);
   }
@@ -163,7 +152,6 @@ const mergeMapsExits = (mapsExitsLeft, mapsExitsRight) => {
 
 const formatMapsExits = mapsExits => {
   const allMapNames = Object.keys(mapsExits);
-  assertValidMapNames(allMapNames);
 
   return allMapNames
     .reduce((output, mapName) => {
@@ -185,22 +173,10 @@ const formatMapsExits = mapsExits => {
 };
 
 const main = async () => {
-  const allMapNames = Object.keys(SCAVS_EXFILS);
-  assertValidMapNames(allMapNames);
+  const allMapNames = Object.keys(LOCATION_NAME_MAPPING);
 
   const mapsExits = await loadMapsExits(allMapNames);
-  const allMapsExits = mergeMapsExits(mapsExits, SCAVS_EXFILS);
-
-  // const allFlattenedExfils = {};
-  // Object.keys(allMapsExits).forEach(mapName => {
-  //   const exfils = allMapsExits[mapName];
-  //   exfils.forEach(exfilName => {
-  //     if (allFlattenedExfils[exfilName]) {
-  //       throw new Error(`Duplicate exfilName "${exfilName}" found for map "${mapName}"`);
-  //     }
-  //     allFlattenedExfils[exfilName] = true;
-  //   });
-  // });
+  const allMapsExits = mergeMapsExits(mapsExits, {});
 
   process.stderr.write(JSON.stringify(allMapsExits, undefined, 2));
   process.stderr.write('\n');
