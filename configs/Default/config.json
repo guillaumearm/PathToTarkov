@@ -256,7 +256,10 @@
         "kr": "Scav Bunker in woods",
         "pl": "Scav Bunker in woods",
         "po": "Scav Bunker in woods",
-        "ru": "Scav Bunker in woods"
+        "ro": "Scav Bunker in woods",
+        "ru": "Scav Bunker in woods",
+        "rk": "Scav Bunker in woods",
+        "tu": "Scav Bunker in woods"
       },
       "access_via": ["PraporHideout"]
     },
@@ -286,7 +289,10 @@
         "kr": "Emercom checkpoint on Ground Zero",
         "pl": "Emercom checkpoint on Ground Zero",
         "po": "Emercom checkpoint on Ground Zero",
-        "ru": "Emercom checkpoint on Ground Zero"
+        "ro": "Emercom checkpoint on Ground Zero",
+        "ru": "Emercom checkpoint on Ground Zero",
+        "sk": "Emercom checkpoint on Ground Zero",
+        "tu": "Emercom checkpoint on Ground Zero"
       },
       "access_via": ["TherapistHideout"]
     },
@@ -307,7 +313,10 @@
         "kr": "Bunker in Factory",
         "pl": "Bunker in Factory",
         "po": "Bunker in Factory",
-        "ru": "Bunker in Factory"
+        "ro": "Bunker in Factory",
+        "ru": "Bunker in Factory",
+        "sk": "Bunker in Factory",
+        "tu": "Bunker in Factory"
       },
       "access_via": ["MechanicHideout"]
     },
@@ -337,7 +346,10 @@
         "kr": "Warehouse 17 at Customs",
         "pl": "Warehouse 17 at Customs",
         "po": "Warehouse 17 at Customs",
-        "ru": "Warehouse 17 at Customs"
+        "ro": "Warehouse 17 at Customs",
+        "ru": "Warehouse 17 at Customs",
+        "sk": "Warehouse 17 at Customs",
+        "tu": "Warehouse 17 at Customs"
       },
       "access_via": ["SkierHideout"]
     },
@@ -367,7 +379,10 @@
         "kr": "Somewhere between Interchange and Customs",
         "pl": "Somewhere between Interchange and Customs",
         "po": "Somewhere between Interchange and Customs",
-        "ru": "Somewhere between Interchange and Customs"
+        "ro": "Somewhere between Interchange and Customs",
+        "ru": "Somewhere between Interchange and Customs",
+        "sk": "Somewhere between Interchange and Customs",
+        "tu": "Somewhere between Interchange and Customs"
       },
       "access_via": ["TrailerPark", "ScavCamp"]
     },
@@ -388,7 +403,10 @@
         "kr": "Mountain stash in Woods",
         "pl": "Mountain stash in Woods",
         "po": "Mountain stash in Woods",
-        "ru": "Mountain stash in Woods"
+        "ro": "Mountain stash in Woods",
+        "ru": "Mountain stash in Woods",
+        "sk": "Mountain stash in Woods",
+        "tu": "Mountain stash in Woods"
       },
       "access_via": ["JaegerHideout"]
     },
@@ -409,7 +427,10 @@
         "kr": "In D2 bunker between military reserve and shoreline",
         "pl": "In D2 bunker between military reserve and shoreline",
         "po": "In D2 bunker between military reserve and shoreline",
-        "ru": "In D2 bunker between military reserve and shoreline"
+        "ro": "In D2 bunker between military reserve and shoreline",
+        "ru": "In D2 bunker between military reserve and shoreline",
+        "sk": "In D2 bunker between military reserve and shoreline",
+        "tu": "In D2 bunker between military reserve and shoreline"
       },
       "access_via": ["PeacekeeperHideout"]
     },
@@ -451,7 +472,10 @@
         "kr": "Along the railroad line between shoreline and customs",
         "pl": "Along the railroad line between shoreline and customs",
         "po": "Along the railroad line between shoreline and customs",
-        "ru": "Along the railroad line between shoreline and customs"
+        "ro": "Along the railroad line between shoreline and customs",
+        "ru": "Along the railroad line between shoreline and customs",
+        "sk": "Along the railroad line between shoreline and customs",
+        "tu": "Along the railroad line between shoreline and customs"
       },
       "access_via": ["RailwayBridge", "PortRR"]
     },
@@ -473,7 +497,10 @@
         "kr": "Somewhere outskirts in woods",
         "pl": "Somewhere outskirts in woods",
         "po": "Somewhere outskirts in woods",
-        "ru": "Somewhere outskirts in woods"
+        "ro": "Somewhere outskirts in woods",
+        "ru": "Somewhere outskirts in woods",
+        "sk": "Somewhere outskirts in woods",
+        "tu": "Somewhere outskirts in woods"
       },
       "access_via": ["Outskirts"]
     },
@@ -495,7 +522,10 @@
         "kr": "Trailer Park Workers Shack",
         "pl": "Trailer Park Workers Shack",
         "po": "Trailer Park Workers Shack",
-        "ru": "Trailer Park Workers Shack"
+        "ro": "Trailer Park Workers Shack",
+        "ru": "Trailer Park Workers Shack",
+        "sk": "Trailer Park Workers Shack",
+        "tu": "Trailer Park Workers Shack"
       },
       "access_via": ["LegsHideout"]
     },
@@ -517,7 +547,10 @@
         "kr": "Basement in town between streets and ground zero",
         "pl": "Basement in town between streets and ground zero",
         "po": "Basement in town between streets and ground zero",
-        "ru": "Basement in town between streets and ground zero"
+        "ru": "Basement in town between streets and ground zero",
+        "ro": "Basement in town between streets and ground zero",
+        "sk": "Basement in town between streets and ground zero",
+        "tu": "Basement in town between streets and ground zero"
       },
       "access_via": ["BasementDescent"]
     },
@@ -539,7 +572,10 @@
         "kr": "Scav Hideout at the Grotto around lighthouse",
         "pl": "Scav Hideout at the Grotto around lighthouse",
         "po": "Scav Hideout at the Grotto around lighthouse",
-        "ru": "Scav Hideout at the Grotto around lighthouse"
+        "ro": "Scav Hideout at the Grotto around lighthouse",
+        "ru": "Scav Hideout at the Grotto around lighthouse",
+        "sk": "Scav Hideout at the Grotto around lighthouse",
+        "tu": "Scav Hideout at the Grotto around lighthouse"
       },
       "access_via": ["ArtemHideout"]
     },
@@ -561,7 +597,10 @@
         "kr": "In ZB-14 bunker (Woods/Reserve)",
         "pl": "In ZB-14 bunker (Woods/Reserve)",
         "po": "In ZB-14 bunker (Woods/Reserve)",
-        "ru": "In ZB-14 bunker (Woods/Reserve)"
+        "ro": "In ZB-14 bunker (Woods/Reserve)",
+        "ru": "In ZB-14 bunker (Woods/Reserve)",
+        "sk": "In ZB-14 bunker (Woods/Reserve)",
+        "tu": "In ZB-14 bunker (Woods/Reserve)"
       },
       "access_via": ["ReserveZB-014"]
     },
@@ -583,7 +622,10 @@
         "kr": "Along the railroad line between customs streets and interchange",
         "pl": "Along the railroad line between customs streets and interchange",
         "po": "Along the railroad line between customs streets and interchange",
-        "ru": "Along the railroad line between customs streets and interchange"
+        "ro": "Along the railroad line between customs streets and interchange",
+        "ru": "Along the railroad line between customs streets and interchange",
+        "sk": "Along the railroad line between customs streets and interchange",
+        "tu": "Along the railroad line between customs streets and interchange"
       },
       "access_via": ["TarkovRR", "CrashSite", "Railway"]
     },
@@ -605,7 +647,10 @@
         "kr": "at Emercom Checkpoint between Interchange and Customs",
         "pl": "at Emercom Checkpoint between Interchange and Customs",
         "po": "at Emercom Checkpoint between Interchange and Customs",
-        "ru": "at Emercom Checkpoint between Interchange and Customs"
+        "ro": "at Emercom Checkpoint between Interchange and Customs",
+        "ru": "at Emercom Checkpoint between Interchange and Customs",
+        "sk": "at Emercom Checkpoint between Interchange and Customs",
+        "tu": "at Emercom Checkpoint between Interchange and Customs"
       },
       "access_via": ["Emercom", "Crossroads"]
     },
@@ -627,7 +672,10 @@
         "kr": "Basement in town between streets and ground zero",
         "pl": "Basement in town between streets and ground zero",
         "po": "Basement in town between streets and ground zero",
-        "ru": "Basement in town between streets and ground zero"
+        "ro": "Basement in town between streets and ground zero",
+        "ru": "Basement in town between streets and ground zero",
+        "sk": "Basement in town between streets and ground zero",
+        "tu": "Basement in town between streets and ground zero"
       },
       "access_via": ["BasementDescent"]
     },
@@ -649,7 +697,10 @@
         "kr": "Ruined house in the streets",
         "pl": "Ruined house in the streets",
         "po": "Ruined house in the streets",
-        "ru": "Ruined house in the streets"
+        "ro": "Ruined house in the streets",
+        "ru": "Ruined house in the streets",
+        "sk": "Ruined house in the streets",
+        "tu": "Ruined house in the streets"
       },
       "access_via": ["RuinedHouse"]
     },
@@ -671,7 +722,10 @@
         "kr": "Sewer between Reserve and Streets",
         "pl": "Sewer between Reserve and Streets",
         "po": "Sewer between Reserve and Streets",
-        "ru": "Sewer between Reserve and Streets"
+        "ro": "Sewer between Reserve and Streets",
+        "ru": "Sewer between Reserve and Streets",
+        "sk": "Sewer between Reserve and Streets",
+        "tu": "Sewer between Reserve and Streets"
       },
       "access_via": ["Manhole"]
     }

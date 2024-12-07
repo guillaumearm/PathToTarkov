@@ -207,6 +207,23 @@ const getErrorsForInfils = (config: Config, spawnConfig: SpawnConfig): string[] 
   return errors;
 };
 
+const getErrorsForAdditionalSpawnpoints = (config: Config): string[] => {
+  const errors: string[] = [];
+
+  const additionalSpawnConfig = config.infiltrations_config?.additional_player_spawnpoints ?? {};
+
+  Object.keys(additionalSpawnConfig).forEach(mapName => {
+    if (!ALLOWED_MAPS.includes(mapName)) {
+      errors.push(
+        `${mapName} is now allowed as a map name in "infiltrations_config.additional_player_spawnpoints"`,
+      );
+      return;
+    }
+  });
+
+  return errors;
+};
+
 export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigValidationResult => {
   const errors: string[] = [];
   const warnings: string[] = [];
@@ -237,6 +254,9 @@ export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigV
 
   // 7. check for infiltrations maps and spawn points
   errors.push(...getErrorsForInfils(config, spawnConfig));
+
+  // 8. check for additional spawnpoints
+  errors.push(...getErrorsForAdditionalSpawnpoints(config));
 
   return {
     errors,

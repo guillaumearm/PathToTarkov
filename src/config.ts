@@ -32,7 +32,7 @@ export type PositionXYZ = {
 export type SpawnPointGenericPosition = [number, number, number] | PositionXYZ;
 
 /**
- * player_spawnpoints.json
+ * shared_player_spawnpoints.json
  */
 export type SpawnPoint = {
   Position: SpawnPointGenericPosition;
@@ -75,6 +75,10 @@ type AllLocales<T> = {
   kr?: T;
   pl?: T;
   po?: T;
+  ro?: T;
+  ru?: T;
+  sk?: T;
+  tu?: T;
 };
 
 export type LocaleName = keyof AllLocales<unknown>;
@@ -138,6 +142,10 @@ export type OverrideByProfiles = ByProfileId<{
   hideout_main_stash_access_via?: AccessVia;
 }>;
 
+export type InfiltrationsConfig = {
+  additional_player_spawnpoints?: Partial<SpawnConfig>;
+};
+
 type RawConfig = {
   enabled: boolean;
   debug?: boolean;
@@ -161,12 +169,14 @@ type RawConfig = {
   hideout_secondary_stashes: RawStashConfig[];
   traders_access_restriction: boolean;
   traders_config: TradersConfig;
+  infiltrations_config?: InfiltrationsConfig;
   exfiltrations: Exfiltrations;
   infiltrations: Infiltrations;
 };
 
-export type Config = Omit<RawConfig, 'hideout_secondary_stashes'> & {
+export type Config = Omit<RawConfig, 'hideout_secondary_stashes' | 'infiltrations_config'> & {
   hideout_secondary_stashes: StashConfig[];
+  infiltrations_config: InfiltrationsConfig;
 };
 
 export type PathToTarkovReloadedTooltipsConfig = {
@@ -197,7 +207,7 @@ export const CONFIGS_DIR = join(__dirname, '../configs');
 export const USER_CONFIG_PATH = join(CONFIGS_DIR, 'UserConfig.json');
 
 export const CONFIG_FILENAME = 'config.json';
-export const SPAWN_CONFIG_FILENAME = 'player_spawnpoints.json';
+export const SPAWN_CONFIG_FILENAME = 'shared_player_spawnpoints.json';
 
 export const PRAPOR_ID = '54cb50c76803fa8b248b4571';
 export const FENCE_ID = '579dc571d53a0658a154fbec';
@@ -255,7 +265,7 @@ export const MAPLIST = [
 ];
 
 // sandbox_high is a special map for high level players (> 20)
-const prepareGroundZeroHigh = <T>(maps: ByMap<T>): ByMap<T> => {
+const prepareGroundZeroHighPartial = <T>(maps: Partial<ByMap<T>>): Partial<ByMap<T>> => {
   if (maps.sandbox && !maps.sandbox_high) {
     return {
       ...maps,
@@ -264,6 +274,10 @@ const prepareGroundZeroHigh = <T>(maps: ByMap<T>): ByMap<T> => {
   }
 
   return maps;
+};
+
+const prepareGroundZeroHigh = <T>(maps: ByMap<T>): ByMap<T> => {
+  return prepareGroundZeroHighPartial(maps) as ByMap<T>;
 };
 
 export const processConfig = (originalConfig: RawConfig): Config => {
@@ -278,15 +292,48 @@ export const processConfig = (originalConfig: RawConfig): Config => {
   });
 
   const stashConfigs: StashConfig[] = config.hideout_secondary_stashes.map(toStashConfig);
+  const infiltrationsConfig = config.infiltrations_config ?? {};
 
   return {
     ...config,
     hideout_secondary_stashes: stashConfigs,
+    infiltrations_config: infiltrationsConfig,
   };
 };
 
-export const processSpawnConfig = (spawnConfig: SpawnConfig): SpawnConfig => {
-  return prepareGroundZeroHigh(spawnConfig);
+const mergeAdditionalSpawnpoints = (
+  spawnConfig: SpawnConfig,
+  additionalSpawnConfig: Partial<SpawnConfig>,
+): SpawnConfig => {
+  const clonedSpawnConfig = deepClone(spawnConfig);
+
+  Object.keys(additionalSpawnConfig).forEach(mapName => {
+    const infilConfig = additionalSpawnConfig[mapName as MapName];
+    const spawnPoints = clonedSpawnConfig[mapName as MapName];
+
+    if (!infilConfig || !spawnPoints) {
+      return;
+    }
+
+    Object.keys(infilConfig).forEach(spawnPointName => {
+      const spawnPoint = infilConfig[spawnPointName];
+      const spawnPoints = clonedSpawnConfig[mapName as MapName];
+
+      if (spawnPoint) {
+        spawnPoints[spawnPointName] = spawnPoint;
+      }
+    });
+  });
+
+  return clonedSpawnConfig;
+};
+
+export const processSpawnConfig = (spawnConfig: SpawnConfig, config: Config): SpawnConfig => {
+  const additionalPlayerSpawnpoints =
+    config.infiltrations_config?.additional_player_spawnpoints ?? {};
+
+  const mergedConfig = mergeAdditionalSpawnpoints(spawnConfig, additionalPlayerSpawnpoints);
+  return prepareGroundZeroHigh(mergedConfig);
 };
 
 export const getUserConfig = (): UserConfig => {

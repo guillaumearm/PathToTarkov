@@ -523,7 +523,7 @@
       "Gate m": "FactoryZB-1012",
       "Cellars": "FactoryZB-1011",
       "Camera Bunker Door": "FactoryZB-1011",
-      "Office Window": "WoodsFactoryGate",
+      "Gate_o": "WoodsFactoryGate",
       "Gate 0": "WoodsFactoryGate"
     },
     "factory4_night": {
@@ -531,7 +531,7 @@
       "Gate m": "FactoryZB-1012",
       "Cellars": "FactoryZB-1011",
       "Camera Bunker Door": "FactoryZB-1011",
-      "Office Window": "WoodsFactoryGate",
+      "Gate_o": "WoodsFactoryGate",
       "Gate 0": "WoodsFactoryGate"
     },
     "bigmap": {
@@ -619,11 +619,11 @@
     "ShorelineLighthousePath": {
       "shoreline": ["Path to Lighthouse"],
       "lighthouse": ["Path to Shoreline"],
-      "rezervbase": ["CP Fence"]
+      "rezervbase": ["Checkpoint Fence"]
     },
     "ShorelineLighthouseTunnel": {
-      "shoreline": ["Tunnel"],
-      "lighthouse": ["Lighthouse tunnel"]
+      "shoreline": ["Shoreline Tunnel"],
+      "lighthouse": ["Lighthouse Tunnel"]
     },
     "ShorelineNorthMoutains": {
       "rezervbase": ["Cliff"],
@@ -631,14 +631,14 @@
     },
     "WoodsReserveShoreline": {
       "woods": ["Outskirts"],
-      "rezervbase": ["CP Fence"]
+      "rezervbase": ["Checkpoint Fence"]
     },
     "InterchangeCustoms": {
       "bigmap": ["Crossroads"],
       "interchange": ["Scav Camp"]
     },
     "CustomsTarkovRail": {
-      "bigmap": ["MallTrain"],
+      "bigmap": ["RR to Tarkov"],
       "interchange": ["Railway"]
     },
     "WoodsCustoms": {
@@ -646,7 +646,7 @@
       "bigmap": ["RUAF Roadblock"]
     },
     "Boat": {
-      "bigmap": ["Smuggler's Boat"],
+      "bigmap": ["Smugglers Boat"],
       "woods": ["The Boat"],
       "shoreline": ["Pier Boat"],
       "lighthouse": ["Lighthouse Docks Boat"]
@@ -657,11 +657,11 @@
     },
     "Car": {
       "bigmap": ["Dorms Car"],
-      "interchange": ["Car at Power Station"],
-      "woods": ["Bridge Car"],
+      "interchange": ["Interchange Vehicle Extract"],
+      "woods": ["Woods Vehicle Extract"],
       "lighthouse": ["Lighthouse Vehicle Extract"],
-      "tarkovstreets": ["Primorsky Vehicle Extract"],
-      "sandbox": ["hideout_gz"],
+      "tarkovstreets": ["Streets Vehicle Extract"],
+      "sandbox": ["Nakatani Basement Stairs"],
       "laboratory": [
         "Cargo Elevator",
         "Lab Sewage Conduit",
@@ -675,16 +675,16 @@
       "rezervbase": ["Scav lands"]
     },
     "PilgrimTrail": {
-      "bigmap": ["PraveenGasoline"],
+      "bigmap": ["Old Gas Scav"],
       "tarkovstreets": ["Crane"]
     },
     "MilitaryBaseRail": {
-      "bigmap": ["Railroad To Military Base"],
+      "bigmap": ["RR to Military Base"],
       "rezervbase": ["Train Station"]
     },
     "FactoryZB-1013": {
       "bigmap": ["ZB-1013"],
-      "woods": ["ZB-1014"],
+      "woods": ["ZB-014"],
       "factory4_day": ["Gate 3"],
       "factory4_night": ["Gate 3"]
     },
@@ -699,9 +699,9 @@
       "factory4_night": ["Cellars"]
     },
     "ScavWindow": {
-      "bigmap": ["OfficePath"],
-      "factory4_day": ["Office Window"],
-      "factory4_night": ["Office Window"]
+      "bigmap": ["Factory Far Corner"],
+      "factory4_day": ["Courtyard"],
+      "factory4_night": ["Courtyard"]
     },
     "WoodsFactoryGate": {
       "woods": ["Factory Gate"],
@@ -709,25 +709,25 @@
       "factory4_night": ["Gate 0"]
     },
     "WoodsMilitaryPath": {
-      "woods": ["RUAFRoadblock"],
-      "bigmap": ["RUAFAdmin"]
+      "woods": ["RUAF Gate"],
+      "bigmap": ["Administration Gate"]
     },
     "SafeRoom": {
       "rezervbase": ["D-2"],
       "interchange": ["Safe Room"]
     },
     "TherapistHideout": {
-      "sandbox": ["Crow Hideout"]
+      "sandbox": ["Scav Hideout"]
     },
     "PlayerHideout": {
-      "sandbox": ["hideout_gz"]
+      "sandbox": ["Nakatani Basement Stairs"]
     },
     "EmercomToKlimov": {
-      "sandbox": ["Crow Hideout"],
+      "sandbox": ["Scav Hideout"],
       "tarkovstreets": ["Basement Descent"]
     },
     "SniperPath": {
-      "sandbox": ["From Streets"],
+      "sandbox": ["Mira Ave"],
       "tarkovstreets": ["Klimov Street"]
     },
     "UnderpasstoLabs": {
@@ -740,7 +740,7 @@
     },
     "StreetsEvac": {
       "tarkovstreets": ["Evacuation Zone"],
-      "interchange": ["EmercomMall"],
+      "interchange": ["Emercom"],
       "bigmap": ["Old Gas Scav"]
     },
     "CatacombsHangar": {

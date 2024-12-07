@@ -63,7 +63,8 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       readJsonFile(path.join(CONFIGS_DIR, userConfig.selectedConfig, CONFIG_FILENAME)),
     );
     this.spawnConfig = processSpawnConfig(
-      readJsonFile(path.join(CONFIGS_DIR, userConfig.selectedConfig, SPAWN_CONFIG_FILENAME)),
+      readJsonFile(path.join(CONFIGS_DIR, SPAWN_CONFIG_FILENAME)),
+      this.config,
     );
 
     this.tooltipsConfig = getTooltipsConfig(userConfig);

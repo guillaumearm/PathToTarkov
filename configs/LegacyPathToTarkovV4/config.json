@@ -528,7 +528,7 @@
       "Gate m": "FactoryZB-1012",
       "Cellars": "FactoryZB-1011",
       "Camera Bunker Door": "FactoryZB-1011",
-      "Office Window": "WoodsFactoryGate",
+      "Gate_o": "WoodsFactoryGate",
       "Gate 0": "WoodsFactoryGate"
     },
     "factory4_night": {
@@ -536,7 +536,7 @@
       "Gate m": "FactoryZB-1012",
       "Cellars": "FactoryZB-1011",
       "Camera Bunker Door": "FactoryZB-1011",
-      "Office Window": "WoodsFactoryGate",
+      "Gate_o": "WoodsFactoryGate",
       "Gate 0": "WoodsFactoryGate"
     },
     "bigmap": {
@@ -609,11 +609,11 @@
     "ShorelineLighthousePath": {
       "shoreline": ["Path to Lighthouse"],
       "lighthouse": ["Path to Shoreline"],
-      "rezervbase": ["CP Fence"]
+      "rezervbase": ["Checkpoint Fence"]
     },
     "ShorelineLighthouseTunnel": {
-      "shoreline": ["Tunnel"],
-      "lighthouse": ["Lighthouse tunnel"]
+      "shoreline": ["Shoreline Tunnel"],
+      "lighthouse": ["Lighthouse Tunnel"]
     },
     "ShorelineNorthMoutains": {
       "rezervbase": ["Cliff"],
@@ -621,7 +621,7 @@
     },
     "WoodsReserveShoreline": {
       "woods": ["Outskirts"],
-      "rezervbase": ["CP Fence"]
+      "rezervbase": ["Checkpoint Fence"]
     },
     "InterchangeCustoms": {
       "bigmap": ["Crossroads"],
@@ -632,7 +632,7 @@
       "bigmap": ["RUAF Roadblock"]
     },
     "Boat": {
-      "bigmap": ["Smuggler's Boat"],
+      "bigmap": ["Smugglers Boat"],
       "woods": ["The Boat"],
       "shoreline": ["Pier Boat"],
       "lighthouse": ["Lighthouse Docks Boat"]
@@ -643,10 +643,10 @@
     },
     "Car": {
       "bigmap": ["Dorms Car"],
-      "interchange": ["Car at Power Station"],
-      "woods": ["Bridge Car"],
+      "interchange": ["Interchange Vehicle Extract"],
+      "woods": ["Woods Vehicle Extract"],
       "lighthouse": ["Lighthouse Vehicle Extract"],
-      "tarkovstreets": ["Primorsky Vehicle Extract"],
+      "tarkovstreets": ["Streets Vehicle Extract"],
       "sandbox": ["Mira Ave"],
       "laboratory": [
         "Cargo Elevator",
@@ -663,12 +663,12 @@
       "rezervbase": ["Scav lands"]
     },
     "MilitaryBaseRail": {
-      "bigmap": ["Railroad To Military Base"],
+      "bigmap": ["RR to Military Base"],
       "rezervbase": ["Scav lands rail"]
     },
     "FactoryZB-1013": {
       "bigmap": ["ZB-1013"],
-      "woods": ["ZB-1014"],
+      "woods": ["ZB-014"],
       "factory4_day": ["Gate 3"],
       "factory4_night": ["Gate 3"]
     },

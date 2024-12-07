@@ -8,8 +8,8 @@ const loadConfig = (dirPath: string): Config => {
   return processConfig(readJsonFile(path.join(dirPath, 'config.json')));
 };
 
-const loadSpawnConfig = (dirPath: string): SpawnConfig => {
-  return processSpawnConfig(readJsonFile(path.join(dirPath, 'player_spawnpoints.json')));
+const loadSpawnConfig = (config: Config): SpawnConfig => {
+  return processSpawnConfig(readJsonFile('./configs/shared_player_spawnpoints.json'), config);
 };
 
 describe('PTT embedded configs', () => {
@@ -25,7 +25,7 @@ describe('PTT embedded configs', () => {
 
   const testConfig = (dirPath: string) => {
     const config = loadConfig(dirPath);
-    const spawnConfig = loadSpawnConfig(dirPath);
+    const spawnConfig = loadSpawnConfig(config);
 
     const { errors, warnings } = analyzeConfig(config, spawnConfig);
 

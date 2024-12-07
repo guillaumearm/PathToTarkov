@@ -684,7 +684,7 @@
     },
     "RagmanHideout": {
       "bigmap": ["Crossroads"],
-      "interchange": ["EmercomMall"]
+      "interchange": ["Emercom"]
     },
     "TherapistHideout": {
       "sandbox": ["EmercomGZ"]
@@ -710,7 +710,7 @@
       "interchange": ["Railway"]
     },
     "ScorpionHideout": {
-      "tarkovstreets": ["Stylobate Building Elevator"],
+      "tarkovstreets": ["Sylobate Elevator"],
       "laboratory": ["Main Elevator"]
     },
     "DormsCar": {
@@ -718,7 +718,7 @@
       "shoreline": ["North Fence Passage"]
     },
     "NorthCar": {
-      "interchange": ["Car at Power Station"],
+      "interchange": ["Interchange Vehicle Extract"],
       "sandbox": ["Police Car"],
       "woods": ["Woods Vehicle Extract"]
     },
@@ -727,7 +727,7 @@
       "lighthouse": ["Lighthouse Vehicle Extract"]
     },
     "Boat": {
-      "bigmap": ["Smuggler's Boat"],
+      "bigmap": ["Smugglers Boat"],
       "shoreline": ["Pier Boat"],
       "woods": ["ScavVillage"],
       "lighthouse": ["Lighthouse Docks Boat"]
@@ -775,7 +775,7 @@
     },
     "WoodsLighthouse": {
       "woods": ["Outskirts"],
-      "lighthouse": ["NorthernRoad"]
+      "lighthouse": ["Northern CP"]
     },
     "ZB-014Stash": {
       "woods": ["ZB-014"]
@@ -785,8 +785,8 @@
       "tarkovstreets": ["Streets Ruined House"]
     },
     "ShorelineLighthouseTunnel": {
-      "shoreline": ["Tunnel"],
-      "lighthouse": ["Lighthouse tunnel"]
+      "shoreline": ["Shoreline Tunnel"],
+      "lighthouse": ["Lighthouse Tunnel"]
     },
     "ShorelineLighthousePath": {
       "shoreline": ["Path to Lighthouse"],
@@ -805,7 +805,7 @@
       "laboratory": ["Lab Sewage Conduit"]
     },
     "StreetsCarToLabs": {
-      "tarkovstreets": ["Primorsky Vehicle Extract"],
+      "tarkovstreets": ["Streets Vehicle Extract"],
       "laboratory": ["Parking Gate"]
     },
     "Catacombs": {
@@ -821,9 +821,20 @@
       "tarkovstreets": ["Klimov Street"]
     },
     "BasementDescent": {
-      "sandbox": ["Nakatani Basement"],
+      "sandbox": ["Nakatani Basement Stairs"],
       "tarkovstreets": ["Basement Descent"],
       "laboratory": ["Cargo Elevator"]
+    }
+  },
+  "infiltrations_config": {
+    "additional_player_spawnpoints": {
+      "woods": {
+        "ScavVillage": {
+          "Description": "Scav Village in the north end",
+          "Position": [-58.53, 7.66, -757.22],
+          "Rotation": 180
+        }
+      }
     }
   }
 }
