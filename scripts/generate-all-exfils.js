@@ -46,7 +46,8 @@ const LOCALES = lowerLocaleKeys(
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const MAPGENIE_LOCATIONS = require(`../${EXTERNAL_RESOURCES_DIR}/${MAPGENIE_LOCATIONS_FILENAME}`);
 
-const getMapJsonFilePath = mapName => `${EXTERNAL_RESOURCES_DIR}/${MAPS_DIR}/${mapName}_allExtracts.json`;
+const getMapJsonFilePath = mapName =>
+  `${EXTERNAL_RESOURCES_DIR}/${MAPS_DIR}/${mapName}_allExtracts.json`;
 
 const getMapGenieMapName = mapName => {
   if (MAPGENIE_REMAPPING[mapName]) {
