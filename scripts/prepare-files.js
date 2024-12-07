@@ -7,7 +7,7 @@ const { mkdirp } = require('mkdirp');
 // // eslint-disable-next-line @typescript-eslint/no-var-requires
 // const cpr = require('cpr');
 
-const PTTClientDir = 'PTT-BepInEx'
+const PTTClientDir = 'PTT-BepInEx';
 const dllFileName = 'Trap.PathToTarkov.dll';
 
 const main = async modName => {
