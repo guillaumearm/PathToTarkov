@@ -1,4 +1,5 @@
 import { isValidExfilForMap } from './all-exfils';
+import type { ByMap } from './config';
 import { EMPTY_STASH, type Config, type MapName, type SpawnConfig } from './config';
 import { ensureArray } from './utils';
 
@@ -114,6 +115,36 @@ const getErrorsForOffraidPositions = (config: Config): string[] => {
   });
 
   return errors;
+};
+
+const getInfiltrationHash = (spawns: ByMap<string[]>): string => {
+  const results = Object.keys(spawns).flatMap(mapName => {
+    return spawns[mapName as MapName].map(spawnName => {
+      return `${mapName}.${spawnName}`;
+    });
+  });
+
+  return results.sort().join('/');
+};
+
+const getWarningsForOffraidPositions = (config: Config): string[] => {
+  const warnings: string[] = [];
+  const offraidPosByHash: Record<string, string> = {};
+
+  Object.keys(config.infiltrations).forEach(offraidPosition => {
+    const spawnsByMap = config.infiltrations[offraidPosition];
+    const hash = getInfiltrationHash(spawnsByMap);
+
+    if (offraidPosByHash[hash]) {
+      warnings.push(
+        `offraid position "${offraidPosition}" seems to be a duplicate of "${offraidPosByHash[hash]}"`,
+      );
+    } else {
+      offraidPosByHash[hash] = offraidPosition;
+    }
+  });
+
+  return warnings;
 };
 
 const getErrorsForExfils = (config: Config): string[] => {
@@ -262,6 +293,7 @@ export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigV
 
   // 4. check all offraid positions
   errors.push(...getErrorsForOffraidPositions(config));
+  warnings.push(...getWarningsForOffraidPositions(config));
 
   // 5. checks for exfil maps
   errors.push(...getErrorsForExfils(config));

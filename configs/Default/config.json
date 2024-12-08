@@ -76,12 +76,12 @@
     {
       "id": "PathToTarkov_Ref_stash",
       "size": 48,
-      "access_via": ["PortRR", "RailwayBridge"]
+      "access_via": ["RefHideout"]
     },
     {
       "id": "PathToTarkov_Lotus_stash",
       "size": 48,
-      "access_via": ["Crossroads", "Emercom"]
+      "access_via": ["Crossroads"]
     },
     {
       "id": "PathToTarkov_Artem_stash",
@@ -121,52 +121,37 @@
     {
       "id": "PathToTarkov_CustomsNorth_stash",
       "size": 32,
-      "access_via": [
-        "FactoryCorner",
-        "RUAFWoods",
-        "GasGate",
-        "RUAFCustoms",
-        "UNRoadblock",
-        "NorthUNRoadblock"
-      ]
+      "access_via": ["RUAFWoods", "GasGate", "RUAFCustoms", "UNRoadblock", "NorthUNRoadblock"]
     },
     {
       "id": "PathToTarkov_CustomsSouth_stash",
       "size": 32,
-      "access_via": [
-        "MilBaseCP",
-        "ScavLands",
-        "MilBaseRR",
-        "HoleinWall",
-        "SniperRB",
-        "SmugglersPath",
-        "RoadtoCustoms"
-      ]
+      "access_via": ["MilBaseCP", "MilBaseRR", "HoleinWall", "SniperRB", "RoadtoCustoms"]
     },
     {
       "id": "PathToTarkov_CustomsEast_stash",
       "size": 48,
-      "access_via": ["TarkovRR", "CrashSite", "Railway", "ScavCamp", "TrailerPark"]
+      "access_via": ["TarkovRR", "CrashSite", "Railway", "InterchangeScavCamp"]
     },
     {
       "id": "PathToTarkov_CustomsWest_stash",
       "size": 32,
-      "access_via": ["ScavCP", "Outskirts", "NorthernCP"]
+      "access_via": ["Outskirts"]
     },
     {
       "id": "PathToTarkov_ShoreLightPath_stash",
       "size": 16,
-      "access_via": ["LighthousePath", "ShorelinePath", "MountainPass"]
+      "access_via": ["LighthouseShorelinePath", "MountainPass"]
     },
     {
       "id": "PathToTarkov_ShorelineWest_stash",
       "size": 16,
-      "access_via": ["Tunnel", "SideTunnel", "RuinedRoad", "SouthernRoad"]
+      "access_via": ["LighthouseShorelineTunnel", "ShorelineLighthouseRoad"]
     },
     {
       "id": "PathToTarkov_ShorelineNorth_stash",
       "size": 16,
-      "access_via": ["ClimbersTrail", "CliffDescent"]
+      "access_via": ["CliffDescent"]
     },
     {
       "id": "PathToTarkov_GZStreets_stash",
@@ -176,12 +161,12 @@
     {
       "id": "PathToTarkov_NorthCar_stash",
       "size": 4,
-      "access_via": ["WoodsCar", "InterchangeCar", "StreetsCar", "GZCar"]
+      "access_via": ["CityCar"]
     },
     {
       "id": "PathToTarkov_SouthCar_stash",
       "size": 4,
-      "access_via": ["DormsCar", "ShorelineCar"]
+      "access_via": ["ShorelineDormsCar"]
     },
     {
       "id": "PathToTarkov_MilCar_stash",
@@ -201,7 +186,7 @@
     {
       "id": "PathToTarkov_ArmoredTrain_stash",
       "size": 16,
-      "access_via": ["ReserveTrain", "LighthouseTrain"]
+      "access_via": ["ArmoredTrain"]
     },
     {
       "id": "PathToTarkov_VentShaft_stash",
@@ -384,7 +369,7 @@
         "sk": "Somewhere between Interchange and Customs",
         "tu": "Somewhere between Interchange and Customs"
       },
-      "access_via": ["TrailerPark", "ScavCamp"]
+      "access_via": ["InterchangeScavCamp"]
     },
     "5c0647fdd443bc2504c2d371": {
       "// Trader name": "Jaeger",
@@ -477,7 +462,7 @@
         "sk": "Along the railroad line between shoreline and customs",
         "tu": "Along the railroad line between shoreline and customs"
       },
-      "access_via": ["RailwayBridge", "PortRR"]
+      "access_via": ["RefHideout"]
     },
     "6748adca5c70634464b214a8": {
       "// mod integration for Priscilu": true,
@@ -652,7 +637,7 @@
         "sk": "at Emercom Checkpoint between Interchange and Customs",
         "tu": "at Emercom Checkpoint between Interchange and Customs"
       },
-      "access_via": ["Emercom", "Crossroads"]
+      "access_via": ["Crossroads"]
     },
     "Coyote": {
       "// mod integration for Coyote": true,
@@ -748,11 +733,11 @@
       "Gate_o": "GasGate"
     },
     "bigmap": {
-      "Military Checkpoint": "ScavCP",
+      "Military Checkpoint": "Outskirts",
       "EXFIL_ZB013": "FactoryZB-013",
       "ZB-1012": "FactoryZB-1012",
       "ZB-1011": "FactoryZB-1011",
-      "Dorms V-Ex": "DormsCar",
+      "Dorms V-Ex": "ShorelineDormsCar",
       "Sniper Roadblock": "SniperRB",
       "Smuggler's Boat": "SmugglersBoat",
       "RUAF Roadblock": "RUAFCustoms",
@@ -761,10 +746,10 @@
       "Railroad To Tarkov": "TarkovRR",
       "Shack": "MilBaseCP",
       "Warehouse 17": "SkierHideout",
-      "Trailer Park": "TrailerPark",
+      "Trailer Park": "InterchangeScavCamp",
       "Railroad To Military Base": "MilBaseRR",
-      "Railroad To Port": "PortRR",
-      "Factory Far Corner": "FactoryCorner",
+      "Railroad To Port": "RefHideout",
+      "Factory Far Corner": "RUAFWoods",
       "Trailer Park Workers Shack": "LegsHideout"
     },
     "woods": {
@@ -775,13 +760,13 @@
       "ZB-014": "ReserveZB-014",
       "Outskirts": "Outskirts",
       "UN Roadblock": "UNRoadblock",
-      "South V-Ex": "WoodsCar",
+      "South V-Ex": "CityCar",
       "RUAF Gate": "RUAFWoods",
       "Mountain Stash": "JaegerHideout"
     },
     "rezervbase": {
-      "EXFIL_ScavCooperation": "ScavLands",
-      "EXFIL_Train": "ReserveTrain",
+      "EXFIL_ScavCooperation": "MilBaseCP",
+      "EXFIL_Train": "ArmoredTrain",
       "EXFIL_Bunker": "ReserveZB-014",
       "Exit1": "HoleinWall",
       "Exit4": "CPFence",
@@ -790,40 +775,40 @@
       "EXFIL_vent": "Manhole"
     },
     "interchange": {
-      "PP Exfil": "InterchangeCar",
+      "PP Exfil": "CityCar",
       "Saferoom Exfil": "SafeRoom",
       "NW Exfil": "Railway",
-      "SE Exfil": "Emercom",
-      "Interchange Cooperation": "ScavCamp"
+      "SE Exfil": "Crossroads",
+      "Interchange Cooperation": "InterchangeScavCamp"
     },
     "shoreline": {
-      "RedRebel_alp": "ClimbersTrail",
+      "RedRebel_alp": "CliffDescent",
       "Road to Customs": "RoadtoCustoms",
       "Pier Boat": "PierBoat",
-      "Tunnel": "Tunnel",
-      "Wrecked Road": "RuinedRoad",
-      "Lighthouse_pass": "LighthousePath",
-      "Smugglers_Trail_coop": "SmugglersPath",
+      "Tunnel": "LighthouseShorelineTunnel",
+      "Wrecked Road": "ShorelineLighthouseRoad",
+      "Lighthouse_pass": "LighthouseShorelinePath",
+      "Smugglers_Trail_coop": "SniperRB",
       "South Fence Passage": "PeacekeeperHideout",
-      "Shorl_V-Ex": "ShorelineCar",
-      "Road_at_railbridge": "RailwayBridge"
+      "Shorl_V-Ex": "ShorelineDormsCar",
+      "Road_at_railbridge": "RefHideout"
     },
     "lighthouse": {
       " V-Ex_light": "LighthouseCar",
-      "Shorl_free": "ShorelinePath",
-      "Coastal_South_Road": "SouthernRoad",
+      "Shorl_free": "LighthouseShorelinePath",
+      "Coastal_South_Road": "ShorelineLighthouseRoad",
       "Scav_Hideout_at_the_grotto": "ArtemHideout",
-      "EXFIL_Train": "LighthouseTrain",
-      "Nothern_Checkpoint": "NorthernCP",
+      "EXFIL_Train": "ArmoredTrain",
+      "Nothern_Checkpoint": "Outskirts",
       "Alpinist_light": "MountainPass",
-      "tunnel_shared": "SideTunnel"
+      "tunnel_shared": "LighthouseShorelineTunnel"
     },
     "tarkovstreets": {
       "E1": "StylobateElevator",
       "scav_e3": "VentShaft",
       "E3": "RuinedHouse",
       "E4": "CrashSite",
-      "E7_car": "StreetsCar",
+      "E7_car": "CityCar",
       "E9_sniper": "KlimovStreet",
       "scav_e1": "BasementDescent",
       "scav_e2": "Catacombs",
@@ -842,7 +827,7 @@
     },
     "sandbox": {
       "Unity_free_exit": "TherapistHideout",
-      "Sandbox_VExit": "GZCar",
+      "Sandbox_VExit": "CityCar",
       "Nakatani_stairs_free_exit": "BasementDescent",
       "Sniper_exit": "KlimovStreet",
       "Scav_coop_exit": "ExpoCP"
@@ -863,11 +848,6 @@
     },
     "LegsHideout": {
       "bigmap": ["Trailer Park Workers Shack"]
-    },
-    "Emercom": {
-      "bigmap": ["Crossroads"],
-      "interchange": ["Emercom"],
-      "shoreline": ["Road to Customs"]
     },
     "TherapistHideout": {
       "sandbox": ["EmercomGZ"]
@@ -898,15 +878,6 @@
       "bigmap": ["ZB-1011"],
       "factory4_day": ["Gate 0"],
       "factory4_night": ["Gate 0"]
-    },
-    "ScavCP": {
-      "bigmap": ["Scav CP"],
-      "lighthouse": ["Northern CP"],
-      "woods": ["Outskirts"]
-    },
-    "DormsCar": {
-      "bigmap": ["Dorms Car"],
-      "shoreline": ["North Fence Passage"]
     },
     "SniperRB": {
       "bigmap": ["Sniper Roadblock"],
@@ -939,10 +910,6 @@
       "interchange": ["Railway"],
       "tarkovstreets": ["Crash Site"]
     },
-    "PortRR": {
-      "bigmap": ["RR to Port"],
-      "shoreline": ["Railway Bridge"]
-    },
     "MilBaseRR": {
       "bigmap": ["RR to Military Base"],
       "rezervbase": ["Scav lands rail"]
@@ -950,14 +917,6 @@
     "MilBaseCP": {
       "bigmap": ["Military Base CP"],
       "rezervbase": ["Scav lands"]
-    },
-    "TrailerPark": {
-      "bigmap": ["Trailer Park"],
-      "interchange": ["Scav Camp"]
-    },
-    "FactoryCorner": {
-      "bigmap": ["Factory Far Corner"],
-      "woods": ["RUAF Gate"]
     },
     "NorthUNRoadblock": {
       "bigmap": ["RUAF Roadblock"],
@@ -977,31 +936,12 @@
       "woods": ["UN Roadblock"],
       "interchange": ["Railway"]
     },
-    "WoodsCar": {
-      "tarkovstreets": ["Streets Vehicle Extract"],
-      "interchange": ["Interchange Vehicle Extract"],
-      "sandbox": ["Police Car"],
-      "woods": ["Woods Vehicle Extract"]
-    },
     "RUAFWoods": {
       "bigmap": ["Factory Far Corner"],
       "woods": ["RUAF Gate"]
     },
     "ReserveZB-014": {
       "woods": ["ZB-014"]
-    },
-    "ScavLands": {
-      "bigmap": ["Military Base CP"],
-      "rezervbase": ["Scav lands"]
-    },
-    "ReserveTrain": {
-      "bigmap": ["RR to Military Base"],
-      "woods": ["Factory Gate"],
-      "lighthouse": ["Armored Train LH"],
-      "shoreline": ["Railway Bridge"],
-      "interchange": ["Railway"],
-      "rezervbase": ["Train Station"],
-      "tarkovstreets": ["Crash Site"]
     },
     "HoleinWall": {
       "bigmap": ["Dorms Car"],
@@ -1019,7 +959,7 @@
       "rezervbase": ["Reserve Manhole"],
       "tarkovstreets": ["Streets Manhole"]
     },
-    "InterchangeCar": {
+    "CityCar": {
       "tarkovstreets": ["Streets Vehicle Extract"],
       "interchange": ["Interchange Vehicle Extract"],
       "sandbox": ["Police Car"],
@@ -1033,13 +973,9 @@
       "woods": ["UN Roadblock"],
       "tarkovstreets": ["Crash Site"]
     },
-    "ScavCamp": {
+    "InterchangeScavCamp": {
       "interchange": ["Scav Camp"],
       "bigmap": ["Trailer Park"]
-    },
-    "ClimbersTrail": {
-      "rezervbase": ["Cliff"],
-      "shoreline": ["Climbers Trail"]
     },
     "RoadtoCustoms": {
       "bigmap": ["Sniper Roadblock"],
@@ -1052,28 +988,15 @@
       "lighthouse": ["Southern Road Water"],
       "woods": ["Sawmill River"]
     },
-    "Tunnel": {
-      "shoreline": ["Shoreline Tunnel"],
-      "lighthouse": ["Lighthouse Tunnel"]
-    },
-    "RuinedRoad": {
+    "ShorelineLighthouseRoad": {
       "shoreline": ["Ruined Road"],
       "lighthouse": ["Southern Road"]
     },
-    "ShorelinePath": {
-      "shoreline": ["Path to Lighthouse"],
-      "lighthouse": ["Path to Shoreline"]
-    },
-    "SmugglersPath": {
-      "shoreline": ["Smugglers Path"],
-      "bigmap": ["Sniper Roadblock"],
-      "rezervbase": ["Hole In Wall"]
-    },
-    "ShorelineCar": {
+    "ShorelineDormsCar": {
       "bigmap": ["Dorms Car"],
       "shoreline": ["North Fence Passage"]
     },
-    "RailwayBridge": {
+    "RefHideout": {
       "bigmap": ["RR to Port"],
       "shoreline": ["Railway Bridge"]
     },
@@ -1081,15 +1004,11 @@
       "rezervbase": ["Checkpoint Fence"],
       "lighthouse": ["Lighthouse Vehicle Extract"]
     },
-    "LighthousePath": {
+    "LighthouseShorelinePath": {
       "shoreline": ["Path to Lighthouse"],
       "lighthouse": ["Path to Shoreline"]
     },
-    "SouthernRoad": {
-      "shoreline": ["Ruined Road"],
-      "lighthouse": ["Southern Road"]
-    },
-    "LighthouseTrain": {
+    "ArmoredTrain": {
       "bigmap": ["RR to Military Base"],
       "woods": ["Factory Gate"],
       "lighthouse": ["Armored Train LH"],
@@ -1098,16 +1017,11 @@
       "rezervbase": ["Train Station"],
       "tarkovstreets": ["Crash Site"]
     },
-    "NorthernCP": {
-      "bigmap": ["Scav CP"],
-      "lighthouse": ["Northern CP"],
-      "woods": ["Outskirts"]
-    },
     "MountainPass": {
       "shoreline": ["Path to Lighthouse"],
       "lighthouse": ["Mountain Pass"]
     },
-    "SideTunnel": {
+    "LighthouseShorelineTunnel": {
       "shoreline": ["Shoreline Tunnel"],
       "lighthouse": ["Lighthouse Tunnel"]
     },
@@ -1147,18 +1061,6 @@
     "Catacombs": {
       "tarkovstreets": ["Catacombs"],
       "laboratory": ["Hangar Gate"]
-    },
-    "StreetsCar": {
-      "tarkovstreets": ["Streets Vehicle Extract"],
-      "interchange": ["Interchange Vehicle Extract"],
-      "sandbox": ["Police Car"],
-      "woods": ["Woods Vehicle Extract"]
-    },
-    "GZCar": {
-      "tarkovstreets": ["Streets Vehicle Extract"],
-      "interchange": ["Interchange Vehicle Extract"],
-      "sandbox": ["Police Car"],
-      "woods": ["Woods Vehicle Extract"]
     }
   }
 }

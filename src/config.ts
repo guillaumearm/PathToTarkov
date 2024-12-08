@@ -2,7 +2,7 @@ import type { ISptProfile } from '@spt/models/eft/profile/ISptProfile';
 import { join } from 'path';
 import { deepClone, fileExists, getPTTMongoId, readJsonFile, writeJsonFile } from './utils';
 
-type ByMap<T> = {
+export type ByMap<T> = {
   factory4_day: T;
   factory4_night: T;
   bigmap: T;
