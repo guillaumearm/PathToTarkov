@@ -2,6 +2,7 @@
   "enabled": true,
   "debug": true,
   "initial_offraid_position": "FactoryZB-1011",
+  "respawn_at": ["FactoryZB-1011"],
   "reset_offraid_position_on_player_die": true,
   "traders_access_restriction": true,
   "hideout_multistash_enabled": true,
