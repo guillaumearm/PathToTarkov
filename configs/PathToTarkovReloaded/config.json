@@ -166,11 +166,6 @@
       "access_via": ["SniperPath"]
     },
     {
-      "id": "PathToTarkov_EmercomStreet_stash",
-      "size": 8,
-      "access_via": ["EmercomToKlimov"]
-    },
-    {
       "id": "PathToTarkov_sewer_stash",
       "size": 8,
       "access_via": ["ManHoleToReserve"]

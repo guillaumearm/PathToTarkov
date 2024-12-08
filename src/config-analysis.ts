@@ -171,6 +171,23 @@ const getErrorsSecondaryStashes = (config: Config): string[] => {
   return errors;
 };
 
+const getWarningsSecondaryStahes = (config: Config): string[] => {
+  const warnings: string[] = [];
+  const offraidPositions = new Set<string>();
+
+  config.hideout_secondary_stashes.forEach(stashConfig => {
+    ensureArray(stashConfig.access_via).forEach(offraidPosition => {
+      if (offraidPositions.has(offraidPosition)) {
+        warnings.push(`offraid position is already used by stash "${stashConfig.name}"`);
+      } else {
+        offraidPositions.add(offraidPosition);
+      }
+    });
+  });
+
+  return warnings;
+};
+
 const getErrorsForInfils = (config: Config, spawnConfig: SpawnConfig): string[] => {
   const errors: string[] = [];
 
@@ -249,8 +266,9 @@ export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigV
   // 5. checks for exfil maps
   errors.push(...getErrorsForExfils(config));
 
-  // 6. check for secondary stashes errors
+  // 6. check for secondary stashes
   errors.push(...getErrorsSecondaryStashes(config));
+  warnings.push(...getWarningsSecondaryStahes(config));
 
   // 7. check for infiltrations maps and spawn points
   errors.push(...getErrorsForInfils(config, spawnConfig));

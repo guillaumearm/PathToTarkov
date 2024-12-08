@@ -13,14 +13,14 @@ const loadSpawnConfig = (config: Config): SpawnConfig => {
 };
 
 describe('PTT embedded configs', () => {
-  const jestConsole = console;
+  const originalConsole = console;
 
   beforeEach(() => {
     global.console = require('console');
   });
 
   afterEach(() => {
-    global.console = jestConsole;
+    global.console = originalConsole;
   });
 
   const testConfig = (dirPath: string) => {

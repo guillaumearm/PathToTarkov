@@ -115,11 +115,6 @@
       "access_via": ["RefHideout"]
     },
     {
-      "id": "WelcomeToTarkov_PainterHideout_stash",
-      "size": 38,
-      "access_via": ["PainterHideout"]
-    },
-    {
       "id": "WelcomeToTarkov_Boat_stash",
       "size": 16,
       "access_via": ["Boat"]
