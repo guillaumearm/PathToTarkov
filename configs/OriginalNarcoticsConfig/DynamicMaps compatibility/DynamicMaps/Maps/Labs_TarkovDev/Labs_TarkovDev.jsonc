@@ -64,7 +64,7 @@
       "Color": { "r": 1.0, "g": 1.0, "b": 0.0, "a": 1.0 },
     },
     {
-      "Text": "Main Elevator (Streets, Sylobate Elevator)",
+      "Text": "Main Elevator (Streets, Stylobate Elevator)",
       "ImagePath": "Markers/exit.png",
       "Position": { "x": -282.304016, "y": -334.896, "z": -3.631999 },
       "Category": "Extract",

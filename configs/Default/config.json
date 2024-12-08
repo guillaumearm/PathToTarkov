@@ -214,9 +214,9 @@
       "access_via": ["SewerRiver"]
     },
     {
-      "id": "PathToTarkov_SylobateElevator_stash",
+      "id": "PathToTarkov_StylobateElevator_stash",
       "size": 4,
-      "access_via": ["SylobateElevator"]
+      "access_via": ["StylobateElevator"]
     },
     {
       "id": "PathToTarkov_Catacombs_stash",
@@ -819,7 +819,7 @@
       "tunnel_shared": "SideTunnel"
     },
     "tarkovstreets": {
-      "E1": "SylobateElevator",
+      "E1": "StylobateElevator",
       "scav_e3": "VentShaft",
       "E3": "RuinedHouse",
       "E4": "CrashSite",
@@ -835,7 +835,7 @@
       "lab_Hangar_Gate": "Catacombs",
       "lab_Parking_Gate": "BasementDescent",
       "lab_Under_Storage_Collector": "SewerRiver",
-      "lab_Elevator_Main": "SylobateElevator",
+      "lab_Elevator_Main": "StylobateElevator",
       "lab_Elevator_Cargo": "BasementDescent",
       "lab_Elevator_Med": "BasementDescent",
       "lab_Vent": "VentShaft"
@@ -1135,8 +1135,8 @@
       "tarkovstreets": ["Sewer River"],
       "laboratory": ["Lab Sewage Conduit"]
     },
-    "SylobateElevator": {
-      "tarkovstreets": ["Sylobate Elevator"],
+    "StylobateElevator": {
+      "tarkovstreets": ["Stylobate Elevator"],
       "laboratory": ["Main Elevator"]
     },
     "CrashSite": {
