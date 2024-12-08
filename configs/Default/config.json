@@ -104,7 +104,7 @@
       "access_via": ["BasementDescent"]
     },
     {
-      "id": "PathToTarkov_Hephaestus_stash",
+      "id": "PathToTarkov_RuinedHouse_stash",
       "size": 48,
       "access_via": ["RuinedHouse"]
     },
@@ -664,31 +664,6 @@
       },
       "access_via": ["BasementDescent"]
     },
-    "hephaestus_alxk": {
-      "// mod integration for Hephaestus": true,
-      "disable_warning": true,
-      "override_description": true,
-      "location_description": {
-        "ch": "Ruined house in the streets",
-        "cz": "Ruined house in the streets",
-        "en": "Ruined house in the streets",
-        "es-mx": "Ruined house in the streets",
-        "es": "Ruined house in the streets",
-        "fr": "Maison en ruine dans les rues",
-        "ge": "Ruined house in the streets",
-        "hu": "Ruined house in the streets",
-        "it": "Ruined house in the streets",
-        "jp": "Ruined house in the streets",
-        "kr": "Ruined house in the streets",
-        "pl": "Ruined house in the streets",
-        "po": "Ruined house in the streets",
-        "ro": "Ruined house in the streets",
-        "ru": "Ruined house in the streets",
-        "sk": "Ruined house in the streets",
-        "tu": "Ruined house in the streets"
-      },
-      "access_via": ["RuinedHouse"]
-    },
     "Sally": {
       "// mod integration for Sally": true,
       "disable_warning": true,
@@ -1061,6 +1036,276 @@
     "Catacombs": {
       "tarkovstreets": ["Catacombs"],
       "laboratory": ["Hangar Gate"]
+    }
+  },
+  "exfiltrations_tooltips_template": "$exfilDisplayName ($offraidPositionDisplayName)",
+  "offraid_positions": {
+    "PraporHideout": {
+      "displayName": {
+        "en": "Prapor"
+      }
+    },
+    "SkierHideout": {
+      "displayName": {
+        "en": "Skier"
+      }
+    },
+    "JaegerHideout": {
+      "displayName": {
+        "en": "Jaeger"
+      }
+    },
+    "PeacekeeperHideout": {
+      "displayName": {
+        "en": "Peacekeeper"
+      }
+    },
+    "LegsHideout": {
+      "displayName": {
+        "en": "Legs"
+      }
+    },
+    "TherapistHideout": {
+      "displayName": {
+        "en": "Therapist"
+      }
+    },
+    "MechanicHideout": {
+      "displayName": {
+        "en": "Mechanic"
+      }
+    },
+    "ArtemHideout": {
+      "displayName": {
+        "en": "Artem"
+      }
+    },
+    "FactoryZB-016": {
+      "displayName": {
+        "en": "Woods/Factory"
+      }
+    },
+    "FactoryZB-013": {
+      "displayName": {
+        "en": "Customs/Factory"
+      }
+    },
+    "FactoryZB-1012": {
+      "displayName": {
+        "en": "Customs/Factory"
+      }
+    },
+    "FactoryZB-1011": {
+      "displayName": {
+        "en": "Customs/Factory"
+      }
+    },
+    "SniperRB": {
+      "displayName": {
+        "en": "Customs/Reserve/Shoreline"
+      }
+    },
+    "SmugglersBoat": {
+      "displayName": {
+        "en": "Boat"
+      }
+    },
+    "RUAFCustoms": {
+      "displayName": {
+        "en": "Customs/Woods"
+      }
+    },
+    "Crossroads": {
+      "displayName": {
+        "en": "Customs/Interchange/Shoreline"
+      }
+    },
+    "GasGate": {
+      "displayName": {
+        "en": "Customs/Woods/Factory"
+      }
+    },
+    "TarkovRR": {
+      "displayName": {
+        "en": "Painter + Customs/Interchange/Streets"
+      }
+    },
+    "MilBaseRR": {
+      "displayName": {
+        "en": "Customs/Reserve"
+      }
+    },
+    "MilBaseCP": {
+      "displayName": {
+        "en": "Customs/Reserve"
+      }
+    },
+    "NorthUNRoadblock": {
+      "displayName": {
+        "en": "Customs/Woods"
+      }
+    },
+    "FactoryGate": {
+      "displayName": {
+        "en": "Customs/Woods"
+      }
+    },
+    "Outskirts": {
+      "displayName": {
+        "en": "Priscilu + Customs/Woods/Lighthouse"
+      }
+    },
+    "UNRoadblock": {
+      "displayName": {
+        "en": "Customs/Woods/Interchange"
+      }
+    },
+    "RUAFWoods": {
+      "displayName": {
+        "en": "Customs/Woods"
+      }
+    },
+    "ReserveZB-014": {
+      "displayName": {
+        "en": "Scorpion"
+      }
+    },
+    "HoleinWall": {
+      "displayName": {
+        "en": "Customs/Reserve"
+      }
+    },
+    "CPFence": {
+      "displayName": {
+        "en": "Lighthouse/Reserve"
+      }
+    },
+    "CliffDescent": {
+      "displayName": {
+        "en": "Shoreline/Reserve"
+      }
+    },
+    "Manhole": {
+      "displayName": {
+        "en": "Sally + Streets/Reserve"
+      }
+    },
+    "CityCar": {
+      "displayName": {
+        "en": "Streets/Interchange/Woods/GZ"
+      }
+    },
+    "SafeRoom": {},
+    "Railway": {
+      "displayName": {
+        "en": "Painter + Streets/Woods/Interchange"
+      }
+    },
+    "InterchangeScavCamp": {
+      "displayName": {
+        "en": "Customs/Interchange"
+      }
+    },
+    "RoadtoCustoms": {
+      "displayName": {
+        "en": "Customs/Interchange/Shoreline"
+      }
+    },
+    "PierBoat": {
+      "displayName": {
+        "en": "Customs/Shoreline/Lighthouse/Woods"
+      }
+    },
+    "ShorelineLighthouseRoad": {
+      "displayName": {
+        "en": "Shoreline/Lighthouse"
+      }
+    },
+    "ShorelineDormsCar": {
+      "displayName": {
+        "en": "Customs/Shoreline"
+      }
+    },
+    "RefHideout": {
+      "displayName": {
+        "en": "Customs/Shoreline"
+      }
+    },
+    "LighthouseCar": {
+      "displayName": {
+        "en": "Reserve/Lighthouse"
+      }
+    },
+    "LighthouseShorelinePath": {
+      "displayName": {
+        "en": "Shoreline/Lighthouse"
+      }
+    },
+    "ArmoredTrain": {
+      "displayName": {
+        "en": "goes almost everywhere",
+        "fr": "va presque partout"
+      }
+    },
+    "MountainPass": {
+      "displayName": {
+        "en": "Shoreline/Lighthouse"
+      }
+    },
+    "LighthouseShorelineTunnel": {
+      "displayName": {
+        "en": "Shoreline/Lighthouse"
+      }
+    },
+    "BasementDescent": {
+      "displayName": {
+        "en": "Harry/Coyote"
+      }
+    },
+    "RuinedHouse": {},
+    "ExpoCP": {
+      "displayName": {
+        "en": "GZ/Streets"
+      }
+    },
+    "KlimovStreet": {
+      "displayName": {
+        "en": "GZ/Streets"
+      }
+    },
+    "VentShaft": {
+      "displayName": {
+        "en": "Streets/Lab"
+      }
+    },
+    "SewerRiver": {
+      "displayName": {
+        "en": "Streets/Lab"
+      }
+    },
+    "StylobateElevator": {
+      "displayName": {
+        "en": "Streets/Lab"
+      }
+    },
+    "CrashSite": {
+      "displayName": {
+        "en": "Painter + Streets/Interchange/Woods"
+      }
+    },
+    "Catacombs": {
+      "displayName": {
+        "en": "Streets/Lab"
+      }
+    }
+  },
+  "exfiltrations_config": {
+    "Warehouse 17": {
+      "override_tooltips_template": "$offraidPositionDisplayName $exfilDisplayName",
+      "displayName": {
+        "en": "in Warehouse 17",
+        "fr": "à l'entrepôt 17"
+      }
     }
   }
 }
