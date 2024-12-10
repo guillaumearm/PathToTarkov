@@ -47,9 +47,8 @@ export class TradersController {
         // be able to lock a trader
         trader.base.unlockedByDefault = false;
 
+        // traders description update
         if (tradersConfig[traderId].override_description) {
-          // change trader location in descriptions
-
           Object.keys(locales?.global ?? []).forEach(locale => {
             const locationDescription = tradersConfig[traderId].location_description;
 
@@ -129,7 +128,7 @@ export class TradersController {
           }
         }
 
-        // offraid pay-to-heal config
+        // offraid pay-to-heal config update
         if (tradersConfig[traderId].heal_always_enabled) {
           trader.base.medic = true;
           trader.base.loyaltyLevels = trader.base.loyaltyLevels.map((loyaltyLevel, index) => {
