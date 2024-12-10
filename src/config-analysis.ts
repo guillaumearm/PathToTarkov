@@ -156,8 +156,11 @@ const getErrorsForExfils = (config: Config): string[] => {
       errors.push(`${mapName} is now allowed as a map name in "exfiltrations"`);
     }
 
-    // 2. check for map with no exfils
-    if (Object.keys(config.exfiltrations[mapName as MapName]).length === 0) {
+    // 2. check for map with no exfils (only when all transits are disabled)
+    if (
+      config.disable_all_transits &&
+      Object.keys(config.exfiltrations[mapName as MapName]).length === 0
+    ) {
       errors.push(`no exfils found for map ${mapName} in "exfiltrations"`);
     }
   });
