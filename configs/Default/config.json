@@ -614,6 +614,30 @@
       },
       "access_via": ["TarkovRR", "CrashSite", "Railway"]
     },
+    "66f4db5ca4958508883d700c": {
+      "// Trader name": "Saria",
+      "override_description": true,
+      "location_description": {
+        "ch": "With Peacekeeper in Bunker D2",
+        "cz": "With Peacekeeper in Bunker D2",
+        "en": "With Peacekeeper in Bunker D2",
+        "es-mx": "With Peacekeeper in Bunker D2",
+        "es": "With Peacekeeper in Bunker D2",
+        "fr": "Avec Peacekeeper dans le bunker D2",
+        "ge": "With Peacekeeper in Bunker D2",
+        "hu": "With Peacekeeper in Bunker D2",
+        "it": "With Peacekeeper in Bunker D2",
+        "jp": "With Peacekeeper in Bunker D2",
+        "kr": "With Peacekeeper in Bunker D2",
+        "pl": "With Peacekeeper in Bunker D2",
+        "po": "With Peacekeeper in Bunker D2",
+        "ro": "With Peacekeeper in Bunker D2",
+        "ru": "With Peacekeeper in Bunker D2",
+        "sk": "With Peacekeeper in Bunker D2",
+        "tu": "With Peacekeeper in Bunker D2"
+      },
+      "access_via": ["PeacekeeperHideout"]
+    },
     "lotus": {
       "// mod integration for lotus": true,
       "disable_warning": true,
