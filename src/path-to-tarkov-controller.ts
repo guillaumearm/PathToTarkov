@@ -552,8 +552,7 @@ export class PathToTarkovController {
 
     // TODO: move this into config-analysis
     if (config.vanilla_exfils_requirements) {
-      this.logger.error('Path To Tarkov: "vanilla_exfils_requirements" is no longer supported');
-      return;
+      this.logger.warning('Path To Tarkov: "vanilla_exfils_requirements" is no longer supported');
     }
 
     // TODO(refactor): implement an indexBy util
