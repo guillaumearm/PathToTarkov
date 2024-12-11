@@ -192,15 +192,6 @@ export type Config = Omit<RawConfig, 'hideout_secondary_stashes' | 'infiltration
   infiltrations_config: InfiltrationsConfig;
 };
 
-export type PathToTarkovReloadedTooltipsConfig = {
-  language?: string;
-  moddedTraderCompat?: boolean;
-  additionalLocalesToggle?: boolean;
-  moddedTraderExtracts?: string[];
-  localesToChangeAdditional?: string[];
-  localesToChange?: string[];
-};
-
 export type UserConfig = {
   selectedConfig: string;
 };
