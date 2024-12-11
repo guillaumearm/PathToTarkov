@@ -110,23 +110,13 @@ const mergeConfigs = (configA, configB) => {
 
   return result;
 };
+void mergeConfigs;
 
-const Tooltips_EN = loadTooltips('DevilFlippy');
-const Tooltips_FR = loadTooltips('DevilFlippy/FR');
+const Tooltips_EN = loadTooltips('LegacyPathToTarkovV5');
 
 const configEN = extractExfiltrationsConfigFromLocales(
   Tooltips_EN.allLocales,
   Tooltips_EN.language,
 );
-const configFR = extractExfiltrationsConfigFromLocales(
-  Tooltips_FR.allLocales,
-  Tooltips_FR.language,
-);
 
-const mergedConfigs = mergeConfigs(configEN, configFR);
-console.log(JSON.stringify(mergedConfigs, undefined, 2));
-
-console.log(
-  'same amount of keys found between EN and FR: ',
-  Object.keys(configFR).length === Object.keys(configEN).length,
-);
+console.log(JSON.stringify(configEN, undefined, 2));
