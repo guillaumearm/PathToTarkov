@@ -1,11 +1,15 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const Tooltips = require('../configs/Default/Tooltips.json');
+const loadTooltips = tooltipsPath => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const Tooltips = require(`../configs/${tooltipsPath}/Tooltips.json`);
 
-const localesToChange = Tooltips.localesToChange ?? [];
-const additionalLocales =
-  (Tooltips.additionalLocalesToggle ? Tooltips.localesToChangeAdditional : []) ?? [];
-const moddedLocales = (Tooltips.moddedTraderCompat ? Tooltips.moddedTraderExtracts : []) ?? [];
-const allLocales = [...localesToChange, ...additionalLocales, ...moddedLocales];
+  const localesToChange = Tooltips.localesToChange ?? [];
+  const additionalLocales =
+    (Tooltips.additionalLocalesToggle ? Tooltips.localesToChangeAdditional : []) ?? [];
+  const moddedLocales = (Tooltips.moddedTraderCompat ? Tooltips.moddedTraderExtracts : []) ?? [];
+  const allLocales = [...localesToChange, ...additionalLocales, ...moddedLocales];
+
+  return { allLocales, language: Tooltips.language || 'en' };
+};
 
 const localeMappings = {
   english: 'en',
@@ -76,17 +80,53 @@ const createExfilConfig = (rawLang, localeValue) => {
 const isOdd = n => Boolean(n % 2);
 const isEven = n => !isOdd(n);
 
-const extractExfiltrationsConfigFromLocales = locales => {
+const extractExfiltrationsConfigFromLocales = (locales, lang) => {
   const exfiltrationsConfig = {};
   locales.forEach((localeKey, i) => {
     if (isEven(i)) {
       const localeValue = locales[i + 1];
-      exfiltrationsConfig[localeKey] = createExfilConfig(Tooltips.language, localeValue);
+      if (exfiltrationsConfig[localeKey]) {
+        throw new Error(`duplicate found for localeKey ${localeKey}`);
+      }
+      exfiltrationsConfig[localeKey] = createExfilConfig(lang, localeValue);
     }
   });
   return exfiltrationsConfig;
 };
 
-const exfiltrations_config = extractExfiltrationsConfigFromLocales(allLocales);
+const mergeConfigs = (configA, configB) => {
+  const result = {};
 
-console.log(JSON.stringify(exfiltrations_config, undefined, 2));
+  Object.keys(configA).forEach(exfilName => {
+    const exfilConfigA = configA[exfilName];
+    const exfilConfigB = configB[exfilName];
+    result[exfilName] = {
+      displayName: {
+        ...exfilConfigA.displayName,
+        ...exfilConfigB.displayName,
+      },
+    };
+  });
+
+  return result;
+};
+
+const Tooltips_EN = loadTooltips('DevilFlippy');
+const Tooltips_FR = loadTooltips('DevilFlippy/FR');
+
+const configEN = extractExfiltrationsConfigFromLocales(
+  Tooltips_EN.allLocales,
+  Tooltips_EN.language,
+);
+const configFR = extractExfiltrationsConfigFromLocales(
+  Tooltips_FR.allLocales,
+  Tooltips_FR.language,
+);
+
+const mergedConfigs = mergeConfigs(configEN, configFR);
+console.log(JSON.stringify(mergedConfigs, undefined, 2));
+
+console.log(
+  'same amount of keys found between EN and FR: ',
+  Object.keys(configFR).length === Object.keys(configEN).length,
+);
