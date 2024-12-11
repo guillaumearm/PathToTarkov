@@ -47,20 +47,11 @@
     "The Boat",
     "Boat (Machine,Artem)",
 
-    "Smuggler's Boat",
-    "Boat (Machine,Artem)",
-
-    "Gate 0",
-    "WoodsFactoryGate (Prapor)",
-
     "WoodsFactoryGate",
     "Gate 0 (Prapor)",
 
     "Hole Exfil",
     "Crossroads (The Machine)",
-
-    "Crossroads",
-    "Hole Exfil (The Machine)",
 
     "ZB-1012",
     "ZB-1012 to Factory, Med tent gate(Mechanic)",
@@ -94,23 +85,15 @@
 
     "Outskirts Water",
     "Northern Bridge (to Streets, Car)",
-    "South V-Ex",
-    "Bridge Car (to Streets, Car)",
-    "un-sec",
-    "N. UN Roadblock (to Customs, RUAF)",
     "UN Roadblock",
     "UN Roadblock (to Customs, RUAF)",
     "Factory gate",
     "Factory Gate (to Factory, Med Tent)",
-    "Outskirts",
-    "Outskirts (to Lighthouse, N. Checkpoint)",
 
     "Old Azs Gate",
     "Old Gas Gate (to Factory, Gate 0)",
     "Factory Far Corner",
     "Factory Far Corner (to Factory, Gate 3)",
-    "RUAF Roadblock",
-    "RUAF Roadblock (to Woods, N. UN Roadblock)",
     "Railroad To Tarkov",
     "RR to Tarkov (to Interchange, Railway)",
     "Crossroads",
@@ -122,8 +105,6 @@
 
     "NW Exfil",
     "Railway (to Customs, RR to Tarkov)",
-    "PP Exfil",
-    "Power Station Car (to Streets, Underpass)",
     "SE Exfil",
     "Emercom (to Streets, Underpass)",
 
@@ -155,10 +136,6 @@
     "EXFIL_BUNKER_D2",
     "D-2 (to Woods, Snip er Rock Bunker *1way)",
 
-    "Road to Customs",
-    "Road to Customs (to Customs, Crossroads)",
-    "Pier Boat",
-    "Pier Boat (to Lighthouse, Woods, Customs, Machine,Artem,Jaeger)",
     "Tunnel",
     "Tunnel (to Lighthouse, Side Tunnel)",
     "Lighthouse_pass",
@@ -196,21 +173,6 @@
     "lab_Under_Storage_Collector",
     "Sewage Conduit (to Streets, Sewer River)",
     "lab_Vent",
-    "Vents (to Streets, Vents)",
-
-    "5a7c2eca46aef81a7ca2145d Location",
-    "",
-    "5ac3b934156ae10c4430e83c Location",
-    "",
-    "54cb50c76803fa8b248b4571 Location",
-    "",
-    "54cb57776803fa99248b456e Location",
-    "",
-    "58330581ace78e27b8b10cee Location",
-    "",
-    "5935c25fb3acc3127c3d8cd9 Location",
-    "",
-    "5c0647fdd443bc2504c2d371 Location",
-    ""
+    "Vents (to Streets, Vents)"
   ]
 }
