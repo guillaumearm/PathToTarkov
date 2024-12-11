@@ -1012,5 +1012,432 @@
       "tarkovstreets": ["Catacombs"],
       "laboratory": ["Hangar Gate"]
     }
+  },
+  "exfiltrations_config": {
+    "East Gate": {
+      "displayName": {
+        "en": "Scav Bunker (Prapor)"
+      }
+    },
+    "Unity_free_exit": {
+      "displayName": {
+        "en": "Emercom Checkpoint (Therapist)"
+      }
+    },
+    "Warehouse 17": {
+      "displayName": {
+        "en": "Warehouse 17 (Skier)"
+      }
+    },
+    "Mountain Stash": {
+      "displayName": {
+        "en": "Mountain Stash (Jaeger)"
+      }
+    },
+    "Interchange Cooperation": {
+      "displayName": {
+        "en": "Scav Camp (Ragman/Customs)"
+      }
+    },
+    "Trailer Park": {
+      "displayName": {
+        "en": "Trailer Park (Ragman/Interchange)"
+      }
+    },
+    "EXFIL_Bunker_D2": {
+      "displayName": {
+        "en": "D-2 (Peacekeeper/Shoreline*)"
+      }
+    },
+    "South Fence Passage": {
+      "displayName": {
+        "en": "Old Bunker (Peacekeeper)"
+      }
+    },
+    "Camera Bunker Door": {
+      "displayName": {
+        "en": "Camera Bunker Door (Mechanic)"
+      }
+    },
+    "Railroad To Port": {
+      "displayName": {
+        "en": "RR to Port (Ref/Shoreline)"
+      }
+    },
+    "Road_at_railbridge": {
+      "displayName": {
+        "en": "Railbridge (Ref/Customs)"
+      }
+    },
+    "Gate 3": {
+      "displayName": {
+        "en": "Gate 3 (Woods, ZB-1016)"
+      }
+    },
+    "Gate m": {
+      "displayName": {
+        "en": "Med Tent Gates (Customs, ZB-1012)"
+      }
+    },
+    "Gate 0": {
+      "displayName": {
+        "en": "Gate 0 (Customs, ZB-1011)"
+      }
+    },
+    "Cellars": {
+      "displayName": {
+        "en": "Cellars (Customs, ZB-1013)"
+      }
+    },
+    "Office Window": {
+      "displayName": {
+        "en": "Office Window (Customs/Woods)"
+      }
+    },
+    "ZB-1011": {
+      "displayName": {
+        "en": "ZB-1011 (Hideout/Factory)"
+      }
+    },
+    "ZB-1012": {
+      "displayName": {
+        "en": "ZB-1012 (Factory, Med Tent Gates)"
+      }
+    },
+    "EXFIL_ZB013": {
+      "displayName": {
+        "en": "ZB-1013 (Factory, Cellars)"
+      }
+    },
+    "Military Checkpoint": {
+      "displayName": {
+        "en": "Scav Checkpoint (Woods/Lighthouse)"
+      }
+    },
+    "Sniper Roadblock": {
+      "displayName": {
+        "en": "Sniper Roadblock (Reserve*/Shoreline)"
+      }
+    },
+    "Smuggler's Boat": {
+      "displayName": {
+        "en": "Smuggler's Boat (Lighthouse*/Shoreline/Woods*"
+      }
+    },
+    "Dorms V-Ex": {
+      "displayName": {
+        "en": "Dorms SUV (Shoreline, North Fence SUV)"
+      }
+    },
+    "RUAF Roadblock": {
+      "displayName": {
+        "en": "RUAF Roadblock (Woods, UN Roadblock)"
+      }
+    },
+    "Old Azs Gate": {
+      "displayName": {
+        "en": "Old Gas Gate (Factory/Woods)"
+      }
+    },
+    "Shack": {
+      "displayName": {
+        "en": "Military Base Checkpoint (Reserve, Scav lands)"
+      }
+    },
+    "Railroad To Military Base": {
+      "displayName": {
+        "en": "RR to Military Base (Reserve, Scav land rails*)"
+      }
+    },
+    "Factory Far Corner": {
+      "displayName": {
+        "en": "Factory Corner (Woods, RUAF Gate)"
+      }
+    },
+    "un-sec": {
+      "displayName": {
+        "en": "North UN Roadblock (Customs, RUAF Roadblock*)"
+      }
+    },
+    "Factory gate": {
+      "displayName": {
+        "en": "Factory Gate (Customs, Old Gas Gate)"
+      }
+    },
+    "ZB-016": {
+      "displayName": {
+        "en": "ZB-016 (Factory, Gate 3)"
+      }
+    },
+    "Outskirts": {
+      "displayName": {
+        "en": "Outskirts (Customs/Lighthouse)"
+      }
+    },
+    "UN Roadblock": {
+      "displayName": {
+        "en": "UN Roadblock (Customs/Interchange)"
+      }
+    },
+    "South V-Ex": {
+      "displayName": {
+        "en": "Bridge SUV (Streets/Interchange/GZ)"
+      }
+    },
+    "RUAF Gate": {
+      "displayName": {
+        "en": "RUAF Gate (Customs, Factory Corner)"
+      }
+    },
+    "EXFIL_ScavCooperation": {
+      "displayName": {
+        "en": "Scav lands (Customs, Military Base CP)"
+      }
+    },
+    "EXFIL_Train": {
+      "displayName": {
+        "en": "Armored Train (all maps besides GZ*)"
+      }
+    },
+    "Exit1": {
+      "displayName": {
+        "en": "Hole in the Wall (Customs, Dorms Car*)"
+      }
+    },
+    "Exit4": {
+      "displayName": {
+        "en": "Checkpoint Fence (Lighthouse, Northeast Mountains*)"
+      }
+    },
+    "Alpinist": {
+      "displayName": {
+        "en": "Cliff Descent (Shoreline, Climber's Trail)"
+      }
+    },
+    "E1": {
+      "displayName": {
+        "en": "Stylobate Elevator (Labs, Main Elevator)"
+      }
+    },
+    "E2": {
+      "displayName": {
+        "en": "Sewer River (Labs, Sewage Conduit)"
+      }
+    },
+    "E7": {
+      "displayName": {
+        "en": "Expo Checkpoint (Ground Zero, Scav Camp)"
+      }
+    },
+    "E7_car": {
+      "displayName": {
+        "en": "Primorsky Ave Taxi (Woods/Interchange/GZ)"
+      }
+    },
+    "E9_sniper": {
+      "displayName": {
+        "en": "Basement Descent (Labs/Ground Zero)"
+      }
+    },
+    "scav_e2": {
+      "displayName": {
+        "en": "Entrance to Catacombs (Labs, Hangar Gate)"
+      }
+    },
+    "scav_e3": {
+      "displayName": {
+        "en": "Vent Shaft (Lab, Vents)"
+      }
+    },
+    "Road to Customs": {
+      "displayName": {
+        "en": "Road to Customs (Customs, Sniper Roadblock*)"
+      }
+    },
+    "Pier Boat": {
+      "displayName": {
+        "en": "Pier Boat (Lighthouse*/Customs/Woods*)"
+      }
+    },
+    "Tunnel": {
+      "displayName": {
+        "en": "Tunnel (Lighthouse, Side Tunnel)"
+      }
+    },
+    "Wrecked Road": {
+      "displayName": {
+        "en": "Ruined Road (Lighthouse, Southern Road)"
+      }
+    },
+    "Smugglers_Trail_coop": {
+      "displayName": {
+        "en": "Smuggler's Path (Customs/Reserve*)"
+      }
+    },
+    "Shorl_V-Ex": {
+      "displayName": {
+        "en": "North Fence SUV (Customs, Dorms SUV)"
+      }
+    },
+    "Lighthouse_pass": {
+      "displayName": {
+        "en": "Path to Lighthouse"
+      }
+    },
+    "RedRebel_alp": {
+      "displayName": {
+        "en": "Climber's Trail (Reserve, Cliff Descent)"
+      }
+    },
+    "Nothern_Checkpoint": {
+      "displayName": {
+        "en": "Northern Checkpoint (Woods/Customs)"
+      }
+    },
+    " V-ex_light": {
+      "displayName": {
+        "en": "Military Base SUV (Reserve, CP Fence)"
+      }
+    },
+    "Shorl_free": {
+      "displayName": {
+        "en": "Path to Shoreline"
+      }
+    },
+    "Coastal_South_road": {
+      "displayName": {
+        "en": "Southern Road (Shoreline, Ruined Road)"
+      }
+    },
+    "Alpinist_light": {
+      "displayName": {
+        "en": "Mountain Pass (Shoreline, Path to Shoreline*)"
+      }
+    },
+    "Tunnel_Shared": {
+      "displayName": {
+        "en": "Side Tunnel (Shoreline, Tunnel)"
+      }
+    },
+    "lab_Elevator_Main": {
+      "displayName": {
+        "en": "Main Elevator (Streets, Stylobate Elevator)"
+      }
+    },
+    "lab_Hangar_Gate": {
+      "displayName": {
+        "en": "Hangar Gate (Streets, Catacombs)"
+      }
+    },
+    "lab_Under_Storage_Collector": {
+      "displayName": {
+        "en": "Sewage Conduit (Streets, Sewer River)"
+      }
+    },
+    "lab_Vent": {
+      "displayName": {
+        "en": "Vents (Streets, Vent Shaft)"
+      }
+    },
+    "Sandbox_VExit": {
+      "displayName": {
+        "en": "Police Car (Woods/Interchange/Streets)"
+      }
+    },
+    "Sniper_exit": {
+      "displayName": {
+        "en": "Mira Ave (Streets, Klimov Ave)"
+      }
+    },
+    "Scav_coop_exit": {
+      "displayName": {
+        "en": "Scav Checkpoint (Streets, Expo CP)"
+      }
+    },
+    "Saferoom Exfil": {
+      "displayName": {
+        "en": "Saferoom (Flea Market)"
+      }
+    },
+    "Trailer Park Workers Shack": {
+      "displayName": {
+        "en": "Trailer Park Workers' Shack (Legs)"
+      }
+    },
+    "Scav_Hideout_at_the_grotto": {
+      "displayName": {
+        "en": "Hideout at the Grotto (Artem)"
+      }
+    },
+    "Railroad To Tarkov": {
+      "displayName": {
+        "en": "RR to Tarkov (Painter/Streets/Interchange)"
+      }
+    },
+    "NW Exfil": {
+      "displayName": {
+        "en": "Railway (Painter/Customs/Woods/Streets)"
+      }
+    },
+    "PP Exfil": {
+      "displayName": {
+        "en": "Power Station SUV (Painter/Streets/Woods/GZ)"
+      }
+    },
+    "E4": {
+      "displayName": {
+        "en": "Crash Site (Painter/Customs/Interchange)"
+      }
+    },
+    "ZB-014": {
+      "displayName": {
+        "en": "ZB-014 (Scorpion)"
+      }
+    },
+    "EXFIL_Bunker": {
+      "displayName": {
+        "en": "Bunker Hermetic Door (Scorpion/Woods*)"
+      }
+    },
+    "SE Exfil": {
+      "displayName": {
+        "en": "Emercom Checkpoint (Lotus/Customs)"
+      }
+    },
+    "Crossroads": {
+      "displayName": {
+        "en": "Crossroads (Lotus/Interchange/Shoreline*)"
+      }
+    },
+    "Nakatani_stairs_free_exit": {
+      "displayName": {
+        "en": "Nakatani Basement Stairs (Coyote/Streets/Labs)"
+      }
+    },
+    "scav_e1": {
+      "displayName": {
+        "en": "Basement Descent (Coyote/Labs/Ground Zero)"
+      }
+    },
+    "lab_Elevator_Cargo": {
+      "displayName": {
+        "en": "Cargo Elevator (Coyote/Streets/Ground Zero)"
+      }
+    },
+    "E3": {
+      "displayName": {
+        "en": "Ruined House (Hephaestus)"
+      }
+    },
+    "EXFIL_Vent": {
+      "displayName": {
+        "en": "Manhole (Sally/Streets)"
+      }
+    },
+    "scav_e4": {
+      "displayName": {
+        "en": "Manhole (Sally/Reserve)"
+      }
+    }
   }
 }

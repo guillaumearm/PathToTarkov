@@ -112,7 +112,7 @@ const mergeConfigs = (configA, configB) => {
 };
 void mergeConfigs;
 
-const Tooltips_EN = loadTooltips('LegacyPathToTarkovV5');
+const Tooltips_EN = loadTooltips('OriginalNarcoticsConfig');
 
 const configEN = extractExfiltrationsConfigFromLocales(
   Tooltips_EN.allLocales,
