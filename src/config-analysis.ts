@@ -1,7 +1,7 @@
 import { isValidExfilForMap } from './all-exfils';
 import type { ByMap } from './config';
 import { EMPTY_STASH, type Config, type MapName, type SpawnConfig } from './config';
-import { ensureArray } from './utils';
+import { ensureArray, isEmpty } from './utils';
 
 const MIN_NEEDED_MAPS = [
   'laboratory',
@@ -157,10 +157,7 @@ const getErrorsForExfils = (config: Config): string[] => {
     }
 
     // 2. check for map with no exfils (only when all transits are disabled)
-    if (
-      config.disable_all_transits &&
-      Object.keys(config.exfiltrations[mapName as MapName]).length === 0
-    ) {
+    if (config.disable_all_transits && isEmpty(config.exfiltrations[mapName as MapName])) {
       errors.push(`no exfils found for map ${mapName} in "exfiltrations"`);
     }
   });
@@ -280,12 +277,12 @@ export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigV
   const warnings: string[] = [];
 
   // 1. check there is at least one offraid position
-  if (Object.keys(config.infiltrations).length === 0) {
+  if (isEmpty(config.infiltrations)) {
     errors.push('no offraid position found in "infiltrations"');
   }
 
   // 2. check there is at least one map
-  if (Object.keys(config.exfiltrations).length === 0) {
+  if (isEmpty(config.exfiltrations)) {
     errors.push('no map found found in "exfiltrations"');
   }
 

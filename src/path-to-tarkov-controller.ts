@@ -37,7 +37,7 @@ import type { IGetBodyResponseData } from '@spt/models/eft/httpResponse/IGetBody
 import { TradersAvailabilityService } from './services/TradersAvailabilityService';
 import { fixRepeatableQuestsForPmc } from './fix-repeatable-quests';
 import { KeepFoundInRaidTweak } from './keep-fir-tweak';
-// import type { LocationCallbacks } from '@spt/callbacks/LocationCallbacks';
+import { ExfilsTooltipsTemplater } from './services/ExfilsTooltipsTemplater';
 
 type IndexedLocations = Record<string, ILocationBase>;
 
@@ -101,6 +101,24 @@ export class PathToTarkovController {
       this.logger,
     );
     this.overrideControllers();
+  }
+
+  // TODO: make it dynamic (aka intercept instead of mutating the db)
+  injectTooltipsInLocales(config: Config): void {
+    const allLocales = this.db.getTables()?.locales?.global;
+
+    if (!allLocales) {
+      throw new Error('Path To Tarkov: no locales found in db');
+    }
+
+    const templater = new ExfilsTooltipsTemplater(allLocales);
+    const partialLocales = templater.computeLocales(config);
+    const report = ExfilsTooltipsTemplater.mutateLocales(allLocales, partialLocales);
+
+    const nbValuesUpdated = report.nbTotalValuesUpdated / report.nbLocalesImpacted;
+    this.debug(
+      `${nbValuesUpdated} extract tooltip values updated for ${report.nbLocalesImpacted} locales (total of ${report.nbTotalValuesUpdated})`,
+    );
   }
 
   setConfig(config: Config, sessionId: string): void {
@@ -299,7 +317,7 @@ export class PathToTarkovController {
         if (gridProps) {
           gridProps.cellsV = size;
         } else {
-          throw new Error('Path To  Tarkov: cannot set size for custom stash');
+          throw new Error('Path To Tarkov: cannot set size for custom stash');
         }
       });
 

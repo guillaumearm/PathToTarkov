@@ -103,6 +103,10 @@ export function shuffle<T>(givenArray: T[]): T[] {
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export function noop(): void {}
 
+export const isEmpty = (obj: object): boolean => {
+  return Object.keys(obj).length === 0;
+};
+
 export const isEmptyArray = <T>(arr: T[] | undefined): boolean => {
   return Boolean(arr && arr.length > 0);
 };

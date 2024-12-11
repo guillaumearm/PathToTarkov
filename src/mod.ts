@@ -183,6 +183,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     this.executeOnStartAPICallbacks = executeOnStartAPICallbacks;
 
+    this.pathToTarkovController.injectTooltipsInLocales(this.config);
     this.pathToTarkovController.tradersController.initTraders(this.config);
 
     const nbAddedTemplates =

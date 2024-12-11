@@ -17,6 +17,26 @@ export type ByMap<T> = {
   terminal: T;
 };
 
+export type ByLocale<T> = {
+  ch?: T;
+  cz?: T;
+  en?: T;
+  'es-mx'?: T;
+  es?: T;
+  fr?: T;
+  ge?: T;
+  hu?: T;
+  it?: T;
+  jp?: T;
+  kr?: T;
+  pl?: T;
+  po?: T;
+  ro?: T;
+  ru?: T;
+  sk?: T;
+  tu?: T;
+};
+
 type ByProfileId<T> = Record<string, T | undefined>;
 
 export type MapName = keyof ByMap<unknown>;
@@ -61,27 +81,7 @@ export type RawStashConfig = {
   access_via: AccessVia;
 };
 
-type AllLocales<T> = {
-  ch?: T;
-  cz?: T;
-  en?: T;
-  'es-mx'?: T;
-  es?: T;
-  fr?: T;
-  ge?: T;
-  hu?: T;
-  it?: T;
-  jp?: T;
-  kr?: T;
-  pl?: T;
-  po?: T;
-  ro?: T;
-  ru?: T;
-  sk?: T;
-  tu?: T;
-};
-
-export type LocaleName = keyof AllLocales<unknown>;
+export type LocaleName = keyof ByLocale<unknown>;
 
 type InsuranceConfig = {
   insurance_price_coef?: number;
@@ -102,7 +102,7 @@ type RepairConfig = {
 type StaticTraderConfig = {
   disable_warning?: boolean;
   override_description?: boolean;
-  location_description?: AllLocales<string>;
+  location_description?: ByLocale<string>;
   insurance_always_enabled?: boolean;
   insurance_config?: InsuranceConfig;
   repair_always_enabled?: boolean;
@@ -119,15 +119,15 @@ type TraderConfig = StaticTraderConfig & {
 export type TradersConfig = Record<string, TraderConfig>;
 
 type SpawnPointName = string;
-type OffraidPosition = string;
+type OffraidPositionName = string;
 type ExtractName = string;
 
 type Exfiltrations = ByMap<{
-  [extractName: ExtractName]: OffraidPosition;
+  [extractName: ExtractName]: OffraidPositionName;
 }>;
 
 type Infiltrations = {
-  [offraidPosition: OffraidPosition]: ByMap<SpawnPointName[]>;
+  [offraidPosition: OffraidPositionName]: ByMap<SpawnPointName[]>;
 };
 
 export type OffraidRegenConfig = {
@@ -144,6 +144,15 @@ export type OverrideByProfiles = ByProfileId<{
 
 export type InfiltrationsConfig = {
   additional_player_spawnpoints?: Partial<SpawnConfig>;
+};
+
+export type OffraidPositionDefinition = {
+  displayName?: ByLocale<string>;
+};
+
+export type ExfiltrationConfig = {
+  override_tooltips_template?: string;
+  displayName?: ByLocale<string>;
 };
 
 type RawConfig = {
@@ -169,9 +178,12 @@ type RawConfig = {
   hideout_secondary_stashes: RawStashConfig[];
   traders_access_restriction: boolean;
   traders_config: TradersConfig;
-  infiltrations_config?: InfiltrationsConfig;
   exfiltrations: Exfiltrations;
   infiltrations: Infiltrations;
+  infiltrations_config?: InfiltrationsConfig;
+  exfiltrations_config?: Record<ExtractName, ExfiltrationConfig>; // TODO: validate in config-analysis
+  exfiltrations_tooltips_template?: string; // TODO: validate in config-analysis
+  offraid_positions?: Record<OffraidPositionName, OffraidPositionDefinition>; // TODO: validate in config-analysis
 };
 
 export type Config = Omit<RawConfig, 'hideout_secondary_stashes' | 'infiltrations_config'> & {
