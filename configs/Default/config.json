@@ -1245,7 +1245,9 @@
         "en": "Streets/Interchange/Woods/GZ"
       }
     },
-    "SafeRoom": {},
+    "SafeRoom": {
+      "override_tooltips_template": "$exfilDisplayName"
+    },
     "Railway": {
       "displayName": {
         "en": "Painter + Streets/Woods/Interchange"
@@ -1360,9 +1362,6 @@
         "en": "in Warehouse 17",
         "fr": "à l'entrepôt 17"
       }
-    },
-    "SafeRoom": {
-      "override_tooltips_template": "$exfilDisplayName"
     }
   }
 }

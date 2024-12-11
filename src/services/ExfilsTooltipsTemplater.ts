@@ -88,17 +88,21 @@ export class ExfilsTooltipsTemplater {
 
   private computeLocaleValue(
     config: MinimumConfigForTooltipsTemplater,
-    { exfilName, offraidPosition, locale }: ComputeLocaleValueParameter,
+    params: ComputeLocaleValueParameter,
   ): string {
-    const exfilDisplayName = this.resolveExfilDisplayName(config, exfilName, locale);
+    const exfilVanillaDisplayName = this.snapshotLocales[params.locale][params.exfilName];
+
+    const exfilDisplayName =
+      ExfilsTooltipsTemplater.resolveExfilDisplayName(config, params) ??
+      exfilVanillaDisplayName ??
+      'PTT_ERROR_NO_EXFIL_LOCALE_FOUND';
 
     const offraidPositionDisplayName = ExfilsTooltipsTemplater.resolveOffraidPositionDisplayName(
       config,
-      offraidPosition,
-      locale,
+      params,
     );
 
-    const tooltipsTemplate = ExfilsTooltipsTemplater.resolveTooltipsTemplate(config, exfilName);
+    const tooltipsTemplate = ExfilsTooltipsTemplater.resolveTooltipsTemplate(config, params);
 
     const templatedValue = tooltipsTemplate
       .replace(EXFIL_DISPLAY_NAME_VARIABLE, exfilDisplayName)
@@ -107,29 +111,22 @@ export class ExfilsTooltipsTemplater {
     return templatedValue;
   }
 
-  private resolveExfilDisplayName(
+  private static resolveExfilDisplayName(
     config: MinimumConfigForTooltipsTemplater,
-    exfilName: string,
-    locale: LocaleName,
-  ): string {
+    { exfilName, locale }: ComputeLocaleValueParameter,
+  ): string | undefined {
     const exfilConfig = config?.exfiltrations_config?.[exfilName];
     const resolvedDisplayName = ExfilsTooltipsTemplater.resolveDisplayName(
       locale,
       exfilConfig?.displayName,
     );
 
-    if (resolvedDisplayName) {
-      return resolvedDisplayName;
-    }
-
-    const vanillaResolvedValue = this.snapshotLocales[locale][exfilName];
-    return vanillaResolvedValue ?? 'PTT_ERROR_NO_EXFIL_LOCALE_FOUND';
+    return resolvedDisplayName;
   }
 
   private static resolveOffraidPositionDisplayName(
     config: MinimumConfigForTooltipsTemplater,
-    offraidPosition: string,
-    locale: LocaleName,
+    { offraidPosition, locale }: ComputeLocaleValueParameter,
   ): string {
     const offraidPositionDefinition = config.offraid_positions?.[offraidPosition];
     const resolvedDisplayName = ExfilsTooltipsTemplater.resolveDisplayName(
@@ -146,12 +143,16 @@ export class ExfilsTooltipsTemplater {
 
   private static resolveTooltipsTemplate(
     config: MinimumConfigForTooltipsTemplater,
-    exfilName: string,
+    { offraidPosition, exfilName }: ComputeLocaleValueParameter,
   ): string {
     const exfilConfig = config.exfiltrations_config?.[exfilName];
-
     if (exfilConfig?.override_tooltips_template) {
       return exfilConfig.override_tooltips_template;
+    }
+
+    const offraidPositionDefinition = config.offraid_positions?.[offraidPosition];
+    if (offraidPositionDefinition?.override_tooltips_template) {
+      return offraidPositionDefinition?.override_tooltips_template;
     }
 
     if (config.exfiltrations_tooltips_template) {

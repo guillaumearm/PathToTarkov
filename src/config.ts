@@ -147,6 +147,7 @@ export type InfiltrationsConfig = {
 };
 
 export type OffraidPositionDefinition = {
+  override_tooltips_template?: string; // this one will be used only if there is no override on exfil config
   displayName?: ByLocale<string>;
 };
 
