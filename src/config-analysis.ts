@@ -308,6 +308,11 @@ export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigV
   // 8. check for additional spawnpoints
   errors.push(...getErrorsForAdditionalSpawnpoints(config));
 
+  // 9. check for usage of "vanilla_exfils_requirements"
+  if (config.vanilla_exfils_requirements) {
+    errors.push('"vanilla_exfils_requirements" is no longer supported since version 6');
+  }
+
   return {
     errors,
     warnings,

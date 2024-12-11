@@ -568,11 +568,6 @@ export class PathToTarkovController {
       return;
     }
 
-    // TODO: move this into config-analysis
-    if (config.vanilla_exfils_requirements) {
-      this.logger.warning('Path To Tarkov: "vanilla_exfils_requirements" is no longer supported');
-    }
-
     // TODO(refactor): implement an indexBy util
     const indexedExits = locationBase.exits.reduce<Record<string, IExit | undefined>>(
       (indexed, exit) => {
