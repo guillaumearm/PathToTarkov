@@ -323,7 +323,7 @@
         "en": "Warehouse 17 at Customs",
         "es-mx": "Warehouse 17 at Customs",
         "es": "Warehouse 17 at Customs",
-        "fr": "Entrepôt 17 à la douane",
+        "fr": "Entrepôt 17 aux douanes",
         "ge": "Warehouse 17 at Customs",
         "hu": "Warehouse 17 at Customs",
         "it": "Warehouse 17 at Customs",
@@ -616,6 +616,7 @@
     },
     "66f4db5ca4958508883d700c": {
       "// Trader name": "Saria",
+      "disable_warning": true,
       "override_description": true,
       "location_description": {
         "ch": "With Peacekeeper in Bunker D2",
@@ -637,6 +638,31 @@
         "tu": "With Peacekeeper in Bunker D2"
       },
       "access_via": ["PeacekeeperHideout"]
+    },
+    "66f0eaa93f6cc015bc1f3acb": {
+      "// Trader name": "Requisitions",
+      "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "In a ruined house in Tarkov streets",
+        "cz": "In a ruined house in Tarkov streets",
+        "en": "In a ruined house in Tarkov streets",
+        "es-mx": "In a ruined house in Tarkov streets",
+        "es": "In a ruined house in Tarkov streets",
+        "fr": "Dans une maison ruinée dans les rues de Tarkov",
+        "ge": "In a ruined house in Tarkov streets",
+        "hu": "In a ruined house in Tarkov streets",
+        "it": "In a ruined house in Tarkov streets",
+        "jp": "In a ruined house in Tarkov streets",
+        "kr": "In a ruined house in Tarkov streets",
+        "pl": "In a ruined house in Tarkov streets",
+        "po": "In a ruined house in Tarkov streets",
+        "ro": "In a ruined house in Tarkov streets",
+        "ru": "In a ruined house in Tarkov streets",
+        "sk": "In a ruined house in Tarkov streets",
+        "tu": "In a ruined house in Tarkov streets"
+      },
+      "access_via": ["RuinedHouse"]
     },
     "lotus": {
       "// mod integration for lotus": true,
@@ -1081,7 +1107,7 @@
     },
     "PeacekeeperHideout": {
       "displayName": {
-        "en": "Peacekeeper"
+        "en": "Peacekeeper/Saria"
       }
     },
     "LegsHideout": {
@@ -1252,7 +1278,7 @@
     },
     "RefHideout": {
       "displayName": {
-        "en": "Customs/Shoreline"
+        "en": "Ref/Customs/Shoreline"
       }
     },
     "LighthouseCar": {
@@ -1286,7 +1312,11 @@
         "en": "Harry/Coyote"
       }
     },
-    "RuinedHouse": {},
+    "RuinedHouse": {
+      "displayName": {
+        "en": "Requisitions"
+      }
+    },
     "ExpoCP": {
       "displayName": {
         "en": "GZ/Streets"
@@ -1330,6 +1360,9 @@
         "en": "in Warehouse 17",
         "fr": "à l'entrepôt 17"
       }
+    },
+    "SafeRoom": {
+      "override_tooltips_template": "$exfilDisplayName"
     }
   }
 }
