@@ -1117,12 +1117,14 @@
     },
     "TherapistHideout": {
       "displayName": {
-        "en": "Therapist"
+        "en": "Therapist",
+        "fr": "La Toubib"
       }
     },
     "MechanicHideout": {
       "displayName": {
-        "en": "Mechanic"
+        "en": "Mechanic",
+        "fr": "Le Mécano"
       }
     },
     "ArtemHideout": {
@@ -1132,57 +1134,68 @@
     },
     "FactoryZB-016": {
       "displayName": {
-        "en": "Woods/Factory"
+        "en": "Woods/Factory",
+        "fr": "Bois/Usine"
       }
     },
     "FactoryZB-013": {
       "displayName": {
-        "en": "Customs/Factory"
+        "en": "Customs/Factory",
+        "fr": "Douanes/Usine"
       }
     },
     "FactoryZB-1012": {
       "displayName": {
-        "en": "Customs/Factory"
+        "en": "Customs/Factory",
+        "fr": "Douanes/Usine"
       }
     },
     "FactoryZB-1011": {
       "displayName": {
-        "en": "Customs/Factory"
+        "en": "Customs/Factory",
+        "fr": "Douanes/Usine"
       }
     },
     "SniperRB": {
       "displayName": {
-        "en": "Customs/Reserve/Shoreline"
+        "en": "Customs/Reserve/Shoreline",
+        "fr": "Douanes/Réserve/Littoral"
       }
     },
     "SmugglersBoat": {
       "displayName": {
-        "en": "Boat"
+        "en": "Boat",
+        "fr": "Bâteau"
       }
     },
     "RUAFCustoms": {
       "displayName": {
-        "en": "Customs/Woods"
+        "en": "Customs/Woods",
+        "fr": "Douanes/Bois"
       }
     },
     "Crossroads": {
       "displayName": {
-        "en": "Customs/Interchange/Shoreline"
+        "en": "Customs/Interchange/Shoreline",
+        "fr": "Douanes/Échangeur/Littoral"
       }
     },
     "GasGate": {
       "displayName": {
-        "en": "Customs/Woods/Factory"
+        "en": "Customs/Woods/Factory",
+        "fr": "Douanes/Bois/Usine"
       }
     },
     "TarkovRR": {
       "displayName": {
-        "en": "Painter + Customs/Interchange/Streets"
+        "en": "Painter + Customs/Interchange/Streets",
+        "fr": "Painter + Dounes/Échangeur/Rues"
       }
     },
     "MilBaseRR": {
       "displayName": {
-        "en": "Customs/Reserve"
+        "en": "Customs/Reserve",
+        "fr": "Douanes/Réserve"
       }
     },
     "MilBaseCP": {
@@ -1192,27 +1205,32 @@
     },
     "NorthUNRoadblock": {
       "displayName": {
-        "en": "Customs/Woods"
+        "en": "Customs/Woods",
+        "fr": "Douanes/Bois"
       }
     },
     "FactoryGate": {
       "displayName": {
-        "en": "Customs/Woods"
+        "en": "Customs/Woods",
+        "fr": "Douanes/Bois"
       }
     },
     "Outskirts": {
       "displayName": {
-        "en": "Priscilu + Customs/Woods/Lighthouse"
+        "en": "Priscilu + Customs/Woods/Lighthouse",
+        "fr": "Priscilu + Douanes/Bois/Phare"
       }
     },
     "UNRoadblock": {
       "displayName": {
-        "en": "Customs/Woods/Interchange"
+        "en": "Customs/Woods/Interchange",
+        "fr": "Douanes/Bois/Échangeur"
       }
     },
     "RUAFWoods": {
       "displayName": {
-        "en": "Customs/Woods"
+        "en": "Customs/Woods",
+        "fr": "Douanes/Bois"
       }
     },
     "ReserveZB-014": {
@@ -1222,27 +1240,32 @@
     },
     "HoleinWall": {
       "displayName": {
-        "en": "Customs/Reserve"
+        "en": "Customs/Reserve",
+        "fr": "Douanes/Réserve"
       }
     },
     "CPFence": {
       "displayName": {
-        "en": "Lighthouse/Reserve"
+        "en": "Lighthouse/Reserve",
+        "fr": "Phare/Réserve"
       }
     },
     "CliffDescent": {
       "displayName": {
-        "en": "Shoreline/Reserve"
+        "en": "Shoreline/Reserve",
+        "fr": "Littoral/Réserve"
       }
     },
     "Manhole": {
       "displayName": {
-        "en": "Sally + Streets/Reserve"
+        "en": "Sally + Streets/Reserve",
+        "fr": "Sally + Rues/Réserve"
       }
     },
     "CityCar": {
       "displayName": {
-        "en": "Streets/Interchange/Woods/GZ"
+        "en": "Streets/Interchange/Woods/GZ",
+        "fr": "Rues/Échangeur/Bois/Point Zero"
       }
     },
     "SafeRoom": {
@@ -1250,47 +1273,56 @@
     },
     "Railway": {
       "displayName": {
-        "en": "Painter + Streets/Woods/Interchange"
+        "en": "Painter + Streets/Woods/Interchange",
+        "fr": "Painter + Rues/Bois/Échangeur"
       }
     },
     "InterchangeScavCamp": {
       "displayName": {
-        "en": "Customs/Interchange"
+        "en": "Customs/Interchange",
+        "fr": "Douanes/Échangeur"
       }
     },
     "RoadtoCustoms": {
       "displayName": {
-        "en": "Customs/Interchange/Shoreline"
+        "en": "Customs/Interchange/Shoreline",
+        "fr": "Douanes/Échangeur/Littoral"
       }
     },
     "PierBoat": {
       "displayName": {
-        "en": "Customs/Shoreline/Lighthouse/Woods"
+        "en": "Customs/Shoreline/Lighthouse/Woods",
+        "fr": "Douanes/Littoral/Phare/Bois"
       }
     },
     "ShorelineLighthouseRoad": {
       "displayName": {
-        "en": "Shoreline/Lighthouse"
+        "en": "Shoreline/Lighthouse",
+        "fr": "Littoral/Phare"
       }
     },
     "ShorelineDormsCar": {
       "displayName": {
-        "en": "Customs/Shoreline"
+        "en": "Customs/Shoreline",
+        "fr": "Douanes/Littoral"
       }
     },
     "RefHideout": {
       "displayName": {
-        "en": "Ref/Customs/Shoreline"
+        "en": "Ref + Customs/Shoreline",
+        "fr": "Ref + Douanes/Littoral"
       }
     },
     "LighthouseCar": {
       "displayName": {
-        "en": "Reserve/Lighthouse"
+        "en": "Reserve/Lighthouse",
+        "fr": "Réserve/Phare"
       }
     },
     "LighthouseShorelinePath": {
       "displayName": {
-        "en": "Shoreline/Lighthouse"
+        "en": "Shoreline/Lighthouse",
+        "fr": "Littoral/Phare"
       }
     },
     "ArmoredTrain": {
@@ -1301,12 +1333,14 @@
     },
     "MountainPass": {
       "displayName": {
-        "en": "Shoreline/Lighthouse"
+        "en": "Shoreline/Lighthouse",
+        "fr": "Littoral/Phare"
       }
     },
     "LighthouseShorelineTunnel": {
       "displayName": {
-        "en": "Shoreline/Lighthouse"
+        "en": "Shoreline/Lighthouse",
+        "fr": "Littoral/Phare"
       }
     },
     "BasementDescent": {
@@ -1321,37 +1355,44 @@
     },
     "ExpoCP": {
       "displayName": {
-        "en": "GZ/Streets"
+        "en": "GZ/Streets",
+        "fr": "Point Zero/Rues"
       }
     },
     "KlimovStreet": {
       "displayName": {
-        "en": "GZ/Streets"
+        "en": "GZ/Streets",
+        "fr": "Point Zero/Rues"
       }
     },
     "VentShaft": {
       "displayName": {
-        "en": "Streets/Lab"
+        "en": "Streets/Lab",
+        "fr": "Rues/Labo"
       }
     },
     "SewerRiver": {
       "displayName": {
-        "en": "Streets/Lab"
+        "en": "Streets/Lab",
+        "fr": "Rues/Labo"
       }
     },
     "StylobateElevator": {
       "displayName": {
-        "en": "Streets/Lab"
+        "en": "Streets/Lab",
+        "fr": "Rues/Labo"
       }
     },
     "CrashSite": {
       "displayName": {
-        "en": "Painter + Streets/Interchange/Woods"
+        "en": "Painter + Streets/Interchange/Woods",
+        "fr": "Painter + Rues/Échangeur/Labo"
       }
     },
     "Catacombs": {
       "displayName": {
-        "en": "Streets/Lab"
+        "en": "Streets/Lab",
+        "fr": "Rues/Labo"
       }
     }
   },
