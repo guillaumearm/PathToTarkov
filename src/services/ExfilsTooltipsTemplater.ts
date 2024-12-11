@@ -146,16 +146,16 @@ export class ExfilsTooltipsTemplater {
     { offraidPosition, exfilName }: ComputeLocaleValueParameter,
   ): string {
     const exfilConfig = config.exfiltrations_config?.[exfilName];
-    if (exfilConfig?.override_tooltips_template) {
+    if (exfilConfig?.override_tooltips_template?.trim()) {
       return exfilConfig.override_tooltips_template;
     }
 
     const offraidPositionDefinition = config.offraid_positions?.[offraidPosition];
-    if (offraidPositionDefinition?.override_tooltips_template) {
+    if (offraidPositionDefinition?.override_tooltips_template?.trim()) {
       return offraidPositionDefinition?.override_tooltips_template;
     }
 
-    if (config.exfiltrations_tooltips_template) {
+    if (config.exfiltrations_tooltips_template?.trim()) {
       return config.exfiltrations_tooltips_template;
     }
 
