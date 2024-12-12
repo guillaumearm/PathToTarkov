@@ -1,6 +1,12 @@
 import { isValidExfilForMap } from './all-exfils';
 import type { ByMap } from './config';
-import { EMPTY_STASH, type Config, type MapName, type SpawnConfig } from './config';
+import {
+  EMPTY_STASH,
+  isLocalAvailable,
+  type Config,
+  type MapName,
+  type SpawnConfig,
+} from './config';
 import { ensureArray, isEmpty } from './utils';
 
 const MIN_NEEDED_MAPS = [
@@ -272,6 +278,25 @@ const getErrorsForAdditionalSpawnpoints = (config: Config): string[] => {
   return errors;
 };
 
+const getErrorsForGeneralConfig = (config: Config): string[] => {
+  const errors: string[] = [];
+
+  // check for wrong locale on `debug_exfiltrations_tooltips_locale`
+  const debugTooltipsLocale = config.debug_exfiltrations_tooltips_locale;
+  if (debugTooltipsLocale && !isLocalAvailable(debugTooltipsLocale)) {
+    errors.push(
+      `wrong locale "${debugTooltipsLocale}" set to "debug_exfiltrations_tooltips_locale"`,
+    );
+  }
+
+  // check for usage of "vanilla_exfils_requirements"
+  if (config.vanilla_exfils_requirements) {
+    errors.push('"vanilla_exfils_requirements" is no longer supported since version 6');
+  }
+
+  return errors;
+};
+
 export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigValidationResult => {
   const errors: string[] = [];
   const warnings: string[] = [];
@@ -308,10 +333,8 @@ export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigV
   // 8. check for additional spawnpoints
   errors.push(...getErrorsForAdditionalSpawnpoints(config));
 
-  // 9. check for usage of "vanilla_exfils_requirements"
-  if (config.vanilla_exfils_requirements) {
-    errors.push('"vanilla_exfils_requirements" is no longer supported since version 6');
-  }
+  // 9. check the rest of the config
+  errors.push(...getErrorsForGeneralConfig(config));
 
   return {
     errors,

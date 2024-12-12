@@ -6,8 +6,8 @@ const OFFRAID_POSITION_DISPLAY_NAME_VARIABLE = '$offraidPositionDisplayName';
 
 const DEFAULT_FALLBACK_LANGUAGE = 'en';
 
-type AllLocalesInDb = Record<string, Record<string, string>>;
-type PartialLocales = Partial<Record<string, Record<string, string>>>;
+export type AllLocalesInDb = Record<string, Record<string, string>>;
+export type PartialLocales = Partial<Record<string, Record<string, string>>>;
 
 export type MinimumConfigForTooltipsTemplater = Pick<
   Config,
@@ -52,6 +52,7 @@ export class ExfilsTooltipsTemplater {
             offraidPosition,
           };
 
+          // TODO: retrieve locale from exfilName
           localeValues[exfilName] = this.computeLocaleValue(config, computeParams);
         });
       });
@@ -90,6 +91,7 @@ export class ExfilsTooltipsTemplater {
     config: MinimumConfigForTooltipsTemplater,
     params: ComputeLocaleValueParameter,
   ): string {
+    // TODO: retrieve locale from exfilName
     const exfilVanillaDisplayName = this.snapshotLocales[params.locale][params.exfilName];
 
     const exfilDisplayName =

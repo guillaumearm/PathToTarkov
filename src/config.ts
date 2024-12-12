@@ -17,25 +17,55 @@ export type ByMap<T> = {
   terminal: T;
 };
 
-export type ByLocale<T> = {
-  ch?: T;
-  cz?: T;
-  en?: T;
-  'es-mx'?: T;
-  es?: T;
-  fr?: T;
-  ge?: T;
-  hu?: T;
-  it?: T;
-  jp?: T;
-  kr?: T;
-  pl?: T;
-  po?: T;
-  ro?: T;
-  ru?: T;
-  sk?: T;
-  tu?: T;
+type AvailableLocales<T> = {
+  ch: T;
+  cz: T;
+  en: T;
+  'es-mx': T;
+  es: T;
+  fr: T;
+  ge: T;
+  hu: T;
+  it: T;
+  jp: T;
+  kr: T;
+  pl: T;
+  po: T;
+  ro: T;
+  ru: T;
+  sk: T;
+  tu: T;
 };
+
+export type ByLocale<T> = Partial<AvailableLocales<T>>;
+
+export const INDEXED_AVAILABLE_LOCALES: AvailableLocales<true> = {
+  ch: true,
+  cz: true,
+  en: true,
+  'es-mx': true,
+  es: true,
+  fr: true,
+  ge: true,
+  hu: true,
+  it: true,
+  jp: true,
+  kr: true,
+  pl: true,
+  po: true,
+  ro: true,
+  ru: true,
+  sk: true,
+  tu: true,
+};
+
+export const isLocalAvailable = (givenLocale: string): boolean => {
+  const availableLocales: Record<string, true | undefined> = INDEXED_AVAILABLE_LOCALES;
+  const locale = givenLocale.trim().toLowerCase();
+  return Boolean(availableLocales[locale]);
+};
+
+export const AVAILABLE_LOCALES: string[] = Object.keys(INDEXED_AVAILABLE_LOCALES);
 
 type ByProfileId<T> = Record<string, T | undefined>;
 
@@ -159,6 +189,7 @@ export type ExfiltrationConfig = {
 type RawConfig = {
   enabled: boolean;
   debug?: boolean;
+  debug_exfiltrations_tooltips_locale?: string;
   override_by_profiles?: OverrideByProfiles;
   bypass_keep_found_in_raid_tweak?: boolean;
   initial_offraid_position: string;
@@ -167,7 +198,7 @@ type RawConfig = {
   hideout_multistash_enabled: boolean;
   player_scav_move_offraid_position: boolean;
   workbench_always_enabled: boolean;
-  vanilla_exfils_requirements?: boolean;
+  vanilla_exfils_requirements?: boolean; // no longer supported
   bypass_exfils_override?: boolean;
   disable_all_transits?: boolean;
   bypass_uninstall_procedure: boolean;
@@ -183,7 +214,7 @@ type RawConfig = {
   infiltrations: Infiltrations;
   infiltrations_config?: InfiltrationsConfig;
   exfiltrations_config?: Record<ExtractName, ExfiltrationConfig>; // TODO: validate in config-analysis
-  exfiltrations_tooltips_template?: string; // TODO: validate in config-analysis
+  exfiltrations_tooltips_template?: string; // TODO(config-analysis): error when unknown template variable usage is found
   offraid_positions?: Record<OffraidPositionName, OffraidPositionDefinition>; // TODO: validate in config-analysis
 };
 

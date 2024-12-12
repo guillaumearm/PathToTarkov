@@ -21,7 +21,7 @@ import {
   SPAWN_CONFIG_FILENAME,
 } from './config';
 import { EventWatcher } from './event-watcher';
-import { createStaticRoutePeeker, disableRunThrough } from './helpers';
+import { createStaticRoutePeeker } from './helpers';
 
 import { PathToTarkovController } from './path-to-tarkov-controller';
 import { purgeProfiles } from './uninstall';
@@ -149,8 +149,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       return;
     }
 
-    this.pathToTarkovController.tradersAvailabilityService.init(quests);
-
     const [api, executeOnStartAPICallbacks] = createPathToTarkovAPI(
       this.pathToTarkovController,
       this.logger,
@@ -165,20 +163,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     this.executeOnStartAPICallbacks = executeOnStartAPICallbacks;
 
-    this.pathToTarkovController.injectTooltipsInLocales(this.config);
-    this.pathToTarkovController.tradersController.initTraders(this.config);
-
-    const nbAddedTemplates =
-      this.pathToTarkovController.stashController.initSecondaryStashTemplates(
-        this.config.hideout_secondary_stashes,
-      );
-    this.debug(`${nbAddedTemplates} secondary stash templates added`);
-
-    if (!this.config.enable_run_through) {
-      disableRunThrough(db);
-      this.debug('disabled run through in-raid status');
-    }
-
+    this.pathToTarkovController.loaded(this.config);
     this.logger.success(`===> Successfully loaded ${getModDisplayName(this.packageJson, true)}`);
   }
 }
