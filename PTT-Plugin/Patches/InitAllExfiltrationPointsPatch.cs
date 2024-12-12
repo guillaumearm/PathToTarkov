@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using SPT.Reflection.Patching;
+using EFT;
 using EFT.Interactive;
 using HarmonyLib;
 
@@ -38,7 +39,7 @@ internal class InitAllExfiltrationPointsPatch : ModulePatch
     }
 
     [PatchPrefix]
-    protected static bool PatchPrefix(ref ExfiltrationControllerClass __instance, LocationExitClass[] settings, bool justLoadSettings = false, bool giveAuthority = true)
+    protected static bool PatchPrefix(ref ExfiltrationControllerClass __instance, MongoID locationId, LocationExitClass[] settings, bool justLoadSettings = false, string disabledScavExits = "", bool giveAuthority = true)
     {
         ExfiltrationPoint[] source = LocationScene.GetAllObjects<ExfiltrationPoint>(false).ToArray();
         ExfiltrationPoint[] scavExfilArr = source.Where(new Func<ExfiltrationPoint, bool>(IsScavExfil)).ToArray();
@@ -87,9 +88,11 @@ internal class InitAllExfiltrationPointsPatch : ModulePatch
             Logger.LogWarning("PMC Exfil name = " + exfiltrationPoint.Settings.Name);
             exitName = exfiltrationPoint.Settings.Name;
             LocationExitClass locationExit = settings.FirstOrDefault(new Func<LocationExitClass, bool>(NameMatches));
+            int num = Array.IndexOf(source, exfiltrationPoint) + 1;
+            MongoID mongoID = locationId.Add(num + 1);
             if (locationExit != null)
             {
-                exfiltrationPoint.LoadSettings(exfiltrationPoint.Id, locationExit, giveAuthority);
+                exfiltrationPoint.LoadSettings(mongoID, locationExit, giveAuthority);
                 if (!justLoadSettings && !RandomRange(exfiltrationPoint))
                 {
                     exfiltrationPoint.SetStatusLogged(EExfiltrationStatus.NotPresent, "ExfiltrationController.InitAllExfiltrationPoints-2");
