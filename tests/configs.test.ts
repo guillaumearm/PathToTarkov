@@ -1,18 +1,31 @@
+import { readdirSync } from 'fs';
 import path from 'path';
 import type { Config, SpawnConfig } from '../src/config';
 import { processConfig, processSpawnConfig } from '../src/config';
 import { readJsonFile } from '../src/utils';
 import { analyzeConfig } from '../src/config-analysis';
+import { CONFIG_FILENAME, SPAWN_CONFIG_FILENAME, CONFIGS_DIR } from '../src/config';
 
-const loadConfig = (dirPath: string): Config => {
-  return processConfig(readJsonFile(path.join(dirPath, 'config.json')));
+const SHARED_PLAYER_SPAWNPOINTS_NAME = SPAWN_CONFIG_FILENAME;
+
+const loadConfigs = (
+  dirPath: string,
+  rawSpawnConfig: SpawnConfig,
+): { config: Config; spawnConfig: SpawnConfig } => {
+  const config = processConfig(readJsonFile(path.join(dirPath, CONFIG_FILENAME)));
+  const spawnConfig = processSpawnConfig(rawSpawnConfig, config);
+  return { config, spawnConfig };
 };
 
-const loadSpawnConfig = (config: Config): SpawnConfig => {
-  return processSpawnConfig(readJsonFile('./configs/shared_player_spawnpoints.json'), config);
-};
+const getDirectories = (source: string) =>
+  readdirSync(source, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name);
 
 describe('PTT embedded configs', () => {
+  const rawSpawnConfig: SpawnConfig = readJsonFile(
+    path.join(CONFIGS_DIR, SHARED_PLAYER_SPAWNPOINTS_NAME),
+  );
   const originalConsole = console;
 
   beforeEach(() => {
@@ -23,53 +36,19 @@ describe('PTT embedded configs', () => {
     global.console = originalConsole;
   });
 
-  const testConfig = (dirPath: string) => {
-    const config = loadConfig(dirPath);
-    const spawnConfig = loadSpawnConfig(config);
+  void getDirectories(CONFIGS_DIR).forEach(configName => {
+    describe(`${configName} config`, () => {
+      const configPath = path.join(CONFIGS_DIR, configName);
+      const { config, spawnConfig } = loadConfigs(configPath, rawSpawnConfig);
+      const { errors, warnings } = analyzeConfig(config, spawnConfig);
 
-    const { errors, warnings } = analyzeConfig(config, spawnConfig);
+      test(`no error detected for ${configName} config`, () => {
+        expect(errors).toHaveLength(0);
+      });
 
-    if (errors.length > 0) {
-      errors.forEach(err => console.error(err));
-    }
-
-    if (warnings.length > 0) {
-      warnings.forEach(warn => console.warn(warn));
-    }
-
-    expect(errors.length).toBe(0);
-    expect(warnings.length).toBe(0);
-  };
-
-  it('should validate the default config', () => {
-    testConfig('./configs/Default');
-  });
-
-  it('should validate the ExampleOverrideByProfiles config', () => {
-    testConfig('./configs/ExampleOverrideByProfiles');
-  });
-
-  it('should validate the LegacyPathToTarkovV4 config', () => {
-    testConfig('./configs/LegacyPathToTarkovV4');
-  });
-
-  it('should validate the LegacyPathToTarkovV5 config', () => {
-    testConfig('./configs/LegacyPathToTarkovV5');
-  });
-
-  it('should validate the LinearPath config', () => {
-    testConfig('./configs/LinearPath');
-  });
-
-  it('should validate the OriginalNarcoticsConfig config', () => {
-    testConfig('./configs/OriginalNarcoticsConfig');
-  });
-
-  it('should validate the PathToTarkovReloaded config', () => {
-    testConfig('./configs/PathToTarkovReloaded');
-  });
-
-  it('should validate the DevilFlippy config', () => {
-    testConfig('./configs/DevilFlippy');
+      test(`no warning detected for ${configName} config`, () => {
+        expect(warnings).toHaveLength(0);
+      });
+    });
   });
 });

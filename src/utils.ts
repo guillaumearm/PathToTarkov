@@ -34,7 +34,7 @@ export const getModDisplayName = (packageJson: PackageJson, withVersion = false)
   return `${packageJson.displayName}`;
 };
 
-// deep clone taken on stackoverflow
+// stackoverflow deep clone
 export function deepClone<T>(item: T): T {
   if (!item) {
     return item;
