@@ -1,13 +1,18 @@
-import type { ByLocale, Config, LocaleName, MapName } from '../config';
+import {
+  AVAILABLE_LOCALES,
+  type ByLocale,
+  type Config,
+  type LocaleName,
+  type MapName,
+} from '../config';
 import { deepClone } from '../utils';
+
+const DEFAULT_FALLBACK_LANGUAGE = 'en';
 
 const EXFIL_DISPLAY_NAME_VARIABLE = '$exfilDisplayName';
 const OFFRAID_POSITION_DISPLAY_NAME_VARIABLE = '$offraidPositionDisplayName';
 
-const DEFAULT_FALLBACK_LANGUAGE = 'en';
-
-export type AllLocalesInDb = Record<string, Record<string, string>>;
-export type PartialLocales = Partial<Record<string, Record<string, string>>>;
+type AllLocalesInDb = Record<string, Record<string, string>>;
 
 export type MinimumConfigForTooltipsTemplater = Pick<
   Config,
@@ -19,13 +24,15 @@ export type LocalesMutationReport = {
   nbTotalValuesUpdated: number;
 };
 
-type ComputeLocaleValueParameter = {
+export type ComputeLocaleValueParameter = {
   locale: LocaleName;
   exfilName: string;
   offraidPosition: string;
 };
 
 export class ExfilsTooltipsTemplater {
+  public static readonly ERROR_NO_EXFIL = 'PTT_ERROR_NO_EXFIL_LOCALE_FOUND';
+
   // this is used to be sure to keep the vanilla locales even after mutations are applied to the database
   private readonly snapshotLocales: AllLocalesInDb;
 
@@ -33,8 +40,8 @@ export class ExfilsTooltipsTemplater {
     this.snapshotLocales = deepClone(allLocales);
   }
 
-  public computeLocales(config: MinimumConfigForTooltipsTemplater): PartialLocales {
-    const result: PartialLocales = {};
+  public computeLocales(config: MinimumConfigForTooltipsTemplater): Partial<AllLocalesInDb> {
+    const result: Partial<AllLocalesInDb> = {};
 
     Object.keys(this.snapshotLocales).forEach(locale => {
       const localeValues: Record<string, string> = {};
@@ -61,9 +68,25 @@ export class ExfilsTooltipsTemplater {
     return result;
   }
 
+  public debugTooltipsForLocale(
+    locale: string,
+    config: MinimumConfigForTooltipsTemplater,
+  ): Record<string, string> {
+    const partialLocales = this.computeLocales(config);
+    const mergedLocales: AllLocalesInDb = AVAILABLE_LOCALES.reduce<AllLocalesInDb>(
+      (locales, locale) => {
+        locales[locale] = {};
+        return locales;
+      },
+      {},
+    );
+    void ExfilsTooltipsTemplater.mutateLocales(mergedLocales, partialLocales);
+    return mergedLocales[locale];
+  }
+
   public static mutateLocales(
     allLocales: AllLocalesInDb,
-    partialLocales: PartialLocales,
+    partialLocales: Partial<AllLocalesInDb>,
   ): LocalesMutationReport {
     const report: LocalesMutationReport = {
       nbLocalesImpacted: 0,
@@ -97,7 +120,7 @@ export class ExfilsTooltipsTemplater {
     const exfilDisplayName =
       ExfilsTooltipsTemplater.resolveExfilDisplayName(config, params) ??
       exfilVanillaDisplayName ??
-      'PTT_ERROR_NO_EXFIL_LOCALE_FOUND';
+      ExfilsTooltipsTemplater.ERROR_NO_EXFIL;
 
     const offraidPositionDisplayName = ExfilsTooltipsTemplater.resolveOffraidPositionDisplayName(
       config,

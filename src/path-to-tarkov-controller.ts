@@ -6,7 +6,7 @@ import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { SaveServer } from '@spt/servers/SaveServer';
 
 import type { Config, ConfigGetter, MapName, Profile, SpawnConfig } from './config';
-import { AVAILABLE_LOCALES, MAPLIST, VANILLA_STASH_IDS } from './config';
+import { MAPLIST, VANILLA_STASH_IDS } from './config';
 
 import {
   changeRestrictionsInRaid,
@@ -38,7 +38,6 @@ import type { IGetBodyResponseData } from '@spt/models/eft/httpResponse/IGetBody
 import { TradersAvailabilityService } from './services/TradersAvailabilityService';
 import { fixRepeatableQuestsForPmc } from './fix-repeatable-quests';
 import { KeepFoundInRaidTweak } from './keep-fir-tweak';
-import type { AllLocalesInDb } from './services/ExfilsTooltipsTemplater';
 import { ExfilsTooltipsTemplater } from './services/ExfilsTooltipsTemplater';
 
 type IndexedLocations = Record<string, ILocationBase>;
@@ -220,18 +219,8 @@ export class PathToTarkovController {
       return;
     }
 
-    const partialLocales = this.tooltipsTemplater.computeLocales(config);
-    const mergedLocales: AllLocalesInDb = AVAILABLE_LOCALES.reduce<AllLocalesInDb>(
-      (locales, locale) => {
-        locales[locale] = {};
-        return locales;
-      },
-      {},
-    );
-    void ExfilsTooltipsTemplater.mutateLocales(mergedLocales, partialLocales);
-    const valuesForCountry = mergedLocales[locale];
-
-    this.debug(`debug exfils tooltips => ${JSON.stringify(valuesForCountry, undefined, 2)}`);
+    const localeValues = this.tooltipsTemplater.debugTooltipsForLocale(locale, config);
+    this.debug(`debug exfils tooltips => ${JSON.stringify(localeValues, undefined, 2)}`);
   }
 
   // TODO: make it dynamic (aka intercept instead of mutating the db)
