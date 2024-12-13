@@ -1,10 +1,11 @@
-import { readdirSync } from 'fs';
+import { readFileSync, readdirSync } from 'fs';
 import path from 'path';
 import type { Config, SpawnConfig } from '../src/config';
 import { processConfig, processSpawnConfig } from '../src/config';
 import { readJsonFile } from '../src/utils';
 import { analyzeConfig } from '../src/config-analysis';
 import { CONFIG_FILENAME, SPAWN_CONFIG_FILENAME, CONFIGS_DIR } from '../src/config';
+import { ExfilsTooltipsTemplater } from '../src/services/ExfilsTooltipsTemplater';
 
 const SHARED_PLAYER_SPAWNPOINTS_NAME = SPAWN_CONFIG_FILENAME;
 
@@ -26,6 +27,11 @@ describe('PTT embedded configs', () => {
   const rawSpawnConfig: SpawnConfig = readJsonFile(
     path.join(CONFIGS_DIR, SHARED_PLAYER_SPAWNPOINTS_NAME),
   );
+
+  const enLocales: Record<string, string> = JSON.parse(
+    readFileSync('./external-resources/locales_global_en.json').toString(),
+  );
+
   const originalConsole = console;
 
   beforeEach(() => {
@@ -42,12 +48,25 @@ describe('PTT embedded configs', () => {
       const { config, spawnConfig } = loadConfigs(configPath, rawSpawnConfig);
       const { errors, warnings } = analyzeConfig(config, spawnConfig);
 
-      test(`no error detected for ${configName} config`, () => {
+      test(`no error detected during config analysis`, () => {
         expect(errors).toHaveLength(0);
       });
 
-      test(`no warning detected for ${configName} config`, () => {
+      test(`no warning detected during config analysis`, () => {
         expect(warnings).toHaveLength(0);
+      });
+
+      test(`exfils tooltips are rendered without any error (english locale)`, () => {
+        const allLocales = { en: enLocales };
+        const templater = new ExfilsTooltipsTemplater(allLocales);
+
+        const localeValues = templater.debugTooltipsForLocale('en', config);
+
+        const localeKeysWithErrors = Object.entries(localeValues)
+          .filter(([_key, val]) => val.startsWith(ExfilsTooltipsTemplater.ERROR_NO_EXFIL))
+          .map(([key]) => key);
+
+        expect(localeKeysWithErrors).toHaveLength(0);
       });
     });
   });

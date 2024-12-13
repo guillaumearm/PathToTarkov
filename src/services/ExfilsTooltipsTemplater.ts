@@ -14,6 +14,33 @@ const OFFRAID_POSITION_DISPLAY_NAME_VARIABLE = '$offraidPositionDisplayName';
 
 type AllLocalesInDb = Record<string, Record<string, string>>;
 
+type LocaleKey = string;
+
+type LocaleKeysLowerCaseMapping = {
+  [localeName: string]: {
+    [lowerCasedLocaleKey: string]: LocaleKey;
+  };
+};
+
+class ExfilsLocaleResolver {
+  private readonly localeKeysMapping: LocaleKeysLowerCaseMapping = {};
+
+  constructor(allLocales: AllLocalesInDb) {
+    void Object.keys(allLocales).forEach(localeName => {
+      const localeValues: Record<string, string> = {};
+      this.localeKeysMapping[localeName] = localeValues;
+
+      void Object.keys(allLocales[localeName]).forEach(localeKey => {
+        localeValues[localeKey.toLowerCase()] = localeKey;
+      });
+    });
+  }
+
+  public retrieveKey(exfilName: string, locale: LocaleName): string {
+    return this.localeKeysMapping?.[locale]?.[exfilName.toLowerCase()] ?? exfilName;
+  }
+}
+
 export type MinimumConfigForTooltipsTemplater = Pick<
   Config,
   'exfiltrations' | 'exfiltrations_config' | 'exfiltrations_tooltips_template' | 'offraid_positions'
@@ -26,18 +53,21 @@ export type LocalesMutationReport = {
 
 export type ComputeLocaleValueParameter = {
   locale: LocaleName;
+  localeKey: string;
   exfilName: string;
   offraidPosition: string;
 };
 
 export class ExfilsTooltipsTemplater {
-  public static readonly ERROR_NO_EXFIL = 'PTT_ERROR_NO_EXFIL_LOCALE_FOUND';
+  public static readonly ERROR_NO_EXFIL = 'PTT_ERROR_EXFIL_LOCALE_NOT_FOUND';
 
   // this is used to be sure to keep the vanilla locales even after mutations are applied to the database
   private readonly snapshotLocales: AllLocalesInDb;
+  private readonly localeResolver: ExfilsLocaleResolver;
 
   constructor(allLocales: AllLocalesInDb) {
     this.snapshotLocales = deepClone(allLocales);
+    this.localeResolver = new ExfilsLocaleResolver(allLocales);
   }
 
   public computeLocales(config: MinimumConfigForTooltipsTemplater): Partial<AllLocalesInDb> {
@@ -53,14 +83,17 @@ export class ExfilsTooltipsTemplater {
         Object.keys(exfils).forEach(exfilName => {
           const offraidPosition = exfils[exfilName];
 
+          const localeName = locale as LocaleName;
+          const localeKey = this.localeResolver.retrieveKey(exfilName, localeName);
+
           const computeParams: ComputeLocaleValueParameter = {
-            locale: locale as LocaleName,
+            locale: localeName,
+            localeKey,
             exfilName,
             offraidPosition,
           };
 
-          // TODO: retrieve locale from exfilName
-          localeValues[exfilName] = this.computeLocaleValue(config, computeParams);
+          localeValues[localeKey] = this.computeLocaleValue(config, computeParams);
         });
       });
     });
@@ -114,8 +147,7 @@ export class ExfilsTooltipsTemplater {
     config: MinimumConfigForTooltipsTemplater,
     params: ComputeLocaleValueParameter,
   ): string {
-    // TODO: retrieve locale from exfilName
-    const exfilVanillaDisplayName = this.snapshotLocales[params.locale][params.exfilName];
+    const exfilVanillaDisplayName = this.snapshotLocales[params.locale]?.[params.localeKey];
 
     const exfilDisplayName =
       ExfilsTooltipsTemplater.resolveExfilDisplayName(config, params) ??

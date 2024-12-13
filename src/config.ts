@@ -111,7 +111,7 @@ export type RawStashConfig = {
   access_via: AccessVia;
 };
 
-export type LocaleName = keyof ByLocale<unknown>;
+export type LocaleName = keyof AvailableLocales<unknown>;
 
 type InsuranceConfig = {
   insurance_price_coef?: number;
