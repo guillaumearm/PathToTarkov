@@ -45,6 +45,10 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>$(PathToSPT)\EscapeFromTarkov_Data\Managed\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    
+    <Reference Include="InteractableExfilsAPI">
+      <HintPath>$(PathToSPT)\BepInEx\plugins\InteractableExfilsAPI.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <!-- <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">

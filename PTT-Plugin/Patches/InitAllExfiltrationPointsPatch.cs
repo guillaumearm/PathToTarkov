@@ -6,6 +6,7 @@ using SPT.Reflection.Patching;
 using EFT;
 using EFT.Interactive;
 using HarmonyLib;
+using System.Runtime.CompilerServices;
 
 namespace PTT.Patches;
 
