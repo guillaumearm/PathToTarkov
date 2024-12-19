@@ -337,7 +337,7 @@
       },
       "access_via": ["WoodsCustoms"]
     },
-    "gunsmith": {
+    "4e7ef752240141bca059b2ea": {
       "// mod integration for Gunsmith": true,
       "// Gunsmith is available after extracting from Tunnel (shoreline map) or Lighthouse Tunnel (lighthouse map)": true,
       "disable_warning": true,
