@@ -17,6 +17,7 @@ export const fixRepeatableQuests = (container: DependencyContainer): void => {
         repeatableQuestGenerator.generateRepeatableQuest.bind(repeatableQuestGenerator);
 
       repeatableQuestGenerator.generateRepeatableQuest = (
+        sessionId: string,
         pmcLevel: number,
         pmcTradersInfo: Record<string, ITraderInfo>,
         questTypePool: IQuestTypePool,
@@ -32,6 +33,7 @@ export const fixRepeatableQuests = (container: DependencyContainer): void => {
         });
 
         return originalGenerateRepeatableQuest(
+          sessionId,
           pmcLevel,
           clonedPmcTradersInfo,
           questTypePool,
