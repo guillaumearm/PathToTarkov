@@ -16,7 +16,7 @@ const main = async modName => {
     'rimraf dist/BepInEx',
     () => mkdirp.sync(`./dist/user/mods/${modName}`),
     () => mkdirp.sync('./dist/BepInEx/plugins'),
-    `cpr ./${PTTClientDir}/bin/Debug/netstandard2.0/${dllFileName} ./dist/BepInEx/plugins/${dllFileName} -o`,
+    `cpr ./${PTTClientDir}/bin/Debug/net471/${dllFileName} ./dist/BepInEx/plugins/${dllFileName} -o`,
     `cpr package.json ./dist/user/mods/${modName}/package.json -o`,
     `cpr dist/src ./dist/user/mods/${modName}/src -o`,
     `cpr configs ./dist/user/mods/${modName}/configs -o`,

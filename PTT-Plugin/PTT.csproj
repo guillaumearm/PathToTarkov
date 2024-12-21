@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net471</TargetFramework>
     <AssemblyName>Trap.PathToTarkov</AssemblyName>
     <Description>Client patches for Path to Tarkov</Description>
     <Version>1.1.0</Version>
@@ -48,6 +48,10 @@
     
     <Reference Include="InteractableExfilsAPI">
       <HintPath>$(PathToSPT)\BepInEx\plugins\InteractableExfilsAPI.dll</HintPath>
+    </Reference>
+
+    <Reference Include="Fika.Core">
+      <HintPath>$(PathToSPT)\BepInEx\plugins\Fika.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
 

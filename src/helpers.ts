@@ -22,7 +22,9 @@ const getPosition = (pos: SpawnPoint['Position']): PositionXYZ => {
   return pos;
 };
 
-export const PTT_INFILTRATION = 'PTT_INFILTRATION';
+// Note: this is also used by the client to know if the exfil is enabled
+// Warning: this value will be lower-cased by the client (especially in `EligibleEntryPoints` exfil client property)
+export const PTT_INFILTRATION = 'ptt_infiltration';
 
 export const isPlayerSpawnPoint = (spawnPoint: ISpawnPointParam): boolean => {
   return Boolean(spawnPoint.Categories.find(cat => cat === 'Player'));

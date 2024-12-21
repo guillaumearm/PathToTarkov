@@ -7,6 +7,7 @@ import {
   type MapName,
   type SpawnConfig,
 } from './config';
+import { parseExilTargetFromPTTConfig } from './exfils-targets';
 import { ensureArray, isEmpty } from './utils';
 
 const MIN_NEEDED_MAPS = [
@@ -106,17 +107,40 @@ const getErrorsForOffraidPositions = (config: Config): string[] => {
     );
   });
 
-  // check exfils offraid positions
+  // check exfils targets (offraid positions + ptt transit custom notation)
   Object.keys(config.exfiltrations).forEach(mapName => {
-    const offraidByExfil = config.exfiltrations[mapName as MapName];
+    const targetsByExfil = config.exfiltrations[mapName as MapName];
 
-    Object.keys(offraidByExfil).forEach(extractName => {
-      const offraidPosition = offraidByExfil[extractName];
-      if (!config.infiltrations[offraidPosition]) {
-        errors.push(
-          `wrong offraidPosition: "${offraidPosition}" in exfiltrations.${mapName}.${extractName}`,
-        );
+    Object.keys(targetsByExfil).forEach(extractName => {
+      const exfilTargets = targetsByExfil[extractName];
+
+      if (!exfilTargets || exfilTargets.length === 0) {
+        errors.push(`no offraid position specified for exfil "${extractName}"`);
+        return;
       }
+
+      exfilTargets.forEach(exfilTarget => {
+        const parsed = parseExilTargetFromPTTConfig(exfilTarget);
+        const offraidPosition = parsed.targetOffraidPosition;
+
+        if (offraidPosition && !config.infiltrations[offraidPosition]) {
+          errors.push(
+            `wrong offraidPosition: "${offraidPosition}" in exfiltrations.${mapName}.${extractName}`,
+          );
+        }
+
+        if (
+          !offraidPosition &&
+          (!parsed.transitTargetLocationId || !parsed.transitTargetLocationId)
+        ) {
+          errors.push(`cannot parse exfil target in exfiltrations.${mapName}.${extractName}`);
+        }
+
+        if (parsed.transitTargetLocationId && parsed.transitTargetSpawnPointId) {
+          // 1. TODO: check valid target location id
+          // 2. TODO: check valid spawn points for location
+        }
+      });
     });
   });
 
@@ -162,10 +186,15 @@ const getErrorsForExfils = (config: Config): string[] => {
       errors.push(`${mapName} is now allowed as a map name in "exfiltrations"`);
     }
 
-    // 2. check for map with no exfils (only when all transits are disabled)
-    if (config.disable_all_transits && isEmpty(config.exfiltrations[mapName as MapName])) {
-      errors.push(`no exfils found for map ${mapName} in "exfiltrations"`);
-    }
+    // 2. check there is at least one exfil target
+    const targetsByExfil = config.exfiltrations[mapName as MapName] ?? {};
+    Object.keys(targetsByExfil).forEach(extractName => {
+      const exfilTargets = targetsByExfil[extractName];
+
+      if (exfilTargets.length === 0) {
+        errors.push(`no exfil targets found for "exfiltrations.${mapName}.${extractName}"`);
+      }
+    });
   });
 
   // 3. check for missing maps
@@ -185,6 +214,19 @@ const getErrorsForExfils = (config: Config): string[] => {
   });
 
   return errors;
+};
+
+const getWarningsForExfils = (config: Config): string[] => {
+  const warnings: string[] = [];
+
+  Object.keys(config.exfiltrations).forEach(mapName => {
+    const noVanillaTransits = !config.enable_all_vanilla_transits;
+    if (noVanillaTransits && isEmpty(config.exfiltrations[mapName as MapName])) {
+      warnings.push(`no exfils found for map ${mapName} in "exfiltrations"`);
+    }
+  });
+
+  return warnings;
 };
 
 // Note: offraidPosition is already checked by `getErrorsForOffraidPositions`
@@ -208,7 +250,7 @@ const getErrorsSecondaryStashes = (config: Config): string[] => {
   return errors;
 };
 
-const getWarningsSecondaryStahes = (config: Config): string[] => {
+const getWarningsSecondaryStashes = (config: Config): string[] => {
   const warnings: string[] = [];
   const offraidPositions = new Set<string>();
 
@@ -322,10 +364,11 @@ export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigV
 
   // 5. checks for exfil maps
   errors.push(...getErrorsForExfils(config));
+  warnings.push(...getWarningsForExfils(config));
 
   // 6. check for secondary stashes
   errors.push(...getErrorsSecondaryStashes(config));
-  warnings.push(...getWarningsSecondaryStahes(config));
+  warnings.push(...getWarningsSecondaryStashes(config));
 
   // 7. check for infiltrations maps and spawn points
   errors.push(...getErrorsForInfils(config, spawnConfig));

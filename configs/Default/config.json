@@ -9,7 +9,7 @@
   "hideout_multistash_enabled": true,
   "player_scav_move_offraid_position": false,
   "workbench_always_enabled": true,
-  "disable_all_transits": false,
+  "enable_all_vanilla_transits": false,
   "bypass_keep_found_in_raid_tweak": false,
   "restrictions_in_raid": {
     "5449016a4bdc2d6f028b456f": {
@@ -743,16 +743,16 @@
   },
   "exfiltrations": {
     "factory4_day": {
-      "Gate 3": "FactoryZB-016",
-      "Gate m": "FactoryZB-1012",
-      "Cellars": "FactoryZB-013",
-      "Camera Bunker Door": "MechanicHideout",
-      "Gate 0": "FactoryZB-1011",
-      "Gate_o": "GasGate"
+      "Gate 3": ["FactoryZB-016", "woods.ZB-016"],
+      "Gate m": ["FactoryZB-1012", "bigmap.ZB-1012"],
+      "Cellars": ["FactoryZB-013", "bigmap.ZB-1013"],
+      "Camera Bunker Door": ["MechanicHideout"],
+      "Gate 0": ["FactoryZB-1011", "bigmap.ZB-1011"],
+      "Gate_o": ["GasGate", "bigmap.Old Gas Scav", "wodds.Factory Gate"]
     },
     "factory4_night": {
-      "Gate 3": "FactoryZB-016",
-      "Gate m": "FactoryZB-1012",
+      "Gate 3": ["FactoryZB-016", "woods.ZB-016"],
+      "Gate m": ["FactoryZB-1012", "bigmap.ZB-1012"],
       "Cellars": "FactoryZB-013",
       "Camera Bunker Door": "MechanicHideout",
       "Gate 0": "FactoryZB-1011",

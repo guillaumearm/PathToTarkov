@@ -39,6 +39,7 @@ import { TradersAvailabilityService } from './services/TradersAvailabilityServic
 import { fixRepeatableQuestsForPmc } from './fix-repeatable-quests';
 import { KeepFoundInRaidTweak } from './keep-fir-tweak';
 import { ExfilsTooltipsTemplater } from './services/ExfilsTooltipsTemplater';
+import type { RaidCache } from './event-watcher';
 
 type IndexedLocations = Record<string, ILocationBase>;
 
@@ -75,6 +76,7 @@ export class PathToTarkovController {
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
     configServer: ConfigServer,
+    private readonly getRaidCache: (sessionId: string) => RaidCache | null,
     private readonly logger: ILogger,
     private readonly debug: (data: string) => void,
   ) {
@@ -176,10 +178,10 @@ export class PathToTarkovController {
   onPlayerExtracts(params: {
     sessionId: string;
     mapName: MapName;
-    exitName: string;
+    newOffraidPosition: string;
     isPlayerScav: boolean;
-  }): string | null {
-    const { sessionId, mapName, exitName, isPlayerScav } = params;
+  }): void {
+    const { sessionId, newOffraidPosition, isPlayerScav } = params;
     const config = this.getConfig(sessionId);
 
     if (config.bypass_keep_found_in_raid_tweak) {
@@ -192,23 +194,33 @@ export class PathToTarkovController {
       );
     }
 
-    const extractsConf = config.exfiltrations[mapName];
-    const newOffraidPosition = extractsConf && exitName && extractsConf[exitName];
-
-    if (newOffraidPosition) {
-      this.updateOffraidPosition(sessionId, newOffraidPosition);
-      return newOffraidPosition;
-    }
-
-    return null;
+    this.updateOffraidPosition(sessionId, newOffraidPosition);
   }
 
   /**
    * Warning: this function will mutate the given locationBase
    */
   syncLocationBase(locationBase: ILocationBase, sessionId: string): void {
-    this.updateInfiltrationForPlayerSpawnPoints(locationBase);
-    this.updateSpawnPoints(locationBase, sessionId);
+    const raidCache = this.getRaidCache(sessionId);
+
+    if (raidCache && raidCache.exitStatus === 'Transit') {
+      // handle when a player took a vanilla transit
+      this.updateInfiltrationForPlayerSpawnPoints(locationBase);
+    }
+
+    if (raidCache && raidCache.transitTargetLocationId && raidCache.transitTargetSpawnPointId) {
+      // handle when a player took a ptt transit
+      this.updateSpawnPointsForTransit(
+        locationBase,
+        sessionId,
+        raidCache.transitTargetLocationId,
+        raidCache.transitTargetSpawnPointId,
+      );
+    } else {
+      // handle when a player took a ptt extract
+      this.updateSpawnPoints(locationBase, sessionId);
+    }
+
     this.updateLocationBaseExits(locationBase, sessionId);
     this.updateLocationBaseTransits(locationBase, sessionId);
   }
@@ -536,9 +548,47 @@ export class PathToTarkovController {
     }
   }
 
+  private updateSpawnPointsForTransit(
+    locationBase: ILocationBase,
+    sessionId: string,
+    transitTargetLocationId: string,
+    transitTargetSpawnPointId: string,
+  ): void {
+    if (!this.isLocationBaseAvailable(locationBase)) {
+      return;
+    }
+    const mapName = resolveMapNameFromLocation(locationBase.Id);
+
+    if (mapName !== transitTargetLocationId) {
+      return;
+    }
+
+    const spawnId = transitTargetSpawnPointId;
+    const spawnData =
+      this.spawnConfig[mapName as MapName] && this.spawnConfig[mapName as MapName][spawnId];
+    if (spawnData) {
+      const spawnPoint = createSpawnPoint(spawnData.Position, spawnData.Rotation, spawnId);
+
+      if (!spawnPoint.Infiltration) {
+        this.logger.warning(
+          `=> PathToTarkov: spawn '${spawnId}' has no Infiltration (player in transit)`,
+        );
+      }
+
+      locationBase.SpawnPointParams.push(spawnPoint);
+      this.debug(
+        `[${sessionId}] player spawn '${spawnId}' added for location ${mapName} (player in transit)`,
+      );
+    }
+
+    this.debug(
+      `Transit detected on map "${mapName}" via spawnpoint "${transitTargetSpawnPointId}"`,
+    );
+  }
+
   /**
    * The purpose of this function is to set the PTT Infiltration field for all player spawnpoints
-   * It will allow exfils to be available even when player took a transit
+   * It will allow exfils to be available even when player took a vanilla transit
    */
   private updateInfiltrationForPlayerSpawnPoints(locationBase: ILocationBase): void {
     if (!this.isLocationBaseAvailable(locationBase)) {
@@ -571,11 +621,8 @@ export class PathToTarkovController {
 
     const config = this.getConfig(sessionId);
 
-    if (!config.disable_all_transits) {
-      return;
-    }
-
-    if (config.disable_all_transits) {
+    const noVanillaTransits = !config.enable_all_vanilla_transits;
+    if (noVanillaTransits) {
       this.updateLocationDisableAllTransits(locationBase);
     }
   }

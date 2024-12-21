@@ -81,7 +81,7 @@ export class ExfilsTooltipsTemplater {
         const exfils = config.exfiltrations[mapName as MapName];
 
         Object.keys(exfils).forEach(exfilName => {
-          const offraidPosition = exfils[exfilName];
+          const exfilTargets = exfils[exfilName];
 
           const localeName = locale as LocaleName;
           const localeKey = this.localeResolver.retrieveKey(exfilName, localeName);
@@ -90,7 +90,7 @@ export class ExfilsTooltipsTemplater {
             locale: localeName,
             localeKey,
             exfilName,
-            offraidPosition,
+            offraidPosition: exfilTargets[0], // TODO: ignores transits
           };
 
           localeValues[localeKey] = this.computeLocaleValue(config, computeParams);

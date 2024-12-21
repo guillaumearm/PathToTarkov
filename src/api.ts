@@ -17,7 +17,7 @@ export type PathToTarkovAPI = {
 };
 
 const warnDeprecationMessage = (methodName?: string) =>
-  `PathToTarkovAPI${methodName ? '.' + methodName : ''} is used and can cause several issues during your openworld experience.`;
+  `PathToTarkovAPI${methodName ? '.' + methodName : ''} is used and can cause several issues`;
 
 // This is deprecated since PTT 5.2.0
 export const createPathToTarkovAPI = (

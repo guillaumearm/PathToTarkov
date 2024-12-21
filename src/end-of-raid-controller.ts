@@ -8,7 +8,9 @@ export type EndOfRaidPayload = {
   sessionId: string;
   locationName: string;
   exitName: string | null;
+  newOffraidPosition: string | null; // null when in transit
   isPlayerScav: boolean;
+  isTransit: boolean;
 };
 
 export type PTTInstance = {
@@ -23,7 +25,8 @@ export class EndOfRaidController {
   constructor(private ptt: PTTInstance) {}
 
   public end(payload: EndOfRaidPayload): void {
-    const { sessionId, locationName, exitName, isPlayerScav } = payload;
+    const { sessionId, locationName, exitName, newOffraidPosition, isPlayerScav, isTransit } =
+      payload;
 
     const mapName = resolveMapNameFromLocation(locationName) as MapName;
     if (!mapName) {
@@ -48,15 +51,17 @@ export class EndOfRaidController {
       return;
     }
 
-    const newOffraidPosition = this.ptt.pathToTarkovController.onPlayerExtracts({
-      sessionId,
-      mapName,
-      exitName,
-      isPlayerScav,
-    });
-
     if (newOffraidPosition) {
+      this.ptt.pathToTarkovController.onPlayerExtracts({
+        sessionId,
+        mapName,
+        newOffraidPosition,
+        isPlayerScav,
+      });
+
       this.ptt.debug(`end of raid: new offraid position ${newOffraidPosition}`);
+    } else if (isTransit) {
+      this.ptt.debug(`end of raid: transit detected`);
     } else {
       this.ptt.logger.warning(`end of raid: no offraid position found`);
     }

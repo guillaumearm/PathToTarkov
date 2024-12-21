@@ -8,21 +8,31 @@ import type { DependencyContainer } from 'tsyringe';
 import type { ILocationBase } from '@spt/models/eft/common/ILocationBase';
 import { deepClone } from './utils';
 import type { MatchCallbacks } from '@spt/callbacks/MatchCallbacks';
+import type { ExitStatus } from '@spt/models/enums/ExitStatis';
+import { parseExfilTargetFromExitName } from './exfils-targets';
 
 type EndOfRaidCallback = (payload: EndOfRaidPayload) => void;
 
-type RaidCache = {
+export type RaidCache = {
   sessionId: string | null;
   currentLocationName: string | null;
   exitName: string | null | undefined;
+  targetOffraidPosition: string | null; // used by extracts only
+  transitTargetLocationId: string | null; // used by transits only
+  transitTargetSpawnPointId: string | null; // used by transits only
   isPlayerScav: boolean | null;
+  exitStatus: ExitStatus | null;
 };
 
 const createInitialRaidCache = (sessionId: string): RaidCache => ({
   sessionId: sessionId,
   currentLocationName: null,
   exitName: undefined,
+  targetOffraidPosition: null,
+  transitTargetLocationId: null,
+  transitTargetSpawnPointId: null,
   isPlayerScav: null,
+  exitStatus: null,
 });
 
 export class EventWatcher {
@@ -36,15 +46,18 @@ export class EventWatcher {
     this.raidCaches = {};
   }
 
-  private cleanRaidCache(sessionId: string): void {
-    delete this.raidCaches[sessionId];
-  }
-
   private initRaidCache(sessionId: string): void {
+    const existingRaidCache = this.raidCaches[sessionId];
+
+    // raid cache is not resetted when player is in a map transit
+    if (existingRaidCache && existingRaidCache.exitStatus === 'Transit') {
+      return;
+    }
+
     this.raidCaches[sessionId] = createInitialRaidCache(sessionId);
   }
 
-  private getRaidCache(sessionId: string): RaidCache | null {
+  public getRaidCache(sessionId: string): RaidCache | null {
     const raidCache = this.raidCaches[sessionId];
 
     if (!raidCache) {
@@ -145,12 +158,17 @@ export class EventWatcher {
           }
 
           raidCache.sessionId = sessionId;
-          raidCache.exitName = data.results.exitName;
+          raidCache.exitStatus = data.results.result;
 
-          const exitStatus = data.results.result;
+          const parsedExfilTarget = parseExfilTargetFromExitName(data.results.exitName ?? '');
+
+          raidCache.exitName = parsedExfilTarget.exitName;
+          raidCache.targetOffraidPosition = parsedExfilTarget.targetOffraidPosition;
+          raidCache.transitTargetLocationId = parsedExfilTarget.transitTargetLocationId;
+          raidCache.transitTargetSpawnPointId = parsedExfilTarget.transitTargetSpawnPointId;
 
           this.ptt.debug(
-            `end of raid detected for exit '${data.results.exitName}' with status '${exitStatus}'`,
+            `end of raid detected for exit '${raidCache.exitName}' with status '${raidCache.exitStatus}'`,
           );
           this.runEndOfRaidCallback(sessionId);
 
@@ -166,6 +184,9 @@ export class EventWatcher {
       currentLocationName: locationName,
       isPlayerScav,
       exitName,
+      targetOffraidPosition,
+      transitTargetLocationId,
+      transitTargetSpawnPointId,
     } = this.raidCaches[sessionId];
 
     if (sessionId === null) {
@@ -184,11 +205,29 @@ export class EventWatcher {
       throw new Error('raidCache.exitName is undefined');
     }
 
+    if (!targetOffraidPosition && !transitTargetLocationId && !transitTargetSpawnPointId) {
+      throw new Error('raidCache cannot determine if we are in transit or extract (no data found)');
+    }
+
+    if (targetOffraidPosition && transitTargetLocationId && transitTargetSpawnPointId) {
+      throw new Error('raidCache cannot determine if we are in transit or extract');
+    }
+
+    if (transitTargetLocationId && !transitTargetSpawnPointId) {
+      throw new Error('raidCache.transitTargetSpawnPointId is null');
+    }
+
+    if (!transitTargetLocationId && transitTargetSpawnPointId) {
+      throw new Error('raidCache.transitTargetLocationId is null');
+    }
+
     return {
       sessionId,
       locationName,
       isPlayerScav,
       exitName,
+      newOffraidPosition: targetOffraidPosition,
+      isTransit: !targetOffraidPosition,
     };
   }
 
@@ -199,8 +238,6 @@ export class EventWatcher {
         this.endOfRaidCallback(endOfRaidPayload);
       } catch (error: any) {
         this.ptt.logger.error(`Path To Tarkov Error: ${error.message}`);
-      } finally {
-        this.cleanRaidCache(sessionId);
       }
     } else {
       this.ptt.logger.error('Path To Tarkov Error: no endOfRaidCallback on EventWatcher!');
@@ -218,7 +255,6 @@ export class EventWatcher {
   public register(staticRoutePeeker: StaticRoutePeeker, container: DependencyContainer): void {
     this.watchOnGameStart(staticRoutePeeker);
     this.watchOnProfileCreated(staticRoutePeeker);
-    // this.watchSave(staticRoutePeeker);
     this.watchStartOfRaid(container);
     this.watchEndOfRaid(container);
 

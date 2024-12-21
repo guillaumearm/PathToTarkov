@@ -1,6 +1,6 @@
 using EFT;
 
-namespace PTT.Utils;
+namespace PTT.Helpers;
 
 internal class Trader
 {
