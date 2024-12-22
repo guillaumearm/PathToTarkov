@@ -106,29 +106,6 @@ public class ExfilPromptService(
             }
 
         });
-
-
-        // TODO: remove this part
-        string mapId = "bigmap";
-        string actionName = $"Transit to {mapId}";
-        string customExfilName = $"{exfil.Settings.Name}.{mapId}.MY_CUSTOM_SPAWN_POINT";
-
-        var transitAction = new CustomExfilAction(actionName, false, () =>
-        {
-            bool successfullyTransited = FikaCustomExfilService.TransitTo(mapId, customExfilName);
-
-            if (successfullyTransited)
-            {
-                Logger.LogInfo("[PTT] successfully transited");
-            }
-            else
-            {
-                Logger.LogError("[PTT] cannot transit");
-            }
-        });
-
-        actions.Add(transitAction);
-
         return new OnActionsAppliedResult(actions);
     }
 
