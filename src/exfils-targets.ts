@@ -37,11 +37,13 @@ export const getExfilsTargets = (config: Config, mapName: MapName): ExfilsTarget
 
   void Object.keys(exfilsConfig).forEach(exfilName => {
     const targets = ensureArray(exfilsConfig[exfilName]).map<ExfilTarget>(targetValue => {
+      const parsed = parseExilTargetFromPTTConfig(targetValue);
+
       return {
-        isTransit: false, // TODO
-        offraidPosition: targetValue,
-        transitMapId: '', // TODO
-        transitSpawnPointId: '', // TODO
+        isTransit: Boolean(!parsed.targetOffraidPosition),
+        offraidPosition: parsed.targetOffraidPosition ?? '',
+        transitMapId: parsed.transitTargetLocationId ?? '',
+        transitSpawnPointId: parsed.transitTargetSpawnPointId ?? '',
       };
     });
 
