@@ -18,7 +18,7 @@ export type RaidCache = {
   currentLocationName: string | null;
   exitName: string | null | undefined;
   targetOffraidPosition: string | null; // used by extracts only
-  transitTargetLocationId: string | null; // used by transits only
+  transitTargetLocationId: string | null; // used by transits only (TODO: rename to transitTargetMapName)
   transitTargetSpawnPointId: string | null; // used by transits only
   isPlayerScav: boolean | null;
   exitStatus: ExitStatus | null;

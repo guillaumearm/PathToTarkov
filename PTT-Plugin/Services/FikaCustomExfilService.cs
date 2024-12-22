@@ -56,7 +56,7 @@ public static class FikaCustomExfilService
             }
         };
 
-        // TODO: check if it's needed
+        // TODO: remove this because it look like it's not used
         // coopGame.ExitLocation = customExfilName;
         coopGame.Extract(coopPlayer, null, tp);
         return true;

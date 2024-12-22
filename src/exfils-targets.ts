@@ -1,5 +1,5 @@
 import type { Config, MapName } from './config';
-import { resolveMapNameFromLocation } from './map-name-resolver';
+import { resolveLocationIdFromMapName, resolveMapNameFromLocation } from './map-name-resolver';
 import { ensureArray } from './utils';
 
 // Warning: This type should be the same than the corresponding client type
@@ -42,7 +42,7 @@ export const getExfilsTargets = (config: Config, mapName: MapName): ExfilsTarget
       return {
         isTransit: Boolean(!parsed.targetOffraidPosition),
         offraidPosition: parsed.targetOffraidPosition ?? '',
-        transitMapId: parsed.transitTargetLocationId ?? '',
+        transitMapId: resolveLocationIdFromMapName(parsed.transitTargetLocationId ?? ''),
         transitSpawnPointId: parsed.transitTargetSpawnPointId ?? '',
       };
     });
@@ -55,7 +55,7 @@ export const getExfilsTargets = (config: Config, mapName: MapName): ExfilsTarget
 
 type ParsedExfilTarget = {
   targetOffraidPosition: string | null; // is null on transit
-  transitTargetLocationId: string | null;
+  transitTargetLocationId: string | null; // TODO: rename to transitTargetMapName
   transitTargetSpawnPointId: string | null;
 };
 
