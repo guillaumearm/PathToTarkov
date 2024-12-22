@@ -15,19 +15,6 @@ public class ExfilPromptService(
     ExfilsTargetsService exfilsTargetsService
 )
 {
-    // Warning: the "ptt_infiltration" value provided by the server is lower-cased by the client at some point
-    private const string PTT_INFILTRATION = "ptt_infiltration";
-
-    // This is not used anymore since ExfilsTargets
-    // TODO: remove this
-    // TODO: change comments on server-side (search for PTT_INFILTRATION)
-    static private bool IsPTTEntryPoint(ExfiltrationPoint exfil)
-    {
-
-        string foundEntryPoint = exfil.EligibleEntryPoints.FirstOrDefault(ep => ep == PTT_INFILTRATION);
-        return foundEntryPoint != null;
-    }
-
     public void InitPromptHandlers()
     {
         // requires manual activation (no auto-extract)
