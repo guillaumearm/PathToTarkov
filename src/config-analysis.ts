@@ -203,8 +203,12 @@ const getErrorsForExfils = (config: Config): string[] => {
     // 2. check there is at least one exfil target
     const targetsByExfil = config.exfiltrations[mapName as MapName] ?? {};
     Object.keys(targetsByExfil).forEach(extractName => {
-      const exfilTargets = targetsByExfil[extractName];
+      // 2bis. check there is no "." characters in given extractName
+      if (extractName.indexOf('.') !== -1) {
+        errors.push(`bad extract name "${extractName}": the "." character is forbidden`);
+      }
 
+      const exfilTargets = targetsByExfil[extractName];
       if (exfilTargets.length === 0) {
         errors.push(`no exfil targets found for "exfiltrations.${mapName}.${extractName}"`);
       }
@@ -284,15 +288,22 @@ const getWarningsSecondaryStashes = (config: Config): string[] => {
 const getErrorsForInfils = (config: Config, spawnConfig: SpawnConfig): string[] => {
   const errors: string[] = [];
 
-  Object.values(config.infiltrations).forEach(spawnPointsByMap => {
+  Object.keys(config.infiltrations).forEach(offraidPosition => {
+    // 1. check offraidPosition format
+    if (offraidPosition.indexOf('.') !== -1) {
+      errors.push(`bad offraid position name "${offraidPosition}": the "." character is forbidden`);
+    }
+
+    const spawnPointsByMap = config.infiltrations[offraidPosition];
+
     Object.keys(spawnPointsByMap).forEach(mapName => {
-      // 1. check for map validity
+      // 2. check for map validity
       if (!ALLOWED_MAPS.includes(mapName)) {
         errors.push(`${mapName} is now allowed as a map name in "infiltrations"`);
         return;
       }
 
-      // 2. check for existing spawnpoints for given map (in player_spawnpoints.json)
+      // 3. check for existing spawnpoints for given map (in player_spawnpoints.json)
       if (!spawnConfig[mapName as MapName]) {
         errors.push(`no spawn points found for map ${mapName} in player_spawnpoints.json`);
         return;
@@ -353,6 +364,23 @@ const getErrorsForGeneralConfig = (config: Config): string[] => {
   return errors;
 };
 
+const getErrorsForSpawnConfig = (spawnConfig: SpawnConfig): string[] => {
+  const errors: string[] = [];
+
+  Object.keys(spawnConfig).forEach(mapName => {
+    const spawns = spawnConfig[mapName as MapName];
+    Object.keys(spawns).forEach(spawnPointName => {
+      if (spawnPointName.indexOf('.') !== -1) {
+        errors.push(
+          `Invalid name for spawnpoint "${spawnPointName}": the "." character is forbidden`,
+        );
+      }
+    });
+  });
+
+  return errors;
+};
+
 export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigValidationResult => {
   const errors: string[] = [];
   const warnings: string[] = [];
@@ -392,6 +420,9 @@ export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigV
 
   // 9. check the rest of the config
   errors.push(...getErrorsForGeneralConfig(config));
+
+  // 10. check the spawn config
+  errors.push(...getErrorsForSpawnConfig(spawnConfig));
 
   return {
     errors,
