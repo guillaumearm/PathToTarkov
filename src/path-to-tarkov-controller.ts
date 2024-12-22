@@ -575,7 +575,8 @@ export class PathToTarkovController {
         );
       }
 
-      locationBase.SpawnPointParams.push(spawnPoint);
+      locationBase.SpawnPointParams = [spawnPoint];
+
       this.debug(
         `[${sessionId}] player spawn '${spawnId}' added for location ${mapName} (player in transit)`,
       );
@@ -630,15 +631,9 @@ export class PathToTarkovController {
   private updateLocationDisableAllTransits(locationBase: ILocationBase): void {
     const transits = locationBase.transits ?? [];
 
-    let nbTransitsWiped = 0;
     transits.forEach(transit => {
       transit.active = false;
-      nbTransitsWiped += 1;
     });
-
-    if (nbTransitsWiped) {
-      this.debug(`${nbTransitsWiped} transits disabled for map "${locationBase.Name}"`);
-    }
   }
 
   private updateLocationBaseExits(locationBase: ILocationBase, sessionId: string): void {

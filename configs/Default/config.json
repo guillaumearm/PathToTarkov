@@ -753,22 +753,22 @@
     "factory4_night": {
       "Gate 3": ["FactoryZB-016", "woods.ZB-016"],
       "Gate m": ["FactoryZB-1012", "bigmap.ZB-1012"],
-      "Cellars": "FactoryZB-013",
-      "Camera Bunker Door": "MechanicHideout",
-      "Gate 0": "FactoryZB-1011",
-      "Gate_o": "GasGate"
+      "Cellars": ["FactoryZB-013", "bigmap.ZB-1013"],
+      "Camera Bunker Door": ["MechanicHideout"],
+      "Gate 0": ["FactoryZB-1011", "bigmap.ZB-1011"],
+      "Gate_o": ["GasGate", "bigmap.Old Gas Scav", "woods.Factory Gate"]
     },
     "bigmap": {
       "Military Checkpoint": "Outskirts",
       "EXFIL_ZB013": "FactoryZB-013",
       "ZB-1012": "FactoryZB-1012",
-      "ZB-1011": "FactoryZB-1011",
+      "ZB-1011": ["FactoryZB-1011", "factory4_day.Gate 0"],
       "Dorms V-Ex": "ShorelineDormsCar",
       "Sniper Roadblock": "SniperRB",
       "Smuggler's Boat": "SmugglersBoat",
       "RUAF Roadblock": "RUAFCustoms",
       "Crossroads": "Crossroads",
-      "Old Azs Gate": "GasGate",
+      "Old Azs Gate": ["GasGate", "factory4_day.Courtyard"],
       "Railroad To Tarkov": "TarkovRR",
       "Shack": "MilBaseCP",
       "Warehouse 17": "SkierHideout",
