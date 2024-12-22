@@ -1,3 +1,4 @@
+import path from 'path';
 import type { DependencyContainer } from 'tsyringe';
 
 import type { IPostSptLoadMod } from '@spt/models/external/IPostSptLoadMod';
@@ -9,7 +10,7 @@ import type { SaveServer } from '@spt/servers/SaveServer';
 import type { StaticRouterModService } from '@spt/services/mod/staticRouter/StaticRouterModService';
 
 import { createPathToTarkovAPI } from './api';
-import type { Config, PathToTarkovReloadedTooltipsConfig, SpawnConfig, UserConfig } from './config';
+import type { Config, SpawnConfig } from './config';
 import {
   CONFIG_FILENAME,
   CONFIGS_DIR,
@@ -20,7 +21,7 @@ import {
   SPAWN_CONFIG_FILENAME,
 } from './config';
 import { EventWatcher } from './event-watcher';
-import { createStaticRoutePeeker, disableRunThrough } from './helpers';
+import { createStaticRoutePeeker } from './helpers';
 
 import { PathToTarkovController } from './path-to-tarkov-controller';
 import { purgeProfiles } from './uninstall';
@@ -28,26 +29,14 @@ import type { PackageJson } from './utils';
 import { getModDisplayName, noop, readJsonFile } from './utils';
 import { EndOfRaidController } from './end-of-raid-controller';
 import { fixRepeatableQuests } from './fix-repeatable-quests';
-import { pathToTarkovReloadedTooltipsConfigCompat } from './pttr-tooltips';
-import path from 'path';
+
 import { analyzeConfig } from './config-analysis';
 import { TradersAvailabilityService } from './services/TradersAvailabilityService';
-
-const getTooltipsConfig = (
-  userConfig: UserConfig,
-): PathToTarkovReloadedTooltipsConfig | undefined => {
-  try {
-    return require(path.join(CONFIGS_DIR, userConfig.selectedConfig, 'Tooltips.json'));
-  } catch (_err) {
-    return undefined;
-  }
-};
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;
   private config: Config;
   private spawnConfig: SpawnConfig;
-  private tooltipsConfig: PathToTarkovReloadedTooltipsConfig | undefined;
   public logger: ILogger;
   public debug: (data: string) => void;
   public container: DependencyContainer;
@@ -63,10 +52,9 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       readJsonFile(path.join(CONFIGS_DIR, userConfig.selectedConfig, CONFIG_FILENAME)),
     );
     this.spawnConfig = processSpawnConfig(
-      readJsonFile(path.join(CONFIGS_DIR, userConfig.selectedConfig, SPAWN_CONFIG_FILENAME)),
+      readJsonFile(path.join(CONFIGS_DIR, SPAWN_CONFIG_FILENAME)),
+      this.config,
     );
-
-    this.tooltipsConfig = getTooltipsConfig(userConfig);
 
     this.logger = container.resolve<ILogger>('WinstonLogger');
     this.debug = this.config.debug
@@ -161,13 +149,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       return;
     }
 
-    this.pathToTarkovController.tradersAvailabilityService.init(quests);
-
-    if (this.tooltipsConfig) {
-      pathToTarkovReloadedTooltipsConfigCompat(db, this.tooltipsConfig);
-      this.debug('injected legacy PTTR Tooltips.json file');
-    }
-
     const [api, executeOnStartAPICallbacks] = createPathToTarkovAPI(
       this.pathToTarkovController,
       this.logger,
@@ -182,19 +163,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     this.executeOnStartAPICallbacks = executeOnStartAPICallbacks;
 
-    this.pathToTarkovController.tradersController.initTraders(this.config);
-
-    const nbAddedTemplates =
-      this.pathToTarkovController.stashController.initSecondaryStashTemplates(
-        this.config.hideout_secondary_stashes,
-      );
-    this.debug(`${nbAddedTemplates} secondary stash templates added`);
-
-    if (!this.config.enable_run_through) {
-      disableRunThrough(db);
-      this.debug('disabled run through in-raid status');
-    }
-
+    this.pathToTarkovController.loaded(this.config);
     this.logger.success(`===> Successfully loaded ${getModDisplayName(this.packageJson, true)}`);
   }
 }

@@ -13,6 +13,7 @@ import {
   checkAccessVia,
   createExitPoint,
   createSpawnPoint,
+  disableRunThrough,
   isIgnoredArea,
   isPlayerSpawnPoint,
   PTT_INFILTRATION,
@@ -37,7 +38,7 @@ import type { IGetBodyResponseData } from '@spt/models/eft/httpResponse/IGetBody
 import { TradersAvailabilityService } from './services/TradersAvailabilityService';
 import { fixRepeatableQuestsForPmc } from './fix-repeatable-quests';
 import { KeepFoundInRaidTweak } from './keep-fir-tweak';
-// import type { LocationCallbacks } from '@spt/callbacks/LocationCallbacks';
+import { ExfilsTooltipsTemplater } from './services/ExfilsTooltipsTemplater';
 
 type IndexedLocations = Record<string, ILocationBase>;
 
@@ -59,17 +60,17 @@ const getIndexedLocations = (locations: ILocations): IndexedLocations => {
 };
 
 export class PathToTarkovController {
-  public stashController: StashController;
   public tradersController: TradersController;
-
+  public getConfig: ConfigGetter;
   // configs are indexed by sessionId
   private configCache: Record<string, Config> = {};
-  public getConfig: ConfigGetter;
+  private stashController: StashController;
+  private tooltipsTemplater: ExfilsTooltipsTemplater | undefined;
 
   constructor(
     private readonly baseConfig: Config,
     public spawnConfig: SpawnConfig,
-    public tradersAvailabilityService: TradersAvailabilityService,
+    private tradersAvailabilityService: TradersAvailabilityService,
     private readonly container: DependencyContainer,
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
@@ -101,6 +102,37 @@ export class PathToTarkovController {
       this.logger,
     );
     this.overrideControllers();
+  }
+
+  loaded(config: Config): void {
+    const allLocales = this.db.getTables()?.locales?.global;
+    const quests = this.db.getTables()?.templates?.quests;
+
+    if (!quests) {
+      throw new Error('Path To Tarkov: no quests found in db');
+    }
+
+    if (!allLocales) {
+      throw new Error('Path To Tarkov: no locales found in db');
+    }
+
+    this.tooltipsTemplater = new ExfilsTooltipsTemplater(allLocales);
+
+    this.tradersAvailabilityService.init(quests);
+    this.injectTooltipsInLocales(config);
+    this.tradersController.initTraders(config);
+
+    const nbAddedTemplates = this.stashController.initSecondaryStashTemplates(
+      config.hideout_secondary_stashes,
+    );
+    this.debug(`${nbAddedTemplates} secondary stash templates added`);
+
+    if (!config.enable_run_through) {
+      disableRunThrough(this.db);
+      this.debug('disabled run through in-raid status');
+    }
+
+    this.debugExfiltrationsTooltips(config);
   }
 
   setConfig(config: Config, sessionId: string): void {
@@ -179,6 +211,37 @@ export class PathToTarkovController {
     this.updateSpawnPoints(locationBase, sessionId);
     this.updateLocationBaseExits(locationBase, sessionId);
     this.updateLocationBaseTransits(locationBase, sessionId);
+  }
+
+  private debugExfiltrationsTooltips(config: Config): void {
+    const locale = config.debug_exfiltrations_tooltips_locale;
+    if (!locale || !this.tooltipsTemplater) {
+      return;
+    }
+
+    const localeValues = this.tooltipsTemplater.debugTooltipsForLocale(locale, config);
+    this.debug(`debug exfils tooltips => ${JSON.stringify(localeValues, undefined, 2)}`);
+  }
+
+  // TODO: make it dynamic (aka intercept instead of mutating the db)
+  private injectTooltipsInLocales(config: Config): void {
+    const allLocales = this.db.getTables()?.locales?.global;
+
+    if (!allLocales) {
+      throw new Error('Path To Tarkov: no locales found in db');
+    }
+
+    if (!this.tooltipsTemplater) {
+      throw new Error('Path To Tarkov: tooltips templater is missing');
+    }
+
+    const partialLocales = this.tooltipsTemplater.computeLocales(config);
+    const report = ExfilsTooltipsTemplater.mutateLocales(allLocales, partialLocales);
+
+    const nbValuesUpdated = report.nbTotalValuesUpdated / report.nbLocalesImpacted;
+    this.debug(
+      `${nbValuesUpdated} extract tooltip values updated for ${report.nbLocalesImpacted} locales (total of ${report.nbTotalValuesUpdated})`,
+    );
   }
 
   private getRespawnOffraidPosition = (sessionId: string): string => {
@@ -299,7 +362,7 @@ export class PathToTarkovController {
         if (gridProps) {
           gridProps.cellsV = size;
         } else {
-          throw new Error('Path To  Tarkov: cannot set size for custom stash');
+          throw new Error('Path To Tarkov: cannot set size for custom stash');
         }
       });
 
@@ -547,12 +610,6 @@ export class PathToTarkovController {
 
     if (extractPoints.length === 0) {
       this.logger.error(`Path To Tarkov: no exfils found for map '${mapName}'!`);
-      return;
-    }
-
-    // TODO: move this into config-analysis
-    if (config.vanilla_exfils_requirements) {
-      this.logger.error('Path To Tarkov: "vanilla_exfils_requirements" is no longer supported');
       return;
     }
 

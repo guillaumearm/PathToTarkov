@@ -2,7 +2,7 @@ import type { ISptProfile } from '@spt/models/eft/profile/ISptProfile';
 import { join } from 'path';
 import { deepClone, fileExists, getPTTMongoId, readJsonFile, writeJsonFile } from './utils';
 
-type ByMap<T> = {
+export type ByMap<T> = {
   factory4_day: T;
   factory4_night: T;
   bigmap: T;
@@ -16,6 +16,56 @@ type ByMap<T> = {
   sandbox_high: T;
   terminal: T;
 };
+
+type AvailableLocales<T> = {
+  ch: T;
+  cz: T;
+  en: T;
+  'es-mx': T;
+  es: T;
+  fr: T;
+  ge: T;
+  hu: T;
+  it: T;
+  jp: T;
+  kr: T;
+  pl: T;
+  po: T;
+  ro: T;
+  ru: T;
+  sk: T;
+  tu: T;
+};
+
+export type ByLocale<T> = Partial<AvailableLocales<T>>;
+
+export const INDEXED_AVAILABLE_LOCALES: AvailableLocales<true> = {
+  ch: true,
+  cz: true,
+  en: true,
+  'es-mx': true,
+  es: true,
+  fr: true,
+  ge: true,
+  hu: true,
+  it: true,
+  jp: true,
+  kr: true,
+  pl: true,
+  po: true,
+  ro: true,
+  ru: true,
+  sk: true,
+  tu: true,
+};
+
+export const isLocalAvailable = (givenLocale: string): boolean => {
+  const availableLocales: Record<string, true | undefined> = INDEXED_AVAILABLE_LOCALES;
+  const locale = givenLocale.trim().toLowerCase();
+  return Boolean(availableLocales[locale]);
+};
+
+export const AVAILABLE_LOCALES: string[] = Object.keys(INDEXED_AVAILABLE_LOCALES);
 
 type ByProfileId<T> = Record<string, T | undefined>;
 
@@ -32,7 +82,7 @@ export type PositionXYZ = {
 export type SpawnPointGenericPosition = [number, number, number] | PositionXYZ;
 
 /**
- * player_spawnpoints.json
+ * shared_player_spawnpoints.json
  */
 export type SpawnPoint = {
   Position: SpawnPointGenericPosition;
@@ -61,23 +111,7 @@ export type RawStashConfig = {
   access_via: AccessVia;
 };
 
-type AllLocales<T> = {
-  ch?: T;
-  cz?: T;
-  en?: T;
-  'es-mx'?: T;
-  es?: T;
-  fr?: T;
-  ge?: T;
-  hu?: T;
-  it?: T;
-  jp?: T;
-  kr?: T;
-  pl?: T;
-  po?: T;
-};
-
-export type LocaleName = keyof AllLocales<unknown>;
+export type LocaleName = keyof AvailableLocales<unknown>;
 
 type InsuranceConfig = {
   insurance_price_coef?: number;
@@ -98,7 +132,7 @@ type RepairConfig = {
 type StaticTraderConfig = {
   disable_warning?: boolean;
   override_description?: boolean;
-  location_description?: AllLocales<string>;
+  location_description?: ByLocale<string>;
   insurance_always_enabled?: boolean;
   insurance_config?: InsuranceConfig;
   repair_always_enabled?: boolean;
@@ -115,15 +149,15 @@ type TraderConfig = StaticTraderConfig & {
 export type TradersConfig = Record<string, TraderConfig>;
 
 type SpawnPointName = string;
-type OffraidPosition = string;
+type OffraidPositionName = string;
 type ExtractName = string;
 
 type Exfiltrations = ByMap<{
-  [extractName: ExtractName]: OffraidPosition;
+  [extractName: ExtractName]: OffraidPositionName;
 }>;
 
 type Infiltrations = {
-  [offraidPosition: OffraidPosition]: ByMap<SpawnPointName[]>;
+  [offraidPosition: OffraidPositionName]: ByMap<SpawnPointName[]>;
 };
 
 export type OffraidRegenConfig = {
@@ -138,9 +172,24 @@ export type OverrideByProfiles = ByProfileId<{
   hideout_main_stash_access_via?: AccessVia;
 }>;
 
+export type InfiltrationsConfig = {
+  additional_player_spawnpoints?: Partial<SpawnConfig>;
+};
+
+export type OffraidPositionDefinition = {
+  override_tooltips_template?: string; // this one will be used only if there is no override on exfil config
+  displayName?: ByLocale<string>;
+};
+
+export type ExfiltrationConfig = {
+  override_tooltips_template?: string;
+  displayName?: ByLocale<string>;
+};
+
 type RawConfig = {
   enabled: boolean;
   debug?: boolean;
+  debug_exfiltrations_tooltips_locale?: string;
   override_by_profiles?: OverrideByProfiles;
   bypass_keep_found_in_raid_tweak?: boolean;
   initial_offraid_position: string;
@@ -149,7 +198,7 @@ type RawConfig = {
   hideout_multistash_enabled: boolean;
   player_scav_move_offraid_position: boolean;
   workbench_always_enabled: boolean;
-  vanilla_exfils_requirements?: boolean;
+  vanilla_exfils_requirements?: boolean; // no longer supported
   bypass_exfils_override?: boolean;
   disable_all_transits?: boolean;
   bypass_uninstall_procedure: boolean;
@@ -163,19 +212,15 @@ type RawConfig = {
   traders_config: TradersConfig;
   exfiltrations: Exfiltrations;
   infiltrations: Infiltrations;
+  infiltrations_config?: InfiltrationsConfig;
+  exfiltrations_config?: Record<ExtractName, ExfiltrationConfig>; // TODO: validate in config-analysis
+  exfiltrations_tooltips_template?: string; // TODO(config-analysis): error when unknown template variable usage is found
+  offraid_positions?: Record<OffraidPositionName, OffraidPositionDefinition>; // TODO: validate in config-analysis
 };
 
-export type Config = Omit<RawConfig, 'hideout_secondary_stashes'> & {
+export type Config = Omit<RawConfig, 'hideout_secondary_stashes' | 'infiltrations_config'> & {
   hideout_secondary_stashes: StashConfig[];
-};
-
-export type PathToTarkovReloadedTooltipsConfig = {
-  language?: string;
-  moddedTraderCompat?: boolean;
-  additionalLocalesToggle?: boolean;
-  moddedTraderExtracts?: string[];
-  localesToChangeAdditional?: string[];
-  localesToChange?: string[];
+  infiltrations_config: InfiltrationsConfig;
 };
 
 export type UserConfig = {
@@ -197,7 +242,7 @@ export const CONFIGS_DIR = join(__dirname, '../configs');
 export const USER_CONFIG_PATH = join(CONFIGS_DIR, 'UserConfig.json');
 
 export const CONFIG_FILENAME = 'config.json';
-export const SPAWN_CONFIG_FILENAME = 'player_spawnpoints.json';
+export const SPAWN_CONFIG_FILENAME = 'shared_player_spawnpoints.json';
 
 export const PRAPOR_ID = '54cb50c76803fa8b248b4571';
 export const FENCE_ID = '579dc571d53a0658a154fbec';
@@ -255,7 +300,7 @@ export const MAPLIST = [
 ];
 
 // sandbox_high is a special map for high level players (> 20)
-const prepareGroundZeroHigh = <T>(maps: ByMap<T>): ByMap<T> => {
+const prepareGroundZeroHighPartial = <T>(maps: Partial<ByMap<T>>): Partial<ByMap<T>> => {
   if (maps.sandbox && !maps.sandbox_high) {
     return {
       ...maps,
@@ -264,6 +309,10 @@ const prepareGroundZeroHigh = <T>(maps: ByMap<T>): ByMap<T> => {
   }
 
   return maps;
+};
+
+const prepareGroundZeroHigh = <T>(maps: ByMap<T>): ByMap<T> => {
+  return prepareGroundZeroHighPartial(maps) as ByMap<T>;
 };
 
 export const processConfig = (originalConfig: RawConfig): Config => {
@@ -278,15 +327,48 @@ export const processConfig = (originalConfig: RawConfig): Config => {
   });
 
   const stashConfigs: StashConfig[] = config.hideout_secondary_stashes.map(toStashConfig);
+  const infiltrationsConfig = config.infiltrations_config ?? {};
 
   return {
     ...config,
     hideout_secondary_stashes: stashConfigs,
+    infiltrations_config: infiltrationsConfig,
   };
 };
 
-export const processSpawnConfig = (spawnConfig: SpawnConfig): SpawnConfig => {
-  return prepareGroundZeroHigh(spawnConfig);
+const mergeAdditionalSpawnpoints = (
+  spawnConfig: SpawnConfig,
+  additionalSpawnConfig: Partial<SpawnConfig>,
+): SpawnConfig => {
+  const clonedSpawnConfig = deepClone(spawnConfig);
+
+  Object.keys(additionalSpawnConfig).forEach(mapName => {
+    const infilConfig = additionalSpawnConfig[mapName as MapName];
+    const spawnPoints = clonedSpawnConfig[mapName as MapName];
+
+    if (!infilConfig || !spawnPoints) {
+      return;
+    }
+
+    Object.keys(infilConfig).forEach(spawnPointName => {
+      const spawnPoint = infilConfig[spawnPointName];
+      const spawnPoints = clonedSpawnConfig[mapName as MapName];
+
+      if (spawnPoint) {
+        spawnPoints[spawnPointName] = spawnPoint;
+      }
+    });
+  });
+
+  return clonedSpawnConfig;
+};
+
+export const processSpawnConfig = (spawnConfig: SpawnConfig, config: Config): SpawnConfig => {
+  const additionalPlayerSpawnpoints =
+    config.infiltrations_config?.additional_player_spawnpoints ?? {};
+
+  const mergedConfig = mergeAdditionalSpawnpoints(spawnConfig, additionalPlayerSpawnpoints);
+  return prepareGroundZeroHigh(mergedConfig);
 };
 
 export const getUserConfig = (): UserConfig => {

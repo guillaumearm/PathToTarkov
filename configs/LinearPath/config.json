@@ -276,11 +276,11 @@
   "exfiltrations": {
     "factory4_day": {
       "Gate 3": "MechanicStash",
-      "Office Window": "JaegerStash"
+      "Gate_o": "JaegerStash"
     },
     "factory4_night": {
       "Gate 3": "MechanicStash",
-      "Office Window": "JaegerStash"
+      "Gate_o": "JaegerStash"
     },
     "bigmap": {
       "Railroad To Tarkov": "TherapistStash",
@@ -351,21 +351,21 @@
       "interchange": ["Railway"]
     },
     "SkierStash": {
-      "bigmap": ["Railroad To Military Base"],
+      "bigmap": ["RR to Military Base"],
       "rezervbase": ["Scav lands rail"]
     },
     "PeacekeeperStash": {
-      "lighthouse": ["Lighthouse tunnel"],
-      "shoreline": ["Tunnel"]
+      "lighthouse": ["Lighthouse Tunnel"],
+      "shoreline": ["Shoreline Tunnel"]
     },
     "JaegerStash": {
-      "factory4_day": ["Office Window"],
-      "factory4_night": ["Office Window"],
-      "woods": ["Factory Gate", "RUAFRoadblock", "UN Roadblock"]
+      "factory4_day": ["Courtyard"],
+      "factory4_night": ["Courtyard"],
+      "woods": ["Factory Gate", "RUAF Gate", "UN Roadblock"]
     },
     "MilitaryLighthouseStash": {
       "lighthouse": ["Lighthouse Vehicle Extract"],
-      "rezervbase": ["CP Fence"]
+      "rezervbase": ["Checkpoint Fence"]
     },
     "KlimovStash": {
       "tarkovstreets": ["Klimov Street"]

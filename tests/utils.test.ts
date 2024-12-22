@@ -25,7 +25,7 @@ describe('PTT utils', () => {
       expect(getPTTMongoId('test3')).toBe(getPTTMongoId('test3'));
     });
 
-    it('should check that the id start with "PTT" preefix', () => {
+    it('should check that the id start with PTT "deadbeef" prefix', () => {
       expect(getPTTMongoId('test').startsWith('deadbeef')).toBe(true);
     });
   });

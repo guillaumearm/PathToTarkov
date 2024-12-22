@@ -1,6 +1,13 @@
 import { isValidExfilForMap } from './all-exfils';
-import { EMPTY_STASH, type Config, type MapName, type SpawnConfig } from './config';
-import { ensureArray } from './utils';
+import type { ByMap } from './config';
+import {
+  EMPTY_STASH,
+  isLocalAvailable,
+  type Config,
+  type MapName,
+  type SpawnConfig,
+} from './config';
+import { ensureArray, isEmpty } from './utils';
 
 const MIN_NEEDED_MAPS = [
   'laboratory',
@@ -116,6 +123,36 @@ const getErrorsForOffraidPositions = (config: Config): string[] => {
   return errors;
 };
 
+const getInfiltrationHash = (spawns: ByMap<string[]>): string => {
+  const results = Object.keys(spawns).flatMap(mapName => {
+    return spawns[mapName as MapName].map(spawnName => {
+      return `${mapName}.${spawnName}`;
+    });
+  });
+
+  return results.sort().join('/');
+};
+
+const getWarningsForOffraidPositions = (config: Config): string[] => {
+  const warnings: string[] = [];
+  const offraidPosByHash: Record<string, string> = {};
+
+  Object.keys(config.infiltrations).forEach(offraidPosition => {
+    const spawnsByMap = config.infiltrations[offraidPosition];
+    const hash = getInfiltrationHash(spawnsByMap);
+
+    if (offraidPosByHash[hash]) {
+      warnings.push(
+        `offraid position "${offraidPosition}" seems to be a duplicate of "${offraidPosByHash[hash]}"`,
+      );
+    } else {
+      offraidPosByHash[hash] = offraidPosition;
+    }
+  });
+
+  return warnings;
+};
+
 const getErrorsForExfils = (config: Config): string[] => {
   const errors: string[] = [];
 
@@ -125,8 +162,8 @@ const getErrorsForExfils = (config: Config): string[] => {
       errors.push(`${mapName} is now allowed as a map name in "exfiltrations"`);
     }
 
-    // 2. check for map with no exfils
-    if (Object.keys(config.exfiltrations[mapName as MapName]).length === 0) {
+    // 2. check for map with no exfils (only when all transits are disabled)
+    if (config.disable_all_transits && isEmpty(config.exfiltrations[mapName as MapName])) {
       errors.push(`no exfils found for map ${mapName} in "exfiltrations"`);
     }
   });
@@ -171,6 +208,23 @@ const getErrorsSecondaryStashes = (config: Config): string[] => {
   return errors;
 };
 
+const getWarningsSecondaryStahes = (config: Config): string[] => {
+  const warnings: string[] = [];
+  const offraidPositions = new Set<string>();
+
+  config.hideout_secondary_stashes.forEach(stashConfig => {
+    ensureArray(stashConfig.access_via).forEach(offraidPosition => {
+      if (offraidPositions.has(offraidPosition)) {
+        warnings.push(`offraid position is already used by stash "${stashConfig.name}"`);
+      } else {
+        offraidPositions.add(offraidPosition);
+      }
+    });
+  });
+
+  return warnings;
+};
+
 const getErrorsForInfils = (config: Config, spawnConfig: SpawnConfig): string[] => {
   const errors: string[] = [];
 
@@ -207,17 +261,53 @@ const getErrorsForInfils = (config: Config, spawnConfig: SpawnConfig): string[] 
   return errors;
 };
 
+const getErrorsForAdditionalSpawnpoints = (config: Config): string[] => {
+  const errors: string[] = [];
+
+  const additionalSpawnConfig = config.infiltrations_config?.additional_player_spawnpoints ?? {};
+
+  Object.keys(additionalSpawnConfig).forEach(mapName => {
+    if (!ALLOWED_MAPS.includes(mapName)) {
+      errors.push(
+        `${mapName} is now allowed as a map name in "infiltrations_config.additional_player_spawnpoints"`,
+      );
+      return;
+    }
+  });
+
+  return errors;
+};
+
+const getErrorsForGeneralConfig = (config: Config): string[] => {
+  const errors: string[] = [];
+
+  // check for wrong locale on `debug_exfiltrations_tooltips_locale`
+  const debugTooltipsLocale = config.debug_exfiltrations_tooltips_locale;
+  if (debugTooltipsLocale && !isLocalAvailable(debugTooltipsLocale)) {
+    errors.push(
+      `wrong locale "${debugTooltipsLocale}" set to "debug_exfiltrations_tooltips_locale"`,
+    );
+  }
+
+  // check for usage of "vanilla_exfils_requirements"
+  if (config.vanilla_exfils_requirements) {
+    errors.push('"vanilla_exfils_requirements" is no longer supported since version 6');
+  }
+
+  return errors;
+};
+
 export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigValidationResult => {
   const errors: string[] = [];
   const warnings: string[] = [];
 
   // 1. check there is at least one offraid position
-  if (Object.keys(config.infiltrations).length === 0) {
+  if (isEmpty(config.infiltrations)) {
     errors.push('no offraid position found in "infiltrations"');
   }
 
   // 2. check there is at least one map
-  if (Object.keys(config.exfiltrations).length === 0) {
+  if (isEmpty(config.exfiltrations)) {
     errors.push('no map found found in "exfiltrations"');
   }
 
@@ -228,15 +318,23 @@ export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigV
 
   // 4. check all offraid positions
   errors.push(...getErrorsForOffraidPositions(config));
+  warnings.push(...getWarningsForOffraidPositions(config));
 
   // 5. checks for exfil maps
   errors.push(...getErrorsForExfils(config));
 
-  // 6. check for secondary stashes errors
+  // 6. check for secondary stashes
   errors.push(...getErrorsSecondaryStashes(config));
+  warnings.push(...getWarningsSecondaryStahes(config));
 
   // 7. check for infiltrations maps and spawn points
   errors.push(...getErrorsForInfils(config, spawnConfig));
+
+  // 8. check for additional spawnpoints
+  errors.push(...getErrorsForAdditionalSpawnpoints(config));
+
+  // 9. check the rest of the config
+  errors.push(...getErrorsForGeneralConfig(config));
 
   return {
     errors,

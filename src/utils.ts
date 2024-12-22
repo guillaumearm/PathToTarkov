@@ -34,7 +34,7 @@ export const getModDisplayName = (packageJson: PackageJson, withVersion = false)
   return `${packageJson.displayName}`;
 };
 
-// deep clone taken on stackoverflow
+// stackoverflow deep clone
 export function deepClone<T>(item: T): T {
   if (!item) {
     return item;
@@ -102,6 +102,10 @@ export function shuffle<T>(givenArray: T[]): T[] {
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export function noop(): void {}
+
+export const isEmpty = (obj: object): boolean => {
+  return Object.keys(obj).length === 0;
+};
 
 export const isEmptyArray = <T>(arr: T[] | undefined): boolean => {
   return Boolean(arr && arr.length > 0);

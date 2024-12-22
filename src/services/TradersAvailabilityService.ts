@@ -1,5 +1,6 @@
 import type { IQuestStatus } from '@spt/models/eft/common/tables/IBotBase';
 import type { IQuest } from '@spt/models/eft/common/tables/IQuest';
+import { isEmpty } from '../utils';
 
 type Quests = Record<string, IQuest>;
 
@@ -44,7 +45,7 @@ export class TradersAvailabilityService {
 
     const unlockQuests = this.tradersLockedByQuests[traderId];
 
-    if (!unlockQuests || Object.keys(unlockQuests).length === 0) {
+    if (!unlockQuests || isEmpty(unlockQuests)) {
       return true;
     }
 

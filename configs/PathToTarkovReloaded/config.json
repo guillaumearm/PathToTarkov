@@ -166,11 +166,6 @@
       "access_via": ["SniperPath"]
     },
     {
-      "id": "PathToTarkov_EmercomStreet_stash",
-      "size": 8,
-      "access_via": ["EmercomToKlimov"]
-    },
-    {
       "id": "PathToTarkov_sewer_stash",
       "size": 8,
       "access_via": ["ManHoleToReserve"]
@@ -378,7 +373,7 @@
       },
       "access_via": ["WoodsReserveShoreline"]
     },
-    "gunsmith": {
+    "4e7ef752240141bca059b2ea": {
       "// mod integration for Gunsmith": true,
       "// Gunsmith is available after extracting from Tunnel (shoreline map) or Lighthouse Tunnel (lighthouse map)": true,
       "disable_warning": true,
@@ -523,7 +518,7 @@
       "Gate m": "FactoryZB-1012",
       "Cellars": "FactoryZB-1011",
       "Camera Bunker Door": "FactoryZB-1011",
-      "Office Window": "WoodsFactoryGate",
+      "Gate_o": "WoodsFactoryGate",
       "Gate 0": "WoodsFactoryGate"
     },
     "factory4_night": {
@@ -531,7 +526,7 @@
       "Gate m": "FactoryZB-1012",
       "Cellars": "FactoryZB-1011",
       "Camera Bunker Door": "FactoryZB-1011",
-      "Office Window": "WoodsFactoryGate",
+      "Gate_o": "WoodsFactoryGate",
       "Gate 0": "WoodsFactoryGate"
     },
     "bigmap": {
@@ -619,11 +614,11 @@
     "ShorelineLighthousePath": {
       "shoreline": ["Path to Lighthouse"],
       "lighthouse": ["Path to Shoreline"],
-      "rezervbase": ["CP Fence"]
+      "rezervbase": ["Checkpoint Fence"]
     },
     "ShorelineLighthouseTunnel": {
-      "shoreline": ["Tunnel"],
-      "lighthouse": ["Lighthouse tunnel"]
+      "shoreline": ["Shoreline Tunnel"],
+      "lighthouse": ["Lighthouse Tunnel"]
     },
     "ShorelineNorthMoutains": {
       "rezervbase": ["Cliff"],
@@ -631,14 +626,14 @@
     },
     "WoodsReserveShoreline": {
       "woods": ["Outskirts"],
-      "rezervbase": ["CP Fence"]
+      "rezervbase": ["Checkpoint Fence"]
     },
     "InterchangeCustoms": {
       "bigmap": ["Crossroads"],
       "interchange": ["Scav Camp"]
     },
     "CustomsTarkovRail": {
-      "bigmap": ["MallTrain"],
+      "bigmap": ["RR to Tarkov"],
       "interchange": ["Railway"]
     },
     "WoodsCustoms": {
@@ -646,7 +641,7 @@
       "bigmap": ["RUAF Roadblock"]
     },
     "Boat": {
-      "bigmap": ["Smuggler's Boat"],
+      "bigmap": ["Smugglers Boat"],
       "woods": ["The Boat"],
       "shoreline": ["Pier Boat"],
       "lighthouse": ["Lighthouse Docks Boat"]
@@ -657,11 +652,11 @@
     },
     "Car": {
       "bigmap": ["Dorms Car"],
-      "interchange": ["Car at Power Station"],
-      "woods": ["Bridge Car"],
+      "interchange": ["Interchange Vehicle Extract"],
+      "woods": ["Woods Vehicle Extract"],
       "lighthouse": ["Lighthouse Vehicle Extract"],
-      "tarkovstreets": ["Primorsky Vehicle Extract"],
-      "sandbox": ["hideout_gz"],
+      "tarkovstreets": ["Streets Vehicle Extract"],
+      "sandbox": ["Nakatani Basement Stairs"],
       "laboratory": [
         "Cargo Elevator",
         "Lab Sewage Conduit",
@@ -675,16 +670,16 @@
       "rezervbase": ["Scav lands"]
     },
     "PilgrimTrail": {
-      "bigmap": ["PraveenGasoline"],
+      "bigmap": ["Old Gas Scav"],
       "tarkovstreets": ["Crane"]
     },
     "MilitaryBaseRail": {
-      "bigmap": ["Railroad To Military Base"],
+      "bigmap": ["RR to Military Base"],
       "rezervbase": ["Train Station"]
     },
     "FactoryZB-1013": {
       "bigmap": ["ZB-1013"],
-      "woods": ["ZB-1014"],
+      "woods": ["ZB-014"],
       "factory4_day": ["Gate 3"],
       "factory4_night": ["Gate 3"]
     },
@@ -699,9 +694,9 @@
       "factory4_night": ["Cellars"]
     },
     "ScavWindow": {
-      "bigmap": ["OfficePath"],
-      "factory4_day": ["Office Window"],
-      "factory4_night": ["Office Window"]
+      "bigmap": ["Factory Far Corner"],
+      "factory4_day": ["Courtyard"],
+      "factory4_night": ["Courtyard"]
     },
     "WoodsFactoryGate": {
       "woods": ["Factory Gate"],
@@ -709,25 +704,25 @@
       "factory4_night": ["Gate 0"]
     },
     "WoodsMilitaryPath": {
-      "woods": ["RUAFRoadblock"],
-      "bigmap": ["RUAFAdmin"]
+      "woods": ["RUAF Gate"],
+      "bigmap": ["Administration Gate"]
     },
     "SafeRoom": {
       "rezervbase": ["D-2"],
       "interchange": ["Safe Room"]
     },
     "TherapistHideout": {
-      "sandbox": ["Crow Hideout"]
+      "sandbox": ["Scav Hideout"]
     },
     "PlayerHideout": {
-      "sandbox": ["hideout_gz"]
+      "sandbox": ["Nakatani Basement Stairs"]
     },
     "EmercomToKlimov": {
-      "sandbox": ["Crow Hideout"],
+      "sandbox": ["Scav Hideout"],
       "tarkovstreets": ["Basement Descent"]
     },
     "SniperPath": {
-      "sandbox": ["From Streets"],
+      "sandbox": ["Mira Ave"],
       "tarkovstreets": ["Klimov Street"]
     },
     "UnderpasstoLabs": {
@@ -740,12 +735,339 @@
     },
     "StreetsEvac": {
       "tarkovstreets": ["Evacuation Zone"],
-      "interchange": ["EmercomMall"],
+      "interchange": ["Emercom"],
       "bigmap": ["Old Gas Scav"]
     },
     "CatacombsHangar": {
       "tarkovstreets": ["Catacombs"],
       "laboratory": ["Hangar Gate"]
+    }
+  },
+  "exfiltrations_config": {
+    "Gate 0": {
+      "displayName": {
+        "en": "Gate 0 (to Customs, Old Gas Gate)"
+      }
+    },
+    "Gate 3": {
+      "displayName": {
+        "en": "Gate 3 (to Customs, Factory Far Corner)"
+      }
+    },
+    "Gate m": {
+      "displayName": {
+        "en": "Medical Tent (to Woods, Factory Gate)"
+      }
+    },
+    "Outskirts Water": {
+      "displayName": {
+        "en": "Northern Bridge (to Streets, Car)"
+      }
+    },
+    "UN Roadblock": {
+      "displayName": {
+        "en": "UN Roadblock (to Customs, RUAF)"
+      }
+    },
+    "Factory gate": {
+      "displayName": {
+        "en": "Factory Gate (to Factory, Med Tent)"
+      }
+    },
+    "Old Azs Gate": {
+      "displayName": {
+        "en": "Old Gas Gate (to Factory, Gate 0)"
+      }
+    },
+    "Factory Far Corner": {
+      "displayName": {
+        "en": "Factory Far Corner (to Factory, Gate 3)"
+      }
+    },
+    "Railroad To Tarkov": {
+      "displayName": {
+        "en": "RR to Tarkov (to Interchange, Railway)"
+      }
+    },
+    "Crossroads": {
+      "displayName": {
+        "en": "Crossroads (to Shoreline, Road to Customs)"
+      }
+    },
+    "Railroad To Port": {
+      "displayName": {
+        "en": "RR to Port (to Shoreline, Railbridge)"
+      }
+    },
+    "Railroad To Military Base": {
+      "displayName": {
+        "en": "RR to Mil Base (to Reserve, Train Station *1way)"
+      }
+    },
+    "NW Exfil": {
+      "displayName": {
+        "en": "Railway (to Customs, RR to Tarkov)"
+      }
+    },
+    "SE Exfil": {
+      "displayName": {
+        "en": "Emercom (to Streets, Underpass)"
+      }
+    },
+    "E1": {
+      "displayName": {
+        "en": "Underpass (to Interchange, Emercom)"
+      }
+    },
+    "E2": {
+      "displayName": {
+        "en": "Sewer River (to Lab, Sewage Conduit)"
+      }
+    },
+    "E4": {
+      "displayName": {
+        "en": "Evac to Mil Base (to Reserve, Checkpoint Fence)"
+      }
+    },
+    "E7_car": {
+      "displayName": {
+        "en": "Primorsky Ave Taxi (to Woods, Bridge Car)"
+      }
+    },
+    "scav_e1": {
+      "displayName": {
+        "en": "Basement Descent (to Lab, Main Elevator)"
+      }
+    },
+    "scav_e2": {
+      "displayName": {
+        "en": "Entrance to Catacombs (to Lab, Parking Gate)"
+      }
+    },
+    "scav_e3": {
+      "displayName": {
+        "en": "Vents (to Lab, Vents)"
+      }
+    },
+    "scav_e4": {
+      "displayName": {
+        "en": "Manhole (to Reserve, Manhole)"
+      }
+    },
+    "Alpinist": {
+      "displayName": {
+        "en": "Cliff Descent (to Shoreline, N. Cliffs *1way)"
+      }
+    },
+    "EXFIL_vent": {
+      "displayName": {
+        "en": "Manhole (to Streets, Manhole)"
+      }
+    },
+    "Exit4": {
+      "displayName": {
+        "en": "Checkpoint Fence (to Streets, Evac to Mil Base)"
+      }
+    },
+    "EXFIL_Bunker": {
+      "displayName": {
+        "en": "Bunker Hermetic Door (to Shoreline, Checkpoint *1way)"
+      }
+    },
+    "EXFIL_BUNKER_D2": {
+      "displayName": {
+        "en": "D-2 (to Woods, Snip er Rock Bunker *1way)"
+      }
+    },
+    "Tunnel": {
+      "displayName": {
+        "en": "Tunnel (to Lighthouse, Side Tunnel)"
+      }
+    },
+    "Lighthouse_pass": {
+      "displayName": {
+        "en": "Path to Lighthouse (... you get it)"
+      }
+    },
+    "South Fence Passage": {
+      "displayName": {
+        "en": "North Fence Passage (to Reserve, Hole in Wall *1way)"
+      }
+    },
+    "Road_at_railbridge": {
+      "displayName": {
+        "en": "Railbridge (to Customs, RR to Port)"
+      }
+    },
+    "Nothern_Checkpoint": {
+      "displayName": {
+        "en": "Northern CP (to Woods, Outskirts)"
+      }
+    },
+    " V-ex_light": {
+      "displayName": {
+        "en": "Car Ride Home"
+      }
+    },
+    "Shorl_free": {
+      "displayName": {
+        "en": "Path to Shoreline (I swear if you ask)"
+      }
+    },
+    "Coastal_South_road": {
+      "displayName": {
+        "en": "Southern Road (to Shoreline, Tunnel)"
+      }
+    },
+    "Alpinist_light": {
+      "displayName": {
+        "en": "Mountain Pass (to Shoreline, Path to Shoreline)"
+      }
+    },
+    "Tunnel_Shared": {
+      "displayName": {
+        "en": "Side Tunnel (to Shoreline, Tunnel)"
+      }
+    },
+    "Scav_Hideout_at_the_grotto": {
+      "displayName": {
+        "en": "Hideout at the Grotto (to Shoreline, Pier Boat)"
+      }
+    },
+    "lab_Elevator_Cargo": {
+      "displayName": {
+        "en": "Cargo Elevator (to Streets, Basement)"
+      }
+    },
+    "lab_Elevator_Main": {
+      "displayName": {
+        "en": "Main Elevator (to Streets, Basement)"
+      }
+    },
+    "lab_Elevator_med": {
+      "displayName": {
+        "en": "Medical Block Elevator (to Streets, Basement)"
+      }
+    },
+    "lab_Hangar_Gate": {
+      "displayName": {
+        "en": "Hangar Gate (to Streets, Catacombs)"
+      }
+    },
+    "lab_Parking_Gate": {
+      "displayName": {
+        "en": "Parking Gate (to Streets, Catacombs)"
+      }
+    },
+    "lab_Under_Storage_Collector": {
+      "displayName": {
+        "en": "Sewage Conduit (to Streets, Sewer River)"
+      }
+    },
+    "lab_Vent": {
+      "displayName": {
+        "en": "Vents (to Streets, Vents)"
+      }
+    },
+    "RUAF Roadblock": {
+      "displayName": {
+        "en": "North UN Woods(PeaceKeeper)"
+      }
+    },
+    "un-sec": {
+      "displayName": {
+        "en": "RUAF Roadblock(PeaceKeeper)"
+      }
+    },
+    "Road to Customs": {
+      "displayName": {
+        "en": "Road to Customs to Customs, SniperRoadblock(Skier)"
+      }
+    },
+    "Sniper Roadblock": {
+      "displayName": {
+        "en": "Sniper Roadblock to Shoreline, Road to Customs(Skier)"
+      }
+    },
+    "Smuggler's Boat": {
+      "displayName": {
+        "en": "Shoreline,Woods,Lighthouse(Machine,Artem,Jaeger)"
+      }
+    },
+    "PP Exfil": {
+      "displayName": {
+        "en": "Car (Home,Prapor,Therapist,Rag,Jae,Harry)"
+      }
+    },
+    "South V-Ex": {
+      "displayName": {
+        "en": "Car (Jaeger)"
+      }
+    },
+    "Dorms V-Ex": {
+      "displayName": {
+        "en": "Car (Jaeger)"
+      }
+    },
+    " V-Ex_light": {
+      "displayName": {
+        "en": "Car (Jaeger)"
+      }
+    },
+    "Pier Boat": {
+      "displayName": {
+        "en": "Boat (Machine,Artem)"
+      }
+    },
+    "The Boat": {
+      "displayName": {
+        "en": "Boat (Machine,Artem)"
+      }
+    },
+    "WoodsFactoryGate": {
+      "displayName": {
+        "en": "Gate 0 (Prapor)"
+      }
+    },
+    "Hole Exfil": {
+      "displayName": {
+        "en": "Crossroads (The Machine)"
+      }
+    },
+    "ZB-1012": {
+      "displayName": {
+        "en": "ZB-1012 to Factory, Med tent gate(Mechanic)"
+      }
+    },
+    "ZB-1011": {
+      "displayName": {
+        "en": "Zb-1011 to Factory, Cellars(Mechanic)"
+      }
+    },
+    "ZB-1013": {
+      "displayName": {
+        "en": "ZB-1013 to Factory, Gate 3(Mechanic)"
+      }
+    },
+    "ZB-1014": {
+      "displayName": {
+        "en": "ZB-1014 to Factory, Gate 3(Mechanic)"
+      }
+    },
+    "Outskirts": {
+      "displayName": {
+        "en": "Outskirts to Reserve and Shoreline (Priscillu)"
+      }
+    },
+    "Checkpoint Fence": {
+      "displayName": {
+        "en": "Checkpoint Fence to Woods and Shoreline (Priscillu)"
+      }
+    },
+    "Nakatani_stairs_free_exit": {
+      "displayName": {
+        "en": "Nakatani Basement (Hideout)"
+      }
     }
   }
 }
