@@ -99,7 +99,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     const eventWatcher = new EventWatcher(this, saveServer);
     const endOfRaidController = new EndOfRaidController(this);
 
-    const getRaidCache = eventWatcher.getRaidCache.bind(this);
+    const getRaidCache = eventWatcher.getRaidCache.bind(eventWatcher);
 
     this.pathToTarkovController = new PathToTarkovController(
       this.config,
