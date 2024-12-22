@@ -1,18 +1,20 @@
-﻿using System;
-using BepInEx;
+﻿using BepInEx;
+using BepInEx.Bootstrap;
 using Comfort.Common;
 using InteractableExfilsAPI.Singletons;
 
 using PTT.Services;
-using PTT.Helpers;
 
 namespace PTT;
 
 [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
 public class Plugin : BaseUnityPlugin
 {
+    public static bool FikaIsInstalled { get; private set; }
+
     protected void Awake()
     {
+        FikaIsInstalled = Chainloader.PluginInfos.ContainsKey("com.fika.core");
         Logger.LogInfo($"[PTT] Plugin {PluginInfo.PLUGIN_GUID} is loading...");
 
         Settings.Config.Init(Config);

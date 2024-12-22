@@ -1,13 +1,6 @@
-using System;
 using EFT;
 using EFT.Interactive;
 using Comfort.Common;
-using BepInEx.Logging;
-using Fika.Core.Coop.GameMode;
-using Fika.Core.Coop.Players;
-using System.Reflection;
-using Fika.Core.Coop.Components;
-using PTT;
 
 namespace PTT.Services;
 
@@ -15,6 +8,11 @@ public static class CustomExfilService
 {
     public static bool ExtractTo(ExfiltrationPoint exfiltrationPoint, string customExfilName)
     {
+        if (Plugin.FikaIsInstalled)
+        {
+            return CustomExfilServiceFika.ExtractTo(exfiltrationPoint, customExfilName);
+        }
+
         LocalGame localGame = Singleton<AbstractGame>.Instance as LocalGame;
         Player player = Singleton<GameWorld>.Instance.MainPlayer;
         if (localGame == null || player == null) return false;
@@ -23,8 +21,13 @@ public static class CustomExfilService
         return true;
     }
 
-    public static bool TransitTo(string locationId, string customExfilName)
+    public static bool TransitTo(string locationId, string originalExitName, string customExfilName)
     {
+        if (Plugin.FikaIsInstalled)
+        {
+            return CustomExfilServiceFika.TransitTo(locationId, originalExitName, customExfilName);
+        }
+
         LocalGame localGame = Singleton<AbstractGame>.Instance as LocalGame;
         Player player = Singleton<GameWorld>.Instance.MainPlayer;
         if (localGame == null || player == null) return false;

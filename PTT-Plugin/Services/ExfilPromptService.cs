@@ -5,7 +5,6 @@ using InteractableExfilsAPI.Common;
 using System.Linq;
 using BepInEx.Logging;
 using System.Collections.Generic;
-using EFT;
 
 namespace PTT.Services;
 
@@ -50,7 +49,7 @@ public class ExfilPromptService(
 
                 var transitAction = new CustomExfilAction(actionName, false, () =>
                 {
-                    bool successfullyTransited = FikaCustomExfilService.TransitTo(exfilTarget.transitMapId, customExfilName);
+                    bool successfullyTransited = CustomExfilService.TransitTo(exfilTarget.transitMapId, exfil.Settings.Name, customExfilName);
 
                     if (successfullyTransited)
                     {
@@ -77,7 +76,7 @@ public class ExfilPromptService(
                     // TODO: uncomment this
                     // exfil.Settings.Name = customExfilName;
 
-                    bool successfullyExtracted = FikaCustomExfilService.ExtractTo(exfil, customExfilName);
+                    bool successfullyExtracted = CustomExfilService.ExtractTo(exfil, customExfilName);
 
                     if (successfullyExtracted)
                     {

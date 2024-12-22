@@ -1,16 +1,12 @@
-using System;
 using EFT;
 using EFT.Interactive;
 using Comfort.Common;
-using BepInEx.Logging;
 using Fika.Core.Coop.GameMode;
 using Fika.Core.Coop.Players;
-using System.Reflection;
-using Fika.Core.Coop.Components;
 
 namespace PTT.Services;
 
-public static class FikaCustomExfilService
+public static class CustomExfilServiceFika
 {
     public static bool ExtractTo(ExfiltrationPoint exfiltrationPoint, string customExfilName)
     {
@@ -27,7 +23,7 @@ public static class FikaCustomExfilService
         return true;
     }
 
-    public static bool TransitTo(string locationId, string customExfilName)
+    public static bool TransitTo(string locationId, string originalExitName, string customExfilName)
     {
         CoopGame coopGame = (CoopGame)Singleton<IFikaGame>.Instance;
         CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
@@ -58,6 +54,7 @@ public static class FikaCustomExfilService
 
         // TODO: remove this because it look like it's not used
         // coopGame.ExitLocation = customExfilName;
+        coopGame.ExitLocation = originalExitName;
         coopGame.Extract(coopPlayer, null, tp);
         return true;
     }
