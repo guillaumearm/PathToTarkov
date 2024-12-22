@@ -666,6 +666,31 @@
       },
       "access_via": ["RuinedHouse"]
     },
+    "4e7ef752240141bca059b2ea": {
+      "// mod integration for Gunsmith": true,
+      "disable_warning": true,
+      "override_description": true,
+      "location_description": {
+        "ch": "In a tunnel between lighthouse and shoreline",
+        "cz": "In a tunnel between lighthouse and shoreline",
+        "en": "In a tunnel between lighthouse and shoreline",
+        "es-mx": "In a tunnel between lighthouse and shoreline",
+        "es": "In a tunnel between lighthouse and shoreline",
+        "fr": "Dans un tunnel entre le phare et le littoral",
+        "ge": "In a tunnel between lighthouse and shoreline",
+        "hu": "In a tunnel between lighthouse and shoreline",
+        "it": "In a tunnel between lighthouse and shoreline",
+        "jp": "In a tunnel between lighthouse and shoreline",
+        "kr": "In a tunnel between lighthouse and shoreline",
+        "pl": "In a tunnel between lighthouse and shoreline",
+        "po": "In a tunnel between lighthouse and shoreline",
+        "ro": "In a tunnel between lighthouse and shoreline",
+        "ru": "In a tunnel between lighthouse and shoreline",
+        "sk": "In a tunnel between lighthouse and shoreline",
+        "tu": "In a tunnel between lighthouse and shoreline"
+      },
+      "access_via": ["LighthouseShorelineTunnel"]
+    },
     "lotus": {
       "// mod integration for lotus": true,
       "disable_warning": true,
