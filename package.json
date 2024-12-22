@@ -6,7 +6,7 @@
   "main": "src/mod.js",
   "license": "MIT",
   "author": "Trap",
-  "sptVersion": "3.10.x",
+  "sptVersion": "~3.10.3",
   "scripts": {
     "install:files": "npm run prepare:files && node scripts/install-files.js",
     "build:ieapi": "cd ../InteractableExfilsAPI && dotnet build",
