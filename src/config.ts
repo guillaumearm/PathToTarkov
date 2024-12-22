@@ -8,6 +8,7 @@ import {
   readJsonFile,
   writeJsonFile,
 } from './utils';
+import { parseExilTargetFromPTTConfig } from './exfils-targets';
 
 export type ByMap<T> = {
   factory4_day: T;
@@ -211,6 +212,7 @@ type RawConfig = {
   workbench_always_enabled: boolean;
   vanilla_exfils_requirements?: boolean; // no longer supported
   bypass_exfils_override?: boolean;
+  enable_automatic_transits_creation?: boolean;
   enable_all_vanilla_transits?: boolean;
   bypass_uninstall_procedure: boolean;
   enable_run_through?: boolean;
@@ -346,26 +348,67 @@ const fromRawExfiltrations = (rawExfiltrations: RawExfiltrations): Exfiltrations
   return exfiltrations as Exfiltrations;
 };
 
+// Warning: this mutate the exfiltrations config
+const prepareAutomaticTransitsCreation = (config: Config): void => {
+  const { infiltrations, exfiltrations } = config;
+
+  Object.keys(exfiltrations).forEach(mapName => {
+    const targetsByExfil = exfiltrations[mapName as MapName];
+
+    Object.keys(targetsByExfil).forEach(exfilName => {
+      const exfilTargets = targetsByExfil[exfilName];
+      const newExfilTargets: string[] = [];
+
+      exfilTargets.forEach(exfilTarget => {
+        newExfilTargets.push(exfilTarget);
+        const offraidPosition = parseExilTargetFromPTTConfig(exfilTarget).targetOffraidPosition;
+
+        if (offraidPosition && infiltrations[offraidPosition]) {
+          Object.keys(infiltrations[offraidPosition]).forEach(targetMapName => {
+            if (targetMapName !== mapName) {
+              const spawns = infiltrations[offraidPosition][targetMapName as MapName] ?? [];
+              spawns.forEach(spawnId => {
+                const createdExfilTarget = `${targetMapName}.${spawnId}`;
+                newExfilTargets.push(createdExfilTarget);
+              });
+            }
+          });
+        }
+      });
+
+      // to avoid duplicates
+      targetsByExfil[exfilName] = [...new Set(newExfilTargets)];
+    });
+  });
+};
+
 export const processConfig = (originalConfig: RawConfig): Config => {
-  const config = deepClone(originalConfig);
+  const rawConfig = deepClone(originalConfig);
 
-  config.exfiltrations = prepareGroundZeroHigh(config.exfiltrations);
+  rawConfig.exfiltrations = prepareGroundZeroHigh(rawConfig.exfiltrations);
 
-  Object.keys(config.infiltrations).forEach(offraidPosition => {
-    config.infiltrations[offraidPosition] = prepareGroundZeroHigh(
-      config.infiltrations[offraidPosition],
+  Object.keys(rawConfig.infiltrations).forEach(offraidPosition => {
+    rawConfig.infiltrations[offraidPosition] = prepareGroundZeroHigh(
+      rawConfig.infiltrations[offraidPosition],
     );
   });
 
-  const stashConfigs: StashConfig[] = config.hideout_secondary_stashes.map(toStashConfig);
-  const infiltrationsConfig = config.infiltrations_config ?? {};
+  const stashConfigs: StashConfig[] = rawConfig.hideout_secondary_stashes.map(toStashConfig);
+  const infiltrationsConfig = rawConfig.infiltrations_config ?? {};
+  const exfiltrations = fromRawExfiltrations(rawConfig.exfiltrations);
 
-  return {
-    ...config,
+  const config: Config = {
+    ...rawConfig,
     hideout_secondary_stashes: stashConfigs,
     infiltrations_config: infiltrationsConfig,
-    exfiltrations: fromRawExfiltrations(config.exfiltrations),
+    exfiltrations,
   };
+
+  if (config.enable_automatic_transits_creation) {
+    prepareAutomaticTransitsCreation(config);
+  }
+
+  return config;
 };
 
 const mergeAdditionalSpawnpoints = (
