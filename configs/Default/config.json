@@ -748,7 +748,7 @@
       "Cellars": ["FactoryZB-013", "bigmap.ZB-1013"],
       "Camera Bunker Door": ["MechanicHideout"],
       "Gate 0": ["FactoryZB-1011", "bigmap.ZB-1011"],
-      "Gate_o": ["GasGate", "bigmap.Old Gas Scav", "wodds.Factory Gate"]
+      "Gate_o": ["GasGate", "bigmap.Old Gas Scav", "woods.Factory Gate"]
     },
     "factory4_night": {
       "Gate 3": ["FactoryZB-016", "woods.ZB-016"],

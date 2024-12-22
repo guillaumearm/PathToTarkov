@@ -53,7 +53,10 @@ const checkAccessViaErrors = (
   return errors;
 };
 
-const getErrorsForOffraidPositions = (config: Config): string[] => {
+/**
+ * This will also check ptt transit custom notation, e.g. "factory4_day.Gate 3"
+ */
+const getErrorsForOffraidPositions = (config: Config, spawnConfig: SpawnConfig): string[] => {
   const errors: string[] = [];
 
   errors.push(
@@ -137,8 +140,19 @@ const getErrorsForOffraidPositions = (config: Config): string[] => {
         }
 
         if (parsed.transitTargetLocationId && parsed.transitTargetSpawnPointId) {
-          // 1. TODO: check valid target location id
-          // 2. TODO: check valid spawn points for location
+          if (!ALLOWED_MAPS.includes(parsed.transitTargetLocationId)) {
+            errors.push(
+              `bad exfil target in exfiltrations.${mapName}.${extractName}: ${parsed.transitTargetLocationId} is now allowed as a map`,
+            );
+          }
+
+          const spawns = spawnConfig[parsed.transitTargetLocationId as MapName] ?? {};
+
+          if (!spawns[parsed.transitTargetSpawnPointId]) {
+            errors.push(
+              `bad exfil target in exfiltrations.${mapName}.${extractName}: unknown spawn point id "${parsed.transitTargetSpawnPointId}"`,
+            );
+          }
         }
       });
     });
@@ -359,7 +373,7 @@ export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigV
   }
 
   // 4. check all offraid positions
-  errors.push(...getErrorsForOffraidPositions(config));
+  errors.push(...getErrorsForOffraidPositions(config, spawnConfig));
   warnings.push(...getWarningsForOffraidPositions(config));
 
   // 5. checks for exfil maps
