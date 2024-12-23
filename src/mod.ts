@@ -185,6 +185,8 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     this.pathToTarkovController.tradersController.initTraders(this.config);
 
+	this.pathToTarkovController.fleaController.initFlea(this.config);
+
     Object.keys(profiles).forEach(profileId => {
       this.pathToTarkovController.cleanupLegacySecondaryStashesLink(profileId);
     });
