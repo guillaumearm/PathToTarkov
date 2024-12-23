@@ -18,7 +18,7 @@ export type RaidCache = {
   currentLocationName: string | null;
   exitName: string | null | undefined;
   targetOffraidPosition: string | null; // used by extracts only
-  transitTargetLocationId: string | null; // used by transits only (TODO: rename to transitTargetMapName)
+  transitTargetMapName: string | null; // used by transits only
   transitTargetSpawnPointId: string | null; // used by transits only
   isPlayerScav: boolean | null;
   exitStatus: ExitStatus | null;
@@ -29,7 +29,7 @@ const createInitialRaidCache = (sessionId: string): RaidCache => ({
   currentLocationName: null,
   exitName: undefined,
   targetOffraidPosition: null,
-  transitTargetLocationId: null,
+  transitTargetMapName: null,
   transitTargetSpawnPointId: null,
   isPlayerScav: null,
   exitStatus: null,
@@ -164,7 +164,7 @@ export class EventWatcher {
 
           raidCache.exitName = parsedExfilTarget.exitName;
           raidCache.targetOffraidPosition = parsedExfilTarget.targetOffraidPosition;
-          raidCache.transitTargetLocationId = parsedExfilTarget.transitTargetLocationId;
+          raidCache.transitTargetMapName = parsedExfilTarget.transitTargetMapName;
           raidCache.transitTargetSpawnPointId = parsedExfilTarget.transitTargetSpawnPointId;
 
           this.ptt.debug(
@@ -185,7 +185,7 @@ export class EventWatcher {
       isPlayerScav,
       exitName,
       targetOffraidPosition,
-      transitTargetLocationId,
+      transitTargetMapName,
       transitTargetSpawnPointId,
     } = this.raidCaches[sessionId];
 
@@ -205,20 +205,20 @@ export class EventWatcher {
       throw new Error('raidCache.exitName is undefined');
     }
 
-    if (!targetOffraidPosition && !transitTargetLocationId && !transitTargetSpawnPointId) {
+    if (!targetOffraidPosition && !transitTargetMapName && !transitTargetSpawnPointId) {
       throw new Error('raidCache cannot determine if we are in transit or extract (no data found)');
     }
 
-    if (targetOffraidPosition && transitTargetLocationId && transitTargetSpawnPointId) {
+    if (targetOffraidPosition && transitTargetMapName && transitTargetSpawnPointId) {
       throw new Error('raidCache cannot determine if we are in transit or extract');
     }
 
-    if (transitTargetLocationId && !transitTargetSpawnPointId) {
+    if (transitTargetMapName && !transitTargetSpawnPointId) {
       throw new Error('raidCache.transitTargetSpawnPointId is null');
     }
 
-    if (!transitTargetLocationId && transitTargetSpawnPointId) {
-      throw new Error('raidCache.transitTargetLocationId is null');
+    if (!transitTargetMapName && transitTargetSpawnPointId) {
+      throw new Error('raidCache.transitTargetMapName is null');
     }
 
     return {

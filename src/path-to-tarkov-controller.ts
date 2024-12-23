@@ -208,12 +208,12 @@ export class PathToTarkovController {
       this.updateInfiltrationForPlayerSpawnPoints(locationBase);
     }
 
-    if (raidCache && raidCache.transitTargetLocationId && raidCache.transitTargetSpawnPointId) {
+    if (raidCache && raidCache.transitTargetMapName && raidCache.transitTargetSpawnPointId) {
       // handle when a player took a ptt transit
       this.updateSpawnPointsForTransit(
         locationBase,
         sessionId,
-        raidCache.transitTargetLocationId,
+        raidCache.transitTargetMapName,
         raidCache.transitTargetSpawnPointId,
       );
     } else {
@@ -551,7 +551,7 @@ export class PathToTarkovController {
   private updateSpawnPointsForTransit(
     locationBase: ILocationBase,
     sessionId: string,
-    transitTargetLocationId: string,
+    transitTargetMapName: string,
     transitTargetSpawnPointId: string,
   ): void {
     if (!this.isLocationBaseAvailable(locationBase)) {
@@ -559,7 +559,7 @@ export class PathToTarkovController {
     }
     const mapName = resolveMapNameFromLocation(locationBase.Id);
 
-    if (mapName !== transitTargetLocationId) {
+    if (mapName !== transitTargetMapName) {
       return;
     }
 

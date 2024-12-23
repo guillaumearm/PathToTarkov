@@ -42,7 +42,7 @@ export const getExfilsTargets = (config: Config, mapName: MapName): ExfilsTarget
       return {
         isTransit: Boolean(!parsed.targetOffraidPosition),
         offraidPosition: parsed.targetOffraidPosition ?? '',
-        transitMapId: resolveLocationIdFromMapName(parsed.transitTargetLocationId ?? ''),
+        transitMapId: resolveLocationIdFromMapName(parsed.transitTargetMapName ?? ''),
         transitSpawnPointId: parsed.transitTargetSpawnPointId ?? '',
       };
     });
@@ -55,7 +55,7 @@ export const getExfilsTargets = (config: Config, mapName: MapName): ExfilsTarget
 
 type ParsedExfilTarget = {
   targetOffraidPosition: string | null; // is null on transit
-  transitTargetLocationId: string | null; // TODO: rename to transitTargetMapName
+  transitTargetMapName: string | null;
   transitTargetSpawnPointId: string | null;
 };
 
@@ -71,7 +71,7 @@ export const parseExfilTargetFromExitName = (
     return {
       exitName: null,
       targetOffraidPosition: null,
-      transitTargetLocationId: null,
+      transitTargetMapName: null,
       transitTargetSpawnPointId: null,
     };
   }
@@ -82,7 +82,7 @@ export const parseExfilTargetFromExitName = (
     return {
       exitName,
       targetOffraidPosition: null,
-      transitTargetLocationId: null,
+      transitTargetMapName: null,
       transitTargetSpawnPointId: null,
     };
   }
@@ -92,7 +92,7 @@ export const parseExfilTargetFromExitName = (
     return {
       exitName,
       targetOffraidPosition: offraidPosition,
-      transitTargetLocationId: null,
+      transitTargetMapName: null,
       transitTargetSpawnPointId: null,
     };
   }
@@ -103,7 +103,7 @@ export const parseExfilTargetFromExitName = (
   return {
     exitName,
     targetOffraidPosition: null,
-    transitTargetLocationId: locationId,
+    transitTargetMapName: locationId,
     transitTargetSpawnPointId: spawnPointId,
   };
 };
@@ -114,7 +114,7 @@ export const parseExilTargetFromPTTConfig = (exfilTargetFromConfig: string): Par
   if (splitted.length === 0) {
     return {
       targetOffraidPosition: null,
-      transitTargetLocationId: null,
+      transitTargetMapName: null,
       transitTargetSpawnPointId: null,
     };
   }
@@ -122,14 +122,14 @@ export const parseExilTargetFromPTTConfig = (exfilTargetFromConfig: string): Par
   if (splitted.length === 1) {
     return {
       targetOffraidPosition: splitted[0],
-      transitTargetLocationId: null,
+      transitTargetMapName: null,
       transitTargetSpawnPointId: null,
     };
   }
 
   return {
     targetOffraidPosition: null,
-    transitTargetLocationId: splitted[0],
+    transitTargetMapName: splitted[0],
     transitTargetSpawnPointId: splitted[1],
   };
 };

@@ -132,21 +132,18 @@ const getErrorsForOffraidPositions = (config: Config, spawnConfig: SpawnConfig):
           );
         }
 
-        if (
-          !offraidPosition &&
-          (!parsed.transitTargetLocationId || !parsed.transitTargetLocationId)
-        ) {
+        if (!offraidPosition && (!parsed.transitTargetMapName || !parsed.transitTargetMapName)) {
           errors.push(`cannot parse exfil target in exfiltrations.${mapName}.${extractName}`);
         }
 
-        if (parsed.transitTargetLocationId && parsed.transitTargetSpawnPointId) {
-          if (!ALLOWED_MAPS.includes(parsed.transitTargetLocationId)) {
+        if (parsed.transitTargetMapName && parsed.transitTargetSpawnPointId) {
+          if (!ALLOWED_MAPS.includes(parsed.transitTargetMapName)) {
             errors.push(
-              `bad exfil target in exfiltrations.${mapName}.${extractName}: ${parsed.transitTargetLocationId} is now allowed as a map`,
+              `bad exfil target in exfiltrations.${mapName}.${extractName}: ${parsed.transitTargetMapName} is now allowed as a map`,
             );
           }
 
-          const spawns = spawnConfig[parsed.transitTargetLocationId as MapName] ?? {};
+          const spawns = spawnConfig[parsed.transitTargetMapName as MapName] ?? {};
 
           if (!spawns[parsed.transitTargetSpawnPointId]) {
             errors.push(
