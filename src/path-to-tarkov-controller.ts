@@ -575,7 +575,8 @@ export class PathToTarkovController {
         );
       }
 
-      locationBase.SpawnPointParams = [spawnPoint];
+      this.removePlayerSpawnsForLocation(locationBase);
+      locationBase.SpawnPointParams.push(spawnPoint);
 
       this.debug(
         `[${sessionId}] player spawn '${spawnId}' added for location ${mapName} (player in transit)`,
