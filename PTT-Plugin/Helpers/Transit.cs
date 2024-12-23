@@ -1,11 +1,15 @@
 using EFT.Interactive;
+using PTT.Data;
 
 namespace PTT.Helpers;
 
 static class Transit
 {
-    static public TransitPoint Create(string locationId, string customTransitName)
+    static public TransitPoint Create(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
     {
+        string locationId = exfilTarget.transitMapId;
+        string customTransitName = exfilTarget.GetCustomExitName(exfil);
+
         return new TransitPoint
         {
             Enabled = true,
@@ -18,7 +22,7 @@ static class Transit
                 name = customTransitName,
                 description = customTransitName,
                 conditions = string.Empty,
-                target = locationId, // should be "_Id" of the corresponding location base but not needed here
+                target = "", // should be "_Id" of the corresponding location base but not needed here
                 location = locationId,
             }
         };

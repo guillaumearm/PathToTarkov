@@ -67,7 +67,7 @@ internal class InitAllExfiltrationPointsPatch : ModulePatch
 
         foreach (ScavExfiltrationPoint scavExfiltrationPoint in __instance.ScavExfiltrationPoints)
         {
-            Plugin.LogSource.LogWarning("Scav Exfil name = " + scavExfiltrationPoint.Settings.Name);
+            Plugin.LogSource.LogInfo("[PTT] Scav Exfil name = " + scavExfiltrationPoint.Settings.Name);
             SharedExfiltrationPoint sharedExfiltrationPoint = scavExfiltrationPoint as SharedExfiltrationPoint;
             if (sharedExfiltrationPoint != null && sharedExfiltrationPoint.IsMandatoryForScavs)
             {
@@ -85,7 +85,7 @@ internal class InitAllExfiltrationPointsPatch : ModulePatch
 
         foreach (ExfiltrationPoint exfiltrationPoint in __instance.ExfiltrationPoints)
         {
-            Plugin.LogSource.LogWarning("PMC Exfil name = " + exfiltrationPoint.Settings.Name);
+            Plugin.LogSource.LogInfo("[PTT] PMC Exfil name = " + exfiltrationPoint.Settings.Name);
             exitName = exfiltrationPoint.Settings.Name;
             LocationExitClass locationExit = settings.FirstOrDefault(new Func<LocationExitClass, bool>(NameMatches));
             int num = Array.IndexOf(source, exfiltrationPoint) + 1;

@@ -16,11 +16,9 @@ internal class OnGameStartedPatch() : ModulePatch
     [PatchPrefix]
     public static bool PatchPrefix()
     {
-        var exfilsTargetsService = Singleton<ExfilsTargetsService>.Instance;
-
-        if (exfilsTargetsService != null)
+        if (Plugin.ExfilsTargetsService != null)
         {
-            exfilsTargetsService.Init();
+            Plugin.ExfilsTargetsService.Init();
         }
         else
         {

@@ -13,17 +13,22 @@ public class Plugin : BaseUnityPlugin
 {
     public static bool FikaIsInstalled { get; private set; }
     public static ManualLogSource LogSource { get; private set; }
+    public static ExfilsTargetsService ExfilsTargetsService;
 
     protected void Awake()
     {
-        LogSource = Logger;
         Logger.LogInfo($"[PTT] Plugin {PluginInfo.PLUGIN_GUID} is loading...");
 
+        LogSource = Logger;
         FikaIsInstalled = Chainloader.PluginInfos.ContainsKey("com.fika.core");
+        ExfilsTargetsService = new ExfilsTargetsService();
+
+        if (FikaIsInstalled)
+        {
+            Logger.LogInfo($"[PTT] Fika.Core detected");
+        }
 
         Settings.Config.Init(Config);
-        Singleton<ExfilsTargetsService>.Create(new ExfilsTargetsService());
-
         new Patches.HideLockedTraderCardPatch().Enable();
         new Patches.HideLockedTraderPanelPatch().Enable();
         new Patches.InitAllExfiltrationPointsPatch().Enable();
@@ -38,16 +43,16 @@ public class Plugin : BaseUnityPlugin
     {
 
         InteractableExfilsService interactableExfilsService = Singleton<InteractableExfilsService>.Instance;
-        var exfilsTargetsService = Singleton<ExfilsTargetsService>.Instance;
+
         if (interactableExfilsService != null)
         {
-            var exfilPromptService = new ExfilPromptService(interactableExfilsService, exfilsTargetsService);
+            var exfilPromptService = new ExfilPromptService(interactableExfilsService, ExfilsTargetsService);
             exfilPromptService.InitPromptHandlers();
-            Logger.LogInfo($"[PTT] Interactable Exfils API: initialized exfils prompt handlers");
+            Logger.LogInfo($"[PTT] Jehree's Interactable Exfils API: initialized exfils prompt service");
         }
         else
         {
-            Logger.LogError($"[PTT] Interactable exfils API: not found");
+            Logger.LogError($"[PTT] Jehree's Interactable Exfils API: not found");
         }
     }
 }

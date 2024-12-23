@@ -5,58 +5,66 @@ using System;
 using System.Collections.Generic;
 
 using PTT.Helpers;
+using PTT.Data;
 
 namespace PTT.Services;
 
 public static class CustomExfilService
 {
-    public static bool ExtractTo(ExfiltrationPoint exfiltrationPoint, string customExtractName)
+    public static void ExtractTo(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
     {
         if (Plugin.FikaIsInstalled)
         {
-            return CustomExfilServiceFika.ExtractTo(exfiltrationPoint, customExtractName);
+            CustomExfilServiceFika.ExtractTo(exfil, exfilTarget);
+            return;
         }
 
+        string customExtractName = exfilTarget.GetCustomExitName(exfil);
         LocalGame localGame = Singleton<AbstractGame>.Instance as LocalGame;
         Player player = Singleton<GameWorld>.Instance.MainPlayer;
+
+        // TODO: log -> started extraction on customExtractName
 
         if (localGame == null)
         {
             // TODO: log error
-            return false;
+            return;
         }
 
         if (player == null)
         {
             // TODO: log error
-            return false;
+            return;
         }
 
         localGame.Stop(player.ProfileId, ExitStatus.Survived, customExtractName, 0f);
-        return true;
+        // TODO: log -> local game stopped
     }
 
-    // TODO: fix this code smell (the 2 string params)
-    public static bool TransitTo(string locationId, string customTransitName)
+    public static void TransitTo(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
     {
         if (Plugin.FikaIsInstalled)
         {
-            return CustomExfilServiceFika.TransitTo(locationId, customTransitName);
+            CustomExfilServiceFika.TransitTo(exfil, exfilTarget);
+            return;
         }
+
+        TransitPoint transit = Transit.Create(exfil, exfilTarget);
+        string customTransitName = transit.parameters.name;
+        // TODO: log -> started transit on customTransitName
 
         if (!TransitControllerAbstractClass.Exist(out GClass1642 vanillaTransitController))
         {
             // TODO: log error
-            return false;
+            return;
         }
 
         Player player = Singleton<GameWorld>.Instance.MainPlayer;
         if (player == null)
         {
             // TODO: log error
-            return false;
+            return;
         }
-
 
         Dictionary<string, ProfileKey> profiles = [];
         profiles.Add(player.ProfileId, new()
@@ -69,8 +77,7 @@ public static class CustomExfilService
         string transitHash = Guid.NewGuid().ToString();
         int playersCount = 1;
 
-        TransitPoint transit = Transit.Create(locationId, customTransitName);
         vanillaTransitController.Transit(transit, playersCount, transitHash, profiles, player);
-        return true;
+        // TODO: log -> transit done
     }
 }
