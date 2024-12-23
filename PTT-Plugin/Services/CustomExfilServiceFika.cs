@@ -4,7 +4,6 @@ using Comfort.Common;
 using Fika.Core.Coop.GameMode;
 using Fika.Core.Coop.Players;
 using System;
-using Fika.Core.Coop.HostClasses;
 using System.Collections.Generic;
 using PTT.Helpers;
 
