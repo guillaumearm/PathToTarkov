@@ -4,7 +4,7 @@ namespace PTT.Helpers;
 
 static class Transit
 {
-    static public TransitPoint Create(string locationId, string customExfilName)
+    static public TransitPoint Create(string locationId, string customTransitName)
     {
         return new TransitPoint
         {
@@ -15,8 +15,8 @@ static class Transit
             {
                 active = true,
                 id = 1,
-                name = customExfilName,
-                description = customExfilName,
+                name = customTransitName,
+                description = customTransitName,
                 conditions = string.Empty,
                 target = locationId, // should be "_Id" of the corresponding location base but not needed here
                 location = locationId,

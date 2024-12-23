@@ -11,7 +11,7 @@ namespace PTT.Services;
 
 public static class CustomExfilServiceFika
 {
-    public static bool ExtractTo(ExfiltrationPoint exfiltrationPoint, string customExfilName)
+    public static bool ExtractTo(ExfiltrationPoint exfiltrationPoint, string customExtractName)
     {
         CoopGame coopGame = (CoopGame)Singleton<IFikaGame>.Instance;
         CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
@@ -21,13 +21,13 @@ public static class CustomExfilServiceFika
             return false;
         }
 
-        coopGame.ExitLocation = customExfilName;
+        coopGame.ExitLocation = customExtractName;
         coopGame.Extract(coopPlayer, exfiltrationPoint, null);
         return true;
     }
 
     // TODO: fix this code smell (the 2 string params)
-    public static bool TransitTo(string locationId, string customExfilName)
+    public static bool TransitTo(string locationId, string customTransitName)
     {
         CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
         if (coopPlayer == null)
@@ -53,7 +53,7 @@ public static class CustomExfilServiceFika
         string transitHash = Guid.NewGuid().ToString();
         int playersCount = 1;
 
-        TransitPoint transit = Transit.Create(locationId, customExfilName);
+        TransitPoint transit = Transit.Create(locationId, customTransitName);
         vanillaTransitController.Transit(transit, playersCount, transitHash, profiles, coopPlayer);
         return true;
     }

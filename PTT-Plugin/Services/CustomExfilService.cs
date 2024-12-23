@@ -10,11 +10,11 @@ namespace PTT.Services;
 
 public static class CustomExfilService
 {
-    public static bool ExtractTo(ExfiltrationPoint exfiltrationPoint, string customExfilName)
+    public static bool ExtractTo(ExfiltrationPoint exfiltrationPoint, string customExtractName)
     {
         if (Plugin.FikaIsInstalled)
         {
-            return CustomExfilServiceFika.ExtractTo(exfiltrationPoint, customExfilName);
+            return CustomExfilServiceFika.ExtractTo(exfiltrationPoint, customExtractName);
         }
 
         LocalGame localGame = Singleton<AbstractGame>.Instance as LocalGame;
@@ -32,16 +32,16 @@ public static class CustomExfilService
             return false;
         }
 
-        localGame.Stop(player.ProfileId, ExitStatus.Survived, customExfilName, 0f);
+        localGame.Stop(player.ProfileId, ExitStatus.Survived, customExtractName, 0f);
         return true;
     }
 
     // TODO: fix this code smell (the 2 string params)
-    public static bool TransitTo(string locationId, string customExfilName)
+    public static bool TransitTo(string locationId, string customTransitName)
     {
         if (Plugin.FikaIsInstalled)
         {
-            return CustomExfilServiceFika.TransitTo(locationId, customExfilName);
+            return CustomExfilServiceFika.TransitTo(locationId, customTransitName);
         }
 
         if (!TransitControllerAbstractClass.Exist(out GClass1642 vanillaTransitController))
@@ -69,7 +69,7 @@ public static class CustomExfilService
         string transitHash = Guid.NewGuid().ToString();
         int playersCount = 1;
 
-        TransitPoint transit = Transit.Create(locationId, customExfilName);
+        TransitPoint transit = Transit.Create(locationId, customTransitName);
         vanillaTransitController.Transit(transit, playersCount, transitHash, profiles, player);
         return true;
     }

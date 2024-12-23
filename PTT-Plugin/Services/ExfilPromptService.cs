@@ -43,15 +43,16 @@ public class ExfilPromptService(
             {
                 // TODO: i18n support with custom transit displayName
                 string actionName = $"Transit to {exfilTarget.transitMapId}";
-                string customExfilName = $"{exfil.Settings.Name}.{exfilTarget.transitMapId}.{exfilTarget.transitSpawnPointId}";
+                string customTransitName = $"{exfil.Settings.Name}.{exfilTarget.transitMapId}.{exfilTarget.transitSpawnPointId}";
 
                 var transitAction = new CustomExfilAction(actionName, false, () =>
                 {
-                    bool successfullyTransited = CustomExfilService.TransitTo(exfilTarget.transitMapId, customExfilName);
+                    Plugin.LogSource.LogInfo("[PTT] transit exfil action triggered");
+                    bool successfullyTransited = CustomExfilService.TransitTo(exfilTarget.transitMapId, customTransitName);
 
                     if (successfullyTransited)
                     {
-                        Plugin.LogSource.LogInfo("[PTT] successfully transited");
+                        Plugin.LogSource.LogInfo($"[PTT] successfully transited to {customTransitName}");
                     }
                     else
                     {
@@ -65,20 +66,17 @@ public class ExfilPromptService(
             {
                 // TODO: i18n support (use the offraid position displayName)
                 string actionName = $"Extract to {exfilTarget.offraidPosition}";
-                string customExfilName = $"{exfil.Settings.Name}.{exfilTarget.offraidPosition}";
+                string customExtractName = $"{exfil.Settings.Name}.{exfilTarget.offraidPosition}";
 
                 var escapeAction = new CustomExfilAction(actionName, false, () =>
                 {
-                    Plugin.LogSource.LogInfo("[PTT] escape action triggered!");
+                    Plugin.LogSource.LogInfo("[PTT] extract exfil action triggered");
 
-                    // TODO: uncomment this
-                    // exfil.Settings.Name = customExfilName;
-
-                    bool successfullyExtracted = CustomExfilService.ExtractTo(exfil, customExfilName);
+                    bool successfullyExtracted = CustomExfilService.ExtractTo(exfil, customExtractName);
 
                     if (successfullyExtracted)
                     {
-                        Plugin.LogSource.LogInfo("[PTT] successfully extracted");
+                        Plugin.LogSource.LogInfo($"[PTT] successfully extracted to {customExtractName}");
                     }
                     else
                     {
