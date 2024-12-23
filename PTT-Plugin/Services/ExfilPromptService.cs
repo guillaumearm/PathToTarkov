@@ -9,7 +9,6 @@ using System.Collections.Generic;
 namespace PTT.Services;
 
 public class ExfilPromptService(
-    ManualLogSource Logger,
     InteractableExfilsService ieService,
     ExfilsTargetsService exfilsTargetsService
 )
@@ -34,7 +33,7 @@ public class ExfilPromptService(
         }
 
 
-        Logger.LogInfo($"[PTT] exfil.Settings.Name = {exfil.Settings.Name}");
+        Plugin.LogSource.LogInfo($"[PTT] exfil.Settings.Name = {exfil.Settings.Name}");
 
         List<CustomExfilAction> actions = [];
 
@@ -49,15 +48,15 @@ public class ExfilPromptService(
 
                 var transitAction = new CustomExfilAction(actionName, false, () =>
                 {
-                    bool successfullyTransited = CustomExfilService.TransitTo(exfilTarget.transitMapId, exfil.Settings.Name, customExfilName);
+                    bool successfullyTransited = CustomExfilService.TransitTo(exfilTarget.transitMapId, customExfilName);
 
                     if (successfullyTransited)
                     {
-                        Logger.LogInfo("[PTT] successfully transited");
+                        Plugin.LogSource.LogInfo("[PTT] successfully transited");
                     }
                     else
                     {
-                        Logger.LogError("[PTT] cannot transit");
+                        Plugin.LogSource.LogError("[PTT] cannot transit");
                     }
                 });
 
@@ -71,7 +70,7 @@ public class ExfilPromptService(
 
                 var escapeAction = new CustomExfilAction(actionName, false, () =>
                 {
-                    Logger.LogInfo("[PTT] escape action triggered!");
+                    Plugin.LogSource.LogInfo("[PTT] escape action triggered!");
 
                     // TODO: uncomment this
                     // exfil.Settings.Name = customExfilName;
@@ -80,11 +79,11 @@ public class ExfilPromptService(
 
                     if (successfullyExtracted)
                     {
-                        Logger.LogInfo("[PTT] successfully extracted");
+                        Plugin.LogSource.LogInfo("[PTT] successfully extracted");
                     }
                     else
                     {
-                        Logger.LogError("[PTT] cannot extract");
+                        Plugin.LogSource.LogError("[PTT] cannot extract");
                     }
                 });
 

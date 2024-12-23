@@ -7,7 +7,7 @@ using Comfort.Common;
 
 namespace PTT.Services;
 
-public class ExfilsTargetsService(ManualLogSource Logger)
+public class ExfilsTargetsService
 {
     public ExfilsTargetsResponse ExfilsTargets { get; private set; } = new() { data = { } };
 
@@ -22,19 +22,19 @@ public class ExfilsTargetsService(ManualLogSource Logger)
 
         if (locationId == null || locationId == "")
         {
-            Logger.LogError($"[PTT] Fatal Error: no LocationId found in GameWorld");
+            Plugin.LogSource.LogError($"[PTT] Fatal Error: no LocationId found in GameWorld");
             return;
         }
 
         try
         {
-            Logger.LogInfo($"[PTT] calling FetchExfilsTargets for locationId {locationId}");
+            Plugin.LogSource.LogInfo($"[PTT] calling FetchExfilsTargets for locationId {locationId}");
             ExfilsTargets = HttpRequest.FetchExfilsTargets(locationId);
-            Logger.LogInfo($"[PTT] FetchExfilsTargets successfully called");
+            Plugin.LogSource.LogInfo($"[PTT] FetchExfilsTargets successfully called");
         }
         catch (Exception ex)
         {
-            Logger.LogError($"[PTT] Error occurred during request: {ex.Message}");
+            Plugin.LogSource.LogError($"[PTT] Error occurred during request: {ex.Message}");
         }
     }
 }

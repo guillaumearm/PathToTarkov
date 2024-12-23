@@ -3,6 +3,10 @@ using EFT.Interactive;
 using Comfort.Common;
 using Fika.Core.Coop.GameMode;
 using Fika.Core.Coop.Players;
+using System;
+using Fika.Core.Coop.HostClasses;
+using System.Collections.Generic;
+using PTT.Helpers;
 
 namespace PTT.Services;
 
@@ -23,39 +27,35 @@ public static class CustomExfilServiceFika
         return true;
     }
 
-    public static bool TransitTo(string locationId, string originalExitName, string customExfilName)
+    // TODO: fix this code smell (the 2 string params)
+    public static bool TransitTo(string locationId, string customExfilName)
     {
-        CoopGame coopGame = (CoopGame)Singleton<IFikaGame>.Instance;
         CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
-
-        if (coopGame == null || coopPlayer == null)
+        if (coopPlayer == null)
         {
+            // TODO: log error
             return false;
         }
 
-        bool preparedTransit = Helpers.Transit.PrepareTransits(locationId);
-
-        if (!preparedTransit)
+        if (!TransitControllerAbstractClass.Exist(out GClass1642 vanillaTransitController))
         {
+            // TODO: log error
             return false;
         }
 
-
-        var tp = new TransitPoint
+        Dictionary<string, ProfileKey> profiles = [];
+        profiles.Add(coopPlayer.ProfileId, new()
         {
-            parameters = new LocationSettingsClass.Location.TransitParameters
-            {
-                id = 1,
-                name = customExfilName,
-                target = locationId,
-                location = locationId,
-            }
-        };
+            isSolo = true,
+            keyId = coopPlayer.GroupId,
+            _id = coopPlayer.ProfileId,
+        });
 
-        // TODO: remove this because it look like it's not used
-        // coopGame.ExitLocation = customExfilName;
-        coopGame.ExitLocation = originalExitName;
-        coopGame.Extract(coopPlayer, null, tp);
+        string transitHash = Guid.NewGuid().ToString();
+        int playersCount = 1;
+
+        TransitPoint transit = Transit.Create(locationId, customExfilName);
+        vanillaTransitController.Transit(transit, playersCount, transitHash, profiles, coopPlayer);
         return true;
     }
 }
