@@ -19,6 +19,7 @@ import {
 
 import { getTemplateIdFromStashId, StashController } from './stash-controller';
 import { TradersController } from './traders-controller';
+import { FleaController } from './flea-controller';
 import type { DependencyContainer } from 'tsyringe';
 import type { LocationController } from '@spt/controllers/LocationController';
 import { deepClone, shuffle } from './utils';
@@ -60,6 +61,7 @@ const getIndexedLocations = (locations: ILocations): IndexedLocations => {
 export class PathToTarkovController {
   public stashController: StashController;
   public tradersController: TradersController;
+  public fleaController: FleaController;
 
   // configs are indexed by sessionId
   private configCache: Record<string, Config> = {};
@@ -99,6 +101,10 @@ export class PathToTarkovController {
       configServer,
       this.logger,
     );
+	this.fleaController = new FleaController(
+		db,
+		configServer,
+	);
     this.overrideControllers();
   }
 
@@ -243,6 +249,12 @@ export class PathToTarkovController {
       offraidPosition,
       sessionId,
     );
+
+	if (config.flea && config.flea.access_via)
+		this.fleaController.updateFlea(
+		  config.flea.access_via,
+		  offraidPosition,
+		);
 
     this.saveServer.saveProfile(sessionId);
   }
