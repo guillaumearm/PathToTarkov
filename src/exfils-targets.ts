@@ -1,6 +1,5 @@
 import type { Config, MapName } from './config';
 import { resolveLocationIdFromMapName, resolveMapNameFromLocation } from './map-name-resolver';
-import { ensureArray } from './utils';
 
 // Warning: This type should be the same than the corresponding client type
 export type ExfilTarget = {
@@ -36,7 +35,7 @@ export const getExfilsTargets = (config: Config, mapName: MapName): ExfilsTarget
   }
 
   void Object.keys(exfilsConfig).forEach(exfilName => {
-    const targets = ensureArray(exfilsConfig[exfilName]).map<ExfilTarget>(targetValue => {
+    const targets = exfilsConfig[exfilName].map<ExfilTarget>(targetValue => {
       const parsed = parseExilTargetFromPTTConfig(targetValue);
 
       return {
