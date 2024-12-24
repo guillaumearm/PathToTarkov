@@ -19,9 +19,9 @@ public static class CustomExfilService
             return;
         }
 
-        string customExtractName = exfilTarget.GetCustomExitName(exfil);
         LocalGame localGame = Singleton<AbstractGame>.Instance as LocalGame;
         Player player = Singleton<GameWorld>.Instance.MainPlayer;
+        string customExtractName = exfilTarget.GetCustomExitName(exfil);
 
         // TODO: log -> started extraction on customExtractName
 
@@ -37,18 +37,13 @@ public static class CustomExfilService
             return;
         }
 
-        localGame.Stop(player.ProfileId, ExitStatus.Survived, customExtractName, 0f);
+        float delay = 0f;
+        localGame.Stop(player.ProfileId, ExitStatus.Survived, customExtractName, delay);
         // TODO: log -> local game stopped
     }
 
     public static void TransitTo(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
     {
-        if (Plugin.FikaIsInstalled)
-        {
-            CustomExfilServiceFika.TransitTo(exfil, exfilTarget);
-            return;
-        }
-
         TransitPoint transit = Transit.Create(exfil, exfilTarget);
         string customTransitName = transit.parameters.name;
         // TODO: log -> started transit on customTransitName
