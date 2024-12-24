@@ -1,6 +1,7 @@
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { ConfigServer } from '@spt/servers/ConfigServer';
 import type { ConfigTypes } from '@spt/models/enums/ConfigTypes';
+import type { Config } from './config';
 import { checkAccessVia } from './helpers';
 
 export class FleaController{
