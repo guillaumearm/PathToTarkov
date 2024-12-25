@@ -5,6 +5,7 @@ using InteractableExfilsAPI.Common;
 using System.Linq;
 using System.Collections.Generic;
 using PTT.Data;
+using PTT.Helpers;
 
 namespace PTT.Services;
 
@@ -49,7 +50,7 @@ public class ExfilPromptService(
 
         if (!indexedExfilsTargets.TryGetValue(exitName, out List<ExfilTarget> exfilTargets))
         {
-            Plugin.LogSource.LogWarning($"[PTT] cannot retrieve exfil targets for exfil '{exfil.Settings.Name}'");
+            Logger.Warning($"cannot retrieve exfil targets for exfil '{exfil.Settings.Name}'");
             return null;
         }
 

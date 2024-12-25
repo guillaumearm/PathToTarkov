@@ -21,19 +21,19 @@ public class ExfilsTargetsService
 
         if (locationId == null || locationId == "")
         {
-            Plugin.LogSource.LogError($"[PTT] Fatal Error: no LocationId found in GameWorld");
+            Logger.Error($"Fatal Error: no LocationId found in GameWorld");
             return;
         }
 
         try
         {
-            Plugin.LogSource.LogInfo($"[PTT] calling FetchExfilsTargets for locationId {locationId}");
+            Logger.Info($"calling FetchExfilsTargets for locationId {locationId}");
             ExfilsTargets = HttpRequest.FetchExfilsTargets(locationId);
-            Plugin.LogSource.LogInfo($"[PTT] FetchExfilsTargets successfully called");
+            Logger.Info($"FetchExfilsTargets successfully called");
         }
         catch (Exception ex)
         {
-            Plugin.LogSource.LogError($"[PTT] Error occurred during request: {ex.Message}");
+            Logger.Error($"Error occurred during request: {ex.Message}");
         }
     }
 }

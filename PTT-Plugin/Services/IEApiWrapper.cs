@@ -1,6 +1,7 @@
 using Comfort.Common;
 using InteractableExfilsAPI;
 using InteractableExfilsAPI.Singletons;
+using PTT.Helpers;
 using PTT.Services;
 
 static public class IEApiWrapper
@@ -13,11 +14,11 @@ static public class IEApiWrapper
         {
             var exfilPromptService = new ExfilPromptService(interactableExfilsService, exfilsTargetsService);
             exfilPromptService.InitPromptHandlers();
-            Plugin.LogSource.LogInfo($"[PTT] Jehree's Interactable Exfils API: initialized exfils prompt service");
+            Logger.Info($"Jehree's Interactable Exfils API: initialized exfils prompt service");
         }
         else
         {
-            Plugin.LogSource.LogError($"[PTT] Jehree's Interactable Exfils API: not found");
+            Logger.Error($"Jehree's Interactable Exfils API: not found");
         }
     }
 }

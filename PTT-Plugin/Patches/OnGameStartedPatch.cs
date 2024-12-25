@@ -22,7 +22,7 @@ internal class OnGameStartedPatch() : ModulePatch
         }
         else
         {
-            Plugin.LogSource.LogError("[PTT] ExfilsTargetsService instance not found");
+            Helpers.Logger.Error("ExfilsTargetsService instance not found");
         }
 
         return true;

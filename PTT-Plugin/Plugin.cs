@@ -17,7 +17,8 @@ public class Plugin : BaseUnityPlugin
 
     protected void Awake()
     {
-        Logger.LogInfo($"[PTT] Plugin {PluginInfo.PLUGIN_GUID} is loading...");
+        Helpers.Logger.Init(Logger);
+        Helpers.Logger.Info($"Plugin {PluginInfo.PLUGIN_GUID} is loading...");
 
         LogSource = Logger;
         FikaIsInstalled = Chainloader.PluginInfos.ContainsKey("com.fika.core");
@@ -27,7 +28,7 @@ public class Plugin : BaseUnityPlugin
 
         if (FikaIsInstalled)
         {
-            Logger.LogInfo($"[PTT] Fika.Core plugin detected");
+            Helpers.Logger.Info($"Fika.Core plugin detected");
         }
 
         Settings.Config.Init(Config);
@@ -38,14 +39,14 @@ public class Plugin : BaseUnityPlugin
         new Patches.OnGameStartedPatch().Enable();
         new Patches.LocalRaidStartedPatch().Enable();
 
-        Logger.LogInfo($"[PTT] Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+        Helpers.Logger.Info($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
     }
 
     protected void Start()
     {
         if (InteractableExfilsApiIsInstalled)
         {
-            Logger.LogInfo($"[PTT] Jehree.InteractableExfilsAPI plugin detected");
+            Helpers.Logger.Info($"Jehree.InteractableExfilsAPI plugin detected");
             IEApiWrapper.Init(ExfilsTargetsService);
         }
     }

@@ -3,7 +3,7 @@ using PTT.Data;
 
 namespace PTT.Helpers;
 
-static class Transit
+internal static class Transit
 {
     static public TransitPoint Create(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
     {
