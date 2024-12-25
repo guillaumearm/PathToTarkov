@@ -49,7 +49,7 @@ public class ExfilPromptService(
 
         if (!indexedExfilsTargets.TryGetValue(exitName, out List<ExfilTarget> exfilTargets))
         {
-            Plugin.LogSource.LogError($"[PTT] cannot retrieve exfil targets for exfil '{exfil.Settings.Name}'");
+            Plugin.LogSource.LogWarning($"[PTT] cannot retrieve exfil targets for exfil '{exfil.Settings.Name}'");
             return null;
         }
 

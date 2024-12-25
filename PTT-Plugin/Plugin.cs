@@ -1,8 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using BepInEx.Bootstrap;
-using Comfort.Common;
-using InteractableExfilsAPI.Singletons;
 
 using PTT.Services;
 
@@ -15,17 +13,21 @@ public class Plugin : BaseUnityPlugin
     public static ManualLogSource LogSource { get; private set; }
     public static ExfilsTargetsService ExfilsTargetsService;
 
+    private static bool InteractableExfilsApiIsInstalled { get; set; }
+
     protected void Awake()
     {
         Logger.LogInfo($"[PTT] Plugin {PluginInfo.PLUGIN_GUID} is loading...");
 
         LogSource = Logger;
         FikaIsInstalled = Chainloader.PluginInfos.ContainsKey("com.fika.core");
+        InteractableExfilsApiIsInstalled = Chainloader.PluginInfos.ContainsKey("Jehree.InteractableExfilsAPI");
+
         ExfilsTargetsService = new ExfilsTargetsService();
 
         if (FikaIsInstalled)
         {
-            Logger.LogInfo($"[PTT] Fika.Core detected");
+            Logger.LogInfo($"[PTT] Fika.Core plugin detected");
         }
 
         Settings.Config.Init(Config);
@@ -41,18 +43,10 @@ public class Plugin : BaseUnityPlugin
 
     protected void Start()
     {
-
-        InteractableExfilsService interactableExfilsService = Singleton<InteractableExfilsService>.Instance;
-
-        if (interactableExfilsService != null)
+        if (InteractableExfilsApiIsInstalled)
         {
-            var exfilPromptService = new ExfilPromptService(interactableExfilsService, ExfilsTargetsService);
-            exfilPromptService.InitPromptHandlers();
-            Logger.LogInfo($"[PTT] Jehree's Interactable Exfils API: initialized exfils prompt service");
-        }
-        else
-        {
-            Logger.LogError($"[PTT] Jehree's Interactable Exfils API: not found");
+            Logger.LogInfo($"[PTT] Jehree.InteractableExfilsAPI plugin detected");
+            IEApiWrapper.Init(ExfilsTargetsService);
         }
     }
 }
