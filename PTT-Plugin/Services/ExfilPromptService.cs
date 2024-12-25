@@ -45,12 +45,30 @@ public class ExfilPromptService(
 
     private OnActionsAppliedResult ExfilPromptHandler(ExfiltrationPoint exfil, CustomExfilTrigger customExfilTrigger, bool exfilIsAvailableToPlayer)
     {
+        if (exfil == null)
+        {
+            Logger.Error("ExfilPromptHandler: ExfiltrationPoint is null");
+            return null;
+        }
+
+        if (exfil.Settings == null)
+        {
+            Logger.Error("ExfilPromptHandler: ExfiltrationPoint.Settings is null");
+            return null;
+        }
+
+        if (exfil.Settings.Name == null)
+        {
+            Logger.Error("ExfilPromptHandler: ExfiltrationPoint.Settings.Name is null");
+            return null;
+        }
+
         string exitName = exfil.Settings.Name;
         var indexedExfilsTargets = exfilsTargetsService.ExfilsTargets.data;
 
         if (!indexedExfilsTargets.TryGetValue(exitName, out List<ExfilTarget> exfilTargets))
         {
-            Logger.Warning($"cannot retrieve exfil targets for exfil '{exfil.Settings.Name}'");
+            Logger.Warning($"cannot retrieve exfil targets for exfil '{exitName}'");
             return null;
         }
 
