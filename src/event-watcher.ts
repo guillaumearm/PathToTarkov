@@ -181,6 +181,35 @@ export class EventWatcher {
     );
   }
 
+  // This part is here to handle regular extracts (e.g. when Interactable Exfils API is not installed)
+  private handleRegularExtracts(payload: EndOfRaidPayload): EndOfRaidPayload {
+    const mapName = resolveMapNameFromLocation(payload.locationName) as MapName;
+    const config = this.ptt.pathToTarkovController.getConfig(payload.sessionId);
+
+    const exitName = payload.exitName ?? '';
+    const exfilTargets = config.exfiltrations[mapName]?.[exitName] ?? [];
+
+    const foundOffraidPosition = exfilTargets.find(exfilTarget =>
+      Boolean(parseExilTargetFromPTTConfig(exfilTarget).targetOffraidPosition),
+    );
+
+    if (!foundOffraidPosition) {
+      throw new Error(
+        `cannot determine offraid position from config for map "${mapName}" using extract "${exitName}"`,
+      );
+    }
+
+    this.ptt.logger.warning(
+      `Path To Tarkov: new offraid position automatically determined from config for map "${mapName}" using extract "${exitName}"`,
+    );
+
+    return {
+      ...payload,
+      isTransit: false,
+      newOffraidPosition: foundOffraidPosition,
+    };
+  }
+
   private getEndOfRaidPayload(sessionId: string): EndOfRaidPayload {
     const {
       currentLocationName,
@@ -219,43 +248,20 @@ export class EventWatcher {
       throw new Error('raidCache.transitTargetMapName is null');
     }
 
-    // This part is here to handle regular extracts when Interactable Exfils API is not installed
-    let newOffraidPosition = targetOffraidPosition;
-    let isTransit = !targetOffraidPosition;
-
-    if (exitName && !targetOffraidPosition && !transitTargetMapName && !transitTargetSpawnPointId) {
-      isTransit = false;
-
-      const mapName = resolveMapNameFromLocation(currentLocationName) as MapName;
-      const config = this.ptt.pathToTarkovController.getConfig(sessionId);
-
-      const exfilTargets = config.exfiltrations[mapName]?.[exitName] ?? [];
-
-      const foundOffraidPosition = exfilTargets.find(exfilTarget =>
-        Boolean(parseExilTargetFromPTTConfig(exfilTarget).targetOffraidPosition),
-      );
-
-      if (!foundOffraidPosition) {
-        throw new Error(
-          `cannot determine offraid position from config for map "${mapName}" using extract "${exitName}"`,
-        );
-      }
-
-      newOffraidPosition = foundOffraidPosition;
-
-      this.ptt.logger.warning(
-        `Path To Tarkov: new offraid position automatically determined from config for map "${mapName}" using extract "${exitName}"`,
-      );
-    }
-
-    return {
+    const endOfRaidPayload: EndOfRaidPayload = {
       sessionId,
       locationName: currentLocationName,
       isPlayerScav,
       exitName,
-      newOffraidPosition,
-      isTransit,
+      newOffraidPosition: targetOffraidPosition,
+      isTransit: !targetOffraidPosition,
     };
+
+    if (exitName && !targetOffraidPosition && !transitTargetMapName && !transitTargetSpawnPointId) {
+      return this.handleRegularExtracts(endOfRaidPayload);
+    }
+
+    return endOfRaidPayload;
   }
 
   private runEndOfRaidCallback(sessionId: string): void {
