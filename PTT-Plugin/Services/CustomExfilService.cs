@@ -23,23 +23,23 @@ public static class CustomExfilService
         Player player = Singleton<GameWorld>.Instance.MainPlayer;
         string customExtractName = exfilTarget.GetCustomExitName(exfil);
 
-        // TODO: log -> started extraction on customExtractName
+        Logger.Info($"started extraction on '{customExtractName}'");
 
         if (localGame == null)
         {
-            // TODO: log error
+            Logger.Error($"cannot extract because no LocalGame found");
             return;
         }
 
         if (player == null)
         {
-            // TODO: log error
+            Logger.Error($"cannot extract because no Player found");
             return;
         }
 
         float delay = 0f;
         localGame.Stop(player.ProfileId, ExitStatus.Survived, customExtractName, delay);
-        // TODO: log -> local game stopped
+        Logger.Info($"local game stopped for profile '${player.ProfileId}'");
     }
 
     public static void TransitTo(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
@@ -52,18 +52,18 @@ public static class CustomExfilService
 
         TransitPoint transit = Transit.Create(exfil, exfilTarget);
         string customTransitName = transit.parameters.name;
-        // TODO: log -> started transit on customTransitName
+        Logger.Info($"started transit on '{customTransitName}'");
 
         if (!TransitControllerAbstractClass.Exist(out GClass1642 vanillaTransitController))
         {
-            // TODO: log error
+            Logger.Error($"cannot transit because no TransitControllerAbstractClass found");
             return;
         }
 
         Player player = Singleton<GameWorld>.Instance.MainPlayer;
         if (player == null)
         {
-            // TODO: log error
+            Logger.Error($"cannot transit because no player found");
             return;
         }
 
@@ -79,6 +79,6 @@ public static class CustomExfilService
         int playersCount = 1;
 
         vanillaTransitController.Transit(transit, playersCount, transitHash, profiles, player);
-        // TODO: log -> transit done
+        Logger.Info($"transit done for profile '${player.ProfileId}'");
     }
 }

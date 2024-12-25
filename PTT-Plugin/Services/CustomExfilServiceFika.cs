@@ -18,24 +18,24 @@ public static class CustomExfilServiceFika
         CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
 
         string customExtractName = exfilTarget.GetCustomExitName(exfil);
-        // TODO: log -> started fika extraction on customExtractName
+        Logger.Info($"(FIKA) started extraction on '{customExtractName}'");
 
         if (coopGame == null)
         {
-            // TODO: log error
+            Logger.Error($"(FIKA) cannot extract because no CoopGame found");
             return;
         }
 
         if (coopPlayer == null)
         {
-            // TODO: log error
+            Logger.Error($"(FIKA) cannot extract because no CoopPlayer found");
             return;
         }
 
         coopGame.ExitLocation = customExtractName; // not sure if it's needed
         coopGame.Extract(coopPlayer, exfil, null);
+        Logger.Info($"(FIKA) extraction done for profile {coopPlayer.ProfileId}");
 
-        // TODO: log -> fika extraction done
     }
 
     public static void TransitTo(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
@@ -43,29 +43,35 @@ public static class CustomExfilServiceFika
         CoopGame coopGame = (CoopGame)Singleton<IFikaGame>.Instance;
         CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
 
-        string customExtractName = exfilTarget.GetCustomExitName(exfil);
-        // TODO: log -> started fika transit on customExtractName
+        string customTransitName = exfilTarget.GetCustomExitName(exfil);
+        Logger.Info($"started transit on '{customTransitName}'");
 
         if (coopGame == null)
         {
-            // TODO: log error
+            Logger.Error($"(FIKA) cannot transit because no CoopGame found");
             return;
         }
 
         if (coopPlayer == null)
         {
-            // TODO: log error
+            Logger.Error($"(FIKA) cannot transit because no CoopPlayer found");
             return;
         }
 
-        if (!TransitControllerAbstractClass.Exist(out GClass1642 vanillaTransitController))
+        if (!TransitControllerAbstractClass.Exist(out GClass1642 transitController))
         {
-            // TODO: log errors
+            Logger.Error($"(FIKA) cannot transit because no TransitControllerAbstractClass found");
             return;
         }
 
         TransitPoint transit = Transit.Create(exfil, exfilTarget);
         var localRaidSettings = LocalRaidSettingsRetriever.Settings;
+
+        if (localRaidSettings == null)
+        {
+            Logger.Error($"(FIKA) cannot transit because no LocalRaidSettings found");
+            return;
+        }
 
         // 1. set the transition status
         string location = transit.parameters.location;
@@ -76,12 +82,24 @@ public static class CustomExfilServiceFika
         }
         else
         {
-            // TODO: log errors
+            Logger.Error($"(FIKA) cannot transit because no TarkovApplication found");
             return;
         }
 
 
-        // 2. prepare profiles
+        // 2. add the transitPayload
+        var transitPayload = CreateTransitPayload(location, transitController, coopPlayer);
+        transitController.alreadyTransits.Add(coopPlayer.ProfileId, transitPayload);
+
+        // 3. trigger extract
+        coopGame.ExitLocation = customTransitName; // not sure if it's needed
+        coopGame.Extract(coopPlayer, null, transit);
+        Logger.Info($"(FIKA) transit done for profile '${coopPlayer.ProfileId}'");
+    }
+
+    private static GClass1926 CreateTransitPayload(string locationName, GClass1642 transitController, CoopPlayer coopPlayer)
+    {
+        // 1. create player profiles
         Dictionary<string, ProfileKey> profiles = new() {
             {coopPlayer.ProfileId, new()
                 {
@@ -92,25 +110,20 @@ public static class CustomExfilServiceFika
             }
         };
 
-        // 3. prepare transitPayload (TODO: refactor)
+        // 2. create the transit payload
         GClass1926 transitPayload = new()
         {
             hash = Guid.NewGuid().ToString(),
             playersCount = 1,
             ip = "",
-            location = location,
+            location = locationName,
             profiles = profiles,
-            transitionRaidId = vanillaTransitController.summonedTransits[coopPlayer.ProfileId].raidId,
-            raidMode = eraidMode,
+            transitionRaidId = transitController?.summonedTransits?[coopPlayer.ProfileId]?.raidId,
+            raidMode = ERaidMode.Local,
             side = coopPlayer.Side is EPlayerSide.Savage ? ESideType.Savage : ESideType.Pmc,
-            dayTime = localRaidSettings.timeVariant
+            dayTime = LocalRaidSettingsRetriever.Settings.timeVariant
         };
 
-        // 4. add transitPayload
-        vanillaTransitController.alreadyTransits.Add(coopPlayer.ProfileId, transitPayload);
-
-        // 5. trigger extract
-        coopGame.ExitLocation = customExtractName; // not sure if it's needed
-        coopGame.Extract(coopPlayer, null, transit);
+        return transitPayload;
     }
 }
