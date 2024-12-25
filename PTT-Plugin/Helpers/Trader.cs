@@ -1,8 +1,8 @@
 using EFT;
 
-namespace PTT.Utils;
+namespace PTT.Helpers;
 
-internal class Trader
+internal static class Trader
 {
     internal static bool IsHidden(ref Profile.TraderInfo trader)
     {

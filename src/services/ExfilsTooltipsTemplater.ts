@@ -1,3 +1,4 @@
+import { parseExilTargetFromPTTConfig } from '../exfils-targets';
 import {
   AVAILABLE_LOCALES,
   type ByLocale,
@@ -81,7 +82,16 @@ export class ExfilsTooltipsTemplater {
         const exfils = config.exfiltrations[mapName as MapName];
 
         Object.keys(exfils).forEach(exfilName => {
-          const offraidPosition = exfils[exfilName];
+          const exfilTargets = exfils[exfilName] ?? [];
+
+          const foundTargetOffraidPosition =
+            exfilTargets
+              .map(exfilTarget => {
+                // here we need to parse in order to make sure we get an offraidPosition and not a transit notation
+                const parsed = parseExilTargetFromPTTConfig(exfilTarget);
+                return parsed.targetOffraidPosition;
+              })
+              .find(Boolean) ?? '';
 
           const localeName = locale as LocaleName;
           const localeKey = this.localeResolver.retrieveKey(exfilName, localeName);
@@ -90,7 +100,7 @@ export class ExfilsTooltipsTemplater {
             locale: localeName,
             localeKey,
             exfilName,
-            offraidPosition,
+            offraidPosition: foundTargetOffraidPosition,
           };
 
           localeValues[localeKey] = this.computeLocaleValue(config, computeParams);

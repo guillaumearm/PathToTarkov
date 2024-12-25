@@ -14,7 +14,7 @@ internal class HideLockedTraderPanelPatch : ModulePatch
     [PatchPostfix]
     protected static void Postfix(TraderPanel __instance, ref Profile.TraderInfo trader)
     {
-        if (Utils.Trader.IsHidden(ref trader))
+        if (Helpers.Trader.IsHidden(ref trader))
         {
             __instance.HideGameObject();
         }
@@ -30,7 +30,7 @@ internal class HideLockedTraderCardPatch : ModulePatch
     [PatchPostfix]
     protected static void Postfix(TraderCard __instance, ref Profile.TraderInfo trader)
     {
-        if (Utils.Trader.IsHidden(ref trader))
+        if (Helpers.Trader.IsHidden(ref trader))
         {
             __instance.HideGameObject();
         }

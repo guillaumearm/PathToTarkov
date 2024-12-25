@@ -1,6 +1,14 @@
 import type { ISptProfile } from '@spt/models/eft/profile/ISptProfile';
 import { join } from 'path';
-import { deepClone, fileExists, getPTTMongoId, readJsonFile, writeJsonFile } from './utils';
+import {
+  deepClone,
+  ensureArray,
+  fileExists,
+  getPTTMongoId,
+  readJsonFile,
+  writeJsonFile,
+} from './utils';
+import { parseExilTargetFromPTTConfig } from './exfils-targets';
 
 export type ByMap<T> = {
   factory4_day: T;
@@ -152,8 +160,12 @@ type SpawnPointName = string;
 type OffraidPositionName = string;
 type ExtractName = string;
 
+type RawExfiltrations = ByMap<{
+  [extractName: ExtractName]: OffraidPositionName | OffraidPositionName[];
+}>;
+
 type Exfiltrations = ByMap<{
-  [extractName: ExtractName]: OffraidPositionName;
+  [extractName: ExtractName]: OffraidPositionName[];
 }>;
 
 type Infiltrations = {
@@ -200,7 +212,8 @@ type RawConfig = {
   workbench_always_enabled: boolean;
   vanilla_exfils_requirements?: boolean; // no longer supported
   bypass_exfils_override?: boolean;
-  disable_all_transits?: boolean;
+  enable_automatic_transits_creation?: boolean;
+  enable_all_vanilla_transits?: boolean;
   bypass_uninstall_procedure: boolean;
   enable_run_through?: boolean;
   enable_legacy_ptt_api?: boolean;
@@ -210,7 +223,7 @@ type RawConfig = {
   hideout_secondary_stashes: RawStashConfig[];
   traders_access_restriction: boolean;
   traders_config: TradersConfig;
-  exfiltrations: Exfiltrations;
+  exfiltrations: RawExfiltrations;
   infiltrations: Infiltrations;
   infiltrations_config?: InfiltrationsConfig;
   exfiltrations_config?: Record<ExtractName, ExfiltrationConfig>; // TODO: validate in config-analysis
@@ -218,9 +231,13 @@ type RawConfig = {
   offraid_positions?: Record<OffraidPositionName, OffraidPositionDefinition>; // TODO: validate in config-analysis
 };
 
-export type Config = Omit<RawConfig, 'hideout_secondary_stashes' | 'infiltrations_config'> & {
+export type Config = Omit<
+  RawConfig,
+  'hideout_secondary_stashes' | 'infiltrations_config' | 'exfiltrations'
+> & {
   hideout_secondary_stashes: StashConfig[];
   infiltrations_config: InfiltrationsConfig;
+  exfiltrations: Exfiltrations;
 };
 
 export type UserConfig = {
@@ -315,25 +332,83 @@ const prepareGroundZeroHigh = <T>(maps: ByMap<T>): ByMap<T> => {
   return prepareGroundZeroHighPartial(maps) as ByMap<T>;
 };
 
+const fromRawExfiltrations = (rawExfiltrations: RawExfiltrations): Exfiltrations => {
+  const exfiltrations: Record<string, Record<string, string[]>> = {};
+
+  Object.keys(rawExfiltrations).forEach(mapName => {
+    const targetsByExfils = rawExfiltrations[mapName as MapName] ?? {};
+    exfiltrations[mapName] = {};
+
+    Object.keys(targetsByExfils).forEach(extractName => {
+      const exfilTargets = ensureArray(targetsByExfils[extractName]);
+      exfiltrations[mapName][extractName] = exfilTargets;
+    });
+  });
+
+  return exfiltrations as Exfiltrations;
+};
+
+// Warning: this mutate the exfiltrations config
+const prepareAutomaticTransitsCreation = (config: Config): void => {
+  const { infiltrations, exfiltrations } = config;
+
+  Object.keys(exfiltrations).forEach(mapName => {
+    const targetsByExfil = exfiltrations[mapName as MapName];
+
+    Object.keys(targetsByExfil).forEach(exfilName => {
+      const exfilTargets = targetsByExfil[exfilName];
+      const newExfilTargets: string[] = [];
+
+      exfilTargets.forEach(exfilTarget => {
+        newExfilTargets.push(exfilTarget);
+        const offraidPosition = parseExilTargetFromPTTConfig(exfilTarget).targetOffraidPosition;
+
+        if (offraidPosition && infiltrations[offraidPosition]) {
+          Object.keys(infiltrations[offraidPosition]).forEach(targetMapName => {
+            if (targetMapName !== mapName) {
+              const spawns = infiltrations[offraidPosition][targetMapName as MapName] ?? [];
+              spawns.forEach(spawnId => {
+                const createdExfilTarget = `${targetMapName}.${spawnId}`;
+                newExfilTargets.push(createdExfilTarget);
+              });
+            }
+          });
+        }
+      });
+
+      // to avoid duplicates
+      targetsByExfil[exfilName] = [...new Set(newExfilTargets)];
+    });
+  });
+};
+
 export const processConfig = (originalConfig: RawConfig): Config => {
-  const config = deepClone(originalConfig);
+  const rawConfig = deepClone(originalConfig);
 
-  config.exfiltrations = prepareGroundZeroHigh(config.exfiltrations);
+  rawConfig.exfiltrations = prepareGroundZeroHigh(rawConfig.exfiltrations);
 
-  Object.keys(config.infiltrations).forEach(offraidPosition => {
-    config.infiltrations[offraidPosition] = prepareGroundZeroHigh(
-      config.infiltrations[offraidPosition],
+  Object.keys(rawConfig.infiltrations).forEach(offraidPosition => {
+    rawConfig.infiltrations[offraidPosition] = prepareGroundZeroHigh(
+      rawConfig.infiltrations[offraidPosition],
     );
   });
 
-  const stashConfigs: StashConfig[] = config.hideout_secondary_stashes.map(toStashConfig);
-  const infiltrationsConfig = config.infiltrations_config ?? {};
+  const stashConfigs: StashConfig[] = rawConfig.hideout_secondary_stashes.map(toStashConfig);
+  const infiltrationsConfig = rawConfig.infiltrations_config ?? {};
+  const exfiltrations = fromRawExfiltrations(rawConfig.exfiltrations);
 
-  return {
-    ...config,
+  const config: Config = {
+    ...rawConfig,
     hideout_secondary_stashes: stashConfigs,
     infiltrations_config: infiltrationsConfig,
+    exfiltrations,
   };
+
+  if (config.enable_automatic_transits_creation) {
+    prepareAutomaticTransitsCreation(config);
+  }
+
+  return config;
 };
 
 const mergeAdditionalSpawnpoints = (

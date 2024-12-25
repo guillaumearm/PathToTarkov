@@ -7,6 +7,7 @@ import {
   type MapName,
   type SpawnConfig,
 } from './config';
+import { parseExilTargetFromPTTConfig } from './exfils-targets';
 import { ensureArray, isEmpty } from './utils';
 
 const MIN_NEEDED_MAPS = [
@@ -52,7 +53,10 @@ const checkAccessViaErrors = (
   return errors;
 };
 
-const getErrorsForOffraidPositions = (config: Config): string[] => {
+/**
+ * This will also check ptt transit custom notation, e.g. "factory4_day.Gate 3"
+ */
+const getErrorsForOffraidPositions = (config: Config, spawnConfig: SpawnConfig): string[] => {
   const errors: string[] = [];
 
   errors.push(
@@ -106,17 +110,48 @@ const getErrorsForOffraidPositions = (config: Config): string[] => {
     );
   });
 
-  // check exfils offraid positions
+  // check exfils targets (offraid positions + ptt transit custom notation)
   Object.keys(config.exfiltrations).forEach(mapName => {
-    const offraidByExfil = config.exfiltrations[mapName as MapName];
+    const targetsByExfil = config.exfiltrations[mapName as MapName];
 
-    Object.keys(offraidByExfil).forEach(extractName => {
-      const offraidPosition = offraidByExfil[extractName];
-      if (!config.infiltrations[offraidPosition]) {
-        errors.push(
-          `wrong offraidPosition: "${offraidPosition}" in exfiltrations.${mapName}.${extractName}`,
-        );
+    Object.keys(targetsByExfil).forEach(extractName => {
+      const exfilTargets = targetsByExfil[extractName];
+
+      if (!exfilTargets || exfilTargets.length === 0) {
+        errors.push(`no offraid position specified for exfil "${extractName}"`);
+        return;
       }
+
+      exfilTargets.forEach(exfilTarget => {
+        const parsed = parseExilTargetFromPTTConfig(exfilTarget);
+        const offraidPosition = parsed.targetOffraidPosition;
+
+        if (offraidPosition && !config.infiltrations[offraidPosition]) {
+          errors.push(
+            `wrong offraidPosition: "${offraidPosition}" in exfiltrations.${mapName}.${extractName}`,
+          );
+        }
+
+        if (!offraidPosition && (!parsed.transitTargetMapName || !parsed.transitTargetMapName)) {
+          errors.push(`cannot parse exfil target in exfiltrations.${mapName}.${extractName}`);
+        }
+
+        if (parsed.transitTargetMapName && parsed.transitTargetSpawnPointId) {
+          if (!ALLOWED_MAPS.includes(parsed.transitTargetMapName)) {
+            errors.push(
+              `bad exfil target in exfiltrations.${mapName}.${extractName}: ${parsed.transitTargetMapName} is now allowed as a map`,
+            );
+          }
+
+          const spawns = spawnConfig[parsed.transitTargetMapName as MapName] ?? {};
+
+          if (!spawns[parsed.transitTargetSpawnPointId]) {
+            errors.push(
+              `bad exfil target in exfiltrations.${mapName}.${extractName}: unknown spawn point id "${parsed.transitTargetSpawnPointId}"`,
+            );
+          }
+        }
+      });
     });
   });
 
@@ -162,10 +197,19 @@ const getErrorsForExfils = (config: Config): string[] => {
       errors.push(`${mapName} is now allowed as a map name in "exfiltrations"`);
     }
 
-    // 2. check for map with no exfils (only when all transits are disabled)
-    if (config.disable_all_transits && isEmpty(config.exfiltrations[mapName as MapName])) {
-      errors.push(`no exfils found for map ${mapName} in "exfiltrations"`);
-    }
+    // 2. check there is at least one exfil target
+    const targetsByExfil = config.exfiltrations[mapName as MapName] ?? {};
+    Object.keys(targetsByExfil).forEach(extractName => {
+      // 2bis. check there is no "." characters in given extractName
+      if (extractName.indexOf('.') !== -1) {
+        errors.push(`bad extract name "${extractName}": the "." character is forbidden`);
+      }
+
+      const exfilTargets = targetsByExfil[extractName];
+      if (exfilTargets.length === 0) {
+        errors.push(`no exfil targets found for "exfiltrations.${mapName}.${extractName}"`);
+      }
+    });
   });
 
   // 3. check for missing maps
@@ -185,6 +229,19 @@ const getErrorsForExfils = (config: Config): string[] => {
   });
 
   return errors;
+};
+
+const getWarningsForExfils = (config: Config): string[] => {
+  const warnings: string[] = [];
+
+  Object.keys(config.exfiltrations).forEach(mapName => {
+    const noVanillaTransits = !config.enable_all_vanilla_transits;
+    if (noVanillaTransits && isEmpty(config.exfiltrations[mapName as MapName])) {
+      warnings.push(`no exfils found for map ${mapName} in "exfiltrations"`);
+    }
+  });
+
+  return warnings;
 };
 
 // Note: offraidPosition is already checked by `getErrorsForOffraidPositions`
@@ -208,7 +265,7 @@ const getErrorsSecondaryStashes = (config: Config): string[] => {
   return errors;
 };
 
-const getWarningsSecondaryStahes = (config: Config): string[] => {
+const getWarningsSecondaryStashes = (config: Config): string[] => {
   const warnings: string[] = [];
   const offraidPositions = new Set<string>();
 
@@ -228,15 +285,22 @@ const getWarningsSecondaryStahes = (config: Config): string[] => {
 const getErrorsForInfils = (config: Config, spawnConfig: SpawnConfig): string[] => {
   const errors: string[] = [];
 
-  Object.values(config.infiltrations).forEach(spawnPointsByMap => {
+  Object.keys(config.infiltrations).forEach(offraidPosition => {
+    // 1. check offraidPosition format
+    if (offraidPosition.indexOf('.') !== -1) {
+      errors.push(`bad offraid position name "${offraidPosition}": the "." character is forbidden`);
+    }
+
+    const spawnPointsByMap = config.infiltrations[offraidPosition];
+
     Object.keys(spawnPointsByMap).forEach(mapName => {
-      // 1. check for map validity
+      // 2. check for map validity
       if (!ALLOWED_MAPS.includes(mapName)) {
         errors.push(`${mapName} is now allowed as a map name in "infiltrations"`);
         return;
       }
 
-      // 2. check for existing spawnpoints for given map (in player_spawnpoints.json)
+      // 3. check for existing spawnpoints for given map (in player_spawnpoints.json)
       if (!spawnConfig[mapName as MapName]) {
         errors.push(`no spawn points found for map ${mapName} in player_spawnpoints.json`);
         return;
@@ -297,6 +361,23 @@ const getErrorsForGeneralConfig = (config: Config): string[] => {
   return errors;
 };
 
+const getErrorsForSpawnConfig = (spawnConfig: SpawnConfig): string[] => {
+  const errors: string[] = [];
+
+  Object.keys(spawnConfig).forEach(mapName => {
+    const spawns = spawnConfig[mapName as MapName];
+    Object.keys(spawns).forEach(spawnPointName => {
+      if (spawnPointName.indexOf('.') !== -1) {
+        errors.push(
+          `Invalid name for spawnpoint "${spawnPointName}": the "." character is forbidden`,
+        );
+      }
+    });
+  });
+
+  return errors;
+};
+
 export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigValidationResult => {
   const errors: string[] = [];
   const warnings: string[] = [];
@@ -317,15 +398,16 @@ export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigV
   }
 
   // 4. check all offraid positions
-  errors.push(...getErrorsForOffraidPositions(config));
+  errors.push(...getErrorsForOffraidPositions(config, spawnConfig));
   warnings.push(...getWarningsForOffraidPositions(config));
 
   // 5. checks for exfil maps
   errors.push(...getErrorsForExfils(config));
+  warnings.push(...getWarningsForExfils(config));
 
   // 6. check for secondary stashes
   errors.push(...getErrorsSecondaryStashes(config));
-  warnings.push(...getWarningsSecondaryStahes(config));
+  warnings.push(...getWarningsSecondaryStashes(config));
 
   // 7. check for infiltrations maps and spawn points
   errors.push(...getErrorsForInfils(config, spawnConfig));
@@ -335,6 +417,9 @@ export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigV
 
   // 9. check the rest of the config
   errors.push(...getErrorsForGeneralConfig(config));
+
+  // 10. check the spawn config
+  errors.push(...getErrorsForSpawnConfig(spawnConfig));
 
   return {
     errors,

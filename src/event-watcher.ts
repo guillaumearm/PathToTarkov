@@ -8,21 +8,33 @@ import type { DependencyContainer } from 'tsyringe';
 import type { ILocationBase } from '@spt/models/eft/common/ILocationBase';
 import { deepClone } from './utils';
 import type { MatchCallbacks } from '@spt/callbacks/MatchCallbacks';
+import type { ExitStatus } from '@spt/models/enums/ExitStatis';
+import { parseExfilTargetFromExitName, parseExilTargetFromPTTConfig } from './exfils-targets';
+import { resolveMapNameFromLocation } from './map-name-resolver';
+import type { MapName } from './config';
 
 type EndOfRaidCallback = (payload: EndOfRaidPayload) => void;
 
-type RaidCache = {
+export type RaidCache = {
   sessionId: string | null;
   currentLocationName: string | null;
   exitName: string | null | undefined;
+  targetOffraidPosition: string | null; // used by extracts only
+  transitTargetMapName: string | null; // used by transits only
+  transitTargetSpawnPointId: string | null; // used by transits only
   isPlayerScav: boolean | null;
+  exitStatus: ExitStatus | null;
 };
 
 const createInitialRaidCache = (sessionId: string): RaidCache => ({
   sessionId: sessionId,
   currentLocationName: null,
   exitName: undefined,
+  targetOffraidPosition: null,
+  transitTargetMapName: null,
+  transitTargetSpawnPointId: null,
   isPlayerScav: null,
+  exitStatus: null,
 });
 
 export class EventWatcher {
@@ -36,15 +48,18 @@ export class EventWatcher {
     this.raidCaches = {};
   }
 
-  private cleanRaidCache(sessionId: string): void {
-    delete this.raidCaches[sessionId];
-  }
-
   private initRaidCache(sessionId: string): void {
+    const existingRaidCache = this.raidCaches[sessionId];
+
+    // raid cache is not resetted when player is in a map transit
+    if (existingRaidCache && existingRaidCache.exitStatus === 'Transit') {
+      return;
+    }
+
     this.raidCaches[sessionId] = createInitialRaidCache(sessionId);
   }
 
-  private getRaidCache(sessionId: string): RaidCache | null {
+  public getRaidCache(sessionId: string): RaidCache | null {
     const raidCache = this.raidCaches[sessionId];
 
     if (!raidCache) {
@@ -145,12 +160,17 @@ export class EventWatcher {
           }
 
           raidCache.sessionId = sessionId;
-          raidCache.exitName = data.results.exitName;
+          raidCache.exitStatus = data.results.result;
 
-          const exitStatus = data.results.result;
+          const parsedExfilTarget = parseExfilTargetFromExitName(data.results.exitName ?? '');
+
+          raidCache.exitName = parsedExfilTarget.exitName;
+          raidCache.targetOffraidPosition = parsedExfilTarget.targetOffraidPosition;
+          raidCache.transitTargetMapName = parsedExfilTarget.transitTargetMapName;
+          raidCache.transitTargetSpawnPointId = parsedExfilTarget.transitTargetSpawnPointId;
 
           this.ptt.debug(
-            `end of raid detected for exit '${data.results.exitName}' with status '${exitStatus}'`,
+            `end of raid detected for exit '${raidCache.exitName}' with status '${raidCache.exitStatus}'`,
           );
           this.runEndOfRaidCallback(sessionId);
 
@@ -161,18 +181,50 @@ export class EventWatcher {
     );
   }
 
+  // This part is here to handle regular extracts (e.g. when Interactable Exfils API is not installed)
+  private handleRegularExtracts(payload: EndOfRaidPayload): EndOfRaidPayload {
+    const mapName = resolveMapNameFromLocation(payload.locationName) as MapName;
+    const config = this.ptt.pathToTarkovController.getConfig(payload.sessionId);
+
+    const exitName = payload.exitName ?? '';
+    const exfilTargets = config.exfiltrations[mapName]?.[exitName] ?? [];
+
+    const foundOffraidPosition = exfilTargets.find(exfilTarget =>
+      Boolean(parseExilTargetFromPTTConfig(exfilTarget).targetOffraidPosition),
+    );
+
+    if (!foundOffraidPosition) {
+      throw new Error(
+        `cannot determine offraid position from config for map "${mapName}" using extract "${exitName}"`,
+      );
+    }
+
+    this.ptt.logger.warning(
+      `Path To Tarkov: new offraid position automatically determined from config for map "${mapName}" using extract "${exitName}"`,
+    );
+
+    return {
+      ...payload,
+      isTransit: false,
+      newOffraidPosition: foundOffraidPosition,
+    };
+  }
+
   private getEndOfRaidPayload(sessionId: string): EndOfRaidPayload {
     const {
-      currentLocationName: locationName,
+      currentLocationName,
       isPlayerScav,
       exitName,
+      targetOffraidPosition,
+      transitTargetMapName,
+      transitTargetSpawnPointId,
     } = this.raidCaches[sessionId];
 
     if (sessionId === null) {
       throw new Error('raidCache.sessionId is null');
     }
 
-    if (locationName === null) {
+    if (currentLocationName === null) {
       throw new Error('raidCache.currentLocationName is null');
     }
 
@@ -184,12 +236,32 @@ export class EventWatcher {
       throw new Error('raidCache.exitName is undefined');
     }
 
-    return {
+    if (targetOffraidPosition && transitTargetMapName && transitTargetSpawnPointId) {
+      throw new Error('raidCache cannot determine if we are in transit or extract');
+    }
+
+    if (transitTargetMapName && !transitTargetSpawnPointId) {
+      throw new Error('raidCache.transitTargetSpawnPointId is null');
+    }
+
+    if (!transitTargetMapName && transitTargetSpawnPointId) {
+      throw new Error('raidCache.transitTargetMapName is null');
+    }
+
+    const endOfRaidPayload: EndOfRaidPayload = {
       sessionId,
-      locationName,
+      locationName: currentLocationName,
       isPlayerScav,
       exitName,
+      newOffraidPosition: targetOffraidPosition,
+      isTransit: !targetOffraidPosition,
     };
+
+    if (exitName && !targetOffraidPosition && !transitTargetMapName && !transitTargetSpawnPointId) {
+      return this.handleRegularExtracts(endOfRaidPayload);
+    }
+
+    return endOfRaidPayload;
   }
 
   private runEndOfRaidCallback(sessionId: string): void {
@@ -199,8 +271,6 @@ export class EventWatcher {
         this.endOfRaidCallback(endOfRaidPayload);
       } catch (error: any) {
         this.ptt.logger.error(`Path To Tarkov Error: ${error.message}`);
-      } finally {
-        this.cleanRaidCache(sessionId);
       }
     } else {
       this.ptt.logger.error('Path To Tarkov Error: no endOfRaidCallback on EventWatcher!');
@@ -218,7 +288,6 @@ export class EventWatcher {
   public register(staticRoutePeeker: StaticRoutePeeker, container: DependencyContainer): void {
     this.watchOnGameStart(staticRoutePeeker);
     this.watchOnProfileCreated(staticRoutePeeker);
-    // this.watchSave(staticRoutePeeker);
     this.watchStartOfRaid(container);
     this.watchEndOfRaid(container);
 

@@ -22,7 +22,8 @@ const getPosition = (pos: SpawnPoint['Position']): PositionXYZ => {
   return pos;
 };
 
-export const PTT_INFILTRATION = 'PTT_INFILTRATION';
+// Note: this value will be lower-cased by the client (especially in `EligibleEntryPoints` exfil client property)
+export const PTT_INFILTRATION = 'ptt_infiltration';
 
 export const isPlayerSpawnPoint = (spawnPoint: ISpawnPointParam): boolean => {
   return Boolean(spawnPoint.Categories.find(cat => cat === 'Player'));
