@@ -44,6 +44,12 @@ public static class CustomExfilService
 
     public static void TransitTo(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
     {
+        if (Plugin.FikaIsInstalled)
+        {
+            CustomExfilServiceFika.TransitTo(exfil, exfilTarget);
+            return;
+        }
+
         TransitPoint transit = Transit.Create(exfil, exfilTarget);
         string customTransitName = transit.parameters.name;
         // TODO: log -> started transit on customTransitName
