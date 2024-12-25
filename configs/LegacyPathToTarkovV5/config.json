@@ -23,6 +23,14 @@
     "569668774bdc2da2298b4568": {
       "// type = euros": true,
       "Value": 1000000
+    },
+    "67449b6c89d5e1ddc603f504": {
+      "// type = case key": true,
+      "Value": 42
+    },
+    "6740987b89d5e1ddc603f4f0": {
+      "// type = locked case": true,
+      "Value": 10
     }
   },
   "offraid_regen_config": {
