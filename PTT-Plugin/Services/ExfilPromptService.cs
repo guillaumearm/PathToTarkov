@@ -44,11 +44,18 @@ public class ExfilPromptService(
 
     private OnActionsAppliedResult ExfilPromptHandler(ExfiltrationPoint exfil, CustomExfilTrigger customExfilTrigger, bool exfilIsAvailableToPlayer)
     {
-        List<ExfilTarget> exfilTargets = exfilsTargetsService.ExfilsTargets.data[exfil.Settings.Name];
+        string exitName = exfil.Settings.Name;
+        var indexedExfilsTargets = exfilsTargetsService.ExfilsTargets.data;
+
+        if (!indexedExfilsTargets.TryGetValue(exitName, out List<ExfilTarget> exfilTargets))
+        {
+            Plugin.LogSource.LogError($"[PTT] cannot retrieve exfil targets for exfil '{exfil.Settings.Name}'");
+            return null;
+        }
 
         if (exfilTargets == null || !exfilTargets.Any())
         {
-            // no exfilTargets means the exfil is not available for the player (this is not an error)
+            // no exfilTargets means the exfil is not available for the player (this is not supposed to be an error)
             return null;
         }
 
@@ -62,7 +69,7 @@ public class ExfilPromptService(
 
     private OnActionsAppliedResult RequiresManualActivation(ExfiltrationPoint exfil, CustomExfilTrigger customExfilTrigger, bool exfilIsAvailableToPlayer)
     {
-        // TODO: find out why it doesn't work as intended (in some cases) ?
+        // TODO: find out why it doesn't work as intended? (in some cases, when player enable/disable the bepinex setting manually)
         customExfilTrigger.RequiresManualActivation = true;
         return null;
     }
