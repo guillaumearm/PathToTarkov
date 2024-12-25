@@ -20,15 +20,15 @@
   "restrictions_in_raid": {
     "5449016a4bdc2d6f028b456f": {
       "// type = roubles": true,
-      "Value": 10000000
+      "Value": 100000000
     },
     "5696686a4bdc2da3298b456a": {
       "// type = dollars": true,
-      "Value": 100000
+      "Value": 1000000
     },
     "569668774bdc2da2298b4568": {
       "// type = euros": true,
-      "Value": 100000
+      "Value": 1000000
     }
   },
   "offraid_regen_config": {
