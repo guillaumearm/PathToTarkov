@@ -10,10 +10,11 @@ namespace PTT;
 public class Plugin : BaseUnityPlugin
 {
     public static bool FikaIsInstalled { get; private set; }
+    private static bool InteractableExfilsApiIsInstalled { get; set; }
+    private static bool KaenoTraderScrollingIsInstalled { get; set; }
     public static ManualLogSource LogSource { get; private set; }
     public static ExfilsTargetsService ExfilsTargetsService;
 
-    private static bool InteractableExfilsApiIsInstalled { get; set; }
 
     protected void Awake()
     {
@@ -23,6 +24,9 @@ public class Plugin : BaseUnityPlugin
         LogSource = Logger;
         FikaIsInstalled = Chainloader.PluginInfos.ContainsKey("com.fika.core");
         InteractableExfilsApiIsInstalled = Chainloader.PluginInfos.ContainsKey("Jehree.InteractableExfilsAPI");
+        KaenoTraderScrollingIsInstalled = Chainloader.PluginInfos.ContainsKey("com.kaeno.TraderScrolling");
+
+        Settings.Config.Init(Config);
 
         ExfilsTargetsService = new ExfilsTargetsService();
 
@@ -31,7 +35,12 @@ public class Plugin : BaseUnityPlugin
             Helpers.Logger.Info($"Fika.Core plugin detected");
         }
 
-        Settings.Config.Init(Config);
+        if (KaenoTraderScrollingIsInstalled)
+        {
+            Helpers.Logger.Info($"Kaeno-TraderScrolling detected");
+            new Patches.KaenoTraderScrollingCompatPatch().Enable();
+        }
+
         new Patches.HideLockedTraderCardPatch().Enable();
         new Patches.HideLockedTraderPanelPatch().Enable();
         new Patches.InitAllExfiltrationPointsPatch().Enable();
