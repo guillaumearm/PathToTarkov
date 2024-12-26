@@ -559,7 +559,7 @@
       },
       "access_via": ["RuinedHouse"]
     },
-    "lotus": {
+    "6747208ef022cbbfc65c41bf": {
       "// mod integration for lotus": true,
       "// lotus is available at Crossroads/Emercom": true,
       "disable_warning": true,

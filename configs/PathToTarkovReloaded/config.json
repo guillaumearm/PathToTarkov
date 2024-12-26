@@ -450,7 +450,7 @@
       },
       "access_via": ["Boat"]
     },
-    "lotus": {
+    "6747208ef022cbbfc65c41bf": {
       "// mod integration for lotus": true,
       "// lotus is available at StreetsEvac": true,
       "disable_warning": true,
