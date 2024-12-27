@@ -88,6 +88,12 @@ public class ExfilPromptService(
 
     private OnActionsAppliedResult RequiresManualActivation(ExfiltrationPoint exfil, CustomExfilTrigger customExfilTrigger, bool exfilIsAvailableToPlayer)
     {
+        // customExfilTrigger is null for some special exfils (like labs elevators)
+        if (customExfilTrigger == null)
+        {
+            return null;
+        }
+
         // TODO: find out why it doesn't work as intended? (in some cases, when player enable/disable the bepinex setting manually)
         customExfilTrigger.RequiresManualActivation = true;
         return null;
