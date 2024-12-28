@@ -6,6 +6,8 @@ using System.Linq;
 using System.Collections.Generic;
 using PTT.Data;
 using PTT.Helpers;
+using Comfort.Common;
+using EFT.UI;
 
 namespace PTT.Services;
 
@@ -33,11 +35,13 @@ public class ExfilPromptService(
             case true:
                 return new CustomExfilAction(customActionName, false, () =>
                 {
+                    Sound.PlayTransitConfirm();
                     CustomExfilService.TransitTo(exfil, exfilTarget);
                 });
             case false:
                 return new CustomExfilAction(customActionName, false, () =>
                 {
+                    Sound.PlayExtractConfirm();
                     CustomExfilService.ExtractTo(exfil, exfilTarget);
                 });
         }
