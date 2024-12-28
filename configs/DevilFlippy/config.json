@@ -700,7 +700,7 @@
       "lighthouse": ["Grotto"]
     },
     "RequisitionsHideout": {
-      "tarkovstreets": ["Near Kamchatskaya Arch"]
+      "tarkovstreets": ["Kamchatskaya Arch"]
     },
     "PainterHideout": {
       "tarkovstreets": ["Cardinal Appartments Parking"]
@@ -1209,7 +1209,7 @@
     },
     "scav_e5": {
       "displayName": {
-        "en": "Near Kamchatskaya Arch - Requisitions",
+        "en": "Kamchatskaya Arch - Requisitions",
         "fr": "Arche Kamchatskaya - Requisitions"
       }
     },

@@ -439,10 +439,6 @@
       "Position": [212.0187, 3.098404, 252.7016],
       "Rotation": 270.9422
     },
-    "Near Kamchatskaya Arch": {
-      "Position": [260.6, -4.5, 49.6],
-      "Rotation": 304.3322
-    },
     "Expo Checkpoint": {
       "Position": [215, -1.93, -88.75],
       "Rotation": 304.3322
@@ -459,9 +455,9 @@
       "Position": [269.3, 3.4, 427.25],
       "Rotation": 87.62667
     },
-    "Kamchatskya Arch": {
-      "Position": [260.6, -4.5, 49.6],
-      "Rotation": 304.3322
+    "Kamchatskaya Arch": {
+      "Position": [268.84, -4.46, 88.95],
+      "Rotation": 270.0
     },
     "Stylobate Elevator": {
       "Position": [-36.1, 9.63, -63.9],
