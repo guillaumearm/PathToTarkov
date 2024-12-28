@@ -8,7 +8,6 @@
   "traders_access_restriction": true,
   "hideout_multistash_enabled": true,
   "player_scav_move_offraid_position": false,
-  "workbench_always_enabled": true,
   "enable_automatic_transits_creation": true,
   "enable_all_vanilla_transits": false,
   "bypass_keep_found_in_raid_tweak": false,

@@ -403,7 +403,7 @@ export class PathToTarkovController {
       const hideoutEnabled = this.stashController.getHideoutEnabled(offraidPosition, sessionId);
 
       areas.forEach(area => {
-        if (!isIgnoredArea(area, this.getConfig(sessionId).workbench_always_enabled)) {
+        if (!isIgnoredArea(area)) {
           area.enabled = hideoutEnabled;
         }
       });

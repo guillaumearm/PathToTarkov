@@ -208,7 +208,6 @@ type RawConfig = {
   reset_offraid_position_on_player_die: boolean;
   hideout_multistash_enabled: boolean;
   player_scav_move_offraid_position: boolean;
-  workbench_always_enabled: boolean;
   vanilla_exfils_requirements?: boolean; // no longer supported
   bypass_exfils_override?: boolean;
   enable_automatic_transits_creation?: boolean;
