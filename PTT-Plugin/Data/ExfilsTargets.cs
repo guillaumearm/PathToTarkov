@@ -32,15 +32,25 @@ public class ExfilTarget
     public string transitSpawnPointId; // transit only
     public string offraidPosition; // empty on transit
 
-    // TODO: i18n support (use the offraid position displayName)
     public string GetCustomActionName()
     {
         if (isTransit)
         {
-            return $"Transit to {transitMapId}";
+            string transitTemplate = "PTT_TRANSITS_PROMPT_TEMPLATE".Localized();
+            return string.Format(transitTemplate, transitMapId.Localized());
         }
 
-        return $"Extract to {offraidPosition}";
+        string extractTemplate = "PTT_EXTRACTS_PROMPT_TEMPLATE".Localized();
+        string offraidPositionDisplayNameKey = $"PTT_OFFRAIDPOS_DISPLAY_NAME_{offraidPosition}";
+        string offraidPositionDisplayName = offraidPositionDisplayNameKey.Localized();
+
+        // when the offraid position display name cannot be resolved
+        if (offraidPositionDisplayName == offraidPositionDisplayNameKey)
+        {
+            return string.Format(extractTemplate, offraidPosition);
+        }
+
+        return string.Format(extractTemplate, offraidPositionDisplayName);
     }
 
     public string GetCustomExitName(ExfiltrationPoint exfil)

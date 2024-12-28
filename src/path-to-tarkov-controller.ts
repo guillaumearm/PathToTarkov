@@ -5,8 +5,16 @@ import type { ConfigServer } from '@spt/servers/ConfigServer';
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { SaveServer } from '@spt/servers/SaveServer';
 
-import type { Config, ConfigGetter, MapName, Profile, SpawnConfig } from './config';
-import { MAPLIST, VANILLA_STASH_IDS } from './config';
+import type {
+  ByLocale,
+  Config,
+  ConfigGetter,
+  LocaleName,
+  MapName,
+  Profile,
+  SpawnConfig,
+} from './config';
+import { DEFAULT_FALLBACK_LANGUAGE, MAPLIST, VANILLA_STASH_IDS } from './config';
 
 import {
   changeRestrictionsInRaid,
@@ -16,6 +24,7 @@ import {
   disableRunThrough,
   isIgnoredArea,
   isPlayerSpawnPoint,
+  mutateLocales,
   PTT_INFILTRATION,
 } from './helpers';
 
@@ -40,6 +49,7 @@ import { fixRepeatableQuestsForPmc } from './fix-repeatable-quests';
 import { KeepFoundInRaidTweak } from './keep-fir-tweak';
 import { ExfilsTooltipsTemplater } from './services/ExfilsTooltipsTemplater';
 import type { RaidCache } from './event-watcher';
+import type { AllLocalesInDb } from './services/LocaleResolver';
 
 type IndexedLocations = Record<string, ILocationBase>;
 
@@ -122,6 +132,8 @@ export class PathToTarkovController {
 
     this.tradersAvailabilityService.init(quests);
     this.injectTooltipsInLocales(config);
+    this.injectPromptTemplatesInLocales(config);
+    this.injectOffraidPositionDisplayNamesInLocales(config);
     this.tradersController.initTraders(config);
 
     const nbAddedTemplates = this.stashController.initSecondaryStashTemplates(
@@ -248,11 +260,93 @@ export class PathToTarkovController {
     }
 
     const partialLocales = this.tooltipsTemplater.computeLocales(config);
-    const report = ExfilsTooltipsTemplater.mutateLocales(allLocales, partialLocales);
+    const report = mutateLocales(allLocales, partialLocales);
 
     const nbValuesUpdated = report.nbTotalValuesUpdated / report.nbLocalesImpacted;
     this.debug(
       `${nbValuesUpdated} extract tooltip values updated for ${report.nbLocalesImpacted} locales (total of ${report.nbTotalValuesUpdated})`,
+    );
+  }
+
+  // TODO: refactor in a dedicated service
+  // TODO: make it dynamic (aka intercept instead of mutating the db)
+  private injectPromptTemplatesInLocales(config: Config): void {
+    const allLocales = this.db.getTables()?.locales?.global;
+
+    if (!allLocales) {
+      throw new Error('Path To Tarkov: no locales found in db');
+    }
+
+    // 1. prepare transits_prompt_template
+    const DEFAULT_TRANSITS_PROMPT_TEMPLATE_KEY = 'PTT_TRANSITS_PROMPT_TEMPLATE';
+    const DEFAULT_TRANSITS_PROMPT_TEMPLATE_VALUE = 'Transit: {0}';
+    const DEFAULT_TRANSITS_PROMPT_TEMPLATE: ByLocale<string> = {
+      [DEFAULT_FALLBACK_LANGUAGE]: DEFAULT_TRANSITS_PROMPT_TEMPLATE_VALUE,
+    };
+    const transitsPromptTemplate =
+      config.transits_prompt_template ?? DEFAULT_TRANSITS_PROMPT_TEMPLATE;
+
+    // 2. prepare extracts_prompt_template
+    const DEFAULT_EXTRACTS_PROMPT_TEMPLATE_KEY = 'PTT_EXTRACTS_PROMPT_TEMPLATE';
+    const DEFAULT_EXTRACTS_PROMPT_TEMPLATE_VALUE = 'Extract: {0}';
+    const DEFAULT_EXTRACTS_PROMPT_TEMPLATE: ByLocale<string> = {
+      [DEFAULT_FALLBACK_LANGUAGE]: DEFAULT_EXTRACTS_PROMPT_TEMPLATE_VALUE,
+    };
+    const extractsPromptTemplate =
+      config.extracts_prompt_template ?? DEFAULT_EXTRACTS_PROMPT_TEMPLATE;
+
+    // 3. prepare new locales
+    const newLocales: Partial<AllLocalesInDb> = {};
+    Object.keys(allLocales).forEach(locale => {
+      const localeValues: Record<string, string> = {
+        [DEFAULT_TRANSITS_PROMPT_TEMPLATE_KEY]:
+          transitsPromptTemplate[locale as LocaleName] ?? DEFAULT_TRANSITS_PROMPT_TEMPLATE_VALUE,
+        [DEFAULT_EXTRACTS_PROMPT_TEMPLATE_KEY]:
+          extractsPromptTemplate[locale as LocaleName] ?? DEFAULT_EXTRACTS_PROMPT_TEMPLATE_VALUE,
+      };
+      newLocales[locale] = localeValues;
+    });
+
+    // 4. mutate locales
+    const report = mutateLocales(allLocales, newLocales);
+
+    const nbValuesUpdated = report.nbTotalValuesUpdated / report.nbLocalesImpacted;
+    this.debug(
+      `${nbValuesUpdated} prompt templates values updated for ${report.nbLocalesImpacted} locales (total of ${report.nbTotalValuesUpdated})`,
+    );
+  }
+
+  private injectOffraidPositionDisplayNamesInLocales(config: Config): void {
+    const allLocales = this.db.getTables()?.locales?.global;
+
+    if (!allLocales) {
+      throw new Error('Path To Tarkov: no locales found in db');
+    }
+
+    // 1. create new locales
+    const newLocales: Partial<AllLocalesInDb> = {};
+    Object.keys(allLocales).forEach(locale => {
+      const localeValues: Record<string, string> = {};
+
+      const offraidPositions = config.offraid_positions ?? {};
+      Object.keys(offraidPositions).forEach(offraidPosition => {
+        const displayNameValue = ExfilsTooltipsTemplater.resolveOffraidPositionDisplayName(config, {
+          offraidPosition,
+          locale: locale as LocaleName,
+        });
+
+        localeValues[`PTT_OFFRAIDPOS_DISPLAY_NAME_${offraidPosition}`] = displayNameValue;
+      });
+
+      newLocales[locale] = localeValues;
+    });
+
+    // 2. mutate locales
+    const report = mutateLocales(allLocales, newLocales);
+
+    const nbValuesUpdated = report.nbTotalValuesUpdated / report.nbLocalesImpacted;
+    this.debug(
+      `${nbValuesUpdated} prompt templates values updated for ${report.nbLocalesImpacted} locales (total of ${report.nbTotalValuesUpdated})`,
     );
   }
 

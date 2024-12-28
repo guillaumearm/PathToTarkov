@@ -7,6 +7,7 @@ import type { StaticRouterModService } from '@spt/services/mod/staticRouter/Stat
 import type { AccessVia, Config, PositionXYZ, Profile, SpawnPoint, StashConfig } from './config';
 import { EMPTY_STASH, SLOT_ID_HIDEOUT, SLOT_ID_LOCKED_STASH, VANILLA_STASH_IDS } from './config';
 import type { IItem } from '@spt/models/eft/common/tables/IItem';
+import type { AllLocalesInDb } from './services/LocaleResolver';
 
 export function checkAccessVia(access_via: AccessVia, value: string): boolean {
   return access_via === '*' || access_via[0] === '*' || access_via.includes(value);
@@ -309,3 +310,34 @@ export const retrieveMainStashIdFromItems = (
 
   return null;
 };
+
+export type LocalesMutationReport = {
+  nbLocalesImpacted: number;
+  nbTotalValuesUpdated: number;
+};
+
+export function mutateLocales(
+  allLocales: AllLocalesInDb,
+  partialLocales: Partial<AllLocalesInDb>,
+): LocalesMutationReport {
+  const report: LocalesMutationReport = {
+    nbLocalesImpacted: 0,
+    nbTotalValuesUpdated: 0,
+  };
+
+  void Object.keys(allLocales).forEach(localeName => {
+    if (partialLocales[localeName]) {
+      const values = allLocales[localeName];
+      const newValues = partialLocales[localeName] ?? {};
+      const nbNewValues = Object.keys(newValues).length;
+
+      if (nbNewValues > 0) {
+        void Object.assign(values, newValues); // mutation here
+        report.nbLocalesImpacted += 1;
+        report.nbTotalValuesUpdated += nbNewValues;
+      }
+    }
+  });
+
+  return report;
+}

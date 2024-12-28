@@ -46,6 +46,7 @@ type AvailableLocales<T> = {
 };
 
 export type ByLocale<T> = Partial<AvailableLocales<T>>;
+export type ByLocaleFull<T> = AvailableLocales<T>;
 
 export const INDEXED_AVAILABLE_LOCALES: AvailableLocales<true> = {
   ch: true,
@@ -74,6 +75,8 @@ export const isLocalAvailable = (givenLocale: string): boolean => {
 };
 
 export const AVAILABLE_LOCALES: string[] = Object.keys(INDEXED_AVAILABLE_LOCALES);
+
+export const DEFAULT_FALLBACK_LANGUAGE = 'en';
 
 type ByProfileId<T> = Record<string, T | undefined>;
 
@@ -226,6 +229,8 @@ type RawConfig = {
   infiltrations_config?: InfiltrationsConfig;
   exfiltrations_config?: Record<ExtractName, ExfiltrationConfig>; // TODO: validate in config-analysis
   exfiltrations_tooltips_template?: string; // TODO(config-analysis): error when unknown template variable usage is found
+  transits_prompt_template?: ByLocale<string>; // TODO: validate in config-analysis
+  extracts_prompt_template?: ByLocale<string>; // TODO: validate in config-analysis
   offraid_positions?: Record<OffraidPositionName, OffraidPositionDefinition>; // TODO: validate in config-analysis
 };
 

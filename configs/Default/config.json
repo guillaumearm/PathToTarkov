@@ -1123,6 +1123,14 @@
     }
   },
   "exfiltrations_tooltips_template": "$exfilDisplayName -> $offraidPositionDisplayName",
+  "extracts_prompt_template": {
+    "en": "Extract: {0}",
+    "fr": "Extraction: {0}"
+  },
+  "transits_prompt_template": {
+    "en": "Transit: {0}",
+    "fr": "Transit: {0}"
+  },
   "offraid_positions": {
     "PraporHideout": {
       "displayName": {
@@ -1186,8 +1194,8 @@
     },
     "FactoryZB-1011": {
       "displayName": {
-        "en": "Customs/Factory",
-        "fr": "Douanes/Usine"
+        "en": "Bunker 11 Customs/Factory",
+        "fr": "Bunker 11 Douanes/Usine"
       }
     },
     "SniperRB": {
