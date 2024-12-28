@@ -169,7 +169,10 @@ export class ExfilsTooltipsTemplater {
       params,
     );
 
-    const tooltipsTemplate = ExfilsTooltipsTemplater.resolveTooltipsTemplate(config, params);
+    const tooltipsTemplate = ExfilsTooltipsTemplater.resolveTooltipsTemplate(
+      config,
+      params.exfilName,
+    );
 
     const templatedValue = tooltipsTemplate
       .replace(EXFIL_DISPLAY_NAME_VARIABLE, exfilDisplayName)
@@ -210,16 +213,11 @@ export class ExfilsTooltipsTemplater {
 
   private static resolveTooltipsTemplate(
     config: MinimumConfigForTooltipsTemplater,
-    { offraidPosition, exfilName }: ComputeLocaleValueParameter,
+    exfilName: string,
   ): string {
     const exfilConfig = config.exfiltrations_config?.[exfilName];
     if (exfilConfig?.override_tooltips_template?.trim()) {
       return exfilConfig.override_tooltips_template;
-    }
-
-    const offraidPositionDefinition = config.offraid_positions?.[offraidPosition];
-    if (offraidPositionDefinition?.override_tooltips_template?.trim()) {
-      return offraidPositionDefinition?.override_tooltips_template;
     }
 
     if (config.exfiltrations_tooltips_template?.trim()) {
