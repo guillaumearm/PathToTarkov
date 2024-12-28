@@ -1124,12 +1124,12 @@
   },
   "exfiltrations_tooltips_template": "$exfilDisplayName -> $offraidPositionDisplayName",
   "extracts_prompt_template": {
-    "en": "Extract: {0}",
-    "fr": "Extraction: {0}"
+    "en": "Extract to {0}",
+    "fr": "Extraction vers {0}"
   },
   "transits_prompt_template": {
-    "en": "Transit: {0}",
-    "fr": "Transit: {0}"
+    "en": "Transit to {0}",
+    "fr": "Transit vers {0}"
   },
   "offraid_positions": {
     "PraporHideout": {

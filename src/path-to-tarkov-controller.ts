@@ -279,7 +279,7 @@ export class PathToTarkovController {
 
     // 1. prepare transits_prompt_template
     const DEFAULT_TRANSITS_PROMPT_TEMPLATE_KEY = 'PTT_TRANSITS_PROMPT_TEMPLATE';
-    const DEFAULT_TRANSITS_PROMPT_TEMPLATE_VALUE = 'Transit: {0}';
+    const DEFAULT_TRANSITS_PROMPT_TEMPLATE_VALUE = 'Transit to {0}';
     const DEFAULT_TRANSITS_PROMPT_TEMPLATE: ByLocale<string> = {
       [DEFAULT_FALLBACK_LANGUAGE]: DEFAULT_TRANSITS_PROMPT_TEMPLATE_VALUE,
     };
@@ -288,7 +288,7 @@ export class PathToTarkovController {
 
     // 2. prepare extracts_prompt_template
     const DEFAULT_EXTRACTS_PROMPT_TEMPLATE_KEY = 'PTT_EXTRACTS_PROMPT_TEMPLATE';
-    const DEFAULT_EXTRACTS_PROMPT_TEMPLATE_VALUE = 'Extract: {0}';
+    const DEFAULT_EXTRACTS_PROMPT_TEMPLATE_VALUE = 'Extract to {0}';
     const DEFAULT_EXTRACTS_PROMPT_TEMPLATE: ByLocale<string> = {
       [DEFAULT_FALLBACK_LANGUAGE]: DEFAULT_EXTRACTS_PROMPT_TEMPLATE_VALUE,
     };
