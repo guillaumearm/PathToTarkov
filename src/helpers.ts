@@ -72,7 +72,7 @@ type ExitProps = {
 };
 
 // TODO: default_exfiltration_time_seconds field in config ?
-const DEFAULT_EXFILTRATION_TIME_IN_SECONDS = 10;
+const DEFAULT_EXFILTRATION_TIME_IN_SECONDS = 30;
 
 const getDefaultExitProps = (): ExitProps => ({
   Id: '',
