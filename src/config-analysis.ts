@@ -252,7 +252,7 @@ const getErrorsSecondaryStashes = (config: Config): string[] => {
   config.hideout_secondary_stashes.forEach(stashConfig => {
     if (stashConfig.name === EMPTY_STASH.name) {
       errors.push(
-        `secondary stash ${stashConfig.name} is a special reserved name, please choose another.`,
+        `secondary stash "${stashConfig.name}" is a special reserved name, please choose another.`,
       );
     }
 
@@ -316,7 +316,7 @@ const getErrorsForInfils = (config: Config, spawnConfig: SpawnConfig): string[] 
       spawnPoints.forEach(spawnPointName => {
         const spawn = spawnConfig[mapName as MapName][spawnPointName];
         if (!spawn) {
-          errors.push(`unknown player spawnpoint reference ${spawnPointName} for map ${mapName}`);
+          errors.push(`unknown player spawnpoint reference "${spawnPointName}" for map ${mapName}`);
         }
       });
     });
