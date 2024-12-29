@@ -92,7 +92,7 @@ public class ExfilPromptService(
 
     private OnActionsAppliedResult RequiresManualActivation(ExfiltrationPoint exfil, CustomExfilTrigger customExfilTrigger, bool exfilIsAvailableToPlayer)
     {
-        // customExfilTrigger is null for some special exfils (like labs elevators)
+        // compat with older version of Interactable Exfils API (< 1.4.0)
         if (customExfilTrigger == null)
         {
             return null;
