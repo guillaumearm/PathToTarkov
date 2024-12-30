@@ -8,6 +8,8 @@ using PTT.Data;
 using PTT.Helpers;
 using Comfort.Common;
 using EFT.UI;
+using System;
+using System.Runtime.CompilerServices;
 
 namespace PTT.Services;
 
@@ -18,12 +20,46 @@ public class ExfilPromptService(
 {
     public void InitPromptHandlers()
     {
-        // requires manual activation (no auto-extract)
+        // requires manual activation (no auto-extract even if the player enabled the IEAPI option in BepInEx)
         ieService.OnActionsAppliedEvent += RequiresManualActivation;
 
         // replace default ie api prompt logic
         ieService.OnActionsAppliedEvent -= ieService.ApplyExtractToggleAction;
         ieService.OnActionsAppliedEvent += ExfilPromptHandler;
+    }
+
+    private static void SelectFirstPromptItem()
+    {
+        var interactionState = InteractableExfilsService.GetAvailableInteractionState();
+
+        if (interactionState.Value != null && interactionState.Value.Actions.Any())
+        {
+            ActionsTypesClass firstAction = interactionState.Value.Actions[0];
+            interactionState.Value.SelectAction(firstAction);
+        }
+    }
+
+    private Action _actionToExecuteOnConfirm;
+
+    private void InitPromptState()
+    {
+        _actionToExecuteOnConfirm = null;
+    }
+
+    private void RunConfirm()
+    {
+        if (_actionToExecuteOnConfirm != null)
+        {
+            _actionToExecuteOnConfirm();
+            _actionToExecuteOnConfirm = null;
+        }
+    }
+
+    private void RunCancel()
+    {
+        InitPromptState();
+        Sound.PlayMenuCancel();
+        SelectFirstPromptItem();
     }
 
     private CustomExfilAction CreateCustomExfilAction(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
@@ -35,20 +71,35 @@ public class ExfilPromptService(
             case true:
                 return new CustomExfilAction(customActionName, false, () =>
                 {
-                    Sound.PlayTransitConfirm();
-                    CustomExfilService.TransitTo(exfil, exfilTarget);
+                    _actionToExecuteOnConfirm = () =>
+                    {
+                        Sound.PlayTransitConfirm();
+                        CustomExfilService.TransitTo(exfil, exfilTarget);
+                    };
+                    Sound.PlayMenuEnter();
+                    SelectFirstPromptItem();
                 });
             case false:
                 return new CustomExfilAction(customActionName, false, () =>
                 {
-                    Sound.PlayExtractConfirm();
-                    CustomExfilService.ExtractTo(exfil, exfilTarget);
+                    _actionToExecuteOnConfirm = () =>
+                    {
+                        Sound.PlayExtractConfirm();
+                        CustomExfilService.ExtractTo(exfil, exfilTarget);
+                    };
+                    Sound.PlayMenuEnter();
+                    SelectFirstPromptItem();
                 });
         }
     }
 
     private OnActionsAppliedResult ExfilPromptHandler(ExfiltrationPoint exfil, CustomExfilTrigger customExfilTrigger, bool exfilIsAvailableToPlayer)
     {
+        if (InteractableExfilsService.IsFirstRender())
+        {
+            InitPromptState();
+        }
+
         if (exfil == null)
         {
             Logger.Error("ExfilPromptHandler: ExfiltrationPoint is null");
@@ -82,12 +133,27 @@ public class ExfilPromptService(
             return null;
         }
 
-        List<CustomExfilAction> actions = exfilTargets.Select(exfilTarget =>
+        // action selection step
+        if (_actionToExecuteOnConfirm == null)
         {
-            return CreateCustomExfilAction(exfil, exfilTarget);
-        }).ToList();
+            List<CustomExfilAction> actions = exfilTargets.Select(exfilTarget =>
+            {
+                return CreateCustomExfilAction(exfil, exfilTarget);
+            }).ToList();
 
-        return new OnActionsAppliedResult(actions);
+            return new OnActionsAppliedResult(actions);
+        }
+
+        // confirmation step
+        var confirmAction = new CustomExfilAction("confirm".Localized(), false, RunConfirm);
+        var cancelAction = new CustomExfilAction("Cancel".Localized(), false, RunCancel);
+
+        if (Settings.Config.ExfilAutoselectCancel.Value)
+        {
+            return new OnActionsAppliedResult([cancelAction, confirmAction]);
+        }
+
+        return new OnActionsAppliedResult([confirmAction, cancelAction]);
     }
 
     private OnActionsAppliedResult RequiresManualActivation(ExfiltrationPoint exfil, CustomExfilTrigger customExfilTrigger, bool exfilIsAvailableToPlayer)

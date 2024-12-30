@@ -3,6 +3,7 @@ using BepInEx.Logging;
 using BepInEx.Bootstrap;
 
 using PTT.Services;
+using System;
 
 namespace PTT;
 
@@ -55,8 +56,23 @@ public class Plugin : BaseUnityPlugin
     {
         if (InteractableExfilsApiIsInstalled)
         {
+            Version apiVersion = Chainloader.PluginInfos["Jehree.InteractableExfilsAPI"].Metadata.Version;
+
+            if (apiVersion < new Version("1.4.0"))
+            {
+                Helpers.Logger.Warning($"Jehree.InteractableExfilsAPI >= 1.4.0 is required");
+                // TODO: warn the user on game start (+ add BepInEx advanced option to silent those warnings)
+                // NotificationManagerClass.DisplayWarningNotification("Path To Tarkov: Your Interactable Exfils API mod is outdated. at least v1.4.0 is required");
+            }
+
             Helpers.Logger.Info($"Jehree.InteractableExfilsAPI plugin detected");
             IEApiWrapper.Init(ExfilsTargetsService);
+        }
+        else
+        {
+            Helpers.Logger.Error($"Jehree.InteractableExfilsAPI plugin is missing");
+            // TODO: warn the user on game start (+ add BepInEx advanced option to silent those warnings)
+            // NotificationManagerClass.DisplayWarningNotification("Path To Tarkov: Interactable Exfils API mod is not installed");
         }
     }
 }
