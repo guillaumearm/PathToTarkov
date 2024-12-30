@@ -136,10 +136,10 @@ public class ExfilPromptService(
         // action selection step
         if (_actionToExecuteOnConfirm == null)
         {
-            List<CustomExfilAction> actions = exfilTargets.Select(exfilTarget =>
-            {
-                return CreateCustomExfilAction(exfil, exfilTarget);
-            }).ToList();
+            List<CustomExfilAction> actions = exfilTargets
+                .Where(exfilTarget => exfilTarget.IsAvailable())
+                .Select(exfilTarget => CreateCustomExfilAction(exfil, exfilTarget))
+                .ToList();
 
             return new OnActionsAppliedResult(actions);
         }

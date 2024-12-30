@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using SPT.Common.Http;
 using Newtonsoft.Json;
 using EFT.Interactive;
+using PTT.Settings;
+using EFT;
 
 namespace PTT.Data;
 
@@ -37,7 +39,14 @@ public class ExfilTarget
         if (isTransit)
         {
             string transitTemplate = "PTT_TRANSITS_PROMPT_TEMPLATE".Localized();
-            return string.Format(transitTemplate, transitMapId.Localized());
+            string result = string.Format(transitTemplate, transitMapId.Localized());
+
+            if (Config.DebugMode.Value && transitMapId.ToLower() == "sandbox_high")
+            {
+                return $"{result}*";
+            }
+
+            return result;
         }
 
         string extractTemplate = "PTT_EXTRACTS_PROMPT_TEMPLATE".Localized();
@@ -61,5 +70,29 @@ public class ExfilTarget
         }
 
         return $"{exfil.Settings.Name}.{offraidPosition}";
+    }
+
+    public bool IsAvailable()
+    {
+        if (transitMapId == null)
+        {
+            return true;
+        }
+
+        bool playerIsHighLevel = Helpers.PlayerProfile.GetLevel() >= 20;
+        bool isSandboxLow = transitMapId.ToLower() == "sandbox";
+        bool isSandboxHigh = transitMapId.ToLower() == "sandbox_high";
+
+        if (playerIsHighLevel && isSandboxLow)
+        {
+            return false;
+        }
+
+        if (!playerIsHighLevel && isSandboxHigh)
+        {
+            return false;
+        }
+
+        return true;
     }
 }
