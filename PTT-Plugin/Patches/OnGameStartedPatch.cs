@@ -1,8 +1,6 @@
-using Comfort.Common;
 using EFT;
 using SPT.Reflection.Patching;
 using System.Reflection;
-using PTT.Services;
 
 namespace PTT.Patches;
 
@@ -16,6 +14,13 @@ internal class OnGameStartedPatch() : ModulePatch
     [PatchPrefix]
     public static bool PatchPrefix()
     {
+        InitExfilsTargetsService();
+        Plugin.DisplayInteractableExfilsAPIWarning();
+        return true;
+    }
+
+    private static void InitExfilsTargetsService()
+    {
         if (Plugin.ExfilsTargetsService != null)
         {
             Plugin.ExfilsTargetsService.Init();
@@ -24,7 +29,5 @@ internal class OnGameStartedPatch() : ModulePatch
         {
             Helpers.Logger.Error("ExfilsTargetsService instance not found");
         }
-
-        return true;
     }
 }

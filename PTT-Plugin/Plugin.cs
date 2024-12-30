@@ -4,6 +4,7 @@ using BepInEx.Bootstrap;
 
 using PTT.Services;
 using System;
+using EFT.Communications;
 
 namespace PTT;
 
@@ -12,19 +13,18 @@ public class Plugin : BaseUnityPlugin
 {
     public static bool FikaIsInstalled { get; private set; }
     private static bool InteractableExfilsApiIsInstalled { get; set; }
+    private static bool InteractableExfilsApiIsOutdated { get; set; } = false;
     private static bool KaenoTraderScrollingIsInstalled { get; set; }
-    public static ManualLogSource LogSource { get; private set; }
     public static ExfilsTargetsService ExfilsTargetsService;
-
+    private const string IE_API_PLUGIN_NAME = "Jehree.InteractableExfilsAPI";
 
     protected void Awake()
     {
         Helpers.Logger.Init(Logger);
         Helpers.Logger.Info($"Plugin {PluginInfo.PLUGIN_GUID} is loading...");
 
-        LogSource = Logger;
         FikaIsInstalled = Chainloader.PluginInfos.ContainsKey("com.fika.core");
-        InteractableExfilsApiIsInstalled = Chainloader.PluginInfos.ContainsKey("Jehree.InteractableExfilsAPI");
+        InteractableExfilsApiIsInstalled = Chainloader.PluginInfos.ContainsKey(IE_API_PLUGIN_NAME);
         KaenoTraderScrollingIsInstalled = Chainloader.PluginInfos.ContainsKey("com.kaeno.TraderScrolling");
 
         Settings.Config.Init(Config);
@@ -48,6 +48,7 @@ public class Plugin : BaseUnityPlugin
         new Patches.ScavExfiltrationPointPatch().Enable();
         new Patches.OnGameStartedPatch().Enable();
         new Patches.LocalRaidStartedPatch().Enable();
+        new Patches.MenuScreenAwakePatch().Enable();
 
         Helpers.Logger.Info($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
     }
@@ -56,13 +57,12 @@ public class Plugin : BaseUnityPlugin
     {
         if (InteractableExfilsApiIsInstalled)
         {
-            Version apiVersion = Chainloader.PluginInfos["Jehree.InteractableExfilsAPI"].Metadata.Version;
+            Version apiVersion = Chainloader.PluginInfos[IE_API_PLUGIN_NAME].Metadata.Version;
 
             if (apiVersion < new Version("1.4.0"))
             {
                 Helpers.Logger.Warning($"Jehree.InteractableExfilsAPI >= 1.4.0 is required");
-                // TODO: warn the user on game start (+ add BepInEx advanced option to silent those warnings)
-                // NotificationManagerClass.DisplayWarningNotification("Path To Tarkov: Your Interactable Exfils API mod is outdated. at least v1.4.0 is required");
+                InteractableExfilsApiIsOutdated = true;
             }
 
             Helpers.Logger.Info($"Jehree.InteractableExfilsAPI plugin detected");
@@ -71,8 +71,18 @@ public class Plugin : BaseUnityPlugin
         else
         {
             Helpers.Logger.Error($"Jehree.InteractableExfilsAPI plugin is missing");
-            // TODO: warn the user on game start (+ add BepInEx advanced option to silent those warnings)
-            // NotificationManagerClass.DisplayWarningNotification("Path To Tarkov: Interactable Exfils API mod is not installed");
+        }
+    }
+
+    public static void DisplayInteractableExfilsAPIWarning()
+    {
+        if (!InteractableExfilsApiIsInstalled)
+        {
+            NotificationManagerClass.DisplayWarningNotification("Path To Tarkov: Interactable Exfils API mod is not installed", ENotificationDurationType.Long);
+        }
+        else if (InteractableExfilsApiIsOutdated)
+        {
+            NotificationManagerClass.DisplayWarningNotification("Path To Tarkov: Your Interactable Exfils API mod is outdated. v1.4.0 or higher is required", ENotificationDurationType.Long);
         }
     }
 }
