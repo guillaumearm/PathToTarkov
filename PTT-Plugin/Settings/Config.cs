@@ -8,10 +8,10 @@ internal class Config
     private const string TradersSection = "1. Traders";
     private const string ExfilSection = "2. Exfiltration";
 
+    internal static ConfigEntry<bool> SilentMissingInteractableExfilsWarning { get; set; }
     internal static ConfigEntry<bool> DebugMode { get; set; }
     internal static ConfigEntry<bool> ShowLockedTraders { get; set; }
     internal static ConfigEntry<bool> ExfilAutoselectCancel { get; set; }
-    internal static ConfigEntry<bool> SilentMissingInteractableExfilsWarning { get; set; }
 
     internal static void Init(ConfigFile config)
     {
