@@ -106,8 +106,10 @@ export class EventWatcher {
   private watchStartOfRaid(container: DependencyContainer): void {
     container.afterResolution<MatchController>(
       'MatchController',
-      (_t, result): void => {
-        const matchController = Array.isArray(result) ? result[0] : result;
+      (_t, givenMatchControllers): void => {
+        const matchController = Array.isArray(givenMatchControllers)
+          ? givenMatchControllers[0]
+          : givenMatchControllers;
         const originalStartLocalRaid = matchController.startLocalRaid.bind(matchController);
 
         matchController.startLocalRaid = (sessionId: string, data: IStartLocalRaidRequestData) => {
@@ -142,8 +144,10 @@ export class EventWatcher {
   private watchEndOfRaid(container: DependencyContainer): void {
     container.afterResolution<MatchCallbacks>(
       'MatchCallbacks',
-      (_t, result): void => {
-        const matchCallbacks = Array.isArray(result) ? result[0] : result;
+      (_t, givenMatchCallbacks): void => {
+        const matchCallbacks = Array.isArray(givenMatchCallbacks)
+          ? givenMatchCallbacks[0]
+          : givenMatchCallbacks;
         const originalEndLocalRaid = matchCallbacks.endLocalRaid.bind(matchCallbacks);
 
         matchCallbacks.endLocalRaid = (
@@ -151,12 +155,10 @@ export class EventWatcher {
           data: IEndLocalRaidRequestData,
           sessionId: string,
         ) => {
-          const result = originalEndLocalRaid(url, data, sessionId);
-
           const raidCache = this.getRaidCache(sessionId);
           if (!raidCache) {
             this.ptt.logger.error(`no PTT raid cache found`);
-            return result;
+            return originalEndLocalRaid(url, data, sessionId);
           }
 
           raidCache.sessionId = sessionId;
@@ -172,8 +174,19 @@ export class EventWatcher {
           this.ptt.debug(
             `end of raid detected for exit '${raidCache.exitName}' with status '${raidCache.exitStatus}'`,
           );
-          this.runEndOfRaidCallback(sessionId);
 
+          // restore original exitName (because passed exitName is supposed to be a custom ptt exit)
+          const originalExitName = parsedExfilTarget.exitName ?? data.results.exitName;
+          const originalData: IEndLocalRaidRequestData = {
+            ...data,
+            results: {
+              ...data.results,
+              exitName: originalExitName,
+            },
+          };
+          const result = originalEndLocalRaid(url, originalData, sessionId);
+
+          this.runEndOfRaidCallback(sessionId);
           return result;
         };
       },
