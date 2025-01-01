@@ -60,9 +60,9 @@ public class Plugin : BaseUnityPlugin
         {
             Version apiVersion = Chainloader.PluginInfos[IE_API_PLUGIN_NAME].Metadata.Version;
 
-            if (apiVersion < new Version("1.4.0"))
+            if (apiVersion < new Version("1.4.1"))
             {
-                Helpers.Logger.Warning($"Jehree.InteractableExfilsAPI >= 1.4.0 is required");
+                Helpers.Logger.Warning($"Jehree.InteractableExfilsAPI >= 1.4.1 is required");
                 InteractableExfilsApiIsOutdated = true;
             }
 
@@ -83,7 +83,7 @@ public class Plugin : BaseUnityPlugin
         }
         else if (InteractableExfilsApiIsOutdated)
         {
-            NotificationManagerClass.DisplayWarningNotification("Path To Tarkov: Your Interactable Exfils API mod is outdated. v1.4.0 or higher is required", ENotificationDurationType.Long);
+            NotificationManagerClass.DisplayWarningNotification("Path To Tarkov: Your Interactable Exfils API mod is outdated. v1.4.1 or higher is required", ENotificationDurationType.Long);
         }
     }
 }
