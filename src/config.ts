@@ -259,10 +259,10 @@ export type ConfigGetter = (sessionId: string) => Config;
 export const PACKAGE_JSON_PATH = join(__dirname, '../package.json');
 
 export const CONFIGS_DIR = join(__dirname, '../configs');
-export const USER_CONFIG_PATH = join(CONFIGS_DIR, 'UserConfig.json');
+export const USER_CONFIG_PATH = join(CONFIGS_DIR, 'UserConfig.jsonc');
 
-export const CONFIG_FILENAME = 'config.json';
-export const SPAWN_CONFIG_FILENAME = 'shared_player_spawnpoints.json';
+export const CONFIG_FILENAME = 'config.jsonc';
+export const SPAWN_CONFIG_FILENAME = 'shared_player_spawnpoints.jsonc';
 
 export const PRAPOR_ID = '54cb50c76803fa8b248b4571';
 export const FENCE_ID = '579dc571d53a0658a154fbec';

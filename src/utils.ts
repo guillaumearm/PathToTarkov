@@ -1,5 +1,6 @@
 import { readFileSync, existsSync, writeFileSync } from 'fs';
 import { createHash } from 'crypto';
+import { jsonc } from 'jsonc';
 
 export const fileExists = (path: string): boolean => {
   return existsSync(path);
@@ -10,7 +11,7 @@ export const readJsonFile = <T>(path: string): T => {
     throw new Error(`Path To Tarkov cannot read json file "${path}"`);
   }
 
-  return JSON.parse(readFileSync(path, 'utf-8'));
+  return jsonc.parse(readFileSync(path, 'utf-8'));
 };
 
 export const writeJsonFile = <T>(path: string, x: T): void => {
