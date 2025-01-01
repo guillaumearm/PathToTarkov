@@ -11,9 +11,7 @@ static public class IEApiWrapper
 
         if (interactableExfilsService != null)
         {
-            interactableExfilsService.DisableVanillaActions = true;
-            var exfilPromptService = new ExfilPromptService(interactableExfilsService, exfilsTargetsService);
-            exfilPromptService.InitPromptHandlers();
+            new ExfilPromptService(interactableExfilsService, exfilsTargetsService).Init();
             Logger.Info($"Jehree's Interactable Exfils API: initialized exfils prompt service");
         }
         else

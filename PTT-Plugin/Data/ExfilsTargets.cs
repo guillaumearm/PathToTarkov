@@ -80,6 +80,7 @@ public class ExfilTarget
         }
 
         bool playerIsHighLevel = Helpers.PlayerProfile.GetLevel() >= 20;
+        bool playerIsLowLevel = !playerIsHighLevel;
         bool isSandboxLow = transitMapId.ToLower() == "sandbox";
         bool isSandboxHigh = transitMapId.ToLower() == "sandbox_high";
 
@@ -88,7 +89,7 @@ public class ExfilTarget
             return false;
         }
 
-        if (!playerIsHighLevel && isSandboxHigh)
+        if (playerIsLowLevel && isSandboxHigh)
         {
             return false;
         }

@@ -18,7 +18,13 @@ public class ExfilPromptService(
     ExfilsTargetsService exfilsTargetsService
 )
 {
-    public void InitPromptHandlers()
+    public void Init()
+    {
+        ieService.DisableVanillaActions = true;
+        InitPromptHandlers();
+    }
+
+    private void InitPromptHandlers()
     {
         // requires manual activation (no auto-extract even if the player enabled the IEAPI option in BepInEx)
         ieService.OnActionsAppliedEvent += RequiresManualActivation;
@@ -160,13 +166,12 @@ public class ExfilPromptService(
 
     private OnActionsAppliedResult RequiresManualActivation(ExfiltrationPoint exfil, CustomExfilTrigger customExfilTrigger, bool exfilIsAvailableToPlayer)
     {
-        // compat with older version of Interactable Exfils API (< 1.4.0)
+        // avoid crash with older version of Interactable Exfils API (< 1.4.0)
         if (customExfilTrigger == null)
         {
             return null;
         }
 
-        // TODO: find out why it doesn't work as intended? (in some cases, when player enable/disable the bepinex setting manually)
         customExfilTrigger.RequiresManualActivation = true;
         return null;
     }
