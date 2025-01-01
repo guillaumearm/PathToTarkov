@@ -48,6 +48,7 @@ public class Plugin : BaseUnityPlugin
         new Patches.ScavExfiltrationPointPatch().Enable();
         new Patches.OnGameStartedPatch().Enable();
         new Patches.LocalRaidStartedPatch().Enable();
+        new Patches.LocalRaidEndedPatch().Enable();
         new Patches.MenuScreenAwakePatch().Enable();
 
         Helpers.Logger.Info($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");

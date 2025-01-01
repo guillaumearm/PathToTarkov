@@ -73,8 +73,9 @@ public class ExfilPromptService(
                 {
                     _actionToExecuteOnConfirm = () =>
                     {
-                        Sound.PlayTransitConfirm();
+                        Plugin.ExfilsTargetsService.SaveExfil(exfil, exfilTarget);
                         CustomExfilService.TransitTo(exfil, exfilTarget);
+                        Sound.PlayTransitConfirm();
                     };
                     Sound.PlayMenuEnter();
                     SelectFirstPromptItem();
@@ -84,8 +85,9 @@ public class ExfilPromptService(
                 {
                     _actionToExecuteOnConfirm = () =>
                     {
-                        Sound.PlayExtractConfirm();
+                        Plugin.ExfilsTargetsService.SaveExfil(exfil, exfilTarget);
                         CustomExfilService.ExtractTo(exfil, exfilTarget);
+                        Sound.PlayExtractConfirm();
                     };
                     Sound.PlayMenuEnter();
                     SelectFirstPromptItem();

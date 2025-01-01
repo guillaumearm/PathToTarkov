@@ -21,9 +21,7 @@ public static class CustomExfilService
 
         LocalGame localGame = Singleton<AbstractGame>.Instance as LocalGame;
         Player player = Singleton<GameWorld>.Instance.MainPlayer;
-        string customExtractName = exfilTarget.GetCustomExitName(exfil);
-
-        Logger.Info($"started extraction on '{customExtractName}'");
+        Logger.Info($"started extraction on '{exfilTarget.GetCustomExitName(exfil)}'");
 
         if (localGame == null)
         {
@@ -38,7 +36,7 @@ public static class CustomExfilService
         }
 
         float delay = 0f;
-        localGame.Stop(player.ProfileId, ExitStatus.Survived, customExtractName, delay);
+        localGame.Stop(player.ProfileId, ExitStatus.Survived, exfil.Settings.Name, delay);
         Logger.Info($"local game stopped for profile '${player.ProfileId}'");
     }
 
@@ -51,8 +49,7 @@ public static class CustomExfilService
         }
 
         TransitPoint transit = Transit.Create(exfil, exfilTarget);
-        string customTransitName = transit.parameters.name;
-        Logger.Info($"started transit on '{customTransitName}'");
+        Logger.Info($"started transit on '{transit.parameters.name}'");
 
         if (!TransitControllerAbstractClass.Exist(out GClass1642 vanillaTransitController))
         {

@@ -3,16 +3,30 @@ using EFT;
 using PTT.Data;
 using PTT.Helpers;
 using Comfort.Common;
+using EFT.Interactive;
 
 namespace PTT.Services;
 
 public class ExfilsTargetsService
 {
     public ExfilsTargetsResponse ExfilsTargets { get; private set; } = new() { data = { } };
+    private string UsedCustomExtractName { get; set; } = null;
 
     public void Init()
     {
         FetchExfilsTargetsForCurrentLocation();
+    }
+
+    public void SaveExfil(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
+    {
+        UsedCustomExtractName = exfilTarget.GetCustomExitName(exfil);
+    }
+
+    public string ConsumeExtractName()
+    {
+        string extractName = UsedCustomExtractName;
+        UsedCustomExtractName = null;
+        return extractName;
     }
 
     private void FetchExfilsTargetsForCurrentLocation()

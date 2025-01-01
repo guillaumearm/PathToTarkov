@@ -16,9 +16,7 @@ public static class CustomExfilServiceFika
     {
         CoopGame coopGame = (CoopGame)Singleton<IFikaGame>.Instance;
         CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
-
-        string customExtractName = exfilTarget.GetCustomExitName(exfil);
-        Logger.Info($"(FIKA) started extraction on '{customExtractName}'");
+        Logger.Info($"(FIKA) started extraction on '{exfilTarget.GetCustomExitName(exfil)}'");
 
         if (coopGame == null)
         {
@@ -32,19 +30,16 @@ public static class CustomExfilServiceFika
             return;
         }
 
-        coopGame.ExitLocation = customExtractName; // not sure if it's needed
+        coopGame.ExitLocation = exfil.Settings.Name;
         coopGame.Extract(coopPlayer, exfil, null);
         Logger.Info($"(FIKA) extraction done for profile {coopPlayer.ProfileId}");
-
     }
 
     public static void TransitTo(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
     {
         CoopGame coopGame = (CoopGame)Singleton<IFikaGame>.Instance;
         CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
-
-        string customTransitName = exfilTarget.GetCustomExitName(exfil);
-        Logger.Info($"started transit on '{customTransitName}'");
+        Logger.Info($"started transit on '{exfilTarget.GetCustomExitName(exfil)}'");
 
         if (coopGame == null)
         {
@@ -92,7 +87,7 @@ public static class CustomExfilServiceFika
         transitController.alreadyTransits.Add(coopPlayer.ProfileId, transitPayload);
 
         // 3. trigger extract
-        coopGame.ExitLocation = customTransitName; // not sure if it's needed
+        coopGame.ExitLocation = exfil.Settings.Name;
         coopGame.Extract(coopPlayer, null, transit);
         Logger.Info($"(FIKA) transit done for profile '${coopPlayer.ProfileId}'");
     }
