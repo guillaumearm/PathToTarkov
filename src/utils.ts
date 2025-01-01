@@ -1,17 +1,23 @@
 import { readFileSync, existsSync, writeFileSync } from 'fs';
 import { createHash } from 'crypto';
-import { jsonc } from 'jsonc';
+import type { JsonUtil } from '@spt/utils/JsonUtil';
 
 export const fileExists = (path: string): boolean => {
   return existsSync(path);
 };
 
-export const readJsonFile = <T>(path: string): T => {
+export const readJsonFile = <T>(path: string, jsonUtil: JsonUtil): T => {
   if (!existsSync(path)) {
     throw new Error(`Path To Tarkov cannot read json file "${path}"`);
   }
 
-  return jsonc.parse(readFileSync(path, 'utf-8'));
+  const parsedResult = jsonUtil.deserializeJson5<T>(readFileSync(path, 'utf-8'));
+
+  if (!parsedResult) {
+    throw new Error(`Path To Tarkov cannot parse json5 file "${path}"`);
+  }
+
+  return parsedResult;
 };
 
 export const writeJsonFile = <T>(path: string, x: T): void => {

@@ -1,11 +1,19 @@
-import { readFileSync, readdirSync } from 'fs';
+import { existsSync, readFileSync, readdirSync } from 'fs';
 import path from 'path';
 import type { Config, SpawnConfig } from '../src/config';
 import { processConfig, processSpawnConfig } from '../src/config';
-import { readJsonFile } from '../src/utils';
 import { analyzeConfig } from '../src/config-analysis';
 import { CONFIG_FILENAME, SPAWN_CONFIG_FILENAME, CONFIGS_DIR } from '../src/config';
 import { ExfilsTooltipsTemplater } from '../src/services/ExfilsTooltipsTemplater';
+import { parse } from 'json5';
+
+const readJsonFile = <T>(path: string): T => {
+  if (!existsSync(path)) {
+    throw new Error(`Path To Tarkov cannot read json file "${path}"`);
+  }
+
+  return parse(readFileSync(path, 'utf-8'));
+};
 
 const SHARED_PLAYER_SPAWNPOINTS_NAME = SPAWN_CONFIG_FILENAME;
 

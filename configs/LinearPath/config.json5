@@ -1,0 +1,380 @@
+{
+  enabled: true,
+  debug: true,
+  initial_offraid_position: 'MechanicStash',
+  reset_offraid_position_on_player_die: true,
+  traders_access_restriction: true,
+  hideout_multistash_enabled: true,
+  player_scav_move_offraid_position: false,
+  bypass_keep_found_in_raid_tweak: false,
+  bypass_uninstall_procedure: false,
+  restrictions_in_raid: {
+    // roubles
+    '5449016a4bdc2d6f028b456f': {
+      Value: 100000000,
+    },
+    // dollars
+    '5696686a4bdc2da3298b456a': {
+      Value: 1000000,
+    },
+    // euros
+    '569668774bdc2da2298b4568': {
+      Value: 1000000,
+    },
+    // case key
+    '67449b6c89d5e1ddc603f504': {
+      Value: 42,
+    },
+    // locked case
+    '6740987b89d5e1ddc603f4f0': {
+      Value: 10,
+    },
+  },
+  offraid_regen_config: {
+    hydration: {
+      access_via: ['*'],
+    },
+    energy: {
+      access_via: ['*'],
+    },
+    health: {
+      access_via: ['*'],
+    },
+  },
+  hideout_main_stash_access_via: ['MechanicStash'],
+  hideout_secondary_stashes: [
+    {
+      id: 'PathToTarkov_Therapist_stash',
+      size: 22,
+      access_via: ['TherapistStash'],
+    },
+    {
+      id: 'PathToTarkov_Prapor_stash',
+      size: 22,
+      access_via: ['PraporStash'],
+    },
+    {
+      id: 'PathToTarkov_Mechanic_stash',
+      size: 22,
+      access_via: ['MechanicStash'],
+    },
+    {
+      id: 'PathToTarkov_Ragman_stash',
+      size: 22,
+      access_via: ['RagmanStash'],
+    },
+    {
+      id: 'PathToTarkov_Skier_stash',
+      size: 22,
+      access_via: ['SkierStash'],
+    },
+    {
+      id: 'PathToTarkov_Peacekeeper_stash',
+      size: 22,
+      access_via: ['PeacekeeperStash'],
+    },
+    {
+      id: 'PathToTarkov_Jaeger_stash',
+      size: 22,
+      access_via: ['JaegerStash'],
+    },
+    {
+      id: 'PathToTarkov_MilitaryLighthouse_stash',
+      size: 22,
+      access_via: ['MilitaryLighthouseStash'],
+    },
+    {
+      id: 'PathToTarkov_Klimov_stash',
+      size: 22,
+      access_via: ['KlimovStash'],
+    },
+  ],
+  traders_config: {
+    // Prapor
+    '54cb50c76803fa8b248b4571': {
+      override_description: false,
+      location_description: {
+        ch: 'In his car, he hangs around the city',
+        cz: 'In his car, he hangs around the city',
+        en: 'In his car, he hangs around the city',
+        'es-mx': 'In his car, he hangs around the city',
+        es: 'In his car, he hangs around the city',
+        fr: 'Dans sa voiture, il traine en ville',
+        ge: 'In his car, he hangs around the city',
+        hu: 'In his car, he hangs around the city',
+        it: 'In his car, he hangs around the city',
+        jp: 'In his car, he hangs around the city',
+        kr: 'In his car, he hangs around the city',
+        pl: 'In his car, he hangs around the city',
+        po: 'In his car, he hangs around the city',
+        ru: 'In his car, he hangs around the city',
+      },
+      access_via: ['PraporStash'],
+    },
+    // Therapist
+    '54cb57776803fa99248b456e': {
+      override_description: false,
+      location_description: {
+        ch: 'in the city',
+        cz: 'In the city',
+        en: 'In the city',
+        'es-mx': 'In the city',
+        es: 'In the city',
+        fr: 'En ville',
+        ge: 'In the city',
+        hu: 'In the city',
+        it: 'In the city',
+        jp: 'In the city',
+        kr: 'In the city',
+        pl: 'In the city',
+        po: 'In the city',
+        ru: 'In the city',
+      },
+      access_via: ['TherapistStash'],
+    },
+    // Mechanic
+    '5a7c2eca46aef81a7ca2145d': {
+      override_description: false,
+      location_description: {
+        ch: 'inside the factory (at home)',
+        cz: 'inside the factory (at home)',
+        en: 'inside the factory (at home)',
+        'es-mx': 'inside the factory (at home)',
+        es: 'inside the factory (at home)',
+        fr: "Dans l'usine (à la maison)",
+        ge: 'inside the factory (at home)',
+        hu: 'inside the factory (at home)',
+        it: 'inside the factory (at home)',
+        jp: 'inside the factory (at home)',
+        kr: 'inside the factory (at home)',
+        pl: 'inside the factory (at home)',
+        po: 'inside the factory (at home)',
+        ru: 'inside the factory (at home)',
+      },
+      access_via: ['MechanicStash'],
+    },
+    // Skier
+    '58330581ace78e27b8b10cee': {
+      override_description: false,
+      location_description: {
+        ch: 'To customs',
+        cz: 'To customs',
+        en: 'To customs',
+        'es-mx': 'To customs',
+        es: 'To customs',
+        fr: 'Vers les douanes',
+        ge: 'To customs',
+        hu: 'To customs',
+        it: 'To customs',
+        jp: 'To customs',
+        kr: 'To customs',
+        pl: 'To customs',
+        po: 'To customs',
+        ru: 'To customs',
+      },
+      access_via: ['SkierStash'],
+    },
+    // Ragman
+    '5ac3b934156ae10c4430e83c': {
+      override_description: false,
+      location_description: {
+        ch: 'To interchange',
+        cz: 'To interchange',
+        en: 'To interchange',
+        'es-mx': 'To interchange',
+        es: 'To interchange',
+        fr: "Vers l'échangeur",
+        ge: 'To interchange',
+        hu: 'To interchange',
+        it: 'To interchange',
+        jp: 'To interchange',
+        kr: 'To interchange',
+        pl: 'To interchange',
+        po: 'To interchange',
+        ru: 'To interchange',
+      },
+      access_via: ['RagmanStash'],
+    },
+    // Jaeger
+    '5c0647fdd443bc2504c2d371': {
+      override_description: false,
+      location_description: {
+        ch: 'In the woods, not far from the factory',
+        cz: 'In the woods, not far from the factory',
+        en: 'In the woods, not far from the factory',
+        'es-mx': 'In the woods, not far from the factory',
+        es: 'In the woods, not far from the factory',
+        fr: "Dans les bois, pas loin de l'usine",
+        ge: 'In the woods, not far from the factory',
+        hu: 'In the woods, not far from the factory',
+        it: 'In the woods, not far from the factory',
+        jp: 'In the woods, not far from the factory',
+        kr: 'In the woods, not far from the factory',
+        pl: 'In the woods, not far from the factory',
+        po: 'In the woods, not far from the factory',
+        ru: 'In the woods, not far from the factory',
+      },
+      access_via: ['JaegerStash'],
+    },
+    // Peacekeeper
+    '5935c25fb3acc3127c3d8cd9': {
+      override_description: true,
+      location_description: {
+        ch: 'In the tunnel between the shoreline and the lighthouse',
+        cz: 'In the tunnel between the shoreline and the lighthouse',
+        en: 'In the tunnel between the shoreline and the lighthouse',
+        'es-mx': 'In the tunnel between the shoreline and the lighthouse',
+        es: 'In the tunnel between the shoreline and the lighthouse',
+        fr: 'Dans le tunnel entre le littoral et le phare',
+        ge: 'In the tunnel between the shoreline and the lighthouse',
+        hu: 'In the tunnel between the shoreline and the lighthouse',
+        it: 'In the tunnel between the shoreline and the lighthouse',
+        jp: 'In the tunnel between the shoreline and the lighthouse',
+        kr: 'In the tunnel between the shoreline and the lighthouse',
+        pl: 'In the tunnel between the shoreline and the lighthouse',
+        po: 'In the tunnel between the shoreline and the lighthouse',
+        ru: 'In the tunnel between the shoreline and the lighthouse',
+      },
+      access_via: ['PeacekeeperStash'],
+    },
+    // Ref (arena)
+    '6617beeaa9cfa777ca915b7c': {
+      override_description: true,
+      location_description: {
+        ch: 'To customs',
+        cz: 'To customs',
+        en: 'To customs',
+        'es-mx': 'To customs',
+        es: 'To customs',
+        fr: 'Vers les douanes',
+        ge: 'To customs',
+        hu: 'To customs',
+        it: 'To customs',
+        jp: 'To customs',
+        kr: 'To customs',
+        pl: 'To customs',
+        po: 'To customs',
+        ru: 'To customs',
+      },
+      access_via: ['SkierStash'],
+    },
+    // Fence
+    '579dc571d53a0658a154fbec': {
+      access_via: '*',
+      insurance_always_enabled: true,
+      insurance_config: {
+        insurance_price_coef: 100,
+        min_payment: 0,
+        min_return_hour: 1,
+        max_return_hour: 2,
+        max_storage_time: 480,
+      },
+      repair_always_enabled: true,
+      repair_config: {
+        quality: 1,
+        currency: '5449016a4bdc2d6f028b456f',
+        currency_coefficient: 12,
+        repair_price_coef: 0,
+      },
+      heal_always_enabled: true,
+    },
+  },
+  exfiltrations: {
+    factory4_day: {
+      'Gate 3': 'MechanicStash',
+      Gate_o: 'JaegerStash',
+    },
+    factory4_night: {
+      'Gate 3': 'MechanicStash',
+      Gate_o: 'JaegerStash',
+    },
+    bigmap: {
+      'Railroad To Tarkov': 'TherapistStash',
+      'Railroad To Military Base': 'SkierStash',
+      'Factory Far Corner': 'MechanicStash',
+      'Old Azs Gate': 'RagmanStash',
+    },
+    woods: {
+      'Factory Gate': 'JaegerStash',
+    },
+    rezervbase: {
+      EXFIL_ScavCooperation: 'SkierStash',
+      Exit4: 'MilitaryLighthouseStash',
+    },
+    interchange: {
+      'NW Exfil': 'RagmanStash',
+    },
+    shoreline: {
+      Tunnel: 'PeacekeeperStash',
+    },
+    lighthouse: {
+      Coastal_South_Road: 'PeacekeeperStash',
+      ' V-Ex_light': 'MilitaryLighthouseStash',
+    },
+    tarkovstreets: {
+      E5: 'TherapistStash',
+      E7_car: 'PraporStash',
+      E9_sniper: 'KlimovStash',
+    },
+    laboratory: {
+      lab_Parking_Gate: 'PraporStash',
+      lab_Hangar_Gate: 'PraporStash',
+      lab_Elevator_Med: 'PraporStash',
+      lab_Under_Storage_Collector: 'PraporStash',
+      lab_Elevator_Main: 'PraporStash',
+      lab_Vent: 'PraporStash',
+      lab_Elevator_Cargo: 'PraporStash',
+    },
+    sandbox: {
+      Sandbox_VExit: 'PraporStash',
+    },
+  },
+  infiltrations: {
+    TherapistStash: {
+      bigmap: ['Crossroads'],
+      tarkovstreets: ['Zmeevsky Alley'],
+    },
+    PraporStash: {
+      tarkovstreets: ['Klimov Street'],
+      sandbox: ['Mira Ave'],
+      laboratory: [
+        'Cargo Elevator',
+        'Hangar Gate',
+        'Lab Sewage Conduit',
+        'Lab Vents',
+        'Main Elevator',
+        'Med Block Elevator',
+        'Parking Gate',
+      ],
+    },
+    MechanicStash: {
+      factory4_day: ['Gate 3'],
+      factory4_night: ['Gate 3'],
+      bigmap: ['ZB-1011'],
+    },
+    RagmanStash: {
+      bigmap: ['Old Gas Scav'],
+      interchange: ['Railway'],
+    },
+    SkierStash: {
+      bigmap: ['RR to Military Base'],
+      rezervbase: ['Scav lands rail'],
+    },
+    PeacekeeperStash: {
+      lighthouse: ['Lighthouse Tunnel'],
+      shoreline: ['Shoreline Tunnel'],
+    },
+    JaegerStash: {
+      factory4_day: ['Courtyard'],
+      factory4_night: ['Courtyard'],
+      woods: ['Factory Gate', 'RUAF Gate', 'UN Roadblock'],
+    },
+    MilitaryLighthouseStash: {
+      lighthouse: ['Lighthouse Vehicle Extract'],
+      rezervbase: ['Checkpoint Fence'],
+    },
+    KlimovStash: {
+      tarkovstreets: ['Klimov Street'],
+    },
+  },
+}

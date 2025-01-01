@@ -35,6 +35,7 @@ import { TradersAvailabilityService } from './services/TradersAvailabilityServic
 import type { ExfilsTargetsRequest } from './exfils-targets';
 import { getExfilsTargets } from './exfils-targets';
 import { resolveMapNameFromLocation } from './map-name-resolver';
+import type { JsonUtil } from '@spt/utils/JsonUtil';
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;
@@ -48,14 +49,15 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
   public preSptLoad(container: DependencyContainer): void {
     this.container = container;
-    this.packageJson = readJsonFile(PACKAGE_JSON_PATH);
+    const jsonUtil = container.resolve<JsonUtil>('JsonUtil');
+    this.packageJson = readJsonFile(PACKAGE_JSON_PATH, jsonUtil);
 
-    const userConfig = getUserConfig();
+    const userConfig = getUserConfig(jsonUtil);
     this.config = processConfig(
-      readJsonFile(path.join(CONFIGS_DIR, userConfig.selectedConfig, CONFIG_FILENAME)),
+      readJsonFile(path.join(CONFIGS_DIR, userConfig.selectedConfig, CONFIG_FILENAME), jsonUtil),
     );
     this.spawnConfig = processSpawnConfig(
-      readJsonFile(path.join(CONFIGS_DIR, SPAWN_CONFIG_FILENAME)),
+      readJsonFile(path.join(CONFIGS_DIR, SPAWN_CONFIG_FILENAME), jsonUtil),
       this.config,
     );
 

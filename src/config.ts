@@ -9,6 +9,7 @@ import {
   writeJsonFile,
 } from './utils';
 import { parseExilTargetFromPTTConfig } from './exfils-targets';
+import type { JsonUtil } from '@spt/utils/JsonUtil';
 
 export type ByMap<T> = {
   factory4_day: T;
@@ -259,10 +260,10 @@ export type ConfigGetter = (sessionId: string) => Config;
 export const PACKAGE_JSON_PATH = join(__dirname, '../package.json');
 
 export const CONFIGS_DIR = join(__dirname, '../configs');
-export const USER_CONFIG_PATH = join(CONFIGS_DIR, 'UserConfig.jsonc');
+export const USER_CONFIG_PATH = join(CONFIGS_DIR, 'UserConfig.json5');
 
-export const CONFIG_FILENAME = 'config.jsonc';
-export const SPAWN_CONFIG_FILENAME = 'shared_player_spawnpoints.jsonc';
+export const CONFIG_FILENAME = 'config.json5';
+export const SPAWN_CONFIG_FILENAME = 'shared_player_spawnpoints.json5';
 
 export const PRAPOR_ID = '54cb50c76803fa8b248b4571';
 export const FENCE_ID = '579dc571d53a0658a154fbec';
@@ -449,7 +450,7 @@ export const processSpawnConfig = (spawnConfig: SpawnConfig, config: Config): Sp
   return prepareGroundZeroHigh(mergedConfig);
 };
 
-export const getUserConfig = (): UserConfig => {
+export const getUserConfig = (jsonUtil: JsonUtil): UserConfig => {
   if (!fileExists(USER_CONFIG_PATH)) {
     const userConfig: UserConfig = {
       selectedConfig: 'Default',
@@ -458,5 +459,5 @@ export const getUserConfig = (): UserConfig => {
     return userConfig;
   }
 
-  return readJsonFile(USER_CONFIG_PATH);
+  return readJsonFile(USER_CONFIG_PATH, jsonUtil);
 };
