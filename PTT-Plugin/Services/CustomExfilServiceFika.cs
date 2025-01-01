@@ -17,6 +17,7 @@ public static class CustomExfilServiceFika
         CoopGame coopGame = (CoopGame)Singleton<IFikaGame>.Instance;
         CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
         Logger.Info($"(FIKA) started extraction on '{exfilTarget.GetCustomExitName(exfil)}'");
+        Plugin.ExfilsTargetsService.SaveExfil(exfil, exfilTarget);
 
         if (coopGame == null)
         {
@@ -40,6 +41,7 @@ public static class CustomExfilServiceFika
         CoopGame coopGame = (CoopGame)Singleton<IFikaGame>.Instance;
         CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
         Logger.Info($"started transit on '{exfilTarget.GetCustomExitName(exfil)}'");
+        Plugin.ExfilsTargetsService.SaveExfil(exfil, exfilTarget);
 
         if (coopGame == null)
         {

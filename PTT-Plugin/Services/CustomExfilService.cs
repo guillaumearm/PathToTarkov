@@ -22,6 +22,7 @@ public static class CustomExfilService
         LocalGame localGame = Singleton<AbstractGame>.Instance as LocalGame;
         Player player = Singleton<GameWorld>.Instance.MainPlayer;
         Logger.Info($"started extraction on '{exfilTarget.GetCustomExitName(exfil)}'");
+        Plugin.ExfilsTargetsService.SaveExfil(exfil, exfilTarget);
 
         if (localGame == null)
         {
@@ -50,6 +51,7 @@ public static class CustomExfilService
 
         TransitPoint transit = Transit.Create(exfil, exfilTarget);
         Logger.Info($"started transit on '{transit.parameters.name}'");
+        Plugin.ExfilsTargetsService.SaveExfil(exfil, exfilTarget);
 
         if (!TransitControllerAbstractClass.Exist(out GClass1642 vanillaTransitController))
         {

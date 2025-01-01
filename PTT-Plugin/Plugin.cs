@@ -67,7 +67,7 @@ public class Plugin : BaseUnityPlugin
             }
 
             Helpers.Logger.Info($"Jehree.InteractableExfilsAPI plugin detected");
-            IEApiWrapper.Init(ExfilsTargetsService);
+            IEApiWrapper.Init();
         }
         else
         {

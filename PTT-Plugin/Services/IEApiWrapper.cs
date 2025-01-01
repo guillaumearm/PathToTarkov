@@ -5,13 +5,13 @@ using PTT.Services;
 
 static public class IEApiWrapper
 {
-    public static void Init(ExfilsTargetsService exfilsTargetsService)
+    public static void Init()
     {
         InteractableExfilsService interactableExfilsService = Singleton<InteractableExfilsService>.Instance;
 
         if (interactableExfilsService != null)
         {
-            new ExfilPromptService(interactableExfilsService, exfilsTargetsService).Init();
+            new ExfilPromptService(interactableExfilsService).Init();
             Logger.Info($"Jehree's Interactable Exfils API: initialized exfils prompt service");
         }
         else
