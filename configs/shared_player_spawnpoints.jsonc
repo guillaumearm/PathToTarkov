@@ -1,6 +1,6 @@
 {
-  "Comment": "The player spawnpoints marked in this file are shared between all configs",
-  "Comment about Rotation": "Example rotation values -> N: 180, NE: 225, E: 270, SE: 315, S: 0, SW: 45, W: 90, NW: 135",
+  // The player spawnpoints marked in this file are shared between all configs
+  // Example rotation values -> N: 180, NE: 225, E: 270, SE: 315, S: 0, SW: 45, W: 90, NW: 135
   "factory4_day": {
     "Gate 3": {
       "Position": [57.89, 0.3, 49.57],
@@ -223,7 +223,7 @@
       "Rotation": 190.4635
     },
     "Checkpoint Fence": {
-      "Description": "RezervBase_cp_fence (exit4)",
+      // RezervBase_cp_fence (exit4)
       "Position": [56.2388641, -6.94445145, 90.22048],
       "Rotation": 287.982239
     },
