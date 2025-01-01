@@ -12,24 +12,24 @@
   "bypass_uninstall_procedure": false,
   "bypass_luas_Customs_spawn_points_tweak": false,
   "restrictions_in_raid": {
+    // roubles
     "5449016a4bdc2d6f028b456f": {
-      "// type = roubles": true,
       "Value": 100000000,
     },
+    // dollars
     "5696686a4bdc2da3298b456a": {
-      "// type = dollars": true,
       "Value": 1000000,
     },
+    // euros
     "569668774bdc2da2298b4568": {
-      "// type = euros": true,
       "Value": 1000000,
     },
+    // case key
     "67449b6c89d5e1ddc603f504": {
-      "// type = case key": true,
       "Value": 42,
     },
+    // locked case
     "6740987b89d5e1ddc603f4f0": {
-      "// type = locked case": true,
       "Value": 10,
     },
   },
@@ -148,29 +148,8 @@
     },
   ],
   "traders_config": {
-    "ragfair": {
-      "// Trader name": "Flea Market",
-      "override_description": true,
-      "location_description": {
-        "ch": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
-        "cz": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
-        "en": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
-        "es-mx": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
-        "es": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
-        "fr": "Pour accéder au marché noir, rendez vous aux camps scav de Base Militaire, Echangeur, ou en ville",
-        "ge": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
-        "hu": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
-        "it": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
-        "jp": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
-        "kr": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
-        "pl": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
-        "po": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
-        "ru": "To access the Flea Market, go to the Scav Camps in Reserve, Streets or Ground Zero and Interchange",
-      },
-      "access_via": ["ReservFlea", "ExpoCPFlea", "SafeRoomFlea"],
-    },
+    // Prapor
     "54cb50c76803fa8b248b4571": {
-      "// Trader name": "Prapor",
       "override_description": true,
       "location_description": {
         "ch": "Customs (ZB-1011, ZB-1012), Factory (Med Tent Gates, Gate 3)",
@@ -190,8 +169,8 @@
       },
       "access_via": ["FactoryZB-1011", "FactoryZB-1012"],
     },
+    // Therapist
     "54cb57776803fa99248b456e": {
-      "// Trader name": "Therapist",
       "override_description": true,
       "location_description": {
         "ch": "在 “地面零点 ”的拾荒者营地",
@@ -211,8 +190,8 @@
       },
       "access_via": ["TherapistHideout"],
     },
+    // Ref (arena)
     "6617beeaa9cfa777ca915b7c": {
-      "// Trader name": "Ref",
       "override_description": true,
       "location_description": {
         "ch": "Near the Airpit outside Shoreline (Railway Bridge)",
@@ -232,8 +211,8 @@
       },
       "access_via": ["RefHideout"],
     },
+    // Mechanic
     "5a7c2eca46aef81a7ca2145d": {
-      "// Trader name": "Mechanic",
       "override_description": true,
       "location_description": {
         "ch": "Inside a bunker in Factory (Camera Bunker Door)",
@@ -253,8 +232,8 @@
       },
       "access_via": ["MechanicHideout"],
     },
+    // Skier
     "58330581ace78e27b8b10cee": {
-      "// Trader name": "Skier",
       "override_description": true,
       "location_description": {
         "ch": "Inside a warehouse (Warehouse 17)",
@@ -274,8 +253,8 @@
       },
       "access_via": ["SkierHideout"],
     },
+    // Ragman
     "5ac3b934156ae10c4430e83c": {
-      "// Trader name": "Ragman",
       "override_description": true,
       "location_description": {
         "ch": "Near an  Emercom checkpoint outside Ultra",
@@ -295,8 +274,8 @@
       },
       "access_via": ["RagmanHideout"],
     },
+    // Jaeger
     "5c0647fdd443bc2504c2d371": {
-      "// Trader name": "Jaeger",
       "override_description": true,
       "location_description": {
         "ch": "Tucked in the mountains (Mountain Stash)",
@@ -316,8 +295,8 @@
       },
       "access_via": ["JaegerHideout"],
     },
+    // Peacekeeper
     "5935c25fb3acc3127c3d8cd9": {
-      "// Trader name": "Peacekeeper",
       "override_description": true,
       "location_description": {
         "ch": "In a bunker between Shoreline and Reserve (Old Bunker/D2)",
@@ -337,9 +316,8 @@
       },
       "access_via": ["PeacekeeperHideout"],
     },
+    // Fence
     "579dc571d53a0658a154fbec": {
-      "// Trader name": "Fence",
-      "// Fence is accessible everywhere": false,
       "location_description": {
         "ch": "In a car",
         "cz": "In a car",
@@ -375,9 +353,8 @@
       },
       "heal_always_enabled": false,
     },
+    // Artem
     "66bf757f27d0b097db0acea5": {
-      "// mod integration for ArtemTrader": true,
-      "// ArtemTrader is available at ArtemHideout": true,
       "disable_warning": false,
       "override_description": true,
       "location_description": {
@@ -398,9 +375,8 @@
       },
       "access_via": ["ArtemHideout"],
     },
+    // Scorpion
     "6688d464bc40c867f60e7d7e": {
-      "// mod integration for Scorpion": true,
-      "// Scorpion is available at ScorpionHideout": true,
       "disable_warning": false,
       "override_description": true,
       "location_description": {
@@ -421,9 +397,8 @@
       },
       "access_via": ["ScorpionHideout"],
     },
+    // Painter
     "668aaff35fd574b6dcc4a686": {
-      "// mod integration for PAINTER": true,
-      "// PAINTERSHOP is available at PainterHideout": true,
       "disable_warning": false,
       "override_description": true,
       "location_description": {
@@ -444,9 +419,8 @@
       },
       "access_via": ["PainterHideout"],
     },
+    // lotus
     "6747208ef022cbbfc65c41bf": {
-      "// mod integration for lotus": true,
-      "// lotus is available at LotusHideout": true,
       "disable_warning": false,
       "override_description": true,
       "location_description": {
@@ -467,10 +441,9 @@
       },
       "access_via": ["LotusHideout"],
     },
+    // Requisitions (from Raid Overhaul mod)
     "66f0eaa93f6cc015bc1f3acb": {
-      "// Trader name": "Requisitions",
       "override_description": true,
-      "// Requisitions is available at Near Kamchatskaya Arch": true,
       "disable_warning": false,
       "location_description": {
         "ch": "In the city near Kamchatskaya Arch",
@@ -490,9 +463,8 @@
       },
       "access_via": ["RequisitionsHideout"],
     },
+    // Svetlana (legacy)
     "Svetlana": {
-      "// mod integration for Svetlana": true,
-      "// Svetlana is available at Hideout": true,
       "disable_warning": false,
       "override_description": true,
       "location_description": {
@@ -513,9 +485,8 @@
       },
       "access_via": ["FactoryZB-1011", "FactoryZB-1012"],
     },
+    // Evelyn (legacy)
     "Evelyn": {
-      "// mod integration for Evelyn": true,
-      "// Evelyn is available at Hideout": true,
       "disable_warning": false,
       "override_description": true,
       "location_description": {
@@ -536,9 +507,8 @@
       },
       "access_via": ["FactoryZB-1011", "FactoryZB-1012"],
     },
+    // Anastasia (legacy)
     "Anastasia": {
-      "// mod integration for Anastasia": true,
-      "// Anastasia is available at HermaticToCellars": true,
       "disable_warning": false,
       "override_description": true,
       "location_description": {
@@ -832,7 +802,7 @@
     "additional_player_spawnpoints": {
       "woods": {
         "ScavVillage": {
-          "Description": "Scav Village in the north end",
+          // Scav Village in the north end
           "Position": [-58.53, 7.66, -757.22],
           "Rotation": 180,
         },

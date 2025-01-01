@@ -9,24 +9,24 @@
   "bypass_keep_found_in_raid_tweak": false,
   "bypass_uninstall_procedure": false,
   "restrictions_in_raid": {
+    // roubles
     "5449016a4bdc2d6f028b456f": {
-      "// type = roubles": true,
       "Value": 100000000,
     },
+    // dollars
     "5696686a4bdc2da3298b456a": {
-      "// type = dollars": true,
       "Value": 1000000,
     },
+    // euros
     "569668774bdc2da2298b4568": {
-      "// type = euros": true,
       "Value": 1000000,
     },
+    // case key
     "67449b6c89d5e1ddc603f504": {
-      "// type = case key": true,
       "Value": 42,
     },
+    // locked case
     "6740987b89d5e1ddc603f4f0": {
-      "// type = locked case": true,
       "Value": 10,
     },
   },
@@ -85,8 +85,8 @@
     },
   ],
   "traders_config": {
+    // Prapor
     "54cb50c76803fa8b248b4571": {
-      "// Trader name": "Prapor",
       "override_description": true,
       "location_description": {
         "ch": "Between woods and factory",
@@ -106,8 +106,8 @@
       },
       "access_via": ["WoodsFactoryGate"],
     },
+    // Therapist
     "54cb57776803fa99248b456e": {
-      "// Trader name": "Therapist",
       "override_description": true,
       "location_description": {
         "ch": "Between woods and factory",
@@ -127,8 +127,8 @@
       },
       "access_via": ["WoodsFactoryGate"],
     },
+    // Mechanic
     "5a7c2eca46aef81a7ca2145d": {
-      "// Trader name": "Mechanic",
       "override_description": true,
       "location_description": {
         "ch": "In ZB-* bunkers",
@@ -148,8 +148,8 @@
       },
       "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-1013"],
     },
+    // Skier
     "58330581ace78e27b8b10cee": {
-      "// Trader name": "Skier",
       "override_description": true,
       "location_description": {
         "ch": "Between woods and customs",
@@ -169,8 +169,8 @@
       },
       "access_via": ["WoodsCustoms"],
     },
+    // Ragman
     "5ac3b934156ae10c4430e83c": {
-      "// Trader name": "Ragman",
       "override_description": true,
       "location_description": {
         "ch": "Between interchange and customs",
@@ -190,8 +190,8 @@
       },
       "access_via": ["InterchangeCustoms"],
     },
+    // Jaeger
     "5c0647fdd443bc2504c2d371": {
-      "// Trader name": "Jaeger",
       "override_description": true,
       "location_description": {
         "ch": "In car",
@@ -211,8 +211,8 @@
       },
       "access_via": ["Car"],
     },
+    // Peacekeeper
     "5935c25fb3acc3127c3d8cd9": {
-      "// Trader name": "Peacekeeper",
       "override_description": true,
       "location_description": {
         "ch": "In boat",
@@ -232,8 +232,8 @@
       },
       "access_via": ["Boat"],
     },
+    // Ref (arena)
     "6617beeaa9cfa777ca915b7c": {
-      "// Trader name": "Arena (Ref)",
       "override_description": true,
       "location_description": {
         "ch": "Between woods and customs",
@@ -253,9 +253,8 @@
       },
       "access_via": ["WoodsCustoms"],
     },
+    // Fence
     "579dc571d53a0658a154fbec": {
-      "// Trader name": "Fence",
-      "// Fence is accessible everywhere": true,
       "access_via": "*",
       "insurance_always_enabled": true,
       "insurance_config": {
@@ -275,9 +274,8 @@
       },
       "heal_always_enabled": true,
     },
-    "Priscilu": {
-      "// mod integration for Priscilu": true,
-      "// Priscilu is available after extracting from Outskirts (woods map)": true,
+    // Priscilu
+    "6748adca5c70634464b214a8": {
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -298,9 +296,8 @@
       },
       "access_via": ["WoodsReserveShoreline"],
     },
+    // GearGal (legacy)
     "GearGal": {
-      "// mod integration for GearGal": true,
-      "// GearGal is available after extracting from Crossroads (cutstoms map) or Railway Exfil (interchange map)": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -321,9 +318,8 @@
       },
       "access_via": ["InterchangeCustoms"],
     },
+    // armalite (legacy)
     "armalite": {
-      "// mod integration for AR Shoppe Unlimited": true,
-      "// ArmaLite is available after extracting from RUAF (cutstoms map) or North UN Roadblock (woods map)": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -344,9 +340,8 @@
       },
       "access_via": ["WoodsCustoms"],
     },
+    // gunsmith
     "4e7ef752240141bca059b2ea": {
-      "// mod integration for Gunsmith": true,
-      "// Gunsmith is available after extracting from Tunnel (shoreline map) or Lighthouse Tunnel (lighthouse map)": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -367,9 +362,8 @@
       },
       "access_via": ["ShorelineLighthouseTunnel"],
     },
+    // operator (from Alex-AIO mod)
     "operator": {
-      "// mod integration for Alex-AIO": true,
-      "// Operator is available after extracting from Scav lands (reserve map)": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -390,9 +384,8 @@
       },
       "access_via": ["CustomsMilitaryBaseCP"],
     },
+    // Elder from Andrudis-QuestManiac mod (legacy)
     "Elder_Temporal_Id": {
-      "// mod integration for Andrudis-QuestManiac": true,
-      "// Trader name": "Elder",
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -413,9 +406,8 @@
       },
       "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-1013"],
     },
+    // Khokhol from Andrudis-QuestManiac mod (legacy)
     "Khokhol_Temporal_Id": {
-      "// mod integration for Andrudis-QuestManiac": true,
-      "// Trader name": "Khokol",
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -436,9 +428,8 @@
       },
       "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-1013"],
     },
+    // Warden from Andrudis-QuestManiac mod (legacy)
     "Warden_Temporal_Id": {
-      "// mod integration for Andrudis-QuestManiac": true,
-      "// Trader name": "Warden",
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -459,9 +450,8 @@
       },
       "access_via": ["Car"],
     },
+    // LabRat from Andrudis-QuestManiac mod (legacy)
     "LabRat_Temporal_Id": {
-      "// mod integration for Andrudis-QuestManiac": true,
-      "// Trader name": "Lab Rat",
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -482,9 +472,8 @@
       },
       "access_via": ["Car"],
     },
+    // Bashkir from Andrudis-QuestManiac mod (legacy)
     "Bashkir_Temporal_Id": {
-      "// mod integration for Andrudis-QuestManiac": true,
-      "// Trader name": "Bashkir",
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -505,9 +494,8 @@
       },
       "access_via": ["Boat"],
     },
+    // Colonel from Andrudis-QuestManiac mod (legacy)
     "Colonel_Temporal_Id": {
-      "// mod integration for Andrudis-QuestManiac": true,
-      "// Trader name": "Colonel",
       "disable_warning": true,
       "override_description": true,
       "location_description": {

@@ -11,24 +11,24 @@
   "bypass_keep_found_in_raid_tweak": false,
   "bypass_uninstall_procedure": false,
   "restrictions_in_raid": {
+    // roubles
     "5449016a4bdc2d6f028b456f": {
-      "// type = roubles": true,
       "Value": 100000000,
     },
+    // dollars
     "5696686a4bdc2da3298b456a": {
-      "// type = dollars": true,
       "Value": 1000000,
     },
+    // euros
     "569668774bdc2da2298b4568": {
-      "// type = euros": true,
       "Value": 1000000,
     },
+    // case key
     "67449b6c89d5e1ddc603f504": {
-      "// type = case key": true,
       "Value": 42,
     },
+    // locked case
     "6740987b89d5e1ddc603f4f0": {
-      "// type = locked case": true,
       "Value": 10,
     },
   },
@@ -103,7 +103,7 @@
   ],
   "traders_config": {
     "54cb50c76803fa8b248b4571": {
-      "// Trader name": "Prapor",
+      // Prapor
       "override_description": false,
       "location_description": {
         "ch": "In his car, he hangs around the city",
@@ -123,8 +123,8 @@
       },
       "access_via": ["PraporStash"],
     },
+    // Therapist
     "54cb57776803fa99248b456e": {
-      "// Trader name": "Therapist",
       "override_description": false,
       "location_description": {
         "ch": "in the city",
@@ -144,8 +144,8 @@
       },
       "access_via": ["TherapistStash"],
     },
+    // Mechanic
     "5a7c2eca46aef81a7ca2145d": {
-      "// Trader name": "Mechanic",
       "override_description": false,
       "location_description": {
         "ch": "inside the factory (at home)",
@@ -165,8 +165,8 @@
       },
       "access_via": ["MechanicStash"],
     },
+    // Skier
     "58330581ace78e27b8b10cee": {
-      "// Trader name": "Skier",
       "override_description": false,
       "location_description": {
         "ch": "To customs",
@@ -186,8 +186,8 @@
       },
       "access_via": ["SkierStash"],
     },
+    // Ragman
     "5ac3b934156ae10c4430e83c": {
-      "// Trader name": "Ragman",
       "override_description": false,
       "location_description": {
         "ch": "To interchange",
@@ -207,8 +207,8 @@
       },
       "access_via": ["RagmanStash"],
     },
+    // Jaeger
     "5c0647fdd443bc2504c2d371": {
-      "// Trader name": "Jaeger",
       "override_description": false,
       "location_description": {
         "ch": "In the woods, not far from the factory",
@@ -228,8 +228,8 @@
       },
       "access_via": ["JaegerStash"],
     },
+    // Peacekeeper
     "5935c25fb3acc3127c3d8cd9": {
-      "// Trader name": "Peacekeeper",
       "override_description": true,
       "location_description": {
         "ch": "In the tunnel between the shoreline and the lighthouse",
@@ -249,8 +249,8 @@
       },
       "access_via": ["PeacekeeperStash"],
     },
+    // Ref (arena)
     "6617beeaa9cfa777ca915b7c": {
-      "// Trader name": "Arena (Ref)",
       "override_description": true,
       "location_description": {
         "ch": "To customs",
@@ -270,9 +270,8 @@
       },
       "access_via": ["SkierStash"],
     },
+    // Fence
     "579dc571d53a0658a154fbec": {
-      "// Trader name": "Fence",
-      "// Fence is accessible everywhere": true,
       "access_via": "*",
       "insurance_always_enabled": true,
       "insurance_config": {
@@ -292,8 +291,8 @@
       },
       "heal_always_enabled": true,
     },
+    // Sally (legacy)
     "Sally": {
-      "// Trader name": "Sally",
       "override_description": true,
       "location_description": {
         "ch": "Somewhere in the Military reserve",

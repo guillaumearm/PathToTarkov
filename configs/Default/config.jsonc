@@ -12,24 +12,24 @@
   "enable_all_vanilla_transits": false,
   "bypass_keep_found_in_raid_tweak": false,
   "restrictions_in_raid": {
+    // roubles
     "5449016a4bdc2d6f028b456f": {
-      "// type = roubles": true,
       "Value": 100000000,
     },
+    // dollars
     "5696686a4bdc2da3298b456a": {
-      "// type = dollars": true,
       "Value": 1000000,
     },
+    // euros
     "569668774bdc2da2298b4568": {
-      "// type = euros": true,
       "Value": 1000000,
     },
+    // case key
     "67449b6c89d5e1ddc603f504": {
-      "// type = case key": true,
       "Value": 42,
     },
+    // locked case
     "6740987b89d5e1ddc603f4f0": {
-      "// type = locked case": true,
       "Value": 10,
     },
   },
@@ -224,8 +224,8 @@
     },
   ],
   "traders_config": {
+    // Prapor
     "54cb50c76803fa8b248b4571": {
-      "// Trader name": "Prapor",
       "insurance_always_enabled": true,
       "insurance_config": {
         "insurance_price_coef": 50,
@@ -257,8 +257,8 @@
       },
       "access_via": ["PraporHideout"],
     },
+    // Therapist
     "54cb57776803fa99248b456e": {
-      "// Trader name": "Therapist",
       "insurance_always_enabled": true,
       "insurance_config": {
         "insurance_price_coef": 25,
@@ -290,8 +290,8 @@
       },
       "access_via": ["TherapistHideout"],
     },
+    // Mechanic
     "5a7c2eca46aef81a7ca2145d": {
-      "// Trader name": "Mechanic",
       "override_description": true,
       "location_description": {
         "ch": "Bunker in Factory",
@@ -314,8 +314,8 @@
       },
       "access_via": ["MechanicHideout"],
     },
+    // Skier
     "58330581ace78e27b8b10cee": {
-      "// Trader name": "Skier",
       "insurance_always_enabled": true,
       "insurance_config": {
         "insurance_price_coef": 100,
@@ -347,8 +347,8 @@
       },
       "access_via": ["SkierHideout"],
     },
+    // Ragman
     "5ac3b934156ae10c4430e83c": {
-      "// Trader name": "Ragman",
       "insurance_always_enabled": true,
       "insurance_config": {
         "insurance_price_coef": 75,
@@ -380,8 +380,8 @@
       },
       "access_via": ["InterchangeScavCamp"],
     },
+    // Jaeger
     "5c0647fdd443bc2504c2d371": {
-      "// Trader name": "Jaeger",
       "override_description": true,
       "location_description": {
         "ch": "Mountain stash in Woods",
@@ -404,8 +404,8 @@
       },
       "access_via": ["JaegerHideout"],
     },
+    // Peacekeeper
     "5935c25fb3acc3127c3d8cd9": {
-      "// Trader name": "Peacekeeper",
       "override_description": true,
       "location_description": {
         "ch": "In D2 bunker between military reserve and shoreline",
@@ -428,8 +428,8 @@
       },
       "access_via": ["PeacekeeperHideout"],
     },
+    // Fence
     "579dc571d53a0658a154fbec": {
-      "// Trader name": "Fence",
       "access_via": "*",
       "insurance_always_enabled": true,
       "insurance_config": {
@@ -449,8 +449,8 @@
       },
       "heal_always_enabled": true,
     },
+    // Ref (arena)
     "6617beeaa9cfa777ca915b7c": {
-      "// Trader name": "Ref",
       "override_description": true,
       "location_description": {
         "ch": "Along the railroad line between shoreline and customs",
@@ -473,8 +473,8 @@
       },
       "access_via": ["RefHideout"],
     },
+    // Priscilu
     "6748adca5c70634464b214a8": {
-      "// mod integration for Priscilu": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -498,8 +498,8 @@
       },
       "access_via": ["Outskirts"],
     },
+    // Legs the trader
     "6748edbcb936f1098d4303e4": {
-      "// mod integration for Legs the Trader": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -523,8 +523,8 @@
       },
       "access_via": ["LegsHideout"],
     },
+    // Harry hideout
     "67419e9d0d4541ce671543bb": {
-      "// mod integration for HarryHideout": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -548,8 +548,8 @@
       },
       "access_via": ["BasementDescent"],
     },
+    // Artem
     "66bf757f27d0b097db0acea5": {
-      "// mod integration for ArtemTrader": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -573,8 +573,8 @@
       },
       "access_via": ["ArtemHideout"],
     },
+    // Scorpion
     "6688d464bc40c867f60e7d7e": {
-      "// mod integration for Scorpion": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -598,8 +598,8 @@
       },
       "access_via": ["ReserveZB-014"],
     },
+    // Painter
     "668aaff35fd574b6dcc4a686": {
-      "// mod integration for PAINTER": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -623,8 +623,8 @@
       },
       "access_via": ["TarkovRR", "CrashSite", "Railway"],
     },
+    // Saria
     "66f4db5ca4958508883d700c": {
-      "// Trader name": "Saria",
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -648,8 +648,8 @@
       },
       "access_via": ["PeacekeeperHideout"],
     },
+    // Requisitions (from Raid Overhaul mod)
     "66f0eaa93f6cc015bc1f3acb": {
-      "// Trader name": "Requisitions",
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -673,8 +673,8 @@
       },
       "access_via": ["RuinedHouse"],
     },
+    // Gunsmith
     "4e7ef752240141bca059b2ea": {
-      "// mod integration for Gunsmith": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -698,8 +698,8 @@
       },
       "access_via": ["LighthouseShorelineTunnel"],
     },
+    // lotus
     "6747208ef022cbbfc65c41bf": {
-      "// mod integration for lotus": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -723,8 +723,8 @@
       },
       "access_via": ["Crossroads"],
     },
+    // Coyote (on legacy SPT versions)
     "Coyote": {
-      "// mod integration for Coyote": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
@@ -748,8 +748,8 @@
       },
       "access_via": ["BasementDescent"],
     },
+    // Sally (on legacy SPT versions)
     "Sally": {
-      "// mod integration for Sally": true,
       "disable_warning": true,
       "override_description": true,
       "location_description": {
