@@ -50,7 +50,7 @@ internal class Config
 
         ExfilAutoselectCancel = config.Bind(
             ExfilSection,
-            "Autoselect the \"Cancel\" action",
+            "Autoselect the cancel action",
             true,
             new ConfigDescription(
                 "Disable this so you can just press double-F on extract.",
