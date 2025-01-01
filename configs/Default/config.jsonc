@@ -14,31 +14,31 @@
   "restrictions_in_raid": {
     "5449016a4bdc2d6f028b456f": {
       "// type = roubles": true,
-      "Value": 100000000
+      "Value": 100000000,
     },
     "5696686a4bdc2da3298b456a": {
       "// type = dollars": true,
-      "Value": 1000000
+      "Value": 1000000,
     },
     "569668774bdc2da2298b4568": {
       "// type = euros": true,
-      "Value": 1000000
+      "Value": 1000000,
     },
     "67449b6c89d5e1ddc603f504": {
       "// type = case key": true,
-      "Value": 42
+      "Value": 42,
     },
     "6740987b89d5e1ddc603f4f0": {
       "// type = locked case": true,
-      "Value": 10
-    }
+      "Value": 10,
+    },
   },
   "offraid_regen_config": {
     "hydration": {
-      "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-013", "FactoryZB-016"]
+      "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-013", "FactoryZB-016"],
     },
     "energy": {
-      "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-013", "FactoryZB-016"]
+      "access_via": ["FactoryZB-1011", "FactoryZB-1012", "FactoryZB-013", "FactoryZB-016"],
     },
     "health": {
       "access_via": [
@@ -46,182 +46,182 @@
         "FactoryZB-1012",
         "FactoryZB-013",
         "FactoryZB-016",
-        "TherapistHideout"
-      ]
-    }
+        "TherapistHideout",
+      ],
+    },
   },
   "hideout_main_stash_access_via": [
     "FactoryZB-1011",
     "FactoryZB-1012",
     "FactoryZB-013",
-    "FactoryZB-016"
+    "FactoryZB-016",
   ],
   "hideout_secondary_stashes": [
     {
       "id": "PathToTarkov_Prapor_stash",
       "size": 48,
-      "access_via": ["PraporHideout"]
+      "access_via": ["PraporHideout"],
     },
     {
       "id": "PathToTarkov_Mechanic_stash",
       "size": 48,
-      "access_via": ["MechanicHideout"]
+      "access_via": ["MechanicHideout"],
     },
     {
       "id": "PathToTarkov_Skier_stash",
       "size": 48,
-      "access_via": ["SkierHideout"]
+      "access_via": ["SkierHideout"],
     },
     {
       "id": "PathToTarkov_Jaeger_stash",
       "size": 48,
-      "access_via": ["JaegerHideout"]
+      "access_via": ["JaegerHideout"],
     },
     {
       "id": "PathToTarkov_Peacekeeper_stash",
       "size": 48,
-      "access_via": ["PeacekeeperHideout"]
+      "access_via": ["PeacekeeperHideout"],
     },
     {
       "id": "PathToTarkov_Ref_stash",
       "size": 48,
-      "access_via": ["RefHideout"]
+      "access_via": ["RefHideout"],
     },
     {
       "id": "PathToTarkov_Lotus_stash",
       "size": 48,
-      "access_via": ["Crossroads"]
+      "access_via": ["Crossroads"],
     },
     {
       "id": "PathToTarkov_Artem_stash",
       "size": 48,
-      "access_via": ["ArtemHideout"]
+      "access_via": ["ArtemHideout"],
     },
     {
       "id": "PathToTarkov_Legs_stash",
       "size": 48,
-      "access_via": ["LegsHideout"]
+      "access_via": ["LegsHideout"],
     },
     {
       "id": "PathToTarkov_Scorpion_stash",
       "size": 48,
-      "access_via": ["ReserveZB-014"]
+      "access_via": ["ReserveZB-014"],
     },
     {
       "id": "PathToTarkov_BasementDescent_stash",
       "size": 48,
-      "access_via": ["BasementDescent"]
+      "access_via": ["BasementDescent"],
     },
     {
       "id": "PathToTarkov_RuinedHouse_stash",
       "size": 48,
-      "access_via": ["RuinedHouse"]
+      "access_via": ["RuinedHouse"],
     },
     {
       "id": "PathToTarkov_Manhole_stash",
       "size": 48,
-      "access_via": ["Manhole"]
+      "access_via": ["Manhole"],
     },
     {
       "id": "PathToTarkov_Saferoom_stash",
       "size": 48,
-      "access_via": ["SafeRoom"]
+      "access_via": ["SafeRoom"],
     },
     {
       "id": "PathToTarkov_CustomsNorth_stash",
       "size": 32,
-      "access_via": ["RUAFWoods", "GasGate", "RUAFCustoms", "UNRoadblock", "NorthUNRoadblock"]
+      "access_via": ["RUAFWoods", "GasGate", "RUAFCustoms", "UNRoadblock", "NorthUNRoadblock"],
     },
     {
       "id": "PathToTarkov_CustomsSouth_stash",
       "size": 32,
-      "access_via": ["MilBaseCP", "MilBaseRR", "HoleinWall", "SniperRB", "RoadtoCustoms"]
+      "access_via": ["MilBaseCP", "MilBaseRR", "HoleinWall", "SniperRB", "RoadtoCustoms"],
     },
     {
       "id": "PathToTarkov_CustomsEast_stash",
       "size": 48,
-      "access_via": ["TarkovRR", "CrashSite", "Railway", "InterchangeScavCamp"]
+      "access_via": ["TarkovRR", "CrashSite", "Railway", "InterchangeScavCamp"],
     },
     {
       "id": "PathToTarkov_CustomsWest_stash",
       "size": 32,
-      "access_via": ["Outskirts"]
+      "access_via": ["Outskirts"],
     },
     {
       "id": "PathToTarkov_ShoreLightPath_stash",
       "size": 16,
-      "access_via": ["LighthouseShorelinePath", "MountainPass"]
+      "access_via": ["LighthouseShorelinePath", "MountainPass"],
     },
     {
       "id": "PathToTarkov_ShorelineWest_stash",
       "size": 16,
-      "access_via": ["LighthouseShorelineTunnel", "ShorelineLighthouseRoad"]
+      "access_via": ["LighthouseShorelineTunnel", "ShorelineLighthouseRoad"],
     },
     {
       "id": "PathToTarkov_ShorelineNorth_stash",
       "size": 16,
-      "access_via": ["CliffDescent"]
+      "access_via": ["CliffDescent"],
     },
     {
       "id": "PathToTarkov_GZStreets_stash",
       "size": 32,
-      "access_via": ["ExpoCP", "KlimovStreet"]
+      "access_via": ["ExpoCP", "KlimovStreet"],
     },
     {
       "id": "PathToTarkov_NorthCar_stash",
       "size": 4,
-      "access_via": ["CityCar"]
+      "access_via": ["CityCar"],
     },
     {
       "id": "PathToTarkov_SouthCar_stash",
       "size": 4,
-      "access_via": ["ShorelineDormsCar"]
+      "access_via": ["ShorelineDormsCar"],
     },
     {
       "id": "PathToTarkov_MilCar_stash",
       "size": 4,
-      "access_via": ["LighthouseCar"]
+      "access_via": ["LighthouseCar"],
     },
     {
       "id": "PathToTarkov_SmugglersBoat_stash",
       "size": 4,
-      "access_via": ["SmugglersBoat"]
+      "access_via": ["SmugglersBoat"],
     },
     {
       "id": "PathToTarkov_PierBoat_stash",
       "size": 8,
-      "access_via": ["PierBoat"]
+      "access_via": ["PierBoat"],
     },
     {
       "id": "PathToTarkov_ArmoredTrain_stash",
       "size": 16,
-      "access_via": ["ArmoredTrain"]
+      "access_via": ["ArmoredTrain"],
     },
     {
       "id": "PathToTarkov_VentShaft_stash",
       "size": 4,
-      "access_via": ["VentShaft"]
+      "access_via": ["VentShaft"],
     },
     {
       "id": "PathToTarkov_SewerRiver_stash",
       "size": 4,
-      "access_via": ["SewerRiver"]
+      "access_via": ["SewerRiver"],
     },
     {
       "id": "PathToTarkov_StylobateElevator_stash",
       "size": 4,
-      "access_via": ["StylobateElevator"]
+      "access_via": ["StylobateElevator"],
     },
     {
       "id": "PathToTarkov_Catacombs_stash",
       "size": 16,
-      "access_via": ["Catacombs"]
+      "access_via": ["Catacombs"],
     },
     {
       "id": "PathToTarkov_Therapist_stash",
       "size": 16,
-      "access_via": ["TherapistHideout"]
-    }
+      "access_via": ["TherapistHideout"],
+    },
   ],
   "traders_config": {
     "54cb50c76803fa8b248b4571": {
@@ -233,7 +233,7 @@
         "min_return_hour": 0,
         "max_return_hour": 0,
         "max_storage_time": 480,
-        "return_chance_percent": 85
+        "return_chance_percent": 85,
       },
       "override_description": true,
       "location_description": {
@@ -253,9 +253,9 @@
         "ro": "Scav Bunker in woods",
         "ru": "Scav Bunker in woods",
         "rk": "Scav Bunker in woods",
-        "tu": "Scav Bunker in woods"
+        "tu": "Scav Bunker in woods",
       },
-      "access_via": ["PraporHideout"]
+      "access_via": ["PraporHideout"],
     },
     "54cb57776803fa99248b456e": {
       "// Trader name": "Therapist",
@@ -266,7 +266,7 @@
         "min_return_hour": 0,
         "max_return_hour": 0,
         "max_storage_time": 480,
-        "return_chance_percent": 75
+        "return_chance_percent": 75,
       },
       "override_description": true,
       "location_description": {
@@ -286,9 +286,9 @@
         "ro": "Emercom checkpoint on Ground Zero",
         "ru": "Emercom checkpoint on Ground Zero",
         "sk": "Emercom checkpoint on Ground Zero",
-        "tu": "Emercom checkpoint on Ground Zero"
+        "tu": "Emercom checkpoint on Ground Zero",
       },
-      "access_via": ["TherapistHideout"]
+      "access_via": ["TherapistHideout"],
     },
     "5a7c2eca46aef81a7ca2145d": {
       "// Trader name": "Mechanic",
@@ -310,9 +310,9 @@
         "ro": "Bunker in Factory",
         "ru": "Bunker in Factory",
         "sk": "Bunker in Factory",
-        "tu": "Bunker in Factory"
+        "tu": "Bunker in Factory",
       },
-      "access_via": ["MechanicHideout"]
+      "access_via": ["MechanicHideout"],
     },
     "58330581ace78e27b8b10cee": {
       "// Trader name": "Skier",
@@ -323,7 +323,7 @@
         "min_return_hour": 0,
         "max_return_hour": 0,
         "max_storage_time": 480,
-        "return_chance_percent": 100
+        "return_chance_percent": 100,
       },
       "override_description": true,
       "location_description": {
@@ -343,9 +343,9 @@
         "ro": "Warehouse 17 at Customs",
         "ru": "Warehouse 17 at Customs",
         "sk": "Warehouse 17 at Customs",
-        "tu": "Warehouse 17 at Customs"
+        "tu": "Warehouse 17 at Customs",
       },
-      "access_via": ["SkierHideout"]
+      "access_via": ["SkierHideout"],
     },
     "5ac3b934156ae10c4430e83c": {
       "// Trader name": "Ragman",
@@ -356,7 +356,7 @@
         "min_return_hour": 0,
         "max_return_hour": 0,
         "max_storage_time": 480,
-        "return_chance_percent": 85
+        "return_chance_percent": 85,
       },
       "override_description": true,
       "location_description": {
@@ -376,9 +376,9 @@
         "ro": "Somewhere between Interchange and Customs",
         "ru": "Somewhere between Interchange and Customs",
         "sk": "Somewhere between Interchange and Customs",
-        "tu": "Somewhere between Interchange and Customs"
+        "tu": "Somewhere between Interchange and Customs",
       },
-      "access_via": ["InterchangeScavCamp"]
+      "access_via": ["InterchangeScavCamp"],
     },
     "5c0647fdd443bc2504c2d371": {
       "// Trader name": "Jaeger",
@@ -400,9 +400,9 @@
         "ro": "Mountain stash in Woods",
         "ru": "Mountain stash in Woods",
         "sk": "Mountain stash in Woods",
-        "tu": "Mountain stash in Woods"
+        "tu": "Mountain stash in Woods",
       },
-      "access_via": ["JaegerHideout"]
+      "access_via": ["JaegerHideout"],
     },
     "5935c25fb3acc3127c3d8cd9": {
       "// Trader name": "Peacekeeper",
@@ -424,9 +424,9 @@
         "ro": "In D2 bunker between military reserve and shoreline",
         "ru": "In D2 bunker between military reserve and shoreline",
         "sk": "In D2 bunker between military reserve and shoreline",
-        "tu": "In D2 bunker between military reserve and shoreline"
+        "tu": "In D2 bunker between military reserve and shoreline",
       },
-      "access_via": ["PeacekeeperHideout"]
+      "access_via": ["PeacekeeperHideout"],
     },
     "579dc571d53a0658a154fbec": {
       "// Trader name": "Fence",
@@ -438,16 +438,16 @@
         "min_return_hour": 0,
         "max_return_hour": 0,
         "max_storage_time": 480,
-        "return_chance_percent": 50
+        "return_chance_percent": 50,
       },
       "repair_always_enabled": true,
       "repair_config": {
         "quality": 1,
         "currency": "5449016a4bdc2d6f028b456f",
         "currency_coefficient": 12,
-        "repair_price_coef": 0
+        "repair_price_coef": 0,
       },
-      "heal_always_enabled": true
+      "heal_always_enabled": true,
     },
     "6617beeaa9cfa777ca915b7c": {
       "// Trader name": "Ref",
@@ -469,9 +469,9 @@
         "ro": "Along the railroad line between shoreline and customs",
         "ru": "Along the railroad line between shoreline and customs",
         "sk": "Along the railroad line between shoreline and customs",
-        "tu": "Along the railroad line between shoreline and customs"
+        "tu": "Along the railroad line between shoreline and customs",
       },
-      "access_via": ["RefHideout"]
+      "access_via": ["RefHideout"],
     },
     "6748adca5c70634464b214a8": {
       "// mod integration for Priscilu": true,
@@ -494,9 +494,9 @@
         "ro": "Somewhere outskirts in woods",
         "ru": "Somewhere outskirts in woods",
         "sk": "Somewhere outskirts in woods",
-        "tu": "Somewhere outskirts in woods"
+        "tu": "Somewhere outskirts in woods",
       },
-      "access_via": ["Outskirts"]
+      "access_via": ["Outskirts"],
     },
     "6748edbcb936f1098d4303e4": {
       "// mod integration for Legs the Trader": true,
@@ -519,9 +519,9 @@
         "ro": "Trailer Park Workers Shack",
         "ru": "Trailer Park Workers Shack",
         "sk": "Trailer Park Workers Shack",
-        "tu": "Trailer Park Workers Shack"
+        "tu": "Trailer Park Workers Shack",
       },
-      "access_via": ["LegsHideout"]
+      "access_via": ["LegsHideout"],
     },
     "67419e9d0d4541ce671543bb": {
       "// mod integration for HarryHideout": true,
@@ -544,9 +544,9 @@
         "ru": "Basement in town between streets and ground zero",
         "ro": "Basement in town between streets and ground zero",
         "sk": "Basement in town between streets and ground zero",
-        "tu": "Basement in town between streets and ground zero"
+        "tu": "Basement in town between streets and ground zero",
       },
-      "access_via": ["BasementDescent"]
+      "access_via": ["BasementDescent"],
     },
     "66bf757f27d0b097db0acea5": {
       "// mod integration for ArtemTrader": true,
@@ -569,9 +569,9 @@
         "ro": "Scav Hideout at the Grotto around lighthouse",
         "ru": "Scav Hideout at the Grotto around lighthouse",
         "sk": "Scav Hideout at the Grotto around lighthouse",
-        "tu": "Scav Hideout at the Grotto around lighthouse"
+        "tu": "Scav Hideout at the Grotto around lighthouse",
       },
-      "access_via": ["ArtemHideout"]
+      "access_via": ["ArtemHideout"],
     },
     "6688d464bc40c867f60e7d7e": {
       "// mod integration for Scorpion": true,
@@ -594,9 +594,9 @@
         "ro": "In ZB-14 bunker (Woods/Reserve)",
         "ru": "In ZB-14 bunker (Woods/Reserve)",
         "sk": "In ZB-14 bunker (Woods/Reserve)",
-        "tu": "In ZB-14 bunker (Woods/Reserve)"
+        "tu": "In ZB-14 bunker (Woods/Reserve)",
       },
-      "access_via": ["ReserveZB-014"]
+      "access_via": ["ReserveZB-014"],
     },
     "668aaff35fd574b6dcc4a686": {
       "// mod integration for PAINTER": true,
@@ -619,9 +619,9 @@
         "ro": "Along the railroad line between customs streets and interchange",
         "ru": "Along the railroad line between customs streets and interchange",
         "sk": "Along the railroad line between customs streets and interchange",
-        "tu": "Along the railroad line between customs streets and interchange"
+        "tu": "Along the railroad line between customs streets and interchange",
       },
-      "access_via": ["TarkovRR", "CrashSite", "Railway"]
+      "access_via": ["TarkovRR", "CrashSite", "Railway"],
     },
     "66f4db5ca4958508883d700c": {
       "// Trader name": "Saria",
@@ -644,9 +644,9 @@
         "ro": "With Peacekeeper in Bunker D2",
         "ru": "With Peacekeeper in Bunker D2",
         "sk": "With Peacekeeper in Bunker D2",
-        "tu": "With Peacekeeper in Bunker D2"
+        "tu": "With Peacekeeper in Bunker D2",
       },
-      "access_via": ["PeacekeeperHideout"]
+      "access_via": ["PeacekeeperHideout"],
     },
     "66f0eaa93f6cc015bc1f3acb": {
       "// Trader name": "Requisitions",
@@ -669,9 +669,9 @@
         "ro": "In a ruined house in Tarkov streets",
         "ru": "In a ruined house in Tarkov streets",
         "sk": "In a ruined house in Tarkov streets",
-        "tu": "In a ruined house in Tarkov streets"
+        "tu": "In a ruined house in Tarkov streets",
       },
-      "access_via": ["RuinedHouse"]
+      "access_via": ["RuinedHouse"],
     },
     "4e7ef752240141bca059b2ea": {
       "// mod integration for Gunsmith": true,
@@ -694,9 +694,9 @@
         "ro": "In a tunnel between lighthouse and shoreline",
         "ru": "In a tunnel between lighthouse and shoreline",
         "sk": "In a tunnel between lighthouse and shoreline",
-        "tu": "In a tunnel between lighthouse and shoreline"
+        "tu": "In a tunnel between lighthouse and shoreline",
       },
-      "access_via": ["LighthouseShorelineTunnel"]
+      "access_via": ["LighthouseShorelineTunnel"],
     },
     "6747208ef022cbbfc65c41bf": {
       "// mod integration for lotus": true,
@@ -719,9 +719,9 @@
         "ro": "at Emercom Checkpoint between Interchange and Customs",
         "ru": "at Emercom Checkpoint between Interchange and Customs",
         "sk": "at Emercom Checkpoint between Interchange and Customs",
-        "tu": "at Emercom Checkpoint between Interchange and Customs"
+        "tu": "at Emercom Checkpoint between Interchange and Customs",
       },
-      "access_via": ["Crossroads"]
+      "access_via": ["Crossroads"],
     },
     "Coyote": {
       "// mod integration for Coyote": true,
@@ -744,9 +744,9 @@
         "ro": "Basement in town between streets and ground zero",
         "ru": "Basement in town between streets and ground zero",
         "sk": "Basement in town between streets and ground zero",
-        "tu": "Basement in town between streets and ground zero"
+        "tu": "Basement in town between streets and ground zero",
       },
-      "access_via": ["BasementDescent"]
+      "access_via": ["BasementDescent"],
     },
     "Sally": {
       "// mod integration for Sally": true,
@@ -769,10 +769,10 @@
         "ro": "Sewer between Reserve and Streets",
         "ru": "Sewer between Reserve and Streets",
         "sk": "Sewer between Reserve and Streets",
-        "tu": "Sewer between Reserve and Streets"
+        "tu": "Sewer between Reserve and Streets",
       },
-      "access_via": ["Manhole"]
-    }
+      "access_via": ["Manhole"],
+    },
   },
   "exfiltrations": {
     "factory4_day": {
@@ -781,7 +781,7 @@
       "Cellars": ["FactoryZB-013"],
       "Camera Bunker Door": ["MechanicHideout"],
       "Gate 0": ["FactoryZB-1011"],
-      "Gate_o": ["GasGate"]
+      "Gate_o": ["GasGate"],
     },
     "factory4_night": {
       "Gate 3": ["FactoryZB-016"],
@@ -789,7 +789,7 @@
       "Cellars": ["FactoryZB-013"],
       "Camera Bunker Door": ["MechanicHideout"],
       "Gate 0": ["FactoryZB-1011"],
-      "Gate_o": ["GasGate"]
+      "Gate_o": ["GasGate"],
     },
     "bigmap": {
       "Military Checkpoint": ["Outskirts"],
@@ -809,7 +809,7 @@
       "Railroad To Military Base": ["MilBaseRR"],
       "Railroad To Port": ["RefHideout"],
       "Factory Far Corner": ["RUAFWoods"],
-      "Trailer Park Workers Shack": ["LegsHideout"]
+      "Trailer Park Workers Shack": ["LegsHideout"],
     },
     "woods": {
       "un-sec": ["NorthUNRoadblock"],
@@ -821,7 +821,7 @@
       "UN Roadblock": ["UNRoadblock"],
       "South V-Ex": ["CityCar"],
       "RUAF Gate": ["RUAFWoods"],
-      "Mountain Stash": ["JaegerHideout"]
+      "Mountain Stash": ["JaegerHideout"],
     },
     "rezervbase": {
       "EXFIL_ScavCooperation": ["MilBaseCP"],
@@ -831,14 +831,14 @@
       "Exit4": ["CPFence"],
       "Alpinist": ["CliffDescent"],
       "EXFIL_Bunker_D2": ["PeacekeeperHideout"],
-      "EXFIL_vent": ["Manhole"]
+      "EXFIL_vent": ["Manhole"],
     },
     "interchange": {
       "PP Exfil": ["CityCar"],
       "Saferoom Exfil": ["SafeRoom"],
       "NW Exfil": ["Railway"],
       "SE Exfil": ["Crossroads"],
-      "Interchange Cooperation": ["InterchangeScavCamp"]
+      "Interchange Cooperation": ["InterchangeScavCamp"],
     },
     "shoreline": {
       "RedRebel_alp": ["CliffDescent"],
@@ -850,7 +850,7 @@
       "Smugglers_Trail_coop": ["SniperRB"],
       "South Fence Passage": ["PeacekeeperHideout"],
       "Shorl_V-Ex": ["ShorelineDormsCar"],
-      "Road_at_railbridge": ["RefHideout"]
+      "Road_at_railbridge": ["RefHideout"],
     },
     "lighthouse": {
       " V-Ex_light": ["LighthouseCar"],
@@ -860,7 +860,7 @@
       "EXFIL_Train": ["ArmoredTrain"],
       "Nothern_Checkpoint": ["Outskirts"],
       "Alpinist_light": ["MountainPass"],
-      "tunnel_shared": ["LighthouseShorelineTunnel"]
+      "tunnel_shared": ["LighthouseShorelineTunnel"],
     },
     "tarkovstreets": {
       "E1": ["StylobateElevator"],
@@ -873,7 +873,7 @@
       "scav_e2": ["Catacombs"],
       "scav_e4": ["Manhole"],
       "E2": ["SewerRiver"],
-      "E7": ["ExpoCP"]
+      "E7": ["ExpoCP"],
     },
     "laboratory": {
       "lab_Hangar_Gate": ["Catacombs"],
@@ -882,190 +882,190 @@
       "lab_Elevator_Main": ["StylobateElevator"],
       "lab_Elevator_Cargo": ["BasementDescent"],
       "lab_Elevator_Med": ["BasementDescent"],
-      "lab_Vent": ["VentShaft"]
+      "lab_Vent": ["VentShaft"],
     },
     "sandbox": {
       "Unity_free_exit": ["TherapistHideout"],
       "Sandbox_VExit": ["CityCar"],
       "Nakatani_stairs_free_exit": ["BasementDescent"],
       "Sniper_exit": ["KlimovStreet"],
-      "Scav_coop_exit": ["ExpoCP"]
-    }
+      "Scav_coop_exit": ["ExpoCP"],
+    },
   },
   "infiltrations": {
     "PraporHideout": {
-      "woods": ["Scav Bunker"]
+      "woods": ["Scav Bunker"],
     },
     "SkierHideout": {
-      "bigmap": ["Warehouse 17"]
+      "bigmap": ["Warehouse 17"],
     },
     "JaegerHideout": {
-      "woods": ["Mountain Stash"]
+      "woods": ["Mountain Stash"],
     },
     "PeacekeeperHideout": {
-      "shoreline": ["Old Bunker"]
+      "shoreline": ["Old Bunker"],
     },
     "LegsHideout": {
-      "bigmap": ["Trailer Park Workers Shack"]
+      "bigmap": ["Trailer Park Workers Shack"],
     },
     "TherapistHideout": {
-      "sandbox": ["EmercomGZ"]
+      "sandbox": ["EmercomGZ"],
     },
     "MechanicHideout": {
       "factory4_day": ["Camera Bunker Door"],
-      "factory4_night": ["Camera Bunker Door"]
+      "factory4_night": ["Camera Bunker Door"],
     },
     "ArtemHideout": {
-      "lighthouse": ["Grotto"]
+      "lighthouse": ["Grotto"],
     },
     "FactoryZB-016": {
       "woods": ["ZB-016"],
       "factory4_day": ["Gate 3"],
-      "factory4_night": ["Gate 3"]
+      "factory4_night": ["Gate 3"],
     },
     "FactoryZB-013": {
       "bigmap": ["ZB-1013"],
       "factory4_day": ["Cellars"],
-      "factory4_night": ["Cellars"]
+      "factory4_night": ["Cellars"],
     },
     "FactoryZB-1012": {
       "bigmap": ["ZB-1012"],
       "factory4_day": ["Med tent gates"],
-      "factory4_night": ["Med tent gates"]
+      "factory4_night": ["Med tent gates"],
     },
     "FactoryZB-1011": {
       "bigmap": ["ZB-1011"],
       "factory4_day": ["Gate 0"],
-      "factory4_night": ["Gate 0"]
+      "factory4_night": ["Gate 0"],
     },
     "SniperRB": {
       "bigmap": ["Sniper Roadblock"],
       "rezervbase": ["Hole In Wall"],
-      "shoreline": ["Smugglers Path"]
+      "shoreline": ["Smugglers Path"],
     },
     "SmugglersBoat": {
       "bigmap": ["Smugglers Boat"],
       "woods": ["Sawmill River"],
       "shoreline": ["Climbers Trail"],
-      "lighthouse": ["Southern Road Water"]
+      "lighthouse": ["Southern Road Water"],
     },
     "RUAFCustoms": {
       "bigmap": ["RUAF Roadblock"],
-      "woods": ["UN Roadblock"]
+      "woods": ["UN Roadblock"],
     },
     "Crossroads": {
       "bigmap": ["Crossroads"],
       "interchange": ["Emercom"],
-      "shoreline": ["Road to Customs"]
+      "shoreline": ["Road to Customs"],
     },
     "GasGate": {
       "bigmap": ["Old Gas Scav"],
       "woods": ["Factory Gate"],
       "factory4_day": ["Courtyard"],
-      "factory4_night": ["Courtyard"]
+      "factory4_night": ["Courtyard"],
     },
     "TarkovRR": {
       "bigmap": ["RR to Tarkov"],
       "interchange": ["Railway"],
-      "tarkovstreets": ["Crash Site"]
+      "tarkovstreets": ["Crash Site"],
     },
     "MilBaseRR": {
       "bigmap": ["RR to Military Base"],
-      "rezervbase": ["Scav lands rail"]
+      "rezervbase": ["Scav lands rail"],
     },
     "MilBaseCP": {
       "bigmap": ["Military Base CP"],
-      "rezervbase": ["Scav lands"]
+      "rezervbase": ["Scav lands"],
     },
     "NorthUNRoadblock": {
       "bigmap": ["RUAF Roadblock"],
-      "woods": ["Northern UN Roadblock"]
+      "woods": ["Northern UN Roadblock"],
     },
     "FactoryGate": {
       "bigmap": ["Old Gas Scav"],
-      "woods": ["Factory Gate"]
+      "woods": ["Factory Gate"],
     },
     "Outskirts": {
       "bigmap": ["Scav CP"],
       "lighthouse": ["Northern CP"],
-      "woods": ["Outskirts"]
+      "woods": ["Outskirts"],
     },
     "UNRoadblock": {
       "bigmap": ["RUAF Roadblock"],
       "woods": ["UN Roadblock"],
-      "interchange": ["Railway"]
+      "interchange": ["Railway"],
     },
     "RUAFWoods": {
       "bigmap": ["Factory Far Corner"],
-      "woods": ["RUAF Gate"]
+      "woods": ["RUAF Gate"],
     },
     "ReserveZB-014": {
-      "woods": ["ZB-014"]
+      "woods": ["ZB-014"],
     },
     "HoleinWall": {
       "bigmap": ["Dorms Car"],
-      "rezervbase": ["Hole In Wall"]
+      "rezervbase": ["Hole In Wall"],
     },
     "CPFence": {
       "rezervbase": ["Checkpoint Fence"],
-      "lighthouse": ["Northeast Mountains"]
+      "lighthouse": ["Northeast Mountains"],
     },
     "CliffDescent": {
       "rezervbase": ["Cliff"],
-      "shoreline": ["Climbers Trail"]
+      "shoreline": ["Climbers Trail"],
     },
     "Manhole": {
       "rezervbase": ["Reserve Manhole"],
-      "tarkovstreets": ["Streets Manhole"]
+      "tarkovstreets": ["Streets Manhole"],
     },
     "CityCar": {
       "tarkovstreets": ["Streets Vehicle Extract"],
       "interchange": ["Interchange Vehicle Extract"],
       "sandbox": ["Police Car"],
-      "woods": ["Woods Vehicle Extract"]
+      "woods": ["Woods Vehicle Extract"],
     },
     "SafeRoom": {
-      "interchange": ["Safe Room"]
+      "interchange": ["Safe Room"],
     },
     "Railway": {
       "interchange": ["Railway"],
       "woods": ["UN Roadblock"],
-      "tarkovstreets": ["Crash Site"]
+      "tarkovstreets": ["Crash Site"],
     },
     "InterchangeScavCamp": {
       "interchange": ["Scav Camp"],
-      "bigmap": ["Trailer Park"]
+      "bigmap": ["Trailer Park"],
     },
     "RoadtoCustoms": {
       "bigmap": ["Sniper Roadblock"],
       "shoreline": ["Road to Customs"],
-      "interchange": ["Emercom"]
+      "interchange": ["Emercom"],
     },
     "PierBoat": {
       "bigmap": ["Smugglers Boat"],
       "shoreline": ["Pier Boat"],
       "lighthouse": ["Southern Road Water"],
-      "woods": ["Sawmill River"]
+      "woods": ["Sawmill River"],
     },
     "ShorelineLighthouseRoad": {
       "shoreline": ["Ruined Road"],
-      "lighthouse": ["Southern Road"]
+      "lighthouse": ["Southern Road"],
     },
     "ShorelineDormsCar": {
       "bigmap": ["Dorms Car"],
-      "shoreline": ["North Fence Passage"]
+      "shoreline": ["North Fence Passage"],
     },
     "RefHideout": {
       "bigmap": ["RR to Port"],
-      "shoreline": ["Railway Bridge"]
+      "shoreline": ["Railway Bridge"],
     },
     "LighthouseCar": {
       "rezervbase": ["Checkpoint Fence"],
-      "lighthouse": ["Lighthouse Vehicle Extract"]
+      "lighthouse": ["Lighthouse Vehicle Extract"],
     },
     "LighthouseShorelinePath": {
       "shoreline": ["Path to Lighthouse"],
-      "lighthouse": ["Path to Shoreline"]
+      "lighthouse": ["Path to Shoreline"],
     },
     "ArmoredTrain": {
       "bigmap": ["RR to Military Base"],
@@ -1074,377 +1074,377 @@
       "shoreline": ["Railway Bridge"],
       "interchange": ["Railway"],
       "rezervbase": ["Train Station"],
-      "tarkovstreets": ["Crash Site"]
+      "tarkovstreets": ["Crash Site"],
     },
     "MountainPass": {
       "shoreline": ["Path to Lighthouse"],
-      "lighthouse": ["Mountain Pass"]
+      "lighthouse": ["Mountain Pass"],
     },
     "LighthouseShorelineTunnel": {
       "shoreline": ["Shoreline Tunnel"],
-      "lighthouse": ["Lighthouse Tunnel"]
+      "lighthouse": ["Lighthouse Tunnel"],
     },
     "BasementDescent": {
       "sandbox": ["Nakatani Basement Stairs"],
       "tarkovstreets": ["Basement Descent"],
-      "laboratory": ["Cargo Elevator", "Parking Gate", "Med Block Elevator"]
+      "laboratory": ["Cargo Elevator", "Parking Gate", "Med Block Elevator"],
     },
     "RuinedHouse": {
-      "tarkovstreets": ["Streets Ruined House"]
+      "tarkovstreets": ["Streets Ruined House"],
     },
     "ExpoCP": {
       "sandbox": ["Scav Hideout"],
-      "tarkovstreets": ["Expo Checkpoint"]
+      "tarkovstreets": ["Expo Checkpoint"],
     },
     "KlimovStreet": {
       "sandbox": ["Mira Ave"],
-      "tarkovstreets": ["Klimov Street"]
+      "tarkovstreets": ["Klimov Street"],
     },
     "VentShaft": {
       "tarkovstreets": ["Streets Vents"],
-      "laboratory": ["Lab Vents"]
+      "laboratory": ["Lab Vents"],
     },
     "SewerRiver": {
       "tarkovstreets": ["Sewer River"],
-      "laboratory": ["Lab Sewage Conduit"]
+      "laboratory": ["Lab Sewage Conduit"],
     },
     "StylobateElevator": {
       "tarkovstreets": ["Stylobate Elevator"],
-      "laboratory": ["Main Elevator"]
+      "laboratory": ["Main Elevator"],
     },
     "CrashSite": {
       "tarkovstreets": ["Evacuation Zone"],
       "interchange": ["Railway"],
-      "woods": ["Woods Vehicle Extract"]
+      "woods": ["Woods Vehicle Extract"],
     },
     "Catacombs": {
       "tarkovstreets": ["Catacombs"],
-      "laboratory": ["Hangar Gate"]
-    }
+      "laboratory": ["Hangar Gate"],
+    },
   },
   "exfiltrations_tooltips_template": "$exfilDisplayName -> $offraidPositionDisplayName",
   "extracts_prompt_template": {
     "en": "Extract to {0}",
-    "fr": "Extraction vers {0}"
+    "fr": "Extraction vers {0}",
   },
   "transits_prompt_template": {
     "en": "Transit to {0}",
-    "fr": "Transit vers {0}"
+    "fr": "Transit vers {0}",
   },
   "offraid_positions": {
     "PraporHideout": {
       "displayName": {
-        "en": "Prapor"
-      }
+        "en": "Prapor",
+      },
     },
     "SkierHideout": {
       "displayName": {
-        "en": "Skier"
-      }
+        "en": "Skier",
+      },
     },
     "JaegerHideout": {
       "displayName": {
-        "en": "Jaeger"
-      }
+        "en": "Jaeger",
+      },
     },
     "PeacekeeperHideout": {
       "displayName": {
-        "en": "Peacekeeper/Saria"
-      }
+        "en": "Peacekeeper/Saria",
+      },
     },
     "LegsHideout": {
       "displayName": {
-        "en": "Legs"
-      }
+        "en": "Legs",
+      },
     },
     "TherapistHideout": {
       "displayName": {
         "en": "Therapist",
-        "fr": "La Toubib"
-      }
+        "fr": "La Toubib",
+      },
     },
     "MechanicHideout": {
       "displayName": {
         "en": "Mechanic",
-        "fr": "Le Mécano"
-      }
+        "fr": "Le Mécano",
+      },
     },
     "ArtemHideout": {
       "displayName": {
-        "en": "Artem"
-      }
+        "en": "Artem",
+      },
     },
     "FactoryZB-016": {
       "displayName": {
         "en": "Woods/Factory",
-        "fr": "Bois/Usine"
-      }
+        "fr": "Bois/Usine",
+      },
     },
     "FactoryZB-013": {
       "displayName": {
         "en": "Customs/Factory",
-        "fr": "Douanes/Usine"
-      }
+        "fr": "Douanes/Usine",
+      },
     },
     "FactoryZB-1012": {
       "displayName": {
         "en": "Customs/Factory",
-        "fr": "Douanes/Usine"
-      }
+        "fr": "Douanes/Usine",
+      },
     },
     "FactoryZB-1011": {
       "displayName": {
         "en": "Bunker 11 Customs/Factory",
-        "fr": "Bunker 11 Douanes/Usine"
-      }
+        "fr": "Bunker 11 Douanes/Usine",
+      },
     },
     "SniperRB": {
       "displayName": {
         "en": "Customs/Reserve/Shoreline",
-        "fr": "Douanes/Réserve/Littoral"
-      }
+        "fr": "Douanes/Réserve/Littoral",
+      },
     },
     "SmugglersBoat": {
       "displayName": {
         "en": "Boat",
-        "fr": "Bâteau"
-      }
+        "fr": "Bâteau",
+      },
     },
     "RUAFCustoms": {
       "displayName": {
         "en": "Customs/Woods",
-        "fr": "Douanes/Bois"
-      }
+        "fr": "Douanes/Bois",
+      },
     },
     "Crossroads": {
       "displayName": {
         "en": "Customs/Interchange/Shoreline",
-        "fr": "Douanes/Échangeur/Littoral"
-      }
+        "fr": "Douanes/Échangeur/Littoral",
+      },
     },
     "GasGate": {
       "displayName": {
         "en": "Customs/Woods/Factory",
-        "fr": "Douanes/Bois/Usine"
-      }
+        "fr": "Douanes/Bois/Usine",
+      },
     },
     "TarkovRR": {
       "displayName": {
         "en": "Painter + Customs/Interchange/Streets",
-        "fr": "Painter + Dounes/Échangeur/Rues"
-      }
+        "fr": "Painter + Dounes/Échangeur/Rues",
+      },
     },
     "MilBaseRR": {
       "displayName": {
         "en": "Customs/Reserve",
-        "fr": "Douanes/Réserve"
-      }
+        "fr": "Douanes/Réserve",
+      },
     },
     "MilBaseCP": {
       "displayName": {
-        "en": "Customs/Reserve"
-      }
+        "en": "Customs/Reserve",
+      },
     },
     "NorthUNRoadblock": {
       "displayName": {
         "en": "Customs/Woods",
-        "fr": "Douanes/Bois"
-      }
+        "fr": "Douanes/Bois",
+      },
     },
     "FactoryGate": {
       "displayName": {
         "en": "Customs/Woods",
-        "fr": "Douanes/Bois"
-      }
+        "fr": "Douanes/Bois",
+      },
     },
     "Outskirts": {
       "displayName": {
         "en": "Priscilu + Customs/Woods/Lighthouse",
-        "fr": "Priscilu + Douanes/Bois/Phare"
-      }
+        "fr": "Priscilu + Douanes/Bois/Phare",
+      },
     },
     "UNRoadblock": {
       "displayName": {
         "en": "Customs/Woods/Interchange",
-        "fr": "Douanes/Bois/Échangeur"
-      }
+        "fr": "Douanes/Bois/Échangeur",
+      },
     },
     "RUAFWoods": {
       "displayName": {
         "en": "Customs/Woods",
-        "fr": "Douanes/Bois"
-      }
+        "fr": "Douanes/Bois",
+      },
     },
     "ReserveZB-014": {
       "displayName": {
-        "en": "Scorpion"
-      }
+        "en": "Scorpion",
+      },
     },
     "HoleinWall": {
       "displayName": {
         "en": "Customs/Reserve",
-        "fr": "Douanes/Réserve"
-      }
+        "fr": "Douanes/Réserve",
+      },
     },
     "CPFence": {
       "displayName": {
         "en": "Lighthouse/Reserve",
-        "fr": "Phare/Réserve"
-      }
+        "fr": "Phare/Réserve",
+      },
     },
     "CliffDescent": {
       "displayName": {
         "en": "Shoreline/Reserve",
-        "fr": "Littoral/Réserve"
-      }
+        "fr": "Littoral/Réserve",
+      },
     },
     "Manhole": {
       "displayName": {
         "en": "Streets/Reserve",
-        "fr": "Rues/Réserve"
-      }
+        "fr": "Rues/Réserve",
+      },
     },
     "CityCar": {
       "displayName": {
         "en": "Streets/Interchange/Woods/GZ",
-        "fr": "Rues/Échangeur/Bois/Point Zero"
-      }
+        "fr": "Rues/Échangeur/Bois/Point Zero",
+      },
     },
     "Railway": {
       "displayName": {
         "en": "Painter + Streets/Woods/Interchange",
-        "fr": "Painter + Rues/Bois/Échangeur"
-      }
+        "fr": "Painter + Rues/Bois/Échangeur",
+      },
     },
     "InterchangeScavCamp": {
       "displayName": {
         "en": "Customs/Interchange",
-        "fr": "Douanes/Échangeur"
-      }
+        "fr": "Douanes/Échangeur",
+      },
     },
     "RoadtoCustoms": {
       "displayName": {
         "en": "Customs/Interchange/Shoreline",
-        "fr": "Douanes/Échangeur/Littoral"
-      }
+        "fr": "Douanes/Échangeur/Littoral",
+      },
     },
     "PierBoat": {
       "displayName": {
         "en": "Customs/Shoreline/Lighthouse/Woods",
-        "fr": "Douanes/Littoral/Phare/Bois"
-      }
+        "fr": "Douanes/Littoral/Phare/Bois",
+      },
     },
     "ShorelineLighthouseRoad": {
       "displayName": {
         "en": "Shoreline/Lighthouse",
-        "fr": "Littoral/Phare"
-      }
+        "fr": "Littoral/Phare",
+      },
     },
     "ShorelineDormsCar": {
       "displayName": {
         "en": "Customs/Shoreline",
-        "fr": "Douanes/Littoral"
-      }
+        "fr": "Douanes/Littoral",
+      },
     },
     "RefHideout": {
       "displayName": {
         "en": "Ref + Customs/Shoreline",
-        "fr": "Ref + Douanes/Littoral"
-      }
+        "fr": "Ref + Douanes/Littoral",
+      },
     },
     "LighthouseCar": {
       "displayName": {
         "en": "Reserve/Lighthouse",
-        "fr": "Réserve/Phare"
-      }
+        "fr": "Réserve/Phare",
+      },
     },
     "LighthouseShorelinePath": {
       "displayName": {
         "en": "Shoreline/Lighthouse",
-        "fr": "Littoral/Phare"
-      }
+        "fr": "Littoral/Phare",
+      },
     },
     "ArmoredTrain": {
       "displayName": {
         "en": "It goes almost everywhere",
-        "fr": "Il va presque partout"
-      }
+        "fr": "Il va presque partout",
+      },
     },
     "MountainPass": {
       "displayName": {
         "en": "Shoreline/Lighthouse",
-        "fr": "Littoral/Phare"
-      }
+        "fr": "Littoral/Phare",
+      },
     },
     "LighthouseShorelineTunnel": {
       "displayName": {
         "en": "Shoreline/Lighthouse",
-        "fr": "Littoral/Phare"
-      }
+        "fr": "Littoral/Phare",
+      },
     },
     "BasementDescent": {
       "displayName": {
-        "en": "Harry hideout"
-      }
+        "en": "Harry hideout",
+      },
     },
     "RuinedHouse": {
       "displayName": {
-        "en": "Requisitions"
-      }
+        "en": "Requisitions",
+      },
     },
     "ExpoCP": {
       "displayName": {
         "en": "GZ/Streets",
-        "fr": "Point Zero/Rues"
-      }
+        "fr": "Point Zero/Rues",
+      },
     },
     "KlimovStreet": {
       "displayName": {
         "en": "GZ/Streets",
-        "fr": "Point Zero/Rues"
-      }
+        "fr": "Point Zero/Rues",
+      },
     },
     "VentShaft": {
       "displayName": {
         "en": "Streets/Lab",
-        "fr": "Rues/Labo"
-      }
+        "fr": "Rues/Labo",
+      },
     },
     "SewerRiver": {
       "displayName": {
         "en": "Streets/Lab",
-        "fr": "Rues/Labo"
-      }
+        "fr": "Rues/Labo",
+      },
     },
     "StylobateElevator": {
       "displayName": {
         "en": "Streets/Lab",
-        "fr": "Rues/Labo"
-      }
+        "fr": "Rues/Labo",
+      },
     },
     "CrashSite": {
       "displayName": {
         "en": "Painter + Streets/Interchange/Woods",
-        "fr": "Painter + Rues/Échangeur/Labo"
-      }
+        "fr": "Painter + Rues/Échangeur/Labo",
+      },
     },
     "Catacombs": {
       "displayName": {
         "en": "Streets/Lab",
-        "fr": "Rues/Labo"
-      }
-    }
+        "fr": "Rues/Labo",
+      },
+    },
   },
   "exfiltrations_config": {
     "Warehouse 17": {
       "override_tooltips_template": "$offraidPositionDisplayName $exfilDisplayName",
       "displayName": {
         "en": "in Warehouse 17",
-        "fr": "à l'entrepôt 17"
-      }
+        "fr": "à l'entrepôt 17",
+      },
     },
     "Saferoom Exfil": {
-      "override_tooltips_template": "$exfilDisplayName"
-    }
-  }
+      "override_tooltips_template": "$exfilDisplayName",
+    },
+  },
 }

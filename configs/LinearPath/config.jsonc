@@ -11,83 +11,83 @@
   "restrictions_in_raid": {
     "5449016a4bdc2d6f028b456f": {
       "// type = roubles": true,
-      "Value": 100000000
+      "Value": 100000000,
     },
     "5696686a4bdc2da3298b456a": {
       "// type = dollars": true,
-      "Value": 1000000
+      "Value": 1000000,
     },
     "569668774bdc2da2298b4568": {
       "// type = euros": true,
-      "Value": 1000000
+      "Value": 1000000,
     },
     "67449b6c89d5e1ddc603f504": {
       "// type = case key": true,
-      "Value": 42
+      "Value": 42,
     },
     "6740987b89d5e1ddc603f4f0": {
       "// type = locked case": true,
-      "Value": 10
-    }
+      "Value": 10,
+    },
   },
   "offraid_regen_config": {
     "hydration": {
-      "access_via": ["*"]
+      "access_via": ["*"],
     },
     "energy": {
-      "access_via": ["*"]
+      "access_via": ["*"],
     },
     "health": {
-      "access_via": ["*"]
-    }
+      "access_via": ["*"],
+    },
   },
   "hideout_main_stash_access_via": ["MechanicStash"],
   "hideout_secondary_stashes": [
     {
       "id": "PathToTarkov_Therapist_stash",
       "size": 22,
-      "access_via": ["TherapistStash"]
+      "access_via": ["TherapistStash"],
     },
     {
       "id": "PathToTarkov_Prapor_stash",
       "size": 22,
-      "access_via": ["PraporStash"]
+      "access_via": ["PraporStash"],
     },
     {
       "id": "PathToTarkov_Mechanic_stash",
       "size": 22,
-      "access_via": ["MechanicStash"]
+      "access_via": ["MechanicStash"],
     },
     {
       "id": "PathToTarkov_Ragman_stash",
       "size": 22,
-      "access_via": ["RagmanStash"]
+      "access_via": ["RagmanStash"],
     },
     {
       "id": "PathToTarkov_Skier_stash",
       "size": 22,
-      "access_via": ["SkierStash"]
+      "access_via": ["SkierStash"],
     },
     {
       "id": "PathToTarkov_Peacekeeper_stash",
       "size": 22,
-      "access_via": ["PeacekeeperStash"]
+      "access_via": ["PeacekeeperStash"],
     },
     {
       "id": "PathToTarkov_Jaeger_stash",
       "size": 22,
-      "access_via": ["JaegerStash"]
+      "access_via": ["JaegerStash"],
     },
     {
       "id": "PathToTarkov_MilitaryLighthouse_stash",
       "size": 22,
-      "access_via": ["MilitaryLighthouseStash"]
+      "access_via": ["MilitaryLighthouseStash"],
     },
     {
       "id": "PathToTarkov_Klimov_stash",
       "size": 22,
-      "access_via": ["KlimovStash"]
-    }
+      "access_via": ["KlimovStash"],
+    },
   ],
   "traders_config": {
     "54cb50c76803fa8b248b4571": {
@@ -107,9 +107,9 @@
         "kr": "In his car, he hangs around the city",
         "pl": "In his car, he hangs around the city",
         "po": "In his car, he hangs around the city",
-        "ru": "In his car, he hangs around the city"
+        "ru": "In his car, he hangs around the city",
       },
-      "access_via": ["PraporStash"]
+      "access_via": ["PraporStash"],
     },
     "54cb57776803fa99248b456e": {
       "// Trader name": "Therapist",
@@ -128,9 +128,9 @@
         "kr": "In the city",
         "pl": "In the city",
         "po": "In the city",
-        "ru": "In the city"
+        "ru": "In the city",
       },
-      "access_via": ["TherapistStash"]
+      "access_via": ["TherapistStash"],
     },
     "5a7c2eca46aef81a7ca2145d": {
       "// Trader name": "Mechanic",
@@ -149,9 +149,9 @@
         "kr": "inside the factory (at home)",
         "pl": "inside the factory (at home)",
         "po": "inside the factory (at home)",
-        "ru": "inside the factory (at home)"
+        "ru": "inside the factory (at home)",
       },
-      "access_via": ["MechanicStash"]
+      "access_via": ["MechanicStash"],
     },
     "58330581ace78e27b8b10cee": {
       "// Trader name": "Skier",
@@ -170,9 +170,9 @@
         "kr": "To customs",
         "pl": "To customs",
         "po": "To customs",
-        "ru": "To customs"
+        "ru": "To customs",
       },
-      "access_via": ["SkierStash"]
+      "access_via": ["SkierStash"],
     },
     "5ac3b934156ae10c4430e83c": {
       "// Trader name": "Ragman",
@@ -191,9 +191,9 @@
         "kr": "To interchange",
         "pl": "To interchange",
         "po": "To interchange",
-        "ru": "To interchange"
+        "ru": "To interchange",
       },
-      "access_via": ["RagmanStash"]
+      "access_via": ["RagmanStash"],
     },
     "5c0647fdd443bc2504c2d371": {
       "// Trader name": "Jaeger",
@@ -212,9 +212,9 @@
         "kr": "In the woods, not far from the factory",
         "pl": "In the woods, not far from the factory",
         "po": "In the woods, not far from the factory",
-        "ru": "In the woods, not far from the factory"
+        "ru": "In the woods, not far from the factory",
       },
-      "access_via": ["JaegerStash"]
+      "access_via": ["JaegerStash"],
     },
     "5935c25fb3acc3127c3d8cd9": {
       "// Trader name": "Peacekeeper",
@@ -233,9 +233,9 @@
         "kr": "In the tunnel between the shoreline and the lighthouse",
         "pl": "In the tunnel between the shoreline and the lighthouse",
         "po": "In the tunnel between the shoreline and the lighthouse",
-        "ru": "In the tunnel between the shoreline and the lighthouse"
+        "ru": "In the tunnel between the shoreline and the lighthouse",
       },
-      "access_via": ["PeacekeeperStash"]
+      "access_via": ["PeacekeeperStash"],
     },
     "6617beeaa9cfa777ca915b7c": {
       "// Trader name": "Arena (Ref)",
@@ -254,9 +254,9 @@
         "kr": "To customs",
         "pl": "To customs",
         "po": "To customs",
-        "ru": "To customs"
+        "ru": "To customs",
       },
-      "access_via": ["SkierStash"]
+      "access_via": ["SkierStash"],
     },
     "579dc571d53a0658a154fbec": {
       "// Trader name": "Fence",
@@ -268,54 +268,54 @@
         "min_payment": 0,
         "min_return_hour": 1,
         "max_return_hour": 2,
-        "max_storage_time": 480
+        "max_storage_time": 480,
       },
       "repair_always_enabled": true,
       "repair_config": {
         "quality": 1,
         "currency": "5449016a4bdc2d6f028b456f",
         "currency_coefficient": 12,
-        "repair_price_coef": 0
+        "repair_price_coef": 0,
       },
-      "heal_always_enabled": true
-    }
+      "heal_always_enabled": true,
+    },
   },
   "exfiltrations": {
     "factory4_day": {
       "Gate 3": "MechanicStash",
-      "Gate_o": "JaegerStash"
+      "Gate_o": "JaegerStash",
     },
     "factory4_night": {
       "Gate 3": "MechanicStash",
-      "Gate_o": "JaegerStash"
+      "Gate_o": "JaegerStash",
     },
     "bigmap": {
       "Railroad To Tarkov": "TherapistStash",
       "Railroad To Military Base": "SkierStash",
       "Factory Far Corner": "MechanicStash",
-      "Old Azs Gate": "RagmanStash"
+      "Old Azs Gate": "RagmanStash",
     },
     "woods": {
-      "Factory Gate": "JaegerStash"
+      "Factory Gate": "JaegerStash",
     },
     "rezervbase": {
       "EXFIL_ScavCooperation": "SkierStash",
-      "Exit4": "MilitaryLighthouseStash"
+      "Exit4": "MilitaryLighthouseStash",
     },
     "interchange": {
-      "NW Exfil": "RagmanStash"
+      "NW Exfil": "RagmanStash",
     },
     "shoreline": {
-      "Tunnel": "PeacekeeperStash"
+      "Tunnel": "PeacekeeperStash",
     },
     "lighthouse": {
       "Coastal_South_Road": "PeacekeeperStash",
-      " V-Ex_light": "MilitaryLighthouseStash"
+      " V-Ex_light": "MilitaryLighthouseStash",
     },
     "tarkovstreets": {
       "E5": "TherapistStash",
       "E7_car": "PraporStash",
-      "E9_sniper": "KlimovStash"
+      "E9_sniper": "KlimovStash",
     },
     "laboratory": {
       "lab_Parking_Gate": "PraporStash",
@@ -324,16 +324,16 @@
       "lab_Under_Storage_Collector": "PraporStash",
       "lab_Elevator_Main": "PraporStash",
       "lab_Vent": "PraporStash",
-      "lab_Elevator_Cargo": "PraporStash"
+      "lab_Elevator_Cargo": "PraporStash",
     },
     "sandbox": {
-      "Sandbox_VExit": "PraporStash"
-    }
+      "Sandbox_VExit": "PraporStash",
+    },
   },
   "infiltrations": {
     "TherapistStash": {
       "bigmap": ["Crossroads"],
-      "tarkovstreets": ["Zmeevsky Alley"]
+      "tarkovstreets": ["Zmeevsky Alley"],
     },
     "PraporStash": {
       "tarkovstreets": ["Klimov Street"],
@@ -345,37 +345,37 @@
         "Lab Vents",
         "Main Elevator",
         "Med Block Elevator",
-        "Parking Gate"
-      ]
+        "Parking Gate",
+      ],
     },
     "MechanicStash": {
       "factory4_day": ["Gate 3"],
       "factory4_night": ["Gate 3"],
-      "bigmap": ["ZB-1011"]
+      "bigmap": ["ZB-1011"],
     },
     "RagmanStash": {
       "bigmap": ["Old Gas Scav"],
-      "interchange": ["Railway"]
+      "interchange": ["Railway"],
     },
     "SkierStash": {
       "bigmap": ["RR to Military Base"],
-      "rezervbase": ["Scav lands rail"]
+      "rezervbase": ["Scav lands rail"],
     },
     "PeacekeeperStash": {
       "lighthouse": ["Lighthouse Tunnel"],
-      "shoreline": ["Shoreline Tunnel"]
+      "shoreline": ["Shoreline Tunnel"],
     },
     "JaegerStash": {
       "factory4_day": ["Courtyard"],
       "factory4_night": ["Courtyard"],
-      "woods": ["Factory Gate", "RUAF Gate", "UN Roadblock"]
+      "woods": ["Factory Gate", "RUAF Gate", "UN Roadblock"],
     },
     "MilitaryLighthouseStash": {
       "lighthouse": ["Lighthouse Vehicle Extract"],
-      "rezervbase": ["Checkpoint Fence"]
+      "rezervbase": ["Checkpoint Fence"],
     },
     "KlimovStash": {
-      "tarkovstreets": ["Klimov Street"]
-    }
-  }
+      "tarkovstreets": ["Klimov Street"],
+    },
+  },
 }
