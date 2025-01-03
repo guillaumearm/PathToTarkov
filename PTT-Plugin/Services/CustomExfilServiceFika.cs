@@ -10,6 +10,7 @@ using PTT.Data;
 using Fika.Core.Coop.HostClasses;
 using Fika.Core.Coop.ClientClasses;
 using Fika.Core.Coop.Utils;
+using JsonType;
 
 namespace PTT.Services;
 
@@ -17,10 +18,10 @@ public static class CustomExfilServiceFika
 {
     public static void ExtractTo(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
     {
+        Logger.Info($"(FIKA) started extraction on '{exfilTarget.GetCustomExitName(exfil)}'");
+
         CoopGame coopGame = (CoopGame)Singleton<IFikaGame>.Instance;
         CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
-        Logger.Info($"(FIKA) started extraction on '{exfilTarget.GetCustomExitName(exfil)}'");
-        Plugin.ExfilsTargetsService.SaveExfil(exfil, exfilTarget);
 
         if (coopGame == null)
         {
@@ -34,17 +35,24 @@ public static class CustomExfilServiceFika
             return;
         }
 
+        // 1. Save the exfil target
+        Plugin.ExfilsTargetsService.SaveExfil(exfil, exfilTarget);
+
+        // 2. Set the ExitLocation (needed to validate extract quests like `Burning Rubber`)
         coopGame.ExitLocation = exfil.Settings.Name;
+
+        // 3. Trigger extract
         coopGame.Extract(coopPlayer, exfil, null);
+
         Logger.Info($"(FIKA) extraction done for profile {coopPlayer.ProfileId}");
     }
 
     public static void TransitTo(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
     {
+        Logger.Info($"started transit on '{exfilTarget.GetCustomExitName(exfil)}'");
+
         CoopGame coopGame = (CoopGame)Singleton<IFikaGame>.Instance;
         CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
-        Logger.Info($"started transit on '{exfilTarget.GetCustomExitName(exfil)}'");
-        Plugin.ExfilsTargetsService.SaveExfil(exfil, exfilTarget);
 
         if (coopGame == null)
         {
@@ -58,125 +66,144 @@ public static class CustomExfilServiceFika
             return;
         }
 
-        GameWorld gameWorld = Singleton<GameWorld>.Instance;
-        if (gameWorld == null)
+        // 1. Create the transit point
+        TransitPoint transit = Transit.Create(exfil, exfilTarget);
+
+        // 2. Register the transit point
+        if (!RegisterTransitPoint(transit))
         {
-            Logger.Error($"(FIKA) cannot transit because no GameWorld found");
+            Logger.Error($"(FIKA) cannot register the transit point");
             return;
         }
 
-        // TransitControllerAbstractClass transitController = Singleton<GameWorld>.Instance.TransitController;
+        // 3. Save the exfil target
+        Plugin.ExfilsTargetsService.SaveExfil(exfil, exfilTarget);
 
-        // if (gameWorld.TransitController == null)
-        // {
-        //     Logger.Error("================> The gameWorld.TransitController is null and this is very weird");
-        // }
+        // 4. Set the ExitLocation
+        coopGame.ExitLocation = exfil.Settings.Name;
 
+        // 5. Trigger extract with transit
+        coopGame.Extract(coopPlayer, null, transit);
 
+        Logger.Info($"(FIKA) transit done for profile '${coopPlayer.ProfileId}'");
+    }
 
+    private static bool RegisterTransitPoint(TransitPoint transit)
+    {
+        string location = transit.parameters.location;
+        CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
+        GameWorld gameWorld = Singleton<GameWorld>.Instance;
+        LocalRaidSettings localRaidSettings = LocalRaidSettingsRetriever.RaidSettings;
+        TransitControllerAbstractClass transitController = GetTransitController();
 
-
-
-        // if (gameWorld.TransitController is not FikaHostTransitController hostController)
-        // {
-        //     Logger.Error("(FIKA) FikaHostTransitController not found :'(");
-        // }
-
-
-        // if (transitController == null)
-        // {
-        //     Logger.Error("(FIKA) no transit controller found in TransitController");
-        //     return;
-        // }
-
-        // TransitControllerAbstractClass transitController = gameWorld.TransitController;
-        // if (transitController == null)
-        // {
-        //     Logger.Error($"(FIKA) cannot transit because no TransitControllerAbstractClass found! damn!");
-        //     return;
-        // }
-
-        // if (!TransitControllerAbstractClass.Exist(out GClass1642 transitController))
-        // {
-        //     Logger.Error($"(FIKA) cannot transit because no TransitControllerAbstractClass found");
-        //     return;
-        // }
-
-        TransitPoint transit = Transit.Create(exfil, exfilTarget);
-        var localRaidSettings = LocalRaidSettingsRetriever.RaidSettings;
+        if (gameWorld == null)
+        {
+            Logger.Error($"(FIKA) cannot register transit point because no GameWorld found");
+            return false;
+        }
 
         if (localRaidSettings == null)
         {
-            Logger.Error($"(FIKA) cannot transit because no LocalRaidSettings found");
-            return;
+            Logger.Error($"(FIKA) cannot register transit point because no LocalRaidSettings found");
+            return false;
         }
 
-        Profile profile = gameWorld.MainPlayer.Profile;
-
-        // 0. setup the transit controller if needed (TODO: move in a dedicated method)
-        if (gameWorld.TransitController == null)
+        if (coopPlayer == null)
         {
-            BackendConfigSettingsClass backendConfigSettings = Singleton<BackendConfigSettingsClass>.Instance;
-            if (backendConfigSettings == null)
-            {
-                Logger.Error($"(FIKA) cannot retrieve the fika transit controller because no backendConfigSettings found");
-                return;
-            }
-
-            if (backendConfigSettings.transitSettings == null)
-            {
-                Logger.Error($"(FIKA) cannot retrieve the fika transit controller because no BackendConfigSettingsClass.transitSettings found");
-                return;
-            }
-
-            var localSettings = LocalRaidSettingsRetriever.LocalSettings;
-
-            if (localSettings == null)
-            {
-                Logger.Error($"(FIKA) cannot retrieve the fika transit controller because no LocalSettings found");
-                return;
-            }
-
-            if (localSettings.locationLoot == null)
-            {
-                Logger.Warning($"(FIKA) LocalSettings.locationLoot is null");
-            }
-
-            LocationSettingsClass.Location.TransitParameters[] transitParameters = localSettings.locationLoot?.transitParameters ?? [];
-
-            TransitControllerAbstractClass transitController = FikaBackendUtils.IsServer
-                ? new FikaHostTransitController(backendConfigSettings.transitSettings, transitParameters, profile, localRaidSettings)
-                : new FikaClientTransitController(backendConfigSettings.transitSettings, transitParameters, profile, localRaidSettings);
-
-            gameWorld.TransitController = transitController;
+            Logger.Error($"(FIKA) cannot register transit point because no CoopPlayer found");
+            return false;
         }
 
-        // 1. set the transition status
-        string location = transit.parameters.location;
-        ERaidMode eraidMode = ERaidMode.Local;
+        if (transitController == null)
+        {
+            Logger.Error($"(FIKA) cannot register transit point because no transitController found");
+            return false;
+        }
+
+        // 1. Set the transition status
         if (TarkovApplication.Exist(out TarkovApplication tarkovApplication))
         {
+            ERaidMode eraidMode = ERaidMode.Local;
             tarkovApplication.transitionStatus = new GStruct136(location, false, localRaidSettings.playerSide, eraidMode, localRaidSettings.timeVariant);
         }
         else
         {
-            Logger.Error($"(FIKA) cannot transit because no TarkovApplication found");
-            return;
+            Logger.Error($"(FIKA) cannot register transit point because no TarkovApplication found");
+            return false;
         }
 
-        // 2. add the transitPayload
-        var transitPayload = CreateTransitPayload(location, gameWorld.TransitController, coopPlayer);
-        gameWorld.TransitController.alreadyTransits.Add(coopPlayer.ProfileId, transitPayload);
+        // 2. Create and register the transitPayload
+        var transitPayload = CreateTransitPayload(location, transitController, coopPlayer);
+        transitController.alreadyTransits.Add(coopPlayer.ProfileId, transitPayload);
 
-        // 3. trigger extract
-        coopGame.ExitLocation = exfil.Settings.Name;
-        coopGame.Extract(coopPlayer, null, transit);
-        Logger.Info($"(FIKA) transit done for profile '${coopPlayer.ProfileId}'");
+        return true;
+    }
+
+    private static TransitControllerAbstractClass GetTransitController()
+    {
+        GameWorld gameWorld = Singleton<GameWorld>.Instance;
+        if (gameWorld == null)
+        {
+            Logger.Error($"(FIKA) no GameWorld found");
+            return null;
+        }
+
+        AddMissingFikaTransitController(gameWorld);
+
+        return gameWorld.TransitController;
+    }
+
+    // This is because Fika removed transit support in Fika-Plugin version 1.1.2.0
+    private static void AddMissingFikaTransitController(GameWorld gameWorld)
+    {
+        if (gameWorld.TransitController == null)
+        {
+            Profile profile = gameWorld.MainPlayer.Profile;
+            gameWorld.TransitController = CreateTransitController(profile);
+        }
+    }
+
+    private static TransitControllerAbstractClass CreateTransitController(Profile profile)
+    {
+        LocalRaidSettings localRaidSettings = LocalRaidSettingsRetriever.RaidSettings;
+        LocalSettings localSettings = LocalRaidSettingsRetriever.LocalSettings;
+        BackendConfigSettingsClass backendConfigSettings = Singleton<BackendConfigSettingsClass>.Instance;
+
+        if (localRaidSettings == null)
+        {
+            Logger.Error($"(FIKA) cannot retrieve the fika transit controller because no LocalRaidSettings found");
+            return null;
+        }
+
+        if (localSettings == null)
+        {
+            Logger.Error($"(FIKA) cannot retrieve the fika transit controller because no LocalSettings found");
+            return null;
+        }
+
+        if (localSettings.locationLoot == null)
+        {
+            Logger.Warning($"(FIKA) LocalSettings.locationLoot is null");
+        }
+
+        if (backendConfigSettings?.transitSettings == null)
+        {
+            Logger.Error($"(FIKA) cannot retrieve the fika transit controller because no BackendConfigSettingsClass.transitSettings found");
+            return null;
+        }
+
+        LocationSettingsClass.Location.TransitParameters[] transitParameters = localSettings.locationLoot?.transitParameters ?? [];
+
+        TransitControllerAbstractClass transitController = FikaBackendUtils.IsServer
+            ? new FikaHostTransitController(backendConfigSettings.transitSettings, transitParameters, profile, localRaidSettings)
+            : new FikaClientTransitController(backendConfigSettings.transitSettings, transitParameters, profile, localRaidSettings);
+
+        return transitController;
     }
 
     private static GClass1926 CreateTransitPayload(string locationName, TransitControllerAbstractClass transitController, CoopPlayer coopPlayer)
     {
-        // 1. create player profiles
+        // 1. Create player profile
         Dictionary<string, ProfileKey> profiles = new() {
             {coopPlayer.ProfileId, new()
                 {
@@ -187,7 +214,7 @@ public static class CustomExfilServiceFika
             }
         };
 
-        // 2. create the transit payload
+        // 2. Create the transit payload
         GClass1926 transitPayload = new()
         {
             hash = Guid.NewGuid().ToString(),

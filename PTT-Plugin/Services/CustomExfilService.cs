@@ -22,7 +22,7 @@ public static class CustomExfilService
         LocalGame localGame = Singleton<AbstractGame>.Instance as LocalGame;
         Player player = Singleton<GameWorld>.Instance.MainPlayer;
         Logger.Info($"started extraction on '{exfilTarget.GetCustomExitName(exfil)}'");
-        Plugin.ExfilsTargetsService.SaveExfil(exfil, exfilTarget);
+
 
         if (localGame == null)
         {
@@ -36,8 +36,14 @@ public static class CustomExfilService
             return;
         }
 
+        Plugin.ExfilsTargetsService.SaveExfil(exfil, exfilTarget);
+
+        // This is needed to validate extract quests like `Burning Rubber`
+        // The ptt custom ptt exfil target name will be used to override the exitName in the LocalRaidEndedPatch
+        string exitName = exfil.Settings.Name;
+
         float delay = 0f;
-        localGame.Stop(player.ProfileId, ExitStatus.Survived, exfil.Settings.Name, delay);
+        localGame.Stop(player.ProfileId, ExitStatus.Survived, exitName, delay);
         Logger.Info($"local game stopped for profile '${player.ProfileId}'");
     }
 
