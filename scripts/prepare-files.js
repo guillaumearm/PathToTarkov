@@ -10,6 +10,9 @@ const { mkdirp } = require('mkdirp');
 const PTTClientDir = 'PTT-Plugin';
 const dllFileName = 'Trap.PathToTarkov.dll';
 
+const PTTPacketsClientDir = 'PTT-Packets';
+const packetsDllFileName = "Trap.PathToTarkov-Packets.dll";
+
 const main = async modName => {
   [
     'rimraf dist/user',
@@ -17,6 +20,7 @@ const main = async modName => {
     () => mkdirp.sync(`./dist/user/mods/${modName}`),
     () => mkdirp.sync('./dist/BepInEx/plugins'),
     `cpr ./${PTTClientDir}/bin/Debug/net471/${dllFileName} ./dist/BepInEx/plugins/${dllFileName} -o`,
+    `cpr ./${PTTPacketsClientDir}/bin/Debug/net471/${packetsDllFileName} ./dist/BepInEx/plugins/${packetsDllFileName} -o`,
     `cpr package.json ./dist/user/mods/${modName}/package.json -o`,
     `cpr dist/src ./dist/user/mods/${modName}/src -o`,
     `cpr configs ./dist/user/mods/${modName}/configs -o`,

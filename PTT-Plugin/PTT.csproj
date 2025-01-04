@@ -61,6 +61,13 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PTT-Packets\PTT.csproj">
+      <Project>{E4B8C5DB-7D40-49B5-9A4A-F4C1D3D7ADCB}</Project>
+      <Name>PTT-Packets</Name>
+    </ProjectReference>
+  </ItemGroup>
+
   <!-- <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
   </ItemGroup> -->
