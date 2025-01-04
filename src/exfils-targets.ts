@@ -3,6 +3,7 @@ import { resolveLocationIdFromMapName, resolveMapNameFromLocation } from './map-
 
 // Warning: This type should be the same than the corresponding client type
 export type ExfilTarget = {
+  exitName: string;
   isTransit: boolean;
   transitMapId: string; // transit only
   transitSpawnPointId: string; // transit only
@@ -39,6 +40,7 @@ export const getExfilsTargets = (config: Config, mapName: MapName): ExfilsTarget
       const parsed = parseExilTargetFromPTTConfig(targetValue);
 
       return {
+        exitName: exfilName,
         isTransit: Boolean(!parsed.targetOffraidPosition),
         offraidPosition: parsed.targetOffraidPosition ?? '',
         transitMapId: resolveLocationIdFromMapName(parsed.transitTargetMapName ?? ''),

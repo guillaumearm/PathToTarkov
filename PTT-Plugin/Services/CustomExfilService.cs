@@ -21,7 +21,7 @@ public static class CustomExfilService
 
         LocalGame localGame = Singleton<AbstractGame>.Instance as LocalGame;
         Player player = Singleton<GameWorld>.Instance.MainPlayer;
-        Logger.Info($"started extraction on '{exfilTarget.GetCustomExitName(exfil)}'");
+        Logger.Info($"started extraction on '{exfilTarget.GetCustomExitName()}'");
 
 
         if (localGame == null)
@@ -36,28 +36,32 @@ public static class CustomExfilService
             return;
         }
 
-        Plugin.ExfilsTargetsService.SaveExfil(exfil, exfilTarget);
+        Plugin.ExfilsTargetsService.SaveExfil(exfilTarget);
 
         // This is needed to validate extract quests like `Burning Rubber`
         // The ptt custom ptt exfil target name will be used to override the exitName in the LocalRaidEndedPatch
-        string exitName = exfil.Settings.Name;
+        string exitName = exfilTarget.exitName;
 
         float delay = 0f;
         localGame.Stop(player.ProfileId, ExitStatus.Survived, exitName, delay);
         Logger.Info($"local game stopped for profile '${player.ProfileId}'");
     }
 
-    public static void TransitTo(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
+    public static void TransitTo(ExfilTarget exfilTarget, Action onTransitDone)
     {
         if (Plugin.FikaIsInstalled)
         {
-            CustomExfilServiceFika.TransitTo(exfil, exfilTarget);
+            TransitVoteServiceFika.VoteForExfil(exfilTarget, () =>
+            {
+                CustomExfilServiceFika.TransitTo(exfilTarget);
+                onTransitDone();
+            });
             return;
         }
 
-        TransitPoint transit = Transit.Create(exfil, exfilTarget);
+        TransitPoint transit = Transit.Create(exfilTarget);
         Logger.Info($"started transit on '{transit.parameters.name}'");
-        Plugin.ExfilsTargetsService.SaveExfil(exfil, exfilTarget);
+        Plugin.ExfilsTargetsService.SaveExfil(exfilTarget);
 
         if (!TransitControllerAbstractClass.Exist(out GClass1642 vanillaTransitController))
         {
@@ -84,6 +88,24 @@ public static class CustomExfilService
         int playersCount = 1;
 
         vanillaTransitController.Transit(transit, playersCount, transitHash, profiles, player);
+        onTransitDone();
         Logger.Info($"transit done for profile '${player.ProfileId}'");
+    }
+
+    public static void CancelTransitVote(string cancelMessage)
+    {
+        if (Plugin.FikaIsInstalled)
+        {
+            TransitVoteServiceFika.CancelVoteForExfil(cancelMessage);
+        }
+    }
+
+    public static bool IsTransitDisabled(ExfilTarget exfilTarget)
+    {
+        if (Plugin.FikaIsInstalled && exfilTarget.isTransit)
+        {
+            return TransitVoteServiceFika.IsTransitDisabledByVote(exfilTarget);
+        }
+        return false;
     }
 }

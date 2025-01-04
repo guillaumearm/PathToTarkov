@@ -12,57 +12,100 @@ namespace PTT.UI;
 
 public class ExfilPrompt(ExfiltrationPoint Exfil)
 {
+    private bool _exfiltrated = false;
+    private bool _voted = false; // when vote is confirmed
+    private ExfilTarget _selectedExfilTarget = null; // used to check is auto-cancel vote is needed
     private Action _actionToExecuteOnConfirm = null;
 
     private void InitPromptState()
     {
+        _exfiltrated = false;
+        _voted = false;
+        _selectedExfilTarget = null;
         _actionToExecuteOnConfirm = null;
     }
 
-    private void RunConfirm()
+    private Action CreateRunConfirm()
     {
-        if (_actionToExecuteOnConfirm != null)
+        return () =>
         {
-            _actionToExecuteOnConfirm();
-            _actionToExecuteOnConfirm = null;
-        }
+            if (_actionToExecuteOnConfirm != null)
+            {
+                _actionToExecuteOnConfirm();
+                _actionToExecuteOnConfirm = null;
+                _voted = true;
+            }
+        };
     }
 
-    private void RunCancel()
+    private Action CreateRunCancel()
     {
-        InitPromptState();
-        Sound.PlayMenuCancel();
-        SelectFirstPromptItem();
+        return () =>
+        {
+            CancelVote("Vote cancelled");
+            InitPromptState();
+            Sound.PlayMenuCancel();
+            SelectFirstPromptItem();
+        };
     }
 
     private CustomExfilAction CreateCustomExfilAction(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
     {
-        string customActionName = exfilTarget.GetCustomActionName();
-
         switch (exfilTarget.isTransit)
         {
             case true:
-                return new CustomExfilAction(customActionName, false, () =>
-                {
-                    _actionToExecuteOnConfirm = () =>
+                bool isTransitDisabled = CustomExfilService.IsTransitDisabled(exfilTarget);
+                string customTransitActionName = exfilTarget.GetCustomActionName(isTransitDisabled);
+
+                return new CustomExfilAction(
+                    customTransitActionName,
+                    isTransitDisabled,
+                    () =>
                     {
-                        CustomExfilService.TransitTo(exfil, exfilTarget);
-                        Sound.PlayTransitConfirm();
-                    };
-                    Sound.PlayMenuEnter();
-                    SelectFirstPromptItem();
-                });
+                        _actionToExecuteOnConfirm = () =>
+                        {
+                            CustomExfilService.TransitTo(exfilTarget, () =>
+                            {
+                                _exfiltrated = true;
+                            });
+                            Sound.PlayTransitConfirm();
+                        };
+                        Sound.PlayMenuEnter();
+                        SelectFirstPromptItem();
+                    });
             case false:
-                return new CustomExfilAction(customActionName, false, () =>
-                {
-                    _actionToExecuteOnConfirm = () =>
+                bool isExtractDisabled = false;
+                string customExtractActionName = exfilTarget.GetCustomActionName(isExtractDisabled);
+
+                return new CustomExfilAction(
+                    customExtractActionName,
+                    isExtractDisabled,
+                    () =>
                     {
-                        CustomExfilService.ExtractTo(exfil, exfilTarget);
-                        Sound.PlayExtractConfirm();
-                    };
-                    Sound.PlayMenuEnter();
-                    SelectFirstPromptItem();
-                });
+                        _actionToExecuteOnConfirm = () =>
+                        {
+                            CustomExfilService.ExtractTo(exfil, exfilTarget);
+                            _exfiltrated = true;
+                            Sound.PlayExtractConfirm();
+                        };
+                        Sound.PlayMenuEnter();
+                        SelectFirstPromptItem();
+                    });
+        }
+    }
+
+    private void CancelVote(string cancelMessage)
+    {
+        _voted = false;
+        _selectedExfilTarget = null;
+        CustomExfilService.CancelTransitVote(cancelMessage);
+    }
+
+    private void OnExitZone()
+    {
+        if (!_exfiltrated)
+        {
+            CancelVote("Vote cancelled (zone exited)");
         }
     }
 
@@ -86,27 +129,39 @@ public class ExfilPrompt(ExfiltrationPoint Exfil)
             return null;
         }
 
-        // action selection step
-        if (_actionToExecuteOnConfirm == null)
+        // 1. action selection step
+        if (!_voted && _actionToExecuteOnConfirm == null)
         {
             List<CustomExfilAction> actions = exfilTargets
                 .Where(exfilTarget => exfilTarget.IsAvailable())
                 .Select(exfilTarget => CreateCustomExfilAction(Exfil, exfilTarget))
                 .ToList();
 
-            return new OnActionsAppliedResult(actions);
+            return new OnActionsAppliedResult(actions, OnExitZone);
         }
 
-        // confirmation step
-        var confirmAction = new CustomExfilAction("confirm".Localized(), false, RunConfirm);
-        var cancelAction = new CustomExfilAction("Cancel".Localized(), false, RunCancel);
+        var cancelAction = new CustomExfilAction("Cancel".Localized(), false, CreateRunCancel());
 
-        if (Settings.Config.ExfilAutoselectCancel.Value)
+        // auto-cancel the vote when needed
+        if (_voted && _selectedExfilTarget != null && CustomExfilService.IsTransitDisabled(_selectedExfilTarget))
         {
-            return new OnActionsAppliedResult([cancelAction, confirmAction]);
+            CancelVote("Vote cancelled because selected exfil transit don't match with the others");
         }
 
-        return new OnActionsAppliedResult([confirmAction, cancelAction]);
+        // 3. confirmation step
+        if (!_voted)
+        {
+            var confirmAction = new CustomExfilAction("confirm".Localized(), false, CreateRunConfirm());
+
+            List<CustomExfilAction> actions = Settings.Config.ExfilAutoselectCancel.Value
+                ? [cancelAction, confirmAction]
+                : [confirmAction, cancelAction];
+
+            return new OnActionsAppliedResult(actions, OnExitZone);
+        }
+
+        // 3. cancellation step
+        return new OnActionsAppliedResult([cancelAction], OnExitZone);
     }
 
     private static void SelectFirstPromptItem()

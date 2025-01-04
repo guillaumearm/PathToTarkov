@@ -18,7 +18,7 @@ public static class CustomExfilServiceFika
 {
     public static void ExtractTo(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
     {
-        Logger.Info($"(FIKA) started extraction on '{exfilTarget.GetCustomExitName(exfil)}'");
+        Logger.Info($"(FIKA) started extraction on '{exfilTarget.GetCustomExitName()}'");
 
         CoopGame coopGame = (CoopGame)Singleton<IFikaGame>.Instance;
         CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
@@ -36,10 +36,10 @@ public static class CustomExfilServiceFika
         }
 
         // 1. Save the exfil target
-        Plugin.ExfilsTargetsService.SaveExfil(exfil, exfilTarget);
+        Plugin.ExfilsTargetsService.SaveExfil(exfilTarget);
 
         // 2. Set the ExitLocation (needed to validate extract quests like `Burning Rubber`)
-        coopGame.ExitLocation = exfil.Settings.Name;
+        coopGame.ExitLocation = exfilTarget.exitName;
 
         // 3. Trigger extract
         coopGame.Extract(coopPlayer, exfil, null);
@@ -47,9 +47,9 @@ public static class CustomExfilServiceFika
         Logger.Info($"(FIKA) extraction done for profile {coopPlayer.ProfileId}");
     }
 
-    public static void TransitTo(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
+    public static void TransitTo(ExfilTarget exfilTarget)
     {
-        Logger.Info($"started transit on '{exfilTarget.GetCustomExitName(exfil)}'");
+        Logger.Info($"started transit on '{exfilTarget.GetCustomExitName()}'");
 
         CoopGame coopGame = (CoopGame)Singleton<IFikaGame>.Instance;
         CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
@@ -67,7 +67,7 @@ public static class CustomExfilServiceFika
         }
 
         // 1. Create the transit point
-        TransitPoint transit = Transit.Create(exfil, exfilTarget);
+        TransitPoint transit = Transit.Create(exfilTarget);
 
         // 2. Register the transit point
         if (!RegisterTransitPoint(transit))
@@ -77,10 +77,10 @@ public static class CustomExfilServiceFika
         }
 
         // 3. Save the exfil target
-        Plugin.ExfilsTargetsService.SaveExfil(exfil, exfilTarget);
+        Plugin.ExfilsTargetsService.SaveExfil(exfilTarget);
 
         // 4. Set the ExitLocation
-        coopGame.ExitLocation = exfil.Settings.Name;
+        coopGame.ExitLocation = exfilTarget.exitName;
 
         // 5. Trigger extract with transit
         coopGame.Extract(coopPlayer, null, transit);

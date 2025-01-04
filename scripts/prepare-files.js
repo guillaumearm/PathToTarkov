@@ -11,7 +11,7 @@ const PTTClientDir = 'PTT-Plugin';
 const dllFileName = 'Trap.PathToTarkov.dll';
 
 const PTTPacketsClientDir = 'PTT-Packets';
-const packetsDllFileName = "Trap.PathToTarkov-Packets.dll";
+const packetsDllFileName = 'Trap.PathToTarkov-Packets.dll';
 
 const main = async modName => {
   [

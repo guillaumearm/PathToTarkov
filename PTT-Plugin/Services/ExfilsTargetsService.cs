@@ -14,12 +14,13 @@ public class ExfilsTargetsService
 
     public void Init()
     {
+        UsedCustomExtractName = null;
         FetchExfilsTargetsForCurrentLocation();
     }
 
-    public void SaveExfil(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
+    public void SaveExfil(ExfilTarget exfilTarget)
     {
-        UsedCustomExtractName = exfilTarget.GetCustomExitName(exfil);
+        UsedCustomExtractName = exfilTarget.GetCustomExitName();
     }
 
     public string ConsumeExtractName()

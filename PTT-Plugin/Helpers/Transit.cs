@@ -5,10 +5,10 @@ namespace PTT.Helpers;
 
 internal static class Transit
 {
-    static public TransitPoint Create(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
+    static public TransitPoint Create(ExfilTarget exfilTarget)
     {
         string locationId = exfilTarget.transitMapId;
-        string customTransitName = exfilTarget.GetCustomExitName(exfil);
+        string customTransitName = exfilTarget.GetCustomExitName();
 
         return new TransitPoint
         {

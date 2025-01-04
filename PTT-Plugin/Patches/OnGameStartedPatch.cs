@@ -1,4 +1,5 @@
 using EFT;
+using PTT.Services;
 using SPT.Reflection.Patching;
 using System.Reflection;
 
@@ -14,6 +15,11 @@ internal class OnGameStartedPatch() : ModulePatch
     [PatchPrefix]
     public static bool PatchPrefix()
     {
+        if (Plugin.FikaIsInstalled)
+        {
+            TransitVoteServiceFika.InitRaid();
+        }
+
         InitExfilsTargetsService();
         Plugin.DisplayInteractableExfilsAPIWarning();
         return true;

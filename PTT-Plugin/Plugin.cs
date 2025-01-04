@@ -22,19 +22,13 @@ public class Plugin : BaseUnityPlugin
     {
         Helpers.Logger.Init(Logger);
         Helpers.Logger.Info($"Plugin {PluginInfo.PLUGIN_GUID} is loading...");
+        Settings.Config.Init(Config);
 
         FikaIsInstalled = Chainloader.PluginInfos.ContainsKey("com.fika.core");
         InteractableExfilsApiIsInstalled = Chainloader.PluginInfos.ContainsKey(IE_API_PLUGIN_NAME);
         KaenoTraderScrollingIsInstalled = Chainloader.PluginInfos.ContainsKey("com.kaeno.TraderScrolling");
 
-        Settings.Config.Init(Config);
-
         ExfilsTargetsService = new ExfilsTargetsService();
-
-        if (FikaIsInstalled)
-        {
-            Helpers.Logger.Info($"Fika.Core plugin detected");
-        }
 
         if (KaenoTraderScrollingIsInstalled)
         {
@@ -56,6 +50,12 @@ public class Plugin : BaseUnityPlugin
 
     protected void Start()
     {
+        if (FikaIsInstalled)
+        {
+            Helpers.Logger.Info($"Fika.Core plugin detected");
+            TransitVoteServiceFika.Init();
+        }
+
         if (InteractableExfilsApiIsInstalled)
         {
             Version apiVersion = Chainloader.PluginInfos[IE_API_PLUGIN_NAME].Metadata.Version;
