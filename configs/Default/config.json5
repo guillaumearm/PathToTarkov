@@ -8,16 +8,21 @@
   initial_offraid_position: 'FactoryZB-1011',
 
   // offraid position when a player die (apply only when `reset_offraid_position_on_player_die` is true)
+  // you can put several offraid positions here so it will pick one randomly on death
   respawn_at: ['FactoryZB-1011'],
 
   // with this option, transit points will be created automatically according to offraid position definition
   enable_automatic_transits_creation: true,
 
-  // vanilla compatible are officially not supported but you can still enable them here
+  // vanilla transits are officially not supported but you can still enable them here
   enable_all_vanilla_transits: false,
 
   bypass_keep_found_in_raid_tweak: false,
   player_scav_move_offraid_position: false,
+
+  // Check the `ExampleOverrideByProfiles` config for a full usage example
+  override_by_profiles: {},
+
   debug: true,
   debug_exfiltrations_tooltips_locale: 'en',
 

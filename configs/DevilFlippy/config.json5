@@ -1,16 +1,12 @@
 {
-  enabled: true,
-  debug: true,
-  initial_offraid_position: 'FactoryZB-1011',
   reset_offraid_position_on_player_die: true,
   traders_access_restriction: true,
-  flea_access_restriction: true,
-  flea_access_level: 1,
   hideout_multistash_enabled: true,
+  initial_offraid_position: 'FactoryZB-1011',
   player_scav_move_offraid_position: false,
   bypass_keep_found_in_raid_tweak: false,
-  bypass_uninstall_procedure: false,
   bypass_luas_Customs_spawn_points_tweak: false,
+  debug: true,
   restrictions_in_raid: {
     // roubles
     '5449016a4bdc2d6f028b456f': {
