@@ -394,6 +394,28 @@ const getErrorsForGeneralConfig = (config: Config): string[] => {
     );
   }
 
+  // check extracts_prompt_template locales
+  errors.push(
+    ...checkLocalesErrors(config.extracts_prompt_template ?? {}, `for extracts_prompt_template`),
+  );
+
+  // check transits_prompt_template locales
+  errors.push(
+    ...checkLocalesErrors(config.transits_prompt_template ?? {}, `for transits_prompt_template`),
+  );
+
+  return errors;
+};
+
+const getWarningsForGeneralConfig = (config: Config): string[] => {
+  const warnings: string[] = [];
+  void config;
+  return warnings;
+};
+
+const getErrorsForUnsupportedProperties = (config: Config): string[] => {
+  const errors: string[] = [];
+
   // check for usage of "vanilla_exfils_requirements"
   if (config.vanilla_exfils_requirements) {
     errors.push('"vanilla_exfils_requirements" is no longer supported since version 6');
@@ -414,7 +436,7 @@ const getErrorsForGeneralConfig = (config: Config): string[] => {
   return errors;
 };
 
-const getWarningsForGeneralConfig = (config: Config): string[] => {
+const getWarningsForUnsupportedProperties = (config: Config): string[] => {
   const warnings: string[] = [];
 
   // check for usage of "enabled"
@@ -457,48 +479,52 @@ export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigV
   const errors: string[] = [];
   const warnings: string[] = [];
 
-  // 1. check there is at least one offraid position
+  // check there is at least one offraid position
   if (isEmpty(config.infiltrations)) {
     errors.push('no offraid position found in "infiltrations"');
   }
 
-  // 2. check there is at least one map
+  // check there is at least one map
   if (isEmpty(config.exfiltrations)) {
     errors.push('no map found found in "exfiltrations"');
   }
 
-  // 3. check initial_offraid_position
+  // check initial_offraid_position
   if (!config.infiltrations[config.initial_offraid_position]) {
     errors.push(`wrong initial_offraid_position "${config.initial_offraid_position}"`);
   }
 
-  // 4. check all offraid positions
+  // check all offraid positions
   errors.push(...getErrorsForOffraidPositions(config, spawnConfig));
   warnings.push(...getWarningsForOffraidPositions(config));
 
-  // 5. checks for exfil maps
+  // checks for exfil maps
   errors.push(...getErrorsForExfils(config));
   warnings.push(...getWarningsForExfils(config));
 
-  // 6. check for secondary stashes
+  // check for secondary stashes
   errors.push(...getErrorsSecondaryStashes(config));
   warnings.push(...getWarningsSecondaryStashes(config));
 
-  // 7. check for infiltrations maps and spawn points
+  // check for infiltrations maps and spawn points
   errors.push(...getErrorsForInfils(config, spawnConfig));
   warnings.push(...getWarningsForInfils(config, spawnConfig));
 
-  // 8. check for additional spawnpoints
+  // check for additional spawnpoints
   errors.push(...getErrorsForAdditionalSpawnpoints(config));
   warnings.push(...getWarningsForAdditionalSpawnpoints(config));
 
-  // 9. check the rest of the config
+  // check the rest of the config
   errors.push(...getErrorsForGeneralConfig(config));
   warnings.push(...getWarningsForGeneralConfig(config));
 
-  // 10. check the spawn config
+  // check the spawn config
   errors.push(...getErrorsForSpawnConfig(spawnConfig));
   warnings.push(...getWarningsForSpawnConfig(spawnConfig));
+
+  // check unsupported properties (old ptt configs)
+  errors.push(...getErrorsForUnsupportedProperties(config));
+  warnings.push(...getWarningsForUnsupportedProperties(config));
 
   return {
     errors,
