@@ -213,15 +213,15 @@ const getErrorsForExfils = (config: Config): string[] => {
   const errors: string[] = [];
 
   Object.keys(config.exfiltrations).forEach(mapName => {
-    // 1. check all exfils maps are valid
+    // check all exfils maps are valid
     if (!ALLOWED_MAPS.includes(mapName)) {
       errors.push(`${mapName} is now allowed as a map name in "exfiltrations"`);
     }
 
-    // 2. check there is at least one exfil target
+    // check there is at least one exfil target
     const targetsByExfil = config.exfiltrations[mapName as MapName] ?? {};
     Object.keys(targetsByExfil).forEach(extractName => {
-      // 2bis. check there is no "." characters in given extractName
+      // check there is no "." characters in given extractName
       if (extractName.indexOf('.') !== -1) {
         errors.push(`bad extract name "${extractName}": the "." character is forbidden`);
       }
@@ -233,20 +233,27 @@ const getErrorsForExfils = (config: Config): string[] => {
     });
   });
 
-  // 3. check for missing maps
+  // check for missing maps
   MIN_NEEDED_MAPS.forEach(mapName => {
     if (!config.exfiltrations[mapName as MapName]) {
       errors.push(`${mapName} is missing in "exfiltrations"`);
     }
   });
 
-  // 4. Check for extract point name validity
+  // Check for extract point name validity
   Object.keys(config.exfiltrations).forEach(mapName => {
     Object.keys(config.exfiltrations[mapName as MapName]).forEach(exfilName => {
       if (!isValidExfilForMap(mapName, exfilName)) {
         errors.push(`invalid extract name "${exfilName}" for map "${mapName}"`);
       }
     });
+  });
+
+  // check exfiltrations_config displayName locales
+  Object.keys(config.exfiltrations_config ?? {}).forEach(extractName => {
+    const displayNameByLocale = config.exfiltrations_config?.[extractName]?.displayName ?? {};
+
+    errors.push(...checkLocalesErrors(displayNameByLocale, `for extract "${extractName}"`));
   });
 
   return errors;
