@@ -1,3 +1,4 @@
 {
   selectedConfig: 'Default',
+  runUninstallProcedure: false,
 }
