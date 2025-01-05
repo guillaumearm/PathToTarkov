@@ -117,6 +117,11 @@ public class ExfilPrompt(ExfiltrationPoint Exfil)
 
     public OnActionsAppliedResult Render()
     {
+        if (InteractableExfilsService.IsFirstRender())
+        {
+            InitPromptState();
+        }
+
         if (_exfiltrated)
         {
             return null;
