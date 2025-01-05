@@ -151,6 +151,7 @@ public class ExfilPrompt(ExfiltrationPoint Exfil)
         if (_voted && _selectedExfilTarget != null && CustomExfilService.IsTransitDisabled(_selectedExfilTarget))
         {
             CancelVote("Vote cancelled because selected exfil transit don't match with the others");
+            InitPromptState();
         }
 
         // 3. confirmation step
