@@ -1,16 +1,26 @@
 {
-  enabled: true,
-  debug: true,
-  debug_exfiltrations_tooltips_locale: 'en',
-  initial_offraid_position: 'FactoryZB-1011',
-  respawn_at: ['FactoryZB-1011'],
+  // Those 3 options can highly change the difficulty, try to change them if  PTT is too hardcore/grindy for you
   reset_offraid_position_on_player_die: true,
   traders_access_restriction: true,
   hideout_multistash_enabled: true,
-  player_scav_move_offraid_position: false,
+
+  // default offraid position when profile is created (or ptt installed for the first time)
+  initial_offraid_position: 'FactoryZB-1011',
+
+  // offraid position when a player die (apply only when `reset_offraid_position_on_player_die` is true)
+  respawn_at: ['FactoryZB-1011'],
+
+  // with this option, transit points will be created automatically according to offraid position definition
   enable_automatic_transits_creation: true,
+
+  // vanilla compatible are officially not supported but you can still enable them here
   enable_all_vanilla_transits: false,
+
   bypass_keep_found_in_raid_tweak: false,
+  player_scav_move_offraid_position: false,
+  debug: true,
+  debug_exfiltrations_tooltips_locale: 'en',
+
   restrictions_in_raid: {
     // roubles
     '5449016a4bdc2d6f028b456f': {
