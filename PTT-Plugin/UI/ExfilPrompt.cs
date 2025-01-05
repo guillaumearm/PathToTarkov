@@ -103,19 +103,19 @@ public class ExfilPrompt(ExfiltrationPoint Exfil)
 
     private void OnExitZone()
     {
-        if (!_exfiltrated)
+        if (!_exfiltrated) // we need to check if the player is not exfiltrated because OnExitZone will be call on exfil
         {
-            CancelVote("Vote cancelled (zone exited)");
+            InitPromptState();
+
+            if (_voted)
+            {
+                CancelVote("Vote cancelled (zone exited)");
+            }
         }
     }
 
     public OnActionsAppliedResult Render()
     {
-        if (InteractableExfilsService.IsFirstRender())
-        {
-            InitPromptState();
-        }
-
         string exitName = Exfil.Settings.Name;
         if (!Plugin.ExfilsTargetsService.ExfilsTargets.data.TryGetValue(exitName, out List<ExfilTarget> exfilTargets))
         {
