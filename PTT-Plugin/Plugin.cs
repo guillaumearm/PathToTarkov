@@ -17,6 +17,7 @@ public class Plugin : BaseUnityPlugin
     private static bool KaenoTraderScrollingIsInstalled { get; set; }
     public static ExfilsTargetsService ExfilsTargetsService;
     private const string IE_API_PLUGIN_NAME = "Jehree.InteractableExfilsAPI";
+    private const string IE_API_MIN_VERSION = "1.5.0";
 
     protected void Awake()
     {
@@ -60,9 +61,9 @@ public class Plugin : BaseUnityPlugin
         {
             Version apiVersion = Chainloader.PluginInfos[IE_API_PLUGIN_NAME].Metadata.Version;
 
-            if (apiVersion < new Version("1.4.1"))
+            if (apiVersion < new Version(IE_API_MIN_VERSION))
             {
-                Helpers.Logger.Warning($"Jehree.InteractableExfilsAPI >= 1.4.1 is required");
+                Helpers.Logger.Warning($"Jehree.InteractableExfilsAPI >= {IE_API_MIN_VERSION} is required");
                 InteractableExfilsApiIsOutdated = true;
             }
 
@@ -83,7 +84,7 @@ public class Plugin : BaseUnityPlugin
         }
         else if (InteractableExfilsApiIsOutdated)
         {
-            NotificationManagerClass.DisplayWarningNotification("Path To Tarkov: Your Interactable Exfils API mod is outdated. v1.4.1 or higher is required", ENotificationDurationType.Long);
+            NotificationManagerClass.DisplayWarningNotification($"Path To Tarkov: Your Interactable Exfils API mod is outdated. v{IE_API_MIN_VERSION} or higher is required", ENotificationDurationType.Long);
         }
     }
 }
