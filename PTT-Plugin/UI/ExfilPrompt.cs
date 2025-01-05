@@ -13,15 +13,15 @@ namespace PTT.UI;
 public class ExfilPrompt(ExfiltrationPoint Exfil)
 {
     private bool _exfiltrated = false; // when player extracted or transited
-    private bool _voted = false; // when vote is confirmed
-    private ExfilTarget _selectedExfilTarget = null; // used to check is auto-cancel vote is needed
+    private bool _transitVoted = false; // when vote is confirmed (transit only)
+    private ExfilTarget _selectedTransitExfilTarget = null; // used to check is auto-cancel vote is needed
     private Action _actionToExecuteOnConfirm = null;
 
     private void InitPromptState()
     {
         _exfiltrated = false;
-        _voted = false;
-        _selectedExfilTarget = null;
+        _transitVoted = false;
+        _selectedTransitExfilTarget = null;
         _actionToExecuteOnConfirm = null;
     }
 
@@ -33,7 +33,7 @@ public class ExfilPrompt(ExfiltrationPoint Exfil)
             {
                 _actionToExecuteOnConfirm();
                 _actionToExecuteOnConfirm = null;
-                _voted = true;
+                _transitVoted = true;
             }
         };
     }
@@ -64,6 +64,7 @@ public class ExfilPrompt(ExfiltrationPoint Exfil)
                     {
                         _actionToExecuteOnConfirm = () =>
                         {
+                            _selectedTransitExfilTarget = exfilTarget;
                             CustomExfilService.TransitTo(exfilTarget, () =>
                             {
                                 _exfiltrated = true;
@@ -96,8 +97,8 @@ public class ExfilPrompt(ExfiltrationPoint Exfil)
 
     private void CancelVote(string cancelMessage)
     {
-        _voted = false;
-        _selectedExfilTarget = null;
+        _transitVoted = false;
+        _selectedTransitExfilTarget = null;
         CustomExfilService.CancelTransitVote(cancelMessage);
     }
 
@@ -107,7 +108,7 @@ public class ExfilPrompt(ExfiltrationPoint Exfil)
         {
             InitPromptState();
 
-            if (_voted)
+            if (_transitVoted)
             {
                 CancelVote("Vote cancelled (zone exited)");
             }
@@ -135,7 +136,7 @@ public class ExfilPrompt(ExfiltrationPoint Exfil)
         }
 
         // 1. action selection step
-        if (!_voted && _actionToExecuteOnConfirm == null)
+        if (!_transitVoted && _actionToExecuteOnConfirm == null)
         {
             List<CustomExfilAction> actions = exfilTargets
                 .Where(exfilTarget => exfilTarget.IsAvailable())
@@ -148,14 +149,14 @@ public class ExfilPrompt(ExfiltrationPoint Exfil)
         var cancelAction = new CustomExfilAction("Cancel".Localized(), false, CreateRunCancel());
 
         // auto-cancel the vote when needed
-        if (_voted && _selectedExfilTarget != null && CustomExfilService.IsTransitDisabled(_selectedExfilTarget))
+        if (_transitVoted && _selectedTransitExfilTarget != null && CustomExfilService.IsTransitDisabled(_selectedTransitExfilTarget))
         {
             CancelVote("Vote cancelled because selected exfil transit don't match with the others");
             InitPromptState();
         }
 
         // 3. confirmation step
-        if (!_voted)
+        if (!_transitVoted)
         {
             var confirmAction = new CustomExfilAction("confirm".Localized(), false, CreateRunConfirm());
 
