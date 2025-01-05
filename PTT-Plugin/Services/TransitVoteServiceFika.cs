@@ -21,6 +21,7 @@ public static class TransitVoteServiceFika
 {
     private static Dictionary<int, ExfilTarget> Votes = [];
     private static Action ExfilAction = null;
+    private static bool Enabled = true;
 
     public static void Init()
     {
@@ -32,6 +33,7 @@ public static class TransitVoteServiceFika
     {
         Votes = [];
         ExfilAction = null;
+        Enabled = true;
     }
 
     public static void VoteForExfil(ExfilTarget exfilTarget, Action exfilAction)
@@ -106,6 +108,11 @@ public static class TransitVoteServiceFika
 
     public static bool IsTransitDisabledByVote(ExfilTarget exfilTarget)
     {
+        if (!Enabled)
+        {
+            return true;
+        }
+
         if (Votes.Count == 0)
         {
             return false;
@@ -120,6 +127,19 @@ public static class TransitVoteServiceFika
         }
 
         return false;
+    }
+
+    public static void SendDisableTransitVotePacket(string reason)
+    {
+        if (!Singleton<FikaServer>.Instantiated)
+        {
+            Logger.Error("(FIKA) Only the server can call SendDisableTransitVotePacket");
+            return;
+        }
+
+        var fikaServer = Singleton<FikaServer>.Instance;
+        var packet = new DisableTransitVotePacket { Reason = reason };
+        fikaServer.SendDataToAll(ref packet, DeliveryMethod.ReliableOrdered);
     }
 
     private static void HandlePlayerVotedForExfil(PlayerVotedForExfilTargetPacket packet, NetPeer peer)
@@ -184,6 +204,8 @@ public static class TransitVoteServiceFika
         {
             networkManager.RegisterPacket<PerformExfilPacket, NetPeer>(HandlePerformExfil);
             Logger.Info("(FIKA) Registered PerformExfilPacket");
+            networkManager.RegisterPacket<DisableTransitVotePacket, NetPeer>(HandleDisableTransitVote);
+            Logger.Info("(FIKA) Registered DisableTransitVotePacket");
         }
     }
 
@@ -204,6 +226,13 @@ public static class TransitVoteServiceFika
     private static void HandlePerformExfil(PerformExfilPacket packet, NetPeer peer)
     {
         PerformLocalExfil();
+    }
+
+    private static void HandleDisableTransitVote(DisableTransitVotePacket packet, NetPeer peer)
+    {
+        Enabled = false;
+        NotificationManagerClass.DisplayMessageNotification($"Transits disabled because {packet.Reason}", ENotificationDurationType.Long);
+        InteractableExfilsService.RefreshPrompt();
     }
 
     private static void PerformLocalExfil()
