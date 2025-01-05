@@ -325,6 +325,13 @@ const getErrorsForInfils = (config: Config, spawnConfig: SpawnConfig): string[] 
   return errors;
 };
 
+const getWarningsForInfils = (config: Config, spawnConfig: SpawnConfig): string[] => {
+  const warnings: string[] = [];
+  void config;
+  void spawnConfig;
+  return warnings;
+};
+
 const getErrorsForAdditionalSpawnpoints = (config: Config): string[] => {
   const errors: string[] = [];
 
@@ -340,6 +347,12 @@ const getErrorsForAdditionalSpawnpoints = (config: Config): string[] => {
   });
 
   return errors;
+};
+
+const getWarningsForAdditionalSpawnpoints = (config: Config): string[] => {
+  const warnings: string[] = [];
+  void config;
+  return warnings;
 };
 
 const getErrorsForGeneralConfig = (config: Config): string[] => {
@@ -358,7 +371,35 @@ const getErrorsForGeneralConfig = (config: Config): string[] => {
     errors.push('"vanilla_exfils_requirements" is no longer supported since version 6');
   }
 
+  // check for usage of "enabled" (only when set to false)
+  if (config.enabled === false) {
+    errors.push(
+      'passing the property "enabled" to false is no longer supported since version 6, please use runUninstallProcedure boolean on UserConfig.json5',
+    );
+  }
+
+  // check for usage of "bypass_uninstall_procedure" (only when set to true)
+  if (config.bypass_uninstall_procedure === true) {
+    errors.push('"bypass_uninstall_procedure" property is no longer supported since version 6');
+  }
+
   return errors;
+};
+
+const getWarningsForGeneralConfig = (config: Config): string[] => {
+  const warnings: string[] = [];
+
+  // check for usage of "enabled"
+  if (config.enabled === true || config.enabled === false) {
+    warnings.push('"enabled" property on config is no longer supported since version 6');
+  }
+
+  // check for usage of "bypass_uninstall_procedure" (only when set to false)
+  if (config.bypass_uninstall_procedure === false) {
+    warnings.push('"bypass_uninstall_procedure" property is no longer supported since version 6');
+  }
+
+  return warnings;
 };
 
 const getErrorsForSpawnConfig = (spawnConfig: SpawnConfig): string[] => {
@@ -411,12 +452,15 @@ export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigV
 
   // 7. check for infiltrations maps and spawn points
   errors.push(...getErrorsForInfils(config, spawnConfig));
+  warnings.push(...getWarningsForInfils(config, spawnConfig));
 
   // 8. check for additional spawnpoints
   errors.push(...getErrorsForAdditionalSpawnpoints(config));
+  warnings.push(...getWarningsForAdditionalSpawnpoints(config));
 
   // 9. check the rest of the config
   errors.push(...getErrorsForGeneralConfig(config));
+  warnings.push(...getWarningsForGeneralConfig(config));
 
   // 10. check the spawn config
   errors.push(...getErrorsForSpawnConfig(spawnConfig));

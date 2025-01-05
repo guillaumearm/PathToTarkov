@@ -10,7 +10,7 @@ import type { SaveServer } from '@spt/servers/SaveServer';
 import type { StaticRouterModService } from '@spt/services/mod/staticRouter/StaticRouterModService';
 
 import { createPathToTarkovAPI } from './api';
-import type { Config, MapName, SpawnConfig } from './config';
+import type { Config, MapName, SpawnConfig, UserConfig } from './config';
 import {
   CONFIG_FILENAME,
   CONFIGS_DIR,
@@ -39,6 +39,7 @@ import type { JsonUtil } from '@spt/utils/JsonUtil';
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;
+  private userConfig: UserConfig;
   private config: Config;
   private spawnConfig: SpawnConfig;
   public logger: ILogger;
@@ -52,9 +53,12 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     const jsonUtil = container.resolve<JsonUtil>('JsonUtil');
     this.packageJson = readJsonFile(PACKAGE_JSON_PATH, jsonUtil);
 
-    const userConfig = getUserConfig(jsonUtil);
+    this.userConfig = getUserConfig(jsonUtil);
     this.config = processConfig(
-      readJsonFile(path.join(CONFIGS_DIR, userConfig.selectedConfig, CONFIG_FILENAME), jsonUtil),
+      readJsonFile(
+        path.join(CONFIGS_DIR, this.userConfig.selectedConfig, CONFIG_FILENAME),
+        jsonUtil,
+      ),
     );
     this.spawnConfig = processSpawnConfig(
       readJsonFile(path.join(CONFIGS_DIR, SPAWN_CONFIG_FILENAME), jsonUtil),
@@ -66,7 +70,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       ? (data: string) => this.logger.debug(`Path To Tarkov: ${data}`, true)
       : noop;
 
-    if (!this.config.enabled) {
+    if (this.userConfig.runUninstallProcedure) {
       return;
     }
 
@@ -88,7 +92,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     if (analysisResult.errors.length > 0) {
       throw new Error(
-        `Fatal Error when loading the selected Path To Tarkov config "${userConfig.selectedConfig}"`,
+        `Fatal Error when loading the selected Path To Tarkov config "${this.userConfig.selectedConfig}"`,
       );
     }
 
@@ -144,7 +148,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   }
 
   public postDBLoad(container: DependencyContainer): void {
-    if (!this.config.enabled) {
+    if (this.userConfig.runUninstallProcedure) {
       return;
     }
 
@@ -161,16 +165,8 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       throw new Error('cannot retrieve quests templates from db');
     }
 
-    if (!this.config.enabled) {
+    if (this.userConfig.runUninstallProcedure) {
       this.logger.warning('=> Path To Tarkov is disabled!');
-
-      if (this.config.bypass_uninstall_procedure === true) {
-        this.logger.warning(
-          "=> PathToTarkov: uninstall process aborted because 'bypass_uninstall_procedure' field is true in config.json",
-        );
-        return;
-      }
-
       purgeProfiles(this.config, quests, saveServer, this.logger);
       return;
     }

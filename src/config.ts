@@ -202,7 +202,7 @@ export type ExfiltrationConfig = {
 };
 
 type RawConfig = {
-  enabled: boolean;
+  enabled?: boolean; // no longer supported
   debug?: boolean;
   debug_exfiltrations_tooltips_locale?: string;
   override_by_profiles?: OverrideByProfiles;
@@ -216,7 +216,7 @@ type RawConfig = {
   bypass_exfils_override?: boolean;
   enable_automatic_transits_creation?: boolean;
   enable_all_vanilla_transits?: boolean;
-  bypass_uninstall_procedure: boolean;
+  bypass_uninstall_procedure?: boolean; // no longer supported
   enable_run_through?: boolean;
   enable_legacy_ptt_api?: boolean;
   restrictions_in_raid: Record<string, { Value: number }>;
@@ -246,6 +246,7 @@ export type Config = Omit<
 
 export type UserConfig = {
   selectedConfig: string;
+  runUninstallProcedure?: false;
 };
 
 export type Profile = ISptProfile & {
@@ -261,6 +262,7 @@ export const PACKAGE_JSON_PATH = join(__dirname, '../package.json');
 
 export const CONFIGS_DIR = join(__dirname, '../configs');
 export const USER_CONFIG_PATH = join(CONFIGS_DIR, 'UserConfig.json5');
+export const DEFAULT_SELECTED_PTT_CONFIG = 'Default';
 
 export const CONFIG_FILENAME = 'config.json5';
 export const SPAWN_CONFIG_FILENAME = 'shared_player_spawnpoints.json5';
@@ -453,11 +455,21 @@ export const processSpawnConfig = (spawnConfig: SpawnConfig, config: Config): Sp
 export const getUserConfig = (jsonUtil: JsonUtil): UserConfig => {
   if (!fileExists(USER_CONFIG_PATH)) {
     const userConfig: UserConfig = {
-      selectedConfig: 'Default',
+      selectedConfig: DEFAULT_SELECTED_PTT_CONFIG,
+      runUninstallProcedure: false,
     };
     writeJsonFile(USER_CONFIG_PATH, userConfig);
     return userConfig;
   }
 
-  return readJsonFile(USER_CONFIG_PATH, jsonUtil);
+  const res: UserConfig = readJsonFile(USER_CONFIG_PATH, jsonUtil);
+
+  if (!res.selectedConfig) {
+    return {
+      ...res,
+      selectedConfig: DEFAULT_SELECTED_PTT_CONFIG,
+    };
+  }
+
+  return res;
 };
