@@ -1,5 +1,5 @@
 {
-  // Those 3 options can highly change the difficulty, try to change them if  PTT is too hardcore/grindy for you
+  // Those 3 options can highly change the difficulty, try to change them if PTT is too hardcore/grindy for you
   reset_offraid_position_on_player_die: true,
   traders_access_restriction: true,
   hideout_multistash_enabled: true,
@@ -1485,6 +1485,18 @@
     },
     'Saferoom Exfil': {
       override_tooltips_template: '$exfilDisplayName',
+    },
+    ' V-Ex_light': {
+      displayName: {
+        en: 'Military Base SUV (Reserve)',
+        fr: 'Base militaire SUV (Réserve)',
+      },
+    },
+    EXFIL_Bunker_D2: {
+      displayName: {
+        en: 'D2 Bunker',
+        fr: 'Bunker D2',
+      },
     },
   },
 }

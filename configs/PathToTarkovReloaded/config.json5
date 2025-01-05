@@ -774,7 +774,7 @@
         en: 'UN Roadblock (to Customs, RUAF)',
       },
     },
-    'Factory gate': {
+    'Factory Gate': {
       displayName: {
         en: 'Factory Gate (to Factory, Med Tent)',
       },
@@ -879,7 +879,7 @@
         en: 'Bunker Hermetic Door (to Shoreline, Checkpoint *1way)',
       },
     },
-    EXFIL_BUNKER_D2: {
+    EXFIL_Bunker_D2: {
       displayName: {
         en: 'D-2 (to Woods, Snip er Rock Bunker *1way)',
       },
@@ -909,17 +909,12 @@
         en: 'Northern CP (to Woods, Outskirts)',
       },
     },
-    ' V-ex_light': {
-      displayName: {
-        en: 'Car Ride Home',
-      },
-    },
     Shorl_free: {
       displayName: {
         en: 'Path to Shoreline (I swear if you ask)',
       },
     },
-    Coastal_South_road: {
+    Coastal_South_Road: {
       displayName: {
         en: 'Southern Road (to Shoreline, Tunnel)',
       },
@@ -929,7 +924,7 @@
         en: 'Mountain Pass (to Shoreline, Path to Shoreline)',
       },
     },
-    Tunnel_Shared: {
+    tunnel_shared: {
       displayName: {
         en: 'Side Tunnel (to Shoreline, Tunnel)',
       },
@@ -949,7 +944,7 @@
         en: 'Main Elevator (to Streets, Basement)',
       },
     },
-    lab_Elevator_med: {
+    lab_Elevator_Med: {
       displayName: {
         en: 'Medical Block Elevator (to Streets, Basement)',
       },
@@ -1029,12 +1024,7 @@
         en: 'Boat (Machine,Artem)',
       },
     },
-    WoodsFactoryGate: {
-      displayName: {
-        en: 'Gate 0 (Prapor)',
-      },
-    },
-    'Hole Exfil': {
+    'Hole Exfill': {
       displayName: {
         en: 'Crossroads (The Machine)',
       },
@@ -1049,12 +1039,12 @@
         en: 'Zb-1011 to Factory, Cellars(Mechanic)',
       },
     },
-    'ZB-1013': {
+    EXFIL_ZB013: {
       displayName: {
         en: 'ZB-1013 to Factory, Gate 3(Mechanic)',
       },
     },
-    'ZB-1014': {
+    'ZB-014': {
       displayName: {
         en: 'ZB-1014 to Factory, Gate 3(Mechanic)',
       },
@@ -1062,11 +1052,6 @@
     Outskirts: {
       displayName: {
         en: 'Outskirts to Reserve and Shoreline (Priscillu)',
-      },
-    },
-    'Checkpoint Fence': {
-      displayName: {
-        en: 'Checkpoint Fence to Woods and Shoreline (Priscillu)',
       },
     },
     Nakatani_stairs_free_exit: {

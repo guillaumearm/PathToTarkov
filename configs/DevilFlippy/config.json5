@@ -608,7 +608,7 @@
       E4: 'LotusHideout',
       E7: 'ExpoCPFlea',
       E7_car: 'StreetsCarToLabs',
-      E8_yard: 'PainterHideout',
+      scav_e7: 'PainterHideout',
       E9_sniper: 'KlimovStreet',
       scav_e1: 'BasementDescent',
       scav_e5: 'RequisitionsHideout',
@@ -848,7 +848,7 @@
         fr: 'ZB-1012 vers Usine - Prapor/Svetlana/Evelyn (Planque)',
       },
     },
-    'ZB-1013': {
+    EXFIL_ZB013: {
       displayName: {
         en: 'ZB-1013 to ZB-016',
         fr: 'ZB-1013 vers ZB-016',
@@ -968,7 +968,7 @@
         fr: "Bouche d'égout vers Littoral - Peacekeeper",
       },
     },
-    EXFIL_BUNKER_D2: {
+    EXFIL_Bunker_D2: {
       displayName: {
         en: 'D-2 to Shoreline - Peacekeeper',
         fr: 'D-2 vers Littoral - Peacekeeper',
@@ -1058,7 +1058,7 @@
         fr: 'Pont ferroviaire - Ref',
       },
     },
-    ' V-ex_light': {
+    ' V-Ex_light': {
       displayName: {
         en: 'Road to Military Base V-Ex',
         fr: 'Véhicule vers la base militaire',
@@ -1070,7 +1070,7 @@
         fr: 'Sentier vers litorral',
       },
     },
-    Coastal_South_road: {
+    Coastal_South_Road: {
       displayName: {
         en: 'Southern Road to Shoreline',
         fr: 'Éboulement route sud vers Littoral',
@@ -1154,9 +1154,9 @@
         fr: "Véhicule de l'avenue Primorsky vers labo",
       },
     },
-    E8: {
+    scav_e7: {
       displayName: {
-        en: 'Cardinal Apartment Complex - The Painter',
+        en: 'Cardinal Apartment Complex Parking - The Painter',
         fr: "Parking du complexe d'appartements Cardinal - The Painter",
       },
     },

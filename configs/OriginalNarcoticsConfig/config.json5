@@ -1164,7 +1164,7 @@
         en: 'North UN Roadblock (Customs, RUAF Roadblock*)',
       },
     },
-    'Factory gate': {
+    'Factory Gate': {
       displayName: {
         en: 'Factory Gate (Customs, Old Gas Gate)',
       },
@@ -1299,7 +1299,7 @@
         en: 'Northern Checkpoint (Woods/Customs)',
       },
     },
-    ' V-ex_light': {
+    ' V-Ex_light': {
       displayName: {
         en: 'Military Base SUV (Reserve, CP Fence)',
       },
@@ -1309,7 +1309,7 @@
         en: 'Path to Shoreline',
       },
     },
-    Coastal_South_road: {
+    Coastal_South_Road: {
       displayName: {
         en: 'Southern Road (Shoreline, Ruined Road)',
       },
@@ -1319,7 +1319,7 @@
         en: 'Mountain Pass (Shoreline, Path to Shoreline*)',
       },
     },
-    Tunnel_Shared: {
+    tunnel_shared: {
       displayName: {
         en: 'Side Tunnel (Shoreline, Tunnel)',
       },
@@ -1434,7 +1434,7 @@
         en: 'Ruined House (Hephaestus)',
       },
     },
-    EXFIL_Vent: {
+    EXFIL_vent: {
       displayName: {
         en: 'Manhole (Sally/Streets)',
       },
