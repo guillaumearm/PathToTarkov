@@ -1,8 +1,8 @@
 import { isValidExfilForMap } from './all-exfils';
-import type { ByMap } from './config';
+import type { ByLocale, ByMap } from './config';
 import {
   EMPTY_STASH,
-  isLocalAvailable,
+  isLocaleAvailable,
   type Config,
   type MapName,
   type SpawnConfig,
@@ -47,6 +47,18 @@ const checkAccessViaErrors = (
   accessVia.forEach(offraidPosition => {
     if (!config.infiltrations[offraidPosition]) {
       errors.push(`wrong ${field}: "${offraidPosition}" is not a valid offraid position`);
+    }
+  });
+
+  return errors;
+};
+
+const checkLocalesErrors = (byLocale: ByLocale<unknown>, suffixMessage: string): string[] => {
+  const errors: string[] = [];
+
+  Object.keys(byLocale).forEach(locale => {
+    if (!isLocaleAvailable(locale)) {
+      errors.push(`unknown locale "${locale}" found ${suffixMessage}`);
     }
   });
 
@@ -153,6 +165,15 @@ const getErrorsForOffraidPositions = (config: Config, spawnConfig: SpawnConfig):
         }
       });
     });
+  });
+
+  // check offraidPosition displayName locales
+  Object.keys(config.offraid_positions ?? {}).forEach(offraidPositionName => {
+    const displayNameByLocale = config.offraid_positions?.[offraidPositionName]?.displayName ?? {};
+
+    errors.push(
+      ...checkLocalesErrors(displayNameByLocale, `for offraid position "${offraidPositionName}"`),
+    );
   });
 
   return errors;
@@ -360,7 +381,7 @@ const getErrorsForGeneralConfig = (config: Config): string[] => {
 
   // check for wrong locale on `debug_exfiltrations_tooltips_locale`
   const debugTooltipsLocale = config.debug_exfiltrations_tooltips_locale;
-  if (debugTooltipsLocale && !isLocalAvailable(debugTooltipsLocale)) {
+  if (debugTooltipsLocale && !isLocaleAvailable(debugTooltipsLocale)) {
     errors.push(
       `wrong locale "${debugTooltipsLocale}" set to "debug_exfiltrations_tooltips_locale"`,
     );
@@ -419,6 +440,12 @@ const getErrorsForSpawnConfig = (spawnConfig: SpawnConfig): string[] => {
   return errors;
 };
 
+const getWarningsForSpawnConfig = (spawnConfig: SpawnConfig): string[] => {
+  const warnings: string[] = [];
+  void spawnConfig;
+  return warnings;
+};
+
 export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigValidationResult => {
   const errors: string[] = [];
   const warnings: string[] = [];
@@ -464,6 +491,7 @@ export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigV
 
   // 10. check the spawn config
   errors.push(...getErrorsForSpawnConfig(spawnConfig));
+  warnings.push(...getWarningsForSpawnConfig(spawnConfig));
 
   return {
     errors,

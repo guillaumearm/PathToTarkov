@@ -69,7 +69,7 @@ export const INDEXED_AVAILABLE_LOCALES: AvailableLocales<true> = {
   tu: true,
 };
 
-export const isLocalAvailable = (givenLocale: string): boolean => {
+export const isLocaleAvailable = (givenLocale: string): boolean => {
   const availableLocales: Record<string, true | undefined> = INDEXED_AVAILABLE_LOCALES;
   const locale = givenLocale.trim().toLowerCase();
   return Boolean(availableLocales[locale]);
