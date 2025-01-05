@@ -12,7 +12,7 @@ namespace PTT.UI;
 
 public class ExfilPrompt(ExfiltrationPoint Exfil)
 {
-    private bool _exfiltrated = false;
+    private bool _exfiltrated = false; // when player extracted or transited
     private bool _voted = false; // when vote is confirmed
     private ExfilTarget _selectedExfilTarget = null; // used to check is auto-cancel vote is needed
     private Action _actionToExecuteOnConfirm = null;
@@ -116,6 +116,11 @@ public class ExfilPrompt(ExfiltrationPoint Exfil)
 
     public OnActionsAppliedResult Render()
     {
+        if (_exfiltrated)
+        {
+            return null;
+        }
+
         string exitName = Exfil.Settings.Name;
         if (!Plugin.ExfilsTargetsService.ExfilsTargets.data.TryGetValue(exitName, out List<ExfilTarget> exfilTargets))
         {
