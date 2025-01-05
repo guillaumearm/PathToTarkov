@@ -1,4 +1,4 @@
-import { isValidExfilForMap } from './all-exfils';
+import { isValidExfil, isValidExfilForMap } from './all-exfils';
 import type { ByLocale, ByMap } from './config';
 import {
   EMPTY_STASH,
@@ -252,8 +252,14 @@ const getErrorsForExfils = (config: Config): string[] => {
   // check exfiltrations_config displayName locales
   Object.keys(config.exfiltrations_config ?? {}).forEach(extractName => {
     const displayNameByLocale = config.exfiltrations_config?.[extractName]?.displayName ?? {};
-
     errors.push(...checkLocalesErrors(displayNameByLocale, `for extract "${extractName}"`));
+  });
+
+  // check exfiltrations_config extractName validity
+  Object.keys(config.exfiltrations_config ?? {}).forEach(extractName => {
+    if (!isValidExfil(extractName)) {
+      errors.push(`invalid extract name "${extractName}" found in "exfiltrations_config'`);
+    }
   });
 
   return errors;

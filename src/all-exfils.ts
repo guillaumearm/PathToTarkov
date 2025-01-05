@@ -161,3 +161,11 @@ export const isValidExfilForMap = (mapName: string, exfilName: string): boolean 
   const exfils = ALL_EXFILS[mapName] ?? [];
   return exfils.includes(exfilName);
 };
+
+export const isValidExfil = (exfilName: string): boolean => {
+  const found = Object.keys(ALL_EXFILS).find(mapName => {
+    return isValidExfilForMap(mapName, exfilName);
+  });
+
+  return Boolean(found);
+};
