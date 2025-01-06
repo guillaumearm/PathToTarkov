@@ -1,5 +1,5 @@
 import type { IBodyHealth, IGlobals } from '@spt/models/eft/common/IGlobals';
-import type { IExit, ILocationBase } from '@spt/models/eft/common/ILocationBase';
+import type { IExit, ILocationBase, ISpawnPointParam } from '@spt/models/eft/common/ILocationBase';
 import type { ILogger } from '@spt/models/spt/utils/ILogger';
 import type { ConfigServer } from '@spt/servers/ConfigServer';
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
@@ -26,13 +26,14 @@ import {
   isPlayerSpawnPoint,
   mutateLocales,
   PTT_INFILTRATION,
+  rejectPlayerCategory,
 } from './helpers';
 
 import { StashController } from './stash-controller';
 import { TradersController } from './traders-controller';
 import type { DependencyContainer } from 'tsyringe';
 import type { LocationController } from '@spt/controllers/LocationController';
-import { deepClone, shuffle } from './utils';
+import { deepClone, isNotUndefined, shuffle } from './utils';
 import { resolveMapNameFromLocation } from './map-name-resolver';
 import type {
   ILocationsGenerateAllResponse,
@@ -593,9 +594,17 @@ export class PathToTarkovController {
   }
 
   private removePlayerSpawnsForLocation(locationBase: ILocationBase): void {
-    locationBase.SpawnPointParams = locationBase.SpawnPointParams.filter(params => {
-      return !isPlayerSpawnPoint(params);
-    });
+    const newSpawnPoints: ISpawnPointParam[] = locationBase.SpawnPointParams.map(spawn => {
+      const newSpawn = rejectPlayerCategory(spawn);
+
+      if (newSpawn.Categories.length === 0) {
+        return undefined;
+      }
+
+      return newSpawn;
+    }).filter(isNotUndefined);
+
+    locationBase.SpawnPointParams = newSpawnPoints;
   }
 
   private updateSpawnPoints(locationBase: ILocationBase, sessionId: string): void {

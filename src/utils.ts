@@ -142,6 +142,10 @@ export const ensureArray = <T>(x: T | T[]): T[] => {
   return [x];
 };
 
+export const isNotUndefined = <T>(x: T | undefined): x is T => {
+  return x !== undefined;
+};
+
 /**
  * Mongo Ids
  */
