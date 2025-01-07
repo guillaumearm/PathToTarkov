@@ -11,6 +11,7 @@ using Fika.Core.Coop.HostClasses;
 using Fika.Core.Coop.ClientClasses;
 using Fika.Core.Coop.Utils;
 using JsonType;
+using System.Reflection;
 
 namespace PTT.Services;
 
@@ -55,6 +56,11 @@ public static class CustomExfilServiceFika
 
     public static void TransitTo(ExfilTarget exfilTarget)
     {
+        if (FikaBackendUtils.IsDedicated)
+        {
+            DedicatedTransitTo(exfilTarget);
+            return;
+        }
         Logger.Info($"started transit on '{exfilTarget.GetCustomExitName()}'");
 
         CoopGame coopGame = (CoopGame)Singleton<IFikaGame>.Instance;
@@ -92,6 +98,70 @@ public static class CustomExfilServiceFika
         coopGame.Extract(coopPlayer, null, transit);
 
         Logger.Info($"(FIKA) transit done for profile '${coopPlayer.ProfileId}'");
+    }
+
+    private static void DedicatedTransitTo(ExfilTarget exfilTarget)
+    {
+        Logger.Info($"started dedicated transit on '{exfilTarget.GetCustomExitName()}'");
+
+        CoopGame coopGame = (CoopGame)Singleton<IFikaGame>.Instance;
+        CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
+
+        if (coopGame == null)
+        {
+            Logger.Error($"(FIKA dedi) cannot transit because no CoopGame found");
+            return;
+        }
+
+        if (coopPlayer == null)
+        {
+            Logger.Error($"(FIKA dedi) cannot transit because no CoopPlayer found");
+            return;
+        }
+
+        // 1. Create the transit point
+        TransitPoint transit = Transit.Create(exfilTarget);
+
+        // 2. Register the transit point
+        if (!RegisterTransitPoint(transit))
+        {
+            Logger.Error($"(FIKA dedi) cannot register the transit point");
+            return;
+        }
+
+        // 3. set some needed properties
+        coopGame.ExitStatus = ExitStatus.Transit;
+        coopGame.ExitLocation = exfilTarget.exitName;
+        coopGame.ExtractedPlayers.Add(coopPlayer.NetId);
+
+        if (SetFikaBackendUtilsIsTransit(true))
+        {
+            Logger.Warning($"(FIKA dedi) cannot set FikaBackendUtils.IsTransit to true");
+        }
+
+        // 4. Save the exfil target
+        Plugin.ExfilsTargetsService.SaveExfil(exfilTarget);
+
+        // 5. Stop the game
+        coopGame.Stop(coopPlayer.ProfileId, coopGame.ExitStatus, coopGame.ExitLocation, 0);
+
+        Logger.Info($"(FIKA) transit done for dedicated client");
+    }
+
+    public static bool SetFikaBackendUtilsIsTransit(bool isTransit)
+    {
+        Type targetType = typeof(FikaBackendUtils);
+        PropertyInfo property = targetType.GetProperty("IsTransit", BindingFlags.Public | BindingFlags.Static);
+
+        if (property != null && property.CanWrite)
+        {
+            property.SetValue(null, isTransit); // 'null' because it's a static property
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private static bool RegisterTransitPoint(TransitPoint transit)
