@@ -5,24 +5,11 @@ using System.Reflection;
 using SPT.Reflection.Patching;
 using EFT;
 using EFT.Interactive;
-using HarmonyLib;
 
 namespace PTT.Patches;
 
 internal class InitAllExfiltrationPointsPatch : ModulePatch
 {
-    private static bool NameMatches(LocationExitClass x)
-    {
-        return exitName == x.Name;
-    }
-
-    private static string exitName;
-
-    private static bool RandomRange(ExfiltrationPoint trigger)
-    {
-        return UnityEngine.Random.Range(0f, 100f) <= trigger.Settings.Chance;
-    }
-
     private static bool IsNotScavExfil(ExfiltrationPoint x)
     {
         return x is not ScavExfiltrationPoint || x is SharedExfiltrationPoint;
@@ -41,66 +28,45 @@ internal class InitAllExfiltrationPointsPatch : ModulePatch
     [PatchPostfix]
     protected static void PatchPostfix(ref ExfiltrationControllerClass __instance, MongoID locationId, LocationExitClass[] settings, bool justLoadSettings = false, string disabledScavExits = "", bool giveAuthority = true)
     {
-        ExfiltrationPoint[] source = LocationScene.GetAllObjects<ExfiltrationPoint>(false).ToArray();
-        ExfiltrationPoint[] scavExfilArr = source.Where(new Func<ExfiltrationPoint, bool>(IsScavExfil)).ToArray();
-        ExfiltrationPoint[] pmcExfilArr = source.Where(new Func<ExfiltrationPoint, bool>(IsNotScavExfil)).ToArray();
+        ExfiltrationPoint[] allExfils = LocationScene.GetAllObjects<ExfiltrationPoint>(false).ToArray();
 
-        List<ExfiltrationPoint> pmcExfilList = pmcExfilArr.ToList();
+        EnableScavExfilsForPmc(__instance, allExfils);
+        LoadScavExfilSettings(__instance, locationId, settings, giveAuthority, allExfils);
+    }
 
-        foreach (ExfiltrationPoint scavExfil in scavExfilArr)
+    private static void EnableScavExfilsForPmc(ExfiltrationControllerClass exfilController, ExfiltrationPoint[] allExfils)
+    {
+        IEnumerable<ExfiltrationPoint> scavExfils = allExfils.Where(new Func<ExfiltrationPoint, bool>(IsScavExfil));
+        IEnumerable<ExfiltrationPoint> pmcExfils = allExfils.Where(new Func<ExfiltrationPoint, bool>(IsNotScavExfil));
+
+        List<ExfiltrationPoint> finalExfils = pmcExfils.ToList();
+
+        foreach (ExfiltrationPoint scavExfil in scavExfils)
         {
-            if (!pmcExfilList.Any(k => k.Settings.Name == scavExfil.Settings.Name))
+            if (!pmcExfils.Any(k => k.Settings.Name == scavExfil.Settings.Name))
             {
-                pmcExfilList.Add(scavExfil);
+                Helpers.Logger.Info($"Added scav exfil '{scavExfil.Settings.Name}' for pmc");
+                finalExfils.Add(scavExfil);
             }
         }
 
-        AccessTools.Property(typeof(ExfiltrationControllerClass), "ExfiltrationPoints").SetValue(__instance, pmcExfilList.ToArray());
+        exfilController.ExfiltrationPoints = [.. finalExfils];
+    }
 
-        AccessTools.Property(typeof(ExfiltrationControllerClass), "ScavExfiltrationPoints").SetValue(__instance, source.Where(new Func<ExfiltrationPoint, bool>(IsScavExfil)).Cast<ScavExfiltrationPoint>().ToArray());
-
-        AccessTools.Field(typeof(ExfiltrationControllerClass), "list_0").SetValue(__instance, new List<ScavExfiltrationPoint>(__instance.ScavExfiltrationPoints.Length));
-        AccessTools.Field(typeof(ExfiltrationControllerClass), "list_1").SetValue(__instance, new List<ScavExfiltrationPoint>());
-
-        List<ScavExfiltrationPoint> list_0 = (List<ScavExfiltrationPoint>)AccessTools.Field(typeof(ExfiltrationControllerClass), "list_0").GetValue(__instance);
-        List<ScavExfiltrationPoint> list_1 = (List<ScavExfiltrationPoint>)AccessTools.Field(typeof(ExfiltrationControllerClass), "list_1").GetValue(__instance);
-
-        foreach (ScavExfiltrationPoint scavExfiltrationPoint in __instance.ScavExfiltrationPoints)
+    private static void LoadScavExfilSettings(ExfiltrationControllerClass exfilController, MongoID locationId, LocationExitClass[] settings, bool giveAuthority, ExfiltrationPoint[] allExfils)
+    {
+        foreach (ExfiltrationPoint exfiltrationPoint in exfilController.ExfiltrationPoints)
         {
-            Helpers.Logger.Info("Scav Exfil name = " + scavExfiltrationPoint.Settings.Name);
-            SharedExfiltrationPoint sharedExfiltrationPoint = scavExfiltrationPoint as SharedExfiltrationPoint;
-            if (sharedExfiltrationPoint != null && sharedExfiltrationPoint.IsMandatoryForScavs)
+            if (IsScavExfil(exfiltrationPoint))
             {
-                list_1.Add(scavExfiltrationPoint);
-            }
-            else
-            {
-                list_0.Add(scavExfiltrationPoint);
-            }
-        }
-        AccessTools.Field(typeof(ExfiltrationControllerClass), "list_0").SetValue(__instance, list_0);
-        AccessTools.Field(typeof(ExfiltrationControllerClass), "list_1").SetValue(__instance, list_1);
+                LocationExitClass locationExit = settings.FirstOrDefault(exitClass => exitClass.Name == exfiltrationPoint.Settings.Name);
 
-        UnityEngine.Random.InitState((int)DateTimeOffset.UtcNow.ToUnixTimeSeconds());
-
-        foreach (ExfiltrationPoint exfiltrationPoint in __instance.ExfiltrationPoints)
-        {
-            Helpers.Logger.Info("PMC Exfil name = " + exfiltrationPoint.Settings.Name);
-            exitName = exfiltrationPoint.Settings.Name;
-            LocationExitClass locationExit = settings.FirstOrDefault(new Func<LocationExitClass, bool>(NameMatches));
-            int num = Array.IndexOf(source, exfiltrationPoint) + 1;
-            MongoID mongoID = locationId.Add(num + 1);
-            if (locationExit != null)
-            {
-                exfiltrationPoint.LoadSettings(mongoID, locationExit, giveAuthority);
-                if (!justLoadSettings && !RandomRange(exfiltrationPoint))
+                if (locationExit != null)
                 {
-                    exfiltrationPoint.SetStatusLogged(EExfiltrationStatus.NotPresent, "ExfiltrationController.InitAllExfiltrationPoints-2");
+                    int num = Array.IndexOf(allExfils, exfiltrationPoint) + 1;
+                    MongoID mongoID = locationId.Add(num + 1);
+                    exfiltrationPoint.LoadSettings(mongoID, locationExit, giveAuthority);
                 }
-            }
-            else
-            {
-                exfiltrationPoint.SetStatusLogged(EExfiltrationStatus.NotPresent, "ExfiltrationController.InitAllExfiltrationPoints-3");
             }
         }
     }
