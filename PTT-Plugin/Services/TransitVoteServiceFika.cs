@@ -2,18 +2,20 @@ using System;
 using System.Collections.Generic;
 using Comfort.Common;
 
+using EFT.Communications;
+using InteractableExfilsAPI.Singletons;
+
 using LiteNetLib;
 using Fika.Core.Coop.Components;
 using Fika.Core.Coop.Players;
 using Fika.Core.Networking;
+using Fika.Core.Modding;
+using Fika.Core.Modding.Events;
+using Fika.Core.Coop.Utils;
 
 using PTT.Data;
 using PTT.Helpers;
 using PTT.Packets;
-using Fika.Core.Modding;
-using Fika.Core.Modding.Events;
-using EFT.Communications;
-using InteractableExfilsAPI.Singletons;
 
 namespace PTT.Services;
 
@@ -235,16 +237,41 @@ public static class TransitVoteServiceFika
         InteractableExfilsService.RefreshPrompt();
     }
 
-    private static void PerformLocalExfil()
+    private static ExfilTarget RetrieveFirstVote()
     {
-        if (ExfilAction == null)
+        foreach (var kvp in Votes)
         {
-            Logger.Error("(FIKA) Cannot perform exfil because no action has been set");
-            return;
+            return kvp.Value;
         }
 
-        ExfilAction();
-        ExfilAction = null;
+        return null;
+    }
+
+    private static void PerformLocalExfil()
+    {
+        if (FikaBackendUtils.IsDedicated)
+        {
+            ExfilTarget exfilTarget = RetrieveFirstVote();
+            if (exfilTarget == null)
+            {
+                Logger.Error("(FIKA dedi) Cannot perform exfil because no exil found in Votes dictionary");
+            }
+            else
+            {
+                CustomExfilServiceFika.TransitTo(exfilTarget);
+            }
+        }
+        else
+        {
+            if (ExfilAction == null)
+            {
+                Logger.Error("(FIKA) Cannot perform exfil because no action has been set");
+                return;
+            }
+
+            ExfilAction();
+            ExfilAction = null;
+        }
     }
 
     private static bool IsVoteSuccess()

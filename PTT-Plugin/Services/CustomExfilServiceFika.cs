@@ -102,7 +102,7 @@ public static class CustomExfilServiceFika
 
     private static void DedicatedTransitTo(ExfilTarget exfilTarget)
     {
-        Logger.Info($"started dedicated transit on '{exfilTarget.GetCustomExitName()}'");
+        Logger.Info($"(FIKA dedi) started dedicated transit on '{exfilTarget.GetCustomExitName()}'");
 
         CoopGame coopGame = (CoopGame)Singleton<IFikaGame>.Instance;
         CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
