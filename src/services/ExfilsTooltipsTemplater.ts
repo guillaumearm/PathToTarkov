@@ -59,7 +59,7 @@ export class ExfilsTooltipsTemplater {
                 const parsed = parseExilTargetFromPTTConfig(exfilTarget);
                 return parsed.targetOffraidPosition;
               })
-              .find(Boolean) ?? '';
+              .find(Boolean) ?? ''; // offraid position is empty when only transits are used
 
           const localeName = locale as LocaleName;
           const localeKey = this.localeResolver.retrieveKey(exfilName, localeName);
