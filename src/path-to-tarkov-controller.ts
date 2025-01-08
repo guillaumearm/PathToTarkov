@@ -118,18 +118,12 @@ export class PathToTarkovController {
   }
 
   loaded(config: Config): void {
-    const allLocales = this.db.getTables()?.locales?.global;
+    // const allLocales = this.db.getTables()?.locales?.global;
     const quests = this.db.getTables()?.templates?.quests;
 
     if (!quests) {
       throw new Error('Path To Tarkov: no quests found in db');
     }
-
-    if (!allLocales) {
-      throw new Error('Path To Tarkov: no locales found in db');
-    }
-
-    this.tooltipsTemplater = new ExfilsTooltipsTemplater(allLocales);
 
     this.tradersAvailabilityService.init(quests);
     this.injectTooltipsInLocales(config);
@@ -146,8 +140,6 @@ export class PathToTarkovController {
       disableRunThrough(this.db);
       this.debug('disabled run through in-raid status');
     }
-
-    this.debugExfiltrationsTooltips(config);
   }
 
   setConfig(config: Config, sessionId: string): void {
@@ -238,14 +230,28 @@ export class PathToTarkovController {
     this.updateLocationBaseTransits(locationBase, sessionId);
   }
 
-  private debugExfiltrationsTooltips(config: Config): void {
-    const locale = config.debug_exfiltrations_tooltips_locale;
-    if (!locale || !this.tooltipsTemplater) {
+  debugExfiltrationsTooltips(config: Config): void {
+    const debugLocale = config.debug_exfiltrations_tooltips_locale;
+    if (!debugLocale) {
       return;
     }
 
-    const localeValues = this.tooltipsTemplater.debugTooltipsForLocale(locale, config);
+    if (!this.tooltipsTemplater) {
+      this.tooltipsTemplater = this.createTooltipsTemplater();
+    }
+
+    const localeValues = this.tooltipsTemplater.debugTooltipsForLocale(debugLocale, config);
     this.debug(`debug exfils tooltips => ${JSON.stringify(localeValues, undefined, 2)}`);
+  }
+
+  private createTooltipsTemplater(): ExfilsTooltipsTemplater {
+    const allLocales = this.db.getTables()?.locales?.global;
+
+    if (!allLocales) {
+      throw new Error('Path To Tarkov: no locales found in db');
+    }
+
+    return new ExfilsTooltipsTemplater(allLocales);
   }
 
   // TODO: make it dynamic (aka intercept instead of mutating the db)

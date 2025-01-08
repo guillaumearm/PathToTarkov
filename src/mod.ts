@@ -147,12 +147,11 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     }
   }
 
-  public postDBLoad(container: DependencyContainer): void {
+  public postDBLoad(_container: DependencyContainer): void {
     if (this.userConfig.runUninstallProcedure) {
       return;
     }
-
-    void container;
+    this.pathToTarkovController.debugExfiltrationsTooltips(this.config);
   }
 
   public postSptLoad(container: DependencyContainer): void {
@@ -186,6 +185,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.executeOnStartAPICallbacks = executeOnStartAPICallbacks;
 
     this.pathToTarkovController.loaded(this.config);
+    this.pathToTarkovController.debugExfiltrationsTooltips(this.config);
     this.logger.success(`===> Successfully loaded ${getModDisplayName(this.packageJson, true)}`);
   }
 }
