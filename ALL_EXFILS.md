@@ -53,7 +53,7 @@
 ## Woods
 |identifier|description|mapgenie.io|
 |----------|-----------|-----------|
-| "Factory Gate" | Friendship Bridge (Co-Op) | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24856) |
+| "Factory Gate" | Friendship Bridge (Co-Op) | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=424607) |
 | "RUAF Gate" | RUAF Gate | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24857) |
 | "ZB-016" | ZB-016 | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24858) |
 | "ZB-014" | ZB-014 | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24862) |
