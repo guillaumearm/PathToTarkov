@@ -10,7 +10,7 @@ import type { SaveServer } from '@spt/servers/SaveServer';
 import type { StaticRouterModService } from '@spt/services/mod/staticRouter/StaticRouterModService';
 
 import { createPathToTarkovAPI } from './api';
-import type { Config, MapName, SpawnConfig, UserConfig } from './config';
+import type { Config, SpawnConfig, UserConfig } from './config';
 import {
   CONFIG_FILENAME,
   CONFIGS_DIR,
@@ -32,10 +32,8 @@ import { fixRepeatableQuests } from './fix-repeatable-quests';
 
 import { analyzeConfig } from './config-analysis';
 import { TradersAvailabilityService } from './services/TradersAvailabilityService';
-import type { ExfilsTargetsRequest } from './exfils-targets';
-import { getExfilsTargets } from './exfils-targets';
-import { resolveMapNameFromLocation } from './map-name-resolver';
 import type { JsonUtil } from '@spt/utils/JsonUtil';
+import { registerCustomRoutes } from './routes';
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;
@@ -123,23 +121,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     eventWatcher.onEndOfRaid(payload => endOfRaidController.end(payload));
     eventWatcher.register(createStaticRoutePeeker(staticRouter), container);
 
-    // TODO: refactor this part
-    staticRouter.registerStaticRouter(
-      'Trap-PathToTarkov-ExfilsTargets',
-      [
-        {
-          url: '/PathToTarkov/ExfilsTargets',
-          action: async (_url, info: ExfilsTargetsRequest, sessionId): Promise<string> => {
-            this.debug(`/PathToTarkov/ExfilsTargets called for location "${info.locationId}"`);
-            const config = this.pathToTarkovController.getConfig(sessionId);
-            const mapName = resolveMapNameFromLocation(info.locationId);
-            const response = getExfilsTargets(config, mapName as MapName);
-            return JSON.stringify(response);
-          },
-        },
-      ],
-      '',
-    );
+    registerCustomRoutes(staticRouter, this.pathToTarkovController);
 
     if (this.config.traders_access_restriction) {
       fixRepeatableQuests(container);

@@ -127,13 +127,7 @@ public class ExfilPrompt(ExfiltrationPoint Exfil)
             return null;
         }
 
-        string exitName = Exfil.Settings.Name;
-        if (!Plugin.ExfilsTargetsService.ExfilsTargets.data.TryGetValue(exitName, out List<ExfilTarget> exfilTargets))
-        {
-            Logger.Warning($"cannot retrieve exfil targets for exfil '{exitName}'");
-            return null;
-        }
-
+        List<ExfilTarget> exfilTargets = Plugin.CurrentLocationDataService.GetExfilTargets(Exfil);
         if (exfilTargets == null || !exfilTargets.Any())
         {
             // no exfilTargets means the exfil is not available for the player (this is not supposed to be an error)

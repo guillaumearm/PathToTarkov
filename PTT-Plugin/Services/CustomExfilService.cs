@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 using PTT.Helpers;
 using PTT.Data;
+using PTT.Patches;
 
 namespace PTT.Services;
 
@@ -36,7 +37,7 @@ public static class CustomExfilService
             return;
         }
 
-        Plugin.ExfilsTargetsService.SaveExfil(exfilTarget);
+        CurrentExfilTargetService.SaveExfil(exfilTarget);
 
         // This is needed to validate extract quests like `Burning Rubber`
         // The ptt custom ptt exfil target name will be used to override the exitName in the LocalRaidEndedPatch
@@ -44,7 +45,7 @@ public static class CustomExfilService
 
         float delay = 0f;
         localGame.Stop(player.ProfileId, ExitStatus.Survived, exitName, delay);
-        Logger.Info($"local game stopped for profile '${player.ProfileId}'");
+        Logger.Info($"local game stopped for profile '{player.ProfileId}'");
     }
 
     public static void TransitTo(ExfilTarget exfilTarget, Action onTransitDone)
@@ -61,7 +62,7 @@ public static class CustomExfilService
 
         TransitPoint transit = Transit.Create(exfilTarget);
         Logger.Info($"started transit on '{transit.parameters.name}'");
-        Plugin.ExfilsTargetsService.SaveExfil(exfilTarget);
+        CurrentExfilTargetService.SaveExfil(exfilTarget);
 
         if (!TransitControllerAbstractClass.Exist(out GClass1642 vanillaTransitController))
         {
@@ -89,7 +90,7 @@ public static class CustomExfilService
 
         vanillaTransitController.Transit(transit, playersCount, transitHash, profiles, player);
         onTransitDone();
-        Logger.Info($"transit done for profile '${player.ProfileId}'");
+        Logger.Info($"transit done for profile '{player.ProfileId}'");
     }
 
     public static void CancelTransitVote(string cancelMessage)

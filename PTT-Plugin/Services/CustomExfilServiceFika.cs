@@ -15,7 +15,7 @@ using System.Reflection;
 
 namespace PTT.Services;
 
-public static class CustomExfilServiceFika
+internal static class CustomExfilServiceFika
 {
     public static void ExtractTo(ExfiltrationPoint exfil, ExfilTarget exfilTarget)
     {
@@ -37,7 +37,7 @@ public static class CustomExfilServiceFika
         }
 
         // 1. Save the exfil target
-        Plugin.ExfilsTargetsService.SaveExfil(exfilTarget);
+        CurrentExfilTargetService.SaveExfil(exfilTarget);
 
         // 2. Set the ExitLocation (needed to validate extract quests like `Burning Rubber`)
         coopGame.ExitLocation = exfilTarget.exitName;
@@ -89,7 +89,7 @@ public static class CustomExfilServiceFika
         }
 
         // 3. Save the exfil target
-        Plugin.ExfilsTargetsService.SaveExfil(exfilTarget);
+        CurrentExfilTargetService.SaveExfil(exfilTarget);
 
         // 4. Set the ExitLocation
         coopGame.ExitLocation = exfilTarget.exitName;
@@ -97,7 +97,7 @@ public static class CustomExfilServiceFika
         // 5. Trigger extract with transit
         coopGame.Extract(coopPlayer, null, transit);
 
-        Logger.Info($"(FIKA) transit done for profile '${coopPlayer.ProfileId}'");
+        Logger.Info($"(FIKA) transit done for profile '{coopPlayer.ProfileId}'");
     }
 
     private static void DedicatedTransitTo(ExfilTarget exfilTarget)
@@ -140,7 +140,7 @@ public static class CustomExfilServiceFika
         }
 
         // 4. Save the exfil target
-        Plugin.ExfilsTargetsService.SaveExfil(exfilTarget);
+        CurrentExfilTargetService.SaveExfil(exfilTarget);
 
         // 5. Stop the game
         coopGame.Stop(coopPlayer.ProfileId, coopGame.ExitStatus, coopGame.ExitLocation, 0);

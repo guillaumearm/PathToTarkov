@@ -9,8 +9,11 @@ import { EMPTY_STASH, SLOT_ID_HIDEOUT, SLOT_ID_LOCKED_STASH, VANILLA_STASH_IDS }
 import type { IItem } from '@spt/models/eft/common/tables/IItem';
 import type { AllLocalesInDb } from './services/LocaleResolver';
 
+export const isWildcardAccessVia = (access_via: AccessVia): boolean =>
+  access_via === '*' || access_via[0] === '*';
+
 export function checkAccessVia(access_via: AccessVia, value: string): boolean {
-  return access_via === '*' || access_via[0] === '*' || access_via.includes(value);
+  return isWildcardAccessVia(access_via) || access_via.includes(value);
 }
 
 const getPosition = (pos: SpawnPoint['Position']): PositionXYZ => {

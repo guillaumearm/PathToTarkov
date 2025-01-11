@@ -20,6 +20,35 @@ export const resolveMapNameFromLocation = (location: string): string => {
   return mapName ?? locationName;
 };
 
+/**
+ * Replace `factory4_night` by `factory_day`
+ * Replace `sandbox_high` by `sandbox`
+ */
+const ensureNoSpecialMaps = (locationId: string): string => {
+  if (locationId === 'factory4_night') {
+    return 'factory4_day';
+  }
+
+  if (locationId === 'sandbox_high') {
+    return 'sandbox';
+  }
+
+  return locationId;
+};
+
+/**
+ * Check that 2 locations are the same.
+ *
+ * Please note that `factory4_day` and `factory4_night` are considered as same map here.
+ * There is also `sandbox` and `sandbox_high` (obviously)
+ */
+export const isSameMap = (locationA: string, locationB: string): boolean => {
+  const resolvedLocationA = ensureNoSpecialMaps(resolveMapNameFromLocation(locationA));
+  const resolvedLocationB = ensureNoSpecialMaps(resolveMapNameFromLocation(locationB));
+
+  return resolvedLocationA === resolvedLocationB;
+};
+
 const LOCATION_IDS: Record<string, string> = {
   customs: 'bigmap',
   factory: 'factory4_day',

@@ -23,11 +23,13 @@ internal class LocalRaidStartedPatch() : ModulePatch
 
         if (__result != null)
         {
-            __result = HandleTask(__result);
+            __result = HandleLocalSettingsTask(__result);
         }
+
+        Plugin.InitRaid();
     }
 
-    private static async Task<LocalSettings> HandleTask(Task<LocalSettings> originalTask)
+    private static async Task<LocalSettings> HandleLocalSettingsTask(Task<LocalSettings> originalTask)
     {
         try
         {

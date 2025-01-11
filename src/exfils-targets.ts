@@ -1,13 +1,23 @@
 import type { Config, MapName } from './config';
-import { resolveLocationIdFromMapName, resolveMapNameFromLocation } from './map-name-resolver';
+import { checkAccessVia, isWildcardAccessVia } from './helpers';
+import {
+  isSameMap,
+  resolveLocationIdFromMapName,
+  resolveMapNameFromLocation,
+} from './map-name-resolver';
 
 // Warning: This type should be the same than the corresponding client type
 export type ExfilTarget = {
-  exitName: string;
-  isTransit: boolean;
-  transitMapId: string; // transit only
-  transitSpawnPointId: string; // transit only
-  offraidPosition: string; // empty on transit
+  // used for exfils
+  readonly exitName: string;
+  readonly isTransit: boolean;
+  readonly transitMapId: string; // transit only
+  readonly transitSpawnPointId: string; // transit only
+  readonly offraidPosition: string; // empty on transit
+
+  // for extract tooltips display
+  readonly nextMaps: string[];
+  readonly nextTraders: string[];
 };
 
 // Warning: This type should be the same than the corresponding client type
@@ -15,24 +25,12 @@ export type ExfilsTargets = {
   [exitName: string]: ExfilTarget[];
 };
 
-// Warning: This type should be the same than the corresponding client type
-export type ExfilsTargetsResponse = {
-  data: ExfilsTargets;
-};
-
-// Warning: This type should be the same than the corresponding client type
-export type ExfilsTargetsRequest = {
-  locationId: string;
-};
-
-export const getExfilsTargets = (config: Config, mapName: MapName): ExfilsTargetsResponse => {
-  const response: ExfilsTargetsResponse = {
-    data: {},
-  };
+export const getExfilsTargets = (config: Config, mapName: MapName): ExfilsTargets => {
+  const result: ExfilsTargets = {};
 
   const exfilsConfig = config.exfiltrations[mapName];
   if (!exfilsConfig) {
-    return response;
+    return result;
   }
 
   void Object.keys(exfilsConfig).forEach(exfilName => {
@@ -41,17 +39,83 @@ export const getExfilsTargets = (config: Config, mapName: MapName): ExfilsTarget
 
       return {
         exitName: exfilName,
-        isTransit: Boolean(!parsed.targetOffraidPosition),
+        isTransit: Boolean(parsed.transitTargetMapName),
         offraidPosition: parsed.targetOffraidPosition ?? '',
         transitMapId: resolveLocationIdFromMapName(parsed.transitTargetMapName ?? ''),
         transitSpawnPointId: parsed.transitTargetSpawnPointId ?? '',
+        nextMaps: getNextMaps(config, parsed, mapName),
+        nextTraders: getNextTraders(config, parsed),
       };
     });
 
-    response.data[exfilName] = targets;
+    result[exfilName] = targets;
   });
 
-  return response;
+  return result;
+};
+
+const getNextMaps = (
+  config: Config,
+  parsedExfilTarget: ParsedExfilTarget,
+  currentMapName: string,
+): string[] => {
+  const transitMapName = parsedExfilTarget.transitTargetMapName;
+  const offraidPosition = parsedExfilTarget.targetOffraidPosition;
+
+  if (transitMapName) {
+    if (isSameMap(currentMapName, transitMapName)) {
+      return [];
+    }
+
+    return [resolveLocationIdFromMapName(transitMapName)];
+  }
+
+  if (offraidPosition) {
+    const locationIds = Object.keys(config.infiltrations[offraidPosition] ?? {})
+      .filter(
+        mapName =>
+          mapName !== 'sandbox_high' &&
+          mapName !== 'factory4_night' &&
+          !isSameMap(currentMapName, mapName),
+      )
+      .map(resolveLocationIdFromMapName);
+
+    return locationIds;
+  }
+
+  return ['PTT_ERROR_GET_NEXT_MAPS'];
+};
+
+const getNextTraders = (config: Config, parsedExfilTarget: ParsedExfilTarget): string[] => {
+  if (!config.traders_access_restriction) {
+    return [];
+  }
+
+  if (parsedExfilTarget.transitTargetMapName) {
+    return [];
+  }
+
+  const offraidPosition = parsedExfilTarget.targetOffraidPosition;
+  if (offraidPosition) {
+    const traderIds: string[] = Object.keys(config.traders_config).filter(traderId => {
+      const traderConfig = config.traders_config[traderId];
+
+      if (!checkAccessVia(traderConfig.access_via, offraidPosition)) {
+        return false;
+      }
+
+      // do not show traders that are always enabled
+      if (isWildcardAccessVia(traderConfig.access_via)) {
+        return false;
+      }
+
+      return true;
+    });
+
+    return traderIds;
+  }
+
+  return ['PTT_ERROR_GET_NEXT_TRADERS'];
 };
 
 type ParsedExfilTarget = {
@@ -109,6 +173,9 @@ export const parseExfilTargetFromExitName = (
   };
 };
 
+/**
+ * @param exfilTargetFromConfig e.g. "MY_OFFRAID_POSITION" for extract and "bigmap.MY_SPAWN_POINT" for transit
+ */
 export const parseExilTargetFromPTTConfig = (exfilTargetFromConfig: string): ParsedExfilTarget => {
   const splitted = exfilTargetFromConfig.split('.');
 

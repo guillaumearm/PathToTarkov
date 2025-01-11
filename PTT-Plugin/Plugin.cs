@@ -14,8 +14,7 @@ public class Plugin : BaseUnityPlugin
     public static bool FikaIsInstalled { get; private set; }
     private static bool InteractableExfilsApiIsInstalled { get; set; }
     private static bool InteractableExfilsApiIsOutdated { get; set; } = false;
-    private static bool KaenoTraderScrollingIsInstalled { get; set; }
-    public static ExfilsTargetsService ExfilsTargetsService;
+    public static CurrentLocationDataService CurrentLocationDataService;
     private const string IE_API_PLUGIN_NAME = "Jehree.InteractableExfilsAPI";
     private const string IE_API_MIN_VERSION = "1.5.0";
 
@@ -27,11 +26,10 @@ public class Plugin : BaseUnityPlugin
 
         FikaIsInstalled = Chainloader.PluginInfos.ContainsKey("com.fika.core");
         InteractableExfilsApiIsInstalled = Chainloader.PluginInfos.ContainsKey(IE_API_PLUGIN_NAME);
-        KaenoTraderScrollingIsInstalled = Chainloader.PluginInfos.ContainsKey("com.kaeno.TraderScrolling");
 
-        ExfilsTargetsService = new ExfilsTargetsService();
+        CurrentLocationDataService = new CurrentLocationDataService();
 
-        if (KaenoTraderScrollingIsInstalled)
+        if (Chainloader.PluginInfos.ContainsKey("com.kaeno.TraderScrolling"))
         {
             Helpers.Logger.Info($"Kaeno-TraderScrolling detected");
             new Patches.KaenoTraderScrollingCompatPatch().Enable();
@@ -45,6 +43,9 @@ public class Plugin : BaseUnityPlugin
         new Patches.LocalRaidStartedPatch().Enable();
         new Patches.LocalRaidEndedPatch().Enable();
         new Patches.MenuScreenAwakePatch().Enable();
+        new Patches.ExitTimerPanelSetTimerTextActivePatch().Enable();
+        new Patches.ExitTimerPanelUpdateVisitedStatusPatch().Enable();
+        new Patches.ExtractionTimersPanelSwitchTimersPatch().Enable();
 
         Helpers.Logger.Info($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
     }
@@ -74,6 +75,29 @@ public class Plugin : BaseUnityPlugin
         {
             Helpers.Logger.Error($"Jehree.InteractableExfilsAPI plugin is missing");
         }
+    }
+
+    public static void InitRaid()
+    {
+        if (FikaIsInstalled)
+        {
+            TransitVoteServiceFika.InitRaid();
+        }
+
+        if (CurrentLocationDataService != null)
+        {
+            CurrentLocationDataService.Init();
+            Helpers.Logger.Info("Initialized CurrentLocationDataService");
+        }
+        else
+        {
+            Helpers.Logger.Error("CurrentLocationDataService instance not found");
+        }
+
+        CurrentExfilTargetService.Init();
+        DisplayInteractableExfilsAPIWarning();
+
+        Helpers.Logger.Info("Raid initialized!");
     }
 
     public static void DisplayInteractableExfilsAPIWarning()

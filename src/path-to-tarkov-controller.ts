@@ -89,7 +89,7 @@ export class PathToTarkovController {
     configServer: ConfigServer,
     private readonly getRaidCache: (sessionId: string) => RaidCache | null,
     private readonly logger: ILogger,
-    private readonly debug: (data: string) => void,
+    public readonly debug: (data: string) => void,
   ) {
     this.getConfig = sessionId => {
       const existingConfig = this.configCache[sessionId];

@@ -71,7 +71,14 @@ export class ExfilsTooltipsTemplater {
             offraidPosition: foundTargetOffraidPosition,
           };
 
-          localeValues[localeKey] = this.computeLocaleValue(config, computeParams);
+          const computedLocaleValue = this.computeLocaleValue(config, computeParams);
+
+          // Warning: there is some duplicated locales because BSG ("EXFIL_Train" and "RUAF Roadblock")
+          // override vanilla locales (still used for Dynamic Maps integration)
+          localeValues[localeKey] = computedLocaleValue;
+
+          // unique exfil locales by map (re-used by the client)
+          localeValues[`${mapName}.${exfilName}`] = computedLocaleValue;
         });
       });
     });

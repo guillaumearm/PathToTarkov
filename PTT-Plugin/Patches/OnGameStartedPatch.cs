@@ -12,28 +12,26 @@ internal class OnGameStartedPatch() : ModulePatch
         return typeof(GameWorld).GetMethod(nameof(GameWorld.OnGameStarted));
     }
 
-    [PatchPrefix]
-    public static bool PatchPrefix()
+    [PatchPostfix]
+    public static void Patch()
     {
-        if (Plugin.FikaIsInstalled)
-        {
-            TransitVoteServiceFika.InitRaid();
-        }
+        // if (Plugin.FikaIsInstalled)
+        // {
+        //     TransitVoteServiceFika.InitRaid();
+        // }
 
-        InitExfilsTargetsService();
-        Plugin.DisplayInteractableExfilsAPIWarning();
-        return true;
-    }
+        // if (Plugin.CurrentLocationDataService != null)
+        // {
+        //     Plugin.CurrentLocationDataService.Init();
+        //     Helpers.Logger.Info("Initialized CurrentLocationDataService");
+        // }
+        // else
+        // {
+        //     Helpers.Logger.Error("CurrentLocationDataService instance not found");
+        // }
 
-    private static void InitExfilsTargetsService()
-    {
-        if (Plugin.ExfilsTargetsService != null)
-        {
-            Plugin.ExfilsTargetsService.Init();
-        }
-        else
-        {
-            Helpers.Logger.Error("ExfilsTargetsService instance not found");
-        }
+        // CurrentExfilTargetService.Init();
+        // Plugin.DisplayInteractableExfilsAPIWarning();
+        Helpers.Logger.Info("OnGameStartedPatch executed!");
     }
 }

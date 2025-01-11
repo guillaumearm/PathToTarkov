@@ -7,7 +7,7 @@ using PTT.UI;
 
 namespace PTT.Services;
 
-public class ExfilPromptService(InteractableExfilsService ieService)
+internal class ExfilPromptService(InteractableExfilsService ieService)
 {
 
     private Dictionary<string, ExfilPrompt> IndexedExfilPrompts = [];

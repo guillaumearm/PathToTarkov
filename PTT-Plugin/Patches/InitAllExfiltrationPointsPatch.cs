@@ -28,16 +28,16 @@ internal class InitAllExfiltrationPointsPatch : ModulePatch
     [PatchPostfix]
     protected static void PatchPostfix(ref ExfiltrationControllerClass __instance, MongoID locationId, LocationExitClass[] settings, bool justLoadSettings = false, string disabledScavExits = "", bool giveAuthority = true)
     {
-        ExfiltrationPoint[] allExfils = LocationScene.GetAllObjects<ExfiltrationPoint>(false).ToArray();
-
-        EnableScavExfilsForPmc(__instance, allExfils);
-        LoadScavExfilSettings(__instance, locationId, settings, giveAuthority, allExfils);
+        ExfiltrationPoint[] allExfils = GetAllExfilsForPmc();
+        __instance.ExfiltrationPoints = allExfils;
+        LoadExfilSettings(allExfils, locationId, settings, giveAuthority);
     }
 
-    private static void EnableScavExfilsForPmc(ExfiltrationControllerClass exfilController, ExfiltrationPoint[] allExfils)
+    private static ExfiltrationPoint[] GetAllExfilsForPmc()
     {
-        IEnumerable<ExfiltrationPoint> scavExfils = allExfils.Where(new Func<ExfiltrationPoint, bool>(IsScavExfil));
-        IEnumerable<ExfiltrationPoint> pmcExfils = allExfils.Where(new Func<ExfiltrationPoint, bool>(IsNotScavExfil));
+        ExfiltrationPoint[] allOriginalExfils = LocationScene.GetAllObjects<ExfiltrationPoint>(false).ToArray();
+        IEnumerable<ExfiltrationPoint> scavExfils = allOriginalExfils.Where(new Func<ExfiltrationPoint, bool>(IsScavExfil));
+        IEnumerable<ExfiltrationPoint> pmcExfils = allOriginalExfils.Where(new Func<ExfiltrationPoint, bool>(IsNotScavExfil));
 
         List<ExfiltrationPoint> finalExfils = pmcExfils.ToList();
 
@@ -50,23 +50,20 @@ internal class InitAllExfiltrationPointsPatch : ModulePatch
             }
         }
 
-        exfilController.ExfiltrationPoints = [.. finalExfils];
+        return [.. finalExfils];
     }
 
-    private static void LoadScavExfilSettings(ExfiltrationControllerClass exfilController, MongoID locationId, LocationExitClass[] settings, bool giveAuthority, ExfiltrationPoint[] allExfils)
+    private static void LoadExfilSettings(ExfiltrationPoint[] allExfils, MongoID locationId, LocationExitClass[] settings, bool giveAuthority)
     {
-        foreach (ExfiltrationPoint exfiltrationPoint in exfilController.ExfiltrationPoints)
+        foreach (ExfiltrationPoint exfiltrationPoint in allExfils)
         {
-            if (IsScavExfil(exfiltrationPoint))
-            {
-                LocationExitClass locationExit = settings.FirstOrDefault(exitClass => exitClass.Name == exfiltrationPoint.Settings.Name);
+            LocationExitClass locationExit = settings.FirstOrDefault(exitClass => exitClass.Name == exfiltrationPoint.Settings.Name);
 
-                if (locationExit != null)
-                {
-                    int num = Array.IndexOf(allExfils, exfiltrationPoint) + 1;
-                    MongoID mongoID = locationId.Add(num + 1);
-                    exfiltrationPoint.LoadSettings(mongoID, locationExit, giveAuthority);
-                }
+            if (locationExit != null)
+            {
+                int num = Array.IndexOf(allExfils, exfiltrationPoint) + 1;
+                MongoID mongoID = locationId.Add(num + 1);
+                exfiltrationPoint.LoadSettings(mongoID, locationExit, giveAuthority);
             }
         }
     }

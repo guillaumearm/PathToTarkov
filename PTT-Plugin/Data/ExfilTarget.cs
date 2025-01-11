@@ -1,25 +1,9 @@
-using System.Collections.Generic;
 using PTT.Settings;
 
 namespace PTT.Data;
 
-/**
-* Request
-**/
-public class ExfilsTargetsRequest
-{
-    public string locationId;
-}
 
-/**
-* Response
-**/
-public class ExfilsTargetsResponse
-{
-    // indexed by exit name
-    public Dictionary<string, List<ExfilTarget>> data;
-}
-
+// Warning: The fields here are shared with the server
 public class ExfilTarget
 {
     public string exitName;
@@ -27,6 +11,10 @@ public class ExfilTarget
     public string transitMapId; // transit only
     public string transitSpawnPointId; // transit only
     public string offraidPosition; // empty on transit
+
+    // used for tooltips rendering
+    public string[] nextMaps;
+    public string[] nextTraders;
 
     public string GetCustomActionName(bool isDisabled = false)
     {
