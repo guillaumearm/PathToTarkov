@@ -285,6 +285,19 @@ const getWarningsForExfils = (config: Config): string[] => {
     }
   });
 
+  Object.keys(config.exfiltrations_config ?? {}).forEach(mapName => {
+    const configByExfils = config.exfiltrations_config?.[mapName as MapName] ?? {};
+    Object.keys(configByExfils).forEach(extractName => {
+      const exfilTargets = config.exfiltrations?.[mapName as MapName]?.[extractName];
+
+      if (!exfilTargets || exfilTargets.length === 0) {
+        warnings.push(
+          `unused "exfiltrations_config.${mapName}.${extractName}" you can remove it from the config`,
+        );
+      }
+    });
+  });
+
   return warnings;
 };
 
