@@ -5,7 +5,6 @@
   initial_offraid_position: 'FactoryZB-1011',
   player_scav_move_offraid_position: false,
   bypass_keep_found_in_raid_tweak: false,
-  bypass_luas_Customs_spawn_points_tweak: false,
   debug: true,
   restrictions_in_raid: {
     // roubles
