@@ -1477,9 +1477,114 @@
     },
   },
   exfiltrations_config: {
+    bigmap: {
+      'ZB-1011': {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      'ZB-1012': {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      EXFIL_ZB013: {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      'Sniper Roadblock': {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      "Smuggler's Boat": {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      'RUAF Roadblock': {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      Crossroads: {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      'Old Azs Gate': {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      'Railroad To Tarkov': {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      'Railroad To Military Base': {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+    },
+    woods: {
+      'un-sec': {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      'ZB-014': {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      'ZB-016': {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      Outskirts: {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      'UN Roadblock': {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+    },
+    rezervbase: {
+      EXFIL_Train: {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      Exit1: {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      Exit4: {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      Alpinist: {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      EXFIL_vent: {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+    },
     interchange: {
       'Saferoom Exfil': {
-        override_tooltips_template: '$exfilDisplayName',
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      'NW Exfil': {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+    },
+    lighthouse: {
+      EXFIL_Train: {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      Alpinist_light: {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+    },
+    shoreline: {
+      'Road to Customs': {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      'Pier Boat': {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+    },
+    tarkovstreets: {
+      E1: {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      E2: {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      E4: {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      E7: {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      scav_e2: {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
+      },
+      scav_e4: {
+        override_tooltips_template: '<color="green"><size=90%>$exfilDisplayName',
       },
     },
   },
