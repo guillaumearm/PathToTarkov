@@ -375,7 +375,64 @@
       tarkovstreets: ['Klimov Street'],
     },
   },
+  offraid_positions: {
+    TherapistStash: {
+      displayName: {
+        en: "Therapist's stash",
+        fr: 'La réserve de la thérapeute',
+      },
+    },
+    PraporStash: {
+      displayName: {
+        en: "Prapor's stash",
+        fr: 'La réserve de Prapor',
+      },
+    },
+    MechanicStash: {
+      displayName: {
+        en: "Mechanic's stash",
+        fr: 'La réserve du Mécano',
+      },
+    },
+    RagmanStash: {
+      displayName: {
+        en: "Ragman's stash",
+        fr: 'La réserve de Ragman',
+      },
+    },
+    SkierStash: {
+      displayName: {
+        en: "Skier's stash",
+        fr: 'La réserve de Skier',
+      },
+    },
+    PeacekeeperStash: {
+      displayName: {
+        en: "Peacekeeper's stash",
+        fr: 'La réserve de Peacekeeper',
+      },
+    },
+    JaegerStash: {
+      displayName: {
+        en: "Jaeger's stash",
+        fr: 'La réserve de Jaeger',
+      },
+    },
+    MilitaryLighthouseStash: {
+      displayName: {
+        en: 'a secret place between reserve and ligthouse',
+        fr: 'un lieu secret entre la réserve et le phare',
+      },
+    },
+    KlimovStash: {
+      displayName: {
+        en: 'A safe house at Klimov street',
+        fr: 'Une maison sécurisée dans la rue Klimov',
+      },
+    },
+  },
   exfiltrations_config: {},
+  exfiltrations_tooltips_template: '<color="green"><size=90%>$exfilDisplayName\n<size=60%><color="white">$offraidPositionDisplayName',
   extracts_prompt_template: {
     en: 'Extract to {0}',
     fr: 'Extraction vers {0}',

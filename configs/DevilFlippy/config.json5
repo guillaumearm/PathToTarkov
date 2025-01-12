@@ -804,6 +804,185 @@
       },
     },
   },
+  offraid_positions: {
+    ReservFlea: {},
+    ExpoCPFlea: {},
+    SafeRoomFlea: {},
+    DormsCar: {},
+    NorthCar: {},
+    RoadToWoods: {},
+    CustomsToShoreline: {},
+    WoodsMilitaryPath: {},
+    WoodsFactoryGate: {},
+    HermaticToCellars: {},
+    WoodsLighthouse: {},
+    HoleToDamagedHouse: {},
+    ShorelineLighthouseTunnel: {},
+    ShorelineLighthousePath: {},
+    SouthernRoad: {},
+    StreetsToLabsSewer: {},
+    StreetsCarToLabs: {},
+    RequisitionsHideout: {
+      displayName: {
+        en: "Requisitions's hideout",
+        fr: 'La cachette de Requisitions',
+      },
+    },
+    PainterHideout: {
+      displayName: {
+        en: "Painter's hideout",
+        fr: 'La cachette de Painter',
+      },
+    },
+    LotusHideout: {
+      displayName: {
+        en: "Lotus' hideout",
+        fr: 'La cachette de Lotus',
+      },
+    },
+    ScorpionHideout: {
+      displayName: {
+        en: "Scorpion's hideout",
+        fr: 'La cachette de Scorpion',
+      },
+    },
+    'FactoryZB-1013': {
+      displayName: {
+        en: 'Bunker ZB-1013',
+      },
+    },
+    Boat: {
+      displayName: {
+        en: 'Boat',
+        fr: 'Bateau',
+      },
+    },
+    'ZB-014Stash': {
+      displayName: {
+        en: 'Bunker ZB-014',
+      },
+    },
+    'FactoryZB-1012': {
+      displayName: {
+        en: 'Bunker ZB-1012',
+      },
+    },
+    'FactoryZB-1011': {
+      displayName: {
+        en: 'Bunker ZB-1011',
+      },
+    },
+    RagmanHideout: {
+      displayName: {
+        en: "Ragman's hideout",
+        fr: 'La cachette de Ragman',
+      },
+    },
+    SkierHideout: {
+      displayName: {
+        en: "Skier's hideout",
+        fr: 'La cachette de Skier',
+      },
+    },
+    JaegerHideout: {
+      displayName: {
+        en: "Jaeger's hideout",
+        fr: 'La cachette de Jaeger',
+      },
+    },
+    PeacekeeperHideout: {
+      displayName: {
+        en: "Peacekeeper's hideout",
+        fr: 'La cachette de Peacekeeper',
+      },
+    },
+    TherapistHideout: {
+      displayName: {
+        en: "Therapist's hideout",
+        fr: 'La cachette de la Toubib',
+      },
+    },
+    MechanicHideout: {
+      displayName: {
+        en: "Mechanic's hideout",
+        fr: 'La cachette du Mécano',
+      },
+    },
+    ArtemHideout: {
+      displayName: {
+        en: "Artem's hideout",
+        fr: 'La cachette de Artem',
+      },
+    },
+    Crossroads: {
+      displayName: {
+        en: 'Crossroads',
+        fr: 'Carrefour',
+      },
+    },
+    Outskirts: {
+      displayName: {
+        en: 'Outskirts',
+        fr: 'Périphérie',
+      },
+    },
+    Railway: {
+      displayName: {
+        en: 'Railways',
+        fr: 'Chemins de fer',
+      },
+    },
+    RefHideout: {
+      displayName: {
+        en: "Ref's hideout",
+        fr: 'Cachette de Ref',
+      },
+    },
+    LighthouseCar: {
+      displayName: {
+        en: 'Lighthouse car',
+        fr: 'La voiture du phare',
+      },
+    },
+    ArmoredTrain: {
+      displayName: {
+        en: 'The armored train',
+        fr: 'Le train blindé',
+      },
+    },
+    MountainPass: {
+      displayName: {
+        en: 'Mountain pass',
+        fr: 'Passage en montagne',
+      },
+    },
+    BasementDescent: {
+      displayName: {
+        en: "Harry's hideout",
+        fr: 'La cachette de harry',
+      },
+    },
+    KlimovStreet: {
+      displayName: {
+        en: 'Klimov street hideout',
+        fr: 'La cachette de la rue Klimov',
+      },
+    },
+    VentShaft: {
+      displayName: {
+        en: 'Air duct',
+        fr: 'Conduit de ventilation',
+      },
+    },
+    Catacombs: {
+      displayName: {
+        en: 'Catacombs',
+        fr: 'Catacombes',
+      },
+    },
+  },
+  exfiltrations_config: {},
+  exfiltrations_tooltips_template: '<color="green"><size=90%>$exfilDisplayName\n<size=60%><color="white">$offraidPositionDisplayName',
   extracts_prompt_template: {
     en: 'Extract to {0}',
     fr: 'Extraction vers {0}',
@@ -812,5 +991,4 @@
     en: 'Transit to {0}',
     fr: 'Transit vers {0}',
   },
-  exfiltrations_config: {},
 }

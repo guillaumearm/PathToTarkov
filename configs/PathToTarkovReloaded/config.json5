@@ -748,7 +748,118 @@
       laboratory: ['Hangar Gate'],
     },
   },
+  offraid_positions: {
+    ShorelineLighthousePath: {
+      displayName: {
+        en: 'Path between Shoreline and Lighthouse',
+        fr: 'Chemin entre le littoral et le phare',
+      },
+    },
+    ShorelineLighthouseTunnel: {
+      displayName: {
+        en: 'Tunnel between Lighthouse and Shoreline',
+        fr: 'Tunnel entre le phare et le littoral',
+      },
+    },
+    ShorelineNorthMoutains: {
+      displayName: {
+        en: "Shoreline's north moutains",
+        fr: 'Les montagnes du nord de la côte',
+      },
+    },
+    WoodsReserveShoreline: {
+      displayName: {
+        en: 'secret place between reserve, woods and shoreline',
+        fr: 'lieu secret entre la réserve, les bois et le littoral',
+      },
+    },
+    InterchangeCustoms: {
+      displayName: {
+        en: 'hidden house between Interchange and Customs',
+        fr: 'maison cachée entre échangeur et douanes',
+      },
+    },
+    WoodsCustoms: {
+      displayName: {
+        en: 'secure place around UN roadblock',
+        fr: "lieu sécurisé autour du barrage routier de l'ONU",
+      },
+    },
+    Boat: {
+      displayName: {
+        en: 'Boat',
+        fr: 'Bateau',
+      },
+    },
+    Car: {
+      displayName: {
+        en: 'Car',
+        fr: 'Voiture',
+      },
+    },
+    ShorelineCustoms: {
+      displayName: {
+        en: 'a place between Shoreline and Customs',
+        fr: 'un lieu entre le littoral et les douanes',
+      },
+    },
+    CustomsMilitaryBaseCP: {
+      displayName: {
+        en: 'Military base checkpoint',
+        fr: 'Point de contrôle de la base militaire',
+      },
+    },
+    MilitaryBaseRail: {
+      displayName: {
+        en: 'house close to military reserve',
+        fr: 'maison proche de la réserve militaire',
+      },
+    },
+    'FactoryZB-1011': {
+      displayName: {
+        en: 'Bunker ZB-1011',
+        fr: 'Bunker ZB-1011',
+      },
+    },
+    'FactoryZB-1012': {
+      displayName: {
+        en: 'Bunker ZB-1012',
+        fr: 'Bunker ZB-1012',
+      },
+    },
+    'FactoryZB-1013': {
+      displayName: {
+        en: 'Bunker ZB-1013',
+        fr: 'Bunker ZB-1013',
+      },
+    },
+    WoodsFactoryGate: {
+      displayName: {
+        en: "Prapor's hideout in factory",
+        fr: "La cachette de Prapor dans l'usine",
+      },
+    },
+    SafeRoom: {
+      displayName: {
+        en: 'Safe room',
+        fr: 'Pièce sécurisée',
+      },
+    },
+    CustomsTarkovRail: {},
+    PilgrimTrail: {},
+    ScavWindow: {},
+    WoodsMilitaryPath: {},
+    TherapistHideout: {},
+    PlayerHideout: {},
+    EmercomToKlimov: {},
+    SniperPath: {},
+    UnderpasstoLabs: {},
+    ManHoleToReserve: {},
+    StreetsEvac: {},
+    CatacombsHangar: {},
+  },
   exfiltrations_config: {},
+  exfiltrations_tooltips_template: '<color="green"><size=90%>$exfilDisplayName\n<size=60%><color="white">$offraidPositionDisplayName',
   extracts_prompt_template: {
     en: 'Extract to {0}',
     fr: 'Extraction vers {0}',

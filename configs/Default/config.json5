@@ -1239,7 +1239,7 @@
     SmugglersBoat: {
       displayName: {
         en: "Smuggler's Boat",
-        fr: 'Bâteau du contrebandier',
+        fr: 'Bateau du contrebandier',
       },
     },
     RUAFCustoms: {
@@ -1364,7 +1364,7 @@
     PierBoat: {
       displayName: {
         en: 'Boat',
-        fr: 'Bâteau',
+        fr: 'Bateau',
       },
     },
     ShorelineLighthouseRoad: {
@@ -1471,7 +1471,7 @@
     },
     SafeRoom: {
       displayName: {
-        en: 'Saferoom',
+        en: 'Safe room',
         fr: 'Pièce sécurisée',
       },
     },

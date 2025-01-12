@@ -1018,7 +1018,328 @@
       laboratory: ['Hangar Gate'],
     },
   },
+  offraid_positions: {
+    PraporHideout: {
+      displayName: {
+        en: "Prapor's hideout",
+        fr: 'La cachette de Prapor',
+      },
+    },
+    SkierHideout: {
+      displayName: {
+        en: "Skier's hideout",
+        fr: 'La cachette de Skier',
+      },
+    },
+    JaegerHideout: {
+      displayName: {
+        en: "Jaeger's hideout",
+        fr: 'La cachette de Jaeger',
+      },
+    },
+    PeacekeeperHideout: {
+      displayName: {
+        en: "Peacekeeper's hideout",
+        fr: 'La cachette de Peacekeeper',
+      },
+    },
+    LegsHideout: {
+      displayName: {
+        en: "Legs' hideout",
+        fr: 'La cachette de Legs',
+      },
+    },
+    TherapistHideout: {
+      displayName: {
+        en: "Therapist's hideout",
+        fr: 'La cachette de la Toubib',
+      },
+    },
+    MechanicHideout: {
+      displayName: {
+        en: "Mechanic's hideout",
+        fr: 'La cachette du Mécano',
+      },
+    },
+    ArtemHideout: {
+      displayName: {
+        en: "Artem's hideout",
+        fr: 'La cachette de Artem',
+      },
+    },
+    'FactoryZB-016': {
+      displayName: {
+        en: 'Bunker ZB-016',
+      },
+    },
+    'FactoryZB-013': {
+      displayName: {
+        en: 'Bunker ZB-013',
+      },
+    },
+    'FactoryZB-1012': {
+      displayName: {
+        en: 'Bunker ZB-1012',
+      },
+    },
+    'FactoryZB-1011': {
+      displayName: {
+        en: 'Bunker ZB-1011',
+      },
+    },
+    'ReserveZB-014': {
+      displayName: {
+        en: 'Bunker ZB-014',
+      },
+    },
+    SniperRB: {
+      displayName: {
+        en: 'Sniper roadbloack',
+        fr: 'Barrage sniper',
+      },
+    },
+    SmugglersBoat: {
+      displayName: {
+        en: "Smuggler's Boat",
+        fr: 'Bateau du contrebandier',
+      },
+    },
+    RUAFCustoms: {
+      displayName: {
+        en: 'RUAF Roadblock',
+        fr: 'Barrage RUAF',
+      },
+    },
+    Crossroads: {
+      displayName: {
+        en: 'Crossroads',
+        fr: 'Carrefour',
+      },
+    },
+    GasGate: {
+      displayName: {
+        en: 'Old Gas Station',
+        fr: 'Ancienne station-service',
+      },
+    },
+    TarkovRR: {
+      displayName: {
+        en: 'Railroad To Tarkov',
+        fr: 'Rails vers Tarkov',
+      },
+    },
+    MilBaseRR: {
+      displayName: {
+        en: 'Railroad to Military Base',
+        fr: 'Rails vers la base militaire',
+      },
+    },
+    MilBaseCP: {
+      displayName: {
+        en: 'Military base checkpoint',
+        fr: 'Checkpoint Base militaire',
+      },
+    },
+    NorthUNRoadblock: {
+      displayName: {
+        en: 'UN roadblock in the North',
+        fr: "Barrage routier de l'ONU au Nord",
+      },
+    },
+    FactoryGate: {
+      displayName: {
+        en: 'Factory',
+        fr: 'Usine',
+      },
+    },
+    Outskirts: {
+      displayName: {
+        en: 'Outskirts',
+        fr: 'Périphérie',
+      },
+    },
+    UNRoadblock: {
+      displayName: {
+        en: 'UN Roadblock',
+        fr: 'Barrage ONU',
+      },
+    },
+    RUAFWoods: {
+      displayName: {
+        en: 'RUAF hideout in woods',
+        fr: 'Cachette RUAF dans les bois',
+      },
+    },
+    'BunkerZB-014': {
+      displayName: {
+        en: 'Bunker ZB-014',
+      },
+    },
+    HoleinWall: {
+      displayName: {
+        en: 'Hole in the Fence',
+        fr: 'Trou dans la clôture',
+      },
+    },
+    CPFence: {
+      displayName: {
+        en: 'Military checkpoint fence',
+        fr: 'Barrière de contrôle militaire',
+      },
+    },
+    CliffDescent: {
+      displayName: {
+        en: 'Cliff Descent',
+        fr: 'Descente de falaise',
+      },
+    },
+    Manhole: {
+      displayName: {
+        en: 'Sewers',
+        fr: 'égouts',
+      },
+    },
+    CityCar: {
+      displayName: {
+        en: 'City car',
+        fr: 'Voiture de ville',
+      },
+    },
+    Railway: {
+      displayName: {
+        en: 'Railways',
+        fr: 'Chemins de fer',
+      },
+    },
+    InterchangeScavCamp: {
+      displayName: {
+        en: 'Scav Camp around Interchange',
+        fr: 'Camps de scav vers Échangeur',
+      },
+    },
+    RoadtoCustoms: {
+      displayName: {
+        en: 'Road to customs',
+        fr: 'Route vers les douanes',
+      },
+    },
+    PierBoat: {
+      displayName: {
+        en: 'Boat',
+        fr: 'Bateau',
+      },
+    },
+    ShorelineLighthouseRoad: {
+      displayName: {
+        en: 'Road between Shoreline and Lighthouse',
+        fr: 'Route entre le littoral et le phare',
+      },
+    },
+    ShorelineDormsCar: {
+      displayName: {
+        en: 'The dorms car',
+        fr: 'La voiture des dortoirs',
+      },
+    },
+    RefHideout: {
+      displayName: {
+        en: "Ref's hideout",
+        fr: 'Cachette de Ref',
+      },
+    },
+    LighthouseCar: {
+      displayName: {
+        en: 'Lighthouse car',
+        fr: 'La voiture du phare',
+      },
+    },
+    LighthouseShorelinePath: {
+      displayName: {
+        en: 'Path between Shoreline and Lighthouse',
+        fr: 'Chemin entre le littoral et le phare',
+      },
+    },
+    ArmoredTrain: {
+      displayName: {
+        en: 'The armored train',
+        fr: 'Le train blindé',
+      },
+    },
+    MountainPass: {
+      displayName: {
+        en: 'Mountain pass',
+        fr: 'Passage en montagne',
+      },
+    },
+    LighthouseShorelineTunnel: {
+      displayName: {
+        en: 'Tunnel between Lighthouse and Shoreline',
+        fr: 'Tunnel entre le phare et le littoral',
+      },
+    },
+    BasementDescent: {
+      displayName: {
+        en: "Harry's hideout",
+        fr: 'La cachette de harry',
+      },
+    },
+    RuinedHouse: {
+      displayName: {
+        en: 'The ruined house',
+        fr: 'La maison en ruine',
+      },
+    },
+    ExpoCP: {
+      displayName: {
+        en: 'Expo checkpoint',
+        fr: "Point de contrôle de l'expo",
+      },
+    },
+    KlimovStreet: {
+      displayName: {
+        en: 'Klimov street hideout',
+        fr: 'La cachette de la rue Klimov',
+      },
+    },
+    VentShaft: {
+      displayName: {
+        en: 'Air duct',
+        fr: 'Conduit de ventilation',
+      },
+    },
+    SewerRiver: {
+      displayName: {
+        en: 'Sewage River',
+        fr: 'Rivière à eaux usées',
+      },
+    },
+    StylobateElevator: {
+      displayName: {
+        en: 'Stylobate Elevator',
+        fr: 'Ascensceur Stylobate',
+      },
+    },
+    CrashSite: {
+      displayName: {
+        en: 'Crash Site',
+        fr: "Site d'accident",
+      },
+    },
+    Catacombs: {
+      displayName: {
+        en: 'Catacombs',
+        fr: 'Catacombes',
+      },
+    },
+    SafeRoom: {
+      displayName: {
+        en: 'Safe room',
+        fr: 'Pièce sécurisée',
+      },
+    },
+  },
   exfiltrations_config: {},
+  exfiltrations_tooltips_template: '<color="green"><size=90%>$exfilDisplayName\n<size=60%><color="white">$offraidPositionDisplayName',
   extracts_prompt_template: {
     en: 'Extract to {0}',
     fr: 'Extraction vers {0}',
