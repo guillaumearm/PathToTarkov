@@ -63,7 +63,11 @@ const getNextMaps = (
   const offraidPosition = parsedExfilTarget.targetOffraidPosition;
 
   if (transitMapName) {
-    if (isSameMap(currentMapName, transitMapName)) {
+    if (
+      isSameMap(currentMapName, transitMapName) ||
+      transitMapName === 'sandbox_high' ||
+      transitMapName === 'factory4_night'
+    ) {
       return [];
     }
 
