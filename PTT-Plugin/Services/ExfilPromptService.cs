@@ -9,13 +9,17 @@ namespace PTT.Services;
 
 internal class ExfilPromptService(InteractableExfilsService ieService)
 {
-
     private Dictionary<string, ExfilPrompt> IndexedExfilPrompts = [];
 
     public void Init()
     {
         ieService.DisableVanillaActions = true;
         InitPromptHandlers();
+    }
+
+    public void ClearExfilPromptsCache()
+    {
+        IndexedExfilPrompts = [];
     }
 
     private void InitPromptHandlers()

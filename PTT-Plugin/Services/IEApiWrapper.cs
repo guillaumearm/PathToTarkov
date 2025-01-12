@@ -3,15 +3,18 @@ using InteractableExfilsAPI.Singletons;
 using PTT.Helpers;
 using PTT.Services;
 
-static public class IEApiWrapper
+static internal class IEApiWrapper
 {
+    public static ExfilPromptService ExfilPromptService;
+
     public static void Init()
     {
         InteractableExfilsService interactableExfilsService = Singleton<InteractableExfilsService>.Instance;
 
         if (interactableExfilsService != null)
         {
-            new ExfilPromptService(interactableExfilsService).Init();
+            ExfilPromptService = new ExfilPromptService(interactableExfilsService);
+            ExfilPromptService.Init();
             Logger.Info($"Jehree's Interactable Exfils API: initialized exfils prompt service");
         }
         else

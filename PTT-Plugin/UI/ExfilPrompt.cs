@@ -104,14 +104,12 @@ public class ExfilPrompt(ExfiltrationPoint Exfil)
 
     private void OnExitZone()
     {
-        if (!_exfiltrated) // we need to check if the player is not exfiltrated because OnExitZone will be call on exfil
-        {
-            InitPromptState();
+        InitPromptState();
 
-            if (_transitVoted)
-            {
-                CancelVote("Vote cancelled (zone exited)");
-            }
+        // we need to check if the player is not exfiltrated because OnExitZone is also called on player exfil
+        if (!_exfiltrated && _transitVoted)
+        {
+            CancelVote("Vote cancelled (zone exited)");
         }
     }
 

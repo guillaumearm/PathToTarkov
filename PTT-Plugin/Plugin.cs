@@ -95,8 +95,13 @@ public class Plugin : BaseUnityPlugin
         }
 
         CurrentExfilTargetService.Init();
-        DisplayInteractableExfilsAPIWarning();
 
+        if (InteractableExfilsApiIsInstalled)
+        {
+            IEApiWrapper.ExfilPromptService.ClearExfilPromptsCache();
+        }
+
+        DisplayInteractableExfilsAPIWarning();
         Helpers.Logger.Info("Raid initialized!");
     }
 
