@@ -80,7 +80,8 @@ export class ExfilsTooltipsTemplater {
           localeValues[localeKey] = computedLocaleValue;
 
           // unique exfil locales by map (re-used by the client)
-          localeValues[`${mapName}.${exfilName}`] = computedLocaleValue;
+          const customLocaleKey = `PTT_EXTRACT_${mapName}.${exfilName}`;
+          localeValues[customLocaleKey] = computedLocaleValue;
         });
       });
     });

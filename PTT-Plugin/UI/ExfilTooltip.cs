@@ -15,7 +15,7 @@ public class ExfilTooltip(ExfiltrationPoint ExfilPoint)
     public string GetPrimaryText()
     {
         string locationId = Singleton<GameWorld>.Instance?.LocationId ?? "";
-        string localized = $"{locationId.ToLower()}.{ExfilPoint.Settings.Name}".Localized();
+        string localized = $"PTT_EXTRACT_{locationId.ToLower()}.{ExfilPoint.Settings.Name}".Localized();
         return $"<width=100%><align=\"left\">{localized}";
     }
 
