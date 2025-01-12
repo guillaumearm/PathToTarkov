@@ -1161,15 +1161,6 @@
       laboratory: ['Hangar Gate'],
     },
   },
-  exfiltrations_tooltips_template: '<color="green"><size=90%>$exfilDisplayName\n<size=60%><color="white">$offraidPositionDisplayName',
-  extracts_prompt_template: {
-    en: 'Extract to {0}',
-    fr: 'Extraction vers {0}',
-  },
-  transits_prompt_template: {
-    en: 'Transit to {0}',
-    fr: 'Transit vers {0}',
-  },
   offraid_positions: {
     PraporHideout: {
       displayName: {
@@ -1491,5 +1482,14 @@
         override_tooltips_template: '$exfilDisplayName',
       },
     },
+  },
+  exfiltrations_tooltips_template: '<color="green"><size=90%>$exfilDisplayName\n<size=60%><color="white">$offraidPositionDisplayName',
+  extracts_prompt_template: {
+    en: 'Extract to {0}',
+    fr: 'Extraction vers {0}',
+  },
+  transits_prompt_template: {
+    en: 'Transit to {0}',
+    fr: 'Transit vers {0}',
   },
 }

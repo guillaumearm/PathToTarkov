@@ -685,4 +685,13 @@
       interchange: ['Safe Room'],
     },
   },
+  exfiltrations_config: {},
+  extracts_prompt_template: {
+    en: 'Extract to {0}',
+    fr: 'Extraction vers {0}',
+  },
+  transits_prompt_template: {
+    en: 'Transit to {0}',
+    fr: 'Transit vers {0}',
+  },
 }
