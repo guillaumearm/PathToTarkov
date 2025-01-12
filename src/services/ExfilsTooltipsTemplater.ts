@@ -101,8 +101,19 @@ export class ExfilsTooltipsTemplater {
       },
       {},
     );
+
     void mutateLocales(mergedLocales, partialLocales);
-    return mergedLocales[locale];
+
+    const localeValues = mergedLocales[locale] ?? {};
+
+    const result: Record<string, string> = {};
+    Object.keys(mergedLocales[locale] ?? {}).forEach(localeKey => {
+      if (localeKey.startsWith('PTT_')) {
+        result[localeKey] = localeValues[localeKey];
+      }
+    });
+
+    return result;
   }
 
   private computeLocaleValue(
