@@ -1,6 +1,26 @@
 {
-  // The player spawnpoints marked in this file are shared between all configs
-  // Example rotation values -> N: 180, NE: 225, E: 270, SE: 315, S: 0, SW: 45, W: 90, NW: 135
+  /**
+   * DO NOT DISTRIBUTE THS FILE!
+   * Because the player spawnpoints marked in this file are shared between all configs
+   *
+   * Check the Path To Tarkov documentation on github to see how to create and distribute custom player spawnpoints
+   * You can still edit this file and submit a Pull Request on github if you want to contribute to the project.
+   */
+
+  /**
+   * Tip for rotation values (compass points)
+   * - South: 0
+   * - South West: 45
+   * - West: 90
+   * - North West: 135
+   * - North: 180
+   * - North East: 225
+   * - East: 270
+   * - South East: 315
+   */
+
+  // Factory day
+  // Reminder in case of edit: update also `factory4_night`
   factory4_day: {
     'Gate 3': {
       Position: [57.89, 0.3, 49.57],
@@ -35,6 +55,7 @@
       Rotation: 238.056732,
     },
   },
+  // Factory night
   factory4_night: {
     'Gate 3': {
       Position: [57.89, 0.3, 49.57],
@@ -69,6 +90,8 @@
       Rotation: 238.056732,
     },
   },
+
+  // Customs
   bigmap: {
     'Military Base CP': {
       Position: [674.5625, 5.60742664, 123.641823],
@@ -147,6 +170,8 @@
       rotation: 287.2482,
     },
   },
+
+  // Woods
   woods: {
     'Northern UN Roadblock': {
       Position: [-555.2336, 9.391193, -76.86284],
@@ -209,6 +234,8 @@
       Rotation: 104.772415,
     },
   },
+
+  // Military reserve
   rezervbase: {
     'Scav lands': {
       Position: [-120.954071, -6.94097, -129.4829],
@@ -256,6 +283,8 @@
       Rotation: 128.773651,
     },
   },
+
+  // Interchange
   interchange: {
     'Interchange Vehicle Extract': {
       Position: [-242.849625, 21.32544, -372.680878],
@@ -286,6 +315,8 @@
       Rotation: 344.7888,
     },
   },
+
+  // Shoreline
   shoreline: {
     'North Fence Passage': {
       Position: [-510.430939, -11.9056053, -373.174316],
@@ -340,6 +371,8 @@
       Rotation: 335.1047,
     },
   },
+
+  // Lighthouse
   lighthouse: {
     'Path to Shoreline': {
       Position: [-284.0998, 14.4007835, -161.669266],
@@ -390,6 +423,8 @@
       Rotation: 77.76075,
     },
   },
+
+  // Streets of Tarkov
   tarkovstreets: {
     'Streets Vehicle Extract': {
       Position: [-8.757395, 2.31632733, 458.126923],
@@ -464,6 +499,8 @@
       Rotation: 304.3322,
     },
   },
+
+  // Laboratory
   laboratory: {
     'Cargo Elevator': {
       Position: [-114.2475, 4.101831, -408.6356],
@@ -494,6 +531,9 @@
       Rotation: 14.0038671,
     },
   },
+
+  // Ground Zero
+  // Note: `sandbox_high` spawnpoints are automatically created from `sandbox`
   sandbox: {
     'Nakatani Basement Stairs': {
       Position: [5.295958, 22.73891, 331.8584],
