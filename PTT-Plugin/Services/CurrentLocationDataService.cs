@@ -15,6 +15,18 @@ public class CurrentLocationDataService
         FetchExfilsTargetsForCurrentLocation();
     }
 
+    public bool IsExfiltrationPointEnabled(ExfiltrationPoint exfil)
+    {
+        string exitName = exfil?.Settings?.Name ?? null;
+
+        if (exitName == null)
+        {
+            return false;
+        }
+
+        return CurrentLocationData.exfilsTargets.ContainsKey(exitName);
+    }
+
     public List<ExfilTarget> GetExfilTargets(ExfiltrationPoint exfil)
     {
         if (exfil == null)

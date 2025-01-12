@@ -39,18 +39,19 @@ internal class InitAllExfiltrationPointsPatch : ModulePatch
         IEnumerable<ExfiltrationPoint> scavExfils = allOriginalExfils.Where(new Func<ExfiltrationPoint, bool>(IsScavExfil));
         IEnumerable<ExfiltrationPoint> pmcExfils = allOriginalExfils.Where(new Func<ExfiltrationPoint, bool>(IsNotScavExfil));
 
-        List<ExfiltrationPoint> finalExfils = pmcExfils.ToList();
+        List<ExfiltrationPoint> accExfils = pmcExfils.ToList();
 
         foreach (ExfiltrationPoint scavExfil in scavExfils)
         {
             if (!pmcExfils.Any(k => k.Settings.Name == scavExfil.Settings.Name))
             {
                 Helpers.Logger.Info($"Added scav exfil '{scavExfil.Settings.Name}' for pmc");
-                finalExfils.Add(scavExfil);
+                accExfils.Add(scavExfil);
             }
         }
 
-        return [.. finalExfils];
+        IEnumerable<ExfiltrationPoint> filteredExfils = accExfils.Where(Plugin.CurrentLocationDataService.IsExfiltrationPointEnabled);
+        return [.. filteredExfils];
     }
 
     private static void LoadExfilSettings(ExfiltrationPoint[] allExfils, MongoID locationId, LocationExitClass[] settings, bool giveAuthority)
