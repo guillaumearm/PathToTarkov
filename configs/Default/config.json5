@@ -1,5 +1,5 @@
 {
-  // Those 3 options can highly change the difficulty, try to change them if PTT is too hardcore/grindy for you
+  // These 3 options can highly change the difficulty, try to change them if PTT is too hardcore/grindy for you
   reset_offraid_position_on_player_die: true,
   traders_access_restriction: true,
   hideout_multistash_enabled: true,

@@ -914,24 +914,6 @@
         fr: 'La cachette de Artem',
       },
     },
-    Crossroads: {
-      displayName: {
-        en: 'Crossroads',
-        fr: 'Carrefour',
-      },
-    },
-    Outskirts: {
-      displayName: {
-        en: 'Outskirts',
-        fr: 'Périphérie',
-      },
-    },
-    Railway: {
-      displayName: {
-        en: 'Railways',
-        fr: 'Chemins de fer',
-      },
-    },
     RefHideout: {
       displayName: {
         en: "Ref's hideout",

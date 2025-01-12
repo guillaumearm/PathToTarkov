@@ -211,6 +211,14 @@ const getWarningsForOffraidPositions = (config: Config): string[] => {
     }
   });
 
+  Object.keys(config.offraid_positions ?? {}).forEach(offraidPosition => {
+    if (!config.infiltrations[offraidPosition]) {
+      warnings.push(
+        `the declared "offraid_positions.${offraidPosition}" is not used in "infiltrations"`,
+      );
+    }
+  });
+
   return warnings;
 };
 

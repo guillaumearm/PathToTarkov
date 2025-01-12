@@ -1170,11 +1170,6 @@
         fr: 'Cachette RUAF dans les bois',
       },
     },
-    'BunkerZB-014': {
-      displayName: {
-        en: 'Bunker ZB-014',
-      },
-    },
     HoleinWall: {
       displayName: {
         en: 'Hole in the Fence',
