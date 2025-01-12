@@ -194,9 +194,14 @@ const getWarningsForOffraidPositions = (config: Config): string[] => {
   const offraidPosByHash: Record<string, string> = {};
 
   Object.keys(config.infiltrations).forEach(offraidPosition => {
+    if (!config.offraid_positions?.[offraidPosition]) {
+      warnings.push(
+        `offraid position "${offraidPosition}" is not declared in "offraids_positions"`,
+      );
+    }
+
     const spawnsByMap = config.infiltrations[offraidPosition];
     const hash = getInfiltrationHash(spawnsByMap);
-
     if (offraidPosByHash[hash]) {
       warnings.push(
         `offraid position "${offraidPosition}" seems to be a duplicate of "${offraidPosByHash[hash]}"`,
