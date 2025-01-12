@@ -16,7 +16,7 @@ public class Plugin : BaseUnityPlugin
     private static bool InteractableExfilsApiIsOutdated { get; set; } = false;
     public static CurrentLocationDataService CurrentLocationDataService;
     private const string IE_API_PLUGIN_NAME = "Jehree.InteractableExfilsAPI";
-    private const string IE_API_MIN_VERSION = "1.5.0";
+    private const string IE_API_MIN_VERSION = "1.5.1";
 
     protected void Awake()
     {
