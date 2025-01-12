@@ -4,5 +4,6 @@
 /src/*.js
 /Trap-PathToTarkov-*
 /PTT-Plugin/
+/PTT-Packets/
 *.md
 package-lock.json
