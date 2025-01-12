@@ -261,6 +261,15 @@ export type ConfigGetter = (sessionId: string) => Config;
 export const PACKAGE_JSON_PATH = join(__dirname, '../package.json');
 
 export const CONFIGS_DIR = join(__dirname, '../configs');
+
+/**
+ * The `shared_player_spawnpoints.json5` file will be copied in this directory at release time.
+ * This is an attempt to prevent config makers to distribute this file.
+ *
+ * Additional player spawnpoints should be embedded in the desired config
+ */
+export const DO_NOT_DISTRIBUTE_DIR = join(__dirname, '../src/do_not_distribute');
+
 export const USER_CONFIG_PATH = join(CONFIGS_DIR, 'UserConfig.json5');
 export const DEFAULT_SELECTED_PTT_CONFIG = 'Default';
 

@@ -14,6 +14,7 @@ import type { Config, SpawnConfig, UserConfig } from './config';
 import {
   CONFIG_FILENAME,
   CONFIGS_DIR,
+  DO_NOT_DISTRIBUTE_DIR,
   getUserConfig,
   PACKAGE_JSON_PATH,
   processConfig,
@@ -34,6 +35,7 @@ import { analyzeConfig } from './config-analysis';
 import { TradersAvailabilityService } from './services/TradersAvailabilityService';
 import type { JsonUtil } from '@spt/utils/JsonUtil';
 import { registerCustomRoutes } from './routes';
+import { performPathToTarkovInstallationAnalysis } from './installation-analysis';
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;
@@ -51,6 +53,8 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     const jsonUtil = container.resolve<JsonUtil>('JsonUtil');
     this.packageJson = readJsonFile(PACKAGE_JSON_PATH, jsonUtil);
 
+    performPathToTarkovInstallationAnalysis();
+
     this.userConfig = getUserConfig(jsonUtil);
     this.config = processConfig(
       readJsonFile(
@@ -59,7 +63,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       ),
     );
     this.spawnConfig = processSpawnConfig(
-      readJsonFile(path.join(CONFIGS_DIR, SPAWN_CONFIG_FILENAME), jsonUtil),
+      readJsonFile(path.join(DO_NOT_DISTRIBUTE_DIR, SPAWN_CONFIG_FILENAME), jsonUtil),
       this.config,
     );
 
