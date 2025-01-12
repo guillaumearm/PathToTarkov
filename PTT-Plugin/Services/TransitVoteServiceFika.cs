@@ -27,7 +27,7 @@ public static class TransitVoteServiceFika
 
     public static void Init()
     {
-        FikaEventDispatcher.SubscribeEvent<FikaNetworkManagerCreatedEvent>(RegisterPackets);
+        FikaEventDispatcher.SubscribeEvent<FikaNetworkManagerCreatedEvent>(OnFikaNetworkManagerCreated);
         Logger.Info("Initialized Transit Vote service");
     }
 
@@ -190,7 +190,7 @@ public static class TransitVoteServiceFika
         }
     }
 
-    private static void RegisterPackets(FikaNetworkManagerCreatedEvent createdEvent)
+    private static void OnFikaNetworkManagerCreated(FikaNetworkManagerCreatedEvent createdEvent)
     {
         IFikaNetworkManager networkManager = createdEvent.Manager;
         if (networkManager == null)
@@ -198,6 +198,8 @@ public static class TransitVoteServiceFika
             Logger.Error("(FIKA) Cannot register packets because networkManager is not found");
             return;
         }
+
+        Helpers.Fika.FikaNetworkManager = networkManager;
 
         networkManager.RegisterPacket<PlayerVotedForExfilTargetPacket, NetPeer>(HandlePlayerVotedForExfil);
         Logger.Info("(FIKA) Registered PlayerVotedForExfilTargetPacket");

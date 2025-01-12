@@ -10,8 +10,15 @@ namespace PTT.Helpers;
 
 public static class Fika
 {
+    public static IFikaNetworkManager FikaNetworkManager { get; set; } = null;
     public static IFikaNetworkManager GetNetworkManager()
     {
+        if (FikaNetworkManager != null)
+        {
+            return FikaNetworkManager;
+        }
+
+        // fallback on the old way of doing it
         return Singleton<IFikaNetworkManager>.Instance;
     }
 
@@ -36,7 +43,7 @@ public static class Fika
             }
 
             return true;
-        }).ToList();
+        })?.ToList();
     }
 
     public static CoopPlayer GetMyPlayer()
