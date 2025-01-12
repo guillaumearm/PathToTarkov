@@ -35,7 +35,7 @@ export const registerCurrentLocationDataRoute = (
           const mapName = resolveMapNameFromLocation(info.locationId) as MapName;
 
           const response: CurrentLocationDataResponse = {
-            exfilsTargets: getExfilsTargets(config, mapName),
+            exfilsTargets: getExfilsTargets(pttController, config, mapName),
           };
 
           return JSON.stringify(response);

@@ -23,6 +23,16 @@ export class TradersController {
     private readonly logger: ILogger,
   ) {}
 
+  isTraderInstalled(traderId: string): boolean {
+    const traders = this.db.getTables().traders;
+
+    if (!traders) {
+      throw new Error('Fatal isTraderInstalled: no traders found in db');
+    }
+
+    return Boolean(traders[traderId]);
+  }
+
   initTraders(config: Config): void {
     this.disableFenceGiftForCoopExtracts();
 

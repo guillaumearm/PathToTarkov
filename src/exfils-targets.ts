@@ -5,6 +5,8 @@ import {
   resolveLocationIdFromMapName,
   resolveMapNameFromLocation,
 } from './map-name-resolver';
+import type { PathToTarkovController } from './path-to-tarkov-controller';
+import type { TradersController } from './traders-controller';
 
 // Warning: This type should be the same than the corresponding client type
 export type ExfilTarget = {
@@ -25,7 +27,11 @@ export type ExfilsTargets = {
   [exitName: string]: ExfilTarget[];
 };
 
-export const getExfilsTargets = (config: Config, mapName: MapName): ExfilsTargets => {
+export const getExfilsTargets = (
+  pttController: PathToTarkovController,
+  config: Config,
+  mapName: MapName,
+): ExfilsTargets => {
   const result: ExfilsTargets = {};
 
   const exfilsConfig = config.exfiltrations[mapName];
@@ -44,7 +50,7 @@ export const getExfilsTargets = (config: Config, mapName: MapName): ExfilsTarget
         transitMapId: resolveLocationIdFromMapName(parsed.transitTargetMapName ?? ''),
         transitSpawnPointId: parsed.transitTargetSpawnPointId ?? '',
         nextMaps: getNextMaps(config, parsed, mapName),
-        nextTraders: getNextTraders(config, parsed),
+        nextTraders: getNextTraders(pttController.tradersController, config, parsed),
       };
     });
 
@@ -90,7 +96,11 @@ const getNextMaps = (
   return ['PTT_ERROR_GET_NEXT_MAPS'];
 };
 
-const getNextTraders = (config: Config, parsedExfilTarget: ParsedExfilTarget): string[] => {
+const getNextTraders = (
+  tradersController: TradersController,
+  config: Config,
+  parsedExfilTarget: ParsedExfilTarget,
+): string[] => {
   if (!config.traders_access_restriction) {
     return [];
   }
@@ -104,7 +114,8 @@ const getNextTraders = (config: Config, parsedExfilTarget: ParsedExfilTarget): s
     const traderIds: string[] = Object.keys(config.traders_config).filter(traderId => {
       const traderConfig = config.traders_config[traderId];
 
-      if (!checkAccessVia(traderConfig.access_via, offraidPosition)) {
+      // do not show traders that are not installed
+      if (!tradersController.isTraderInstalled(traderId)) {
         return false;
       }
 
@@ -113,7 +124,13 @@ const getNextTraders = (config: Config, parsedExfilTarget: ParsedExfilTarget): s
         return false;
       }
 
-      return true;
+      // show accessible traders
+      if (checkAccessVia(traderConfig.access_via, offraidPosition)) {
+        return true;
+      }
+
+      // do not show the other traders
+      return false;
     });
 
     return traderIds;
