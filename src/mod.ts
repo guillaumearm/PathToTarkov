@@ -50,12 +50,14 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
   public preSptLoad(container: DependencyContainer): void {
     this.container = container;
+    this.logger = container.resolve<ILogger>('WinstonLogger');
     const jsonUtil = container.resolve<JsonUtil>('JsonUtil');
     this.packageJson = readJsonFile(PACKAGE_JSON_PATH, jsonUtil);
 
     performPathToTarkovInstallationAnalysis();
 
     this.userConfig = getUserConfig(jsonUtil);
+
     this.config = processConfig(
       readJsonFile(
         path.join(CONFIGS_DIR, this.userConfig.selectedConfig, CONFIG_FILENAME),
@@ -67,7 +69,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       this.config,
     );
 
-    this.logger = container.resolve<ILogger>('WinstonLogger');
     this.debug = this.config.debug
       ? (data: string) => this.logger.debug(`Path To Tarkov: ${data}`, true)
       : noop;
@@ -77,6 +78,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     }
 
     this.logger.info(`===> Loading ${getModDisplayName(this.packageJson, true)}`);
+    this.debug(`UserConfig is ${JSON.stringify(this.userConfig, undefined, 2)}`);
 
     if (this.config.debug) {
       this.debug('debug mode enabled');
