@@ -1486,8 +1486,10 @@
     },
   },
   exfiltrations_config: {
-    'Saferoom Exfil': {
-      override_tooltips_template: '$exfilDisplayName',
+    interchange: {
+      'Saferoom Exfil': {
+        override_tooltips_template: '$exfilDisplayName',
+      },
     },
   },
 }

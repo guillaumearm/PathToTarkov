@@ -228,11 +228,11 @@ type RawConfig = {
   exfiltrations: RawExfiltrations;
   infiltrations: Infiltrations;
   infiltrations_config?: InfiltrationsConfig;
-  exfiltrations_config?: Record<ExtractName, ExfiltrationConfig>; // TODO: validate in config-analysis
-  exfiltrations_tooltips_template?: string; // TODO(config-analysis): error when unknown template variable usage is found
-  transits_prompt_template?: ByLocale<string>; // TODO: validate in config-analysis
-  extracts_prompt_template?: ByLocale<string>; // TODO: validate in config-analysis
-  offraid_positions?: Record<OffraidPositionName, OffraidPositionDefinition>; // TODO: validate in config-analysis
+  exfiltrations_config?: ByMap<Record<ExtractName, ExfiltrationConfig>>;
+  exfiltrations_tooltips_template?: string;
+  transits_prompt_template?: ByLocale<string>;
+  extracts_prompt_template?: ByLocale<string>;
+  offraid_positions?: Record<OffraidPositionName, OffraidPositionDefinition>;
 };
 
 export type Config = Omit<

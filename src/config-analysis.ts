@@ -1,4 +1,4 @@
-import { isValidExfil, isValidExfilForMap } from './all-exfils';
+import { isValidExfilForMap } from './all-exfils';
 import type { ByLocale, ByMap } from './config';
 import {
   EMPTY_STASH,
@@ -218,7 +218,6 @@ const getErrorsForExfils = (config: Config): string[] => {
       errors.push(`${mapName} is now allowed as a map name in "exfiltrations"`);
     }
 
-    // check there is at least one exfil target
     const targetsByExfil = config.exfiltrations[mapName as MapName] ?? {};
     Object.keys(targetsByExfil).forEach(extractName => {
       // check there is no "." characters in given extractName
@@ -227,8 +226,15 @@ const getErrorsForExfils = (config: Config): string[] => {
       }
 
       const exfilTargets = targetsByExfil[extractName];
+      // check there is at least one exfil target
       if (exfilTargets.length === 0) {
         errors.push(`no exfil targets found for "exfiltrations.${mapName}.${extractName}"`);
+      }
+
+      if (!isValidExfilForMap(mapName, extractName)) {
+        errors.push(
+          `invalid extract name "${extractName}" for map "${mapName}" in "exfiltrations"`,
+        );
       }
     });
   });
@@ -240,26 +246,30 @@ const getErrorsForExfils = (config: Config): string[] => {
     }
   });
 
-  // Check for extract point name validity
-  Object.keys(config.exfiltrations).forEach(mapName => {
-    Object.keys(config.exfiltrations[mapName as MapName]).forEach(exfilName => {
-      if (!isValidExfilForMap(mapName, exfilName)) {
-        errors.push(`invalid extract name "${exfilName}" for map "${mapName}"`);
-      }
-    });
-  });
-
-  // check exfiltrations_config displayName locales
-  Object.keys(config.exfiltrations_config ?? {}).forEach(extractName => {
-    const displayNameByLocale = config.exfiltrations_config?.[extractName]?.displayName ?? {};
-    errors.push(...checkLocalesErrors(displayNameByLocale, `for extract "${extractName}"`));
-  });
-
-  // check exfiltrations_config extractName validity
-  Object.keys(config.exfiltrations_config ?? {}).forEach(extractName => {
-    if (!isValidExfil(extractName)) {
-      errors.push(`invalid extract name "${extractName}" found in "exfiltrations_config'`);
+  Object.keys(config.exfiltrations_config ?? {}).forEach(mapName => {
+    // check all exfils maps are valid
+    if (!ALLOWED_MAPS.includes(mapName)) {
+      errors.push(`${mapName} is now allowed as a map name in "exfiltrations_config"`);
     }
+
+    const configByExfils = config.exfiltrations_config?.[mapName as MapName] ?? {};
+
+    Object.keys(configByExfils).forEach(extractName => {
+      // check for extract point name validity (in exfiltrations_config)
+      if (!isValidExfilForMap(mapName, extractName)) {
+        errors.push(
+          `invalid extract name "${extractName}" for map "${mapName}" in "exfiltrations_config"`,
+        );
+      }
+
+      const displayNameByLocale = configByExfils[extractName]?.displayName ?? {};
+      errors.push(
+        ...checkLocalesErrors(
+          displayNameByLocale,
+          `for extract "${extractName}" on map "${mapName}"`,
+        ),
+      );
+    });
   });
 
   return errors;
