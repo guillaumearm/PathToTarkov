@@ -1,0 +1,29 @@
+{
+  // On first installation, profile creation or player death (when `reset_offraid_position_on_player_die` is true)
+  initial_offraid_position: 'MainHideout',
+
+  // Here is where you define all your offraid positions and corresponding infiltrations (by map)
+  infiltrations: {
+    MainHideout: {
+      bigmap: ['Dorms Car'], // "Dorms Car" is the name of the spawnpoint in `shared_player_spawnpoints.json5`
+    },
+  },
+
+  // Here is where you define your exil target for a given exfil name (by map)
+  // You can find a complete list of vanilla exfils in ALL_EXFILS.md
+  exfiltrations: {
+    bigmap: {
+      'Dorms V-Ex': ['MainHideout'],
+    },
+  },
+
+  offraid_positions: {
+    MainHideout: {
+      displayName: {
+        en: 'The main hideout',
+        fr: 'La cachette principale',
+        // other languages...
+      },
+    },
+  },
+}
