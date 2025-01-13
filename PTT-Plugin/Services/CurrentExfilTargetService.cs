@@ -18,7 +18,7 @@ internal static class CurrentExfilTargetService
 
     public static string ConsumeExitName()
     {
-        string customExitName = CurrentExfilTarget.GetCustomExitName();
+        string customExitName = CurrentExfilTarget?.GetCustomExitName() ?? null;
         CurrentExfilTarget = null;
         return customExitName;
     }
