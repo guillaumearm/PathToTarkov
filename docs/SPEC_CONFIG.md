@@ -1,0 +1,3 @@
+# Path To Tarkov config specification
+
+Work In Progress...
