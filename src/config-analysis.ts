@@ -10,7 +10,7 @@ import {
 import { parseExilTargetFromPTTConfig } from './exfils-targets';
 import { ensureArray, isEmpty } from './utils';
 
-const MIN_NEEDED_MAPS = [
+const ALLOWED_MAPS = [
   'laboratory',
   'factory4_day',
   'factory4_night',
@@ -22,9 +22,8 @@ const MIN_NEEDED_MAPS = [
   'woods',
   'tarkovstreets',
   'sandbox', // ground zero
+  'sandbox_high', // ground zero (level 20+)
 ];
-
-const ALLOWED_MAPS = [...MIN_NEEDED_MAPS, 'sandbox_high'];
 
 export type ConfigValidationResult = {
   errors: string[];
@@ -201,6 +200,7 @@ const getWarningsForOffraidPositions = (config: Config): string[] => {
     }
 
     const spawnsByMap = config.infiltrations[offraidPosition];
+
     const hash = getInfiltrationHash(spawnsByMap);
     if (offraidPosByHash[hash]) {
       warnings.push(
@@ -250,13 +250,6 @@ const getErrorsForExfils = (config: Config): string[] => {
         );
       }
     });
-  });
-
-  // check for missing maps
-  MIN_NEEDED_MAPS.forEach(mapName => {
-    if (!config.exfiltrations[mapName as MapName]) {
-      errors.push(`${mapName} is missing in "exfiltrations"`);
-    }
   });
 
   Object.keys(config.exfiltrations_config ?? {}).forEach(mapName => {
@@ -528,7 +521,7 @@ export const analyzeConfig = (config: Config, spawnConfig: SpawnConfig): ConfigV
 
   // check there is at least one map
   if (isEmpty(config.exfiltrations)) {
-    errors.push('no map found found in "exfiltrations"');
+    errors.push('no map found in "exfiltrations"');
   }
 
   // check initial_offraid_position

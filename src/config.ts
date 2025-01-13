@@ -371,7 +371,7 @@ const prepareAutomaticTransitsCreation = (config: Config): void => {
     const targetsByExfil = exfiltrations[mapName as MapName];
 
     Object.keys(targetsByExfil).forEach(exfilName => {
-      const exfilTargets = targetsByExfil[exfilName];
+      const exfilTargets = ensureArray(targetsByExfil[exfilName]);
       const newExfilTargets: string[] = [];
 
       exfilTargets.forEach(exfilTarget => {
@@ -400,23 +400,51 @@ const prepareAutomaticTransitsCreation = (config: Config): void => {
 export const processConfig = (originalConfig: RawConfig): Config => {
   const rawConfig = deepClone(originalConfig);
 
-  rawConfig.exfiltrations = prepareGroundZeroHigh(rawConfig.exfiltrations);
+  rawConfig.infiltrations = rawConfig.infiltrations ?? {};
+  rawConfig.infiltrations_config = rawConfig.infiltrations_config ?? {};
+  rawConfig.exfiltrations = prepareGroundZeroHigh(rawConfig.exfiltrations ?? {});
 
   Object.keys(rawConfig.infiltrations).forEach(offraidPosition => {
     rawConfig.infiltrations[offraidPosition] = prepareGroundZeroHigh(
       rawConfig.infiltrations[offraidPosition],
     );
+
+    Object.keys(rawConfig.infiltrations[offraidPosition] ?? {}).forEach(mapName => {
+      const spawns = ensureArray(
+        rawConfig.infiltrations[offraidPosition][mapName as MapName] ?? [],
+      );
+      rawConfig.infiltrations[offraidPosition][mapName as MapName] = spawns;
+    });
   });
 
-  const stashConfigs: StashConfig[] = rawConfig.hideout_secondary_stashes.map(toStashConfig);
-  const infiltrationsConfig = rawConfig.infiltrations_config ?? {};
-  const exfiltrations = fromRawExfiltrations(rawConfig.exfiltrations);
+  const stashConfigs: StashConfig[] = rawConfig.hideout_secondary_stashes?.map(toStashConfig) ?? [];
+  const infiltrationsConfig = rawConfig.infiltrations_config;
+  const exfiltrations = fromRawExfiltrations(rawConfig.exfiltrations ?? {});
 
   const config: Config = {
     ...rawConfig,
+    hideout_main_stash_access_via: rawConfig.hideout_main_stash_access_via ?? ['*'],
     hideout_secondary_stashes: stashConfigs,
     infiltrations_config: infiltrationsConfig,
     exfiltrations,
+    offraid_regen_config: {
+      ...rawConfig.offraid_regen_config,
+      hydration: {
+        ...rawConfig.offraid_positions?.hydration,
+        access_via: [],
+      },
+      energy: {
+        ...rawConfig.offraid_positions?.energy,
+        access_via: [],
+      },
+      health: {
+        ...rawConfig.offraid_positions?.health,
+        access_via: [],
+      },
+    },
+    traders_config: {
+      ...rawConfig.traders_config,
+    },
   };
 
   if (config.enable_automatic_transits_creation) {
