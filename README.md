@@ -28,6 +28,10 @@ Players have the freedom to create their own unique paths by customizing offraid
 - Like any other mods, you juste have to unpack the zip in your SPT folder.
 - For uninstallation, please read about the [uninstallation procedure](./docs/HOW_TO_UNINSTALL.md)
 
+## Recommended mods
+- [Dynamic Maps](https://hub.sp-tarkov.com/files/file/1981-dynamic-maps/): is very useful to learn your exfils
+- [Leave It There](https://hub.sp-tarkov.com/files/file/2572-leave-it-there/): LIT is the perfect companion for Path To Tarkov, you can place any item in raid and it will persist across multiple raids until you pick it back up!
+
 ## Overview
 
 ### Dynamic Map Access
@@ -49,10 +53,6 @@ TODO
 Tarkov's tooltip template has been reworked to fit the mod.
 
 TODO
-
-## Recommended mods
-- [Dynamic Maps](https://hub.sp-tarkov.com/files/file/1981-dynamic-maps/): is very useful to learn your exfils
-- [Leave It There](https://hub.sp-tarkov.com/files/file/2572-leave-it-there/): LIT is the perfect companion for Path To Tarkov, you can place any item in raid and it will persist across multiple raids until you pick it back up!
 
 ## Path To Tarkov configurations
 
