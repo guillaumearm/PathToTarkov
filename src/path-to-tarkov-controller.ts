@@ -236,11 +236,7 @@ export class PathToTarkovController {
       return;
     }
 
-    if (!this.tooltipsTemplater) {
-      this.tooltipsTemplater = this.createTooltipsTemplater();
-    }
-
-    const localeValues = this.tooltipsTemplater.debugTooltipsForLocale(debugLocale, config);
+    const localeValues = this.getTooltipsTemplater().debugTooltipsForLocale(debugLocale, config);
     this.debug(`debug exfils tooltips => ${JSON.stringify(localeValues, undefined, 2)}`);
   }
 
@@ -254,6 +250,14 @@ export class PathToTarkovController {
     return new ExfilsTooltipsTemplater(allLocales);
   }
 
+  private getTooltipsTemplater(): ExfilsTooltipsTemplater {
+    if (!this.tooltipsTemplater) {
+      this.tooltipsTemplater = this.createTooltipsTemplater();
+    }
+
+    return this.tooltipsTemplater;
+  }
+
   // TODO: make it dynamic (aka intercept instead of mutating the db)
   private injectTooltipsInLocales(config: Config): void {
     const allLocales = this.db.getTables()?.locales?.global;
@@ -262,11 +266,7 @@ export class PathToTarkovController {
       throw new Error('Path To Tarkov: no locales found in db');
     }
 
-    if (!this.tooltipsTemplater) {
-      throw new Error('Path To Tarkov: tooltips templater is missing');
-    }
-
-    const partialLocales = this.tooltipsTemplater.computeLocales(config);
+    const partialLocales = this.getTooltipsTemplater().computeLocales(config);
     const report = mutateLocales(allLocales, partialLocales);
 
     const nbValuesUpdated = report.nbTotalValuesUpdated / report.nbLocalesImpacted;
