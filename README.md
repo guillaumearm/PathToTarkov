@@ -52,10 +52,7 @@ TODO
 
 ## Recommended mods
 - [Dynamic Maps](https://hub.sp-tarkov.com/files/file/1981-dynamic-maps/): is very useful to learn your exfils
-- [Leave It There](https://hub.sp-tarkov.com/files/file/2572-leave-it-there/): LIT is the perfect companion for Path To Tarkov: you can place any item in raid and it will persist across multiple raids until you pick it back up!
-
-## How to report a bug
-Please [read the HOW_TO_REPORT_A_BUG.md](./docs/HOW_TO_REPORT_A_BUG.md).
+- [Leave It There](https://hub.sp-tarkov.com/files/file/2572-leave-it-there/): LIT is the perfect companion for Path To Tarkov, you can place any item in raid and it will persist across multiple raids until you pick it back up!
 
 ## Path To Tarkov configurations
 
@@ -80,14 +77,20 @@ You have to update the `selectedConfig` value in your `UserConfig.json5` file to
    }
    ```
 
-### More documentation
+### More reading
 
 - [Frequently Asked Question](./docs/FAQ.md)
+- [Planned features](https://github.com/guillaumearm/PathToTarkov/issues?q=is%3Aopen+is%3Aissue+label%3Afeature)
+- [Known issues](https://github.com/guillaumearm/PathToTarkov/issues?q=is:open+is:issue+label:bug)
 - [Create your config](./docs/HOW_TO_CREATE_CONFIG.md)
 - [List of available player spawnpoints](./configs/shared_player_spawnpoints.json5) 
 - [List of available vanilla extracts](./ALL_EXFILS.md)
 - [Tutorial: create a config from scratch](./docs/TUTORIAL_CONFIG.md)
 - [PTT config specification](./docs/SPEC_CONFIG.md)
+
+
+## How to report a bug
+If you want to report a bug, I'll need some details so please [read the HOW_TO_REPORT_A_BUG.md](./docs/HOW_TO_REPORT_A_BUG.md).
 
 ## Credits
 - Thanks to the SPT team <3
