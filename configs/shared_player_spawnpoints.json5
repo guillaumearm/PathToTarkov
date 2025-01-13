@@ -24,70 +24,70 @@
   factory4_day: {
     'Gate 3': {
       Position: [57.89, 0.3, 49.57],
-      Rotation: 238.056732,
+      Rotation: 270,
     },
     Courtyard: {
       Position: [24.91, 1.18, 53.76],
-      Rotation: 238.056732,
+      Rotation: 270,
     },
     'Gate 0': {
       Position: [-51.44, 1.31, 55.24],
-      Rotation: 238.056732,
+      Rotation: 180,
     },
     'Med tent gates': {
       Position: [-18.21, 0.3, -43.48],
-      Rotation: 238.056732,
+      Rotation: 90,
     },
     'Transit to Customs': {
       Position: [15.94, -0.29, -44.01],
-      Rotation: 238.056732,
+      Rotation: 90,
     },
     'Transit to Labs': {
       Position: [-26.71, -4.75, -35.46],
-      Rotation: 238.056732,
+      Rotation: 90,
     },
     'Camera Bunker Door': {
       Position: [-15.17, -2.61, 39.17],
-      Rotation: 238.056732,
+      Rotation: 270,
     },
     Cellars: {
       Position: [65.02, -2.63, -31.82],
-      Rotation: 238.056732,
+      Rotation: 0,
     },
   },
   // Factory night
   factory4_night: {
     'Gate 3': {
       Position: [57.89, 0.3, 49.57],
-      Rotation: 238.056732,
+      Rotation: 270,
     },
     Courtyard: {
       Position: [24.91, 1.18, 53.76],
-      Rotation: 238.056732,
+      Rotation: 270,
     },
     'Gate 0': {
       Position: [-51.44, 1.31, 55.24],
-      Rotation: 238.056732,
+      Rotation: 180,
     },
     'Med tent gates': {
       Position: [-18.21, 0.3, -43.48],
-      Rotation: 238.056732,
+      Rotation: 90,
     },
-    'Transit Factory to Customs': {
+    'Transit to Customs': {
       Position: [15.94, -0.29, -44.01],
-      Rotation: 238.056732,
+      Rotation: 90,
     },
-    'Transit Factory to Labs': {
+    'Transit to Labs': {
       Position: [-26.71, -4.75, -35.46],
-      Rotation: 238.056732,
+      Rotation: 90,
     },
     'Camera Bunker Door': {
       Position: [-15.17, -2.61, 39.17],
-      Rotation: 238.056732,
+      Rotation: 270,
     },
     Cellars: {
       Position: [65.02, -2.63, -31.82],
-      Rotation: 238.056732,
+      Rotation: 0,
     },
   },
 
