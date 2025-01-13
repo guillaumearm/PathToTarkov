@@ -105,7 +105,7 @@ public static class CustomExfilService
     {
         if (Plugin.FikaIsInstalled && exfilTarget.isTransit)
         {
-            return TransitVoteServiceFika.IsTransitDisabledByVote(exfilTarget);
+            return TransitVoteServiceFika.IsTransitDisabled(exfilTarget);
         }
         return false;
     }

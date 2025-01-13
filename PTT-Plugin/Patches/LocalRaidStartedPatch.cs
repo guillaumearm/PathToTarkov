@@ -26,7 +26,7 @@ internal class LocalRaidStartedPatch() : ModulePatch
             __result = HandleLocalSettingsTask(__result);
         }
 
-        Plugin.InitRaid();
+        Plugin.RaidStarted();
     }
 
     private static async Task<LocalSettings> HandleLocalSettingsTask(Task<LocalSettings> originalTask)

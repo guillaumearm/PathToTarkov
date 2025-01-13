@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Comfort.Common;
+using EFT;
 using Fika.Core.Coop.Components;
 using Fika.Core.Coop.Players;
 using Fika.Core.Coop.Utils;
@@ -69,8 +71,18 @@ public static class Fika
         return Singleton<FikaServer>.Instantiated;
     }
 
+    public static bool IsHostPlayer()
+    {
+        return IsHost() && !IsDedicated();
+    }
+
     public static bool IsClient()
     {
         return Singleton<FikaClient>.Instantiated;
+    }
+
+    public static bool IsDedicated()
+    {
+        return FikaBackendUtils.IsDedicated;
     }
 }

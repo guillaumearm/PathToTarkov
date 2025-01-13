@@ -5,6 +5,7 @@ using BepInEx.Bootstrap;
 using PTT.Services;
 using System;
 using EFT.Communications;
+using EFT.UI;
 
 namespace PTT;
 
@@ -77,11 +78,12 @@ public class Plugin : BaseUnityPlugin
         }
     }
 
-    public static void InitRaid()
+    // Warning: use GameStarted to get a coopPlayer
+    public static void RaidStarted()
     {
         if (FikaIsInstalled)
         {
-            TransitVoteServiceFika.InitRaid();
+            TransitVoteServiceFika.OnRaidStarted();
         }
 
         if (CurrentLocationDataService != null)
@@ -102,7 +104,22 @@ public class Plugin : BaseUnityPlugin
         }
 
         DisplayInteractableExfilsAPIWarning();
-        Helpers.Logger.Info("Raid initialized!");
+        Helpers.Logger.Info("Raid started!");
+    }
+
+    public static void GameStarted()
+    {
+        if (FikaIsInstalled)
+        {
+            TransitVoteServiceFika.OnGameStarted();
+        }
+
+        Helpers.Logger.Info("Game started!");
+    }
+
+    public static void RaidEnded()
+    {
+        Helpers.Logger.Info("Raid ended!");
     }
 
     public static void DisplayInteractableExfilsAPIWarning()

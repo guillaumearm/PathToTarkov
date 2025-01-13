@@ -26,6 +26,7 @@ internal class LocalRaidEndedPatch() : ModulePatch
             results.exitName = customExtractName;
         }
 
+        Plugin.RaidEnded();
         return true;
     }
 }

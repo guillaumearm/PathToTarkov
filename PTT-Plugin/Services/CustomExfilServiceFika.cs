@@ -46,9 +46,9 @@ internal static class CustomExfilServiceFika
         coopGame.Extract(coopPlayer, exfil, null);
 
         // 4. Disable transit vote if host has extracted
-        if (Helpers.Fika.IsHost())
+        if (Helpers.Fika.IsHostPlayer())
         {
-            TransitVoteServiceFika.SendDisableTransitVotePacket("Host has extracted");
+            TransitVoteServiceFika.SendDisableTransitVotePacket("Player host has extracted");
         }
 
         Logger.Info($"(FIKA) extraction done for profile {coopPlayer.ProfileId}");
@@ -56,7 +56,7 @@ internal static class CustomExfilServiceFika
 
     public static void TransitTo(ExfilTarget exfilTarget)
     {
-        if (FikaBackendUtils.IsDedicated)
+        if (Helpers.Fika.IsDedicated())
         {
             DedicatedTransitTo(exfilTarget);
             return;

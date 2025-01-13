@@ -16,6 +16,7 @@ using Fika.Core.Coop.Utils;
 using PTT.Data;
 using PTT.Helpers;
 using PTT.Packets;
+using EFT;
 
 namespace PTT.Services;
 
@@ -31,11 +32,17 @@ public static class TransitVoteServiceFika
         Logger.Info("Initialized Transit Vote service");
     }
 
-    public static void InitRaid()
+    // coopPlayer is not available yet (use OnGameStarted if you need to init something using the coopPlayer)
+    public static void OnRaidStarted()
     {
         Votes = [];
         ExfilAction = null;
         Enabled = true;
+    }
+
+    public static void OnGameStarted()
+    {
+        RegisterPlayerHostDeadEvent();
     }
 
     public static void VoteForExfil(ExfilTarget exfilTarget, Action exfilAction)
@@ -76,7 +83,7 @@ public static class TransitVoteServiceFika
         CoopHandler coopHandler = Helpers.Fika.GetCoopHandler();
         if (coopHandler == null)
         {
-            Logger.Error("(FIKA) Cannot vote for exfil because no CoopHandler found");
+            Logger.Error("(FIKA) Cannot cancel vote for exfil because no CoopHandler found");
             return;
         }
 
@@ -108,7 +115,7 @@ public static class TransitVoteServiceFika
         }
     }
 
-    public static bool IsTransitDisabledByVote(ExfilTarget exfilTarget)
+    public static bool IsTransitDisabled(ExfilTarget exfilTarget)
     {
         if (!Enabled)
         {
@@ -213,6 +220,50 @@ public static class TransitVoteServiceFika
         }
     }
 
+    public static void RegisterPlayerHostDeadEvent()
+    {
+        if (!Helpers.Fika.IsHostPlayer())
+        {
+            Logger.Info("player death event not registered because no player host detected");
+            return;
+        }
+
+        CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
+
+        if (coopPlayer == null)
+        {
+            Logger.Error("coopPlayer not found when trying to register OnPlayerDead event");
+            return;
+        }
+
+        // avoid multiple registration
+        coopPlayer.OnPlayerDead -= OnHostPlayerDead;
+        coopPlayer.OnPlayerDead += OnHostPlayerDead;
+
+        Logger.Info("Registered OnPlayerDead event");
+    }
+
+    private static void OnHostPlayerDead(Player player, IPlayer lastAggressor, DamageInfoStruct damageInfo, EBodyPart part)
+    {
+        CoopPlayer coopPlayer = (CoopPlayer)Singleton<GameWorld>.Instance.MainPlayer;
+        if (coopPlayer == null)
+        {
+            Logger.Error("coopPlayer not found on player death");
+            return;
+        }
+
+        if (coopPlayer.ProfileId != player.ProfileId)
+        {
+            return;
+        }
+
+        string message = "Player host is dead";
+        Enabled = false;
+        CancelVoteForExfil(null);
+        SendDisableTransitVotePacket(message);
+        Logger.Info(message);
+    }
+
     private static void PerformAllExfil()
     {
         if (!Singleton<FikaServer>.Instantiated)
@@ -251,7 +302,7 @@ public static class TransitVoteServiceFika
 
     private static void PerformLocalExfil()
     {
-        if (FikaBackendUtils.IsDedicated)
+        if (Helpers.Fika.IsDedicated())
         {
             ExfilTarget exfilTarget = RetrieveFirstVote();
             if (exfilTarget == null)
