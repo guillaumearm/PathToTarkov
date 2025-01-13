@@ -1,5 +1,5 @@
 import type { RepeatableQuestGenerator } from '@spt/generators/RepeatableQuestGenerator';
-import type { TraderInfo } from '@spt/models/eft/common/tables/IBotBase';
+import type { ITraderInfo } from '@spt/models/eft/common/tables/IBotBase';
 import type { IRepeatableQuest } from '@spt/models/eft/common/tables/IRepeatableQuests';
 import type { IRepeatableQuestConfig } from '@spt/models/spt/config/IQuestConfig';
 import type { IQuestTypePool } from '@spt/models/spt/repeatable/IQuestTypePool';
@@ -17,8 +17,9 @@ export const fixRepeatableQuests = (container: DependencyContainer): void => {
         repeatableQuestGenerator.generateRepeatableQuest.bind(repeatableQuestGenerator);
 
       repeatableQuestGenerator.generateRepeatableQuest = (
+        sessionId: string,
         pmcLevel: number,
-        pmcTradersInfo: Record<string, TraderInfo>,
+        pmcTradersInfo: Record<string, ITraderInfo>,
         questTypePool: IQuestTypePool,
         repeatableConfig: IRepeatableQuestConfig,
       ): IRepeatableQuest => {
@@ -32,6 +33,7 @@ export const fixRepeatableQuests = (container: DependencyContainer): void => {
         });
 
         return originalGenerateRepeatableQuest(
+          sessionId,
           pmcLevel,
           clonedPmcTradersInfo,
           questTypePool,

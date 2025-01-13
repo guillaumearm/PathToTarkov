@@ -1,15 +1,23 @@
 import { readFileSync, existsSync, writeFileSync } from 'fs';
+import { createHash } from 'crypto';
+import type { JsonUtil } from '@spt/utils/JsonUtil';
 
 export const fileExists = (path: string): boolean => {
   return existsSync(path);
 };
 
-export const readJsonFile = <T>(path: string): T => {
+export const readJsonFile = <T>(path: string, jsonUtil: JsonUtil): T => {
   if (!existsSync(path)) {
     throw new Error(`Path To Tarkov cannot read json file "${path}"`);
   }
 
-  return JSON.parse(readFileSync(path, 'utf-8'));
+  const parsedResult = jsonUtil.deserializeJson5<T>(readFileSync(path, 'utf-8'));
+
+  if (!parsedResult) {
+    throw new Error(`Path To Tarkov cannot parse json5 file "${path}"`);
+  }
+
+  return parsedResult;
 };
 
 export const writeJsonFile = <T>(path: string, x: T): void => {
@@ -33,7 +41,7 @@ export const getModDisplayName = (packageJson: PackageJson, withVersion = false)
   return `${packageJson.displayName}`;
 };
 
-// deep clone taken on stackoverflow
+// stackoverflow deep clone
 export function deepClone<T>(item: T): T {
   if (!item) {
     return item;
@@ -102,16 +110,28 @@ export function shuffle<T>(givenArray: T[]): T[] {
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export function noop(): void {}
 
+export const isEmpty = (obj: object): boolean => {
+  return Object.keys(obj).length === 0;
+};
+
 export const isEmptyArray = <T>(arr: T[] | undefined): boolean => {
   return Boolean(arr && arr.length > 0);
 };
 
-export const isLetter = (char: string): boolean => {
+export const isLetterChar = (char: string): boolean => {
   return char.length === 1 && char.toUpperCase() !== char.toLowerCase();
 };
 
-export const isDigit = (char: string): boolean => {
+export const isLowerLetterChar = (char: string): boolean => {
+  return isLetterChar(char) && char.toLowerCase() === char;
+};
+
+export const isDigitChar = (char: string): boolean => {
   return char.length === 1 && char >= '0' && char <= '9';
+};
+
+export const isHexaChar = (char: string): boolean => {
+  return isDigitChar(char) || (char.length === 1 && char >= 'a' && char <= 'f');
 };
 
 export const ensureArray = <T>(x: T | T[]): T[] => {
@@ -120,4 +140,48 @@ export const ensureArray = <T>(x: T | T[]): T[] => {
   }
 
   return [x];
+};
+
+export const isNotUndefined = <T>(x: T | undefined): x is T => {
+  return x !== undefined;
+};
+
+/**
+ * Mongo Ids
+ */
+const MONGO_ID_LENGTH = 24;
+
+export const isValidMongoId = (id: string): boolean => {
+  if (id.length !== MONGO_ID_LENGTH) {
+    return false;
+  }
+
+  for (const char of id) {
+    const isValidChar = isHexaChar(char);
+
+    if (!isValidChar) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+const sha1 = (data: string): string => {
+  const hash = createHash('sha1');
+  hash.update(data);
+  return hash.digest('hex');
+};
+
+export const MONGO_ID_PTT_PREFIX = 'deadbeef';
+
+/**
+ * This function is used to generate predictable mongo ids
+ * a "deadbeef" prefix is added to help debugging profiles
+ */
+export const getPTTMongoId = (data: string): string => {
+  const stripLength = MONGO_ID_LENGTH - MONGO_ID_PTT_PREFIX.length;
+  const strippedHash = sha1(data).substring(0, stripLength);
+
+  return MONGO_ID_PTT_PREFIX + strippedHash;
 };

@@ -1,22 +1,19 @@
 import type { RouteAction } from '@spt/di/Router';
-import type { Exit, SpawnPointParam } from '@spt/models/eft/common/ILocationBase';
+import type { IExit, ISpawnPointParam } from '@spt/models/eft/common/ILocationBase';
 import type { IHideoutArea } from '@spt/models/eft/hideout/IHideoutArea';
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { StaticRouterModService } from '@spt/services/mod/staticRouter/StaticRouterModService';
 
 import type { AccessVia, Config, PositionXYZ, Profile, SpawnPoint, StashConfig } from './config';
-import {
-  EMPTY_STASH,
-  SLOT_ID_HIDEOUT,
-  SLOT_ID_LOCKED_STASH,
-  STANDARD_STASH_ID,
-  VANILLA_STASH_IDS,
-} from './config';
-import { isDigit, isLetter } from './utils';
-import type { Item } from '@spt/models/eft/common/tables/IItem';
+import { EMPTY_STASH, SLOT_ID_HIDEOUT, SLOT_ID_LOCKED_STASH, VANILLA_STASH_IDS } from './config';
+import type { IItem } from '@spt/models/eft/common/tables/IItem';
+import type { AllLocalesInDb } from './services/LocaleResolver';
+
+export const isWildcardAccessVia = (access_via: AccessVia): boolean =>
+  access_via === '*' || access_via[0] === '*';
 
 export function checkAccessVia(access_via: AccessVia, value: string): boolean {
-  return access_via === '*' || access_via[0] === '*' || access_via.includes(value);
+  return isWildcardAccessVia(access_via) || access_via.includes(value);
 }
 
 const getPosition = (pos: SpawnPoint['Position']): PositionXYZ => {
@@ -29,13 +26,25 @@ const getPosition = (pos: SpawnPoint['Position']): PositionXYZ => {
   return pos;
 };
 
-export const PTT_INFILTRATION = 'PTT_INFILTRATION';
+// Note: this value will be lower-cased by the client (especially in `EligibleEntryPoints` exfil client property)
+export const PTT_INFILTRATION = 'ptt_infiltration';
+
+export const isPlayerSpawnPoint = (spawnPoint: ISpawnPointParam): boolean => {
+  return Boolean(spawnPoint.Categories.find(cat => cat === 'Player'));
+};
+
+export const rejectPlayerCategory = (spawn: ISpawnPointParam): ISpawnPointParam => {
+  return {
+    ...spawn,
+    Categories: spawn.Categories.filter(cat => cat !== 'Player'),
+  };
+};
 
 export const createSpawnPoint = (
   pos: SpawnPoint['Position'],
   rot: number,
   spawnId: string,
-): SpawnPointParam => {
+): ISpawnPointParam => {
   return {
     Id: spawnId,
     Position: getPosition(pos),
@@ -60,19 +69,75 @@ export const createSpawnPoint = (
   };
 };
 
-export const createExitPoint = (name: string): Exit => {
-  const Chance = 100;
-  const Count = 0;
-  const ExfiltrationTime = 10;
-  const MinTime = 0;
-  const MaxTime = 0;
-  const PlayersCount = 0;
-  const ExfiltrationType = 'Individual';
-  const PassageRequirement = 'None';
-  const RequirementTip = '';
+type ExitProps = {
+  Id: string;
+  PassageRequirement: string;
+  ExfiltrationType: string;
+  RequirementTip: string;
+  Count: number;
+  MaxTime: number;
+  MinTime: number;
+  PlayersCount: number;
+  Chance: number;
+  ExfiltrationTime: number;
+};
+
+// TODO: default_exfiltration_time_seconds field in config ?
+const DEFAULT_EXFILTRATION_TIME_IN_SECONDS = 30;
+
+const getDefaultExitProps = (): ExitProps => ({
+  Id: '',
+  PassageRequirement: 'None',
+  ExfiltrationType: 'Individual',
+  RequirementTip: '',
+  Count: 0,
+  MinTime: 0,
+  MaxTime: 0,
+  PlayersCount: 0,
+  Chance: 100,
+  ExfiltrationTime: DEFAULT_EXFILTRATION_TIME_IN_SECONDS,
+});
+
+const getExitProps = (originalExit: IExit | undefined): ExitProps => {
+  const newExitProps = getDefaultExitProps();
+
+  if (!originalExit) {
+    return newExitProps;
+  }
+
+  if (originalExit.PassageRequirement === 'WorldEvent') {
+    newExitProps.PassageRequirement = originalExit.PassageRequirement;
+    newExitProps.ExfiltrationType = originalExit.ExfiltrationType;
+    newExitProps.RequirementTip = originalExit.RequirementTip;
+  } else if (originalExit.PassageRequirement === 'Train') {
+    newExitProps.PassageRequirement = originalExit.PassageRequirement;
+    newExitProps.ExfiltrationType = originalExit.ExfiltrationType;
+    newExitProps.RequirementTip = originalExit.RequirementTip;
+    newExitProps.Id = originalExit.Id;
+    newExitProps.Count = originalExit.Count;
+    newExitProps.MinTime = originalExit.MinTime;
+    newExitProps.MaxTime = originalExit.MaxTime;
+  }
+
+  return newExitProps;
+};
+
+export const createExitPoint = (name: string, originalExit: IExit | undefined): IExit => {
+  const {
+    Id,
+    Count,
+    MinTime,
+    MaxTime,
+    ExfiltrationType,
+    PassageRequirement,
+    RequirementTip,
+    PlayersCount,
+    Chance,
+    ExfiltrationTime,
+  } = getExitProps(originalExit);
 
   return {
-    Id: '',
+    Id,
     Name: name,
     EntryPoints: PTT_INFILTRATION,
     Chance,
@@ -84,8 +149,7 @@ export const createExitPoint = (name: string): Exit => {
     ExfiltrationType,
     PassageRequirement,
     RequirementTip,
-    EventAvailable: true,
-    // the following properties are not used but needed to make TypeScript happy
+    EventAvailable: false,
     ChancePVE: Chance,
     CountPVE: Count,
     ExfiltrationTimePVE: ExfiltrationTime,
@@ -104,7 +168,8 @@ export const changeRestrictionsInRaid = (config: Config, db: DatabaseServer): vo
 
   globals?.config.RestrictionsInRaid.forEach(payload => {
     if (restrictionsConfig[payload.TemplateId]) {
-      payload.Value = restrictionsConfig[payload.TemplateId].Value;
+      payload.MaxInRaid = restrictionsConfig[payload.TemplateId].Value;
+      payload.MaxInLobby = Math.max(payload.MaxInRaid, payload.MaxInLobby);
     }
   });
 };
@@ -122,7 +187,7 @@ export const disableRunThrough = (db: DatabaseServer): void => {
 };
 
 // more infos on areas here: https://hub.sp-tarkov.com/doc/entry/4-resources-hideout-areas-ids/
-export const isIgnoredArea = (area: IHideoutArea, isWorkbenchAlwaysEnabled: boolean): boolean => {
+export const isIgnoredArea = (area: IHideoutArea): boolean => {
   if (typeof area.type !== 'number') {
     // invalid area
     return true;
@@ -134,7 +199,7 @@ export const isIgnoredArea = (area: IHideoutArea, isWorkbenchAlwaysEnabled: bool
   } else if (area.type === 6) {
     // water collector (prevent infinite loading menu at start)
     return true;
-  } else if (isWorkbenchAlwaysEnabled && area.type === 10) {
+  } else if (area.type === 10) {
     // workbench
     return true;
   } else if (area.type === 16) {
@@ -145,6 +210,9 @@ export const isIgnoredArea = (area: IHideoutArea, isWorkbenchAlwaysEnabled: bool
     return true;
   } else if (area.type === 21) {
     // christmas tree
+    return true;
+  } else if (area.type === 27) {
+    // circle of cultist
     return true;
   }
 
@@ -198,7 +266,7 @@ const getAllStashByIds = (
   return stashConfigs.reduce((acc, stashConfig) => {
     return {
       ...acc,
-      [stashConfig.id]: true,
+      [stashConfig.mongoId]: true,
     };
   }, initialAcc);
 };
@@ -223,26 +291,7 @@ export const setInventorySlotIds = (
   });
 };
 
-// the length should be 24
-const SPT_ID_LENGTH = STANDARD_STASH_ID.length;
-
-export const isVanillaSptId = (id: string): boolean => {
-  if (id.length !== SPT_ID_LENGTH) {
-    return false;
-  }
-
-  for (const char of id) {
-    const isValidChar = isLetter(char) || isDigit(char);
-
-    if (!isValidChar) {
-      return false;
-    }
-  }
-
-  return true;
-};
-
-const isStashLink = (item: Item): boolean => {
+const isStashLink = (item: IItem): boolean => {
   return (
     Boolean(item._id) &&
     Boolean(item._tpl) &&
@@ -251,12 +300,54 @@ const isStashLink = (item: Item): boolean => {
   );
 };
 
-export const retrieveMainStashIdFromItems = (items: Item[]): string | null => {
+const isPTTMongoId = (id: string, stashes: StashConfig[]): boolean => {
+  const foundId = stashes.find(stash => {
+    return id === stash.mongoId || id === stash.mongoTemplateId || id === stash.mongoGridId;
+  });
+
+  return Boolean(foundId);
+};
+
+export const retrieveMainStashIdFromItems = (
+  items: IItem[],
+  stashes: StashConfig[],
+): string | null => {
   for (const item of items) {
-    if (isStashLink(item) && isVanillaSptId(item._id)) {
+    if (isStashLink(item) && !isPTTMongoId(item._id, stashes)) {
       return item._id;
     }
   }
 
   return null;
 };
+
+export type LocalesMutationReport = {
+  nbLocalesImpacted: number;
+  nbTotalValuesUpdated: number;
+};
+
+export function mutateLocales(
+  allLocales: AllLocalesInDb,
+  partialLocales: Partial<AllLocalesInDb>,
+): LocalesMutationReport {
+  const report: LocalesMutationReport = {
+    nbLocalesImpacted: 0,
+    nbTotalValuesUpdated: 0,
+  };
+
+  void Object.keys(allLocales).forEach(localeName => {
+    if (partialLocales[localeName]) {
+      const values = allLocales[localeName];
+      const newValues = partialLocales[localeName] ?? {};
+      const nbNewValues = Object.keys(newValues).length;
+
+      if (nbNewValues > 0) {
+        void Object.assign(values, newValues); // mutation here
+        report.nbLocalesImpacted += 1;
+        report.nbTotalValuesUpdated += nbNewValues;
+      }
+    }
+  });
+
+  return report;
+}

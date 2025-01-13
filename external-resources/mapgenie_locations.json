@@ -121,6 +121,10 @@
     {
       "id": 88025,
       "description": "Med Tent Gate"
+    },
+    {
+      "id": 403860,
+      "description": "Courtyard Gate"
     }
   ],
   "interchange": [
@@ -441,12 +445,16 @@
       "description": "UN Roadblock"
     },
     {
-      "id": 24856,
-      "description": "Factory Gate (Co-Op)"
+      "id": 424607,
+      "description": "Friendship Bridge (Co-Op)"
     },
     {
       "id": 24857,
       "description": "RUAF Gate"
+    },
+    {
+      "id": 24857,
+      "description": "RUAF Roadblock"
     },
     {
       "id": 24858,
@@ -491,6 +499,10 @@
     {
       "id": 65038,
       "description": "Northern UN Roadblock"
+    },
+    {
+      "id": 410432,
+      "description": "Power Line Passage"
     }
   ],
   "groundzero": [

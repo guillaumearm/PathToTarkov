@@ -1,0 +1,559 @@
+{
+  /**
+   * DO NOT DISTRIBUTE THS FILE!
+   * Because the player spawnpoints marked in this file are shared between all configs
+   *
+   * Check the Path To Tarkov documentation on github to see how to create and distribute custom player spawnpoints
+   * You can still edit this file and submit a Pull Request on github if you want to contribute to the project.
+   */
+
+  /**
+   * Tip for rotation values (compass points)
+   * - South: 0
+   * - South West: 45
+   * - West: 90
+   * - North West: 135
+   * - North: 180
+   * - North East: 225
+   * - East: 270
+   * - South East: 315
+   */
+
+  // Factory day
+  // Reminder in case of edit: update also `factory4_night`
+  factory4_day: {
+    'Gate 3': {
+      Position: [57.89, 0.3, 49.57],
+      Rotation: 270,
+    },
+    Courtyard: {
+      Position: [24.91, 1.18, 53.76],
+      Rotation: 270,
+    },
+    'Gate 0': {
+      Position: [-51.44, 1.31, 55.24],
+      Rotation: 180,
+    },
+    'Med tent gates': {
+      Position: [-18.21, 0.3, -43.48],
+      Rotation: 90,
+    },
+    'Transit to Customs': {
+      Position: [15.94, -0.29, -44.01],
+      Rotation: 90,
+    },
+    'Transit to Labs': {
+      Position: [-26.71, -4.75, -35.46],
+      Rotation: 90,
+    },
+    'Camera Bunker Door': {
+      Position: [-15.17, -2.61, 39.17],
+      Rotation: 270,
+    },
+    Cellars: {
+      Position: [65.02, -2.63, -31.82],
+      Rotation: 0,
+    },
+  },
+  // Factory night
+  factory4_night: {
+    'Gate 3': {
+      Position: [57.89, 0.3, 49.57],
+      Rotation: 270,
+    },
+    Courtyard: {
+      Position: [24.91, 1.18, 53.76],
+      Rotation: 270,
+    },
+    'Gate 0': {
+      Position: [-51.44, 1.31, 55.24],
+      Rotation: 180,
+    },
+    'Med tent gates': {
+      Position: [-18.21, 0.3, -43.48],
+      Rotation: 90,
+    },
+    'Transit to Customs': {
+      Position: [15.94, -0.29, -44.01],
+      Rotation: 90,
+    },
+    'Transit to Labs': {
+      Position: [-26.71, -4.75, -35.46],
+      Rotation: 90,
+    },
+    'Camera Bunker Door': {
+      Position: [-15.17, -2.61, 39.17],
+      Rotation: 270,
+    },
+    Cellars: {
+      Position: [65.02, -2.63, -31.82],
+      Rotation: 0,
+    },
+  },
+
+  // Customs
+  bigmap: {
+    'Military Base CP': {
+      Position: [674.5625, 5.60742664, 123.641823],
+      Rotation: 238.056732,
+    },
+    'ZB-1011': {
+      Position: [629.4296, -2.77441788, -127.8221],
+      Rotation: 97.17987,
+    },
+    'ZB-1012': {
+      Position: [464.075, -2.68441629, -112.424088],
+      Rotation: 96.69592,
+    },
+    'ZB-1013': {
+      Position: [199.2377, -2.81965065, -145.043625],
+      Rotation: 341.8522,
+    },
+    Crossroads: {
+      Position: [-324.1054, -0.317715019, -91.3120041],
+      Rotation: 31.98688,
+    },
+    'Trailer Park': {
+      Position: [-310.01, 0.89, -215.43],
+      Rotation: 31.98688,
+    },
+    'Trailer Park Workers Shack': {
+      Position: [-251.01, 0.89, -227.43],
+      Rotation: 31.98688,
+    },
+    'RUAF Roadblock': {
+      Position: [-3.56247973, 1.08614612, -132.9248],
+      Rotation: 54.44671,
+    },
+    'Smugglers Boat': {
+      Position: [-28.292078, -11.5068331, 109.108429],
+      Rotation: 187.815948,
+    },
+    'Sniper Roadblock': {
+      Position: [30.446312, -0.259777457, 118.656456],
+      Rotation: 327.517334,
+    },
+    'Factory Far Corner': {
+      Position: [647.2151, 1.12474906, -150.711029],
+      Rotation: 331.2538,
+    },
+    'Old Gas Scav': {
+      Position: [302.545, 2.91025, -185.017761],
+      Rotation: 202.349335,
+    },
+    'RR to Military Base': {
+      Position: [458.392639, 4.95283127, 181.01564],
+      Rotation: 256.057983,
+    },
+    'RR to Port': {
+      Position: [-150.3853, 2.62803984, 23.7549515],
+      Rotation: 1.93337643,
+    },
+    'RR to Tarkov': {
+      Position: [-165.420151, 3.40357137, -200.949509],
+      Rotation: 6.05172825,
+    },
+    'Warehouse 17': {
+      Position: [48.11184, 1.10045552, -84.83577],
+      Rotation: 155.8685,
+    },
+    'Dorms Car': {
+      Position: [191.627884, -2.16589069, 208.912079],
+      Rotation: 278.0221,
+    },
+    'Scav CP': {
+      Position: [647.141, -0.3182248, -25.9616776],
+      Rotation: 307.1494,
+    },
+    'Administration Gate': {
+      Position: [667.3405, 1.064447, -58.31626],
+      rotation: 287.2482,
+    },
+  },
+
+  // Woods
+  woods: {
+    'Northern UN Roadblock': {
+      Position: [-555.2336, 9.391193, -76.86284],
+      Rotation: 138.160156,
+    },
+    'Factory Gate': {
+      Position: [-346.51947, -2.32620764, 353.3336],
+      Rotation: 174.779083,
+    },
+    'RUAF Gate': {
+      Position: [-146.51947, 1.22620764, 425.6336],
+      Rotation: 162.779083,
+    },
+    'ZB-014': {
+      Position: [447.93, -14.25, 67.26],
+      Rotation: 285.467377,
+    },
+    'ZB-016': {
+      Position: [-388.16, 3.25, 20.05],
+      Rotation: 115.467377,
+    },
+    'Sawmill River': {
+      Position: [-649.91, 8.61, -272.75],
+      Rotation: 138.160156,
+    },
+    Outskirts: {
+      Position: [334.693359, -11.418191, 327.578033],
+      Rotation: 160.7393,
+    },
+    'The Boat': {
+      Position: [190.682846, -14.9319124, 219.147934],
+      Rotation: 227.765961,
+    },
+    'Mountain Stash': {
+      Position: [-215.205872, 31.7007847, -209.631348],
+      Rotation: 335.046753,
+    },
+    'Sniper Rock Bunker': {
+      Position: [-155.286, 50.95411, -277.7933],
+      Rotation: 345.938324,
+    },
+    'UN Roadblock': {
+      Position: [-521.465332, -1.258715, 288.813171],
+      Rotation: 76.4774246,
+    },
+    'Scav Bridge': {
+      Position: [98.54763, 16.67556, -843.773254],
+      Rotation: -843.773254,
+    },
+    'Woods Vehicle Extract': {
+      Position: [-487.348541, 15.0604687, -497.965179],
+      Rotation: 24.781599,
+    },
+    'Old Station': {
+      Position: [-504.468628, 7.252748, 151.354584],
+      Rotation: 134.066681,
+    },
+    'Scav Bunker': {
+      Position: [224.07019, 20.14909, -708.5178],
+      Rotation: 104.772415,
+    },
+  },
+
+  // Military reserve
+  rezervbase: {
+    'Scav lands': {
+      Position: [-120.954071, -6.94097, -129.4829],
+      Rotation: 260.069275,
+    },
+    'Scav lands rail': {
+      Position: [-196.7502, -5.37225676, -114.267555],
+      Rotation: 93.10983,
+    },
+    Cliff: {
+      Position: [-15.9683733, 18.4609661, 195.898743],
+      Rotation: 190.4635,
+    },
+    'Checkpoint Fence': {
+      // RezervBase_cp_fence (exit4)
+      Position: [56.2388641, -6.94445145, 90.22048],
+      Rotation: 287.982239,
+    },
+    'Bunker Hermetic': {
+      Position: [64.5668, -6.95917463, -190.306641],
+      Rotation: 280.9828,
+    },
+    'Depot Hermetic': {
+      Position: [118.866768, -12.2845945, -119.324211],
+      Rotation: 299.889923,
+    },
+    'Heating Pipe': {
+      Position: [-9.3644, -5.60308161, -186.8873],
+      Rotation: 330.65134,
+    },
+    'Hole In Wall': {
+      Position: [-262.3644, -6.20308161, 47.7328873],
+      Rotation: 89.65134,
+    },
+    'Reserve Manhole': {
+      Position: [50.6118279, -6.97395849, 73.78378],
+      Rotation: 213.616745,
+    },
+    'Train Station': {
+      Position: [166.653687, -5.19410563, -144.143341],
+      Rotation: 191.8541,
+    },
+    'D-2': {
+      Position: [-116.999077, -18.3659115, 169.5836],
+      Rotation: 128.773651,
+    },
+  },
+
+  // Interchange
+  interchange: {
+    'Interchange Vehicle Extract': {
+      Position: [-242.849625, 21.32544, -372.680878],
+      Rotation: 52.06011,
+    },
+    'Fence Gap': {
+      Position: [-220.849625, 21.35, -40.680878],
+      Rotation: 52.06011,
+    },
+    Railway: {
+      Position: [473.177979, 18.4533634, -390.7554],
+      Rotation: 281.3094,
+    },
+    Emercom: {
+      Position: [-328.429871, 21.3254356, 260.571655],
+      Rotation: 73.0782242,
+    },
+    'Scav Camp': {
+      Position: [283.740051, 21.3254337, -34.4532776],
+      Rotation: 138.160156,
+    },
+    FromCrossroads: {
+      Position: [283.740051, 21.3254337, 265.4532776],
+      Rotation: 100.086945,
+    },
+    'Safe Room': {
+      Position: [-49.4776039, 21.3254585, 47.4479179],
+      Rotation: 344.7888,
+    },
+  },
+
+  // Shoreline
+  shoreline: {
+    'North Fence Passage': {
+      Position: [-510.430939, -11.9056053, -373.174316],
+      Rotation: 41.4962769,
+    },
+    'Old Bunker': {
+      Position: [-390.330939, -5.4056053, -374.74316],
+      Rotation: 41.4962769,
+    },
+    'Climbers Trail': {
+      Position: [-198.30939, -11.2056053, -360.54316],
+      Rotation: 56.4962769,
+    },
+    'Road to Customs': {
+      Position: [-864.0486, -43.44637, 16.5865173],
+      Rotation: 18.213295,
+    },
+    'Pier Boat': {
+      Position: [-311.829468, -64.56999, 559.7176],
+      Rotation: 210.594009,
+    },
+    'Shoreline Tunnel': {
+      Position: [356.304871, -59.9092941, 313.181915],
+      Rotation: 274.0321,
+    },
+    'Ruined Road': {
+      Position: [350.51, -59.67, 324.86],
+      Rotation: 55.0321,
+    },
+    'Admin Basement': {
+      Position: [-252.256073, -7.096292, -145.4518],
+      Rotation: 359.0387,
+    },
+    'CCP Temporary': {
+      Position: [-967.462463, -59.678566, 375.060669],
+      Rotation: 166.59436,
+    },
+    'Shoreline Northern Cliffs': {
+      Position: [-174.818451, -11.1724739, -364.436646],
+      Rotation: 330.086456,
+    },
+    'Railway Bridge': {
+      Position: [-1023.37292, -60.67251, 314.364075],
+      Rotation: 24.1157665,
+    },
+    'Path to Lighthouse': {
+      Position: [362.138428, -54.85863, -181.549271],
+      Rotation: 335.1047,
+    },
+    'Smugglers Path': {
+      Position: [-700.538428, -25.45863, -242.9271],
+      Rotation: 335.1047,
+    },
+  },
+
+  // Lighthouse
+  lighthouse: {
+    'Path to Shoreline': {
+      Position: [-284.0998, 14.4007835, -161.669266],
+      Rotation: 126.306564,
+    },
+    'Lighthouse Vehicle Extract': {
+      Position: [-316.70462, 15.1516333, -784.0004],
+      Rotation: 37.57063,
+    },
+    'Industrial Gates': {
+      Position: [-155.70462, 14.1516333, -789.0004],
+      Rotation: 347.57063,
+    },
+    'Lighthouse Tunnel': {
+      Position: [-54.28882, 5.95763159, 327.053345],
+      Rotation: 106.236305,
+    },
+    'Armored Train LH': {
+      Position: [10.0, 11.97, -870.85],
+      Rotation: 180.236305,
+    },
+    'Northeast Mountains': {
+      Position: [-362.13, 26.1, -535.54],
+      Rotation: 85.936305,
+    },
+    'Southern Road Water': {
+      Position: [-225.77, 0.02, 442.06],
+      Rotation: 120.936305,
+    },
+    Grotto: {
+      Position: [194.516525, -0.48209092, -491.773224],
+      Rotation: 182.743759,
+    },
+    'Northern CP': {
+      Position: [115.480957, 4.61967325, -980.5756],
+      Rotation: 347.679443,
+    },
+    'Lighthouse Docks Boat': {
+      Position: [164.16626, 0.317433029, -163.23497],
+      Rotation: 285.558533,
+    },
+    'Mountain Pass': {
+      Position: [-147.143173, 30.5996075, -4.088336],
+      Rotation: 74.17951,
+    },
+    'Southern Road': {
+      Position: [-215.268738, 5.94645643, 419.227417],
+      Rotation: 77.76075,
+    },
+  },
+
+  // Streets of Tarkov
+  tarkovstreets: {
+    'Streets Vehicle Extract': {
+      Position: [-8.757395, 2.31632733, 458.126923],
+      Rotation: 177.1993,
+    },
+    'Basement Descent': {
+      Position: [73.63199, -2.13371778, 56.0767555],
+      Rotation: 326.0107,
+    },
+    Catacombs: {
+      Position: [-243.837051, 0.6605578, 243.027969],
+      Rotation: 124.062996,
+    },
+    'Evacuation Zone': {
+      Position: [161.997284, 3.35329342, 419.626373],
+      Rotation: 241.142944,
+    },
+    'Klimov Street': {
+      Position: [-152.4702, 0.8981548, 76.18395],
+      Rotation: 10.636034,
+    },
+    'Sewer River': {
+      Position: [-263.4596, -2.58167219, 216.658859],
+      Rotation: 151.635468,
+    },
+    'Streets Manhole': {
+      Position: [279.991425, 3.43549061, 349.09433],
+      Rotation: 268.153534,
+    },
+    'Streets Ruined House': {
+      Position: [-244.822723, 6.355562, 344.1349],
+      Rotation: 87.62667,
+    },
+    'Streets Vents': {
+      Position: [-123.828979, 2.30664325, 432.900574],
+      Rotation: 244.029388,
+    },
+    Underpass: {
+      Position: [-2.86661983, -3.73687434, 6.0282855],
+      Rotation: 2.20911074,
+    },
+    'Zmeevsky Alley': {
+      Position: [176.868683, 0.7778812, 172.814636],
+      Rotation: 304.3322,
+    },
+    Crane: {
+      Position: [212.0187, 3.098404, 252.7016],
+      Rotation: 270.9422,
+    },
+    'Expo Checkpoint': {
+      Position: [215, -1.93, -88.75],
+      Rotation: 304.3322,
+    },
+    'Cardinal Appartments Parking': {
+      Position: [103.6, -1.9, -155.3],
+      Rotation: 304.3322,
+    },
+    'Cardinal Appartments': {
+      Position: [82.8, 3.97, -175.4],
+      Rotation: 304.3322,
+    },
+    'Crash Site': {
+      Position: [269.3, 3.4, 427.25],
+      Rotation: 87.62667,
+    },
+    'Kamchatskaya Arch': {
+      Position: [268.84, -4.46, 88.95],
+      Rotation: 270.0,
+    },
+    'Stylobate Elevator': {
+      Position: [-36.1, 9.63, -63.9],
+      Rotation: 304.3322,
+    },
+  },
+
+  // Laboratory
+  laboratory: {
+    'Cargo Elevator': {
+      Position: [-114.2475, 4.101831, -408.6356],
+      Rotation: 270.727661,
+    },
+    'Hangar Gate': {
+      Position: [-170.346313, 0.07315855, -249.111542],
+      Rotation: 208.741516,
+    },
+    'Lab Sewage Conduit': {
+      Position: [-123.794968, -4.985455, -260.754242],
+      Rotation: 185.730515,
+    },
+    'Lab Vents': {
+      Position: [-142.8083, -4.053963, -400.147034],
+      Rotation: 38.8127365,
+    },
+    'Main Elevator': {
+      Position: [-279.4339, -4.050967, -334.7585],
+      Rotation: 73.58874,
+    },
+    'Med Block Elevator': {
+      Position: [-114.566971, -4.05397, -343.565735],
+      Rotation: 275.983582,
+    },
+    'Parking Gate': {
+      Position: [-231.813736, 0.0220247321, -426.099579],
+      Rotation: 14.0038671,
+    },
+  },
+
+  // Ground Zero
+  // Note: `sandbox_high` spawnpoints are automatically created from `sandbox`
+  sandbox: {
+    'Nakatani Basement Stairs': {
+      Position: [5.295958, 22.73891, 331.8584],
+      Rotation: 132.0392,
+    },
+    'Mira Ave': {
+      Position: [215.1694, 16.01762, 40.5],
+      Rotation: 0.7702,
+    },
+    'Police Car': {
+      Position: [-12.97, 22.6, 116.99],
+      Rotation: 90.0,
+    },
+    'Scav Hideout': {
+      Position: [31.74341, 22.59711, -85.79424],
+      Rotation: 43.04764,
+    },
+    EmercomGZ: {
+      Position: [152.5, 24.1, -89.4],
+      Rotation: 0.85,
+    },
+  },
+}

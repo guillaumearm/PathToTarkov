@@ -1,47 +1,61 @@
 import type { IBodyHealth, IGlobals } from '@spt/models/eft/common/IGlobals';
-import type { ILocationBase } from '@spt/models/eft/common/ILocationBase';
+import type { IExit, ILocationBase, ISpawnPointParam } from '@spt/models/eft/common/ILocationBase';
 import type { ILogger } from '@spt/models/spt/utils/ILogger';
 import type { ConfigServer } from '@spt/servers/ConfigServer';
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { SaveServer } from '@spt/servers/SaveServer';
 
-import type { Config, ConfigGetter, MapName, Profile, SpawnConfig } from './config';
-import { EMPTY_STASH, MAPLIST, VANILLA_STASH_IDS } from './config';
+import type {
+  ByLocale,
+  Config,
+  ConfigGetter,
+  LocaleName,
+  MapName,
+  Profile,
+  SpawnConfig,
+} from './config';
+import { DEFAULT_FALLBACK_LANGUAGE, MAPLIST, VANILLA_STASH_IDS } from './config';
 
 import {
   changeRestrictionsInRaid,
   checkAccessVia,
   createExitPoint,
   createSpawnPoint,
+  disableRunThrough,
   isIgnoredArea,
+  isPlayerSpawnPoint,
+  mutateLocales,
   PTT_INFILTRATION,
+  rejectPlayerCategory,
 } from './helpers';
 
-import { getTemplateIdFromStashId, StashController } from './stash-controller';
+import { StashController } from './stash-controller';
 import { TradersController } from './traders-controller';
 import type { DependencyContainer } from 'tsyringe';
 import type { LocationController } from '@spt/controllers/LocationController';
-import { deepClone, shuffle } from './utils';
+import { deepClone, isNotUndefined, shuffle } from './utils';
 import { resolveMapNameFromLocation } from './map-name-resolver';
 import type {
   ILocationsGenerateAllResponse,
-  Path,
+  IPath,
 } from '@spt/models/eft/common/ILocationsSourceDestinationBase';
 import type { ILocations } from '@spt/models/spt/server/ILocations';
-import type { IGetLocationRequestData } from '@spt/models/eft/location/IGetLocationRequestData';
 import type { DataCallbacks } from '@spt/callbacks/DataCallbacks';
 import type { IEmptyRequestData } from '@spt/models/eft/common/IEmptyRequestData';
 import type { ITemplateItem } from '@spt/models/eft/common/tables/ITemplateItem';
 import type { IHideoutArea } from '@spt/models/eft/hideout/IHideoutArea';
-import type { LocationCallbacks } from '@spt/callbacks/LocationCallbacks';
 import type { IGetBodyResponseData } from '@spt/models/eft/httpResponse/IGetBodyResponseData';
-import type { Inventory } from '@spt/models/eft/common/tables/IBotBase';
 import { TradersAvailabilityService } from './services/TradersAvailabilityService';
 import { fixRepeatableQuestsForPmc } from './fix-repeatable-quests';
+import { KeepFoundInRaidTweak } from './keep-fir-tweak';
+import { ExfilsTooltipsTemplater } from './services/ExfilsTooltipsTemplater';
+import type { RaidCache } from './event-watcher';
+import type { AllLocalesInDb } from './services/LocaleResolver';
 
 type IndexedLocations = Record<string, ILocationBase>;
 
 // indexed by mapName
+// Warning: do not re-use, it should only be use by the `generateAll` override
 const getIndexedLocations = (locations: ILocations): IndexedLocations => {
   // WARNING: type lies here
   // TODO: improve type
@@ -58,23 +72,24 @@ const getIndexedLocations = (locations: ILocations): IndexedLocations => {
 };
 
 export class PathToTarkovController {
-  public stashController: StashController;
   public tradersController: TradersController;
-
+  public getConfig: ConfigGetter;
   // configs are indexed by sessionId
   private configCache: Record<string, Config> = {};
-  public getConfig: ConfigGetter;
+  private stashController: StashController;
+  private tooltipsTemplater: ExfilsTooltipsTemplater | undefined;
 
   constructor(
     private readonly baseConfig: Config,
     public spawnConfig: SpawnConfig,
-    public tradersAvailabilityService: TradersAvailabilityService,
+    private tradersAvailabilityService: TradersAvailabilityService,
     private readonly container: DependencyContainer,
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
     configServer: ConfigServer,
+    private readonly getRaidCache: (sessionId: string) => RaidCache | null,
     private readonly logger: ILogger,
-    private readonly debug: (data: string) => void,
+    public readonly debug: (data: string) => void,
   ) {
     this.getConfig = sessionId => {
       const existingConfig = this.configCache[sessionId];
@@ -102,6 +117,31 @@ export class PathToTarkovController {
     this.overrideControllers();
   }
 
+  loaded(config: Config): void {
+    // const allLocales = this.db.getTables()?.locales?.global;
+    const quests = this.db.getTables()?.templates?.quests;
+
+    if (!quests) {
+      throw new Error('Path To Tarkov: no quests found in db');
+    }
+
+    this.tradersAvailabilityService.init(quests);
+    this.injectTooltipsInLocales(config);
+    this.injectPromptTemplatesInLocales(config);
+    this.injectOffraidPositionDisplayNamesInLocales(config);
+    this.tradersController.initTraders(config);
+
+    const nbAddedTemplates = this.stashController.initSecondaryStashTemplates(
+      config.hideout_secondary_stashes,
+    );
+    this.debug(`${nbAddedTemplates} secondary stash templates added`);
+
+    if (!config.enable_run_through) {
+      disableRunThrough(this.db);
+      this.debug('disabled run through in-raid status');
+    }
+  }
+
   setConfig(config: Config, sessionId: string): void {
     // TODO: validation ?
     this.configCache[sessionId] = config;
@@ -110,41 +150,6 @@ export class PathToTarkovController {
   setSpawnConfig(spawnConfig: SpawnConfig): void {
     // TODO: validation ?
     this.spawnConfig = spawnConfig;
-  }
-
-  /**
-   * This is for upgrading profiles for PTT versions < 5.2.0
-   */
-  cleanupLegacySecondaryStashesLink(sessionId: string): void {
-    const profile: Profile = this.saveServer.getProfile(sessionId);
-    const inventory = profile.characters.pmc.Inventory as Inventory | undefined;
-    const secondaryStashIds: string[] = [
-      EMPTY_STASH.id,
-      ...this.getConfig(sessionId).hideout_secondary_stashes.map(config => config.id),
-    ];
-
-    if (!inventory) {
-      return;
-    }
-
-    let stashLinkRemoved = 0;
-
-    inventory.items = inventory.items.filter(item => {
-      if (
-        secondaryStashIds.includes(item._id) &&
-        item._tpl !== getTemplateIdFromStashId(item._id)
-      ) {
-        stashLinkRemoved = stashLinkRemoved + 1;
-        return false;
-      }
-
-      return true;
-    });
-
-    if (stashLinkRemoved > 0) {
-      this.debug(`[${sessionId}] cleaned up ${stashLinkRemoved} legacy stash links`);
-      this.saveServer.saveProfile(sessionId);
-    }
   }
 
   // on game start (or profile creation)
@@ -175,17 +180,181 @@ export class PathToTarkovController {
   }
 
   // returns the new offraid position (or null if not found)
-  onPlayerExtracts(sessionId: string, mapName: MapName, exitName: string): string | null {
-    const extractsConf = this.getConfig(sessionId).exfiltrations[mapName];
+  onPlayerExtracts(params: {
+    sessionId: string;
+    mapName: MapName;
+    newOffraidPosition: string;
+    isPlayerScav: boolean;
+  }): void {
+    const { sessionId, newOffraidPosition, isPlayerScav } = params;
+    const config = this.getConfig(sessionId);
 
-    const newOffraidPosition = extractsConf && exitName && extractsConf[exitName];
-
-    if (newOffraidPosition) {
-      this.updateOffraidPosition(sessionId, newOffraidPosition);
-      return newOffraidPosition;
+    if (config.bypass_keep_found_in_raid_tweak) {
+      this.debug(`[${sessionId}] FIR tweak disabled`);
+    } else {
+      const firTweak = new KeepFoundInRaidTweak(this.saveServer);
+      const nbImpactedItems = firTweak.setFoundInRaidOnEquipment(sessionId, isPlayerScav);
+      this.debug(
+        `[${sessionId}] FIR tweak added SpawnedInSession on ${nbImpactedItems} item${nbImpactedItems > 1 ? 's' : ''}`,
+      );
     }
 
-    return null;
+    this.updateOffraidPosition(sessionId, newOffraidPosition);
+  }
+
+  /**
+   * Warning: this function will mutate the given locationBase
+   */
+  syncLocationBase(locationBase: ILocationBase, sessionId: string): void {
+    const raidCache = this.getRaidCache(sessionId);
+
+    if (raidCache && raidCache.exitStatus === 'Transit') {
+      // handle when a player took a vanilla transit
+      this.updateInfiltrationForPlayerSpawnPoints(locationBase);
+    }
+
+    if (raidCache && raidCache.transitTargetMapName && raidCache.transitTargetSpawnPointId) {
+      // handle when a player took a ptt transit
+      this.updateSpawnPointsForTransit(
+        locationBase,
+        sessionId,
+        raidCache.transitTargetMapName,
+        raidCache.transitTargetSpawnPointId,
+      );
+    } else {
+      // handle when a player took a ptt extract
+      this.updateSpawnPoints(locationBase, sessionId);
+    }
+
+    this.updateLocationBaseExits(locationBase, sessionId);
+    this.updateLocationBaseTransits(locationBase, sessionId);
+  }
+
+  debugExfiltrationsTooltips(config: Config): void {
+    const debugLocale = config.debug_exfiltrations_tooltips_locale;
+    if (!debugLocale) {
+      return;
+    }
+
+    if (!this.tooltipsTemplater) {
+      this.tooltipsTemplater = this.createTooltipsTemplater();
+    }
+
+    const localeValues = this.tooltipsTemplater.debugTooltipsForLocale(debugLocale, config);
+    this.debug(`debug exfils tooltips => ${JSON.stringify(localeValues, undefined, 2)}`);
+  }
+
+  private createTooltipsTemplater(): ExfilsTooltipsTemplater {
+    const allLocales = this.db.getTables()?.locales?.global;
+
+    if (!allLocales) {
+      throw new Error('Path To Tarkov: no locales found in db');
+    }
+
+    return new ExfilsTooltipsTemplater(allLocales);
+  }
+
+  // TODO: make it dynamic (aka intercept instead of mutating the db)
+  private injectTooltipsInLocales(config: Config): void {
+    const allLocales = this.db.getTables()?.locales?.global;
+
+    if (!allLocales) {
+      throw new Error('Path To Tarkov: no locales found in db');
+    }
+
+    if (!this.tooltipsTemplater) {
+      throw new Error('Path To Tarkov: tooltips templater is missing');
+    }
+
+    const partialLocales = this.tooltipsTemplater.computeLocales(config);
+    const report = mutateLocales(allLocales, partialLocales);
+
+    const nbValuesUpdated = report.nbTotalValuesUpdated / report.nbLocalesImpacted;
+    this.debug(
+      `${nbValuesUpdated} extract tooltip values updated for ${report.nbLocalesImpacted} locales (total of ${report.nbTotalValuesUpdated})`,
+    );
+  }
+
+  // TODO: refactor in a dedicated service
+  // TODO: make it dynamic (aka intercept instead of mutating the db)
+  private injectPromptTemplatesInLocales(config: Config): void {
+    const allLocales = this.db.getTables()?.locales?.global;
+
+    if (!allLocales) {
+      throw new Error('Path To Tarkov: no locales found in db');
+    }
+
+    // 1. prepare transits_prompt_template
+    const DEFAULT_TRANSITS_PROMPT_TEMPLATE_KEY = 'PTT_TRANSITS_PROMPT_TEMPLATE';
+    const DEFAULT_TRANSITS_PROMPT_TEMPLATE_VALUE = 'Transit to {0}';
+    const DEFAULT_TRANSITS_PROMPT_TEMPLATE: ByLocale<string> = {
+      [DEFAULT_FALLBACK_LANGUAGE]: DEFAULT_TRANSITS_PROMPT_TEMPLATE_VALUE,
+    };
+    const transitsPromptTemplate =
+      config.transits_prompt_template ?? DEFAULT_TRANSITS_PROMPT_TEMPLATE;
+
+    // 2. prepare extracts_prompt_template
+    const DEFAULT_EXTRACTS_PROMPT_TEMPLATE_KEY = 'PTT_EXTRACTS_PROMPT_TEMPLATE';
+    const DEFAULT_EXTRACTS_PROMPT_TEMPLATE_VALUE = 'Extract to {0}';
+    const DEFAULT_EXTRACTS_PROMPT_TEMPLATE: ByLocale<string> = {
+      [DEFAULT_FALLBACK_LANGUAGE]: DEFAULT_EXTRACTS_PROMPT_TEMPLATE_VALUE,
+    };
+    const extractsPromptTemplate =
+      config.extracts_prompt_template ?? DEFAULT_EXTRACTS_PROMPT_TEMPLATE;
+
+    // 3. prepare new locales
+    const newLocales: Partial<AllLocalesInDb> = {};
+    Object.keys(allLocales).forEach(locale => {
+      const localeValues: Record<string, string> = {
+        [DEFAULT_TRANSITS_PROMPT_TEMPLATE_KEY]:
+          transitsPromptTemplate[locale as LocaleName] ?? DEFAULT_TRANSITS_PROMPT_TEMPLATE_VALUE,
+        [DEFAULT_EXTRACTS_PROMPT_TEMPLATE_KEY]:
+          extractsPromptTemplate[locale as LocaleName] ?? DEFAULT_EXTRACTS_PROMPT_TEMPLATE_VALUE,
+      };
+      newLocales[locale] = localeValues;
+    });
+
+    // 4. mutate locales
+    const report = mutateLocales(allLocales, newLocales);
+
+    const nbValuesUpdated = report.nbTotalValuesUpdated / report.nbLocalesImpacted;
+    this.debug(
+      `${nbValuesUpdated} prompt templates values updated for ${report.nbLocalesImpacted} locales (total of ${report.nbTotalValuesUpdated})`,
+    );
+  }
+
+  private injectOffraidPositionDisplayNamesInLocales(config: Config): void {
+    const allLocales = this.db.getTables()?.locales?.global;
+
+    if (!allLocales) {
+      throw new Error('Path To Tarkov: no locales found in db');
+    }
+
+    // 1. create new locales
+    const newLocales: Partial<AllLocalesInDb> = {};
+    Object.keys(allLocales).forEach(locale => {
+      const localeValues: Record<string, string> = {};
+
+      const offraidPositions = config.offraid_positions ?? {};
+      Object.keys(offraidPositions).forEach(offraidPosition => {
+        const displayNameValue = ExfilsTooltipsTemplater.resolveOffraidPositionDisplayName(config, {
+          offraidPosition,
+          locale: locale as LocaleName,
+        });
+
+        localeValues[`PTT_OFFRAIDPOS_DISPLAY_NAME_${offraidPosition}`] = displayNameValue;
+      });
+
+      newLocales[locale] = localeValues;
+    });
+
+    // 2. mutate locales
+    const report = mutateLocales(allLocales, newLocales);
+
+    const nbValuesUpdated = report.nbTotalValuesUpdated / report.nbLocalesImpacted;
+    this.debug(
+      `${nbValuesUpdated} prompt templates values updated for ${report.nbLocalesImpacted} locales (total of ${report.nbTotalValuesUpdated})`,
+    );
   }
 
   private getRespawnOffraidPosition = (sessionId: string): string => {
@@ -269,41 +438,12 @@ export class PathToTarkovController {
 
           locationBase.Locked = locked;
           locationBase.Enabled = !locked;
-
-          // necessary for Fika
-          this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
-          this.updateLocationBaseExits(locationBase, sessionId);
+          this.syncLocationBase(locationBase, sessionId);
         }
       });
 
-      const newPaths: Path[] = []; // TODO: keep the original path (with filter on locked maps)
+      const newPaths: IPath[] = []; // TODO: keep the original path (with filter on locked maps)
       return { ...result, locations, paths: newPaths };
-    };
-  }
-
-  private createGetLocation(
-    originalFn: (
-      url: string,
-      info: IGetLocationRequestData,
-      sessionId: string,
-    ) => IGetBodyResponseData<ILocationBase>,
-  ) {
-    return (
-      url: string,
-      info: IGetLocationRequestData,
-      sessionId: string,
-    ): IGetBodyResponseData<ILocationBase> => {
-      const offraidPosition = this.getOffraidPosition(sessionId);
-      const rawLocationBase = originalFn(url, info, sessionId) as any as string;
-      const parsed = JSON.parse(rawLocationBase);
-      const locationBase: ILocationBase = parsed.data;
-
-      // This will handle spawnpoints and exfils for SPT
-      // For fika, check the other call of `updateSpawnPoints`
-      this.updateSpawnPoints(locationBase, offraidPosition, sessionId);
-      this.updateLocationBaseExits(locationBase, sessionId);
-
-      return JSON.stringify(parsed) as any;
     };
   }
 
@@ -335,7 +475,7 @@ export class PathToTarkovController {
         if (gridProps) {
           gridProps.cellsV = size;
         } else {
-          throw new Error('Path To  Tarkov: cannot set size for custom stash');
+          throw new Error('Path To Tarkov: cannot set size for custom stash');
         }
       });
 
@@ -364,7 +504,7 @@ export class PathToTarkovController {
       const hideoutEnabled = this.stashController.getHideoutEnabled(offraidPosition, sessionId);
 
       areas.forEach(area => {
-        if (!isIgnoredArea(area, this.getConfig(sessionId).workbench_always_enabled)) {
+        if (!isIgnoredArea(area)) {
           area.enabled = hideoutEnabled;
         }
       });
@@ -438,17 +578,6 @@ export class PathToTarkovController {
       { frequency: 'Always' },
     );
 
-    this.container.afterResolution<LocationCallbacks>(
-      'LocationCallbacks',
-      (_t, result): void => {
-        const locationCallbacks = Array.isArray(result) ? result[0] : result;
-
-        const originalGet = locationCallbacks.getLocation.bind(locationCallbacks);
-        locationCallbacks.getLocation = this.createGetLocation(originalGet);
-      },
-      { frequency: 'Always' },
-    );
-
     this.container.afterResolution<DataCallbacks>(
       'DataCallbacks',
       (_t, result): void => {
@@ -456,12 +585,10 @@ export class PathToTarkovController {
 
         // override getTemplateItems
         const originalGetTemplateItems = dataCallbacks.getTemplateItems.bind(dataCallbacks);
-
         dataCallbacks.getTemplateItems = this.createGetTemplateItems(originalGetTemplateItems);
 
         // override getHideoutAreas
         const originalGetHideoutAreas = dataCallbacks.getHideoutAreas.bind(dataCallbacks);
-
         dataCallbacks.getHideoutAreas = this.createGetHideoutAreas(originalGetHideoutAreas);
 
         // override getGlobals
@@ -473,26 +600,27 @@ export class PathToTarkovController {
   }
 
   private removePlayerSpawnsForLocation(locationBase: ILocationBase): void {
-    locationBase.SpawnPointParams = locationBase.SpawnPointParams.filter(params => {
-      // remove Player from Categories array
-      params.Categories = params.Categories.filter(cat => cat !== 'Player');
+    const newSpawnPoints: ISpawnPointParam[] = locationBase.SpawnPointParams.map(spawn => {
+      const newSpawn = rejectPlayerCategory(spawn);
 
-      if (!params.Categories.length) {
-        // remove the spawn point if Categories is empty
-        return false;
+      if (newSpawn.Categories.length === 0) {
+        return undefined;
       }
 
-      return true;
-    });
+      return newSpawn;
+    }).filter(isNotUndefined);
+
+    locationBase.SpawnPointParams = newSpawnPoints;
   }
 
-  private updateSpawnPoints(
-    locationBase: ILocationBase,
-    offraidPosition: string,
-    sessionId: string,
-  ): void {
+  private updateSpawnPoints(locationBase: ILocationBase, sessionId: string): void {
+    if (!this.isLocationBaseAvailable(locationBase)) {
+      return;
+    }
+
     const mapName = resolveMapNameFromLocation(locationBase.Id);
     const infiltrations = this.getConfig(sessionId).infiltrations;
+    const offraidPosition = this.getOffraidPosition(sessionId);
 
     if (!infiltrations[offraidPosition]) {
       this.debug(
@@ -522,13 +650,70 @@ export class PathToTarkovController {
             this.logger.warning(`=> PathToTarkov: spawn '${spawnId}' has no Infiltration`);
           }
 
-          locationBase?.SpawnPointParams.push(spawnPoint);
+          locationBase.SpawnPointParams.push(spawnPoint);
           this.debug(`[${sessionId}] player spawn '${spawnId}' added for location ${mapName}`);
         }
       });
     }
   }
 
+  private updateSpawnPointsForTransit(
+    locationBase: ILocationBase,
+    sessionId: string,
+    transitTargetMapName: string,
+    transitTargetSpawnPointId: string,
+  ): void {
+    if (!this.isLocationBaseAvailable(locationBase)) {
+      return;
+    }
+    const mapName = resolveMapNameFromLocation(locationBase.Id);
+
+    if (mapName !== transitTargetMapName) {
+      return;
+    }
+
+    const spawnId = transitTargetSpawnPointId;
+    const spawnData =
+      this.spawnConfig[mapName as MapName] && this.spawnConfig[mapName as MapName][spawnId];
+    if (spawnData) {
+      const spawnPoint = createSpawnPoint(spawnData.Position, spawnData.Rotation, spawnId);
+
+      if (!spawnPoint.Infiltration) {
+        this.logger.warning(
+          `=> PathToTarkov: spawn '${spawnId}' has no Infiltration (player in transit)`,
+        );
+      }
+
+      this.removePlayerSpawnsForLocation(locationBase);
+      locationBase.SpawnPointParams.push(spawnPoint);
+
+      this.debug(
+        `[${sessionId}] player spawn '${spawnId}' added for location ${mapName} (player in transit)`,
+      );
+    }
+
+    this.debug(
+      `Transit detected on map "${mapName}" via spawnpoint "${transitTargetSpawnPointId}"`,
+    );
+  }
+
+  /**
+   * The purpose of this function is to set the PTT Infiltration field for all player spawnpoints
+   * It will allow exfils to be available even when player took a vanilla transit
+   */
+  private updateInfiltrationForPlayerSpawnPoints(locationBase: ILocationBase): void {
+    if (!this.isLocationBaseAvailable(locationBase)) {
+      return;
+    }
+
+    locationBase.SpawnPointParams.forEach(spawnPoint => {
+      if (isPlayerSpawnPoint(spawnPoint)) {
+        spawnPoint.Infiltration = PTT_INFILTRATION;
+      }
+    });
+  }
+
+  // this will ignore unavailable maps (like terminal)
   private isLocationBaseAvailable(locationBase: ILocationBase): boolean {
     if (locationBase.Scene.path && locationBase.Scene.rcid) {
       return true;
@@ -537,16 +722,39 @@ export class PathToTarkovController {
     return false;
   }
 
-  private updateLocationBaseExits(locationBase: ILocationBase, sessionId: string): boolean {
+  /**
+   * Disable transits if specified by the config
+   */
+  private updateLocationBaseTransits(locationBase: ILocationBase, sessionId: string): void {
+    if (!this.isLocationBaseAvailable(locationBase)) {
+      return;
+    }
+
+    const config = this.getConfig(sessionId);
+
+    const noVanillaTransits = !config.enable_all_vanilla_transits;
+    if (noVanillaTransits) {
+      this.updateLocationDisableAllTransits(locationBase);
+    }
+  }
+
+  private updateLocationDisableAllTransits(locationBase: ILocationBase): void {
+    const transits = locationBase.transits ?? [];
+
+    transits.forEach(transit => {
+      transit.active = false;
+    });
+  }
+
+  private updateLocationBaseExits(locationBase: ILocationBase, sessionId: string): void {
+    if (!this.isLocationBaseAvailable(locationBase)) {
+      return;
+    }
+
     const config = this.getConfig(sessionId);
 
     if (config.bypass_exfils_override) {
-      return false;
-    }
-
-    // this will ignore unavailable maps (like terminal)
-    if (!this.isLocationBaseAvailable(locationBase)) {
-      return false;
+      return;
     }
 
     const mapName = resolveMapNameFromLocation(locationBase.Id);
@@ -554,45 +762,25 @@ export class PathToTarkovController {
 
     if (extractPoints.length === 0) {
       this.logger.error(`Path To Tarkov: no exfils found for map '${mapName}'!`);
-
-      return false;
+      return;
     }
 
-    if (config.vanilla_exfils_requirements) {
-      const usedExitNames = new Set<string>();
+    // TODO(refactor): implement an indexBy util
+    const indexedExits = locationBase.exits.reduce<Record<string, IExit | undefined>>(
+      (indexed, exit) => {
+        return {
+          ...indexed,
+          [exit.Name]: exit,
+        };
+      },
+      {},
+    );
 
-      // filter all exits and keep vanilla requirements (except for ScavCooperation requirements)
-      locationBase.exits = locationBase.exits
-        .filter(exit => {
-          return extractPoints.includes(exit.Name);
-        })
-        .map(exit => {
-          usedExitNames.add(exit.Name);
-
-          if (exit.PassageRequirement === 'ScavCooperation') {
-            return createExitPoint(exit.Name);
-          }
-
-          exit.EntryPoints = PTT_INFILTRATION;
-          exit.ExfiltrationTime = 10;
-          exit.Chance = 100;
-
-          return exit;
-        });
-
-      // add missing extractPoints (potentially scav extracts)
-      extractPoints.forEach(extractName => {
-        if (!usedExitNames.has(extractName)) {
-          const exitPoint = createExitPoint(extractName);
-          locationBase.exits.push(exitPoint);
-        }
-      });
-    } else {
-      // erase all exits and create custom exit points without requirements
-      locationBase.exits = extractPoints.map(createExitPoint);
-    }
-
-    return true;
+    // erase all exits and create custom exit points without requirements
+    locationBase.exits = extractPoints.map(exitName => {
+      const originalExit = indexedExits[exitName];
+      return createExitPoint(exitName, originalExit);
+    });
   }
 
   private getInitialOffraidPosition = (sessionId: string): string => {

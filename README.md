@@ -24,7 +24,7 @@ New spawn points can be added in `player_spawnpoints.json`
 
 ## The Default configuration
 
-![PathToTarkov mermaid image](./configs/Default/PathToTarkov.png)
+![PathToTarkov config image](./configs/Default/TarkovMapV2.jpg)
 
 By default, you are on `MechanicStash` offraid position. It means you can spawn on Customs or Factory maps only.
 
@@ -44,12 +44,12 @@ The offraid position is stored in your profile in a dedicated field `PathToTarko
 
 ## UnInstallation
 
-Before deleting the mod, you can set the `enabled` props to `false` in `config.json` and start the server once.
+[How to Uninstall Path To Tarkov properly](./docs/HOW_TO_UNINSTALL.md)
 
-It does 2 things in all existing profiles:
+The uninstall process does 2 things for all existing profiles:
 
 1. Ensure the main stash is selected
-2. Unlock all traders listed in the config (Please note Jaeger will be unlocked only if the Introduction quest has been already completed)
+2. Unlock all traders listed in the config (Please note Jaeger will be unlocked only if the Introduction quest has been already completed and this will work also for modded traders)
 
 ## More tweaks
 
