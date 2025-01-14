@@ -11,7 +11,7 @@
   // you can put several offraid positions here so it will pick one randomly on death
   respawn_at: ['FactoryZB-1011'],
 
-  // with this option, transit points will be created automatically according to offraid position definition
+  // with this option, transit points will be created automatically according to the defined path
   enable_automatic_transits_creation: true,
 
   // vanilla transits are officially not supported but you can still enable them here
@@ -20,7 +20,7 @@
   bypass_keep_found_in_raid_tweak: false,
   player_scav_move_offraid_position: false,
 
-  // Check the `ExampleOverrideByProfiles` config for a full usage example
+  // Check the `Examples/OverrideByProfiles` config for a full usage example
   override_by_profiles: {},
 
   debug: true,

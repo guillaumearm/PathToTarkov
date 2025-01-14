@@ -1,91 +1,120 @@
 # Path to Tarkov
 
-Connect all available maps through the extracts points, bring a multi-stash system and lock traders according to the player offraid position.
+The Tarkov **open-world experience**. Connect all available maps through the extract points, introduce a multi-stash system, and lock traders according to the player's off-raid position.
 
-![PTT LOGO](./LOGO.jpg)
+<img src="./LOGO.jpg" alt="PTT LOGO" width="125">
 
 ## Description
 
-This mod bring the notion of "offraid position" for the player, it locks certains maps according to this offraid position, change all player spawn points to reflect this positions, change the hideout stash and lock/unlock traders according to the config file.
+**Path to Tarkov** introduces the concept of "offraid position" for players. This feature locks or unlocks some maps based on the player’s current offraid position. Player spawn points are dynamically adjusted to reflect this position, and hideout stashes and traders are locked or unlocked accordingly, offering a more immersive and strategic gameplay experience.
 
-All corresponding offraid positions, extracts and spawn points can be configured via `config.json` file.
-
-New spawn points can be added in `player_spawnpoints.json`
+Players have the freedom to create their own unique paths by customizing offraid positions, extracts, and spawn points.
 
 ## Features
 
-- Maps are locked/unlocked according to the offraid position
-- Several hideout stash according to your offraid position (disabled in default config)
-- Hideout features disabled when player is not on the main stash position
-- Traders are available only on certains offraid position
-- Tweak exfiltrations points (fixed for each map + removed restrictions)
-- Changed spawn points according to the offraid position
-- Certains offraid locations enable/disable the hydration/energy/health restoration (according to config)
+- **Dynamic Map Access:** Maps are locked or unlocked based on the player’s offraid position.
+- **Customized Spawns:** Spawn points are dynamically adjusted based on the offraid position.
+- **Multi-Stash System:** Manage multiple hideout stashes depending on your offraid position (disabled by default).
+- **Hideout Restrictions:** Hideout features are disabled when the player is not at the main stash location.
+- **Trader Access Control:** Traders are available only at certain offraid positions.
+- **Extracts Overhaul:** Exfiltration points allow players to choose between multiple transit options or offraid positions at extracts.
+- **Multiplayer compatible:** Path To Tarkov is fully compatible with [Fika](https://github.com/project-fika). Each player has his own offraid position
+- **Condition-Based Features:** Certain offraid locations toggle hydration, energy, and health restoration effects, as defined in the configuration.
+- **Quality of Life Features:** Players can adjust in-raid restriction limits (for bringing more money during the travel). There is also a FoundInRaid tweak applied by default.
+- **Highly customizable:** giving players complete control to adapt and fine-tune their gameplay experience.
 
-## The Default configuration
+## Installation
+- [Interactable Exfils API](https://hub.sp-tarkov.com/files/file/2286-interactable-exfils-api/#overview) should be installed
+- Like any other mods, you juste have to unpack the zip in your SPT folder.
+- For uninstallation, please read about the [uninstallation procedure](./docs/HOW_TO_UNINSTALL.md)
 
-![PathToTarkov config image](./configs/Default/TarkovMapV2.jpg)
+## Recommended mods
+- [Dynamic Maps](https://hub.sp-tarkov.com/files/file/1981-dynamic-maps/): is very useful to learn your exfils
+- [Leave It There](https://hub.sp-tarkov.com/files/file/2572-leave-it-there/): LIT is the perfect companion for Path To Tarkov, you can place any item in raid and it will persist across multiple raids until you pick it back up!
 
-By default, you are on `MechanicStash` offraid position. It means you can spawn on Customs or Factory maps only.
+## Overview
 
-The hideout and the main stash are only accessible on this offraid position.
+### Dynamic Map Access
+This is the main feature of Path To Tarkov: you have to travel between maps.
 
-When player die, the position is reset to the `MechanicStash` position.
+<img src="./docs/screenshots/PTT_HIDDEN_MAPS.png" alt="PTT hidden maps" width="600">
 
-Everything is configurable.
+### Exfils overhaul
+You can choose between extraction or transits
 
-## Available Exfiltrations
+<img src="./docs/screenshots/PTT_EXFIL_PROMPT.png" alt="PTT hidden maps" width="600">
 
-Here is [the complete list of available exfiltrations points](./ALL_EXFILS.md)
+### Exfils tooltips overhaul
+Tarkov's tooltip template has been reworked to fit the mod.
 
-## How to edit the current offraid position
+<img src="./docs/screenshots/PTT_EXFIL_TOOLTIPS.png" alt="PTT hidden maps" width="600">
 
-The offraid position is stored in your profile in a dedicated field `PathToTarkov`, you can edit it with a regular text editor.
+### Restricted traders
+You have to travel to see traders (with modded traders compat)
 
-## UnInstallation
+<img src="./docs/screenshots/PTT_HIDDEN_TRADERS.png" alt="PTT hidden maps" width="600">
 
-[How to Uninstall Path To Tarkov properly](./docs/HOW_TO_UNINSTALL.md)
+### Dynamic Maps compatibility
+It works nicely with Dynamic Maps
 
-The uninstall process does 2 things for all existing profiles:
+<img src="./docs/screenshots/PTT_DYNAMIC_MAPS.png" alt="PTT hidden maps" width="600">
 
-1. Ensure the main stash is selected
-2. Unlock all traders listed in the config (Please note Jaeger will be unlocked only if the Introduction quest has been already completed and this will work also for modded traders)
+## Path To Tarkov configurations
 
-## More tweaks
+### The default configuration map images
 
-Check the [Path To Tarkov Additions](https://github.com/guillaumearm/PathToTarkovAdditions) mod to setup additional restrictions.
+![image-default-ptt-config](./configs//Default/TarkovMapV2.jpg)
 
-## Modding API
+### Select Your PTT Configuration
 
-⚠️Since PTT 5.2.0 the modding api is deprecated and disabled by default because any usage of `setConfig`, `setSpawnConfig` or `refresh` will not be guaranteed to work due to the rewrite for Fika.
+The default configuration offers a comprehensive path with all Path to Tarkov features enabled. If it’s your first time using PTT, it is recommended to start with this default setup.
 
-If you still want to play with it, you can add an option `enable_legacy_ptt_api` in your ptt config set to `true`.
+If you wish to explore alternative configurations, the mod includes several pre-configured Path to Tarkov setups. 
 
-I'll try soon to provide a new better way to change a config dynamically.
+To select your current PTT configuration, edit the `Trap-PathToTarkov/configs/UserConfig.json5` file. If this file is missing, start your SPT server once, and the mod will generate it automatically.
 
-Example:
+You have to update the `selectedConfig` value in your `UserConfig.json5` file to point on an existing configuration:
 
-```js
-if (!globalThis.PathToTarkovAPI) {
-  Logger.error(
-    `=> ${this.modName}: PathToTarkovAPI not found, are you sure a version of PathToTarkov >= 2.5.0 is installed ?`,
-  );
-  return;
-}
+   ```js
+   {
+       selectedConfig: "DevilFlippy", // or any other config placed in the `configs` folder
+       // ...
+   }
+   ```
 
-PathToTarkovAPI.onStart(sessionId => {
-  const config = PathToTarkovAPI.getConfig(sessionId);
-  const spawnConfig = PathToTarkovAPI.getSpawnConfig();
+### More reading
 
-  // make some config changes
-  config.reset_offraid_position_on_player_die = false;
+- [Frequently Asked Question](./docs/FAQ.md)
+- [Planned features](https://github.com/guillaumearm/PathToTarkov/issues?q=is%3Aopen+is%3Aissue+label%3Afeature)
+- [Known issues](https://github.com/guillaumearm/PathToTarkov/issues?q=is:open+is:issue+label:bug)
+- [Create your config](./docs/HOW_TO_CREATE_CONFIG.md)
+- [List of available player spawnpoints](./configs/shared_player_spawnpoints.json5) 
+- [List of available vanilla extracts](./ALL_EXFILS.md)
+- [Tutorial: create a config from scratch](./docs/TUTORIAL_CONFIG.md)
+- [PTT config specification](./docs/spec/README.md)
+- [PTT UserConfig specification](./docs/spec/USER_CONFIG_DOCUMENTATION.md)
 
-  PathToTarkovAPI.setConfig(config, sessionId);
-  PathToTarkovAPI.setSpawnConfig(spawnConfig); // not needed if not changed, it's just for the example
 
-  // should be called after setting new configs
-  PathToTarkovAPI.refresh(sessionId);
-});
-```
+## How to report a bug
+If you want to report a bug, I'll need some details so please [read the HOW_TO_REPORT_A_BUG.md](./docs/HOW_TO_REPORT_A_BUG.md).
 
-Full example usage in [Path To Tarkov Additions source code](https://github.com/guillaumearm/PathToTarkovAdditions/blob/master/package.js).
+## Credits
+- Thanks to the SPT team <3
+- Thanks to the Fika team <3
+- Thanks to [Jehree](https://hub.sp-tarkov.com/user/32691-jehree/) for making Interactable Exfils API
+- Thanks to [Jehree](https://hub.sp-tarkov.com/user/32691-jehree/) again to let me re-use the voucher feature from his Traveler mod
+- Special thanks to [Jehree](https://hub.sp-tarkov.com/user/32691-jehree/) for getting me into client-side modding
+- Thanks to [Fontaine](https://hub.sp-tarkov.com/user/9277-fontaine/) for [his contribution](https://github.com/guillaumearm/PathToTarkov/blob/fdecac5881eeb791661d4c31b9dc7e268546af71/PTT-Extracts/Patch.cs) that bring us a way to allow scav extract to be used by PMCs
+- Thanks to [GrooveypenguinX](https://hub.sp-tarkov.com/user/34125-grooveypenguinx/) for the hide traders client-side patch
+- Thanks to [rockahorse](https://hub.sp-tarkov.com/user/25630-rockahorse/) and [GrooveypenguinX](https://hub.sp-tarkov.com/user/34125-grooveypenguinx/) for continuing my work with Path To Tarkov Reloaded
+- Thanks to [Theta](https://hub.sp-tarkov.com/user/17203-theta/) for making the [first image](./configs/LegacyPathToTarkovV4/PathToTarkovMapV2.3.1.png).
+- Thanks to adudewithbadaim for making the [second image](./configs/LegacyPathToTarkovV4/tarkov_full_map2.jpg).
+- Thanks to [r1ft](https://hub.sp-tarkov.com/user/11960-r1ft/) for his contribution. (+ old addons mods PTT Extracts Requirements and Dynamic Time Cycle)
+- Thanks to [gabe_over](https://hub.sp-tarkov.com/user/18108-gabe-over/) for making [Singler Player Overhaul mod (SPO)](https://hub.sp-tarkov.com/files/file/574-spo-single-player-overhaul).
+- Thanks to [Narcotics](https://hub.sp-tarkov.com/user/56420-narcotics/) for [his contributions](https://github.com/guillaumearm/PathToTarkov/pulls?q=is%3Apr+author%3ANarcoticsRx+).
+- Thanks to [averyc1876](https://hub.sp-tarkov.com/user/63831-averyc1876/) for the drawio ([last image in PTT 5.2.0](./configs/LegacyPathToTarkovV5/PathToTarkov.png))
+- Thanks to everyone else to help me improve the Path To Tarkov experience.
+
+------
+
+If you want to support my work, you can [buy me a coffe​e](https://ko-fi.com/trapcodien).
