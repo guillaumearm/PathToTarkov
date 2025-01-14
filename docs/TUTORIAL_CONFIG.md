@@ -431,6 +431,6 @@ When traders access restriction is enabled you can see available traders in your
 ## Want more ?
 This is the end of this tutorial, thank you for reading.
 
-You can check the [config specification reference](./SPEC_CONFIG.md) for a full description of all ptt config properties.
+You can check the [config specification reference](./spec/README.md) for a full description of all ptt config properties.
 
 Starting a config from scratch is a good way to learn, but I suggest you to start from the [Default config](../configs/Default/config.json5) if you want to create a final config for users.
