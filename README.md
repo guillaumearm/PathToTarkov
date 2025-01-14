@@ -37,22 +37,27 @@ Players have the freedom to create their own unique paths by customizing offraid
 ### Dynamic Map Access
 This is the main feature of Path To Tarkov: you have to travel between maps.
 
-TODO
-
-### Restricted traders
-You have to travel to see traders (with modded traders compat)
-
-TODO
+<img src="./docs/screenshots/PTT_HIDDEN_MAPS.png" alt="PTT hidden maps" width="600">
 
 ### Exfils overhaul
 You can choose between extraction or transits
 
-TODO
+<img src="./docs/screenshots/PTT_EXFIL_PROMPT.png" alt="PTT hidden maps" width="600">
 
 ### Exfils tooltips overhaul
 Tarkov's tooltip template has been reworked to fit the mod.
 
-TODO
+<img src="./docs/screenshots/PTT_EXFIL_TOOLTIPS.png" alt="PTT hidden maps" width="600">
+
+### Restricted traders
+You have to travel to see traders (with modded traders compat)
+
+<img src="./docs/screenshots/PTT_HIDDEN_TRADERS.png" alt="PTT hidden maps" width="600">
+
+### Dynamic Maps compatibility
+It works nicely with Dynamic Maps
+
+<img src="./docs/screenshots/PTT_DYNAMIC_MAPS.png" alt="PTT hidden maps" width="600">
 
 ## Path To Tarkov configurations
 
