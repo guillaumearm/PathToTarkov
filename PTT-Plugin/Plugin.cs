@@ -11,11 +11,14 @@ namespace PTT;
 public class Plugin : BaseUnityPlugin
 {
     public static bool FikaIsInstalled { get; private set; }
+    public static bool FikaIsOutdated { get; private set; }
     private static bool InteractableExfilsApiIsInstalled { get; set; }
     private static bool InteractableExfilsApiIsOutdated { get; set; } = false;
     public static CurrentLocationDataService CurrentLocationDataService;
     private const string IE_API_PLUGIN_NAME = "Jehree.InteractableExfilsAPI";
     private const string IE_API_MIN_VERSION = "1.5.1";
+    private const string FIKA_PLUGIN_NAME = "com.fika.core";
+    private const string FIKA_MIN_VERSION = "1.1.5.0";
 
     protected void Awake()
     {
@@ -23,7 +26,7 @@ public class Plugin : BaseUnityPlugin
         Helpers.Logger.Info($"Plugin Trap-PathToTarkov is loading...");
         Settings.Config.Init(Config);
 
-        FikaIsInstalled = Chainloader.PluginInfos.ContainsKey("com.fika.core");
+        FikaIsInstalled = Chainloader.PluginInfos.ContainsKey(FIKA_PLUGIN_NAME);
         InteractableExfilsApiIsInstalled = Chainloader.PluginInfos.ContainsKey(IE_API_PLUGIN_NAME);
 
         CurrentLocationDataService = new CurrentLocationDataService();
@@ -53,6 +56,14 @@ public class Plugin : BaseUnityPlugin
     {
         if (FikaIsInstalled)
         {
+            Version fikaVersion = Chainloader.PluginInfos[FIKA_PLUGIN_NAME].Metadata.Version;
+
+            if (fikaVersion < new Version(FIKA_MIN_VERSION))
+            {
+                Helpers.Logger.Warning($"Fika >= {IE_API_MIN_VERSION} is required");
+                FikaIsOutdated = true;
+            }
+
             Helpers.Logger.Info($"Fika.Core plugin detected");
             TransitVoteServiceFika.Init();
         }
@@ -101,7 +112,7 @@ public class Plugin : BaseUnityPlugin
             IEApiWrapper.ExfilPromptService.ClearExfilPromptsCache();
         }
 
-        DisplayInteractableExfilsAPIWarning();
+        DisplayOutdatedVersionsWarnings();
         Helpers.Logger.Info("Raid started!");
     }
 
@@ -112,6 +123,7 @@ public class Plugin : BaseUnityPlugin
             TransitVoteServiceFika.OnGameStarted();
         }
 
+        DisplayOutdatedVersionsWarnings();
         Helpers.Logger.Info("Game started!");
     }
 
@@ -120,7 +132,7 @@ public class Plugin : BaseUnityPlugin
         Helpers.Logger.Info("Raid ended!");
     }
 
-    public static void DisplayInteractableExfilsAPIWarning()
+    public static void DisplayOutdatedVersionsWarnings()
     {
         if (!InteractableExfilsApiIsInstalled)
         {
@@ -129,6 +141,11 @@ public class Plugin : BaseUnityPlugin
         else if (InteractableExfilsApiIsOutdated)
         {
             NotificationManagerClass.DisplayWarningNotification($"Path To Tarkov: Your Interactable Exfils API mod is outdated. v{IE_API_MIN_VERSION} or higher is required", ENotificationDurationType.Long);
+        }
+
+        if (FikaIsInstalled && FikaIsOutdated)
+        {
+            NotificationManagerClass.DisplayWarningNotification($"Path To Tarkov: Fika.Core is outdated. v{FIKA_MIN_VERSION} or higher is required", ENotificationDurationType.Long);
         }
     }
 }
