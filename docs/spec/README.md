@@ -414,35 +414,3 @@ it will help debug the formatted tooltip for each exfils (related to `exfiltrati
 ```js
 debug_exfiltrations_tooltips_locale: "en"; // any valid EFT locales can be used here
 ```
-
----------
-
-
-### `traders_access_restriction` (boolean) DEPRECATED (should be moved in UserConfig)
-
-```js
-traders_access_restriction: true // traders are hidden according to the offraid position
-```
-
-```js
-traders_access_restriction: true // traders_config ignored
-```
-
-### `player_scav_move_offraid_position` (boolean)  DEPRECATED (should be moved in UserConfig)
-```js
-// extract with a scav will move the current player offraid position
-player_scav_move_offraid_position: true,
-```
-
-```js
-// extract with a scav will not move the current player offraid position
-player_scav_move_offraid_position: false,
-```
-
-### `bypass_keep_found_in_raid_tweak` (boolean) DEPRECATED (should be moved in UserConfig)
-By default, PTT will apply a basic FoundInRaid tweak.
-
-At the end of the raid, all items in the character inventory will be marked as found in raid.
-
-This option will the opportunity to disable this behaviour in case it conflicts with another mod.
-
