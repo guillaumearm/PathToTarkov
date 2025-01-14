@@ -14,7 +14,7 @@ namespace PTT.Patches
         [PatchPostfix]
         public static void Postfix(MenuScreen __instance)
         {
-            Plugin.DisplayInteractableExfilsAPIWarning();
+            Plugin.DisplayOutdatedVersionsWarnings();
         }
     }
 }
