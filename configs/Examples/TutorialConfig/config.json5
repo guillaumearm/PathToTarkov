@@ -1,0 +1,121 @@
+{
+  // On first installation, profile creation or player death (when `reset_offraid_position_on_player_die` is true)
+  initial_offraid_position: 'ThePlayerCar',
+
+  // the main stash will be accessible only from the player car offraid position
+  hideout_multistash_enabled: true,
+  hideout_main_stash_access_via: ['ThePlayerCar'],
+
+  hideout_secondary_stashes: [
+    {
+      id: 'my_hidden_house_stash_with_uniq_name', // Try to not rename the id once you shipped your config to players since it will break association with items and stash (players will simply lose items in secondary stashes)
+      size: 8, // this the height of the stash (see screenshot in the tutorial)
+      access_via: ['TheHiddenHouse'], // here you can list several offraid positions where the secondary stash is accessible
+    },
+  ],
+
+  // This is the place where you can configure your traders
+  // non-listed traders will be accessible from everywhere
+  // Note: you can display all locked traders from the F12 BepInEx menu\
+  traders_access_restriction: true,
+  traders_config: {
+    // Prapor
+    '54cb50c76803fa8b248b4571': {
+      access_via: ['ThePlayerCar'],
+    },
+    // Therapist
+    '54cb57776803fa99248b456e': {
+      access_via: ['ThePlayerCar'],
+    },
+    // Mechanic
+    '5a7c2eca46aef81a7ca2145d': {
+      access_via: ['ThePlayerCar'],
+    },
+    // Skier
+    '58330581ace78e27b8b10cee': {
+      access_via: ['ThePlayerCar'],
+    },
+    // Ragman
+    '5ac3b934156ae10c4430e83c': {
+      access_via: ['TheHiddenHouse'],
+    },
+    // Jaeger
+    '5c0647fdd443bc2504c2d371': {
+      access_via: ['TheHiddenHouse'],
+    },
+    // Peacekeeper
+    '5935c25fb3acc3127c3d8cd9': {
+      access_via: ['TheHiddenHouse'],
+    },
+    // Fence
+    '579dc571d53a0658a154fbec': {
+      access_via: [], // fence is completely disabled here
+    },
+    // You can also restrict access to modded traders, search for the `_Id` property in the `base.json` of your modded trader
+    // Painter
+    '668aaff35fd574b6dcc4a686': {
+      disable_warning: true, // this option will prevent warning to be displayed in the server console (this is in case the uplayer don't have installed the modded trader)
+      access_via: ['TheHiddenHouse'],
+    },
+  },
+
+  // Here is where you define all your offraid positions and corresponding infiltrations (by map)
+  infiltrations: {
+    ThePlayerCar: {
+      bigmap: ['Dorms Car'], // "Dorms Car" is the name of the spawnpoint in `shared_player_spawnpoints.json5`
+      woods: ['Woods Vehicle Extract'], // "Woods Vehicle Extract" is the name of the spawnpoint in `shared_player_spawnpoints.json5`
+      interchange: ['Interchange Vehicle Extract'], // "Interchange Vehicle Extract" is the name of the spawnpoint in `shared_player_spawnpoints.json5`
+    },
+    TheHiddenHouse: {
+      bigmap: ['Crossroads'], // "Crossroads" is the name of the spawnpoint in `shared_player_spawnpoints.json5`
+    },
+  },
+
+  // Here is where you define your exil target for a given exfil name (by map)
+  // You can find a complete list of vanilla exfils in ALL_EXFILS.md
+  exfiltrations: {
+    bigmap: {
+      // here we used 2 offraid positions for 1 exfil, it means the player can choose with the prompt
+      'Dorms V-Ex': ['ThePlayerCar', 'TheHiddenHouse'],
+    },
+    interchange: {
+      // yes "PP Exfil" is the BSG name for the car exfil on interchange
+      'PP Exfil': ['ThePlayerCar'],
+    },
+    woods: {
+      'South V-Ex': ['ThePlayerCar'],
+    },
+  },
+
+  exfiltrations_config: {
+    bigmap: {
+      // You can find a complete list of vanilla exfils in ALL_EXFILS.md
+      'Dorms V-Ex': {
+        displayName: {
+          en: 'Dorms - Extract by car',
+          fr: 'Dortoirs - Extraction en voiture',
+          // other languages...
+        },
+      },
+    },
+  },
+
+  offraid_positions: {
+    ThePlayerCar: {
+      displayName: {
+        en: "The player's car",
+        fr: 'La voiture du joueur',
+        // other languages...
+      },
+    },
+    TheHiddenHouse: {
+      displayName: {
+        en: 'Hidden house near crossroads',
+        fr: "Maison cachée près d'un carrefour",
+      },
+    },
+  },
+
+  // Tooltips formatting using unity rich text notation: https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html
+  exfiltrations_tooltips_template: '<color="green"><size=90%>$exfilDisplayName\n<size=60%><color="white">$offraidPositionDisplayName',
+}

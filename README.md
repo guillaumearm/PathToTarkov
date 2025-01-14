@@ -2,7 +2,7 @@
 
 The Tarkov **open-world experience**. Connect all available maps through the extract points, introduce a multi-stash system, and lock traders according to the player's off-raid position.
 
-<img src="./LOGO.jpg" alt="Description" width="125">
+<img src="./LOGO.jpg" alt="PTT LOGO" width="125">
 
 ## Description
 
