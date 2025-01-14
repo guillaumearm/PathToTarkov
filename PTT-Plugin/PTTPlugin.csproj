@@ -65,7 +65,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PTT-Packets\PTT.csproj">
+    <ProjectReference Include="..\PTT-Packets\PTTPackets.csproj">
       <Project>{E4B8C5DB-7D40-49B5-9A4A-F4C1D3D7ADCB}</Project>
       <Name>PTT-Packets</Name>
     </ProjectReference>

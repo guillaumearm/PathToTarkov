@@ -29,7 +29,7 @@
     "build": "tsc",
     "build:all": "npm run build:doc && npm run build && npm run build:client",
     "build:client": "npm run build:ieapi && dotnet build",
-    "clean:client": "dotnet clean && rimraf PTT-Plugin/bin PTT-Plugin/obj",
+    "clean:client": "dotnet clean && rimraf PTT-Plugin/bin PTT-Plugin/obj PTT-Packets/bin PTT-Packets/obj",
     "test:all": "npm run lint:all && npm run test && npm run build:release",
     "test": "npx jest --verbose",
     "test:watch": "npx jest --watch",

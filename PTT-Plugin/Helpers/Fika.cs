@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Comfort.Common;
-using EFT;
 using Fika.Core.Coop.Components;
 using Fika.Core.Coop.Players;
 using Fika.Core.Coop.Utils;
@@ -20,6 +18,8 @@ public static class Fika
             return FikaNetworkManager;
         }
 
+        Logger.Warning("FikaNetworkManager not set, trying to fallback on singleton");
+
         // fallback on the old way of doing it
         return Singleton<IFikaNetworkManager>.Instance;
     }
@@ -31,7 +31,38 @@ public static class Fika
 
     public static List<CoopPlayer> GetHumanPlayers()
     {
-        return GetCoopHandler()?.HumanPlayers?.Where(player =>
+        var coopHandler = GetCoopHandler();
+
+        if (coopHandler == null)
+        {
+            Logger.Error("GetHumanPlayers cannot retrieve the CoopHandler");
+            return [];
+        }
+
+
+        List<CoopPlayer> humanPlayers = [];
+
+        // HumanPlayers is a field in Fika version <= 1.1.4.0
+        var humanPlayersField = coopHandler.GetType().GetField("HumanPlayers");
+        var humanPlayersProperty = coopHandler.GetType().GetProperty("HumanPlayers");
+        if (humanPlayersField != null)
+        {
+            Logger.Info("HumanPlayers: field detected");
+            humanPlayers = (List<CoopPlayer>)humanPlayersField.GetValue(coopHandler) ?? [];
+        }
+        else if (humanPlayersProperty != null)
+        {
+            Logger.Info("HumanPlayers: property detected");
+            humanPlayers = (List<CoopPlayer>)humanPlayersProperty.GetValue(coopHandler) ?? [];
+        }
+        else
+        {
+            Logger.Error("HumanPlayers: no property or field detected on CoopHandler");
+            // for Fika Version >= 1.1.5.0
+            humanPlayers = [];
+        }
+
+        var filteredHumanPlayers = humanPlayers.Where(player =>
         {
             if (FikaBackendUtils.IsDedicated)
             {
@@ -45,10 +76,12 @@ public static class Fika
             }
 
             return true;
-        })?.ToList();
+        });
+
+        return [.. filteredHumanPlayers];
     }
 
-    public static CoopPlayer GetMyPlayer()
+    private static CoopPlayer GetMyPlayer()
     {
         return GetCoopHandler()?.MyPlayer;
     }
