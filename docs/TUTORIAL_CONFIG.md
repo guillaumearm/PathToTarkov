@@ -117,18 +117,16 @@ Please note that the default language fallaback is english, if you don't want to
 We'll add this to the config: 
 
 ```js
-{
-  exfiltrations_config: {
-    bigmap: {
-      'Dorms V-Ex': {
-        displayName: {
-          en: "Dorms - Extract by car",
-          fr: "Dortoirs - Extraction en voiture",
-        },
+exfiltrations_config: {
+  bigmap: {
+    'Dorms V-Ex': {
+      displayName: {
+        en: "Dorms - Extract by car",
+        fr: "Dortoirs - Extraction en voiture",
       },
     },
   },
-}
+},
 ```
 
 ### Improve tooltips visual
@@ -137,9 +135,7 @@ Now Let's use the `exfiltrations_tooltips_template` feature to make better toolt
 let's add this to your config: 
 
 ```js
-{
-  exfiltrations_tooltips_template: '<color="green"><size=90%>$exfilDisplayName\n<size=60%><color="white">$offraidPositionDisplayName',
-}
+exfiltrations_tooltips_template: '<color="green"><size=90%>$exfilDisplayName\n<size=60%><color="white">$offraidPositionDisplayName',
 ```
 
 Notes:
@@ -209,34 +205,30 @@ So now let's start the game to see our changes (Please note it's always better t
 Let's add 2 more `infiltrations` for woods and interchange for our offraid position.
 
 ```js
-{
-  infiltrations: {
-    ThePlayerCar: {
-      bigmap: ['Dorms Car'],
-      woods: ['Woods Vehicle Extract'],
-      interchange: ['Interchange Vehicle Extract'],
-    },
+infiltrations: {
+  ThePlayerCar: {
+    bigmap: ['Dorms Car'],
+    woods: ['Woods Vehicle Extract'],
+    interchange: ['Interchange Vehicle Extract'],
   },
-}
+},
 ```
 
 We also need to set some `exfiltrations` for these 2 maps, otherwise the player won't be able to extract.
 
 ```js
-{
-  exfiltrations: {
-    bigmap: {
-      'Dorms V-Ex': ['ThePlayerCar'],
-    },
-    interchange: {
-      // yes "PP Exfil" is the BSG name for the car exfil on interchange
-      'PP Exfil': ['ThePlayerCar'],
-    },
-    woods: {
-      'South V-Ex': ['ThePlayerCar'],
-    },
+exfiltrations: {
+  bigmap: {
+    'Dorms V-Ex': ['ThePlayerCar'],
   },
-}
+  interchange: {
+    // yes "PP Exfil" is the BSG name for the car exfil on interchange
+    'PP Exfil': ['ThePlayerCar'],
+  },
+  woods: {
+    'South V-Ex': ['ThePlayerCar'],
+  },
+},
 ```
 
 As a result, we can now spawn and exfils on those maps:
@@ -251,11 +243,9 @@ And here is the tooltip, as you can see it integrates nicely with [Dynamic Maps]
 By default the main stash is available everywhere, let's now enable the multistash feature and setup the main stash to be accessible only from the car
 
 ```js
-{
-   // the main stash will be accessible only from the player car offraid position
-  hideout_multistash_enabled: true,
-  hideout_main_stash_access_via: ['ThePlayerCar'],
-}
+  // the main stash will be accessible only from the player car offraid position
+hideout_multistash_enabled: true,
+hideout_main_stash_access_via: ['ThePlayerCar'],
 ```
 
 To see our changes, we need to add a new offraid position to the config and access it with the player from the configured extract.
@@ -270,14 +260,12 @@ Let's say we want to go on `Crossroads` (customs) with the car.
 So let's define first our new offraid position in `offraid_positions`: 
 
 ```js
-{
-  TheHiddenHouse: {
-    displayName: {
-      en: "Hidden house near crossroads",
-      fr: "Maison cachée près d'un carrefour",
-    },
-  }
-}
+TheHiddenHouse: {
+  displayName: {
+    en: "Hidden house near crossroads",
+    fr: "Maison cachée près d'un carrefour",
+  },
+},
 ```
 
 And let's define 1 infiltration and 1 exfiltration for this offraid, here is the final config with commented changes: 
@@ -347,15 +335,13 @@ Note: By default your secondary stash is empty, you have to declare your stash a
 Here is how you can setup a secondary stash: 
 
 ```js
-{
-  hideout_secondary_stashes: [
-    {
-      id: 'my_hidden_house_stash_with_uniq_name', // Try to not rename the id once you shipped your config to players since it will break association with items and stash (players will simply lose items in secondary stashes)
-      size: 8, // this the height of the stash (see screenshot)
-      access_via: ['TheHiddenHouse'], // here you can list several offraid positions where the secondary stash is accessible
-    },
-  ],
-}
+hideout_secondary_stashes: [
+  {
+    id: 'my_hidden_house_stash_with_uniq_name', // Try to not rename the id once you shipped your config to players since it will break association with items and stash (players will simply lose items in secondary stashes)
+    size: 8, // this the height of the stash (see screenshot)
+    access_via: ['TheHiddenHouse'], // here you can list several offraid positions where the secondary stash is accessible
+  },
+],
 ```
 
 As a result:
@@ -371,49 +357,47 @@ If you want to hide some traders according to the offraid position you have to e
 Here is a basic example:
 
 ```js
-{
-  traders_access_restriction: true,
-  traders_config: {
-      // Prapor
-    '54cb50c76803fa8b248b4571': {
-      access_via: ['ThePlayerCar'],
-    },
-    // Therapist
-    '54cb57776803fa99248b456e': {
-      access_via: ['ThePlayerCar'],
-    },
-    // Mechanic
-    '5a7c2eca46aef81a7ca2145d': {
-      access_via: ['ThePlayerCar'],
-    },
-    // Skier
-    '58330581ace78e27b8b10cee': {
-      access_via: ['ThePlayerCar'],
-    },
-    // Ragman
-    '5ac3b934156ae10c4430e83c': {
-      access_via: ['TheHiddenHouse'],
-    },
-    // Jaeger
-    '5c0647fdd443bc2504c2d371': {
-      access_via: ['TheHiddenHouse'],
-    },
-    // Peacekeeper
-    '5935c25fb3acc3127c3d8cd9': {
-      access_via: ['TheHiddenHouse'],
-    },
-    // Fence
-    '579dc571d53a0658a154fbec': {
-      access_via: [], // fence is completely disabled here
-    },
-    // You can also restrict access to modded traders, search for the `_Id` property in the `base.json` of your modded trader
-    // Painter
-    '668aaff35fd574b6dcc4a686': {
-      disable_warning: true, // this option will prevent warning to be displayed in the server console (this is in case the uplayer don't have installed the modded trader)
-      access_via: ['TheHiddenHouse'],
-    },
+traders_access_restriction: true,
+traders_config: {
+    // Prapor
+  '54cb50c76803fa8b248b4571': {
+    access_via: ['ThePlayerCar'],
   },
-}
+  // Therapist
+  '54cb57776803fa99248b456e': {
+    access_via: ['ThePlayerCar'],
+  },
+  // Mechanic
+  '5a7c2eca46aef81a7ca2145d': {
+    access_via: ['ThePlayerCar'],
+  },
+  // Skier
+  '58330581ace78e27b8b10cee': {
+    access_via: ['ThePlayerCar'],
+  },
+  // Ragman
+  '5ac3b934156ae10c4430e83c': {
+    access_via: ['TheHiddenHouse'],
+  },
+  // Jaeger
+  '5c0647fdd443bc2504c2d371': {
+    access_via: ['TheHiddenHouse'],
+  },
+  // Peacekeeper
+  '5935c25fb3acc3127c3d8cd9': {
+    access_via: ['TheHiddenHouse'],
+  },
+  // Fence
+  '579dc571d53a0658a154fbec': {
+    access_via: [], // fence is completely disabled here
+  },
+  // You can also restrict access to modded traders, search for the `_Id` property in the `base.json` of your modded trader
+  // Painter
+  '668aaff35fd574b6dcc4a686': {
+    disable_warning: true, // this option will prevent warning to be displayed in the server console (this is in case the uplayer don't have installed the modded trader)
+    access_via: ['TheHiddenHouse'],
+  },
+},
 ```
 
 ## Want more ?
