@@ -39,7 +39,29 @@ public static class Fika
             return [];
         }
 
-        var humanPlayers = coopHandler.HumanPlayers ?? [];
+
+        List<CoopPlayer> humanPlayers = [];
+
+        // HumanPlayers is a field in Fika version <= 1.1.4.0
+        var humanPlayersField = coopHandler.GetType().GetField("HumanPlayers");
+        var humanPlayersProperty = coopHandler.GetType().GetProperty("HumanPlayers");
+        if (humanPlayersField != null)
+        {
+            Logger.Info("HumanPlayers: field detected");
+            humanPlayers = (List<CoopPlayer>)humanPlayersField.GetValue(coopHandler) ?? [];
+        }
+        else if (humanPlayersProperty != null)
+        {
+            Logger.Info("HumanPlayers: property detected");
+            humanPlayers = (List<CoopPlayer>)humanPlayersProperty.GetValue(coopHandler) ?? [];
+        }
+        else
+        {
+            Logger.Error("HumanPlayers: no property or field detected on CoopHandler");
+            // for Fika Version >= 1.1.5.0
+            humanPlayers = [];
+        }
+
         var filteredHumanPlayers = humanPlayers.Where(player =>
         {
             if (FikaBackendUtils.IsDedicated)
