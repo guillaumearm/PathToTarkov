@@ -69,9 +69,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       this.config,
     );
 
-    this.debug = this.config.debug
-      ? (data: string) => this.logger.debug(`Path To Tarkov: ${data}`, true)
-      : noop;
+    this.debug = (data: string) => this.logger.debug(`Path To Tarkov: ${data}`, true);
 
     if (this.userConfig.runUninstallProcedure) {
       return;
@@ -79,10 +77,6 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     this.logger.info(`===> Loading ${getModDisplayName(this.packageJson, true)}`);
     this.debug(`UserConfig is ${JSON.stringify(this.userConfig, undefined, 2)}`);
-
-    if (this.config.debug) {
-      this.debug('debug mode enabled');
-    }
 
     const analysisResult = analyzeConfig(this.config, this.spawnConfig);
 
@@ -114,6 +108,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     this.pathToTarkovController = new PathToTarkovController(
       this.config,
       this.spawnConfig,
+      this.userConfig,
       new TradersAvailabilityService(),
       container,
       db,
@@ -129,7 +124,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     registerCustomRoutes(staticRouter, this.pathToTarkovController);
 
-    if (this.config.traders_access_restriction) {
+    if (this.userConfig.gameplay.tradersAccessRestriction) {
       fixRepeatableQuests(container);
       this.debug('Apply fix for unavailable repeatable quests (due to locked traders)');
     }

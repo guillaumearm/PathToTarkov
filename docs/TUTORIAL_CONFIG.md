@@ -243,8 +243,7 @@ And here is the tooltip, as you can see it integrates nicely with [Dynamic Maps]
 By default the main stash is available everywhere, let's now enable the multistash feature and setup the main stash to be accessible only from the car
 
 ```js
-  // the main stash will be accessible only from the player car offraid position
-hideout_multistash_enabled: true,
+// the main stash will be accessible only from the player car offraid position
 hideout_main_stash_access_via: ['ThePlayerCar'],
 ```
 
@@ -274,7 +273,6 @@ And let's define 1 infiltration and 1 exfiltration for this offraid, here is the
 {
   initial_offraid_position: 'ThePlayerCar',
 
-  hideout_multistash_enabled: true,
   hideout_main_stash_access_via: ['ThePlayerCar'],
 
   infiltrations: {
@@ -377,12 +375,11 @@ Here is the result:
 <img src="./screenshots/PTT_TUTORIAL_EXFIL_PROMPT_3.png" alt="Tutorial exfil prompt (3)" width="500">
 
 ### Traders access restriction
-If you want to hide some traders according to the offraid position you have to enable the `traders_access_restriction` param in the config and provide a `traders_access_restriction`
+If you want to hide some traders according to the offraid position you have to configure the`traders_config` section.
 
 Here is a basic example:
 
 ```js
-traders_access_restriction: true,
 traders_config: {
     // Prapor
   '54cb50c76803fa8b248b4571': {

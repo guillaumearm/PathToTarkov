@@ -20,8 +20,8 @@ export const readJsonFile = <T>(path: string, jsonUtil: JsonUtil): T => {
   return parsedResult;
 };
 
-export const writeJsonFile = <T>(path: string, x: T): void => {
-  const str = JSON.stringify(x, undefined, 2);
+export const writeJsonFile = <T>(path: string, jsonUtil: JsonUtil, x: T): void => {
+  const str = jsonUtil.serialize(x, true);
   return writeFileSync(path, str, 'utf-8');
 };
 

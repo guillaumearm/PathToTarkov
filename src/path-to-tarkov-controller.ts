@@ -13,6 +13,7 @@ import type {
   MapName,
   Profile,
   SpawnConfig,
+  UserConfig,
 } from './config';
 import { DEFAULT_FALLBACK_LANGUAGE, MAPLIST, VANILLA_STASH_IDS } from './config';
 
@@ -82,6 +83,7 @@ export class PathToTarkovController {
   constructor(
     private readonly baseConfig: Config,
     public spawnConfig: SpawnConfig,
+    private readonly userConfig: UserConfig,
     private tradersAvailabilityService: TradersAvailabilityService,
     private readonly container: DependencyContainer,
     private readonly db: DatabaseServer,
@@ -106,9 +108,16 @@ export class PathToTarkovController {
     };
 
     this.tradersAvailabilityService = new TradersAvailabilityService();
-    this.stashController = new StashController(this.getConfig, db, saveServer, this.debug);
+    this.stashController = new StashController(
+      this.getConfig,
+      userConfig,
+      db,
+      saveServer,
+      this.debug,
+    );
     this.tradersController = new TradersController(
       this.tradersAvailabilityService,
+      userConfig,
       db,
       saveServer,
       configServer,
@@ -136,10 +145,12 @@ export class PathToTarkovController {
     );
     this.debug(`${nbAddedTemplates} secondary stash templates added`);
 
-    if (!config.enable_run_through) {
-      disableRunThrough(this.db);
-      this.debug('disabled run through in-raid status');
-    }
+    disableRunThrough(this.db);
+    this.debug('disabled run through in-raid status');
+  }
+
+  getUserConfig(): UserConfig {
+    return this.userConfig;
   }
 
   setConfig(config: Config, sessionId: string): void {
@@ -167,14 +178,13 @@ export class PathToTarkovController {
     this.updateOffraidPosition(sessionId, offraidPosition);
   }
 
-  isScavMoveOffraidPosition(sessionId: string): boolean {
-    return this.getConfig(sessionId).player_scav_move_offraid_position;
+  isScavMoveOffraidPosition(): boolean {
+    return this.userConfig.gameplay.playerScavMoveOffraidPosition;
   }
 
   onPlayerDies(sessionId: string): void {
-    if (this.getConfig(sessionId).reset_offraid_position_on_player_die) {
+    if (this.userConfig.gameplay.resetOffraidPositionOnPlayerDeath) {
       const initialOffraidPosition = this.getRespawnOffraidPosition(sessionId);
-
       this.updateOffraidPosition(sessionId, initialOffraidPosition);
     }
   }
@@ -187,16 +197,15 @@ export class PathToTarkovController {
     isPlayerScav: boolean;
   }): void {
     const { sessionId, newOffraidPosition, isPlayerScav } = params;
-    const config = this.getConfig(sessionId);
 
-    if (config.bypass_keep_found_in_raid_tweak) {
-      this.debug(`[${sessionId}] FIR tweak disabled`);
-    } else {
+    if (this.userConfig.gameplay.keepFoundInRaidTweak) {
       const firTweak = new KeepFoundInRaidTweak(this.saveServer);
       const nbImpactedItems = firTweak.setFoundInRaidOnEquipment(sessionId, isPlayerScav);
       this.debug(
         `[${sessionId}] FIR tweak added SpawnedInSession on ${nbImpactedItems} item${nbImpactedItems > 1 ? 's' : ''}`,
       );
+    } else {
+      this.debug(`[${sessionId}] FIR tweak disabled`);
     }
 
     this.updateOffraidPosition(sessionId, newOffraidPosition);
@@ -408,7 +417,7 @@ export class PathToTarkovController {
 
     this.tradersController.updateTraders(
       config.traders_config,
-      config.traders_access_restriction,
+      this.userConfig.gameplay.tradersAccessRestriction,
       offraidPosition,
       sessionId,
     );

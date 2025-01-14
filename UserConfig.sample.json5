@@ -1,4 +1,11 @@
 {
   selectedConfig: 'Default',
+  gameplay: {
+    multistash: true,
+    tradersAccessRestriction: true,
+    resetOffraidPositionOnPlayerDeath: true,
+    playerScavMoveOffraidPosition: false,
+    keepFoundInRaidTweak: true,
+  },
   runUninstallProcedure: false,
 }

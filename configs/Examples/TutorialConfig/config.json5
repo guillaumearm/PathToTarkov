@@ -3,7 +3,6 @@
   initial_offraid_position: 'ThePlayerCar',
 
   // the main stash will be accessible only from the player car offraid position
-  hideout_multistash_enabled: true,
   hideout_main_stash_access_via: ['ThePlayerCar'],
 
   hideout_secondary_stashes: [
@@ -17,7 +16,6 @@
   // This is the place where you can configure your traders
   // non-listed traders will be accessible from everywhere
   // Note: you can display all locked traders from the F12 BepInEx menu\
-  traders_access_restriction: true,
   traders_config: {
     // Prapor
     '54cb50c76803fa8b248b4571': {

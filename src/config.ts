@@ -202,28 +202,10 @@ export type ExfiltrationConfig = {
 };
 
 type RawConfig = {
-  enabled?: boolean; // no longer supported
-  debug?: boolean;
-  debug_exfiltrations_tooltips_locale?: string;
-  override_by_profiles?: OverrideByProfiles;
-  bypass_keep_found_in_raid_tweak?: boolean;
   initial_offraid_position: string;
   respawn_at?: string[];
-  reset_offraid_position_on_player_die: boolean;
-  hideout_multistash_enabled: boolean;
-  player_scav_move_offraid_position: boolean;
-  vanilla_exfils_requirements?: boolean; // no longer supported
-  bypass_exfils_override?: boolean;
-  enable_automatic_transits_creation?: boolean;
-  enable_all_vanilla_transits?: boolean;
-  bypass_uninstall_procedure?: boolean; // no longer supported
-  enable_run_through?: boolean;
-  enable_legacy_ptt_api?: boolean;
-  restrictions_in_raid: Record<string, { Value: number }>;
-  offraid_regen_config: OffraidRegenConfig;
   hideout_main_stash_access_via: AccessVia;
   hideout_secondary_stashes: RawStashConfig[];
-  traders_access_restriction: boolean;
   traders_config: TradersConfig;
   exfiltrations: RawExfiltrations;
   infiltrations: Infiltrations;
@@ -233,6 +215,14 @@ type RawConfig = {
   transits_prompt_template?: ByLocale<string>;
   extracts_prompt_template?: ByLocale<string>;
   offraid_positions?: Record<OffraidPositionName, OffraidPositionDefinition>;
+  restrictions_in_raid: Record<string, { Value: number }>;
+  offraid_regen_config: OffraidRegenConfig;
+  enable_automatic_transits_creation?: boolean;
+  override_by_profiles?: OverrideByProfiles;
+  debug_exfiltrations_tooltips_locale?: string;
+  enable_legacy_ptt_api?: boolean;
+  bypass_exfils_override?: boolean;
+  enable_all_vanilla_transits?: boolean;
 };
 
 export type Config = Omit<
@@ -244,8 +234,16 @@ export type Config = Omit<
   exfiltrations: Exfiltrations;
 };
 
+// Warning: please impact the getUserConfig implementation when changing this type
 export type UserConfig = {
   selectedConfig: string;
+  gameplay: {
+    multistash: boolean;
+    tradersAccessRestriction: boolean;
+    resetOffraidPositionOnPlayerDeath: boolean;
+    playerScavMoveOffraidPosition: boolean;
+    keepFoundInRaidTweak: boolean;
+  };
   runUninstallProcedure?: false;
 };
 
@@ -289,6 +287,18 @@ export const VANILLA_STASH_IDS = [
   '5811ce772459770e9e5f9532', // Edge of darkness
   '6602bcf19cc643f44a04274b', // Unheard
 ];
+
+const DEFAULT_USER_CONFIG: UserConfig = {
+  selectedConfig: DEFAULT_SELECTED_PTT_CONFIG,
+  gameplay: {
+    multistash: true,
+    tradersAccessRestriction: true,
+    resetOffraidPositionOnPlayerDeath: true,
+    playerScavMoveOffraidPosition: false,
+    keepFoundInRaidTweak: true,
+  },
+  runUninstallProcedure: false,
+};
 
 const toStashConfig = (rawStashConfig: RawStashConfig): StashConfig => {
   const name = rawStashConfig.id; // the id is actually the name (this is to avoid breaking changes in the ptt configs)
@@ -491,22 +501,61 @@ export const processSpawnConfig = (spawnConfig: SpawnConfig, config: Config): Sp
 
 export const getUserConfig = (jsonUtil: JsonUtil): UserConfig => {
   if (!fileExists(USER_CONFIG_PATH)) {
-    const userConfig: UserConfig = {
-      selectedConfig: DEFAULT_SELECTED_PTT_CONFIG,
-      runUninstallProcedure: false,
-    };
-    writeJsonFile(USER_CONFIG_PATH, userConfig);
+    const userConfig = DEFAULT_USER_CONFIG satisfies UserConfig;
+    writeJsonFile(USER_CONFIG_PATH, jsonUtil, userConfig);
     return userConfig;
   }
 
-  const res: UserConfig = readJsonFile(USER_CONFIG_PATH, jsonUtil);
+  let needToWriteFile = false;
+  const userConfig: UserConfig = deepClone(readJsonFile(USER_CONFIG_PATH, jsonUtil));
 
-  if (!res.selectedConfig) {
-    return {
-      ...res,
-      selectedConfig: DEFAULT_SELECTED_PTT_CONFIG,
-    };
+  if (!userConfig.selectedConfig) {
+    userConfig.selectedConfig = DEFAULT_SELECTED_PTT_CONFIG;
+    needToWriteFile = true;
   }
 
-  return res;
+  if (userConfig.runUninstallProcedure === undefined) {
+    userConfig.runUninstallProcedure = DEFAULT_USER_CONFIG.runUninstallProcedure;
+    needToWriteFile = true;
+  }
+
+  if (!userConfig.gameplay) {
+    userConfig.gameplay = DEFAULT_USER_CONFIG.gameplay;
+    needToWriteFile = true;
+  }
+
+  if (userConfig.gameplay.keepFoundInRaidTweak === undefined) {
+    userConfig.gameplay.keepFoundInRaidTweak = DEFAULT_USER_CONFIG.gameplay.keepFoundInRaidTweak;
+    needToWriteFile = true;
+  }
+
+  if (userConfig.gameplay.multistash === undefined) {
+    userConfig.gameplay.multistash = DEFAULT_USER_CONFIG.gameplay.multistash;
+    needToWriteFile = true;
+  }
+
+  if (userConfig.gameplay.playerScavMoveOffraidPosition === undefined) {
+    userConfig.gameplay.playerScavMoveOffraidPosition =
+      DEFAULT_USER_CONFIG.gameplay.playerScavMoveOffraidPosition;
+    needToWriteFile = true;
+  }
+
+  if (userConfig.gameplay.resetOffraidPositionOnPlayerDeath === undefined) {
+    userConfig.gameplay.resetOffraidPositionOnPlayerDeath =
+      DEFAULT_USER_CONFIG.gameplay.resetOffraidPositionOnPlayerDeath;
+    needToWriteFile = true;
+  }
+
+  if (userConfig.gameplay.tradersAccessRestriction === undefined) {
+    userConfig.gameplay.tradersAccessRestriction =
+      DEFAULT_USER_CONFIG.gameplay.tradersAccessRestriction;
+    needToWriteFile = true;
+  }
+
+  // Rewrite the file if needed
+
+  if (needToWriteFile) {
+    writeJsonFile(USER_CONFIG_PATH, jsonUtil, userConfig);
+  }
+  return userConfig;
 };

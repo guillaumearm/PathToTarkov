@@ -452,20 +452,55 @@ const getErrorsForUnsupportedProperties = (config: Config): string[] => {
   const errors: string[] = [];
 
   // check for usage of "vanilla_exfils_requirements"
-  if (config.vanilla_exfils_requirements) {
+  if ('vanilla_exfils_requirements' in config) {
     errors.push('"vanilla_exfils_requirements" is no longer supported since version 6');
   }
 
-  // check for usage of "enabled" (only when set to false)
-  if (config.enabled === false) {
+  // check for usage of "enabled"
+  if ('enabled' in config) {
     errors.push(
-      'passing the property "enabled" to false is no longer supported since version 6, please use runUninstallProcedure boolean on UserConfig.json5',
+      'the property "enabled" is no longer supported since version 6, please refer to "runUninstallProcedure" in UserConfig.json5',
     );
   }
 
-  // check for usage of "bypass_uninstall_procedure" (only when set to true)
-  if (config.bypass_uninstall_procedure === true) {
+  // check for usage of "bypass_uninstall_procedure"
+  if ('bypass_uninstall_procedure' in config) {
     errors.push('"bypass_uninstall_procedure" property is no longer supported since version 6');
+  }
+
+  // check for usage of "bypass_keep_found_in_raid_tweak"
+  if ('bypass_keep_found_in_raid_tweak' in config) {
+    errors.push(
+      '"bypass_keep_found_in_raid_tweak" property is no longer supported since version 6, please refer to "keepFoundInRaidTweak" in UserConfig.json5',
+    );
+  }
+
+  // check for usage of "reset_offraid_position_on_player_die"
+  if ('reset_offraid_position_on_player_die' in config) {
+    errors.push(
+      '"reset_offraid_position_on_player_die" property is no longer supported since version 6, please refer to "resetOffraidPositionOnPlayerDeath" in UserConfig.json5',
+    );
+  }
+
+  // check for usage of "hideout_multistash_enabled"
+  if ('hideout_multistash_enabled' in config) {
+    errors.push(
+      '"hideout_multistash_enabled" property is no longer supported since version 6, please refer to "multistash" in UserConfig.json5',
+    );
+  }
+
+  // check for usage of "traders_access_restriction"
+  if ('traders_access_restriction' in config) {
+    errors.push(
+      '"traders_access_restriction" property is no longer supported since version 6, please refer to "tradersAccessRestriction" in UserConfig.json5',
+    );
+  }
+
+  // check for usage of "player_scav_move_offraid_position"
+  if ('player_scav_move_offraid_position' in config) {
+    errors.push(
+      '"player_scav_move_offraid_position" property is no longer supported since version 6, please refer to "playerScavMoveOffraidPosition" in UserConfig.json5',
+    );
   }
 
   return errors;
@@ -473,17 +508,7 @@ const getErrorsForUnsupportedProperties = (config: Config): string[] => {
 
 const getWarningsForUnsupportedProperties = (config: Config): string[] => {
   const warnings: string[] = [];
-
-  // check for usage of "enabled"
-  if (config.enabled === true || config.enabled === false) {
-    warnings.push('"enabled" property on config is no longer supported since version 6');
-  }
-
-  // check for usage of "bypass_uninstall_procedure" (only when set to false)
-  if (config.bypass_uninstall_procedure === false) {
-    warnings.push('"bypass_uninstall_procedure" property is no longer supported since version 6');
-  }
-
+  void config;
   return warnings;
 };
 

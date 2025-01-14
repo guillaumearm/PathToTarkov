@@ -411,37 +411,12 @@ This prints in the server console the formatted tooltip for each exfils.
 
 it will help debug the formatted tooltip for each exfils (related to `exfiltrations_tooltips_template` and `exfiltrations_config`)
 
-Note: `debug` should be enabled in `UserConfig.json5` file. ([UserConfig spec link](./USER_CONFIG_DOCUMENTATION.md))
-
 ```js
 debug_exfiltrations_tooltips_locale: "en"; // any valid EFT locales can be used here
 ```
 
 ---------
 
-### `reset_offraid_position_on_player_die` (boolean)  DEPRECATED (should be moved in UserConfig)
-
-```js
-// the offraid position will be reset on player death to the `initial_offraid_position` (or `respawn_at` if set)
-reset_offraid_position_on_player_die: true
-```
-
-```js
-// the offraid position will not changes on player death
-reset_offraid_position_on_player_die: false
-```
-
-### `hideout_multistash_enabled` (boolean) DEPRECATED (should be moved in UserConfig)
-
-```js
-// Enable the multistash feature (`hideout_main_stash_access_via` and `hideout_secondary_stashes` can be used)
-hideout_multistash_enabled: true,
-```
-
-```js
-// Disable the multistash feature even if `hideout_main_stash_access_via` and `hideout_secondary_stashes` are enabled
-hideout_multistash_enabled: false,
-```
 
 ### `traders_access_restriction` (boolean) DEPRECATED (should be moved in UserConfig)
 
@@ -464,12 +439,6 @@ player_scav_move_offraid_position: true,
 player_scav_move_offraid_position: false,
 ```
 
-### `debug` (boolean) DEPRECATED (should be removed)
-When this is enabled, the server will logs more infos on what's going on with PTT.
-
-It's highly recommended to turn it on, there is not so much logs and it can help to debug in case of issue.
-
-
 ### `bypass_keep_found_in_raid_tweak` (boolean) DEPRECATED (should be moved in UserConfig)
 By default, PTT will apply a basic FoundInRaid tweak.
 
@@ -477,7 +446,3 @@ At the end of the raid, all items in the character inventory will be marked as f
 
 This option will the opportunity to disable this behaviour in case it conflicts with another mod.
 
-
-### `enable_run_through` (boolean) DEPRECATED (should be moved in UserConfig)
-By default, PTT will disable the Run Through mechanic bring by the game.
-Here it's possible to re-enable it explicitely.
