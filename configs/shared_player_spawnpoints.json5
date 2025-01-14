@@ -8,7 +8,7 @@
    */
 
   /**
-   * Tip for rotation values (compass points)
+   * Rotation values by cardinal points
    * - South: 0
    * - South West: 45
    * - West: 90
