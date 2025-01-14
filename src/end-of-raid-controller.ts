@@ -36,7 +36,7 @@ export class EndOfRaidController {
       return;
     }
 
-    if (isPlayerScav && !this.ptt.pathToTarkovController.isScavMoveOffraidPosition(sessionId)) {
+    if (isPlayerScav && !this.ptt.pathToTarkovController.isScavMoveOffraidPosition()) {
       this.ptt.debug('end of raid: scav player detected, pmc offraid position not changed');
       return;
     }

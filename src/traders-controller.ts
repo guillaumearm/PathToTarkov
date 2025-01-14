@@ -5,7 +5,7 @@ import type { ILogger } from '@spt/models/spt/utils/ILogger';
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { ConfigServer } from '@spt/servers/ConfigServer';
 import type { SaveServer } from '@spt/servers/SaveServer';
-import type { Config, LocaleName, TradersConfig } from './config';
+import type { Config, LocaleName, TradersConfig, UserConfig } from './config';
 import { PRAPOR_ID } from './config';
 import { checkAccessVia } from './helpers';
 import { isEmptyArray } from './utils';
@@ -17,6 +17,7 @@ import type { ITraderConfig } from '@spt/models/spt/config/ITraderConfig';
 export class TradersController {
   constructor(
     private readonly tradersAvailabilityService: TradersAvailabilityService,
+    private readonly userConfig: UserConfig,
     private readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
     private readonly configServer: ConfigServer,
@@ -43,7 +44,7 @@ export class TradersController {
       throw new Error('Fatal initTraders: no traders found in db');
     }
 
-    if (!config.traders_access_restriction) {
+    if (!this.userConfig.gameplay.tradersAccessRestriction) {
       return;
     }
 

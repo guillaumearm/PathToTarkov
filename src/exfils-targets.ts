@@ -1,4 +1,4 @@
-import type { Config, MapName } from './config';
+import type { Config, MapName, UserConfig } from './config';
 import { checkAccessVia, isWildcardAccessVia } from './helpers';
 import {
   isSameMap,
@@ -39,6 +39,8 @@ export const getExfilsTargets = (
     return result;
   }
 
+  const userConfig = pttController.getUserConfig();
+
   void Object.keys(exfilsConfig).forEach(exfilName => {
     const targets = exfilsConfig[exfilName].map<ExfilTarget>(targetValue => {
       const parsed = parseExilTargetFromPTTConfig(targetValue);
@@ -50,7 +52,7 @@ export const getExfilsTargets = (
         transitMapId: resolveLocationIdFromMapName(parsed.transitTargetMapName ?? ''),
         transitSpawnPointId: parsed.transitTargetSpawnPointId ?? '',
         nextMaps: getNextMaps(config, parsed, mapName),
-        nextTraders: getNextTraders(pttController.tradersController, config, parsed),
+        nextTraders: getNextTraders(pttController.tradersController, config, userConfig, parsed),
       };
     });
 
@@ -99,9 +101,10 @@ const getNextMaps = (
 const getNextTraders = (
   tradersController: TradersController,
   config: Config,
+  userConfig: UserConfig,
   parsedExfilTarget: ParsedExfilTarget,
 ): string[] => {
-  if (!config.traders_access_restriction) {
+  if (!userConfig.gameplay.tradersAccessRestriction) {
     return [];
   }
 

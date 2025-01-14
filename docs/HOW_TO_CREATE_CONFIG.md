@@ -7,9 +7,7 @@ To customize a Path to Tarkov configuration without overwriting it during future
 2. Update the `selectedConfig` value in your `UserConfig.json5` file to point to your custom configuration:
 
 ```js
-{
-    selectedConfig: "Default",
-}
+selectedConfig: "Default",
 ```
 
 ## Resources for config makers

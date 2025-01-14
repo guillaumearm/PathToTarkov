@@ -77,7 +77,9 @@ export const createPathToTarkovAPI = (
         throw new Error('PTT api -> no sessionId provided');
       }
 
-      if (controller.getConfig(sessionId).traders_access_restriction) {
+      const userConfig = controller.getUserConfig();
+
+      if (userConfig.gameplay.tradersAccessRestriction) {
         controller.tradersController.initTraders(controller.getConfig(sessionId));
       }
 

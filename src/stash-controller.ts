@@ -1,6 +1,6 @@
 import type { DatabaseServer } from '@spt/servers/DatabaseServer';
 import type { SaveServer } from '@spt/servers/SaveServer';
-import type { AccessVia, ConfigGetter, Profile, StashConfig } from './config';
+import type { AccessVia, ConfigGetter, Profile, StashConfig, UserConfig } from './config';
 import { EMPTY_STASH, STANDARD_STASH_ID } from './config';
 import {
   checkAccessVia,
@@ -13,6 +13,7 @@ import { deepClone } from './utils';
 export class StashController {
   constructor(
     private getConfig: ConfigGetter,
+    private userConfig: UserConfig,
     private db: DatabaseServer,
     private saveServer: SaveServer,
     private readonly debug: (data: string) => void,
@@ -103,11 +104,14 @@ export class StashController {
   }
 
   private getMainStashAvailable(offraidPosition: string, sessionId: string): boolean {
-    const multiStashEnabled = this.getConfig(sessionId).hideout_multistash_enabled;
-    const mainStashAccessVia = this.getMainStashAccessVia(sessionId);
-    const mainStashAvailable = checkAccessVia(mainStashAccessVia, offraidPosition);
+    const multiStashEnabled = this.userConfig.gameplay.multistash;
 
-    return mainStashAvailable || multiStashEnabled === false;
+    if (!multiStashEnabled) {
+      return true;
+    }
+
+    const mainStashAccessVia = this.getMainStashAccessVia(sessionId);
+    return checkAccessVia(mainStashAccessVia, offraidPosition);
   }
 
   private getSecondaryStash(
