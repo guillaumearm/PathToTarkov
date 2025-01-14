@@ -75,9 +75,15 @@
   // You can find a complete list of vanilla exfils in ALL_EXFILS.md
   exfiltrations: {
     bigmap: {
-      // here we used 2 offraid positions for 1 exfil, it means the player can choose with the prompt
-      'Dorms V-Ex': ['ThePlayerCar', 'TheHiddenHouse'],
+      // here we used 2 offraid positions and 2 transits for 1 exfil, it means the player can choose a target exifl using the prompt
+      'Dorms V-Ex': [
+        'ThePlayerCar', // extract to offraid position
+        'TheHiddenHouse', // extract to offraid position
+        'interchange.Interchange Vehicle Extract', // transit to interchange
+        'woods.Woods Vehicle Extract', // transit to woods
+      ],
     },
+
     interchange: {
       // yes "PP Exfil" is the BSG name for the car exfil on interchange
       'PP Exfil': ['ThePlayerCar'],

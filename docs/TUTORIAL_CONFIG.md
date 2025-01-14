@@ -349,7 +349,32 @@ As a result:
 <img src="./screenshots/PTT_TUTORIAL_SECONDARY_STASH_1.png" alt="Tutorial secondary stash of 8" width="500">
 
 ### Transits
-TODO
+In Path To Tarkov, any extract zone can be used as a transit giving you more flexibility than vanilla transits.
+For this tutorial we will just add 2 transits that will give us the ability to transits to interchange and woods using the car exfils on dorms.
+
+The notation for a transit is the following: `mapName.spawnPointName`.
+
+
+Let's edit our `exfiltrations.bigmap` to add the transits
+
+```js
+bigmap: {
+  // As you can see here, you can break lines to improve readability
+  'Dorms V-Ex': [
+    'ThePlayerCar', // extract to offraid position
+    'TheHiddenHouse', // extract to offraid position
+    'interchange.Interchange Vehicle Extract', // transit to interchange
+    'woods.Woods Vehicle Extract', // transit to woods
+  ],
+},
+```
+
+- Note: because of this notation, you cannot use dots `.` in player spawnpoint names or offraid position
+- Note 2: PTT transits are not the same as vanilla transits. The main difference is that you cannot send items to your stash.
+
+Here is the result: 
+
+<img src="./screenshots/PTT_TUTORIAL_EXFIL_PROMPT_3.png" alt="Tutorial exfil prompt (3)" width="500">
 
 ### Traders access restriction
 If you want to hide some traders according to the offraid position you have to enable the `traders_access_restriction` param in the config and provide a `traders_access_restriction`
@@ -399,6 +424,9 @@ traders_config: {
   },
 },
 ```
+When traders access restriction is enabled you can see available traders in your exfil tooltips:
+
+<img src="./screenshots/PTT_TUTORIAL_TOOLTIP_2.png" alt="Tutorial tooltip (2)" width="500">
 
 ## Want more ?
 This is the end of this tutorial, thank you for reading.
