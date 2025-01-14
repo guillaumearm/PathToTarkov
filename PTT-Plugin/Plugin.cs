@@ -1,15 +1,13 @@
 ﻿using BepInEx;
-using BepInEx.Logging;
 using BepInEx.Bootstrap;
 
 using PTT.Services;
 using System;
 using EFT.Communications;
-using EFT.UI;
 
 namespace PTT;
 
-[BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
+[BepInPlugin("Trap.PathToTarkov", "Path To Tarkov", "6.0.0")]
 public class Plugin : BaseUnityPlugin
 {
     public static bool FikaIsInstalled { get; private set; }
@@ -22,7 +20,7 @@ public class Plugin : BaseUnityPlugin
     protected void Awake()
     {
         Helpers.Logger.Init(Logger);
-        Helpers.Logger.Info($"Plugin {PluginInfo.PLUGIN_GUID} is loading...");
+        Helpers.Logger.Info($"Plugin Trap-PathToTarkov is loading...");
         Settings.Config.Init(Config);
 
         FikaIsInstalled = Chainloader.PluginInfos.ContainsKey("com.fika.core");
@@ -48,7 +46,7 @@ public class Plugin : BaseUnityPlugin
         new Patches.ExitTimerPanelUpdateVisitedStatusPatch().Enable();
         new Patches.ExtractionTimersPanelSwitchTimersPatch().Enable();
 
-        Helpers.Logger.Info($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+        Helpers.Logger.Info($"Plugin Trap-PathToTarkov is loaded!");
     }
 
     protected void Start()
