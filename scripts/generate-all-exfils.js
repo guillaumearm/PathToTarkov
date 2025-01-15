@@ -4,7 +4,7 @@ const fs = require('node:fs/promises');
 const EXTERNAL_RESOURCES_DIR = 'external-resources';
 const LOCATION_NAME_MAPPING_FILENAME = 'location_name_mapping.json';
 const LOCALES_FILENAME = 'locales_global_en.json';
-const MAPGENIE_LOCATIONS_FILENAME = 'mapgenie_locations.json';
+const MAP_LOCATIONS_FILENAME = 'map_locations.json';
 const MAPS_DIR = 'maps';
 
 const MARKDOWN_MAIN_TITLE = 'All exfiltrations';
@@ -42,7 +42,7 @@ const LOCALES = lowerLocaleKeys(
   require(`../${EXTERNAL_RESOURCES_DIR}/${LOCALES_FILENAME}`),
 );
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const MAPGENIE_LOCATIONS = require(`../${EXTERNAL_RESOURCES_DIR}/${MAPGENIE_LOCATIONS_FILENAME}`);
+const MAP_LOCATIONS = require(`../${EXTERNAL_RESOURCES_DIR}/${MAP_LOCATIONS_FILENAME}`);
 
 const getMapJsonFilePath = mapName =>
   `${EXTERNAL_RESOURCES_DIR}/${MAPS_DIR}/${mapName}_allExtracts.json`;
@@ -56,11 +56,11 @@ const getMapGenieMapName = mapName => {
 };
 
 const resolveMapGenieLocationId = (mapName, exitResolvedName) => {
-  if (!MAPGENIE_LOCATIONS[mapName]) {
+  if (!MAP_LOCATIONS[mapName]) {
     throw new Error(`Error: map name '${mapName}' does not exist in MAPGENIE_LOCATIONS`);
   }
 
-  const mapLocation = MAPGENIE_LOCATIONS[mapName].find(
+  const mapLocation = MAP_LOCATIONS[mapName].find(
     l => l.description.toLowerCase() === exitResolvedName.toLowerCase(),
   );
 
@@ -69,7 +69,7 @@ const resolveMapGenieLocationId = (mapName, exitResolvedName) => {
     return null;
   }
 
-  return mapLocation.id;
+  return mapLocation.mapgenie_id;
 };
 
 const getMapGenieLocationUrl = (mapName, locationId) => {
