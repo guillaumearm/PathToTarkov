@@ -1,12 +1,12 @@
 {
   "customs": "Customs",
   "factory": "Factory",
+  "groundzero": "Ground Zero",
   "interchange": "Interchange",
-  "woods": "Woods",
-  "shoreline": "Shoreline",
-  "reserve": "Military Reserve",
-  "lighthouse": "Lighthouse",
-  "streets": "Streets of Tarkov",
   "laboratory": "Laboratory",
-  "groundzero": "Ground Zero"
+  "lighthouse": "Lighthouse",
+  "reserve": "Military Reserve",
+  "shoreline": "Shoreline",
+  "streets": "Streets of Tarkov",
+  "woods": "Woods"
 }

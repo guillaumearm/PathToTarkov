@@ -40,6 +40,15 @@
 | "Camera Bunker Door" | Camera Bunker Door | [link](https://mapgenie.io/tarkov/maps/factory?locationIds=25058) |
 | "Office Window" | Office Window | [link](https://mapgenie.io/tarkov/maps/factory?locationIds=25060) |
 
+## Ground Zero
+|identifier|description|mapgenie.io|
+|----------|-----------|-----------|
+| "Sandbox_VExit" | Police Cordon V-Ex | [link](https://mapgenie.io/tarkov/maps/groundzero?locationIds=314851) |
+| "Unity_free_exit" | Emercom Checkpoint | [link](https://mapgenie.io/tarkov/maps/groundzero?locationIds=314855) |
+| "Scav_coop_exit" | Scav Checkpoint (Co-op) | [link](https://mapgenie.io/tarkov/maps/groundzero?locationIds=314852) |
+| "Nakatani_stairs_free_exit" | Nakatani Basement Stairs | [link](https://mapgenie.io/tarkov/maps/groundzero?locationIds=314854) |
+| "Sniper_exit" | Mira Ave | [link](https://mapgenie.io/tarkov/maps/groundzero?locationIds=314853) |
+
 ## Interchange
 |identifier|description|mapgenie.io|
 |----------|-----------|-----------|
@@ -50,27 +59,46 @@
 | "Hole Exfill" | Hole in the Fence | [link](https://mapgenie.io/tarkov/maps/interchange?locationIds=28349) |
 | "Saferoom Exfil" | Saferoom Exfil | [link](https://mapgenie.io/tarkov/maps/interchange?locationIds=28342) |
 
-## Woods
+## Laboratory
 |identifier|description|mapgenie.io|
 |----------|-----------|-----------|
-| "Factory Gate" | Friendship Bridge (Co-Op) | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=424607) |
-| "RUAF Gate" | RUAF Gate | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24857) |
-| "ZB-016" | ZB-016 | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24858) |
-| "ZB-014" | ZB-014 | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24862) |
-| "UN Roadblock" | UN Roadblock | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24855) |
-| "South V-Ex" | Bridge V-Ex | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=65037) |
-| "Outskirts" | Outskirts | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24866) |
-| "un-sec" | Northern UN Roadblock | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=65038) |
-| "wood_sniper_exit" | Power Line Passage | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=410432) |
-| "Outskirts Water" | Scav Bridge | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=65035) |
-| "Dead Man's Place" | Dead Man's Place | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24868) |
-| "The Boat" | Boat | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24869) |
-| "Scav House" | Scav House | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24870) |
-| "East Gate" | Scav Bunker | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=65036) |
-| "Mountain Stash" | Mountain Stash | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24859) |
-| "West Border" | Eastern Rocks | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24666) |
-| "Old Station" | Old Railway Depot | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24854) |
-| "RUAF Roadblock" | RUAF Roadblock | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24857) |
+| "lab_Elevator_Cargo" | Cargo Elevator | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=31571) |
+| "lab_Elevator_Main" | Main Elevator | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=31542) |
+| "lab_Vent" | Ventilation Shaft | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=31543) |
+| "lab_Elevator_Med" | Medical Block Elevator | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=31549) |
+| "lab_Under_Storage_Collector" | Sewage Conduit | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=31540) |
+| "lab_Parking_Gate" | Parking Gate | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=32101) |
+| "lab_Hangar_Gate" | Hangar Gate | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=31570) |
+
+## Lighthouse
+|identifier|description|mapgenie.io|
+|----------|-----------|-----------|
+| "EXFIL_Train" | Armored Train | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152316) |
+| " V-Ex_light" | Road to Military Base V-Ex | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152319) |
+| "tunnel_shared" | Side Tunnel (Co-Op) | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152326) |
+| "Alpinist_light" | Mountain Pass | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152323) |
+| "Shorl_free" | Path to Shoreline | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152322) |
+| "Nothern_Checkpoint" | Northern Checkpoint | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152315) |
+| "Coastal_South_Road" | Southern Road | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152328) |
+| "Shorl_free_scav" | Path to Shoreline | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152322) |
+| "Scav_Coastal_South" | Southern Road Landslide | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152329) |
+| "Scav_Underboat_Hideout" | Hideout Under the Landing Stage | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152325) |
+| "Scav_Hideout_at_the_grotto" | Scav Hideout at the Grotto | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152321) |
+| "Scav_Industrial_zone" | Industrial Zone Gates | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152317) |
+
+## Military Reserve
+|identifier|description|mapgenie.io|
+|----------|-----------|-----------|
+| "EXFIL_Train" | Armored Train | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39352) |
+| "EXFIL_Bunker_D2" | D-2 | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39424) |
+| "EXFIL_Bunker" | Bunker Hermetic Door | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39336) |
+| "Alpinist" | Cliff Descent | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39196) |
+| "EXFIL_ScavCooperation" | Scav Lands (Co-Op) | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39211) |
+| "EXFIL_vent" | Sewer Manhole | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39212) |
+| "Exit1" | Hole in the Wall by the Mountains | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39194) |
+| "Exit2" | Heating Pipe | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39193) |
+| "Exit3" | Depot Hermetic Door | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39299) |
+| "Exit4" | Checkpoint Fence | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39195) |
 
 ## Shoreline
 |identifier|description|mapgenie.io|
@@ -89,36 +117,6 @@
 | "South Fence Passage" | Old Bunker | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=317033) |
 | "RWing Gym Entrance" | East Wing Gym Entrance | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=28240) |
 | "Adm Basement" | Admin Basement | [link](https://mapgenie.io/tarkov/maps/shoreline?locationIds=28239) |
-
-## Military Reserve
-|identifier|description|mapgenie.io|
-|----------|-----------|-----------|
-| "EXFIL_Train" | Armored Train | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39352) |
-| "EXFIL_Bunker_D2" | D-2 | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39424) |
-| "EXFIL_Bunker" | Bunker Hermetic Door | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39336) |
-| "Alpinist" | Cliff Descent | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39196) |
-| "EXFIL_ScavCooperation" | Scav Lands (Co-Op) | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39211) |
-| "EXFIL_vent" | Sewer Manhole | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39212) |
-| "Exit1" | Hole in the Wall by the Mountains | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39194) |
-| "Exit2" | Heating Pipe | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39193) |
-| "Exit3" | Depot Hermetic Door | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39299) |
-| "Exit4" | Checkpoint Fence | [link](https://mapgenie.io/tarkov/maps/reserve?locationIds=39195) |
-
-## Lighthouse
-|identifier|description|mapgenie.io|
-|----------|-----------|-----------|
-| "EXFIL_Train" | Armored Train | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152316) |
-| " V-Ex_light" | Road to Military Base V-Ex | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152319) |
-| "tunnel_shared" | Side Tunnel (Co-Op) | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152326) |
-| "Alpinist_light" | Mountain Pass | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152323) |
-| "Shorl_free" | Path to Shoreline | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152322) |
-| "Nothern_Checkpoint" | Northern Checkpoint | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152315) |
-| "Coastal_South_Road" | Southern Road | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152328) |
-| "Shorl_free_scav" | Path to Shoreline | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152322) |
-| "Scav_Coastal_South" | Southern Road Landslide | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152329) |
-| "Scav_Underboat_Hideout" | Hideout Under the Landing Stage | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152325) |
-| "Scav_Hideout_at_the_grotto" | Scav Hideout at the Grotto | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152321) |
-| "Scav_Industrial_zone" | Industrial Zone Gates | [link](https://mapgenie.io/tarkov/maps/lighthouse?locationIds=152317) |
 
 ## Streets of Tarkov
 |identifier|description|mapgenie.io|
@@ -142,23 +140,25 @@
 | "scav_e7" | Cardinal Apartment Complex Parking | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=300400) |
 | "scav_e8" | Klimov Shopping Mall Exfil | [link](https://mapgenie.io/tarkov/maps/streets?locationIds=300384) |
 
-## Laboratory
+## Woods
 |identifier|description|mapgenie.io|
 |----------|-----------|-----------|
-| "lab_Elevator_Cargo" | Cargo Elevator | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=31571) |
-| "lab_Elevator_Main" | Main Elevator | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=31542) |
-| "lab_Vent" | Ventilation Shaft | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=31543) |
-| "lab_Elevator_Med" | Medical Block Elevator | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=31549) |
-| "lab_Under_Storage_Collector" | Sewage Conduit | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=31540) |
-| "lab_Parking_Gate" | Parking Gate | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=32101) |
-| "lab_Hangar_Gate" | Hangar Gate | [link](https://mapgenie.io/tarkov/maps/lab?locationIds=31570) |
-
-## Ground Zero
-|identifier|description|mapgenie.io|
-|----------|-----------|-----------|
-| "Sandbox_VExit" | Police Cordon V-Ex | [link](https://mapgenie.io/tarkov/maps/groundzero?locationIds=314851) |
-| "Unity_free_exit" | Emercom Checkpoint | [link](https://mapgenie.io/tarkov/maps/groundzero?locationIds=314855) |
-| "Scav_coop_exit" | Scav Checkpoint (Co-op) | [link](https://mapgenie.io/tarkov/maps/groundzero?locationIds=314852) |
-| "Nakatani_stairs_free_exit" | Nakatani Basement Stairs | [link](https://mapgenie.io/tarkov/maps/groundzero?locationIds=314854) |
-| "Sniper_exit" | Mira Ave | [link](https://mapgenie.io/tarkov/maps/groundzero?locationIds=314853) |
+| "Factory Gate" | Friendship Bridge (Co-Op) | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=424607) |
+| "RUAF Gate" | RUAF Gate | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24857) |
+| "ZB-016" | ZB-016 | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24858) |
+| "ZB-014" | ZB-014 | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24862) |
+| "UN Roadblock" | UN Roadblock | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24855) |
+| "South V-Ex" | Bridge V-Ex | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=65037) |
+| "Outskirts" | Outskirts | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24866) |
+| "un-sec" | Northern UN Roadblock | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=65038) |
+| "wood_sniper_exit" | Power Line Passage | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=410432) |
+| "Outskirts Water" | Scav Bridge | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=65035) |
+| "Dead Man's Place" | Dead Man's Place | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24868) |
+| "The Boat" | Boat | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24869) |
+| "Scav House" | Scav House | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24870) |
+| "East Gate" | Scav Bunker | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=65036) |
+| "Mountain Stash" | Mountain Stash | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24859) |
+| "West Border" | Eastern Rocks | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24666) |
+| "Old Station" | Old Railway Depot | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24854) |
+| "RUAF Roadblock" | RUAF Roadblock | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24857) |
   

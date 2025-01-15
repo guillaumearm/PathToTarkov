@@ -127,6 +127,28 @@
       "description": "Courtyard Gate"
     }
   ],
+  "groundzero": [
+    {
+      "id": 314855,
+      "description": "Emercom Checkpoint"
+    },
+    {
+      "id": 314851,
+      "description": "Police Cordon V-Ex"
+    },
+    {
+      "id": 314853,
+      "description": "Mira Ave"
+    },
+    {
+      "id": 314852,
+      "description": "Scav Checkpoint (Co-op)"
+    },
+    {
+      "id": 314854,
+      "description": "Nakatani Basement Stairs"
+    }
+  ],
   "interchange": [
     {
       "id": 28339,
@@ -503,28 +525,6 @@
     {
       "id": 410432,
       "description": "Power Line Passage"
-    }
-  ],
-  "groundzero": [
-    {
-      "id": 314855,
-      "description": "Emercom Checkpoint"
-    },
-    {
-      "id": 314851,
-      "description": "Police Cordon V-Ex"
-    },
-    {
-      "id": 314853,
-      "description": "Mira Ave"
-    },
-    {
-      "id": 314852,
-      "description": "Scav Checkpoint (Co-op)"
-    },
-    {
-      "id": 314854,
-      "description": "Nakatani Basement Stairs"
     }
   ]
 }

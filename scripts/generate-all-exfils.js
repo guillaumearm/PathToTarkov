@@ -42,8 +42,6 @@ const LOCALES = lowerLocaleKeys(
   require(`../${EXTERNAL_RESOURCES_DIR}/${LOCALES_FILENAME}`),
 );
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-// const SCAVS_EXFILS = require(`../${EXTERNAL_RESOURCES_DIR}/${SCAVS_EXFILS_FILENAME}`);
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const MAPGENIE_LOCATIONS = require(`../${EXTERNAL_RESOURCES_DIR}/${MAPGENIE_LOCATIONS_FILENAME}`);
 
 const getMapJsonFilePath = mapName =>
