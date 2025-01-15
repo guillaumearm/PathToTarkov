@@ -1,4 +1,3 @@
-
 # All exfiltrations
 ## Customs
 |identifier|description|mapgenie.io|
@@ -161,4 +160,4 @@
 | "West Border" | Eastern Rocks | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24666) |
 | "Old Station" | Old Railway Depot | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24854) |
 | "RUAF Roadblock" | RUAF Roadblock | [link](https://mapgenie.io/tarkov/maps/woods?locationIds=24857) |
-  
+
