@@ -31,6 +31,7 @@ const main = async modName => {
     `cpr README.txt ${serverModDir}/README.txt -o`,
     // `cpr README.md ${serverModDir}/README.md -o`,
     // `cpr ./docs ${serverModDir}/docs -o`,
+    `cpr ./docs/HOW_TO_UNINSTALL.md ${serverModDir}/HOW_TO_UNINSTALL.md -o`,
     `cpr LICENSE ${serverModDir}/LICENSE -o`,
     'echo "> Successfully prepared files!"',
   ].forEach(cmd => {

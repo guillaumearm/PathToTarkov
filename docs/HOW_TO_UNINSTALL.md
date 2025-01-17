@@ -13,7 +13,7 @@ Mandatory steps:
 
 1. edit the `user/mods/Trap-PathToTarkov/configs/UserConfig.json5` file in your spt directory.
 2. pass the property `runUninstallProcedure` to `true` and save the file.
-3. start your spt server (from here, PTT is uninstalled and disabled)
+3. start your spt server. when the server is fully started, PTT should be uninstalled and disabled
 
 Optional steps (cleanup):
 
