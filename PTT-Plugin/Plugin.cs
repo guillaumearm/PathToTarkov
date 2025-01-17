@@ -4,6 +4,8 @@ using BepInEx.Bootstrap;
 using PTT.Services;
 using System;
 using EFT.Communications;
+using PTT;
+using BepInEx.Logging;
 
 namespace PTT;
 
@@ -12,6 +14,9 @@ public class Plugin : BaseUnityPlugin
 {
     public static bool FikaIsInstalled { get; private set; }
     public static bool FikaIsOutdated { get; private set; }
+
+    private static string PathToTarkovServerFullVersion { get; set; } = null;
+    private static bool PathToTarkovIsDisabled { get; set; } = false;
     private static bool InteractableExfilsApiIsInstalled { get; set; }
     private static bool InteractableExfilsApiIsOutdated { get; set; } = false;
     public static CurrentLocationDataService CurrentLocationDataService;
@@ -23,7 +28,15 @@ public class Plugin : BaseUnityPlugin
     protected void Awake()
     {
         Helpers.Logger.Init(Logger);
-        Helpers.Logger.Info($"Plugin Trap-PathToTarkov v{PluginVersion.DISPLAY_VERSION} is loading...");
+
+        FetchPathToTarkovServerVersion();
+        if (PathToTarkovIsDisabled)
+        {
+            Helpers.Logger.Warning($"Plugin Trap-PathToTarkov v{PluginVersion.FULL_VERSION} is disabled!");
+            return;
+        }
+
+        Helpers.Logger.Info($"Plugin Trap-PathToTarkov v{PluginVersion.FULL_VERSION} is loading...");
         Settings.Config.Init(Config);
 
         FikaIsInstalled = Chainloader.PluginInfos.ContainsKey(FIKA_PLUGIN_NAME);
@@ -49,11 +62,13 @@ public class Plugin : BaseUnityPlugin
         new Patches.ExitTimerPanelUpdateVisitedStatusPatch().Enable();
         new Patches.ExtractionTimersPanelSwitchTimersPatch().Enable();
 
-        Helpers.Logger.Info($"Plugin Trap-PathToTarkov v{PluginVersion.DISPLAY_VERSION} is loaded!");
+        Helpers.Logger.Info($"Plugin Trap-PathToTarkov v{PluginVersion.FULL_VERSION} is loaded!");
     }
 
     protected void Start()
     {
+        if (PathToTarkovIsDisabled) return;
+
         if (FikaIsInstalled)
         {
             Version fikaVersion = Chainloader.PluginInfos[FIKA_PLUGIN_NAME].Metadata.Version;
@@ -134,6 +149,12 @@ public class Plugin : BaseUnityPlugin
 
     public static void DisplayOutdatedVersionsWarnings()
     {
+        if (PluginVersion.FULL_VERSION != PathToTarkovServerFullVersion)
+        {
+            Helpers.Logger.Warning($"Mismatch version between server ({PathToTarkovServerFullVersion}) and plugin ({PluginVersion.FULL_VERSION})");
+            NotificationManagerClass.DisplayMessageNotification("Path To Tarkov: mismatch version between server and plugin, please reinstall the mod correctly", ENotificationDurationType.Long);
+        }
+
         if (!InteractableExfilsApiIsInstalled)
         {
             NotificationManagerClass.DisplayWarningNotification("Path To Tarkov: Interactable Exfils API mod is not installed", ENotificationDurationType.Long);
@@ -147,5 +168,25 @@ public class Plugin : BaseUnityPlugin
         {
             NotificationManagerClass.DisplayWarningNotification($"Path To Tarkov: Fika.Core is outdated. v{FIKA_MIN_VERSION} or higher is required", ENotificationDurationType.Long);
         }
+    }
+
+    private static void FetchPathToTarkovServerVersion()
+    {
+        var data = Helpers.HttpRequest.FetchVersionData();
+
+        // ptt server is missing
+        if (data == null)
+        {
+            PathToTarkovIsDisabled = true;
+            return;
+        }
+
+        // ptt server is uninstalled
+        if (data.uninstalled)
+        {
+            PathToTarkovIsDisabled = true;
+        }
+
+        PathToTarkovServerFullVersion = data.fullVersion;
     }
 }

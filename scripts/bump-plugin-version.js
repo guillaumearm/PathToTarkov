@@ -45,7 +45,7 @@ namespace PTT;
 internal static class PluginVersion
 {
     internal const string VERSION = "${semanticVersion}";
-    internal const string DISPLAY_VERSION = "${version}";
+    internal const string FULL_VERSION = "${version}";
 }
 `;
 };

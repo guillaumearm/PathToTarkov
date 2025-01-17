@@ -37,6 +37,7 @@ import type { JsonUtil } from '@spt/utils/JsonUtil';
 import { registerCustomRoutes } from './routes';
 import { performPathToTarkovInstallationAnalysis } from './installation-analysis';
 import { getPTTLogHeader } from './ptt-log-header';
+import { registerVersionRoute } from './routes/version';
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;
@@ -49,36 +50,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   public executeOnStartAPICallbacks: (sessionId: string) => void = noop;
   public pathToTarkovController: PathToTarkovController;
 
-  public preSptLoad(container: DependencyContainer): void {
-    this.container = container;
-    this.logger = container.resolve<ILogger>('WinstonLogger');
-    const jsonUtil = container.resolve<JsonUtil>('JsonUtil');
-    this.packageJson = readJsonFile(PACKAGE_JSON_PATH, jsonUtil);
-
-    performPathToTarkovInstallationAnalysis();
-
-    this.userConfig = getUserConfig(jsonUtil);
-
-    this.config = processConfig(
-      readJsonFile(
-        path.join(CONFIGS_DIR, this.userConfig.selectedConfig, CONFIG_FILENAME),
-        jsonUtil,
-      ),
-    );
-    this.spawnConfig = processSpawnConfig(
-      readJsonFile(path.join(DO_NOT_DISTRIBUTE_DIR, SPAWN_CONFIG_FILENAME), jsonUtil),
-      this.config,
-    );
-
-    this.debug = (data: string) => this.logger.debug(`Path To Tarkov: ${data}`, true);
-
-    if (this.userConfig.runUninstallProcedure) {
-      return;
-    }
-
-    this.logger.info(`===> Loading ${getModDisplayName(this.packageJson, true)}`);
-    this.debug(`UserConfig is ${JSON.stringify(this.userConfig, undefined, 2)}`);
-
+  public runStaticAnalysis(): void {
     const analysisResult = analyzeConfig(this.config, this.spawnConfig);
 
     if (analysisResult.warnings.length > 0) {
@@ -105,6 +77,33 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
         `Fatal Error when loading the selected Path To Tarkov config "${this.userConfig.selectedConfig}"`,
       );
     }
+  }
+
+  public preSptLoad(container: DependencyContainer): void {
+    this.container = container;
+    this.logger = container.resolve<ILogger>('WinstonLogger');
+    const jsonUtil = container.resolve<JsonUtil>('JsonUtil');
+    this.packageJson = readJsonFile(PACKAGE_JSON_PATH, jsonUtil);
+
+    performPathToTarkovInstallationAnalysis();
+
+    this.userConfig = getUserConfig(jsonUtil);
+
+    this.config = processConfig(
+      readJsonFile(
+        path.join(CONFIGS_DIR, this.userConfig.selectedConfig, CONFIG_FILENAME),
+        jsonUtil,
+      ),
+    );
+    this.spawnConfig = processSpawnConfig(
+      readJsonFile(path.join(DO_NOT_DISTRIBUTE_DIR, SPAWN_CONFIG_FILENAME), jsonUtil),
+      this.config,
+    );
+
+    this.debug = (data: string) => this.logger.debug(`Path To Tarkov: ${data}`, true);
+
+    this.logger.info(`===> Loading ${getModDisplayName(this.packageJson, true)}`);
+    this.debug(`UserConfig is ${JSON.stringify(this.userConfig, undefined, 2)}`);
 
     const configServer = container.resolve<ConfigServer>('ConfigServer');
     const db = container.resolve<DatabaseServer>('DatabaseServer');
@@ -121,6 +120,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       this.config,
       this.spawnConfig,
       this.userConfig,
+      this.packageJson,
       new TradersAvailabilityService(),
       container,
       db,
@@ -130,6 +130,18 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
       this.logger,
       this.debug,
     );
+
+    if (this.userConfig.runUninstallProcedure) {
+      // We register the version route here to let the client know when ptt is uninstalled
+      registerVersionRoute(staticRouter, {
+        uninstalled: true,
+        fullVersion: this.packageJson.version,
+      });
+      return;
+    }
+
+    this.pathToTarkovController.init();
+    this.runStaticAnalysis();
 
     eventWatcher.onEndOfRaid(payload => endOfRaidController.end(payload));
     eventWatcher.register(createStaticRoutePeeker(staticRouter), container);

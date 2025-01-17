@@ -34,6 +34,7 @@ import { StashController } from './stash-controller';
 import { TradersController } from './traders-controller';
 import type { DependencyContainer } from 'tsyringe';
 import type { LocationController } from '@spt/controllers/LocationController';
+import type { PackageJson } from './utils';
 import { deepClone, isNotUndefined, shuffle } from './utils';
 import { resolveMapNameFromLocation } from './map-name-resolver';
 import type {
@@ -84,6 +85,7 @@ export class PathToTarkovController {
     private readonly baseConfig: Config,
     public spawnConfig: SpawnConfig,
     private readonly userConfig: UserConfig,
+    private readonly packageJson: PackageJson,
     private tradersAvailabilityService: TradersAvailabilityService,
     private readonly container: DependencyContainer,
     private readonly db: DatabaseServer,
@@ -123,7 +125,14 @@ export class PathToTarkovController {
       configServer,
       this.logger,
     );
+  }
+
+  init(): void {
     this.overrideControllers();
+  }
+
+  getFullVersion(): string {
+    return this.packageJson.version;
   }
 
   loaded(config: Config): void {
