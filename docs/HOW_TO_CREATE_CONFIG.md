@@ -19,7 +19,7 @@ I suggest you to keep those 2 files opened in a browser tab when writing a confi
 In [this tutorial](./TUTORIAL_CONFIG.md), we will create a new config from scrath.
 
 ### Check the PTT config specification
-Here is the link to the [PTT Config specification](./spec/README.md) if you want more details on all features.
+Here is the link to the [PTT Config specification](./specification/README.md) if you want more details on all features.
 
 ### Use a linter to validate syntax of your config
 https://codebeautify.org/json5-validator
