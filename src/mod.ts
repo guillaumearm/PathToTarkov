@@ -36,6 +36,7 @@ import { TradersAvailabilityService } from './services/TradersAvailabilityServic
 import type { JsonUtil } from '@spt/utils/JsonUtil';
 import { registerCustomRoutes } from './routes';
 import { performPathToTarkovInstallationAnalysis } from './installation-analysis';
+import { getPTTLogHeader } from './ptt-log-header';
 
 class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
   private packageJson: PackageJson;
@@ -80,15 +81,26 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     const analysisResult = analyzeConfig(this.config, this.spawnConfig);
 
-    analysisResult.warnings.forEach(warn => {
-      this.logger.warning(`[Path To Tarkov Config] ${warn}`);
-    });
-
-    analysisResult.errors.forEach(err => {
-      this.logger.error(`[Path To Tarkov Config] ${err}`);
-    });
+    if (analysisResult.warnings.length > 0) {
+      this.logger.info(
+        getPTTLogHeader(`Warnings found in "${this.userConfig.selectedConfig}" config`),
+      );
+      analysisResult.warnings.forEach(warn => {
+        this.logger.warning(`[Path To Tarkov Config] ${warn}`);
+      });
+    }
 
     if (analysisResult.errors.length > 0) {
+      this.logger.info(
+        getPTTLogHeader(`Errors found in "${this.userConfig.selectedConfig}" config`),
+      );
+      analysisResult.errors.forEach(err => {
+        this.logger.error(`[Path To Tarkov Config] ${err}`);
+      });
+
+      this.logger.info(
+        getPTTLogHeader('The following stacktrace is not a bug, please fix your config'),
+      );
       throw new Error(
         `Fatal Error when loading the selected Path To Tarkov config "${this.userConfig.selectedConfig}"`,
       );
@@ -150,6 +162,7 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     if (this.userConfig.runUninstallProcedure) {
       this.logger.warning('=> Path To Tarkov is disabled!');
       purgeProfiles(this.config, quests, saveServer, this.logger);
+      this.logger.success(getPTTLogHeader('Uninstall done'));
       return;
     }
 
@@ -169,7 +182,10 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
 
     this.pathToTarkovController.loaded(this.config);
     this.pathToTarkovController.debugExfiltrationsTooltips(this.config);
-    this.logger.success(`===> Successfully loaded ${getModDisplayName(this.packageJson, true)}`);
+
+    this.logger.success(
+      getPTTLogHeader(`Successfully loaded ${getModDisplayName(this.packageJson, true)}`),
+    );
   }
 }
 
