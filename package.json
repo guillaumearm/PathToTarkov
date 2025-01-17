@@ -8,6 +8,7 @@
   "author": "Trap",
   "sptVersion": "~3.10.3",
   "scripts": {
+    "preversion": "cross-var node scripts/bump-plugin-version.js $npm_package_version && git add src PTT-Plugin PTT-Packets configs docs",
     "dev:install": "npm run build && npm run build:client && npm run install:files",
     "install:files": "npm run prepare:files && node scripts/install-files.js",
     "git:check:status": "bash scripts/check-git-status.sh",
@@ -80,6 +81,7 @@
     "bestzip": "2.2.1",
     "cpr": "^3.0.1",
     "cross-env": "~7.0",
+    "cross-var": "^1.1.0",
     "eslint": "8.56.0",
     "gulp": "~5.0",
     "gulp-decompress": "~3.0",
