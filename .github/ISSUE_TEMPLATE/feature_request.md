@@ -1,7 +1,7 @@
 ---
 name: Feature request
-about: Suggest an idea for this project
-title: "[FEATURE REQUEST]"
+about: Suggest an idea to improve the openworld experience
+title: "[FEATURE REQUEST] "
 labels: feature
 assignees: guillaumearm
 
