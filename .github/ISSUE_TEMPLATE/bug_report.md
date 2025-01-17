@@ -7,26 +7,29 @@ assignees: guillaumearm
 
 ---
 
-# How to report a bug
+# Preliminary checks
 
-You may want to check the [FAQ](./FAQ.md) before, maybe there is answers to your question here.
+- [ ] I'm sure my mod is up-to-date
+- [ ] I read the [FAQ](../../docs/FAQ.md)
+- [ ] I checked the [known issues](https://github.com/guillaumearm/PathToTarkov/issues?q=is%3Aissue%20state%3Aopen%20label%3Abug)
+- [ ] I tried to reproduce without the 300 mods I installed
 
-⚠️Check in [Known bugs](https://github.com/guillaumearm/PathToTarkov/issues?q=is%3Aopen+is%3Aissue+label%3Abug) before reporting.
+# Description of the issue
+<!-- Here you can describe your issue, you can paste screenshots if it make sense to you -->
 
-⚠️Please try to reproduce the issue without the 300 mods you have installed.
+## Versions
+- SPT version:
+- PTT version: 
+- Fika version: (only if you use fika)
 
-## Here is a list of useful informations that will help investigation of your issue
+## Server logs
+<!-- latest server.log found in `user/logs` folder -->
 
-- version of SPT
-- version of Path To Tarkov
-- server and client logs
-- The selected PTT config (If you don't know then it should be the default one, you can check in the `UserConfig.json5` file)
-- If you created/edited your own config: I'll need a copy of the correponding `config.json5`
+## Client logs (Player.log)
+<!-- Player.log from F12 BepInEx menu -> can also be found in `C:\Users\YourUser\AppData\LocalLow\Battlestate Games\EscapeFromTarkov` (or `%appdata%\..\LocalLow\Battlestate Games\EscapeFromTarkov`) -->
 
-## For fika users
-- version of fika
-- is the fika dedicated client is used ? (please provide dedi logs)
+## UserConfig.json5
+<!-- Let us know if you modified your UserConfig.json5 -->
 
-
-## Where to report the issue ?
-You can report on github, on the spt hub comments, or even on discord (Fika or WTT)
+## Custom ptt config
+<!-- If you use a custom ptt config that is not packed with the mod, please provide your config.json5 here -->
