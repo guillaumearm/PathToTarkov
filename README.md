@@ -61,14 +61,17 @@ It works nicely with Dynamic Maps
 
 ## Path To Tarkov configurations
 
-### The default configuration map images
-
-![image-default-ptt-config](./configs//Default/TarkovMapV2.jpg)
-
-### Select Your PTT Configuration
-
 The default configuration offers a comprehensive path with all Path to Tarkov features enabled. If it’s your first time using PTT, it is recommended to start with this default setup.
 
+### The default configuration
+
+Here is the map of the default ptt openworld.
+
+![image-default-ptt-config](./configs/Default/TarkovOpenWorld.jpg)
+
+Note: If you want to contribute to PTT, I'm looking for a new map image for the default config of ptt.
+
+### Select Your PTT Configuration
 If you wish to explore alternative configurations, the mod includes several pre-configured Path to Tarkov setups. 
 
 To select your current PTT configuration, edit the `Trap-PathToTarkov/configs/UserConfig.json5` file. If this file is missing, start your SPT server once, and the mod will generate it automatically.
