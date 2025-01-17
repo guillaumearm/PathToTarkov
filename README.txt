@@ -1,0 +1,1 @@
+Path To Tarkov documentation can be found at https://github.com/guillaumearm/PathToTarkov/blob/master/README.md

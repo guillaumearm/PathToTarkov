@@ -26,8 +26,9 @@ const main = async modName => {
     `rimraf ./dist/user/mods/${modName}/configs/UserConfig.json5`,
     `cpr ALL_EXFILS.md ./dist/user/mods/${modName}/ALL_EXFILS.md -o`,
     `cpr LOGO.jpg ./dist/user/mods/${modName}/LOGO.jpg -o`,
-    `cpr README.md ./dist/user/mods/${modName}/README.md -o`,
-    `cpr ./docs ./dist/user/mods/${modName}/docs -o`,
+    `cpr README.txt ./dist/user/mods/${modName}/README.txt -o`,
+    // `cpr README.md ./dist/user/mods/${modName}/README.md -o`,
+    // `cpr ./docs ./dist/user/mods/${modName}/docs -o`,
     `cpr LICENSE ./dist/user/mods/${modName}/LICENSE -o`,
     'echo "> Successfully prepared files!"',
   ].forEach(cmd => {
