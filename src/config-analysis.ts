@@ -356,6 +356,10 @@ const getErrorsForInfils = (config: Config, spawnConfig: SpawnConfig): string[] 
 
     const spawnPointsByMap = config.infiltrations[offraidPosition];
 
+    if (isEmpty(spawnPointsByMap)) {
+      errors.push(`no map found in "infiltrations" for offraid position "${offraidPosition}"`);
+    }
+
     Object.keys(spawnPointsByMap).forEach(mapName => {
       // 2. check for map validity
       if (!ALLOWED_MAPS.includes(mapName)) {
