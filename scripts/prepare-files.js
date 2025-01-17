@@ -28,7 +28,6 @@ const main = async modName => {
     `rimraf ${serverModDir}/configs/shared_player_spawnpoints.json5`,
     `rimraf ${serverModDir}/configs/UserConfig.json5`,
     `cpr ALL_EXFILS.md ${serverModDir}/ALL_EXFILS.md -o`,
-    `cpr LOGO.jpg ${serverModDir}/LOGO.jpg -o`,
     `cpr README.txt ${serverModDir}/README.txt -o`,
     // `cpr README.md ${serverModDir}/README.md -o`,
     // `cpr ./docs ${serverModDir}/docs -o`,
