@@ -1,7 +1,7 @@
 ---
 name: Bug report
-about: Create a report to help us improve
-title: "[BUG]"
+about: Found a bug in Path to Tarkov ? Help us improve it with an appropriate bug report.
+title: "[BUG] "
 labels: bug
 assignees: guillaumearm
 
