@@ -95,7 +95,7 @@ You have to update the `selectedConfig` value in your `UserConfig.json5` file to
 - [List of available vanilla extracts](./ALL_EXFILS.md)
 - [Tutorial: create a config from scratch](./docs/TUTORIAL_CONFIG.md)
 - [PTT config specification](./docs/spec/README.md)
-- [PTT UserConfig specification](./docs/spec/USER_CONFIG_DOCUMENTATION.md)
+- [PTT UserConfig specification](./docs/USER_CONFIG_MANUAL.md)
 
 
 ## How to report a bug

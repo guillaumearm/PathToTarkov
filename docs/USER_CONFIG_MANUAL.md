@@ -1,8 +1,8 @@
 # UserConfig.json5 documentation
 
-This file is generated on server start and is not distributed with Path To Tarkov
+The `UserConfig.json5` is generated on server start and is not distributed with Path To Tarkov.
 
-This allows players to configure their PTT experience without interfering with new updates.
+This allows players to configure their experience without interfering with new updates.
 
 Here is the default one formatted in a json5 format:
 
@@ -22,4 +22,4 @@ Here is the default one formatted in a json5 format:
 
 ## Why should I need a special procedure for uninstallation ?
 
-[Read this documentation about uninstalling PTT](../HOW_TO_UNINSTALL.md)
+[Read this documentation about uninstalling PTT](./HOW_TO_UNINSTALL.md)
