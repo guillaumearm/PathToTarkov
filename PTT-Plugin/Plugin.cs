@@ -16,7 +16,7 @@ public class Plugin : BaseUnityPlugin
     private static bool InteractableExfilsApiIsOutdated { get; set; } = false;
     public static CurrentLocationDataService CurrentLocationDataService;
     private const string IE_API_PLUGIN_NAME = "Jehree.InteractableExfilsAPI";
-    private const string IE_API_MIN_VERSION = "1.5.1";
+    private const string IE_API_MIN_VERSION = "2.0.0";
     private const string FIKA_PLUGIN_NAME = "com.fika.core";
     private const string FIKA_MIN_VERSION = "1.1.5";
 
