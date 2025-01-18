@@ -1,0 +1,530 @@
+{
+  initial_offraid_position: 'PlayerHideout',
+  respawn_at: ['PlayerHideout'],
+  hideout_main_stash_access_via: ['PlayerHideout'],
+
+  // debug_exfiltrations_tooltips_locale: 'en',
+
+  hideout_secondary_stashes: [
+    {
+      id: 'PathToTarkov_Prapor_stash',
+      size: 32,
+      access_via: ['PraporHideout'],
+    },
+    {
+      id: 'PathToTarkov_Therapist_stash',
+      size: 32,
+      access_via: ['TherapistHideout'],
+    },
+    {
+      id: 'PathToTarkov_Mechanic_stash',
+      size: 32,
+      access_via: ['MechanicHideout'],
+    },
+    {
+      id: 'PathToTarkov_Skier_stash',
+      size: 32,
+      access_via: ['SkierHideout'],
+    },
+    {
+      id: 'PathToTarkov_Jaeger_stash',
+      size: 32,
+      access_via: ['JaegerHideout'],
+    },
+    {
+      id: 'PathToTarkov_Peacekeeper_stash',
+      size: 32,
+      access_via: ['PeacekeeperHideout'],
+    },
+    {
+      id: 'PathToTarkov_Ragman_stash',
+      size: 32,
+      access_via: ['RagmanHideout'],
+    },
+    {
+      id: 'PathToTarkov_Ref_stash',
+      size: 32,
+      access_via: ['RefHideout'],
+    },
+    {
+      id: 'PathToTarkov_Car_stash',
+      size: 12,
+      access_via: ['Car'],
+    },
+    {
+      id: 'PathToTarkov_Nakatani_stash',
+      size: 16,
+      access_via: ['NakataniBasementHideout'],
+    },
+  ],
+
+  restrictions_in_raid: {
+    // roubles
+    '5449016a4bdc2d6f028b456f': {
+      Value: 100000000,
+    },
+    // dollars
+    '5696686a4bdc2da3298b456a': {
+      Value: 1000000,
+    },
+    // euros
+    '569668774bdc2da2298b4568': {
+      Value: 1000000,
+    },
+    // case key
+    '67449b6c89d5e1ddc603f504': {
+      Value: 42,
+    },
+    // locked case
+    '6740987b89d5e1ddc603f4f0': {
+      Value: 10,
+    },
+  },
+
+  offraid_regen_config: {
+    hydration: {
+      access_via: ['*'],
+    },
+    energy: {
+      access_via: ['*'],
+    },
+    health: {
+      access_via: ['*'],
+    },
+  },
+
+  traders_config: {
+    // Fence
+    '579dc571d53a0658a154fbec': {
+      access_via: ['*'],
+      insurance_always_enabled: true,
+      insurance_config: {
+        insurance_price_coef: 25,
+        min_payment: 0,
+        min_return_hour: 0,
+        max_return_hour: 0,
+        max_storage_time: 480,
+        return_chance_percent: 50,
+      },
+      repair_always_enabled: true,
+      repair_config: {
+        quality: 1,
+        currency: '5449016a4bdc2d6f028b456f',
+        currency_coefficient: 12,
+        repair_price_coef: 0,
+      },
+      heal_always_enabled: true,
+    },
+    // Prapor
+    '54cb50c76803fa8b248b4571': {
+      access_via: ['PraporHideout'],
+    },
+    // Therapist
+    '54cb57776803fa99248b456e': {
+      access_via: ['TherapistHideout'],
+    },
+    // Mechanic
+    '5a7c2eca46aef81a7ca2145d': {
+      access_via: ['MechanicHideout'],
+    },
+    // Skier
+    '58330581ace78e27b8b10cee': {
+      access_via: ['SkierHideout'],
+    },
+    // Ragman
+    '5ac3b934156ae10c4430e83c': {
+      access_via: ['RagmanHideout'],
+    },
+    // Jaeger
+    '5c0647fdd443bc2504c2d371': {
+      access_via: ['JaegerHideout'],
+    },
+    // Peacekeeper
+    '5935c25fb3acc3127c3d8cd9': {
+      access_via: ['PeacekeeperHideout'],
+    },
+    // Ref (arena)
+    '6617beeaa9cfa777ca915b7c': {
+      access_via: ['RefHideout'],
+    },
+    // Priscilu
+    '6748adca5c70634464b214a8': {
+      disable_warning: true,
+      access_via: ['JaegerHideout'],
+    },
+    // Legs the trader
+    '6748edbcb936f1098d4303e4': {
+      disable_warning: true,
+      access_via: ['PlayerHideout'],
+    },
+    // Harry hideout
+    '67419e9d0d4541ce671543bb': {
+      disable_warning: true,
+      access_via: ['NakataniBasementHideout'],
+    },
+    // Artem
+    '66bf757f27d0b097db0acea5': {
+      disable_warning: true,
+      access_via: ['SkierHideout'],
+    },
+    // Scorpion
+    '6688d464bc40c867f60e7d7e': {
+      disable_warning: true,
+      access_via: ['MechanicHideout'],
+    },
+    // Frostbite
+    '66ef9505bede6c894d6b47bd': {
+      disable_warning: true,
+      access_via: ['TherapistHideout'],
+    },
+    // Painter
+    '668aaff35fd574b6dcc4a686': {
+      disable_warning: true,
+      access_via: ['MechanicHideout'],
+    },
+    // Saria
+    '66f4db5ca4958508883d700c': {
+      disable_warning: true,
+      access_via: ['PeacekeeperHideout'],
+    },
+    // Requisitions (from Raid Overhaul mod)
+    '66f0eaa93f6cc015bc1f3acb': {
+      disable_warning: true,
+      access_via: ['PraporHideout'],
+    },
+    // Gunsmith
+    '4e7ef752240141bca059b2ea': {
+      disable_warning: true,
+      access_via: ['PraporHideout'],
+    },
+    // lotus
+    '6747208ef022cbbfc65c41bf': {
+      disable_warning: true,
+      access_via: ['TherapistHideout'],
+    },
+  },
+
+  exfiltrations: {
+    factory4_day: {
+      'Gate 0': ['PlayerHideout', 'bigmap.ZB-1011'],
+      'Camera Bunker Door': ['MechanicHideout'],
+      'Gate 3': ['woods.ZB-016'],
+      'Gate m': ['bigmap.ZB-1012'],
+      Cellars: ['bigmap.ZB-1013'],
+      Gate_o: ['bigmap.Old Gas Scav'],
+    },
+    factory4_night: {
+      'Gate 0': ['PlayerHideout', 'bigmap.ZB-1011'],
+      'Camera Bunker Door': ['MechanicHideout'],
+      'Gate 3': ['woods.ZB-016'],
+      'Gate m': ['bigmap.ZB-1012'],
+      Cellars: ['bigmap.ZB-1013'],
+      Gate_o: ['bigmap.Old Gas Scav'],
+    },
+    bigmap: {
+      'ZB-1011': ['PlayerHideout', 'factory4_day.Gate 0', 'factory4_night.Gate 0'],
+      'Dorms V-Ex': [
+        'Car',
+        'interchange.Interchange Vehicle Extract',
+        'woods.Woods Vehicle Extract',
+        'sandbox.Police Car',
+        'lighthouse.Lighthouse Vehicle Extract',
+        'shoreline.North Fence Passage', // TODO: verify this one
+        'tarkovstreets.Streets Vehicle Extract',
+      ],
+      'Warehouse 17': ['SkierHideout'],
+      'Trailer Park': ['RagmanHideout'],
+      'Railroad To Port': ['shoreline.Railway Bridge'],
+      'Military Checkpoint': ['woods.Outskirts', 'lighthouse.Northern CP'],
+      EXFIL_ZB013: ['factory4_day.Cellars', 'factory4_night.Cellars'],
+      'ZB-1012': ['factory4_day.Med tent gates', 'factory4_night.Med tent gates'],
+      'Sniper Roadblock': ['rezervbase.Hole In Wall', 'shoreline.Smugglers Path'],
+      "Smuggler's Boat": [
+        'woods.Sawmill River',
+        'shoreline.Climbers Trail',
+        'lighthouse.Southern Road Water',
+      ],
+      'RUAF Roadblock': ['woods.UN Roadblock'],
+      Crossroads: ['interchange.Emercom', 'shoreline.Road to Customs'],
+      'Old Azs Gate': ['factory4_day.Courtyard', 'factory4_night.Courtyard'],
+      'Railroad To Tarkov': ['interchange.Railway', 'tarkovstreets.Crash Site'],
+      Shack: ['rezervbase.Scav lands'],
+      'Railroad To Military Base': ['rezervbase.Scav lands rail'],
+      'Factory Far Corner': ['woods.RUAF Gate'],
+    },
+    woods: {
+      'South V-Ex': [
+        'Car',
+        'bigmap.Dorms Car',
+        'interchange.Interchange Vehicle Extract',
+        'sandbox.Police Car',
+        'lighthouse.Lighthouse Vehicle Extract',
+        'shoreline.North Fence Passage', // TODO: verify this one
+        'tarkovstreets.Streets Vehicle Extract',
+      ],
+      'East Gate': ['PraporHideout'],
+      'Mountain Stash': ['JaegerHideout'],
+      'un-sec': ['bigmap.RUAF Roadblock'],
+      'ZB-016': ['factory4_day.Gate 3', 'factory4_night.Gate 3'],
+      Outskirts: ['bigmap.Scav CP', 'lighthouse.Northern CP'],
+      'UN Roadblock': ['bigmap.RUAF Roadblock', 'interchange.Railway'],
+      'RUAF Gate': ['bigmap.Factory Far Corner'],
+    },
+    rezervbase: {
+      EXFIL_Bunker_D2: ['PeacekeeperHideout'],
+      Exit3: ['RefHideout'],
+      EXFIL_ScavCooperation: ['bigmap.Military Base CP'],
+      Exit4: ['lighthouse.Northeast Mountains'],
+      Alpinist: ['shoreline.Climbers Trail'],
+      EXFIL_vent: ['tarkovstreets.Streets Manhole'],
+    },
+    interchange: {
+      'PP Exfil': [
+        'Car',
+        'bigmap.Dorms Car',
+        'woods.Woods Vehicle Extract',
+        'sandbox.Police Car',
+        'lighthouse.Lighthouse Vehicle Extract',
+        'shoreline.North Fence Passage', // TODO: verify this one
+        'tarkovstreets.Streets Vehicle Extract',
+      ],
+      'NW Exfil': ['woods.UN Roadblock', 'tarkovstreets.Crash Site'],
+      'SE Exfil': ['bigmap.Crossroads', 'shoreline.Road to Customs'],
+      'Interchange Cooperation': ['RagmanHideout'],
+    },
+    shoreline: {
+      'Shorl_V-Ex': [
+        'Car',
+        'bigmap.Dorms Car',
+        'interchange.Interchange Vehicle Extract',
+        'woods.Woods Vehicle Extract',
+        'sandbox.Police Car',
+        'lighthouse.Lighthouse Vehicle Extract',
+        'tarkovstreets.Streets Vehicle Extract',
+      ],
+      'South Fence Passage': ['PeacekeeperHideout'],
+      Road_at_railbridge: ['bigmap.RR to Port'],
+      RedRebel_alp: ['rezervbase.Cliff'],
+      'Road to Customs': ['bigmap.Sniper Roadblock', 'interchange.Emercom'],
+      'Pier Boat': [
+        'bigmap.Smugglers Boat',
+        'lighthouse.Southern Road Water',
+        'woods.Sawmill River',
+      ],
+      Tunnel: ['lighthouse.Lighthouse Tunnel'],
+      'Wrecked Road': ['lighthouse.Southern Road'],
+      Lighthouse_pass: ['lighthouse.Path to Shoreline'],
+      Smugglers_Trail_coop: ['shoreline.Smugglers Path'],
+    },
+    lighthouse: {
+      ' V-Ex_light': [
+        'Car',
+        'bigmap.Dorms Car',
+        'interchange.Interchange Vehicle Extract',
+        'woods.Woods Vehicle Extract',
+        'sandbox.Police Car',
+        'shoreline.North Fence Passage', // TODO: verify this one
+        'tarkovstreets.Streets Vehicle Extract',
+      ],
+      Shorl_free: ['shoreline.Path to Lighthouse'],
+      Coastal_South_Road: ['shoreline.Ruined Road'],
+      Nothern_Checkpoint: ['bigmap.Scav CP', 'woods.Outskirts'],
+      Alpinist_light: ['shoreline.Path to Lighthouse'],
+      tunnel_shared: ['shoreline.Shoreline Tunnel'],
+    },
+    tarkovstreets: {
+      E7_car: [
+        'Car',
+        'bigmap.Dorms Car',
+        'interchange.Interchange Vehicle Extract',
+        'woods.Woods Vehicle Extract',
+        'sandbox.Police Car',
+        'lighthouse.Lighthouse Vehicle Extract',
+        'shoreline.North Fence Passage', // TODO: verify this one
+      ],
+      E1: ['laboratory.Main Elevator'],
+      scav_e3: ['laboratory.Lab Vents'],
+      E4: ['interchange.Railway'],
+      E9_sniper: ['sandbox.Mira Ave'],
+      scav_e1: [
+        'NakataniBasementHideout',
+        'sandbox.Nakatani Basement Stairs',
+        'laboratory.Parking Gate',
+      ],
+      scav_e2: ['laboratory.Hangar Gate'],
+      scav_e4: ['rezervbase.Reserve Manhole'],
+      E2: ['laboratory.Lab Sewage Conduit'],
+      E7: ['sandbox.Scav Hideout'],
+    },
+    laboratory: {
+      lab_Parking_Gate: [
+        'NakataniBasementHideout',
+        'sandbox.Nakatani Basement Stairs',
+        'tarkovstreets.Basement Descent',
+      ],
+      lab_Hangar_Gate: ['tarkovstreets.Catacombs'],
+      lab_Under_Storage_Collector: ['tarkovstreets.Sewer River'],
+      lab_Elevator_Main: ['tarkovstreets.Stylobate Elevator'],
+      lab_Elevator_Cargo: ['tarkovstreets.Stylobate Elevator'],
+      lab_Elevator_Med: ['tarkovstreets.Stylobate Elevator'],
+      lab_Vent: ['tarkovstreets.Streets Vents'],
+    },
+    sandbox: {
+      Sandbox_VExit: [
+        'Car',
+        'bigmap.Dorms Car',
+        'interchange.Interchange Vehicle Extract',
+        'woods.Woods Vehicle Extract',
+        'lighthouse.Lighthouse Vehicle Extract',
+        'shoreline.North Fence Passage', // TODO: verify this one
+        'tarkovstreets.Streets Vehicle Extract',
+      ],
+      Unity_free_exit: ['TherapistHideout'],
+      Nakatani_stairs_free_exit: [
+        'NakataniBasementHideout',
+        'tarkovstreets.Basement Descent',
+        'laboratory.Parking Gate',
+      ],
+      Sniper_exit: ['tarkovstreets.Klimov Street'],
+      Scav_coop_exit: ['tarkovstreets.Expo Checkpoint'],
+    },
+  },
+  infiltrations: {
+    PlayerHideout: {
+      bigmap: ['ZB-1011'],
+      factory4_day: ['Gate 0'],
+      factory4_night: ['Gate 0'],
+    },
+    PraporHideout: {
+      woods: ['Scav Bunker'],
+    },
+    TherapistHideout: {
+      sandbox: ['EmercomGZ'],
+    },
+    MechanicHideout: {
+      factory4_day: ['Camera Bunker Door'],
+      factory4_night: ['Camera Bunker Door'],
+    },
+    SkierHideout: {
+      bigmap: ['Warehouse 17'],
+    },
+    RagmanHideout: {
+      interchange: ['Scav Camp'],
+      bigmap: ['Trailer Park'],
+    },
+    JaegerHideout: {
+      woods: ['Mountain Stash'],
+    },
+    PeacekeeperHideout: {
+      shoreline: ['Old Bunker'],
+    },
+    RefHideout: {
+      bigmap: ['RR to Port'],
+      shoreline: ['Railway Bridge'],
+    },
+    Car: {
+      bigmap: ['Dorms Car'],
+      interchange: ['Interchange Vehicle Extract'],
+      woods: ['Woods Vehicle Extract'],
+      sandbox: ['Police Car'],
+      lighthouse: ['Lighthouse Vehicle Extract'],
+      shoreline: ['North Fence Passage'], // TODO: verify this one
+      tarkovstreets: ['Streets Vehicle Extract'],
+    },
+    NakataniBasementHideout: {
+      tarkovstreets: ['Basement Descent'],
+      sandbox: ['Nakatani Basement Stairs'],
+      laboratory: ['Parking Gate'],
+    },
+  },
+  offraid_positions: {
+    PlayerHideout: {
+      displayName: {
+        en: 'Main hideout',
+        fr: 'La cachette principale',
+      },
+    },
+    PraporHideout: {
+      displayName: {
+        en: "Prapor's hideout",
+        fr: 'La cachette de Prapor',
+      },
+    },
+    TherapistHideout: {
+      displayName: {
+        en: "Therapist's hideout",
+        fr: 'La cachette de la Toubib',
+      },
+    },
+    MechanicHideout: {
+      displayName: {
+        en: "Mechanic's hideout",
+        fr: 'La cachette du Mécano',
+      },
+    },
+    SkierHideout: {
+      displayName: {
+        en: "Skier's hideout",
+        fr: 'La cachette de Skier',
+      },
+    },
+    RagmanHideout: {
+      displayName: {
+        en: "Ragman's hideout",
+        fr: 'La cachette de Ragman',
+      },
+    },
+    JaegerHideout: {
+      displayName: {
+        en: "Jaeger's hideout",
+        fr: 'La cachette de Jaeger',
+      },
+    },
+    PeacekeeperHideout: {
+      displayName: {
+        en: "Peacekeeper's hideout",
+        fr: 'La cachette de Peacekeeper',
+      },
+    },
+    RefHideout: {
+      displayName: {
+        en: "Ref's hideout",
+        fr: 'Cachette de Ref',
+      },
+    },
+    Car: {
+      displayName: {
+        en: 'The car',
+        fr: 'La voiture',
+      },
+    },
+    NakataniBasementHideout: {
+      displayName: {
+        en: 'Basement Hideout at Nakatani',
+        fr: 'Cachette au sous-sol de Nakatani',
+      },
+    },
+  },
+  exfiltrations_config: {
+    factory4_day: {},
+    factory4_night: {},
+    bigmap: {},
+    woods: {},
+    rezervbase: {},
+    interchange: {},
+    shoreline: {},
+    lighthouse: {},
+    tarkovstreets: {},
+    laboratory: {},
+    sandbox: {},
+  },
+  exfiltrations_tooltips_template: '<color="green"><size=90%>$exfilDisplayName\n<size=60%><color="white">$offraidPositionDisplayName',
+  extracts_prompt_template: {
+    en: 'Extract to {0}',
+    fr: 'Extraction vers {0}',
+  },
+  transits_prompt_template: {
+    en: 'Transit to {0}',
+    fr: 'Transit vers {0}',
+  },
+}
