@@ -272,6 +272,7 @@ export const USER_CONFIG_PATH = join(CONFIGS_DIR, 'UserConfig.json5');
 export const DEFAULT_SELECTED_PTT_CONFIG = 'Default';
 
 export const CONFIG_FILENAME = 'config.json5';
+export const ADDITIONAL_PLAYER_SPAWNPOINTS_FILENAME = 'additional_player_spawnpoints.json5';
 export const SPAWN_CONFIG_FILENAME = 'shared_player_spawnpoints.json5';
 
 export const PRAPOR_ID = '54cb50c76803fa8b248b4571';
@@ -464,7 +465,7 @@ export const processConfig = (originalConfig: RawConfig): Config => {
   return config;
 };
 
-const mergeAdditionalSpawnpoints = (
+export const mergeAdditionalSpawnpoints = (
   spawnConfig: SpawnConfig,
   additionalSpawnConfig: Partial<SpawnConfig>,
 ): SpawnConfig => {
@@ -497,6 +498,17 @@ export const processSpawnConfig = (spawnConfig: SpawnConfig, config: Config): Sp
 
   const mergedConfig = mergeAdditionalSpawnpoints(spawnConfig, additionalPlayerSpawnpoints);
   return prepareGroundZeroHigh(mergedConfig);
+};
+
+export const loadAdditionalPlayerSpawnpoints = (
+  filePath: string,
+  jsonUtil: JsonUtil,
+): Partial<SpawnConfig> => {
+  if (!fileExists(filePath)) {
+    return {};
+  }
+
+  return readJsonFile(filePath, jsonUtil) as Partial<SpawnConfig>;
 };
 
 export const getUserConfig = (jsonUtil: JsonUtil): UserConfig => {

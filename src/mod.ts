@@ -12,10 +12,13 @@ import type { StaticRouterModService } from '@spt/services/mod/staticRouter/Stat
 import { createPathToTarkovAPI } from './api';
 import type { Config, SpawnConfig, UserConfig } from './config';
 import {
+  ADDITIONAL_PLAYER_SPAWNPOINTS_FILENAME,
   CONFIG_FILENAME,
   CONFIGS_DIR,
   DO_NOT_DISTRIBUTE_DIR,
   getUserConfig,
+  loadAdditionalPlayerSpawnpoints,
+  mergeAdditionalSpawnpoints,
   PACKAGE_JSON_PATH,
   processConfig,
   processSpawnConfig,
@@ -95,10 +98,22 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
         jsonUtil,
       ),
     );
-    this.spawnConfig = processSpawnConfig(
+
+    const spawnConfig = processSpawnConfig(
       readJsonFile(path.join(DO_NOT_DISTRIBUTE_DIR, SPAWN_CONFIG_FILENAME), jsonUtil),
       this.config,
     );
+
+    const additionalSpawnConfig = loadAdditionalPlayerSpawnpoints(
+      path.join(
+        CONFIGS_DIR,
+        this.userConfig.selectedConfig,
+        ADDITIONAL_PLAYER_SPAWNPOINTS_FILENAME,
+      ),
+      jsonUtil,
+    );
+
+    this.spawnConfig = mergeAdditionalSpawnpoints(spawnConfig, additionalSpawnConfig);
 
     this.debug = (data: string) => this.logger.debug(`Path To Tarkov: ${data}`, true);
 
