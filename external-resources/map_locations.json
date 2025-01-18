@@ -2,528 +2,615 @@
   "customs": [
     {
       "mapgenie_id": 29967,
+      "eft_fandom_marker": 61,
       "description": "Railroad To Port"
     },
     {
       "mapgenie_id": 29968,
+      "eft_fandom_marker": 51,
       "description": "Smuggler's Boat"
     },
     {
       "mapgenie_id": 29969,
+      "eft_fandom_marker": 58,
       "description": "Crossroads"
     },
     {
       "mapgenie_id": 29970,
+      "eft_fandom_marker": 50,
       "description": "Trailer Park"
     },
     {
       "mapgenie_id": 29971,
+      "eft_fandom_marker": 61,
       "description": "Railroad To Tarkov"
     },
     {
       "mapgenie_id": 29972,
+      "eft_fandom_marker": 59,
       "description": "Trailer Park Workers' Shack"
     },
     {
       "mapgenie_id": 29973,
+      "eft_fandom_marker": 57,
       "description": "RUAF Roadblock"
     },
     {
       "mapgenie_id": 29974,
+      "eft_fandom_marker": 55,
       "description": "Old Gas Station"
     },
     {
       "mapgenie_id": 29975,
+      "eft_fandom_marker": 69,
       "description": "Factory Far Corner"
     },
     {
       "mapgenie_id": 29976,
+      "eft_fandom_marker": 68,
       "description": "Administration Gate"
     },
     {
       "mapgenie_id": 29977,
+      "eft_fandom_marker": 67,
       "description": "Scav Checkpoint"
     },
     {
       "mapgenie_id": 29978,
+      "eft_fandom_marker": 66,
       "description": "Military Base CP"
     },
     {
       "mapgenie_id": 29979,
+      "eft_fandom_marker": 65,
       "description": "Passage Between Rocks"
     },
     {
       "mapgenie_id": 29980,
+      "eft_fandom_marker": 64,
       "description": "Railroad To Military Base"
     },
     {
       "mapgenie_id": 29981,
+      "eft_fandom_marker": 63,
       "description": "Old Road Gate"
     },
     {
       "mapgenie_id": 29982,
+      "eft_fandom_marker": 52,
       "description": "Dorms V-Ex"
     },
     {
       "mapgenie_id": 29983,
+      "eft_fandom_marker": 62,
       "description": "Sniper Roadblock"
     },
     {
       "mapgenie_id": 29984,
+      "eft_fandom_marker": 71,
       "description": "Factory Shacks"
     },
     {
       "mapgenie_id": 29985,
+      "eft_fandom_marker": 73,
       "description": "Warehouse 17"
     },
     {
       "mapgenie_id": 30116,
+      "eft_fandom_marker": 53,
       "description": "ZB-1011"
     },
     {
       "mapgenie_id": 30117,
+      "eft_fandom_marker": 54,
       "description": "ZB-1012"
     },
     {
       "mapgenie_id": 30162,
+      "eft_fandom_marker": 70,
       "description": "Warehouse 4"
     },
     {
       "mapgenie_id": 43360,
+      "eft_fandom_marker": 56,
       "description": "ZB-013"
     },
     {
       "mapgenie_id": 59684,
+      "eft_fandom_marker": 72,
       "description": "Old Gas Station Gate"
     }
   ],
   "factory": [
     {
       "mapgenie_id": 25056,
+      "eft_fandom_marker": 1,
       "description": "Gate 3"
     },
     {
       "mapgenie_id": 25057,
+      "eft_fandom_marker": 2,
       "description": "Gate 0"
     },
     {
       "mapgenie_id": 25058,
+      "eft_fandom_marker": 5,
       "description": "Camera Bunker Door"
     },
     {
       "mapgenie_id": 25059,
+      "eft_fandom_marker": 3,
       "description": "Cellars"
     },
     {
       "mapgenie_id": 25060,
+      "eft_fandom_marker": 6,
       "description": "Office Window"
     },
     {
       "mapgenie_id": 88025,
+      "eft_fandom_marker": 4,
       "description": "Med Tent Gate"
     },
     {
       "mapgenie_id": 403860,
+      "eft_fandom_marker": 46,
       "description": "Courtyard Gate"
     }
   ],
   "groundzero": [
     {
       "mapgenie_id": 314855,
+      "eft_fandom_marker": 5,
       "description": "Emercom Checkpoint"
     },
     {
       "mapgenie_id": 314851,
+      "eft_fandom_marker": 3,
       "description": "Police Cordon V-Ex"
     },
     {
       "mapgenie_id": 314853,
+      "eft_fandom_marker": 4,
       "description": "Mira Ave"
     },
     {
       "mapgenie_id": 314852,
+      "eft_fandom_marker": 1,
       "description": "Scav Checkpoint (Co-op)"
     },
     {
       "mapgenie_id": 314854,
+      "eft_fandom_marker": 2,
       "description": "Nakatani Basement Stairs"
     }
   ],
   "interchange": [
     {
       "mapgenie_id": 28339,
+      "eft_fandom_marker": 4,
       "description": "Power Station V-Ex"
     },
     {
       "mapgenie_id": 28340,
+      "eft_fandom_marker": 6,
       "description": "Emercom Checkpoint"
     },
     {
       "mapgenie_id": 28341,
+      "eft_fandom_marker": 7,
       "description": "Railway Exfil"
     },
     {
       "mapgenie_id": 28342,
+      "eft_fandom_marker": 5,
       "description": "Saferoom Exfil"
     },
     {
       "mapgenie_id": 28343,
+      "eft_fandom_marker": 8,
       "description": "SCAV Camp (Co-Op)"
     },
     {
       "mapgenie_id": 28349,
+      "eft_fandom_marker": 3,
       "description": "Hole in the Fence"
     }
   ],
   "laboratory": [
     {
       "mapgenie_id": 31540,
+      "eft_fandom_marker": 8,
       "description": "Sewage Conduit"
     },
     {
       "mapgenie_id": 31542,
+      "eft_fandom_marker": 5,
       "description": "Main Elevator"
     },
     {
       "mapgenie_id": 31543,
+      "eft_fandom_marker": 9,
       "description": "Ventilation Shaft"
     },
     {
       "mapgenie_id": 31549,
+      "eft_fandom_marker": 3,
       "description": "Medical Block Elevator"
     },
     {
       "mapgenie_id": 31570,
+      "eft_fandom_marker": 10,
       "description": "Hangar Gate"
     },
     {
       "mapgenie_id": 31571,
+      "eft_fandom_marker": 1,
       "description": "Cargo Elevator"
     },
     {
       "mapgenie_id": 32101,
+      "eft_fandom_marker": 11,
       "description": "Parking Gate"
     }
   ],
   "lighthouse": [
     {
       "mapgenie_id": 152315,
+      "eft_fandom_marker": 27,
       "description": "Northern Checkpoint"
     },
     {
       "mapgenie_id": 152316,
+      "eft_fandom_marker": 34,
       "description": "Armored Train"
     },
     {
       "mapgenie_id": 152317,
+      "eft_fandom_marker": 28,
       "description": "Industrial Zone Gates"
     },
     {
       "mapgenie_id": 152319,
+      "eft_fandom_marker": 26,
       "description": "Road to military base V-ex"
     },
     {
       "mapgenie_id": 152321,
+      "eft_fandom_marker": 29,
       "description": "Scav Hideout at the Grotto"
     },
     {
       "mapgenie_id": 152322,
+      "eft_fandom_marker": 515,
       "description": "Path to Shoreline"
     },
     {
       "mapgenie_id": 152323,
+      "eft_fandom_marker": 24,
       "description": "Mountain Pass"
     },
     {
       "mapgenie_id": 152325,
+      "eft_fandom_marker": 30,
       "description": "Hideout Under The Landing Stage"
     },
     {
       "mapgenie_id": 152326,
+      "eft_fandom_marker": 32,
       "description": "Side Tunnel (Co-Op)"
     },
     {
       "mapgenie_id": 152328,
+      "eft_fandom_marker": 25,
       "description": "Southern Road"
     },
     {
       "mapgenie_id": 152329,
+      "eft_fandom_marker": 31,
       "description": "Southern Road Landslide"
     }
   ],
   "reserve": [
     {
       "mapgenie_id": 39193,
+      "eft_fandom_marker": 84,
       "description": "Heating Pipe"
     },
     {
       "mapgenie_id": 39194,
+      "eft_fandom_marker": 85,
       "description": "Hole in the Wall by the Mountains"
     },
     {
       "mapgenie_id": 39195,
+      "eft_fandom_marker": 82,
       "description": "Checkpoint Fence"
     },
     {
       "mapgenie_id": 39196,
+      "eft_fandom_marker": 79,
       "description": "Cliff Descent"
     },
     {
       "mapgenie_id": 39211,
+      "eft_fandom_marker": 80,
       "description": "SCAV Lands (Co-Op)"
     },
     {
       "mapgenie_id": 39212,
+      "eft_fandom_marker": 86,
       "description": "Sewer Manhole"
     },
     {
       "mapgenie_id": 39299,
+      "eft_fandom_marker": 83,
       "description": "Depot Hermetic Door"
     },
     {
       "mapgenie_id": 39336,
+      "eft_fandom_marker": 76,
       "description": "Bunker Hermetic Door"
     },
     {
       "mapgenie_id": 39352,
+      "eft_fandom_marker": 81,
       "description": "Armored Train"
     },
     {
       "mapgenie_id": 39424,
+      "eft_fandom_marker": 49,
       "description": "D-2"
     }
   ],
   "shoreline": [
     {
       "mapgenie_id": 26116,
+      "eft_fandom_marker": 3,
       "description": "Tunnel"
     },
     {
-      "mapgenie_id": 26117,
-      "description": "Svetliy Dead End"
-    },
-    {
-      "mapgenie_id": 26118,
-      "description": "Ruined House Fence"
-    },
-    {
       "mapgenie_id": 26121,
+      "eft_fandom_marker": 261,
       "description": "Road To Customs"
     },
     {
       "mapgenie_id": 317032,
+      "eft_fandom_marker": 13,
       "description": "Road to North V-Ex"
     },
     {
       "mapgenie_id": 317034,
+      "eft_fandom_marker": 11,
       "description": "Climber's Trail"
     },
     {
       "mapgenie_id": 317040,
+      "eft_fandom_marker": 12,
       "description": "Smuggler's Path (Co-op)"
     },
     {
       "mapgenie_id": 317033,
+      "eft_fandom_marker": 5,
       "description": "Old Bunker"
     },
     {
-      "mapgenie_id": 26122,
-      "description": "CCP Temporary"
-    },
-    {
       "mapgenie_id": 26123,
+      "eft_fandom_marker": 8,
       "description": "Lighthouse"
     },
     {
       "mapgenie_id": 26124,
+      "eft_fandom_marker": 9,
       "description": "Pier Boat"
     },
     {
       "mapgenie_id": 26323,
+      "eft_fandom_marker": 2,
       "description": "Ruined Road"
     },
     {
       "mapgenie_id": 28239,
+      "eft_fandom_marker": 10,
       "description": "Admin Basement"
     },
     {
       "mapgenie_id": 28240,
+      "eft_fandom_marker": 14,
       "description": "East Wing Gym Entrance"
     },
     {
       "mapgenie_id": 151041,
+      "eft_fandom_marker": 4,
       "description": "Path to Lighthouse"
     },
     {
       "mapgenie_id": 151043,
+      "eft_fandom_marker": 7,
       "description": "Railway Bridge"
-    },
-    {
-      "mapgenie_id": null,
-      "description": "Rock Passage"
     }
   ],
   "streets": [
     {
       "mapgenie_id": 247827,
+      "eft_fandom_marker": 567,
       "description": "Klimov Street"
     },
     {
-      "mapgenie_id": 247828,
-      "description": "Underpass"
-    },
-    {
       "mapgenie_id": 247829,
+      "eft_fandom_marker": 571,
       "description": "Basement Descent"
     },
     {
-      "mapgenie_id": 247830,
-      "description": "SCAV Checkpoint"
-    },
-    {
       "mapgenie_id": 247831,
+      "eft_fandom_marker": 561,
       "description": "Collapsed Crane"
     },
     {
       "mapgenie_id": 247832,
+      "eft_fandom_marker": 576,
       "description": "Sewer Manhole"
     },
     {
-      "mapgenie_id": 247833,
-      "description": "Evacuation Zone"
-    },
-    {
       "mapgenie_id": 247834,
+      "eft_fandom_marker": 577,
       "description": "Ventilation Shaft"
     },
     {
       "mapgenie_id": 247835,
+      "eft_fandom_marker": 568,
       "description": "Primorsky Ave Taxi V-Ex"
     },
     {
       "mapgenie_id": 247836,
+      "eft_fandom_marker": 562,
       "description": "Courtyard"
     },
     {
       "mapgenie_id": 247837,
+      "eft_fandom_marker": 564,
       "description": "Damaged House"
     },
     {
       "mapgenie_id": 247838,
+      "eft_fandom_marker": 573,
       "description": "Entrance To Catacombs"
     },
     {
       "mapgenie_id": 247839,
+      "eft_fandom_marker": 565,
       "description": "Sewer River"
     },
     {
       "mapgenie_id": 300388,
+      "eft_fandom_marker": 569,
       "description": "Stylobate Building Elevator"
     },
     {
       "mapgenie_id": 300385,
+      "eft_fandom_marker": 563,
       "description": "Crash Site"
     },
     {
       "mapgenie_id": 300387,
+      "eft_fandom_marker": 570,
       "description": "Pinewood Basement (Co-Op)"
     },
     {
       "mapgenie_id": 300382,
+      "eft_fandom_marker": 566,
       "description": "Expo Checkpoint"
     },
     {
       "mapgenie_id": 300400,
+      "eft_fandom_marker": 572,
       "description": "Cardinal Apartment Complex Parking"
     },
     {
-      "mapgenie_id": null,
-      "description": "Cardinal Apartment Complex"
-    },
-    {
-      "mapgenie_id": null,
-      "description": "Basement Entrance"
-    },
-    {
       "mapgenie_id": 300386,
+      "eft_fandom_marker": 575,
       "description": "Near Kamchatskaya Arch"
     },
     {
       "mapgenie_id": 300384,
+      "eft_fandom_marker": 574,
       "description": "Klimov Shopping Mall Exfil"
+    },
+    {
+      "mapgenie_id": null,
+      "eft_fandom_marker": null,
+      "description": "Scav Checkpoint"
     }
   ],
   "woods": [
     {
       "mapgenie_id": 24666,
+      "eft_fandom_marker": 351,
       "description": "Eastern Rocks"
     },
     {
       "mapgenie_id": 24854,
+      "eft_fandom_marker": 350,
       "description": "Old Railway Depot"
     },
     {
       "mapgenie_id": 24855,
+      "eft_fandom_marker": 59,
       "description": "UN Roadblock"
     },
     {
       "mapgenie_id": 424607,
+      "eft_fandom_marker": 58,
       "description": "Friendship Bridge (Co-Op)"
     },
     {
       "mapgenie_id": 24857,
+      "eft_fandom_marker": 50,
       "description": "RUAF Gate"
     },
     {
       "mapgenie_id": 24857,
+      "eft_fandom_marker": 54,
       "description": "RUAF Roadblock"
     },
     {
       "mapgenie_id": 24858,
+      "eft_fandom_marker": 49,
       "description": "ZB-016"
     },
     {
       "mapgenie_id": 24859,
+      "eft_fandom_marker": 55,
       "description": "Mountain Stash"
     },
     {
       "mapgenie_id": 24862,
+      "eft_fandom_marker": 61,
       "description": "ZB-014"
     },
     {
       "mapgenie_id": 24866,
+      "eft_fandom_marker": 60,
       "description": "Outskirts"
     },
     {
       "mapgenie_id": 24868,
+      "eft_fandom_marker": 53,
       "description": "Dead Man's Place"
     },
     {
       "mapgenie_id": 24869,
+      "eft_fandom_marker": 52,
       "description": "Boat"
     },
     {
       "mapgenie_id": 24870,
+      "eft_fandom_marker": 51,
       "description": "SCAV House"
     },
     {
       "mapgenie_id": 65035,
+      "eft_fandom_marker": 57,
       "description": "SCAV Bridge"
     },
     {
       "mapgenie_id": 65036,
+      "eft_fandom_marker": 56,
       "description": "SCAV Bunker"
     },
     {
       "mapgenie_id": 65037,
+      "eft_fandom_marker": 47,
       "description": "Bridge V-EX"
     },
     {
       "mapgenie_id": 65038,
+      "eft_fandom_marker": 48,
       "description": "Northern UN Roadblock"
     },
     {
       "mapgenie_id": 410432,
+      "eft_fandom_marker": 491,
       "description": "Power Line Passage"
     }
   ]

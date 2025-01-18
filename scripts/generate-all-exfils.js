@@ -10,8 +10,8 @@ const MAPS_DIR = 'maps';
 const MARKDOWN_MAIN_TITLE = 'All exfiltrations';
 
 const MARKDOWN_TABLE_HEADER = `
-|identifier|description|mapgenie.io|
-|----------|-----------|-----------|
+|identifier|description|mapgenie.io|escapefromtarkov.fandom.com|
+|----------|-----------|-----------|---------------------------|
 `.trim();
 
 const MAPGENIE_REMAPPING = {
@@ -55,7 +55,17 @@ const getMapGenieMapName = mapName => {
   return mapName;
 };
 
-const resolveMapGenieLocationId = (mapName, exitResolvedName) => {
+const getEftFandomMapName = mapDisplayName => {
+  if (mapDisplayName === 'Military Reserve') {
+    return 'Reserve';
+  }
+  if (mapDisplayName === 'Laboratory') {
+    return 'The_Lab';
+  }
+  return mapDisplayName.replaceAll(' ', '_');
+};
+
+const resolveMapLocation = (mapName, exitResolvedName) => {
   if (!MAP_LOCATIONS[mapName]) {
     throw new Error(`Error: map name '${mapName}' does not exist in MAPGENIE_LOCATIONS`);
   }
@@ -69,17 +79,28 @@ const resolveMapGenieLocationId = (mapName, exitResolvedName) => {
     return null;
   }
 
-  return mapLocation.mapgenie_id;
+  return mapLocation;
 };
 
-const getMapGenieLocationUrl = (mapName, locationId) => {
+const getMapGenieLocationUrl = (mapName, mapGenieLocationId) => {
   const mapGenieMapName = getMapGenieMapName(mapName);
 
-  if (!locationId) {
+  if (!mapGenieLocationId) {
     return 'no link';
   }
 
-  return `[link](https://mapgenie.io/tarkov/maps/${mapGenieMapName}?locationIds=${locationId})`;
+  return `[link](https://mapgenie.io/tarkov/maps/${mapGenieMapName}?locationIds=${mapGenieLocationId})`;
+};
+
+const getEftFandomLocationUrl = (mapName, markerId) => {
+  const eftFandomMapName = getEftFandomMapName(mapName);
+
+  if (!markerId) {
+    return 'no link';
+  }
+
+  return `[link](https://escapefromtarkov.fandom.com/wiki/Map:${eftFandomMapName}?marker=${markerId})`;
+  // return `[link](https://escapefromtarkov.fandom.com/wiki/Map:Streets_of_Tarkov?marker=${markerId})`;
 };
 
 class ConfigError extends Error {
@@ -154,16 +175,21 @@ const formatMapsExits = mapsExits => {
 
   return allMapNames
     .reduce((output, mapName) => {
-      const title = `## ${resolveMapDisplayName(mapName)}`;
+      const mapDisplayName = resolveMapDisplayName(mapName);
+      const title = `## ${mapDisplayName}`;
       const exits = mapsExits[mapName];
 
       const formattedRow = exits.map(exitName => {
         const resolvedExitName = resolveLocale(exitName);
-        const mapGenieLocationId = resolveMapGenieLocationId(mapName, resolvedExitName);
+        const mapLocation = resolveMapLocation(mapName, resolvedExitName);
 
-        const mapGenieLocationUrl = getMapGenieLocationUrl(mapName, mapGenieLocationId);
+        const mapGenieLocationUrl = getMapGenieLocationUrl(mapName, mapLocation?.mapgenie_id);
+        const eftFandomUrl = getEftFandomLocationUrl(
+          mapDisplayName,
+          mapLocation?.eft_fandom_marker,
+        );
 
-        return `| "${exitName}" | ${resolveLocale(exitName)} | ${mapGenieLocationUrl} |`;
+        return `| "${exitName}" | ${resolveLocale(exitName)} | ${mapGenieLocationUrl} | ${eftFandomUrl} |`;
       });
 
       return output + `${title}\n${MARKDOWN_TABLE_HEADER}\n${formattedRow.join('\n')}\n\n`;
