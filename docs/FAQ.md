@@ -22,20 +22,21 @@ This is because you need to run the [uninstall procedure](./HOW_TO_UNINSTALL.md)
 
 If you run the procedure and still experiment an issue, please [report the bug](./HOW_TO_REPORT_A_BUG.md)
 
+### I don't know where is the `UserConfig.json5` file
+This file is not distributed with the mod but automatically generated on server start.
+
+You'll find it at `Trap-PathToTarkov/configs/UserConfig.json5` after starting your server.
+
+
+## For config makers
 ### I have a syntax error after editing a config file
 Use a json5 syntax validator will help you -> https://codebeautify.org/json5-validator
 
 ### Nothing changes when I edit a config file
 Be sure that the config you are editing is selected in your `UserConfig.json5` file.
 
-### I don't know where is the `UserConfig.json5` file
-This file is not distributed with the mod but automatically generated on server start.
-
-You'll find it at `Trap-PathToTarkov/configs/UserConfig.json5` after starting your server.
+### How can I add my custom player spawnpoints ?
+[Read this](./HOW_TO_ADD_PLAYER_SPAWNPOINTS.md)
 
 ### I have config analysis errors when making my config
 [Read the manual on config creation](./HOW_TO_CREATE_CONFIG.md)
-
-## For config makers
-### How can I add my custom player spawnpoints ?
-[Read this](./HOW_TO_ADD_PLAYER_SPAWNPOINTS.md)
