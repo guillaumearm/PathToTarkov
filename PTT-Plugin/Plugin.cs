@@ -61,6 +61,7 @@ public class Plugin : BaseUnityPlugin
         new Patches.ExitTimerPanelSetTimerTextActivePatch().Enable();
         new Patches.ExitTimerPanelUpdateVisitedStatusPatch().Enable();
         new Patches.ExtractionTimersPanelSwitchTimersPatch().Enable();
+        new Patches.ExtractionTimersPanelAwakePatch().Enable();
 
         Helpers.Logger.Info($"Plugin Trap-PathToTarkov v{PluginVersion.FULL_VERSION} is loaded!");
     }
