@@ -20,6 +20,6 @@ Here is the default one formatted in a json5 format:
 }
 ```
 
-## Why should I need a special procedure for uninstallation ?
+## Why should I need a special procedure for uninstall ?
 
 [Read this documentation about uninstalling PTT](./HOW_TO_UNINSTALL.md)

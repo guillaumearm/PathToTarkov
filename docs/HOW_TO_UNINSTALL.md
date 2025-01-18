@@ -1,4 +1,4 @@
-# UnInstallation procedure
+# Uninstall procedure
 
 ## Why a special uninstall procedure ?
 

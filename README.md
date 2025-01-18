@@ -26,7 +26,7 @@ Players have the freedom to create their own unique paths by customizing offraid
 ## Installation
 - [Interactable Exfils API](https://hub.sp-tarkov.com/files/file/2286-interactable-exfils-api/#overview) should be installed
 - Like any other mods, you juste have to unpack the zip in your SPT folder.
-- For uninstallation, please read about the [uninstallation procedure](./docs/HOW_TO_UNINSTALL.md)
+- For uninstall, please read about the [uninstall procedure](./docs/HOW_TO_UNINSTALL.md)
 
 ## Recommended mods
 - [Dynamic Maps](https://hub.sp-tarkov.com/files/file/1981-dynamic-maps/): is very useful to learn your exfils

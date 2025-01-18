@@ -63,7 +63,7 @@ const restoreTraders = (
   }
 };
 
-// Used for uninstallation process
+// Used for uninstall process
 export const purgeProfiles = (
   config: Config,
   quests: Record<string, IQuest>,
