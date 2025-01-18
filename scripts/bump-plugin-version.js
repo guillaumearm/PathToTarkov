@@ -55,6 +55,7 @@ const main = async version => {
     throw new Error('missing argument');
   }
 
+  console.log(`> bump PTT BepInEx plugin to version ${version}`);
   const fileContent = getCSharpContent(version);
   await writePluginVersionFile(fileContent);
   console.log(`> wrote "${PTT_PLUGIN_VERSION_CS_FILE}" file.`);
