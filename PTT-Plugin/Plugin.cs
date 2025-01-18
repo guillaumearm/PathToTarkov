@@ -152,7 +152,7 @@ public class Plugin : BaseUnityPlugin
         if (PluginVersion.FULL_VERSION != PathToTarkovServerFullVersion)
         {
             Helpers.Logger.Warning($"Mismatch version between server ({PathToTarkovServerFullVersion}) and plugin ({PluginVersion.FULL_VERSION})");
-            NotificationManagerClass.DisplayMessageNotification("Path To Tarkov: mismatch version between server and plugin, please reinstall the mod correctly", ENotificationDurationType.Long);
+            NotificationManagerClass.DisplayWarningNotification("Path To Tarkov: mismatch version between server and plugin, please reinstall the mod correctly", ENotificationDurationType.Long);
         }
 
         if (!InteractableExfilsApiIsInstalled)
