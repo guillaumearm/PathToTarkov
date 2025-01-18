@@ -10,7 +10,7 @@ Useful links:
 - [UserConfig documentation (UserConfig.json5)](../USER_CONFIG_MANUAL.md)
 - [Tutorial: create a config from scratch](../TUTORIAL_CONFIG.md)
 - [List of available exfils (ALL_EXFILS.md)](../../ALL_EXFILS.md)
-- [How to add player spawnpoints](../HOW_TO_ADD_PLAYER_SPAWNPOINTS.md)
+- [How to add custom player spawnpoints](../HOW_TO_ADD_PLAYER_SPAWNPOINTS.md)
 - [List of player spawnpoints (shared_player_spawnpoints.json5)](../../configs/shared_player_spawnpoints.json5)
 
 ## Terminology

@@ -14,7 +14,7 @@ selectedConfig: "MyConfig",
 I suggest you to keep those 2 files opened in a browser tab when writing a config:
 - [`ALL_EXFILS.md`](../ALL_EXFILS.md) (list of vanilla exfils)
 - [`shared_player_spawnpoints.json5`](../configs/shared_player_spawnpoints.json5) (list of ptt spawnpoints)
-- [How to add player spawnpoints](./HOW_TO_ADD_PLAYER_SPAWNPOINTS.md)
+- [How to add custom player spawnpoints](./HOW_TO_ADD_PLAYER_SPAWNPOINTS.md)
 
 ### Follow the PTT config tutorial
 In [this tutorial](./TUTORIAL_CONFIG.md), we will create a new config from scrath.
