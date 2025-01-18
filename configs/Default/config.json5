@@ -754,6 +754,31 @@
       },
       access_via: ['Crossroads'],
     },
+    // Croupier
+    '1337bb0dd843363fcd1be869': {
+      disable_warning: true,
+      override_description: true,
+      location_description: {
+        ch: 'in ZB-1011 bunker',
+        cz: 'in ZB-1011 bunker',
+        en: 'in ZB-1011 bunker',
+        'es-mx': 'in ZB-1011 bunker',
+        es: 'in ZB-1011 bunker',
+        fr: 'Dans le bunker ZB-1011',
+        ge: 'in ZB-1011 bunker',
+        hu: 'in ZB-1011 bunker',
+        it: 'in ZB-1011 bunker',
+        jp: 'in ZB-1011 bunker',
+        kr: 'in ZB-1011 bunker',
+        pl: 'in ZB-1011 bunker',
+        po: 'in ZB-1011 bunker',
+        ro: 'in ZB-1011 bunker',
+        ru: 'in ZB-1011 bunker',
+        sk: 'in ZB-1011 bunker',
+        tu: 'in ZB-1011 bunker',
+      },
+      access_via: ['FactoryZB-1011'],
+    },
     // Coyote (on legacy SPT versions)
     Coyote: {
       disable_warning: true,

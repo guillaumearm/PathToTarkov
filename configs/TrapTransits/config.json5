@@ -202,6 +202,11 @@
       disable_warning: true,
       access_via: ['TherapistHideout'],
     },
+    // Croupier
+    '1337bb0dd843363fcd1be869': {
+      disable_warning: true,
+      access_via: ['PlayerHideout'],
+    },
   },
 
   exfiltrations: {
