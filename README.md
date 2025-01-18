@@ -93,7 +93,8 @@ You have to update the `selectedConfig` value in your `UserConfig.json5` file to
 - [Tutorial: create a config from scratch](./docs/TUTORIAL_CONFIG.md)
 - [PTT config specification](./docs/specification/README.md)
 - [List of available vanilla extracts](./ALL_EXFILS.md)
-- [List of available player spawnpoints](./configs/shared_player_spawnpoints.json5) 
+- [List of available player spawnpoints](./configs/shared_player_spawnpoints.json5)
+- [How to add player spawnpoints](./docs/HOW_TO_ADD_PLAYER_SPAWNPOINTS.md)
 - [Planned features](https://github.com/guillaumearm/PathToTarkov/issues?q=is%3Aopen+is%3Aissue+label%3Afeature)
 - [Known issues](https://github.com/guillaumearm/PathToTarkov/issues?q=is:open+is:issue+label:bug)
 

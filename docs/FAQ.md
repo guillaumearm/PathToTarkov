@@ -38,7 +38,4 @@ You'll find it at `Trap-PathToTarkov/configs/UserConfig.json5` after starting yo
 
 ## For config makers
 ### How can I add my custom player spawnpoints ?
-
-You can your own custom player spawnpoints directly in your config, check [`infiltrations_config` section in specification](./specification/README.md#infiltrations_config-infiltrationsconfig)
-
-Note: Don't add it directly to the `shared_player_spawnpoints.json5`. this file should not be distributed
+[Read this](./HOW_TO_ADD_PLAYER_SPAWNPOINTS.md)
