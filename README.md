@@ -88,15 +88,14 @@ You have to update the `selectedConfig` value in your `UserConfig.json5` file to
 ### More reading
 
 - [Frequently Asked Question](./docs/FAQ.md)
-- [Planned features](https://github.com/guillaumearm/PathToTarkov/issues?q=is%3Aopen+is%3Aissue+label%3Afeature)
-- [Known issues](https://github.com/guillaumearm/PathToTarkov/issues?q=is:open+is:issue+label:bug)
+- [Config for users](./docs/USER_CONFIG_MANUAL.md)
 - [Create your config](./docs/HOW_TO_CREATE_CONFIG.md)
-- [List of available player spawnpoints](./configs/shared_player_spawnpoints.json5) 
-- [List of available vanilla extracts](./ALL_EXFILS.md)
 - [Tutorial: create a config from scratch](./docs/TUTORIAL_CONFIG.md)
 - [PTT config specification](./docs/specification/README.md)
-- [PTT UserConfig specification](./docs/USER_CONFIG_MANUAL.md)
-
+- [List of available vanilla extracts](./ALL_EXFILS.md)
+- [List of available player spawnpoints](./configs/shared_player_spawnpoints.json5) 
+- [Planned features](https://github.com/guillaumearm/PathToTarkov/issues?q=is%3Aopen+is%3Aissue+label%3Afeature)
+- [Known issues](https://github.com/guillaumearm/PathToTarkov/issues?q=is:open+is:issue+label:bug)
 
 ## How to report a bug
 If you want to report a bug, I'll need some details so please [read the HOW_TO_REPORT_A_BUG.md](./docs/HOW_TO_REPORT_A_BUG.md).
