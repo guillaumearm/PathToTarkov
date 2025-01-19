@@ -322,6 +322,10 @@
       Position: [-510.430939, -11.9056053, -373.174316],
       Rotation: 41.4962769,
     },
+    'Shoreline Vehicle Extract': {
+      Position: [-540.01, -18.2, -368.91],
+      Rotation: 41.4962769,
+    },
     'Old Bunker': {
       Position: [-390.330939, -5.4056053, -374.74316],
       Rotation: 41.4962769,
