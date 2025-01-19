@@ -234,7 +234,7 @@
         'woods.Woods Vehicle Extract',
         'sandbox.Police Car',
         'lighthouse.Lighthouse Vehicle Extract',
-        'shoreline.North Fence Passage', // TODO: verify this one
+        'shoreline.Shoreline Vehicle Extract',
         'tarkovstreets.Streets Vehicle Extract',
       ],
       'Warehouse 17': ['SkierHideout'],
@@ -264,7 +264,7 @@
         'interchange.Interchange Vehicle Extract',
         'sandbox.Police Car',
         'lighthouse.Lighthouse Vehicle Extract',
-        'shoreline.North Fence Passage', // TODO: verify this one
+        'shoreline.Shoreline Vehicle Extract',
         'tarkovstreets.Streets Vehicle Extract',
       ],
       'East Gate': ['PraporHideout'],
@@ -290,7 +290,7 @@
         'woods.Woods Vehicle Extract',
         'sandbox.Police Car',
         'lighthouse.Lighthouse Vehicle Extract',
-        'shoreline.North Fence Passage', // TODO: verify this one
+        'shoreline.Shoreline Vehicle Extract',
         'tarkovstreets.Streets Vehicle Extract',
       ],
       'NW Exfil': ['woods.UN Roadblock', 'tarkovstreets.Crash Site'],
@@ -310,7 +310,7 @@
       'South Fence Passage': ['PeacekeeperHideout'],
       Road_at_railbridge: ['bigmap.RR to Port'],
       RedRebel_alp: ['rezervbase.Cliff'],
-      'Road to Customs': ['bigmap.Sniper Roadblock', 'interchange.Emercom'],
+      'Road to Customs': ['bigmap.Crossroads', 'interchange.Emercom'],
       'Pier Boat': [
         'bigmap.Smugglers Boat',
         'lighthouse.Southern Road Water',
@@ -319,7 +319,7 @@
       Tunnel: ['lighthouse.Lighthouse Tunnel'],
       'Wrecked Road': ['lighthouse.Southern Road'],
       Lighthouse_pass: ['lighthouse.Path to Shoreline'],
-      Smugglers_Trail_coop: ['shoreline.Smugglers Path'],
+      Smugglers_Trail_coop: ['rezervbase.Hole In Wall', 'bigmap.Sniper Roadblock'],
     },
     lighthouse: {
       ' V-Ex_light': [
@@ -328,7 +328,7 @@
         'interchange.Interchange Vehicle Extract',
         'woods.Woods Vehicle Extract',
         'sandbox.Police Car',
-        'shoreline.North Fence Passage', // TODO: verify this one
+        'shoreline.Shoreline Vehicle Extract',
         'tarkovstreets.Streets Vehicle Extract',
       ],
       Shorl_free: ['shoreline.Path to Lighthouse'],
@@ -345,7 +345,7 @@
         'woods.Woods Vehicle Extract',
         'sandbox.Police Car',
         'lighthouse.Lighthouse Vehicle Extract',
-        'shoreline.North Fence Passage', // TODO: verify this one
+        'shoreline.Shoreline Vehicle Extract',
       ],
       E1: ['laboratory.Main Elevator'],
       scav_e3: ['laboratory.Lab Vents'],
@@ -381,7 +381,7 @@
         'interchange.Interchange Vehicle Extract',
         'woods.Woods Vehicle Extract',
         'lighthouse.Lighthouse Vehicle Extract',
-        'shoreline.North Fence Passage', // TODO: verify this one
+        'shoreline.Shoreline Vehicle Extract',
         'tarkovstreets.Streets Vehicle Extract',
       ],
       Unity_free_exit: ['TherapistHideout'],
@@ -433,7 +433,7 @@
       woods: ['Woods Vehicle Extract'],
       sandbox: ['Police Car'],
       lighthouse: ['Lighthouse Vehicle Extract'],
-      shoreline: ['North Fence Passage'], // TODO: verify this one
+      shoreline: ['Shoreline Vehicle Extract'],
       tarkovstreets: ['Streets Vehicle Extract'],
     },
     NakataniBasementHideout: {
