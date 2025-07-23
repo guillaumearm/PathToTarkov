@@ -12,11 +12,14 @@ internal class LocalRaidStartedPatch() : ModulePatch
 {
     protected override MethodBase GetTargetMethod()
     {
-        return typeof(Class301).GetMethod(nameof(Class301.LocalRaidStarted));
+        // Try to find the LocalRaidStarted method
+        var method = typeof(Class303).GetMethod("LocalRaidStarted", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+
+        return method;
     }
 
     [PatchPostfix]
-    public static void PatchPostfix(ref Task<LocalSettings> __result, Class301 __instance, LocalRaidSettings settings)
+    public static void PatchPostfix(ref Task<LocalSettings> __result, Class303 __instance, LocalRaidSettings settings)
     {
         // store the local raid settings
         LocalRaidSettingsRetriever.RaidSettings = settings;

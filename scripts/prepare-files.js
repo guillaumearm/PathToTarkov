@@ -14,8 +14,8 @@ const main = async modName => {
   const serverModDir = `./dist/user/mods/${modName}`;
 
   void [
-    'rimraf dist/user',
-    'rimraf dist/BepInEx',
+    'node ./node_modules/rimraf/bin.js dist/user',
+    'node ./node_modules/rimraf/bin.js dist/BepInEx',
     () => mkdirp.sync(serverModDir),
     () => mkdirp.sync('./dist/BepInEx/plugins'),
     `cpr ./PTT-Plugin/bin/Debug/net471/${PTT_DLL_FILENAME} ./dist/BepInEx/plugins/${PTT_DLL_FILENAME} -o`,
@@ -23,10 +23,10 @@ const main = async modName => {
     `cpr package.json ${serverModDir}/package.json -o`,
     `cpr dist/src ${serverModDir}/src -o`,
     `cpr configs ${serverModDir}/configs -o`,
-    `rimraf ${serverModDir}/configs/**/*.jpg ${serverModDir}/configs/**/*.jpeg ${serverModDir}/configs/**/*.png ${serverModDir}/configs/**/*.gif`,
+    `node ./node_modules/rimraf/bin.js ${serverModDir}/configs/**/*.jpg ${serverModDir}/configs/**/*.jpeg ${serverModDir}/configs/**/*.png ${serverModDir}/configs/**/*.gif`,
     `cpr ${serverModDir}/configs/shared_player_spawnpoints.json5 ${serverModDir}/src/do_not_distribute/shared_player_spawnpoints.json5 -o`,
-    `rimraf ${serverModDir}/configs/shared_player_spawnpoints.json5`,
-    `rimraf ${serverModDir}/configs/UserConfig.json5`,
+    `node ./node_modules/rimraf/bin.js ${serverModDir}/configs/shared_player_spawnpoints.json5`,
+    `node ./node_modules/rimraf/bin.js ${serverModDir}/configs/UserConfig.json5`,
     `cpr ALL_EXFILS.md ${serverModDir}/ALL_EXFILS.md -o`,
     `cpr README.txt ${serverModDir}/README.txt -o`,
     // `cpr README.md ${serverModDir}/README.md -o`,

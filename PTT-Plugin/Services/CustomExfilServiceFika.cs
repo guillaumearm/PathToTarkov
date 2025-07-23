@@ -200,7 +200,7 @@ internal static class CustomExfilServiceFika
         if (TarkovApplication.Exist(out TarkovApplication tarkovApplication))
         {
             ERaidMode eraidMode = ERaidMode.Local;
-            tarkovApplication.transitionStatus = new GStruct136(location, false, localRaidSettings.playerSide, eraidMode, localRaidSettings.timeVariant);
+            tarkovApplication.transitionStatus = new TransitionStatusStruct(location, false, localRaidSettings.playerSide, eraidMode, localRaidSettings.timeVariant);
         }
         else
         {
@@ -277,7 +277,7 @@ internal static class CustomExfilServiceFika
         return transitController;
     }
 
-    private static GClass1926 CreateTransitPayload(string locationName, TransitControllerAbstractClass transitController, CoopPlayer coopPlayer)
+    private static GClass1961 CreateTransitPayload(string locationName, TransitControllerAbstractClass transitController, CoopPlayer coopPlayer)
     {
         // 1. Create player profile
         Dictionary<string, ProfileKey> profiles = new() {
@@ -291,7 +291,7 @@ internal static class CustomExfilServiceFika
         };
 
         // 2. Create the transit payload
-        GClass1926 transitPayload = new()
+        GClass1961 transitPayload = new()
         {
             hash = Guid.NewGuid().ToString(),
             playersCount = 1,

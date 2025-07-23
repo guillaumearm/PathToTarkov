@@ -22,6 +22,11 @@ internal class ExfilPromptService(InteractableExfilsService ieService)
         IndexedExfilPrompts = [];
     }
 
+    public void ClearCachedPrompts()
+    {
+        ClearExfilPromptsCache();
+    }
+
     private void InitPromptHandlers()
     {
         // requires manual activation (no auto-extract even if the player enabled the IEAPI option in BepInEx)
@@ -38,6 +43,13 @@ internal class ExfilPromptService(InteractableExfilsService ieService)
         if (customExfilTrigger == null)
         {
             return null;
+        }
+
+        // Check if this extraction point is enabled in PathToTarkov config
+        if (Plugin.CurrentLocationDataService != null && !Plugin.CurrentLocationDataService.IsExfiltrationPointEnabled(exfil))
+        {
+            // This extraction is disabled, prevent any interaction
+            return new OnActionsAppliedResult([], null);
         }
 
         customExfilTrigger.RequiresManualActivation = true;
@@ -62,6 +74,13 @@ internal class ExfilPromptService(InteractableExfilsService ieService)
         {
             Logger.Error("ExfilPromptHandler: ExfiltrationPoint.Settings.Name is null");
             return null;
+        }
+
+        // Check if this extraction point is enabled in PathToTarkov config
+        if (Plugin.CurrentLocationDataService != null && !Plugin.CurrentLocationDataService.IsExfiltrationPointEnabled(exfil))
+        {
+            // This extraction is disabled, return empty actions to prevent any interaction
+            return new OnActionsAppliedResult([], null);
         }
 
         string exitName = exfil.Settings.Name;

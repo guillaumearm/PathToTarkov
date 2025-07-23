@@ -12,8 +12,9 @@ internal class ScavExfiltrationPointPatch : ModulePatch
     }
 
     [PatchPrefix]
-    protected static bool Prefix(ref bool __result)
+    protected static bool Prefix(ref bool __result, ref ScavExfiltrationPoint __instance)
     {
+        Helpers.Logger.Info($"ScavExfiltrationPointPatch: Forcing InfiltrationMatch to true for exfil '{__instance?.Settings?.Name ?? "unknown"}'");
         __result = true;
         return false;
     }

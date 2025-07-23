@@ -50,20 +50,42 @@ public class Plugin : BaseUnityPlugin
             new Patches.KaenoTraderScrollingCompatPatch().Enable();
         }
 
-        new Patches.HideLockedTraderCardPatch().Enable();
-        new Patches.HideLockedTraderPanelPatch().Enable();
-        new Patches.InitAllExfiltrationPointsPatch().Enable();
-        new Patches.ScavExfiltrationPointPatch().Enable();
-        new Patches.OnGameStartedPatch().Enable();
-        new Patches.LocalRaidStartedPatch().Enable();
-        new Patches.LocalRaidEndedPatch().Enable();
-        new Patches.MenuScreenAwakePatch().Enable();
-        new Patches.ExitTimerPanelSetTimerTextActivePatch().Enable();
-        new Patches.ExitTimerPanelUpdateVisitedStatusPatch().Enable();
-        new Patches.ExtractionTimersPanelSwitchTimersPatch().Enable();
-        new Patches.ExtractionTimersPanelAwakePatch().Enable();
+        Helpers.Logger.Info("Registering PTT patches...");
+        
+        try
+        {
+            new Patches.HideLockedTraderCardPatch().Enable();
+            new Patches.HideLockedTraderPanelPatch().Enable();
+            
+            Helpers.Logger.Info("Registering ExfiltrationPointAwakePatch...");
+            new Patches.ExfiltrationPointAwakePatch().Enable();
+            Helpers.Logger.Info("ExfiltrationPointAwakePatch registered successfully!");
+            
+            Helpers.Logger.Info("Registering InitAllExfiltrationPointsPatch...");
+            new Patches.InitAllExfiltrationPointsPatch().Enable();
+            Helpers.Logger.Info("InitAllExfiltrationPointsPatch registered successfully!");
+            
+            Helpers.Logger.Info("Registering ScavExfiltrationPointPatch...");
+            new Patches.ScavExfiltrationPointPatch().Enable();
+            Helpers.Logger.Info("ScavExfiltrationPointPatch registered successfully!");
+            
+            new Patches.OnGameStartedPatch().Enable();
+            new Patches.LocalRaidStartedPatch().Enable();
+            new Patches.LocalRaidEndedPatch().Enable();
+            new Patches.MenuScreenAwakePatch().Enable();
+            new Patches.ExitTimerPanelSetTimerTextActivePatch().Enable();
+            new Patches.ExitTimerPanelUpdateVisitedStatusPatch().Enable();
+            new Patches.ExtractionTimersPanelSwitchTimersPatch().Enable();
+            new Patches.ExtractionTimersPanelAwakePatch().Enable();
 
-        Helpers.Logger.Info($"Plugin Trap-PathToTarkov v{PluginVersion.FULL_VERSION} is loaded!");
+            Helpers.Logger.Info($"Plugin Trap-PathToTarkov v{PluginVersion.FULL_VERSION} is loaded with all patches registered!");
+        }
+        catch (Exception ex)
+        {
+            Helpers.Logger.Error($"Failed to register patches: {ex.Message}");
+            Helpers.Logger.Error($"Stack trace: {ex.StackTrace}");
+            throw;
+        }
     }
 
     protected void Start()
@@ -115,6 +137,18 @@ public class Plugin : BaseUnityPlugin
         {
             CurrentLocationDataService.Init();
             Helpers.Logger.Info("Initialized CurrentLocationDataService");
+            
+            // Clear any cached exfil prompts before applying filtering
+            if (IEApiWrapper.ExfilPromptService != null)
+            {
+                IEApiWrapper.ExfilPromptService.ClearExfilPromptsCache();
+            }
+            
+            // Disable non-configured exfils now that we know which ones are enabled
+            Patches.ExfiltrationPointAwakePatch.DisableInvalidExfils();
+            
+            // Apply exfil filtering now that location data is loaded
+            Patches.InitAllExfiltrationPointsPatch.ApplyExfilFiltering();
         }
         else
         {
@@ -146,6 +180,15 @@ public class Plugin : BaseUnityPlugin
     public static void RaidEnded()
     {
         Helpers.Logger.Info("Raid ended!");
+        
+        // Reset CurrentLocationDataService for next raid
+        if (CurrentLocationDataService != null)
+        {
+            CurrentLocationDataService.Reset();
+        }
+        
+        // Reset tracked exfils
+        Patches.ExfiltrationPointAwakePatch.ClearTrackedExfils();
     }
 
     public static void DisplayOutdatedVersionsWarnings()

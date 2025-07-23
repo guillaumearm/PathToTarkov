@@ -64,7 +64,7 @@ public static class Fika
 
         var filteredHumanPlayers = humanPlayers.Where(player =>
         {
-            if (FikaBackendUtils.IsDedicated)
+            if (FikaBackendUtils.IsServer && FikaBackendUtils.Profile?.Info?.GroupId == "DEDICATED")
             {
                 return player.Profile.ProfileId != FikaBackendUtils.Profile.ProfileId;
             }
@@ -116,6 +116,6 @@ public static class Fika
 
     public static bool IsDedicated()
     {
-        return FikaBackendUtils.IsDedicated;
+        return FikaBackendUtils.IsServer && FikaBackendUtils.Profile?.Info?.GroupId == "DEDICATED";
     }
 }

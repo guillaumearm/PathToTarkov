@@ -115,7 +115,34 @@ export class EventWatcher {
         matchController.startLocalRaid = (sessionId: string, data: IStartLocalRaidRequestData) => {
           const result = deepClone(originalStartLocalRaid(sessionId, data));
           const locationBase: ILocationBase = result.locationLoot;
+
+          // Debug logging for headless client investigation
+          this.ptt.logger.info(
+            `[PTT Debug] startLocalRaid called with sessionId: ${sessionId}, location: ${data.location}, playerSide: ${data.playerSide}`,
+          );
+          this.ptt.logger.info(
+            `[PTT Debug] Initial spawn points count: ${locationBase.SpawnPointParams?.length || 0}`,
+          );
+
           this.ptt.pathToTarkovController.syncLocationBase(locationBase, sessionId);
+
+          // Log spawn points after sync
+          this.ptt.logger.info(
+            `[PTT Debug] After sync spawn points count: ${locationBase.SpawnPointParams?.length || 0}`,
+          );
+          const playerSpawns =
+            locationBase.SpawnPointParams?.filter(sp => sp.Categories?.includes('Player')) || [];
+          this.ptt.logger.info(
+            `[PTT Debug] Player spawn points: ${playerSpawns.map(sp => `${sp.Id} (Infiltration: ${sp.Infiltration})`).join(', ')}`,
+          );
+
+          // Additional debug for headless client detection
+          const profile = this.saveServer.getProfile(sessionId);
+          const profileName = profile?.info?.username || 'unknown';
+          const isHeadless = profileName.toLowerCase().includes('headless');
+          this.ptt.logger.info(
+            `[PTT Debug] Profile name: ${profileName}, Is headless: ${isHeadless}`,
+          );
 
           this.initRaidCache(sessionId);
           const raidCache = this.getRaidCache(sessionId);

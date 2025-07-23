@@ -243,6 +243,8 @@ export type UserConfig = {
     resetOffraidPositionOnPlayerDeath: boolean;
     playerScavMoveOffraidPosition: boolean;
     keepFoundInRaidTweak: boolean;
+    fleaMarketMode: 'everywhere' | 'location_based' | 'disabled';
+    fleaMarketMinLevel: number;
   };
   runUninstallProcedure?: false;
 };
@@ -297,6 +299,8 @@ const DEFAULT_USER_CONFIG: UserConfig = {
     resetOffraidPositionOnPlayerDeath: true,
     playerScavMoveOffraidPosition: false,
     keepFoundInRaidTweak: true,
+    fleaMarketMode: 'everywhere',
+    fleaMarketMinLevel: 15,
   },
   runUninstallProcedure: false,
 };
@@ -439,18 +443,14 @@ export const processConfig = (originalConfig: RawConfig): Config => {
     infiltrations_config: infiltrationsConfig,
     exfiltrations,
     offraid_regen_config: {
-      ...rawConfig.offraid_regen_config,
       hydration: {
-        ...rawConfig.offraid_positions?.hydration,
-        access_via: [],
+        access_via: rawConfig.offraid_regen_config?.hydration?.access_via ?? [],
       },
       energy: {
-        ...rawConfig.offraid_positions?.energy,
-        access_via: [],
+        access_via: rawConfig.offraid_regen_config?.energy?.access_via ?? [],
       },
       health: {
-        ...rawConfig.offraid_positions?.health,
-        access_via: [],
+        access_via: rawConfig.offraid_regen_config?.health?.access_via ?? [],
       },
     },
     traders_config: {
@@ -561,6 +561,16 @@ export const getUserConfig = (jsonUtil: JsonUtil): UserConfig => {
   if (userConfig.gameplay.tradersAccessRestriction === undefined) {
     userConfig.gameplay.tradersAccessRestriction =
       DEFAULT_USER_CONFIG.gameplay.tradersAccessRestriction;
+    needToWriteFile = true;
+  }
+
+  if (userConfig.gameplay.fleaMarketMode === undefined) {
+    userConfig.gameplay.fleaMarketMode = DEFAULT_USER_CONFIG.gameplay.fleaMarketMode;
+    needToWriteFile = true;
+  }
+
+  if (userConfig.gameplay.fleaMarketMinLevel === undefined) {
+    userConfig.gameplay.fleaMarketMinLevel = DEFAULT_USER_CONFIG.gameplay.fleaMarketMinLevel;
     needToWriteFile = true;
   }
 

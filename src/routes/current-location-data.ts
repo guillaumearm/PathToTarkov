@@ -34,8 +34,22 @@ export const registerCurrentLocationDataRoute = (
           const config = pttController.getConfig(sessionId);
           const mapName = resolveMapNameFromLocation(info.locationId) as MapName;
 
+          const locations = pttController.db.getTables().locations;
+          if (!locations) {
+            throw new Error('Locations table not available');
+          }
+
+          const locationKey = info.locationId.toLowerCase() as keyof typeof locations;
+          const location = locations[locationKey];
+
+          if (!location || !('base' in location) || !location.base) {
+            throw new Error(`Location "${info.locationId}" not found or has no base data`);
+          }
+
+          const locationBase = location.base;
+
           const response: CurrentLocationDataResponse = {
-            exfilsTargets: getExfilsTargets(pttController, config, mapName),
+            exfilsTargets: getExfilsTargets(pttController, config, mapName, locationBase),
           };
 
           return JSON.stringify(response);

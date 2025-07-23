@@ -169,10 +169,14 @@ class PathToTarkov implements IPreSptLoadMod, IPostSptLoadMod {
     }
   }
 
-  public postDBLoad(_container: DependencyContainer): void {
+  public postDBLoad(container: DependencyContainer): void {
     if (this.userConfig.runUninstallProcedure) {
       return;
     }
+
+    // Early modification of RagFair settings to ensure they take effect
+    this.pathToTarkovController.setEarlyRagFairConfig();
+
     this.pathToTarkovController.debugExfiltrationsTooltips(this.config);
   }
 

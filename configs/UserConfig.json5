@@ -1,0 +1,17 @@
+{
+  selectedConfig: 'Default',
+  gameplay: {
+    multistash: true,
+    tradersAccessRestriction: true,
+    resetOffraidPositionOnPlayerDeath: true,
+    playerScavMoveOffraidPosition: false,
+    keepFoundInRaidTweak: true,
+    // Flea market settings:
+    // - 'everywhere': Flea market available everywhere
+    // - 'location_based': Only available at configured locations [ragfair]
+    // - 'disabled': Completely disabled
+    fleaMarketMode: 'location_based',
+    fleaMarketMinLevel: 15, // Minimum level required to access flea market
+  },
+  runUninstallProcedure: false,
+}

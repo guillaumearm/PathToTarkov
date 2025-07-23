@@ -8,11 +8,25 @@ namespace PTT.Services;
 
 public class CurrentLocationDataService
 {
-    private CurrentLocationDataResponse CurrentLocationData { get; set; } = new() { exfilsTargets = { } };
+    private CurrentLocationDataResponse CurrentLocationData { get; set; } = new CurrentLocationDataResponse();
+    private bool _isInitialized = false;
 
     public void Init()
     {
+        if (_isInitialized)
+        {
+            Logger.Info("CurrentLocationDataService already initialized, skipping");
+            return;
+        }
         FetchExfilsTargetsForCurrentLocation();
+        _isInitialized = true;
+
+        PTT.Patches.InitAllExfiltrationPointsPatch.TryApplyExfilFiltering();
+    }
+
+    public bool IsInitialized()
+    {
+        return _isInitialized;
     }
 
     public bool IsExfiltrationPointEnabled(ExfiltrationPoint exfil)
@@ -24,7 +38,7 @@ public class CurrentLocationDataService
             return false;
         }
 
-        return CurrentLocationData.exfilsTargets.ContainsKey(exitName);
+        return CurrentLocationData?.exfilsTargets != null && CurrentLocationData.exfilsTargets.ContainsKey(exitName);
     }
 
     public List<ExfilTarget> GetExfilTargets(ExfiltrationPoint exfil)
@@ -42,7 +56,7 @@ public class CurrentLocationDataService
             return null;
         }
 
-        if (!CurrentLocationData.exfilsTargets.TryGetValue(exitName, out List<ExfilTarget> exfilTargets))
+        if (CurrentLocationData?.exfilsTargets == null || !CurrentLocationData.exfilsTargets.TryGetValue(exitName, out List<ExfilTarget> exfilTargets))
         {
             Logger.Warning($"cannot retrieve exfil targets for exfil '{exitName}'");
             return null;
@@ -71,5 +85,11 @@ public class CurrentLocationDataService
         {
             Logger.Error($"Error occurred during request: {ex.Message}");
         }
+    }
+
+    public void Reset()
+    {
+        _isInitialized = false;
+        CurrentLocationData = new CurrentLocationDataResponse();
     }
 }

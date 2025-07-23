@@ -64,7 +64,7 @@ public static class CustomExfilService
         Logger.Info($"started transit on '{transit.parameters.name}'");
         CurrentExfilTargetService.SaveExfil(exfilTarget);
 
-        if (!TransitControllerAbstractClass.Exist(out GClass1642 vanillaTransitController))
+        if (!TransitControllerAbstractClass.Exist(out GClass1676 vanillaTransitController))
         {
             Logger.Error($"cannot transit because no TransitControllerAbstractClass found");
             return;

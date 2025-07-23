@@ -16,5 +16,5 @@ public class CurrentLocationDataRequest
 public class CurrentLocationDataResponse
 {
     // indexed by exit name
-    public Dictionary<string, List<ExfilTarget>> exfilsTargets;
+    public Dictionary<string, List<ExfilTarget>> exfilsTargets = new Dictionary<string, List<ExfilTarget>>();
 }

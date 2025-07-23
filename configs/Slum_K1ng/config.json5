@@ -1,0 +1,578 @@
+{
+  // the main stash will be accessible only from the "PlayerHideout" offraid position
+  hideout_main_stash_access_via: ['PlayerHideout'],
+
+  initial_offraid_position: 'PlayerHideout',
+
+  respawn_at: ['PlayerHideout'],
+
+  offraid_regen_config: {
+    hydration: {
+      access_via: [
+        'PlayerHideout',
+        'TraderSkier',
+        'TraderJaeger',
+        'TraderPeacekeeper',
+        'TraderFence',
+        'TraderFence2',
+        'TraderFence3',
+        'TraderFence4',
+        'TraderFence5',
+        'TraderFence6',
+        'TraderFence7',
+        'TraderRef',
+        'TraderRagman',
+        'TraderMechanic',
+        'TraderScorpion',
+        'FleaMarket',
+      ],
+    },
+    energy: {
+      access_via: [
+        'PlayerHideout',
+        'TraderSkier',
+        'TraderJaeger',
+        'TraderPeacekeeper',
+        'TraderFence',
+        'TraderFence2',
+        'TraderFence3',
+        'TraderFence4',
+        'TraderFence5',
+        'TraderFence6',
+        'TraderFence7',
+        'TraderRef',
+        'TraderRagman',
+        'TraderMechanic',
+        'TraderScorpion',
+        'FleaMarket',
+      ],
+    },
+    health: {
+      access_via: ['PlayerHideout'],
+    },
+  },
+
+  traders_config: {
+    // Prapor
+    '54cb50c76803fa8b248b4571': {
+      access_via: ['TraderPrapor'], // Prapor - Bunker Hermetic Door (Reserve)
+    },
+    // Therapist
+    '54cb57776803fa99248b456e': {
+      access_via: ['TraderTherapist'], // Therapist - Emercom (Ground Zero)
+    },
+    // Mechanic
+    '5a7c2eca46aef81a7ca2145d': {
+      access_via: ['TraderMechanic'], // Mechanic - Stylobate Building Elevator (Streets)
+    },
+    // Skier
+    '58330581ace78e27b8b10cee': {
+      access_via: ['TraderSkier'], // Skier - Camera Bunker Door (Factory)
+    },
+    // Ragman
+    '5ac3b934156ae10c4430e83c': {
+      access_via: ['TraderRagman'], // Ragman - West Wing Gym Entrance (Shoreline)
+    },
+    // Jaeger
+    '5c0647fdd443bc2504c2d371': {
+      access_via: ['TraderJaeger'], // Jaeger - Emercom Checkpoint (Interchange)
+    },
+    // Peacekeeper
+    '5935c25fb3acc3127c3d8cd9': {
+      access_via: ['TraderPeacekeeper'], // Peacekeeper - Scav Bunker (Woods)
+    },
+    // Fence
+    '579dc571d53a0658a154fbec': {
+      access_via: [
+        'TraderFence', // Fence - All Vehicle Extracts
+        'TraderFence2',
+        'TraderFence3',
+        'TraderFence4',
+        'TraderFence5',
+        'TraderFence6',
+        'TraderFence7',
+      ],
+    },
+    // Ref (Arena)
+    '6617beeaa9cfa777ca915b7c': {
+      access_via: ['TraderRef'], //Ref - ZB-013 - Fortress (Customs)
+    },
+    // Scorpion
+    '6688d464bc40c867f60e7d7e': {
+      access_via: ['TraderScorpion'], //Scorpion - Pier Boat (Shoreline)
+    },
+    // Flea Market (Ragfair)
+    ragfair: {
+      access_via: ['FleaMarket'], //Flea Market - Cardinal Apartments Parking (Streets)
+    },
+  },
+
+  hideout_secondary_stashes: [
+    {
+      id: 'Fence_Stash',
+      size: 50,
+      access_via: [
+        'TraderFence',
+        'TraderFence2',
+        'TraderFence3',
+        'TraderFence4',
+        'TraderFence5',
+        'TraderFence6',
+        'TraderFence7',
+      ],
+    },
+    {
+      id: 'Ref_Stash',
+      size: 50,
+      access_via: ['TraderRef'],
+    },
+    {
+      id: 'Skier_Stash',
+      size: 50,
+      access_via: ['TraderSkier'],
+    },
+    {
+      id: 'Peacekeeper_Stash',
+      size: 50,
+      access_via: ['TraderPeacekeeper'],
+    },
+    {
+      id: 'Jaeger_Stash',
+      size: 50,
+      access_via: ['TraderJaeger'],
+    },
+    {
+      id: 'Prapor_Stash',
+      size: 50,
+      access_via: ['TraderPrapor'],
+    },
+    {
+      id: 'Ragman_Stash',
+      size: 50,
+      access_via: ['TraderRagman'],
+    },
+    {
+      id: 'Mechanic_Stash',
+      size: 50,
+      access_via: ['TraderMechanic'],
+    },
+    {
+      id: 'Therapist_Stash',
+      size: 50,
+      access_via: ['TraderTherapist'],
+    },
+    {
+      id: 'Scorpion_Stash',
+      size: 50,
+      access_via: ['TraderScorpion'],
+    },
+    {
+      id: 'RagFair_Stash',
+      size: 50,
+      access_via: ['FleaMarket'],
+    },
+  ],
+
+  exfiltrations: {
+    bigmap: {
+      'Trailer Park Workers Shack': ['PlayerHideout'],
+      'Dorms V-Ex': ['TraderFence'],
+      'Trailer Park': ['CustomstoInterchange'],
+      EXFIL_ZB013: ['TraderRef'],
+      Shack: ['CustomstoReserve'],
+      'Factory Far Corner': ['CustomstoFactory'],
+      'RUAF Roadblock': ['CustomstoWoods'],
+      'Administration Gate': ['CustomstoShoreline'],
+    },
+    factory4_day: {
+      Gate_o: ['CustomstoFactory'],
+      'Camera Bunker Door': ['TraderSkier'],
+      'Gate m': ['FactorytoLabs'],
+      'Gate 0': ['FactorytoWoods'],
+    },
+    factory4_night: {
+      Gate_o: ['CustomstoFactory'],
+      'Camera Bunker Door': ['TraderSkier'],
+      'Gate m': ['FactorytoLabs'],
+      'Gate 0': ['FactorytoWoods'],
+    },
+    interchange: {
+      'Interchange Cooperation': ['CustomstoInterchange'],
+      'SE Exfil': ['TraderJaeger'],
+      'PP Exfil': ['TraderFence2'],
+      'NW Exfil': ['InterchangetoStreets'],
+    },
+    woods: {
+      'un-sec': ['CustomstoWoods'],
+      'ZB-014': ['FactorytoWoods'],
+      'East Gate': ['TraderPeacekeeper'],
+      'South V-Ex': ['TraderFence3'],
+      Outskirts: ['WoodstoLighthouse'],
+    },
+    rezervbase: {
+      EXFIL_ScavCooperation: ['CustomstoReserve'],
+      EXFIL_Bunker_D2: ['ReservetoLabs'],
+      Alpinist: ['ReservetoShoreline'],
+      EXFIL_Bunker: ['TraderPrapor'],
+    },
+    shoreline: {
+      RedRebel_alp: ['ReservetoShoreline'],
+      'RWing Gym Entrance': ['TraderRagman'],
+      'Road to Customs': ['CustomstoShoreline'],
+      'Shorl_V-Ex': ['TraderFence4'],
+      Lighthouse_pass: ['ShorelinetoLightHouse'],
+      'Wrecked Road': ['ShorelinetoLightHouse2'],
+      'Pier Boat': ['TraderScorpion'],
+    },
+    lighthouse: {
+      Shorl_free: ['ShorelinetoLightHouse'],
+      Coastal_South_Road: ['ShorelinetoLightHouse2'],
+      ' V-Ex_light': ['TraderFence5'],
+      Nothern_Checkpoint: ['WoodstoLighthouse'],
+      Alpinist_light: ['LighthousetoReserve'],
+    },
+    tarkovstreets: {
+      E1: ['TraderMechanic'],
+      E2: ['StreetstoLabs'],
+      E4: ['StreetstoGroundZero'],
+      E7: ['InterchangetoStreets'],
+      E7_car: ['TraderFence6'],
+      scav_e7: ['FleaMarket'],
+    },
+    sandbox: {
+      Nakatani_stairs_free_exit: ['StreetstoGroundZero'],
+      Unity_free_exit: ['TraderTherapist'],
+      Sandbox_VExit: ['TraderFence7'],
+    },
+    laboratory: {
+      lab_Under_Storage_Collector: ['StreetstoLabs'],
+      lab_Parking_Gate: ['FactorytoLabs'],
+      lab_Hangar_Gate: ['ReservetoLabs'],
+      lab_Elevator_Med: ['FactorytoLabs'],
+    },
+  },
+
+  infiltrations: {
+    StreetstoGroundZero: {
+      tarkovstreets: ['Crash Site'],
+      sandbox: ['Nakatani Basement Stairs'],
+    },
+    StreetstoLabs: {
+      tarkovstreets: ['Sewer River'],
+      laboratory: ['Lab Sewage Conduit'],
+    },
+    LighthousetoReserve: {
+      lighthouse: ['Mountain Pass'],
+      rezervbase: ['Checkpoint Fence'],
+    },
+    ShorelinetoLightHouse2: {
+      shoreline: ['Ruined Road'],
+      lighthouse: ['Southern Road'],
+    },
+    ShorelinetoLightHouse: {
+      shoreline: ['Path to Lighthouse'],
+      lighthouse: ['Path to Shoreline'],
+    },
+    ReservetoShoreline: {
+      rezervbase: ['Cliff'],
+      shoreline: ['Climbers Trail'],
+    },
+    ReservetoLabs: {
+      rezervbase: ['D-2'],
+      laboratory: ['Hangar Gate'],
+    },
+    WoodstoLighthouse: {
+      woods: ['Outskirts'],
+      lighthouse: ['Northern CP'],
+    },
+    InterchangetoStreets: {
+      interchange: ['Railway'],
+      tarkovstreets: ['Expo Checkpoint'],
+    },
+    FactorytoWoods: {
+      factory4_day: ['Gate 0'],
+      factory4_night: ['Gate 0'],
+      woods: ['ZB-014'],
+    },
+    FactorytoLabs: {
+      factory4_day: ['Transit to Labs'],
+      factory4_night: ['Transit to Labs'],
+      laboratory: ['Parking Gate'],
+    },
+    CustomstoReserve: {
+      bigmap: ['Military Base CP'],
+      rezervbase: ['Scav lands'],
+    },
+    CustomstoInterchange: {
+      bigmap: ['Trailer Park'],
+      interchange: ['Scav Camp'],
+    },
+    CustomstoFactory: {
+      bigmap: ['Factory Far Corner'],
+      factory4_day: ['Courtyard'],
+      factory4_night: ['Courtyard'],
+    },
+    CustomstoWoods: {
+      bigmap: ['RUAF Roadblock'],
+      woods: ['Northern UN Roadblock'],
+    },
+    CustomstoShoreline: {
+      bigmap: ['Administration Gate'],
+      shoreline: ['Road to Customs'],
+    },
+    PlayerHideout: {
+      bigmap: ['Trailer Park Workers Shack'],
+    },
+    TraderFence: {
+      bigmap: ['Dorms Car'],
+    },
+    TraderFence2: {
+      interchange: ['Interchange Vehicle Extract'],
+    },
+    TraderFence3: {
+      woods: ['Woods Vehicle Extract'],
+    },
+    TraderFence4: {
+      shoreline: ['Shoreline Vehicle Extract'],
+    },
+    TraderFence5: {
+      lighthouse: ['Lighthouse Vehicle Extract'],
+    },
+    TraderFence6: {
+      tarkovstreets: ['Streets Vehicle Extract'],
+    },
+    TraderFence7: {
+      sandbox: ['Police Car'],
+    },
+    TraderRef: {
+      bigmap: ['ZB-1013'],
+    },
+    TraderSkier: {
+      factory4_day: ['Camera Bunker Door'],
+      factory4_night: ['Camera Bunker Door'],
+    },
+    TraderPeacekeeper: {
+      woods: ['Scav Bunker'],
+    },
+    TraderJaeger: {
+      interchange: ['Emercom'],
+    },
+    TraderPrapor: {
+      rezervbase: ['Depot Hermetic'],
+    },
+    TraderRagman: {
+      shoreline: ['Admin Basement'],
+    },
+    TraderMechanic: {
+      tarkovstreets: ['Stylobate Elevator'],
+    },
+    TraderTherapist: {
+      sandbox: ['EmercomGZ'],
+    },
+    TraderScorpion: {
+      shoreline: ['Pier Boat'],
+    },
+    FleaMarket: {
+      tarkovstreets: ['Cardinal Appartments Parking'],
+    },
+  },
+
+  offraid_positions: {
+    CustomstoShoreline: {
+      displayName: {
+        en: 'Customs/Shoreline',
+      },
+    },
+    CustomstoWoods: {
+      displayName: {
+        en: 'Customs/Woods',
+      },
+    },
+    CustomstoFactory: {
+      displayName: {
+        en: 'Customs/Factory',
+      },
+    },
+    CustomstoInterchange: {
+      displayName: {
+        en: 'Customs/Interchange',
+      },
+    },
+    CustomstoReserve: {
+      displayName: {
+        en: 'Customs/Reserve',
+      },
+    },
+    FactorytoLabs: {
+      displayName: {
+        en: 'Factory/Labs',
+      },
+    },
+    FactorytoWoods: {
+      displayName: {
+        en: 'Factory/Woods',
+      },
+    },
+    InterchangetoStreets: {
+      displayName: {
+        en: 'Interchange/Streets',
+      },
+    },
+    WoodstoLighthouse: {
+      displayName: {
+        en: 'Woods/Lighthouse',
+      },
+    },
+    ReservetoLabs: {
+      displayName: {
+        en: 'Reserve/Labs',
+      },
+    },
+    ReservetoShoreline: {
+      displayName: {
+        en: 'Reserve/Shoreline',
+      },
+    },
+    ShorelinetoLightHouse: {
+      displayName: {
+        en: 'Shoreline/Lighthouse',
+      },
+    },
+    ShorelinetoLightHouse2: {
+      displayName: {
+        en: 'Shoreline/Lighthouse',
+      },
+    },
+    LighthousetoReserve: {
+      displayName: {
+        en: 'Lighthouse/Reserve',
+      },
+    },
+    StreetstoLabs: {
+      displayName: {
+        en: 'Streets/Labs',
+      },
+    },
+    StreetstoGroundZero: {
+      displayName: {
+        en: 'Streets/Ground Zero',
+      },
+    },
+    PlayerHideout: {
+      displayName: {
+        en: 'Main Hideout',
+      },
+    },
+    TraderFence: {
+      displayName: {
+        en: 'Fence',
+      },
+    },
+    TraderFence2: {
+      displayName: {
+        en: 'Fence',
+      },
+    },
+    TraderFence3: {
+      displayName: {
+        en: 'Fence',
+      },
+    },
+    TraderFence4: {
+      displayName: {
+        en: 'Fence',
+      },
+    },
+    TraderFence5: {
+      displayName: {
+        en: 'Fence',
+      },
+    },
+    TraderFence6: {
+      displayName: {
+        en: 'Fence',
+      },
+    },
+    TraderFence7: {
+      displayName: {
+        en: 'Fence',
+      },
+    },
+    TraderRef: {
+      displayName: {
+        en: 'Ref',
+      },
+    },
+    TraderSkier: {
+      displayName: {
+        en: 'Skier',
+      },
+    },
+    TraderPeacekeeper: {
+      displayName: {
+        en: 'Peacekeeper',
+      },
+    },
+    TraderJaeger: {
+      displayName: {
+        en: 'Jaeger',
+      },
+    },
+    TraderPrapor: {
+      displayName: {
+        en: 'Prapor',
+      },
+    },
+    TraderRagman: {
+      displayName: {
+        en: 'Ragman',
+      },
+    },
+    TraderMechanic: {
+      displayName: {
+        en: 'Mechanic',
+      },
+    },
+    TraderTherapist: {
+      displayName: {
+        en: 'Therapist',
+      },
+    },
+    TraderScorpion: {
+      displayName: {
+        en: 'Scorpion',
+      },
+    },
+    FleaMarket: {
+      displayName: {
+        en: 'Flea Market',
+      },
+    },
+  },
+
+  exfiltrations_config: {
+    bigmap: {
+      'Trailer Park Workers Shack': {
+        displayName: {
+          en: 'Trailer Park Workers Shack',
+        },
+      },
+      'Factory Far Corner': {
+        displayName: {
+          en: 'Factory Far Corner',
+        },
+      },
+      'Trailer Park': {
+        displayName: {
+          en: 'Trailer Park',
+        },
+      },
+      EXFIL_ZB013: {
+        displayName: {
+          en: 'ZB-013 (Fortress)',
+        },
+      },
+    },
+  },
+  exfiltrations_tooltips_template: '<color="green"><size=90%>$exfilDisplayName\n<size=60%><color="white">$offraidPositionDisplayName',
+}

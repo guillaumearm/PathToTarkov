@@ -6,7 +6,7 @@
     <Description>Path To Tarkov Fika Packets</Description>
     <Version>1.0.0</Version>
     <LangVersion>latest</LangVersion>
-    <PathToSPT>..\..\..\..</PathToSPT>
+    <PathToSPT>..\..</PathToSPT>
   </PropertyGroup>
 
   <!-- <ItemGroup>

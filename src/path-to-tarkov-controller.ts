@@ -88,7 +88,7 @@ export class PathToTarkovController {
     private readonly packageJson: PackageJson,
     private tradersAvailabilityService: TradersAvailabilityService,
     private readonly container: DependencyContainer,
-    private readonly db: DatabaseServer,
+    public readonly db: DatabaseServer,
     private readonly saveServer: SaveServer,
     configServer: ConfigServer,
     private readonly getRaidCache: (sessionId: string) => RaidCache | null,
@@ -129,10 +129,37 @@ export class PathToTarkovController {
 
   init(): void {
     this.overrideControllers();
+    this.overrideRagfairRoutes();
   }
 
   getFullVersion(): string {
     return this.packageJson.version;
+  }
+
+  public setEarlyRagFairConfig(): void {
+    const db = this.db;
+    const globals = db.getTables().globals;
+
+    if (!globals) {
+      throw new Error('Path To Tarkov: globals not found in database');
+    }
+
+    const userConfig = this.getUserConfig();
+    const fleaMarketMode = userConfig.gameplay.fleaMarketMode;
+    const fleaMarketMinLevel = userConfig.gameplay.fleaMarketMinLevel;
+
+    if (fleaMarketMode === 'disabled') {
+      this.debug('Early RagFair configuration: disabled mode');
+      globals.config.RagFair.enabled = true; // Keep enabled to prevent UI issues
+      globals.config.RagFair.minUserLevel = 99;
+    } else if (fleaMarketMode === 'everywhere') {
+      this.debug(
+        `Early RagFair configuration: enabled everywhere with min level ${fleaMarketMinLevel}`,
+      );
+      globals.config.RagFair.enabled = true;
+      globals.config.RagFair.minUserLevel = fleaMarketMinLevel;
+    }
+    // Note: location_based mode is handled dynamically per-session in createGetGlobals
   }
 
   loaded(config: Config): void {
@@ -226,13 +253,34 @@ export class PathToTarkovController {
   syncLocationBase(locationBase: ILocationBase, sessionId: string): void {
     const raidCache = this.getRaidCache(sessionId);
 
+    this.logger.info(`[PTT Debug] syncLocationBase called for sessionId: ${sessionId}`);
+    this.logger.info(
+      `[PTT Debug] RaidCache exists: ${!!raidCache}, exitStatus: ${raidCache?.exitStatus}, transitTargetMapName: ${raidCache?.transitTargetMapName}, transitTargetSpawnPointId: ${raidCache?.transitTargetSpawnPointId}`,
+    );
+
+    // Check if this might be a headless client with missing raid cache
+    if (!raidCache) {
+      this.logger.warning(
+        `[PTT Debug] No raid cache found for session ${sessionId}, this might be a headless client`,
+      );
+      // For headless clients, we should still update spawn points based on offraid position
+      this.updateSpawnPoints(locationBase, sessionId);
+      this.updateLocationBaseExits(locationBase, sessionId);
+      this.updateLocationBaseTransits(locationBase, sessionId);
+      return;
+    }
+
     if (raidCache && raidCache.exitStatus === 'Transit') {
       // handle when a player took a vanilla transit
+      this.logger.info(`[PTT Debug] Handling vanilla transit`);
       this.updateInfiltrationForPlayerSpawnPoints(locationBase);
     }
 
     if (raidCache && raidCache.transitTargetMapName && raidCache.transitTargetSpawnPointId) {
       // handle when a player took a ptt transit
+      this.logger.info(
+        `[PTT Debug] Handling PTT transit to ${raidCache.transitTargetMapName} at spawn ${raidCache.transitTargetSpawnPointId}`,
+      );
       this.updateSpawnPointsForTransit(
         locationBase,
         sessionId,
@@ -241,6 +289,7 @@ export class PathToTarkovController {
       );
     } else {
       // handle when a player took a ptt extract
+      this.logger.info(`[PTT Debug] Handling PTT extract or initial spawn`);
       this.updateSpawnPoints(locationBase, sessionId);
     }
 
@@ -580,8 +629,201 @@ export class PathToTarkovController {
         });
       }
 
+      // Handle Ragfair (Flea Market) access
+      const userConfig = this.getUserConfig();
+      const fleaMarketMode = userConfig.gameplay.fleaMarketMode;
+      const fleaMarketMinLevel = userConfig.gameplay.fleaMarketMinLevel;
+
+      if (fleaMarketMode === 'disabled') {
+        this.debug(`[${sessionId}] Ragfair disabled by user config`);
+        globals.config.RagFair.enabled = true; // Keep enabled to prevent UI issues
+        globals.config.RagFair.minUserLevel = 99;
+      } else if (fleaMarketMode === 'everywhere') {
+        this.debug(
+          `[${sessionId}] Ragfair enabled everywhere with min level ${fleaMarketMinLevel}`,
+        );
+        globals.config.RagFair.enabled = true;
+        globals.config.RagFair.minUserLevel = fleaMarketMinLevel;
+      } else if (fleaMarketMode === 'location_based') {
+        const ragfairConfig = this.getConfig(sessionId).traders_config.ragfair;
+        if (ragfairConfig) {
+          const ragfairAvailable = checkAccessVia(ragfairConfig.access_via, offraidPosition);
+          if (ragfairAvailable) {
+            this.debug(
+              `[${sessionId}] Ragfair enabled at position ${offraidPosition} with min level ${fleaMarketMinLevel}`,
+            );
+            globals.config.RagFair.enabled = true;
+            globals.config.RagFair.minUserLevel = fleaMarketMinLevel;
+          } else {
+            this.debug(`[${sessionId}] Ragfair disabled at position ${offraidPosition}`);
+            globals.config.RagFair.enabled = true; // Keep enabled to prevent UI issues
+            globals.config.RagFair.minUserLevel = 99;
+          }
+        } else {
+          // No ragfair config found, default to everywhere mode
+          this.debug(
+            `[${sessionId}] No ragfair config found, defaulting to everywhere mode with min level ${fleaMarketMinLevel}`,
+          );
+          globals.config.RagFair.enabled = true;
+          globals.config.RagFair.minUserLevel = fleaMarketMinLevel;
+        }
+      }
+
       return JSON.stringify(parsed) as any;
     };
+  }
+
+  private overrideRagfairRoutes(): void {
+    // Hook into ragfair callbacks to enforce flea market restrictions
+    this.container.afterResolution(
+      'RagfairCallbacks',
+      (_t, result) => {
+        const ragfairCallbacks = Array.isArray(result) ? result[0] : result;
+
+        // Helper function to update server-side globals based on player location
+        const updateGlobalsForSession = (sessionID: string): number => {
+          const offraidPosition = this.getOffraidPosition(sessionID);
+          const userConfig = this.getUserConfig();
+          const fleaMarketMode = userConfig.gameplay.fleaMarketMode;
+          const fleaMarketMinLevel = userConfig.gameplay.fleaMarketMinLevel;
+
+          // Get the server-side globals
+          const globals = this.db.getTables().globals;
+          if (!globals) {
+            throw new Error('Path To Tarkov: globals not found in database');
+          }
+          const originalMinLevel = globals.config.RagFair.minUserLevel;
+
+          // Determine the correct minUserLevel based on fleaMarketMode and player location
+          let targetMinLevel = fleaMarketMinLevel;
+
+          if (fleaMarketMode === 'disabled') {
+            targetMinLevel = 99;
+          } else if (fleaMarketMode === 'location_based') {
+            const ragfairConfig = this.getConfig(sessionID).traders_config.ragfair;
+            if (ragfairConfig && !checkAccessVia(ragfairConfig.access_via, offraidPosition)) {
+              targetMinLevel = 99;
+            }
+          }
+
+          // Update server-side globals
+          globals.config.RagFair.minUserLevel = targetMinLevel;
+
+          return originalMinLevel;
+        };
+
+        // Override search method
+        if (ragfairCallbacks.search) {
+          const originalSearch = ragfairCallbacks.search.bind(ragfairCallbacks);
+          ragfairCallbacks.search = (url: string, info: any, sessionID: string): any => {
+            const originalMinLevel = updateGlobalsForSession(sessionID);
+            const globals = this.db.getTables().globals;
+
+            try {
+              const result = originalSearch(url, info, sessionID);
+              if (globals) {
+                globals.config.RagFair.minUserLevel = originalMinLevel;
+              }
+              return result;
+            } catch (error) {
+              if (globals) {
+                globals.config.RagFair.minUserLevel = originalMinLevel;
+              }
+              throw error;
+            }
+          };
+        }
+
+        // Override addOffer method
+        if (ragfairCallbacks.addOffer) {
+          const originalAddOffer = ragfairCallbacks.addOffer.bind(ragfairCallbacks);
+          ragfairCallbacks.addOffer = (pmcData: any, info: any, sessionID: string): any => {
+            const originalMinLevel = updateGlobalsForSession(sessionID);
+            const globals = this.db.getTables().globals;
+
+            try {
+              const result = originalAddOffer(pmcData, info, sessionID);
+              if (globals) {
+                globals.config.RagFair.minUserLevel = originalMinLevel;
+              }
+              return result;
+            } catch (error) {
+              if (globals) {
+                globals.config.RagFair.minUserLevel = originalMinLevel;
+              }
+              throw error;
+            }
+          };
+        }
+
+        // Override extendOffer method
+        if (ragfairCallbacks.extendOffer) {
+          const originalExtendOffer = ragfairCallbacks.extendOffer.bind(ragfairCallbacks);
+          ragfairCallbacks.extendOffer = (pmcData: any, info: any, sessionID: string): any => {
+            const originalMinLevel = updateGlobalsForSession(sessionID);
+            const globals = this.db.getTables().globals;
+
+            try {
+              const result = originalExtendOffer(pmcData, info, sessionID);
+              if (globals) {
+                globals.config.RagFair.minUserLevel = originalMinLevel;
+              }
+              return result;
+            } catch (error) {
+              if (globals) {
+                globals.config.RagFair.minUserLevel = originalMinLevel;
+              }
+              throw error;
+            }
+          };
+        }
+
+        // Override getMarketPrice method
+        if (ragfairCallbacks.getMarketPrice) {
+          const originalGetMarketPrice = ragfairCallbacks.getMarketPrice.bind(ragfairCallbacks);
+          ragfairCallbacks.getMarketPrice = (url: string, info: any, sessionID: string): any => {
+            const originalMinLevel = updateGlobalsForSession(sessionID);
+            const globals = this.db.getTables().globals;
+
+            try {
+              const result = originalGetMarketPrice(url, info, sessionID);
+              if (globals) {
+                globals.config.RagFair.minUserLevel = originalMinLevel;
+              }
+              return result;
+            } catch (error) {
+              if (globals) {
+                globals.config.RagFair.minUserLevel = originalMinLevel;
+              }
+              throw error;
+            }
+          };
+        }
+
+        // Override getFleaPrices method
+        if (ragfairCallbacks.getFleaPrices) {
+          const originalGetFleaPrices = ragfairCallbacks.getFleaPrices.bind(ragfairCallbacks);
+          ragfairCallbacks.getFleaPrices = (url: string, info: any, sessionID: string): any => {
+            const originalMinLevel = updateGlobalsForSession(sessionID);
+            const globals = this.db.getTables().globals;
+
+            try {
+              const result = originalGetFleaPrices(url, info, sessionID);
+              if (globals) {
+                globals.config.RagFair.minUserLevel = originalMinLevel;
+              }
+              return result;
+            } catch (error) {
+              if (globals) {
+                globals.config.RagFair.minUserLevel = originalMinLevel;
+              }
+              throw error;
+            }
+          };
+        }
+      },
+      { frequency: 'Always' },
+    );
   }
 
   private overrideControllers(): void {
@@ -640,6 +882,10 @@ export class PathToTarkovController {
     const infiltrations = this.getConfig(sessionId).infiltrations;
     const offraidPosition = this.getOffraidPosition(sessionId);
 
+    this.logger.info(
+      `[PTT Debug] updateSpawnPoints - map: ${mapName}, sessionId: ${sessionId}, offraidPosition: ${offraidPosition}`,
+    );
+
     if (!infiltrations[offraidPosition]) {
       this.debug(
         `[${sessionId}] no offraid position '${offraidPosition}' found in config.infiltrations`,
@@ -649,9 +895,14 @@ export class PathToTarkovController {
 
     const spawnpoints = infiltrations[offraidPosition][mapName as MapName];
 
+    this.logger.info(
+      `[PTT Debug] Configured spawn points for ${mapName} at ${offraidPosition}: ${spawnpoints ? spawnpoints.join(', ') : 'none'}`,
+    );
+
     if (spawnpoints && spawnpoints.length > 0) {
       if (spawnpoints[0] === '*') {
         // don't update the spawnpoints if wildcard is used
+        this.logger.info(`[PTT Debug] Using wildcard spawn points for ${mapName}`);
         return;
       }
 
@@ -815,6 +1066,43 @@ export class PathToTarkovController {
     const defaultOffraidPosition = this.getInitialOffraidPosition(sessionId);
     const profile: Profile = this.saveServer.getProfile(sessionId);
 
+    this.logger.info(
+      `[PTT Debug] getOffraidPosition - sessionId: ${sessionId}, profileId: ${profile?.info?.id}, username: ${profile?.info?.username}, defaultOffraidPosition: ${defaultOffraidPosition}`,
+    );
+
+    // Check if this is a headless client
+    const profileName = profile?.info?.username || '';
+    const isHeadless = profileName.toLowerCase().includes('headless');
+
+    if (isHeadless) {
+      // For headless clients, try to find the main profile's offraid position
+      this.logger.info(`[PTT Debug] Detected headless client: ${profileName}`);
+
+      // Get all profiles and find the non-headless one
+      const profiles = this.saveServer.getProfiles();
+      for (const [otherSessionId, otherProfile] of Object.entries(profiles)) {
+        const otherProfileName = otherProfile?.info?.username || '';
+        const otherPttProfile = otherProfile as Profile;
+        if (
+          !otherProfileName.toLowerCase().includes('headless') &&
+          otherPttProfile?.PathToTarkov?.offraidPosition
+        ) {
+          this.logger.info(
+            `[PTT Debug] Found main profile: ${otherProfileName} with offraid position: ${otherPttProfile.PathToTarkov.offraidPosition}`,
+          );
+          // Use the main profile's offraid position for the headless client
+          if (!profile.PathToTarkov) {
+            profile.PathToTarkov = {};
+          }
+          profile.PathToTarkov.offraidPosition = otherPttProfile.PathToTarkov.offraidPosition;
+          this.logger.info(
+            `[PTT Debug] Synced headless client offraid position to: ${otherPttProfile.PathToTarkov.offraidPosition}`,
+          );
+          return otherPttProfile.PathToTarkov.offraidPosition;
+        }
+      }
+    }
+
     if (!profile.PathToTarkov) {
       profile.PathToTarkov = {};
     }
@@ -824,6 +1112,8 @@ export class PathToTarkovController {
     }
 
     const offraidPosition = profile.PathToTarkov.offraidPosition;
+
+    this.logger.info(`[PTT Debug] Current offraidPosition: ${offraidPosition}`);
 
     if (!this.getConfig(sessionId).infiltrations[offraidPosition]) {
       this.debug(

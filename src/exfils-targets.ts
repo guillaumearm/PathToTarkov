@@ -27,10 +27,16 @@ export type ExfilsTargets = {
   [exitName: string]: ExfilTarget[];
 };
 
+import type { ILocationBase } from '@spt/models/eft/common/ILocationBase';
+import * as path from 'node:path';
+import * as fs from 'node:fs';
+import { ALL_DUMPED_EXFILS_FROM_SCRIPT } from './_generated/all-vanilla-exfils';
+
 export const getExfilsTargets = (
   pttController: PathToTarkovController,
   config: Config,
   mapName: MapName,
+  locationBase: ILocationBase,
 ): ExfilsTargets => {
   const result: ExfilsTargets = {};
 
@@ -41,8 +47,20 @@ export const getExfilsTargets = (
 
   const userConfig = pttController.getUserConfig();
 
-  void Object.keys(exfilsConfig).forEach(exfilName => {
-    const targets = exfilsConfig[exfilName].map<ExfilTarget>(targetValue => {
+  // Get all extracts including Scav ones from external resources
+  const allExtracts = getAllExtractsFromExternalResources(mapName);
+
+  // Debug logging
+  const baseExtracts = locationBase.exits.map(exit => exit.Name);
+  const scavExtracts = allExtracts.filter(name => !baseExtracts.includes(name));
+  if (scavExtracts.length > 0) {
+    pttController.debug(
+      `Found ${scavExtracts.length} additional Scav extracts for ${mapName}: ${scavExtracts.join(', ')}`,
+    );
+  }
+
+  void allExtracts.forEach(exfilName => {
+    const targets = (exfilsConfig[exfilName] || []).map<ExfilTarget>(targetValue => {
       const parsed = parseExilTargetFromPTTConfig(targetValue);
 
       return {
@@ -56,7 +74,9 @@ export const getExfilsTargets = (
       };
     });
 
-    result[exfilName] = targets;
+    if (targets.length > 0) {
+      result[exfilName] = targets;
+    }
   });
 
   return result;
@@ -195,6 +215,40 @@ export const parseExfilTargetFromExitName = (
     transitTargetMapName: locationId,
     transitTargetSpawnPointId: spawnPointId,
   };
+};
+
+// Helper function to get all extracts including Scav ones from external resources
+const getAllExtractsFromExternalResources = (mapName: string): string[] => {
+  try {
+    const externalResourcesPath = path.join(
+      __dirname,
+      '..',
+      'external-resources',
+      'maps',
+      `${mapName}_allExtracts.json`,
+    );
+
+    if (fs.existsSync(externalResourcesPath)) {
+      const extractsData = JSON.parse(fs.readFileSync(externalResourcesPath, 'utf8'));
+      return extractsData.map((exit: any) => exit.Name);
+    }
+  } catch (error) {
+    // Fall back to generated data if external resources not available
+  }
+
+  // Fall back to using the generated all exfils data with aliases
+  const ALL_EXFILS: Record<string, string[]> = {
+    ...ALL_DUMPED_EXFILS_FROM_SCRIPT,
+    bigmap: ALL_DUMPED_EXFILS_FROM_SCRIPT.customs,
+    rezervbase: ALL_DUMPED_EXFILS_FROM_SCRIPT.reserve,
+    factory4_day: ALL_DUMPED_EXFILS_FROM_SCRIPT.factory,
+    factory4_night: ALL_DUMPED_EXFILS_FROM_SCRIPT.factory,
+    tarkovstreets: ALL_DUMPED_EXFILS_FROM_SCRIPT.streets,
+    sandbox: ALL_DUMPED_EXFILS_FROM_SCRIPT.groundzero,
+    sandbox_high: ALL_DUMPED_EXFILS_FROM_SCRIPT.groundzero,
+  };
+
+  return ALL_EXFILS[mapName] || [];
 };
 
 /**
