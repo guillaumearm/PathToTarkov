@@ -197,6 +197,7 @@ traders_config: {
       repair_price_coef: 0,
     },
     heal_always_enabled: true, // configure the medic service (ability to heal at the end of a raid)
+    hide_until_discovered: true, // hide the trader until the player discovers it by visiting one of its access_via offraid positions
   },
 },
 ```
@@ -267,8 +268,8 @@ offraid_positions: {
 ```
 
 ### `offraid_regen_config` (OffraidRegenConfig)
-Setup restrictions health/energy/hydration according to the offraid position.
-By default, everything is available everywhere.
+Setup restrictions on health/energy/hydration regeneration according to the offraid position.
+When this property is not defined (or when a stat is missing), regeneration remains **enabled** — restrictions are only applied for stats explicitly configured with a non-wildcard `access_via`.
 
 ```js
 offraid_regen_config: {
